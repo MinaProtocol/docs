@@ -1,18 +1,1 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12.9231 29.5734C3.14169 26.0188 2.4398 17.2183 10.6906 9.21841C10.8062 11.3523 11.043 13.396 12.692 14.5517C12.2212 12.6856 9.38829 8.59826 20.2324 3C18.8681 7.80898 21.594 9.64124 24.1027 12.9647C26.6115 16.2881 30.0224 24.1415 21.8956 29.3958L12.9231 29.5734Z" fill="url(#paint0_radial)"/>
-<path d="M21.5149 29.5734L21.918 28.9927C24.5564 25.1732 24.0462 22.2895 23.1498 20.5559L22.0674 18.4502L20.813 20.46C20.7651 20.5361 20.7143 20.6094 20.6636 20.6827C20.6345 19.4371 20.3133 18.2158 19.7257 17.117C19.1382 16.0183 18.3008 15.073 17.2809 14.3572C17.2809 14.3572 15.9053 13.0718 15.2316 13.0352C15.8772 16.7899 12.6214 17.9343 10.5721 20.7306C7.71938 24.5812 9.92654 28.0174 12.6806 29.5734H21.5149Z" fill="url(#paint1_radial)"/>
-<defs>
-<radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(17.1655 20.0344) scale(12.7413)">
-<stop offset="0.55" stop-color="#6BF1FF"/>
-<stop offset="0.66" stop-color="#55E1FF"/>
-<stop offset="0.89" stop-color="#1CB9FF"/>
-<stop offset="1" stop-color="#00A5FF"/>
-</radialGradient>
-<radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(16.8666 27.7665) scale(11.7913)">
-<stop offset="0.42" stop-color="white"/>
-<stop offset="0.52" stop-color="#EDFFFF"/>
-<stop offset="0.73" stop-color="#BFFFFF"/>
-<stop offset="0.88" stop-color="#9BFFFF"/>
-</radialGradient>
-</defs>
-</svg>
+<svg fill="none" height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><radialGradient id="a" cx="17.1655" cy="20.0344" gradientUnits="userSpaceOnUse" r="12.7413"><stop offset=".55" stop-color="#6bf1ff"/><stop offset=".66" stop-color="#55e1ff"/><stop offset=".89" stop-color="#1cb9ff"/><stop offset="1" stop-color="#00a5ff"/></radialGradient><radialGradient id="b" cx="16.8666" cy="27.7665" gradientUnits="userSpaceOnUse" r="11.7913"><stop offset=".42" stop-color="#fff"/><stop offset=".52" stop-color="#edffff"/><stop offset=".73" stop-color="#bfffff"/><stop offset=".88" stop-color="#9bffff"/></radialGradient><path clip-rule="evenodd" d="m12.9231 29.5734c-9.78141-3.5546-10.4833-12.3551-2.2325-20.35499.1156 2.13389.3524 4.17759 2.0014 5.33329-.4708-1.8661-3.30371-5.95344 7.5404-11.5517-1.3643 4.80898 1.3616 6.64124 3.8703 9.9647 2.5088 3.3234 5.9197 11.1768-2.2071 16.4311z" fill="url(#a)" fill-rule="evenodd"/><path d="m21.5149 29.5734.4031-.5807c2.6384-3.8195 2.1282-6.7032 1.2318-8.4368l-1.0824-2.1057-1.2544 2.0098c-.0479.0761-.0987.1494-.1494.2227-.0291-1.2456-.3503-2.4669-.9379-3.5657-.5875-1.0987-1.4249-2.044-2.4448-2.7598 0 0-1.3756-1.2854-2.0493-1.322.6456 3.7547-2.6102 4.8991-4.6595 7.6954-2.85272 3.8506-.64556 7.2868 2.1085 8.8428z" fill="url(#b)"/></svg>
