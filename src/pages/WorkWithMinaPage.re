@@ -11,10 +11,21 @@ module Styles = {
       media(Theme.MediaQuery.desktop, [paddingTop(`rem(8.))]),
       media(Theme.MediaQuery.desktop, [paddingTop(`rem(12.))]),
     ]);
+
+  let teamBackground =
+    style([
+      backgroundImage(
+        `url("/static/img/backgrounds/WorkWithMinaOurCulture.jpg"),
+      ),
+      backgroundSize(`cover),
+      paddingTop(`rem(6.)),
+      media(Theme.MediaQuery.desktop, [paddingTop(`rem(8.))]),
+      media(Theme.MediaQuery.desktop, [paddingTop(`rem(12.))]),
+    ]);
 };
 
 [@react.component]
-let make = () => {
+let make = (~profiles) => {
   <Page title="Mina Cryptocurrency Protocol" footerColor=Theme.Colors.orange>
     <div className=Nav.Styles.spacer />
     <Hero
@@ -56,6 +67,17 @@ let make = () => {
       buttonCopy="Learn More"
       buttonUrl="/tech"
     />
+    <div className=Styles.teamBackground>
+      <Wrapped>
+        <Carousel
+          title="Meet the Team"
+          copy="Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world."
+          textColor=Theme.Colors.digitalBlack
+          items=profiles
+          slideWidthRem=24.5
+        />
+      </Wrapped>
+    </div>
     <div className=Styles.cultureBackground>
       <FeaturedSingleRowFull
         row={
@@ -104,3 +126,22 @@ let make = () => {
     </div>
   </Page>;
 };
+
+Next.injectGetInitialProps(make, _ => {
+  Contentful.getEntries(
+    Lazy.force(Contentful.client),
+    {
+      "include": 1,
+      "content_type": ContentType.GenesisProfile.id,
+      "order": "-fields.publishDate",
+    },
+  )
+  |> Promise.map((entries: ContentType.GenesisProfile.entries) => {
+       let profiles =
+         Array.map(
+           (e: ContentType.GenesisProfile.entry) => e.fields,
+           entries.items,
+         );
+       {"profiles": profiles};
+     })
+});

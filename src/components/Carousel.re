@@ -27,8 +27,8 @@ module Styles = {
       position(`absolute),
       display(`flex),
       alignItems(`center),
-      overflowX(`hidden),
       width(`percent(110.)),
+      unsafe("clip-path", "inset( -100vw -100vw -100vw 0 )"),
       selector(" > :not(:first-child)", [marginLeft(`rem(1.5))]),
     ]);
 
@@ -89,13 +89,6 @@ module Styles = {
     ]);
 };
 
-module Arrow = {
-  [@react.component]
-  let make = (~icon, ~onClick) => {
-    <div className=Styles.button onClick> <Icon kind=icon /> </div>;
-  };
-};
-
 module Slider = {
   [@react.component]
   let make = (~items: array(ContentType.GenesisProfile.t), ~translate) => {
@@ -126,6 +119,7 @@ let make =
       ~title,
       ~copy,
       ~textColor,
+      ~dark=true,
       ~items: array(ContentType.GenesisProfile.t),
       ~slideWidthRem,
     ) => {
@@ -151,10 +145,28 @@ let make =
         <Spacer height=1. />
         <p className={Styles.paragraph(textColor)}> {React.string(copy)} </p>
       </span>
-      <span className=Styles.buttons>
-        <Arrow icon=Icon.ArrowLeftLarge onClick=prevSlide />
-        <Arrow icon=Icon.ArrowRightLarge onClick=nextSlide />
-      </span>
+      {items |> Array.length <= 3
+         ? React.null
+         : <span className=Styles.buttons>
+             <ModalButton
+               bgColor=Theme.Colors.digitalBlack
+               borderColor=Theme.Colors.white
+               dark
+               width={`rem(2.5)}
+               paddingX=0.5
+               onClick=prevSlide>
+               <Icon kind=Icon.ArrowLeftLarge />
+             </ModalButton>
+             <ModalButton
+               bgColor=Theme.Colors.digitalBlack
+               borderColor=Theme.Colors.white
+               dark
+               width={`rem(2.5)}
+               paddingX=0.5
+               onClick=nextSlide>
+               <Icon kind=Icon.ArrowRightLarge />
+             </ModalButton>
+           </span>}
     </div>
     <Slider translate items />
   </div>;
