@@ -23,7 +23,7 @@ module Styles = {
           flexDirection(`row),
           maxWidth(`rem(96.)),
           margin2(~v=`zero, ~h=`auto),
-          padding2(~h=`rem(9.5), ~v=`rem(11.6)),
+          padding2(~h=`rem(9.5), ~v=`rem(8.)),
         ],
       ),
     ]);
@@ -111,6 +111,8 @@ module Styles = {
       width(`percent(100.)),
       color(Theme.Colors.digitalBlack),
       border(`px(1), `solid, black),
+      marginTop(`rem(4.)),
+      media(Theme.MediaQuery.tablet, [marginTop(`zero)]),
     ]);
   let orange =
     merge([
@@ -128,7 +130,6 @@ let make = () => {
   <div className=Styles.rowBackgroundImage>
     <div className=Styles.container>
       <div className=Styles.firstColumn>
-        <Spacer height=4. />
         <hr className=Styles.rule />
         <Spacer height=1.5 />
         <h2 className=Styles.header>
