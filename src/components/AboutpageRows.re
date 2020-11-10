@@ -22,7 +22,7 @@ module Styles = {
           position(`relative),
           flexDirection(`row),
           maxWidth(`rem(96.)),
-          padding2(~h=`rem(9.5), ~v=`rem(4.)),
+          padding2(~h=`rem(9.5), ~v=`rem(8.)),
         ],
       ),
     ]);
@@ -128,6 +128,11 @@ module Styles = {
       height(`rem(0.)),
       media(Theme.MediaQuery.desktop, [height(`rem(4.))]),
     ]);
+  let largestSpacer =
+    style([
+      height(`rem(0.)),
+      media(Theme.MediaQuery.desktop, [height(`rem(8.))]),
+    ]);
 };
 
 [@react.component]
@@ -229,7 +234,7 @@ let make = () => {
           className=Styles.secondImage
           src="/static/img/triangle_desktop.jpg"
         />
-        <div className=Styles.specialSpacer />
+        <div className=Styles.largestSpacer />
       </div>
     </div>
   </div>;
