@@ -15,6 +15,7 @@ module Styles = {
       paddingLeft(`rem(1.5)),
       paddingRight(`rem(1.5)),
       paddingBottom(`rem(4.)),
+      media(Theme.MediaQuery.tablet, [paddingLeft(`rem(3.0))]),
       media(
         Theme.MediaQuery.desktop,
         [
@@ -34,7 +35,7 @@ module Styles = {
       flexDirection(`column),
       justifyContent(`flexStart),
       width(`percent(100.)),
-      media(Theme.MediaQuery.tablet, [width(`rem(21.))]),
+      media(Theme.MediaQuery.tablet, [width(`rem(30.))]),
       media(Theme.MediaQuery.desktop, [width(`rem(35.))]),
     ]);
 
@@ -67,6 +68,7 @@ module Styles = {
   let heroRowImage =
     style([
       width(`percent(100.)),
+      media(Theme.MediaQuery.tablet, [width(`percent(35.))]),
       media(
         Theme.MediaQuery.desktop,
         [marginTop(`zero), height(`rem(38.5)), width(`rem(38.5))],
