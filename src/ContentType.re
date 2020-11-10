@@ -125,6 +125,7 @@ module GenesisProfile = {
     publishDate: string,
     blogPost: BlogPost.entry,
   };
+
   type entry = System.entry(t);
   type entries = System.entries(t);
 };
@@ -156,6 +157,19 @@ module Advisor = {
   type entries = System.entries(t);
 };
 
+module Grant = {
+  let id = "grants";
+  type t = {
+    title: string,
+    contributer: string,
+    description: string,
+    repoSlug: string,
+    projectSlug: string,
+  };
+  type entry = System.entry(t);
+  type entries = System.entries(t);
+};
+
 module GenericMember = {
   type t = {
     name: string,
@@ -167,8 +181,8 @@ module GenericMember = {
     github: option(string),
     linkedIn: option(string),
     blogPost: BlogPost.entry,
-    memberLocation: string,
-    publishDate: string,
+    memberLocation: option(string),
+    publishDate: option(string),
   };
 
   type entry = System.entry(t);

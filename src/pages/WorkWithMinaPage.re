@@ -15,7 +15,7 @@ module Styles = {
   let teamBackground =
     style([
       backgroundImage(
-        `url("/static/img/backgrounds/WorkWithMinaOurCulture.jpg"),
+        `url("/static/img/backgrounds/WorkWithMinaTeamBackground.jpg"),
       ),
       backgroundSize(`cover),
       paddingTop(`rem(6.)),
@@ -72,8 +72,9 @@ let make = (~profiles) => {
         <Carousel
           title="Meet the Team"
           copy="Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world."
-          textColor=Theme.Colors.digitalBlack
-          items=profiles
+          cardKind={Carousel.TeamMembers(profiles)}
+          dark=true
+          numberOfItems={Array.length(profiles)}
           slideWidthRem=24.5
         />
       </Wrapped>
@@ -132,14 +133,14 @@ Next.injectGetInitialProps(make, _ => {
     Lazy.force(Contentful.client),
     {
       "include": 1,
-      "content_type": ContentType.GenesisProfile.id,
-      "order": "-fields.publishDate",
+      "content_type": ContentType.TeamProfile.id,
+      "order": "fields.order",
     },
   )
-  |> Promise.map((entries: ContentType.GenesisProfile.entries) => {
+  |> Promise.map((entries: ContentType.TeamProfile.entries) => {
        let profiles =
          Array.map(
-           (e: ContentType.GenesisProfile.entry) => e.fields,
+           (e: ContentType.TeamProfile.entry) => e.fields,
            entries.items,
          );
        {"profiles": profiles};

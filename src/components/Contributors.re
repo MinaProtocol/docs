@@ -80,8 +80,7 @@ let make =
   };
 
   let closeModal = e => {
-    modalBackgroundRef
-    |> React.Ref.current
+    modalBackgroundRef.current
     |> Js.Nullable.toOption
     |> Option.iter(modalRef =>
          if (modalRef === asDomElement(ReactEvent.Mouse.target(e))

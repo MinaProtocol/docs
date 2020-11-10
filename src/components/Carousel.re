@@ -1,3 +1,8 @@
+type cardKind =
+  | GenesisMembers(array(ContentType.GenesisProfile.t))
+  | TeamMembers(array(ContentType.TeamProfile.t))
+  | Grants(array(ContentType.Grant.t));
+
 module Styles = {
   open Css;
   let container =
@@ -58,10 +63,21 @@ module Styles = {
 
   let rule = style([marginTop(`rem(6.))]);
 
-  let h2 = textColor => merge([Theme.Type.h2, style([color(textColor)])]);
+  let h2 = dark =>
+    merge([
+      Theme.Type.h2,
+      style([
+        dark ? color(Theme.Colors.digitalBlack) : color(Theme.Colors.white),
+      ]),
+    ]);
 
-  let paragraph = textColor =>
-    merge([Theme.Type.paragraph, style([color(textColor)])]);
+  let paragraph = dark =>
+    merge([
+      Theme.Type.sectionSubhead,
+      style([
+        dark ? color(Theme.Colors.digitalBlack) : color(Theme.Colors.white),
+      ]),
+    ]);
 
   let buttons =
     style([
@@ -72,62 +88,54 @@ module Styles = {
       selector(">:first-child", [marginRight(`rem(1.))]),
       media(Theme.MediaQuery.notMobile, [marginTop(`zero)]),
     ]);
-
-  let button =
-    merge([
-      Button.Styles.button(
-        Theme.Colors.digitalBlack,
-        Theme.Colors.white,
-        Some(Theme.Colors.white),
-        false,
-        `rem(2.5),
-        Some(`rem(2.5)),
-        0.5,
-        0.,
-      ),
-      style([cursor(`pointer)]),
-    ]);
 };
 
 module Slider = {
   [@react.component]
-  let make = (~items: array(ContentType.GenesisProfile.t), ~translate) => {
+  let make = (~cardKind, ~translate, ~dark) => {
     <div className=Styles.contentContainer>
-      {items
-       |> Array.map((p: ContentType.GenesisProfile.t) => {
-            <div key={p.name} className={Styles.slide(translate)}>
-              <GenesisMemberProfile
-                key={p.name}
-                name={p.name}
-                photo={p.image.fields.file.url}
-                quote={"\"" ++ p.quote ++ "\""}
-                location={p.memberLocation}
-                twitter={p.twitter}
-                github={p.github}
-                blogPost={p.blogPost.fields.slug}
-              />
-            </div>
-          })
-       |> React.array}
+      {switch (cardKind) {
+       | TeamMembers(members) =>
+         members
+         |> Array.map((member: ContentType.TeamProfile.t) => {
+              <div key={member.name} className={Styles.slide(translate)}>
+                <CarouselCards.TeamMemberCard key={member.name} member dark />
+              </div>
+            })
+         |> React.array
+       | GenesisMembers(members) =>
+         members
+         |> Array.map((member: ContentType.GenesisProfile.t) => {
+              <div key={member.name} className={Styles.slide(translate)}>
+                <CarouselCards.GenesisMemberCard
+                  key={member.name}
+                  member
+                  dark
+                />
+              </div>
+            })
+         |> React.array
+       | Grants(grants) =>
+         grants
+         |> Array.map((grant: ContentType.Grant.t) => {
+              <div key={grant.title} className={Styles.slide(translate)}>
+                <CarouselCards.GrantCard key={grant.title} grant />
+              </div>
+            })
+         |> React.array
+       }}
     </div>;
   };
 };
 
 [@react.component]
 let make =
-    (
-      ~title,
-      ~copy,
-      ~textColor,
-      ~dark=true,
-      ~items: array(ContentType.GenesisProfile.t),
-      ~slideWidthRem,
-    ) => {
+    (~title, ~copy, ~dark=true, ~numberOfItems, ~cardKind, ~slideWidthRem) => {
   let (itemIndex, setItemIndex) = React.useState(_ => 0);
   let (translate, setTranslate) = React.useState(_ => 0.);
 
   let nextSlide = _ =>
-    if (itemIndex < Array.length(items) - 1) {
+    if (itemIndex < numberOfItems - 1) {
       setItemIndex(_ => itemIndex + 1);
       setTranslate(_ => translate -. slideWidthRem);
     };
@@ -141,11 +149,11 @@ let make =
   <div className=Styles.container>
     <div className=Styles.headerContainer>
       <span className=Styles.headerCopy>
-        <h2 className={Styles.h2(textColor)}> {React.string(title)} </h2>
+        <h2 className={Styles.h2(dark)}> {React.string(title)} </h2>
         <Spacer height=1. />
-        <p className={Styles.paragraph(textColor)}> {React.string(copy)} </p>
+        <p className={Styles.paragraph(dark)}> {React.string(copy)} </p>
       </span>
-      {items |> Array.length <= 3
+      {numberOfItems <= 3
          ? React.null
          : <span className=Styles.buttons>
              <ModalButton
@@ -168,6 +176,6 @@ let make =
              </ModalButton>
            </span>}
     </div>
-    <Slider translate items />
+    <Slider cardKind translate dark />
   </div>;
 };
