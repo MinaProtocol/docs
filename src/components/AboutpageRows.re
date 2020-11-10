@@ -12,7 +12,9 @@ module Styles = {
     style([
       display(`flex),
       flexDirection(`column),
-      padding2(~h=`rem(1.5), ~v=`rem(4.0)),
+      paddingLeft(`rem(1.5)),
+      paddingRight(`rem(1.5)),
+      paddingBottom(`rem(4.)),
       media(
         Theme.MediaQuery.desktop,
         [
@@ -64,18 +66,10 @@ module Styles = {
       ]),
     ]);
   let subhead =
-    merge([
-      Theme.Type.sectionSubhead,
-      style([
-        marginTop(`rem(1.5)),
-        letterSpacing(`px(-1)),
-        marginBottom(`rem(1.5)),
-      ]),
-    ]);
+    merge([Theme.Type.sectionSubhead, style([letterSpacing(`px(-1))])]);
   let heroRowImage =
     style([
       width(`rem(21.)),
-      marginTop(`rem(1.)),
       media(
         Theme.MediaQuery.desktop,
         [marginTop(`zero), height(`rem(38.5)), width(`rem(38.5))],
@@ -135,33 +129,37 @@ let make = () => {
   <div className=Styles.rowBackgroundImage>
     <div className=Styles.container>
       <div className=Styles.firstColumn>
+        <Spacer height=3. />
         <hr className=Styles.rule />
         <h2 className=Styles.header>
           {React.string("It's Time to Own Our Future")}
         </h2>
+        <Spacer height=1.5 />
         <p className=Styles.subhead>
           {React.string(
              "Living in today's world requires giving up a lot of control.",
            )}
         </p>
+        <Spacer height=1. />
         <p className=Styles.copy>
           {React.string(
              "Every day, we give up control of intimate data to large tech companies to use online services. We give up control of our finances to banks and unaccountable credit bureaus. We give up control of our elections to voting system companies who run opaque and unauditable elections. ",
            )}
         </p>
-        <Spacer height=1.75 />
+        <Spacer height=1. />
         <p className=Styles.copy>
           {React.string(
              "Even when we try to escape this power imbalance and participate in blockchains, most of us give up control and trust to third parties to verify transactions. Why? Because running a full node requires expensive hardware, unsustainable amounts of electricity and tons of time to sync increasingly heavier and heavier chains.",
            )}
         </p>
-        <Spacer height=1.75 />
+        <Spacer height=1. />
         <p className=Styles.copy>
           <strong>
             {React.string("But it doesn't have to be this way. ")}
           </strong>
         </p>
       </div>
+      <Spacer height=4. />
       <img
         className=Styles.firstImage
         src="/static/img/AboutHeroRow1Image.jpg"
@@ -219,6 +217,7 @@ let make = () => {
              )}
           </strong>
         </p>
+        <Spacer height=3. />
         <img
           className=Styles.secondImage
           src="/static/img/triangle_desktop.jpg"
