@@ -3,7 +3,7 @@ open Css;
 module Styles = {
   let heroContainer = (backgroundImg: Theme.backgroundImage) =>
     style([
-      height(`rem(3.)),
+      height(`rem(37.)),
       display(`flex),
       flexDirection(`column),
       justifyContent(`flexEnd),
