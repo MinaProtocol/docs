@@ -22,7 +22,7 @@ module Styles = {
       gridTemplateColumns([`rem(10.), `rem(10.)]),
       gridAutoRows(`rem(5.5)),
       gridGap(`rem(1.)),
-      selector("div, img", [height(`rem(5.5)), width(`rem(10.))]),
+      selector("div, img", [height(`rem(5.)), width(`rem(10.))]),
       media(
         Theme.MediaQuery.tablet,
         [gridTemplateColumns([`repeat((`num(4), `rem(10.)))])],
