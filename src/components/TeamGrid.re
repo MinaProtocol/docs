@@ -1,7 +1,6 @@
 module Styles = {
   open Css;
-  let headerCopy =
-    style([media(Theme.MediaQuery.desktop, [width(`rem(42.))])]);
+  let headerCopy = style([media(Theme.MediaQuery.desktop, [])]);
 
   let header = merge([Theme.Type.h1, style([marginBottom(`rem(0.5))])]);
 

@@ -33,7 +33,6 @@ module Styles = {
         Theme.MediaQuery.desktop,
         [
           maxWidth(`rem(89.)),
-          margin2(~v=`zero, ~h=`auto),
           padding2(~v=rem(8.9), ~h=`rem(9.5)),
           gridTemplateColumns([`rem(31.5), `rem(29.)]),
           gridTemplateRows([`rem(31.5), `rem(36.)]),
@@ -169,7 +168,7 @@ module Styles = {
       ),
       media(
         Theme.MediaQuery.desktop,
-        [marginRight(`zero), marginBottom(`zero), height(`rem(35.6))],
+        [marginRight(`zero), marginBottom(`zero), height(`rem(99.))],
       ),
     ]);
   let button = style([media(Theme.MediaQuery.tablet, [])]);

@@ -10,8 +10,10 @@ module Styles = {
       position(`relative),
       important(backgroundSize(`cover)),
       background(`url(backgroundImg.mobile)),
-      paddingTop(`rem(4.)),
-      paddingBottom(`rem(4.)),
+      paddingLeft(`rem(1.5)),
+      paddingRight(`rem(1.5)),
+      paddingTop(`rem(8.)),
+      paddingBottom(`rem(8.)),
       media(
         Theme.MediaQuery.tablet,
         [background(`url(backgroundImg.tablet)), height(`percent(100.))],
@@ -21,7 +23,7 @@ module Styles = {
         [
           justifyContent(`flexStart),
           alignContent(`spaceAround),
-          paddingLeft(`rem(9.5)),
+          paddingLeft(`rem(0.)),
           background(`url(backgroundImg.desktop)),
         ],
       ),
@@ -40,7 +42,6 @@ module Styles = {
     style([
       position(`relative),
       background(white),
-      right(`rem(9.5)),
       padding(`rem(2.0)),
       media(
         Theme.MediaQuery.tablet,
