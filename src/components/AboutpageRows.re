@@ -12,7 +12,7 @@ module Styles = {
     style([
       display(`flex),
       flexDirection(`column),
-      padding2(~h=`rem(1.5), ~v=`rem(1.5)),
+      padding2(~h=`rem(1.5), ~v=`rem(4.0)),
       media(
         Theme.MediaQuery.desktop,
         [
