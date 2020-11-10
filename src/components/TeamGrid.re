@@ -3,7 +3,7 @@ module Styles = {
   let headerCopy =
     style([media(Theme.MediaQuery.desktop, [width(`rem(42.))])]);
 
-  let header = merge([Theme.Type.h2, style([marginBottom(`rem(0.5))])]);
+  let header = merge([Theme.Type.h1, style([marginBottom(`rem(0.5))])]);
 
   let sectionSubhead =
     merge([
@@ -55,6 +55,7 @@ module Styles = {
 let make = (~profiles, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <>
     <div className=Styles.headerCopy>
+      <Spacer height=4. />
       <h2 className=Styles.header> {React.string("Meet the Team")} </h2>
       <p className=Styles.sectionSubhead>
         {React.string(

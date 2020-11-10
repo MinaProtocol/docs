@@ -60,16 +60,13 @@ module Styles = {
   let header =
     merge([
       Theme.Type.h1,
-      style([
-        marginTop(`rem(2.06)),
-        media(Theme.MediaQuery.desktop, [width(`rem(25.2))]),
-      ]),
+      style([media(Theme.MediaQuery.desktop, [width(`rem(25.2))])]),
     ]);
   let subhead =
     merge([Theme.Type.sectionSubhead, style([letterSpacing(`px(-1))])]);
   let heroRowImage =
     style([
-      width(`rem(21.)),
+      width(`percent(100.)),
       media(
         Theme.MediaQuery.desktop,
         [marginTop(`zero), height(`rem(38.5)), width(`rem(38.5))],
@@ -129,8 +126,9 @@ let make = () => {
   <div className=Styles.rowBackgroundImage>
     <div className=Styles.container>
       <div className=Styles.firstColumn>
-        <Spacer height=3. />
+        <Spacer height=4. />
         <hr className=Styles.rule />
+        <Spacer height=1.5 />
         <h2 className=Styles.header>
           {React.string("It's Time to Own Our Future")}
         </h2>
@@ -159,7 +157,7 @@ let make = () => {
           </strong>
         </p>
       </div>
-      <Spacer height=4. />
+      <Spacer height=1.5 />
       <img
         className=Styles.firstImage
         src="/static/img/AboutHeroRow1Image.jpg"
@@ -217,7 +215,7 @@ let make = () => {
              )}
           </strong>
         </p>
-        <Spacer height=3. />
+        <Spacer height=4. />
         <img
           className=Styles.secondImage
           src="/static/img/triangle_desktop.jpg"

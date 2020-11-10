@@ -17,8 +17,8 @@ module Styles = {
     style([
       display(`grid),
       padding2(~v=rem(4.), ~h=`rem(1.25)),
-      gridTemplateColumns([`rem(21.)]),
-      gridTemplateRows([`rem(35.), `rem(31.), `rem(54.)]),
+      gridTemplateColumns([`percent(100.)]),
+      gridTemplateRows([`rem(33.), `rem(27.), `rem(54.)]),
       gridRowGap(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
@@ -49,7 +49,7 @@ module Styles = {
   let gridItem3 =
     style([
       backgroundColor(Theme.Colors.digitalBlack),
-      height(`rem(57.)),
+      height(`rem(62.)),
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
       media(
@@ -153,13 +153,16 @@ module Styles = {
   let h3White =
     merge([
       Theme.Type.h3,
-      style([color(white), marginTop(`px(9)), marginBottom(`rem(1.))]),
+      style([
+        color(white),
+        marginTop(`rem(1.5)),
+        marginBottom(`rem(1.)),
+      ]),
     ]);
   let labelWhite =
     merge([Theme.Type.sectionSubhead, style([color(white)])]);
   let dotsImage =
     style([
-      marginBottom(`rem(3.)),
       media(
         Theme.MediaQuery.tablet,
         [marginRight(`rem(3.)), height(`rem(15.))],
@@ -178,7 +181,7 @@ let make = () => {
     <div className=Styles.grid>
       <div className=Styles.gridItem1>
         <Rule />
-        <Spacer height=1. />
+        <Spacer height=2. />
         <h2 className=Styles.h2>
           {React.string("Secured by Participants")}
         </h2>
