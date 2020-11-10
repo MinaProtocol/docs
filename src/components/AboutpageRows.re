@@ -22,7 +22,6 @@ module Styles = {
           position(`relative),
           flexDirection(`row),
           maxWidth(`rem(96.)),
-          margin2(~v=`zero, ~h=`auto),
           padding2(~h=`rem(9.5), ~v=`rem(4.)),
         ],
       ),
