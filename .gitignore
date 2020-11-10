@@ -9,3 +9,6 @@ yarn-error.log
 /public/graphql-docs
 /public/static/font
 /node_modules
+.DS_STORE
+*.log
+.merlin*
