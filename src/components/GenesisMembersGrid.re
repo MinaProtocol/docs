@@ -23,7 +23,7 @@ module Styles = {
       marginTop(`rem(1.)),
       display(`grid),
       paddingTop(`rem(1.)),
-      gridTemplateColumns([`rem(11.), `rem(11.)]),
+      gridTemplateColumns([`rem(11.5), `rem(11.5)]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
       gridRowGap(`rem(1.)),

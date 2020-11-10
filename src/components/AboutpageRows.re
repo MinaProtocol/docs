@@ -157,7 +157,7 @@ let make = () => {
           </strong>
         </p>
       </div>
-      <Spacer height=1.5 />
+      <Spacer height=3.0 />
       <img
         className=Styles.firstImage
         src="/static/img/AboutHeroRow1Image.jpg"
