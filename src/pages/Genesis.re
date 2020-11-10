@@ -299,10 +299,13 @@ let make = (~profiles) => {
         <Rule color=Theme.Colors.white />
         <Carousel
           title="Genesis Founding Members"
-          copy="Get to know some of the Founding Members working to strengthen the protocol and build our community."
-          items=profiles
-          textColor=Theme.Colors.white
-          slideWidthRem=24.5
+          copy={
+            "Get to know some of the Founding Members working to strengthen the protocol and build our community."
+            ->Some
+          }
+          cardKind={Carousel.GenesisMembers(profiles)}
+          dark=false
+          numberOfItems={Array.length(profiles)}
         />
       </FeaturedSingleRow>
     </div>

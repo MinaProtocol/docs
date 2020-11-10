@@ -11,6 +11,15 @@ module Styles = {
       media(Theme.MediaQuery.desktop, [padding(`zero)]),
     ]);
 
+  let grantsBackground =
+    style([
+      backgroundColor(Theme.Colors.digitalBlack),
+      width(`percent(100.)),
+      height(`percent(100.)),
+      paddingTop(`rem(8.)),
+      paddingBottom(`rem(6.)),
+    ]);
+
   let section =
     style([
       width(`percent(100.)),
@@ -156,7 +165,7 @@ module GrantsSideNav = {
         slug="#marketing-community"
       />
       <SideNav.Item title="How to Apply" slug="#how-to-apply" />
-      //<SideNav.Item title="Contributers" slug="#" />
+      <SideNav.Item title="Contributers" slug="#contributors" />
       <SideNav.Item title="FAQ" slug="#faq" />
     </SideNav>;
   };
@@ -704,7 +713,7 @@ module HowToApply = {
 };
 
 [@react.component]
-let make = () => {
+let make = (~grants) => {
   <Page title="Mina Cryptocurrency Protocol" footerColor=Theme.Colors.orange>
     <div className=Nav.Styles.spacer />
     <Hero
@@ -737,6 +746,36 @@ let make = () => {
     <ProtocolProjects />
     <MarketingAndCommunityProjects />
     <HowToApply />
+    <section id="contributors">
+      <div className=Styles.grantsBackground>
+        <Wrapped>
+          <Rule color=Theme.Colors.white />
+          <Carousel
+            title="Completed and Current Grant Projects"
+            copy=None
+            cardKind={Carousel.Grants(grants)}
+            dark=false
+            numberOfItems={Array.length(grants)}
+          />
+        </Wrapped>
+      </div>
+    </section>
     <FAQ />
   </Page>;
 };
+
+Next.injectGetInitialProps(make, _ => {
+  Contentful.getEntries(
+    Lazy.force(Contentful.client),
+    {
+      "include": 1,
+      "content_type": ContentType.Grant.id,
+      //"order": "-fields.title",
+    },
+  )
+  |> Promise.map((entries: ContentType.Grant.entries) => {
+       let grants =
+         Array.map((e: ContentType.Grant.entry) => e.fields, entries.items);
+       {"grants": grants};
+     })
+});
