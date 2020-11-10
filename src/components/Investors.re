@@ -33,7 +33,7 @@ module Styles = {
       ),
     ]);
 
-  let header = merge([Theme.Type.h2, style([marginBottom(`rem(0.5))])]);
+  let header = merge([Theme.Type.h1, style([marginBottom(`rem(0.5))])]);
   let subhead =
     merge([Theme.Type.sectionSubhead, style([marginBottom(`rem(4.))])]);
   let investorGridItem =
