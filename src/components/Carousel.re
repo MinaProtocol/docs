@@ -7,10 +7,9 @@ module Styles = {
   open Css;
   let container =
     style([
-      position(`relative),
       height(`rem(70.)),
       width(`percent(100.)),
-      paddingTop(`rem(6.)),
+      paddingTop(`rem(1.)),
     ]);
 
   let leftWrapped =
@@ -29,10 +28,9 @@ module Styles = {
 
   let contentContainer =
     style([
-      position(`absolute),
       display(`flex),
       alignItems(`center),
-      width(`percent(110.)),
+      width(`vw(100.)),
       unsafe("clip-path", "inset( -100vw -100vw -100vw 0 )"),
       selector(" > :not(:first-child)", [marginLeft(`rem(1.5))]),
     ]);
@@ -50,15 +48,33 @@ module Styles = {
       alignItems(`flexEnd),
       justifyContent(`spaceBetween),
       marginTop(`rem(3.)),
-      marginBottom(`rem(6.625)),
       media(Theme.MediaQuery.notMobile, [flexDirection(`row)]),
     ]);
 
   let headerCopy =
     style([
       width(`percent(100.)),
-      media(Theme.MediaQuery.tablet, [width(`percent(70.))]),
-      media(Theme.MediaQuery.desktop, [width(`percent(50.))]),
+      marginTop(`rem(2.)),
+      marginBottom(`zero),
+      media(
+        Theme.MediaQuery.tablet,
+        [marginBottom(`rem(4.)), width(`percent(70.))],
+      ),
+      media(Theme.MediaQuery.desktop, [width(`percent(80.))]),
+    ]);
+
+  let copyRow =
+    style([
+      width(`percent(100.)),
+      display(`flex),
+      flexDirection(`column),
+      justifyContent(`flexStart),
+      alignItems(`flexStart),
+      marginBottom(`rem(6.)),
+      media(
+        Theme.MediaQuery.notMobile,
+        [justifyContent(`spaceBetween), flexDirection(`row)],
+      ),
     ]);
 
   let rule = style([marginTop(`rem(6.))]);
@@ -119,7 +135,7 @@ module Slider = {
          grants
          |> Array.map((grant: ContentType.Grant.t) => {
               <div key={grant.title} className={Styles.slide(translate)}>
-                <CarouselCards.GrantCard key={grant.title} grant />
+                <CarouselCards.GrantCard key={grant.title} grant dark />
               </div>
             })
          |> React.array
@@ -129,52 +145,63 @@ module Slider = {
 };
 
 [@react.component]
-let make =
-    (~title, ~copy, ~dark=true, ~numberOfItems, ~cardKind, ~slideWidthRem) => {
+let make = (~title, ~copy, ~cardKind, ~numberOfItems, ~dark=true) => {
   let (itemIndex, setItemIndex) = React.useState(_ => 0);
   let (translate, setTranslate) = React.useState(_ => 0.);
+
+  // This is the translation amount for each individual carousel card
+  let slideWidth = 24.5;
 
   let nextSlide = _ =>
     if (itemIndex < numberOfItems - 1) {
       setItemIndex(_ => itemIndex + 1);
-      setTranslate(_ => translate -. slideWidthRem);
+      setTranslate(_ => translate -. slideWidth);
     };
 
   let prevSlide = _ =>
     if (itemIndex > 0) {
       setItemIndex(_ => itemIndex - 1);
-      setTranslate(_ => translate +. slideWidthRem);
+      setTranslate(_ => translate +. slideWidth);
     };
 
   <div className=Styles.container>
     <div className=Styles.headerContainer>
-      <span className=Styles.headerCopy>
-        <h2 className={Styles.h2(dark)}> {React.string(title)} </h2>
-        <Spacer height=1. />
-        <p className={Styles.paragraph(dark)}> {React.string(copy)} </p>
-      </span>
-      {numberOfItems <= 3
-         ? React.null
-         : <span className=Styles.buttons>
-             <ModalButton
-               bgColor=Theme.Colors.digitalBlack
-               borderColor=Theme.Colors.white
-               dark
-               width={`rem(2.5)}
-               paddingX=0.5
-               onClick=prevSlide>
-               <Icon kind=Icon.ArrowLeftLarge />
-             </ModalButton>
-             <ModalButton
-               bgColor=Theme.Colors.digitalBlack
-               borderColor=Theme.Colors.white
-               dark
-               width={`rem(2.5)}
-               paddingX=0.5
-               onClick=nextSlide>
-               <Icon kind=Icon.ArrowRightLarge />
-             </ModalButton>
-           </span>}
+      <div className=Styles.copyRow>
+        <span className=Styles.headerCopy>
+          <h2 className={Styles.h2(dark)}> {React.string(title)} </h2>
+          {Belt.Option.mapWithDefault(copy, React.null, copy => {
+             <>
+               <Spacer height=1. />
+               <p className={Styles.paragraph(dark)}>
+                 {React.string(copy)}
+               </p>
+               <Spacer height=3. />
+             </>
+           })}
+        </span>
+        {numberOfItems <= 3
+           ? React.null
+           : <span className=Styles.buttons>
+               <ModalButton
+                 bgColor=Theme.Colors.digitalBlack
+                 borderColor=Theme.Colors.white
+                 dark
+                 width={`rem(2.5)}
+                 paddingX=0.5
+                 onClick=prevSlide>
+                 <Icon kind=Icon.ArrowLeftLarge />
+               </ModalButton>
+               <ModalButton
+                 bgColor=Theme.Colors.digitalBlack
+                 borderColor=Theme.Colors.white
+                 dark
+                 width={`rem(2.5)}
+                 paddingX=0.5
+                 onClick=nextSlide>
+                 <Icon kind=Icon.ArrowRightLarge />
+               </ModalButton>
+             </span>}
+      </div>
     </div>
     <Slider cardKind translate dark />
   </div>;

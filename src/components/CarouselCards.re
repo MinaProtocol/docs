@@ -1,6 +1,6 @@
 module Styles = {
   open Css;
-  let outerBox = style([padding2(~v=`rem(2.5), ~h=`rem(0.))]);
+  let outerBox = style([padding2(~v=`rem(0.), ~h=`rem(0.))]);
   let container = dark =>
     style([
       display(`flex),
@@ -12,6 +12,10 @@ module Styles = {
         ? background(Theme.Colors.digitalBlack) : background(`hex("F5F5F5")),
       padding2(~h=`rem(2.5), ~v=`rem(3.)),
     ]);
+
+  let grantContainer = dark =>
+    merge([container(dark), style([height(`rem(50.))])]);
+
   let memberName = dark =>
     merge([
       Theme.Type.h3,
@@ -19,6 +23,7 @@ module Styles = {
         dark ? color(Theme.Colors.white) : color(Theme.Colors.digitalBlack),
         marginTop(`rem(1.)),
         fontWeight(`light),
+        maxWidth(`rem(18.)),
       ]),
     ]);
   let profilePicture =
@@ -41,7 +46,7 @@ module Styles = {
         fontSize(`rem(0.875)),
         width(`percent(100.)),
         maxWidth(`rem(18.)),
-        marginBottom(`rem(1.)),
+        marginTop(`rem(0.51)),
         media(
           Theme.MediaQuery.tablet,
           [fontSize(`px(12)), lineHeight(`px(16))],
@@ -50,10 +55,11 @@ module Styles = {
     ]);
   let quoteSection = dark =>
     merge([
-      Theme.Type.paragraphSmall,
+      Theme.Type.paragraph,
       style([
         dark ? color(Theme.Colors.white) : color(Theme.Colors.digitalBlack),
         width(`rem(18.)),
+        marginTop(`rem(1.)),
       ]),
     ]);
   let quote = style([marginTop(`rem(1.5)), marginBottom(`rem(1.5))]);
@@ -93,6 +99,22 @@ module Styles = {
       width(`percent(100.)),
     ]);
   let icon = style([cursor(`pointer)]);
+
+  let contributor = style([color(Theme.Colors.orange)]);
+
+  let repoButton =
+    style([color(Theme.Colors.orange), marginTop(`rem(2.5))]);
+
+  let projectLink =
+    merge([
+      Theme.Type.link,
+      style([
+        display(`flex),
+        alignItems(`center),
+        color(Theme.Colors.orange),
+        marginTop(`rem(1.)),
+      ]),
+    ]);
 };
 
 module GenesisMemberCard = {
@@ -162,11 +184,56 @@ module GenesisMemberCard = {
   };
 };
 
-// TODO: Fill this in once there is data in contentful to test with
 module GrantCard = {
   [@react.component]
-  let make = (~grant: ContentType.Grant.t) => {
-    <div> {React.string(grant.title)} </div>;
+  let make = (~grant: ContentType.Grant.t, ~dark) => {
+    let {
+      ContentType.Grant.title,
+      grantType,
+      contributer,
+      description,
+      repoSlug,
+      projectSlug,
+    } = grant;
+    <div className=Styles.outerBox>
+      <div className={Styles.grantContainer(dark)}>
+        <h4 className={Styles.memberName(dark)}> {React.string(title)} </h4>
+        <p className={Styles.memberTitle(dark)}>
+          {React.string("Contributor: ")}
+          <span className=Styles.contributor>
+            {React.string(contributer)}
+          </span>
+        </p>
+        {Belt.Option.mapWithDefault(grantType, React.null, grantType => {
+           <p className={Styles.memberTitle(dark)}>
+             {React.string("TYPE: " ++ grantType)}
+           </p>
+         })}
+        <div className={Styles.quoteSection(dark)}>
+          <Rule />
+          <p className=Styles.quote> {React.string(description)} </p>
+          <Rule />
+        </div>
+        <div>
+          {Belt.Option.mapWithDefault(projectSlug, React.null, projectSlug => {
+             <a href=projectSlug className=Styles.projectLink>
+               <span> {React.string("Link to Project")} </span>
+               <Icon kind=Icon.ArrowRightMedium />
+             </a>
+           })}
+          {Belt.Option.mapWithDefault(repoSlug, React.null, repoSlug => {
+             <div className=Styles.repoButton>
+               <Button href={`External(repoSlug)} bgColor=Theme.Colors.white>
+                 <span> {React.string("Repo")} </span>
+                 <span className=Styles.contributor>
+                   <Icon kind=Icon.ArrowRightSmall />
+                 </span>
+               </Button>
+             </div>
+           })}
+        </div>
+      </div>
+    </div>;
   };
 };
 

@@ -161,10 +161,11 @@ module Grant = {
   let id = "grants";
   type t = {
     title: string,
+    grantType: option(string),
     contributer: string,
     description: string,
-    repoSlug: string,
-    projectSlug: string,
+    repoSlug: option(string),
+    projectSlug: option(string),
   };
   type entry = System.entry(t);
   type entries = System.entries(t);

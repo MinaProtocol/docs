@@ -71,11 +71,13 @@ let make = (~profiles) => {
       <Wrapped>
         <Carousel
           title="Meet the Team"
-          copy="Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world."
+          copy={
+            "Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world."
+            ->Some
+          }
           cardKind={Carousel.TeamMembers(profiles)}
           dark=true
           numberOfItems={Array.length(profiles)}
-          slideWidthRem=24.5
         />
       </Wrapped>
     </div>
