@@ -23,7 +23,7 @@ module Styles = {
           flexDirection(`row),
           maxWidth(`rem(96.)),
           margin2(~v=`zero, ~h=`auto),
-          padding2(~h=`rem(9.5), ~v=`rem(8.)),
+          padding2(~h=`rem(9.5), ~v=`rem(4.)),
         ],
       ),
     ]);
@@ -123,11 +123,18 @@ module Styles = {
         color(Theme.Colors.orange),
       ]),
     ]);
+
+  let specialSpacer =
+    style([
+      height(`rem(0.)),
+      media(Theme.MediaQuery.desktop, [height(`rem(4.))]),
+    ]);
 };
 
 [@react.component]
 let make = () => {
   <div className=Styles.rowBackgroundImage>
+    <div className=Styles.specialSpacer />
     <div className=Styles.container>
       <div className=Styles.firstColumn>
         <hr className=Styles.rule />
@@ -223,6 +230,7 @@ let make = () => {
           className=Styles.secondImage
           src="/static/img/triangle_desktop.jpg"
         />
+        <div className=Styles.specialSpacer />
       </div>
     </div>
   </div>;
