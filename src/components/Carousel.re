@@ -73,7 +73,11 @@ module Styles = {
       marginBottom(`rem(6.)),
       media(
         Theme.MediaQuery.notMobile,
-        [justifyContent(`spaceBetween), flexDirection(`row)],
+        [
+          alignItems(`center),
+          justifyContent(`spaceBetween),
+          flexDirection(`row),
+        ],
       ),
     ]);
 
