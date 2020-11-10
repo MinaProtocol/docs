@@ -8,3 +8,4 @@ contentfulData/
 yarn-error.log
 /public/graphql-docs
 /public/static/font
+/node_modules
