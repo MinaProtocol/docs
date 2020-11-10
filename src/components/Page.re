@@ -10,6 +10,7 @@ module Styles = {
       animationDuration(1000),
       animationDelay(200),
       animationFillMode(`forwards),
+      overflow(`hidden),
     ]);
 };
 
