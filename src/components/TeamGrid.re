@@ -1,7 +1,5 @@
 module Styles = {
   open Css;
-  let headerCopy = style([media(Theme.MediaQuery.desktop, [])]);
-
   let header = merge([Theme.Type.h1, style([marginBottom(`rem(0.5))])]);
 
   let sectionSubhead =
@@ -12,6 +10,7 @@ module Styles = {
         lineHeight(`rem(1.75)),
         marginBottom(`rem(2.93)),
         letterSpacing(`pxFloat(-0.4)),
+        media(Theme.MediaQuery.desktop, [maxWidth(`rem(41.))]),
       ]),
     ]);
 
@@ -53,15 +52,15 @@ module Styles = {
 [@react.component]
 let make = (~profiles, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <>
-    <div className=Styles.headerCopy>
-      <Spacer height=4. />
-      <h2 className=Styles.header> {React.string("Meet the Team")} </h2>
-      <p className=Styles.sectionSubhead>
-        {React.string(
-           "Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world.",
-         )}
-      </p>
-    </div>
+    <h2 className=Styles.header> {React.string("Meet the Team")} </h2>
+    <p className=Styles.sectionSubhead>
+      {React.string(
+         "Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world.",
+       )}
+    </p>
+    <Spacer height=2. />
+    <Rule color=Theme.Colors.black />
+    <Spacer height=1. />
     <div className=Styles.grid>
       {React.array(
          profiles

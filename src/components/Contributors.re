@@ -1,6 +1,15 @@
 module Styles = {
   open Css;
-  let container = style([margin2(~v=`rem(4.), ~h=`zero)]);
+  let container =
+    style([
+      margin2(~v=`rem(4.), ~h=`zero),
+      padding2(~v=`rem(0.), ~h=`rem(9.5)),
+    ]);
+  let spacer =
+    style([
+      height(`rem(4.)),
+      media(Theme.MediaQuery.desktop, [height(`rem(8.))]),
+    ]);
 
   let modalContainer = modalShowing =>
     style([
@@ -108,16 +117,15 @@ let make =
            </div>
          </div>}
     <div className=Styles.container>
-      <Wrapped>
-        <Rule color=Theme.Colors.black />
-        <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
-        <Rule color=Theme.Colors.black />
-        <GenesisMembersGrid
-          genesisMembers
-          switchModalState
-          setCurrentIndexAndMembers
-        />
-      </Wrapped>
+      <div className=Styles.spacer />
+      <Spacer height=2. />
+      <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
+      <div className=Styles.spacer />
+      <GenesisMembersGrid
+        genesisMembers
+        switchModalState
+        setCurrentIndexAndMembers
+      />
     </div>
     <Investors advisors switchModalState setCurrentIndexAndMembers />
   </>;
