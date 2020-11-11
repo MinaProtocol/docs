@@ -11,10 +11,17 @@ module Styles = {
       important(backgroundSize(`cover)),
       background(`url(backgroundImg.mobile)),
       paddingTop(`rem(8.)),
+      paddingLeft(`rem(1.5)),
+      paddingRight(`rem(1.5)),
       paddingBottom(`rem(8.)),
       media(
         Theme.MediaQuery.tablet,
-        [background(`url(backgroundImg.tablet)), height(`percent(100.))],
+        [
+          background(`url(backgroundImg.tablet)),
+          paddingLeft(`rem(0.)),
+          paddingRight(`rem(0.)),
+          height(`percent(100.)),
+        ],
       ),
       media(
         Theme.MediaQuery.desktop,
