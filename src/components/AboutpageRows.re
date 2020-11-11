@@ -126,12 +126,12 @@ module Styles = {
   let specialSpacer =
     style([
       height(`rem(0.)),
-      media(Theme.MediaQuery.desktop, [height(`rem(4.))]),
+      media(Theme.MediaQuery.tablet, [height(`rem(4.))]),
     ]);
   let largestSpacer =
     style([
       height(`rem(0.)),
-      media(Theme.MediaQuery.desktop, [height(`rem(8.))]),
+      media(Theme.MediaQuery.tablet, [height(`rem(8.))]),
     ]);
 };
 
