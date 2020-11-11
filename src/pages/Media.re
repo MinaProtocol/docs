@@ -129,7 +129,7 @@ module FeaturedPress = {
     content->Array.length == 0
       ? React.null
       : <Wrapped>
-          {content[1]->renderMainListing}
+          {content[0]->renderMainListing}
           <div className=Styles.gridContainer>
             {content->Belt.Array.slice(~offset=1, ~len=Array.length(content))
              |> Array.map((item: ContentType.Press.t) => {
