@@ -11,17 +11,28 @@ module FeaturedPress = {
       ]);
     let container =
       style([
+        display(`flex),
+        flexDirection(`column),
         display(`grid),
         borderTop(`px(1), `solid, Theme.Colors.digitalBlack),
         width(`percent(100.)),
         media(Theme.MediaQuery.notMobile, [width(`percent(80.))]),
       ]);
 
-    let mainListingContainer =
+    let mainListingContainerImage =
       style([
         display(`flex),
         justifyContent(`spaceBetween),
-        alignItems(`center),
+        width(`percent(100.)),
+      ]);
+
+    let mainListingContainer =
+      style([
+        display(`flex),
+        justifyContent(`flexStart),
+        alignItems(`flexStart),
+        width(`percent(100.)),
+        marginBottom(`rem(4.)),
       ]);
 
     let mainListing =
@@ -29,7 +40,8 @@ module FeaturedPress = {
         display(`flex),
         flexDirection(`column),
         height(`percent(100.)),
-        marginBottom(`rem(6.)),
+        width(`percent(100.)),
+        maxWidth(`rem(30.)),
       ]);
 
     let metadata =
@@ -53,16 +65,20 @@ module FeaturedPress = {
         Theme.Type.h5,
         style([fontWeight(`light), marginTop(`rem(1.))]),
       ]);
+
+    let image =
+      style([
+        marginBottom(`rem(4.)),
+        marginRight(`rem(4.)),
+        width(`rem(35.)),
+        height(`rem(23.)),
+      ]);
   };
 
   let run = () => {
     Contentful.getEntries(
       Lazy.force(Contentful.client),
-      {
-        "include": 0,
-        "content_type": ContentType.Press.id,
-        "order": "-fields.datePublished",
-      },
+      {"include": 1, "content_type": ContentType.Press.id},
     )
     |> Promise.map((entries: ContentType.Press.entries) => {
          Array.map((e: ContentType.Press.entry) => e.fields, entries.items)
@@ -72,15 +88,30 @@ module FeaturedPress = {
   [@react.component]
   let make = () => {
     let (content, setContent) = React.useState(_ => [||]);
+
     React.useEffect0(() => {
-      BlogModule.FetchPress.run()
-      |> Promise.iter(press => setContent(_ => press));
+      run() |> Promise.iter(press => {setContent(_ => press)});
       None;
     });
 
     let renderMainListing = (item: ContentType.Press.t) => {
-      let {ContentType.Press.datePublished, publisher, description, link} = item;
-      <div className=Styles.mainListingContainer>
+      let {
+        ContentType.Press.datePublished,
+        publisher,
+        description,
+        link,
+        image,
+      } = item;
+
+      let containerCss =
+        Belt.Option.mapWithDefault(image, Styles.mainListingContainer, _ => {
+          Styles.mainListingContainerImage
+        });
+
+      <div className=containerCss>
+        {Belt.Option.mapWithDefault(image, React.null, image => {
+           <> <img src={image.fields.file.url} className=Styles.image /> </>
+         })}
         <div className=Styles.mainListing>
           <div className=Styles.metadata>
             <span> {React.string("Press")} </span>
@@ -129,6 +160,8 @@ module FeaturedPress = {
     content->Array.length == 0
       ? React.null
       : <Wrapped>
+          <h2 className=Theme.Type.h2> {React.string("Featured Press")} </h2>
+          <Spacer height=4. />
           {content[0]->renderMainListing}
           <div className=Styles.gridContainer>
             {content->Belt.Array.slice(~offset=1, ~len=Array.length(content))
