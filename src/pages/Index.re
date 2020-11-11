@@ -78,7 +78,17 @@ let make = () => {
             }),
         }
       />
-      <BlogModule source=`Press itemKind=ListModule.Press />
+      <BlogModule
+        source=`Announcement
+        title="Mina Announcements"
+        itemKind=ListModule.Announcement
+        buttonHref={`Internal("/announcements")}
+      />
+      <BlogModule
+        source=`Press
+        itemKind=ListModule.Press
+        buttonHref={`Internal("/media")}
+      />
     </div>
   </Page>;
 };

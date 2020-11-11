@@ -25,11 +25,5 @@ let make = () => {
       </Button>
     </Hero>
     <BlogModule source=`Press title="Featured Press" />
-    <BlogModule
-      source=`Announcement
-      title="Mina Announcements"
-      itemKind=ListModule.Announcement
-      buttonHref={`Internal("/announcements")}
-    />
   </Page>;
 };

@@ -56,6 +56,23 @@ type itemKind =
   | Announcement
   | Press;
 
+let renderInternalLinkKind = (itemKind, slug, inner) => {
+  switch (itemKind) {
+  | Blog =>
+    <Next.Link href="/blog/[slug]" _as={"/blog/" ++ slug} passHref=true>
+      inner
+    </Next.Link>
+  | Announcement =>
+    <Next.Link
+      href="/announcements/[slug]"
+      _as={"/announcements/" ++ slug}
+      passHref=true>
+      inner
+    </Next.Link>
+  | _ => React.null
+  };
+};
+
 module MainListing = {
   module MainListingStyles = {
     open Css;
@@ -104,10 +121,8 @@ module MainListing = {
            <Icon kind=Icon.ArrowRightSmall />
          </div>;
        switch (item.link) {
-       | `Slug(slug) =>
-         <Next.Link href="/blog/[slug]" _as={"/blog/" ++ slug} passHref=true>
-           inner
-         </Next.Link>
+       | `Slug(slug) => renderInternalLinkKind(itemKind, slug, inner)
+
        | `Remote(href) =>
          <a className=MainListingStyles.anchor href> inner </a>
        }}
@@ -139,10 +154,8 @@ module Listing = {
           <Icon kind=Icon.ArrowRightSmall />
         </div>;
       switch (item.link) {
-      | `Slug(slug) =>
-        <Next.Link href="/blog/[slug]" _as={"/blog/" ++ slug} passHref=true>
-          inner
-        </Next.Link>
+      | `Slug(slug) => renderInternalLinkKind(itemKind, slug, inner)
+
       | `Remote(href) =>
         <a className=MainListing.MainListingStyles.anchor href> inner </a>
       };

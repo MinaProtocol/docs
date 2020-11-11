@@ -26,7 +26,7 @@ module Fetch = (T: {
 module Styles = {
   open Css;
 
-  let container = style([margin2(~v=`rem(7.), ~h=`zero)]);
+  let container = style([margin2(~v=`rem(5.), ~h=`zero)]);
 
   let header =
     style([
