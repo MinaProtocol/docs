@@ -43,7 +43,7 @@ module Styles = {
     merge([
       column,
       style([
-        media(Theme.MediaQuery.tablet, [marginRight(`rem(15.))]),
+        media(Theme.MediaQuery.tablet, [marginRight(`rem(0.))]),
         media(Theme.MediaQuery.desktop, [marginRight(`rem(7.))]),
       ]),
     ]);
@@ -79,7 +79,11 @@ module Styles = {
       style([
         media(
           Theme.MediaQuery.tablet,
-          [position(`absolute), right(`zero)],
+          [position(`absolute), right(`rem(-9.5))],
+        ),
+        media(
+          Theme.MediaQuery.desktop,
+          [position(`absolute), right(`rem(0.))],
         ),
       ]),
     ]);
