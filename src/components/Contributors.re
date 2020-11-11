@@ -1,10 +1,6 @@
 module Styles = {
   open Css;
-  let container =
-    style([
-      margin2(~v=`rem(4.), ~h=`zero),
-      padding2(~v=`rem(0.), ~h=`rem(9.5)),
-    ]);
+  let container = style([margin2(~v=`rem(4.), ~h=`zero)]);
   let spacer =
     style([
       height(`rem(4.)),
@@ -119,13 +115,14 @@ let make =
     <div className=Styles.container>
       <div className=Styles.spacer />
       <Spacer height=2. />
-      <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
-      <div className=Styles.spacer />
-      <GenesisMembersGrid
-        genesisMembers
-        switchModalState
-        setCurrentIndexAndMembers
-      />
+      <Wrapped>
+        <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
+        <GenesisMembersGrid
+          genesisMembers
+          switchModalState
+          setCurrentIndexAndMembers
+        />
+      </Wrapped>
     </div>
     <Investors advisors switchModalState setCurrentIndexAndMembers />
   </>;

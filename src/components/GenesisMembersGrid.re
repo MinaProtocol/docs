@@ -42,6 +42,8 @@ module Styles = {
 let make = (~genesisMembers, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <>
     <Spacer height=3. />
+    <Rule color=Theme.Colors.black />
+    <Spacer height=1. />
     <div className=Styles.genesisCopy>
       <h2 className=Styles.genesisHeader>
         {React.string("Genesis Members")}

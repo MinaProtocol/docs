@@ -10,8 +10,6 @@ module Styles = {
       position(`relative),
       important(backgroundSize(`cover)),
       background(`url(backgroundImg.mobile)),
-      paddingLeft(`rem(1.5)),
-      paddingRight(`rem(1.5)),
       paddingTop(`rem(8.)),
       paddingBottom(`rem(8.)),
       media(
@@ -23,7 +21,6 @@ module Styles = {
         [
           justifyContent(`flexStart),
           alignContent(`spaceAround),
-          paddingLeft(`rem(0.)),
           background(`url(backgroundImg.desktop)),
         ],
       ),

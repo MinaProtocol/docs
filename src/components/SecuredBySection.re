@@ -16,14 +16,13 @@ module Styles = {
   let grid =
     style([
       display(`grid),
-      padding2(~v=rem(4.), ~h=`rem(1.25)),
+      padding2(~v=rem(4.), ~h=`rem(0.)),
       gridTemplateColumns([`percent(100.)]),
       gridTemplateRows([`rem(33.), `rem(27.), `rem(54.)]),
       gridRowGap(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
         [
-          padding2(~v=rem(4.5), ~h=`rem(2.5)),
           gridTemplateColumns([`rem(43.)]),
           gridTemplateRows([`rem(30.), `rem(18.06), `rem(35.)]),
           gridRowGap(`rem(4.)),
@@ -32,8 +31,6 @@ module Styles = {
       media(
         Theme.MediaQuery.desktop,
         [
-          maxWidth(`rem(89.)),
-          padding2(~v=rem(8.9), ~h=`rem(9.5)),
           gridTemplateColumns([`rem(31.5), `rem(29.)]),
           gridTemplateRows([`rem(31.5), `rem(27.)]),
           gridColumnGap(`rem(6.8)),
@@ -176,83 +173,90 @@ module Styles = {
 [@react.component]
 let make = () => {
   <div className=Styles.backgroundImage>
-    <div className=Styles.grid>
-      <div className=Styles.gridItem1>
-        <Rule />
-        <Spacer height=2. />
-        <h2 className=Styles.h2>
-          {React.string("Secured by Participants")}
-        </h2>
-        <Spacer height=1. />
-        <p className=Theme.Type.sectionSubhead>
-          {React.string(
-             "The Mina network is secured by an uncapped number of block producers via proof-of-stake consensus. A uniquely decentralized blockchain, Mina gets even more secure and resilient as it grows.",
-           )}
-        </p>
-        <Spacer height=3. />
-        <div className=Styles.flexRow>
-          <span className=Styles.imageColumn>
-            <img src="/static/img/AboutBlockProducers.svg" />
-            <h3 className=Theme.Type.h3> {React.string("100s")} </h3>
-            <p className=Theme.Type.label>
-              {React.string("Block Producers")}
-            </p>
-          </span>
-          <span className=Styles.imageColumn>
-            <img src="/static/img/AboutSnarkProducers.svg" />
-            <h3 className=Theme.Type.h3> {React.string("100s")} </h3>
-            <p className=Theme.Type.label>
-              {React.string("Snark Producers")}
-            </p>
-          </span>
-        </div>
-      </div>
-      <Spacer height=4. />
-      <div className=Styles.gridItem2>
-        <Rule />
-        <Spacer height=2. />
-        <h2 className=Styles.h2Small>
-          {React.string("Featured Block Producers")}
-        </h2>
-        <Spacer height=1. />
-        <p className=Theme.Type.sectionSubhead>
-          {React.string(
-             "Delegating is an alternative to staking Mina directly, with the benefit of not having to maintain a node that is always connected to the network. Here are some of the professional block producers offering staking services on Mina.",
-           )}
-        </p>
-        <Spacer height=2. />
-        <div className=Styles.logoGrid>
-          <img className=Styles.logo src="/static/img/BisonTrailsLogo.png" />
-          <img
-            className=Styles.logo
-            src="/static/img/FigmentNetworksLogo.png"
-          />
-          <img className=Styles.logo src="/static/img/NonceLogo.png" />
-          <img className=Styles.logo src="/static/img/SnarkPoolLogo.png" />
-        </div>
-      </div>
-      <div className=Styles.gridItem3>
-        <img className=Styles.dotsImage src="/static/img/SecuredByDots.svg" />
-        <span className=Styles.textColumn>
-          <Rule color=Theme.Colors.white />
-          <h3 className=Styles.h3White>
-            {React.string("You Can Run a Node & Secure the Network")}
-          </h3>
-          <p className=Styles.labelWhite>
+    <Wrapped>
+      <div className=Styles.grid>
+        <div className=Styles.gridItem1>
+          <Rule />
+          <Spacer height=2. />
+          <h2 className=Styles.h2>
+            {React.string("Secured by Participants")}
+          </h2>
+          <Spacer height=1. />
+          <p className=Theme.Type.sectionSubhead>
             {React.string(
-               "With Mina's uniquely light blockchain, you don't have to have expensive hardware, or wait days for the blockchain to sync, or use a ton of computing power to stake and participate in consensus.",
+               "The Mina network is secured by an uncapped number of block producers via proof-of-stake consensus. A uniquely decentralized blockchain, Mina gets even more secure and resilient as it grows.",
+             )}
+          </p>
+          <Spacer height=3. />
+          <div className=Styles.flexRow>
+            <span className=Styles.imageColumn>
+              <img src="/static/img/AboutBlockProducers.svg" />
+              <h3 className=Theme.Type.h3> {React.string("100s")} </h3>
+              <p className=Theme.Type.label>
+                {React.string("Block Producers")}
+              </p>
+            </span>
+            <span className=Styles.imageColumn>
+              <img src="/static/img/AboutSnarkProducers.svg" />
+              <h3 className=Theme.Type.h3> {React.string("100s")} </h3>
+              <p className=Theme.Type.label>
+                {React.string("Snark Producers")}
+              </p>
+            </span>
+          </div>
+        </div>
+        <Spacer height=4. />
+        <div className=Styles.gridItem2>
+          <Rule />
+          <Spacer height=2. />
+          <h2 className=Styles.h2Small>
+            {React.string("Featured Block Producers")}
+          </h2>
+          <Spacer height=1. />
+          <p className=Theme.Type.sectionSubhead>
+            {React.string(
+               "Delegating is an alternative to staking Mina directly, with the benefit of not having to maintain a node that is always connected to the network. Here are some of the professional block producers offering staking services on Mina.",
              )}
           </p>
           <Spacer height=2. />
-          <span className=Styles.button>
-            <Button
-              bgColor=Theme.Colors.orange dark=true href={`Internal("/docs")}>
-              {React.string("Get Started")}
-              <Icon kind=Icon.ArrowRightSmall />
-            </Button>
+          <div className=Styles.logoGrid>
+            <img className=Styles.logo src="/static/img/BisonTrailsLogo.png" />
+            <img
+              className=Styles.logo
+              src="/static/img/FigmentNetworksLogo.png"
+            />
+            <img className=Styles.logo src="/static/img/NonceLogo.png" />
+            <img className=Styles.logo src="/static/img/SnarkPoolLogo.png" />
+          </div>
+        </div>
+        <div className=Styles.gridItem3>
+          <img
+            className=Styles.dotsImage
+            src="/static/img/SecuredByDots.svg"
+          />
+          <span className=Styles.textColumn>
+            <Rule color=Theme.Colors.white />
+            <h3 className=Styles.h3White>
+              {React.string("You Can Run a Node & Secure the Network")}
+            </h3>
+            <p className=Styles.labelWhite>
+              {React.string(
+                 "With Mina's uniquely light blockchain, you don't have to have expensive hardware, or wait days for the blockchain to sync, or use a ton of computing power to stake and participate in consensus.",
+               )}
+            </p>
+            <Spacer height=2. />
+            <span className=Styles.button>
+              <Button
+                bgColor=Theme.Colors.orange
+                dark=true
+                href={`Internal("/docs")}>
+                {React.string("Get Started")}
+                <Icon kind=Icon.ArrowRightSmall />
+              </Button>
+            </span>
           </span>
-        </span>
+        </div>
       </div>
-    </div>
+    </Wrapped>
   </div>;
 };

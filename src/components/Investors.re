@@ -11,7 +11,6 @@ module Styles = {
       media(
         Theme.MediaQuery.desktop,
         [
-          height(`rem(100.)),
           backgroundImage(url("/static/img/InvestorsBackgroundDesktop.jpg")),
         ],
       ),
@@ -65,16 +64,14 @@ module Styles = {
       gridTemplateColumns([`repeat((`num(2), `rem(11.)))]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
+      marginBottom(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
         [gridTemplateColumns([`repeat((`num(4), `rem(11.)))])],
       ),
       media(
         Theme.MediaQuery.desktop,
-        [
-          gridTemplateColumns([`repeat((`num(6), `rem(11.)))]),
-          marginBottom(`rem(7.)),
-        ],
+        [gridTemplateColumns([`repeat((`num(6), `rem(11.)))])],
       ),
     ]);
   let advisors =
