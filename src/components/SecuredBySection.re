@@ -24,7 +24,7 @@ module Styles = {
         Theme.MediaQuery.tablet,
         [
           gridTemplateColumns([`rem(43.)]),
-          gridTemplateRows([`rem(30.), `rem(18.06), `rem(35.)]),
+          gridTemplateRows([`rem(34.), `rem(18.06), `rem(27.)]),
           gridRowGap(`rem(4.)),
         ],
       ),
@@ -53,7 +53,8 @@ module Styles = {
           display(`flex),
           flexDirection(`row),
           unsafe("grid-area", "3 / 1 / 3 / 3"),
-          height(`rem(20.)),
+          marginTop(`rem(4.)),
+          height(`rem(22.)),
         ],
       ),
       media(
@@ -130,21 +131,6 @@ module Styles = {
       Theme.Type.h2,
       style([lineHeight(`rem(3.0)), fontSize(`rem(2.5))]),
     ]);
-  let h2Small =
-    merge([
-      Theme.Type.h2,
-      style([
-        lineHeight(`rem(2.3)),
-        media(
-          Theme.MediaQuery.notMobile,
-          [
-            important(lineHeight(`rem(1.5))),
-            important(fontSize(`rem(2.))),
-          ],
-        ),
-      ]),
-    ]);
-
   let h3White =
     merge([
       Theme.Type.h3,
@@ -209,7 +195,7 @@ let make = () => {
         <div className=Styles.gridItem2>
           <Rule />
           <Spacer height=2. />
-          <h2 className=Styles.h2Small>
+          <h2 className=Styles.h2>
             {React.string("Featured Block Producers")}
           </h2>
           <Spacer height=1. />
