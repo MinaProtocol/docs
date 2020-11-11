@@ -62,6 +62,7 @@ module Styles = {
         [
           unsafe("grid-area", "1 / 2 / 3 / 3"),
           flexDirection(`column),
+          marginTop(`rem(0.)),
           padding2(~v=`rem(4.), ~h=`rem(3.5)),
           height(`rem(73.4)),
         ],
