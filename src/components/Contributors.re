@@ -4,6 +4,7 @@ module Styles = {
   let spacer =
     style([
       height(`rem(4.)),
+      media(Theme.MediaQuery.tablet, [height(`rem(0.))]),
       media(Theme.MediaQuery.desktop, [height(`rem(8.))]),
     ]);
 
@@ -114,7 +115,6 @@ let make =
          </div>}
     <div className=Styles.container>
       <div className=Styles.spacer />
-      <Spacer height=2. />
       <Wrapped>
         <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
         <GenesisMembersGrid

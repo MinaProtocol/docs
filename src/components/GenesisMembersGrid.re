@@ -29,7 +29,7 @@ module Styles = {
       gridRowGap(`rem(1.)),
       media(
         Theme.MediaQuery.tablet,
-        [gridTemplateColumns([`repeat((`num(3), `rem(10.)))])],
+        [gridTemplateColumns([`repeat((`num(3), `rem(11.)))])],
       ),
       media(
         Theme.MediaQuery.desktop,

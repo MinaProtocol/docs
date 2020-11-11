@@ -90,7 +90,7 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <div className=Styles.backgroundImage>
     <div className=Styles.container>
       <Wrapped>
-        <Spacer height=7. />
+        <Spacer height=4. />
         <h2 className=Styles.header> {React.string("Investors")} </h2>
         <p className=Styles.advisorsSubhead>
           {React.string("Supporting O(1) Labs")}

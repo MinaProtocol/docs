@@ -26,10 +26,10 @@ module Styles = {
         Theme.MediaQuery.tablet,
         [
           gridTemplateColumns([
-            `rem(10.),
-            `rem(10.),
-            `rem(10.),
-            `rem(10.),
+            `rem(11.),
+            `rem(11.),
+            `rem(11.),
+            `rem(11.),
           ]),
         ],
       ),
