@@ -20,7 +20,7 @@ module Styles = {
     style([
       display(`grid),
       paddingTop(`rem(2.)),
-      gridTemplateColumns([`rem(10.), `rem(10.)]),
+      gridTemplateColumns([`rem(11.), `rem(11.)]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
       gridRowGap(`rem(1.)),
@@ -28,10 +28,10 @@ module Styles = {
         Theme.MediaQuery.tablet,
         [
           gridTemplateColumns([
-            `rem(10.),
-            `rem(10.),
-            `rem(10.),
-            `rem(10.),
+            `rem(11.),
+            `rem(11.),
+            `rem(11.),
+            `rem(11.),
           ]),
         ],
       ),
