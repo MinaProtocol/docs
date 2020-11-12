@@ -53,12 +53,12 @@ module Styles = {
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
       media(
-        Theme.MediaQuery.tablet,
+        Theme.MediaQuery.notMobile,
         [
           display(`flex),
           flexDirection(`row),
           unsafe("grid-area", "3 / 1 / 3 / 3"),
-          height(`rem(20.)),
+          height(`rem(26.)),
         ],
       ),
       media(
