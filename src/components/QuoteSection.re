@@ -121,7 +121,7 @@ let make =
     ) => {
   <div className={Styles.container(backgroundImg)}>
     <div className={Styles.quoteContainer(small)}>
-      <p className=Styles.jumpQuote> {React.string("\"")} </p>
+      <p className=Styles.jumpQuote> {React.string({js|“|js})} </p>
       <p className=Styles.quote> {React.string(copy)} </p>
       <div className=Styles.attribute>
         <img className=Styles.headshot src=authorImg />
