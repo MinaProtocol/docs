@@ -48,13 +48,13 @@ module Styles = {
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
       media(
-        Theme.MediaQuery.tablet,
+        Theme.MediaQuery.notMobile,
         [
           display(`flex),
           flexDirection(`row),
           unsafe("grid-area", "3 / 1 / 3 / 3"),
-          marginTop(`rem(4.)),
-          height(`rem(22.)),
+          height(`rem(21.)),
+          marginBottom(`rem(4.)),
         ],
       ),
       media(
@@ -64,7 +64,7 @@ module Styles = {
           flexDirection(`column),
           marginTop(`rem(0.)),
           padding2(~v=`rem(4.), ~h=`rem(3.5)),
-          height(`rem(73.4)),
+          height(`rem(75.)),
         ],
       ),
     ]);
