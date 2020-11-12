@@ -21,7 +21,7 @@ module Styles = {
       gridTemplateColumns([`rem(11.5), `rem(11.5)]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
-      gridRowGap(`rem(1.)),
+      gridRowGap(`rem(2.)),
       media(
         Theme.MediaQuery.tablet,
         [
