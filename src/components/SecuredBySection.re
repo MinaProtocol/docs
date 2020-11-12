@@ -18,7 +18,7 @@ module Styles = {
       display(`grid),
       padding2(~v=rem(4.), ~h=`rem(0.)),
       gridTemplateColumns([`percent(100.)]),
-      gridTemplateRows([`rem(33.), `rem(27.), `rem(54.)]),
+      gridTemplateRows([`rem(33.), `rem(27.), `rem(57.)]),
       gridRowGap(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
@@ -47,6 +47,7 @@ module Styles = {
       height(`rem(62.)),
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
+      marginTop(`rem(2.)),
       media(
         Theme.MediaQuery.notMobile,
         [
@@ -55,6 +56,7 @@ module Styles = {
           unsafe("grid-area", "3 / 1 / 3 / 3"),
           height(`rem(21.)),
           marginBottom(`rem(4.)),
+          marginTop(`rem(0.)),
         ],
       ),
       media(
