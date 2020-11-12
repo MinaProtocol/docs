@@ -19,7 +19,7 @@ module Styles = {
   let grid =
     style([
       display(`grid),
-      paddingTop(`rem(1.)),
+      paddingTop(`rem(2.)),
       gridTemplateColumns([`rem(10.), `rem(10.)]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
@@ -61,7 +61,9 @@ let make = (~profiles, ~switchModalState, ~setCurrentIndexAndMembers) => {
            "Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world.",
          )}
       </p>
+      <Spacer height=2. />
     </div>
+    <Rule color=Theme.Colors.digitalBlack />
     <div className=Styles.grid>
       {React.array(
          profiles
