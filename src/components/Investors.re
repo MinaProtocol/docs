@@ -19,17 +19,17 @@ module Styles = {
   let investorGrid =
     style([
       display(`grid),
-      gridTemplateColumns([`rem(10.), `rem(10.)]),
+      gridTemplateColumns([`rem(11.5), `rem(11.5)]),
       gridAutoRows(`rem(5.5)),
       gridGap(`rem(1.)),
-      selector("div, img", [height(`rem(5.5)), width(`rem(10.))]),
+      selector("div, img", [height(`rem(5.5)), width(`rem(11.5))]),
       media(
         Theme.MediaQuery.tablet,
-        [gridTemplateColumns([`repeat((`num(4), `rem(10.)))])],
+        [gridTemplateColumns([`repeat((`num(4), `rem(11.)))])],
       ),
       media(
         Theme.MediaQuery.desktop,
-        [gridTemplateColumns([`repeat((`num(6), `rem(10.)))])],
+        [gridTemplateColumns([`repeat((`num(6), `rem(11.)))])],
       ),
     ]);
 
@@ -58,21 +58,20 @@ module Styles = {
       justifyContent(`center),
       padding2(~v=`rem(1.5), ~h=`rem(1.)),
     ]);
-  let rule = style([marginTop(`rem(3.))]);
   let advisorGrid =
     style([
       display(`grid),
-      gridTemplateColumns([`repeat((`num(2), `rem(11.)))]),
+      gridTemplateColumns([`repeat((`num(2), `rem(11.5)))]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
       media(
         Theme.MediaQuery.tablet,
-        [gridTemplateColumns([`repeat((`num(4), `rem(11.)))])],
+        [gridTemplateColumns([`repeat((`num(4), `rem(11.5)))])],
       ),
       media(
         Theme.MediaQuery.desktop,
         [
-          gridTemplateColumns([`repeat((`num(6), `rem(11.)))]),
+          gridTemplateColumns([`repeat((`num(6), `rem(11.5)))]),
           marginBottom(`rem(7.)),
         ],
       ),
@@ -152,7 +151,7 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
         <img src="/static/img/logos/Three Arrows Capital 1.png" />
         <img src="/static/img/logos/Investor Logos_YBB Foundation 1.png" />
       </div>
-      <div className=Styles.rule> <Rule color=Theme.Colors.black /> </div>
+      <Spacer height=4. />
       <h2 className=Styles.advisors> {React.string("Advisors")} </h2>
       <p className=Styles.advisorsSubhead>
         {React.string("Supporting O(1) Labs")}

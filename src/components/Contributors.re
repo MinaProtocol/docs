@@ -109,7 +109,6 @@ let make =
     <div className=Styles.container>
       <Wrapped>
         <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
-        <Rule color=Theme.Colors.black />
         <GenesisMembersGrid
           genesisMembers
           switchModalState
