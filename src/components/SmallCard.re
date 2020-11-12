@@ -10,8 +10,8 @@ module Styles = {
     ]);
   let image =
     style([
-      width(`rem(11.)),
-      height(`rem(11.)),
+      width(`rem(11.5)),
+      height(`rem(11.5)),
       marginBottom(`rem(1.)),
     ]);
   let name =
