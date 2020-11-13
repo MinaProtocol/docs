@@ -33,7 +33,7 @@ module Styles = {
         [
           gridTemplateColumns([`rem(31.5), `rem(29.)]),
           gridTemplateRows([`rem(31.5), `rem(27.)]),
-          gridColumnGap(`rem(6.8)),
+          gridColumnGap(`rem(15.)),
           gridRowGap(`rem(6.)),
           backgroundSize(`cover),
         ],
