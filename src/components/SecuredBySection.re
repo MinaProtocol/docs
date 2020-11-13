@@ -15,10 +15,10 @@ module Styles = {
     ]);
   let grid =
     style([
-      display(`grid)
-      padding2(~v=rem(4.), ~h=`rem(1.25)),
-      gridTemplateColumns([`rem(21.)]),
-      gridTemplateRows([`rem(35.), `rem(31.), `rem(49.)]),
+      display(`grid),
+      padding2(~v=rem(4.), ~h=`rem(0.)),
+      gridTemplateColumns([`percent(100.)]),
+      gridTemplateRows([`rem(33.), `rem(27.), `rem(54.)]),
       gridRowGap(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
@@ -48,12 +48,13 @@ module Styles = {
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
       media(
-        Theme.MediaQuery.notMobile,
+        Theme.MediaQuery.tablet,
         [
           display(`flex),
           flexDirection(`row),
           unsafe("grid-area", "3 / 1 / 3 / 3"),
-          height(`rem(26.)),
+          marginTop(`rem(4.)),
+          height(`rem(22.)),
         ],
       ),
       media(
