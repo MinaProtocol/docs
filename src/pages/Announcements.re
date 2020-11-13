@@ -69,9 +69,9 @@ module MorePosts = {
   let make = (~posts) => {
     <div>
       <BlogModule.Title
-        copy="More Blog posts"
-        buttonCopy="See all posts"
-        buttonHref={`Internal("/blog/all")}
+        copy="More Announcements "
+        buttonCopy="See all announcements"
+        buttonHref={`Internal("/announcements/all")}
       />
       <Content posts />
     </div>;
@@ -81,9 +81,9 @@ module MorePosts = {
 [@react.component]
 let make = (~posts) => {
   switch (Array.to_list(posts)) {
-  | [] => failwith("Didn't load blog posts")
+  | [] => failwith("Didn't load announcements")
   | [featured, ...posts] =>
-    <Page title="Mina Protocol Blog">
+    <Page title="Mina Protocol Announcement">
       <Next.Head> Markdown.katexStylesheet </Next.Head>
       <div className=Nav.Styles.spacer />
       <Hero
