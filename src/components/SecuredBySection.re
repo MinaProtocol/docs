@@ -156,7 +156,7 @@ module Styles = {
       ),
       media(
         Theme.MediaQuery.desktop,
-        [marginRight(`zero), marginBottom(`zero), height(`rem(99.))],
+        [marginRight(`zero), marginBottom(`zero), height(`rem(35.))],
       ),
     ]);
   let button = style([media(Theme.MediaQuery.tablet, [])]);
@@ -224,7 +224,7 @@ let make = () => {
         <div className=Styles.gridItem3>
           <img
             className=Styles.dotsImage
-            src="/static/img/SecuredByDots.svg"
+            src="/static/img/SecuredByDots.png"
           />
           <span className=Styles.textColumn>
             <Rule color=Theme.Colors.white />
