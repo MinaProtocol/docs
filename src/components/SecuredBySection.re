@@ -31,9 +31,9 @@ module Styles = {
       media(
         Theme.MediaQuery.desktop,
         [
-          gridTemplateColumns([`rem(31.5), `rem(29.)]),
+          gridTemplateColumns([`rem(36.), `rem(29.)]),
           gridTemplateRows([`rem(31.5), `rem(27.)]),
-          gridColumnGap(`rem(15.)),
+          gridColumnGap(`rem(9.)),
           gridRowGap(`rem(6.)),
           backgroundSize(`cover),
         ],
@@ -170,7 +170,7 @@ let make = () => {
           <h2 className=Styles.h2>
             {React.string("Secured by Participants")}
           </h2>
-          <Spacer height=1. />
+          <Spacer height=2. />
           <p className=Theme.Type.sectionSubhead>
             {React.string(
                "The Mina network is secured by an uncapped number of block producers via proof-of-stake consensus. A uniquely decentralized blockchain, Mina gets even more secure and resilient as it grows.",
@@ -201,13 +201,13 @@ let make = () => {
           <h2 className=Styles.h2>
             {React.string("Featured Block Producers")}
           </h2>
-          <Spacer height=1. />
+          <Spacer height=2. />
           <p className=Theme.Type.sectionSubhead>
             {React.string(
                "Delegating is an alternative to staking Mina directly, with the benefit of not having to maintain a node that is always connected to the network. Here are some of the professional block producers offering staking services on Mina.",
              )}
           </p>
-          <Spacer height=2. />
+          <Spacer height=3. />
           <div className=Styles.logoGrid>
             <img className=Styles.logo src="/static/img/BisonTrailsLogo.png" />
             <img
