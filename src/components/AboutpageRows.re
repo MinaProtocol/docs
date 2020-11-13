@@ -59,7 +59,7 @@ module Styles = {
 
   let header =
     merge([
-      Theme.Type.h1,
+      Theme.Type.h2,
       style([media(Theme.MediaQuery.desktop, [width(`rem(25.2))])]),
     ]);
   let subhead =
