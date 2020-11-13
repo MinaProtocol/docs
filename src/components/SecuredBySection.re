@@ -1,6 +1,6 @@
 module Styles = {
   open Css;
-  let backgroundImage =
+  let containerBackground =
     style([
       backgroundSize(`cover),
       backgroundImage(url("/static/img/SecuredBySmall.jpg")),
@@ -32,7 +32,7 @@ module Styles = {
         Theme.MediaQuery.desktop,
         [
           gridTemplateColumns([`rem(36.), `rem(29.)]),
-          gridTemplateRows([`rem(31.5), `rem(27.)]),
+          gridTemplateRows([`rem(36.), `rem(27.)]),
           gridColumnGap(`rem(9.)),
           gridRowGap(`rem(6.)),
           backgroundSize(`cover),
@@ -43,7 +43,10 @@ module Styles = {
   let gridItem2 = style([unsafe("grid-area", "2 / 1 / 3 / 2")]);
   let gridItem3 =
     style([
-      backgroundColor(Theme.Colors.digitalBlack),
+      backgroundImage(
+        url("/static/img/backgrounds/SecureNodeBackground.png"),
+      ),
+      backgroundSize(`cover),
       height(`rem(62.)),
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
@@ -66,7 +69,7 @@ module Styles = {
           flexDirection(`column),
           marginTop(`rem(0.)),
           padding2(~v=`rem(4.), ~h=`rem(3.5)),
-          height(`rem(75.)),
+          height(`rem(80.)),
         ],
       ),
     ]);
@@ -161,7 +164,7 @@ module Styles = {
 
 [@react.component]
 let make = () => {
-  <div className=Styles.backgroundImage>
+  <div className=Styles.containerBackground>
     <Wrapped>
       <div className=Styles.grid>
         <div className=Styles.gridItem1>
