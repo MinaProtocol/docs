@@ -134,6 +134,11 @@ module Styles = {
       Theme.Type.h2,
       style([lineHeight(`rem(3.0)), fontSize(`rem(2.5))]),
     ]);
+  let h3 =
+    merge([
+      Theme.Type.h3,
+      style([lineHeight(`rem(3.0)), fontSize(`rem(2.5))]),
+    ]);
   let h3White =
     merge([
       Theme.Type.h3,
@@ -200,7 +205,7 @@ let make = () => {
         <div className=Styles.gridItem2>
           <Rule />
           <Spacer height=2. />
-          <h2 className=Styles.h2>
+          <h2 className=Styles.h3>
             {React.string("Featured Block Producers")}
           </h2>
           <Spacer height=2. />
