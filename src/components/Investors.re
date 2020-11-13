@@ -152,6 +152,7 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
           <img src="/static/img/logos/Three Arrows Capital 1.png" />
           <img src="/static/img/logos/Investor Logos_YBB Foundation 1.png" />
         </div>
+        <Spacer height=4. />
         <h2 className=Styles.advisors> {React.string("Advisors")} </h2>
         <p className=Styles.advisorsSubhead>
           {React.string("Supporting O(1) Labs")}
