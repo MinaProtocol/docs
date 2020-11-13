@@ -22,18 +22,17 @@ module Styles = {
     style([
       marginTop(`rem(1.)),
       display(`grid),
-      paddingTop(`rem(1.)),
       gridTemplateColumns([`rem(11.5), `rem(11.5)]),
-      gridAutoRows(`rem(17.3)),
-      gridColumnGap(`rem(1.)),
+      gridAutoRows(`rem(17.)),
+      gridColumnGap(`rem(2.)),
       gridRowGap(`rem(1.)),
       media(
         Theme.MediaQuery.tablet,
-        [gridTemplateColumns([`repeat((`num(3), `rem(11.)))])],
+        [gridTemplateColumns([`repeat((`num(3), `rem(11.5)))])],
       ),
       media(
         Theme.MediaQuery.desktop,
-        [gridTemplateColumns([`repeat((`num(5), `rem(11.)))])],
+        [gridTemplateColumns([`repeat((`num(5), `rem(11.5)))])],
       ),
     ]);
 };

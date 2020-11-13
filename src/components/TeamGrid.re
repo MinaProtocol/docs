@@ -17,19 +17,19 @@ module Styles = {
   let grid =
     style([
       display(`grid),
-      paddingTop(`rem(1.)),
+      paddingTop(`rem(2.)),
       gridTemplateColumns([`rem(11.5), `rem(11.5)]),
       gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
-      gridRowGap(`rem(1.)),
+      gridRowGap(`rem(2.)),
       media(
         Theme.MediaQuery.tablet,
         [
           gridTemplateColumns([
-            `rem(11.),
-            `rem(11.),
-            `rem(11.),
-            `rem(11.),
+            `rem(11.5),
+            `rem(11.5),
+            `rem(11.5),
+            `rem(11.5),
           ]),
         ],
       ),
@@ -37,12 +37,12 @@ module Styles = {
         Theme.MediaQuery.desktop,
         [
           gridTemplateColumns([
-            `rem(11.),
-            `rem(11.),
-            `rem(11.),
-            `rem(11.),
-            `rem(11.),
-            `rem(11.),
+            `rem(11.5),
+            `rem(11.5),
+            `rem(11.5),
+            `rem(11.5),
+            `rem(11.5),
+            `rem(11.5),
           ]),
         ],
       ),
@@ -59,8 +59,7 @@ let make = (~profiles, ~switchModalState, ~setCurrentIndexAndMembers) => {
        )}
     </p>
     <Spacer height=2. />
-    <Rule color=Theme.Colors.black />
-    <Spacer height=1. />
+    <Rule color=Theme.Colors.digitalBlack />
     <div className=Styles.grid>
       {React.array(
          profiles
