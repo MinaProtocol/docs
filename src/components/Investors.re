@@ -62,8 +62,10 @@ module Styles = {
     style([
       display(`grid),
       gridTemplateColumns([`repeat((`num(2), `rem(11.5)))]),
-      gridAutoRows(`rem(17.3)),
+      gridAutoRows(`rem(20.)),
       gridColumnGap(`rem(1.)),
+      gridRowGap(`rem(2.)),
+      paddingBottom(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
         [gridTemplateColumns([`repeat((`num(4), `rem(11.5)))])],

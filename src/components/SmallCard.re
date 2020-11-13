@@ -12,7 +12,7 @@ module Styles = {
     style([
       width(`rem(11.5)),
       height(`rem(11.5)),
-      marginBottom(`rem(1.)),
+      marginBottom(`rem(2.)),
     ]);
   let name =
     merge([
