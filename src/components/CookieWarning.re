@@ -29,6 +29,7 @@ module Styles = {
       background(Theme.Colors.digitalBlack),
       boxSizing(`borderBox),
       boxShadow(~x=`px(0), ~y=`px(1), `hex("e5e5e5e5")),
+      zIndex(Theme.StackingIndex.zContent),
       media(
         Theme.MediaQuery.notMobile,
         [

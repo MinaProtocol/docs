@@ -46,7 +46,7 @@ module Styles = {
         borderRadius(`px(4)),
         pointerEvents(`auto),
         opacity(1.),
-        zIndex(100),
+        zIndex(Theme.StackingIndex.zContent),
         selector(
           "li",
           [
