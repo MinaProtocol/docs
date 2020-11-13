@@ -6,7 +6,8 @@
     "dev:reason": "bsb -clean-world -make-world -w",
     "dev:next": "next dev -p 8000",
     "clean": "bsb -clean-world",
-    "build": "graphdoc -s graphql_schema.json -o ./public/graphql-docs --force && bsb -make-world && next build",
+    "build": "npm run build:graphdoc && bsb -make-world && next build",
+    "build:graphdoc": "graphdoc -v -s graphql_schema.json -b /graphql-docs/ -o ./public/graphql-docs --force ",
     "export": "yarn build && next export",
     "start": "next start -p 8000",
     "reformat": "bsrefmt --in-place src/**/*.re"
