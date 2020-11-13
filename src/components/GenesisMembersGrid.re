@@ -23,9 +23,9 @@ module Styles = {
       marginTop(`rem(1.)),
       display(`grid),
       paddingTop(`rem(1.)),
-      gridTemplateColumns([`rem(11.), `rem(11.)]),
-      gridAutoRows(`rem(17.)),
-      gridColumnGap(`rem(2.)),
+      gridTemplateColumns([`rem(11.5), `rem(11.5)]),
+      gridAutoRows(`rem(17.3)),
+      gridColumnGap(`rem(1.)),
       gridRowGap(`rem(1.)),
       media(
         Theme.MediaQuery.tablet,
@@ -42,6 +42,8 @@ module Styles = {
 let make = (~genesisMembers, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <>
     <Spacer height=3. />
+    <Rule color=Theme.Colors.black />
+    <Spacer height=1. />
     <div className=Styles.genesisCopy>
       <h2 className=Styles.genesisHeader>
         {React.string("Genesis Members")}

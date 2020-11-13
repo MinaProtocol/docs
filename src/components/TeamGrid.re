@@ -1,9 +1,6 @@
 module Styles = {
   open Css;
-  let headerCopy =
-    style([media(Theme.MediaQuery.desktop, [width(`rem(42.))])]);
-
-  let header = merge([Theme.Type.h2, style([marginBottom(`rem(0.5))])]);
+  let header = merge([Theme.Type.h1, style([marginBottom(`rem(0.5))])]);
 
   let sectionSubhead =
     merge([
@@ -13,6 +10,7 @@ module Styles = {
         lineHeight(`rem(1.75)),
         marginBottom(`rem(2.93)),
         letterSpacing(`pxFloat(-0.4)),
+        media(Theme.MediaQuery.desktop, [maxWidth(`rem(41.))]),
       ]),
     ]);
 
@@ -21,8 +19,9 @@ module Styles = {
       display(`grid),
       paddingTop(`rem(2.)),
       paddingBottom(`rem(4.)),
-      gridTemplateColumns([`rem(11.), `rem(11.)]),
-      gridAutoRows(`rem(17.)),
+      paddingTop(`rem(1.)),
+      gridTemplateColumns([`rem(11.5), `rem(11.5)]),
+      gridAutoRows(`rem(17.3)),
       gridColumnGap(`rem(1.)),
       gridRowGap(`rem(2.)),
       media(

@@ -1,6 +1,12 @@
 module Styles = {
   open Css;
   let container = style([margin2(~v=`rem(4.), ~h=`zero)]);
+  let spacer =
+    style([
+      height(`rem(4.)),
+      media(Theme.MediaQuery.tablet, [height(`rem(0.))]),
+      media(Theme.MediaQuery.desktop, [height(`rem(8.))]),
+    ]);
 
   let modalContainer = modalShowing =>
     style([
@@ -107,6 +113,7 @@ let make =
            </div>
          </div>}
     <div className=Styles.container>
+      <div className=Styles.spacer />
       <Wrapped>
         <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
         <GenesisMembersGrid

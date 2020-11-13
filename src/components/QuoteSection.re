@@ -10,15 +10,23 @@ module Styles = {
       position(`relative),
       important(backgroundSize(`cover)),
       background(`url(backgroundImg.mobile)),
-      padding2(~v=`rem(4.), ~h=`zero),
+      paddingTop(`rem(8.)),
+      paddingLeft(`rem(1.5)),
+      paddingRight(`rem(1.5)),
+      paddingBottom(`rem(8.)),
       media(
         Theme.MediaQuery.tablet,
-        [background(`url(backgroundImg.tablet)), height(`percent(100.))],
+        [
+          background(`url(backgroundImg.tablet)),
+          paddingLeft(`rem(0.)),
+          paddingRight(`rem(0.)),
+          height(`percent(100.)),
+        ],
       ),
       media(
         Theme.MediaQuery.desktop,
         [
-          justifyContent(`flexEnd),
+          justifyContent(`flexStart),
           alignContent(`spaceAround),
           background(`url(backgroundImg.desktop)),
         ],
@@ -51,7 +59,10 @@ module Styles = {
           width(`rem(43.)),
         ],
       ),
-      media(Theme.MediaQuery.desktop, [width(small ? `rem(47.) : auto)]),
+      media(
+        Theme.MediaQuery.desktop,
+        [width(small ? `rem(47.) : auto), marginLeft(`rem(9.5))],
+      ),
     ]);
 
   let quote =
@@ -123,6 +134,6 @@ let make =
           </div>
         </div>
       </div>
-    </Wrapped>
+    </div>
   </div>;
 };
