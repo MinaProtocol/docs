@@ -19,7 +19,7 @@ module Styles = {
       display(`grid),
       paddingTop(`rem(2.)),
       gridTemplateColumns([`rem(11.5), `rem(11.5)]),
-      gridAutoRows(`rem(17.3)),
+      gridAutoRows(`rem(19.3)),
       gridColumnGap(`rem(1.)),
       gridRowGap(`rem(2.)),
       media(
