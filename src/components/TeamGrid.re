@@ -8,7 +8,6 @@ module Styles = {
       style([
         fontSize(`px(19)),
         lineHeight(`rem(1.75)),
-        marginBottom(`rem(2.93)),
         letterSpacing(`pxFloat(-0.4)),
         media(Theme.MediaQuery.desktop, [maxWidth(`rem(41.))]),
       ]),

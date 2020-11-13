@@ -1,7 +1,6 @@
 module Styles = {
   open Css;
 
-  let genesisHeader = merge([Theme.Type.h2, style([])]);
   let genesisCopy =
     style([
       unsafe("grid-area", "1 /1 / span 1 / span 2"),
@@ -40,13 +39,9 @@ module Styles = {
 [@react.component]
 let make = (~genesisMembers, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <>
-    <Spacer height=3. />
-    <Rule color=Theme.Colors.black />
-    <Spacer height=1. />
+    <Spacer height=4. />
     <div className=Styles.genesisCopy>
-      <h2 className=Styles.genesisHeader>
-        {React.string("Genesis Members")}
-      </h2>
+      <h2 className=Theme.Type.h3> {React.string("Genesis Members")} </h2>
       <p className=Styles.sectionSubhead>
         {React.string(
            "Meet the node operators, developers, and community builders making Mina happen.",
