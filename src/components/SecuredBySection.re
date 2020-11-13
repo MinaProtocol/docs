@@ -47,7 +47,7 @@ module Styles = {
       height(`rem(62.)),
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
-      marginTop(`rem(2.)),
+      marginTop(`rem(4.)),
       media(
         Theme.MediaQuery.notMobile,
         [
@@ -147,6 +147,8 @@ module Styles = {
     merge([Theme.Type.sectionSubhead, style([color(white)])]);
   let dotsImage =
     style([
+      height(`rem(33.)),
+      marginBottom(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
         [marginRight(`rem(3.)), height(`rem(15.))],
