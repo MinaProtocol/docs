@@ -2,6 +2,7 @@ module Styles = {
   open Css;
   let dropdown =
     style([
+      backgroundColor(Theme.Colors.white),
       position(`relative),
       width(`percent(100.)),
       border(`px(1), `solid, Theme.Colors.digitalBlack),
@@ -231,11 +232,12 @@ let make = (~currentSlug, ~defaultValue, ~children) => {
 
   let toggleMenuProvider = {toggleMenu, setItem};
 
-  <div className=Styles.dropdown onClick={_ => setMenuOpen(_ => true)}>
-    <span className=Styles.dropdown__currentItem>
+  <div className=Styles.dropdown>
+    <span className=Styles.dropdown__currentItem onClick={_ => toggleMenu()}>
       <span> {React.string(currentItem)} </span>
       {menuOpen
-         ? <Icon kind=Icon.ChevronUp /> : <Icon kind=Icon.ChevronDownLarge />}
+         ? <Icon kind=Icon.ChevronUpLarge />
+         : <Icon kind=Icon.ChevronDownLarge />}
     </span>
     <CurrentSlugProvider value=currentSlug>
       <ToggleMenuProvider value=toggleMenuProvider>
