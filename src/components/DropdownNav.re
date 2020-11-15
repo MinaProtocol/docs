@@ -43,87 +43,6 @@ module Styles = {
 
   let section__icon =
     style([marginTop(`rem(0.5)), marginLeft(`rem(0.5))]);
-
-  let sideNav =
-    style([
-      unsafe("counter-reset", "orderedList"),
-      width(`percent(100.)),
-      maxWidth(`rem(15.)),
-      listStyleType(`none),
-      firstChild([marginLeft(`zero)]),
-      padding(`zero),
-      margin(`zero),
-      media(
-        Theme.MediaQuery.tablet,
-        [marginTop(`zero), position(`sticky), top(rem(2.5))],
-      ),
-    ]);
-
-  let cell =
-    style([
-      minHeight(`rem(2.75)),
-      width(`rem(13.)),
-      display(`flex),
-      justifyContent(`spaceBetween),
-      alignItems(`center),
-      borderLeft(`px(1), `solid, Theme.Colors.digitalBlackA(0.25)),
-      color(Theme.Colors.digitalBlack),
-      textDecoration(`none),
-      backgroundSize(`cover),
-    ]);
-
-  let currentCell =
-    merge([
-      cell,
-      style([
-        unsafe(
-          "background",
-          "url(/static/img/MinaSepctrumSecondary.png) right no-repeat, linear-gradient(0deg, #2D2D2D, #2D2D2D), #FFFFFF",
-        ),
-      ]),
-    ]);
-
-  let li = style([] /* Inentionally blank, for now */);
-
-  let topLi = isCurrentItem =>
-    merge([
-      li,
-      style([
-        display(`flex),
-        alignItems(`center),
-        before(
-          [
-            color(Theme.Colors.digitalBlackA(isCurrentItem ? 1. : 0.25)),
-            width(`rem(2.)),
-            textAlign(`center),
-            unsafe("counter-increment", "orderedList"),
-            unsafe("content", "counter(orderedList, decimal-leading-zero)"),
-          ]
-          @ Theme.Type.metadata_,
-        ),
-      ]),
-    ]);
-
-  let item =
-    merge([
-      Theme.Type.sidebarLink,
-      style([
-        padding2(~v=`rem(0.6), ~h=`zero),
-        display(`inlineBlock),
-        marginLeft(`rem(1.)),
-        minHeight(`rem(1.5)),
-      ]),
-    ]);
-
-  let currentItem =
-    merge([item, style([position(`relative), color(Theme.Colors.white)])]);
-
-  let break = style([flexBasis(`percent(100.))]);
-
-  let childItem = style([marginLeft(`rem(2.)), listStyleType(`none)]);
-  let flip = style([transform(rotate(`deg(90.)))]);
-
-  let chevronWrap = style([height(`rem(1.)), marginRight(`rem(1.))]);
 };
 
 type toggleMenuContext = {
@@ -151,15 +70,13 @@ let slugConcat = (n1, n2) => {
 module Item = {
   [@react.component]
   let make = (~title, ~slug) => {
-    let currentSlug = React.useContext(CurrentSlugProvider.context);
     let folderSlug = React.useContext(SectionSlugProvider.context);
     let toggleMenu = React.useContext(ToggleMenuProvider.context);
-    let (fullSlug, placement) =
+    let href =
       switch (folderSlug) {
-      | Some(fs) => (slugConcat(fs, slug), `Inner)
-      | None => (slug, `Top)
+      | Some(fs) => slugConcat(fs, slug)
+      | None => slug
       };
-    let href = fullSlug;
     <li
       className=Styles.dropdown__item
       onClick={_ => {
@@ -193,7 +110,8 @@ module Section = {
         ReactEvent.Mouse.preventDefault(e);
         setExpanded(expanded => !expanded);
       });
-    <>
+
+    let renderItem = () => {
       <li key=title>
         <a
           href="#"
@@ -205,13 +123,15 @@ module Section = {
             <Icon kind=Icon.ChevronDown />
           </span>
         </a>
-      </li>
+      </li>;
+    };
+
+    <>
+      {renderItem()}
       {!expanded
          ? React.null
          : <SectionSlugProvider value={Some(slug)}>
-             <div className=Styles.break>
-               <ul className=Styles.section__childItem> children </ul>
-             </div>
+             <> <ul className=Styles.section__childItem> children </ul> </>
            </SectionSlugProvider>}
     </>;
   };
@@ -230,17 +150,19 @@ let make = (~currentSlug, ~defaultValue, ~children) => {
     setCurrentItem(_ => newItem);
   };
 
-  let toggleMenuProvider = {toggleMenu, setItem};
-
-  <div className=Styles.dropdown>
+  let renderCurrentItem = () => {
     <span className=Styles.dropdown__currentItem onClick={_ => toggleMenu()}>
       <span> {React.string(currentItem)} </span>
       {menuOpen
          ? <Icon kind=Icon.ChevronUpLarge />
          : <Icon kind=Icon.ChevronDownLarge />}
-    </span>
+    </span>;
+  };
+
+  <div className=Styles.dropdown>
+    {renderCurrentItem()}
     <CurrentSlugProvider value=currentSlug>
-      <ToggleMenuProvider value=toggleMenuProvider>
+      <ToggleMenuProvider value={toggleMenu, setItem}>
         {menuOpen
            ? <ol role="list" className=Styles.dropdown__list> children </ol>
            : React.null}
