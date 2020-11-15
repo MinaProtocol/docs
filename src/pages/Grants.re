@@ -56,6 +56,7 @@ module Styles = {
       display(`flex),
       justifyContent(`center),
       alignItems(`center),
+      overflow(`hidden),
       media(
         Theme.MediaQuery.notMobile,
         [padding2(~v=`zero, ~h=`zero), height(`rem(43.))],

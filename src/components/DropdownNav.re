@@ -3,7 +3,6 @@ module Styles = {
   let dropdown =
     style([
       backgroundColor(Theme.Colors.white),
-      position(`relative),
       width(`percent(100.)),
       border(`px(1), `solid, Theme.Colors.digitalBlack),
       borderRadius(`px(2)),
