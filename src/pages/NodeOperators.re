@@ -5,7 +5,7 @@ module Styles = {
     style([
       position(`relative),
       background(`url(bg)),
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundSize(`cover),
       backgroundRepeat(`noRepeat),
       padding(`rem(2.)),

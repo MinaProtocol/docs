@@ -419,7 +419,7 @@ global(
 
 global("body", [unsafe("minWidth", "fit-content")]);
 
-global("html", [unsafe("scroll-padding-top", "6rem")]);
+global("html", [unsafe("scrollPaddingTop", "6rem")]);
 
 // Reset padding that appears only on some browsers
 global(

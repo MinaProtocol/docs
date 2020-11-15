@@ -2,7 +2,7 @@ module Styles = {
   open Css;
   let sideNav =
     style([
-      unsafe("counter-reset", "orderedList"),
+      unsafe("counterReset", "orderedList"),
       width(`percent(100.)),
       maxWidth(`rem(15.)),
       listStyleType(`none),
@@ -52,7 +52,7 @@ module Styles = {
             color(Theme.Colors.digitalBlackA(isCurrentItem ? 1. : 0.25)),
             width(`rem(2.)),
             textAlign(`center),
-            unsafe("counter-increment", "orderedList"),
+            unsafe("counterIncrement", "orderedList"),
             unsafe("content", "counter(orderedList, decimal-leading-zero)"),
           ]
           @ Theme.Type.metadata_,
