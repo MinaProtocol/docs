@@ -3,7 +3,7 @@ module SideNav = {
     open Css;
     let container =
       style([
-        display(`block),
+        display(`none),
         media(Theme.MediaQuery.desktop, [display(`block)]),
       ]);
   };
@@ -61,6 +61,7 @@ module Dropdown = {
     let dropdown =
       style([
         display(`block),
+        marginBottom(`rem(5.)),
         media(Theme.MediaQuery.desktop, [display(`none)]),
       ]);
   };

@@ -85,6 +85,7 @@ let make = (~metadata, ~children) => {
         <div className=Style.page>
           <DocsNavs.SideNav currentSlug />
           <div className=Style.content>
+            <DocsNavs.Dropdown currentSlug />
             <div className=Style.eyebrow>
               <LabelEyebrow copy="Documentation" />
             </div>
