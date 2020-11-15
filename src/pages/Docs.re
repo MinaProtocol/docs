@@ -52,11 +52,7 @@ module EditLink = {
     <a
       name="Edit Link"
       target="_blank"
-      href={
-        Constants.minaDocsEditLink
-        ++ route
-        ++ ".mdx"
-      }
+      href={Constants.minaDocsEditLink ++ route ++ ".mdx"}
       className=Style.editLink>
       <span className=Style.link> {React.string("Edit")} </span>
       <Icon kind=Icon.ArrowRightMedium />
@@ -87,7 +83,7 @@ let make = (~metadata, ~children) => {
       <Wrapped>
         <div className=Nav.Styles.spacer />
         <div className=Style.page>
-          <DocsSideNav currentSlug />
+          <DocsNavs.SideNav currentSlug />
           <div className=Style.content>
             <div className=Style.eyebrow>
               <LabelEyebrow copy="Documentation" />
