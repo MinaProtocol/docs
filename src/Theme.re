@@ -419,6 +419,8 @@ global(
 
 global("body", [unsafe("minWidth", "fit-content")]);
 
+global("html", [unsafe("scroll-padding-top", "6rem")]);
+
 // Reset padding that appears only on some browsers
 global(
   "h1,h2,h3,h4,h5,fieldset,ul,li,p,figure",
