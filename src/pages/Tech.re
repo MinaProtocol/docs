@@ -127,39 +127,6 @@ module Section = {
   };
 };
 
-module TechSideNav = {
-  [@react.component]
-  let make = () => {
-    let router = Next.Router.useRouter();
-    let hashExp = Js.Re.fromString("#(.+)");
-    let scrollTop = Hooks.useScroll();
-    let calcHash = path =>
-      Js.Re.(exec_(hashExp, path) |> Option.map(captures))
-      |> Js.Option.andThen((. res) => Js.Nullable.toOption(res[0]))
-      |> Js.Option.getWithDefault("");
-    let (hash, setHash) = React.useState(() => calcHash(router.asPath));
-
-    React.useEffect(() => {
-      let handleRouteChange = url => setHash(_ => calcHash(url));
-      router.events
-      ->Next.Router.Events.on("hashChangeStart", handleRouteChange);
-      Some(
-        () =>
-          router.events
-          ->Next.Router.Events.off("hashChangeStart", handleRouteChange),
-      );
-    });
-
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1000)}>
-      <SideNav.Item title="How Mina Works" slug="#how-mina-works" />
-      <SideNav.Item title="Projects & Possibilities" slug="#projects" />
-      <SideNav.Item title="Incentive Structure" slug="#incentives" />
-      <SideNav.Item title="Where We're Headed" slug="#roadmap" />
-      <SideNav.Item title="Knowledge Base" slug="#knowledge" />
-    </SideNav>;
-  };
-};
-
 module HowMinaWorks = {
   [@react.component]
   let make = () =>
@@ -494,7 +461,8 @@ let make = () => {
         )
       }
     />
-    <TechSideNav />
+    <TechNav.SideNav />
+    <TechNav.Dropdown />
     <HowMinaWorks />
     <Projects />
     <Incentives />
