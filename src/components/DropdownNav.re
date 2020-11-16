@@ -54,6 +54,10 @@ module ToggleMenuProvider = {
     ReactExt.createContext({toggleMenu: () => (), setItem: _ => ()});
 };
 
+module CurrentValueProvider = {
+  let (context, make, makeProps) = ReactExt.createContext("");
+};
+
 module CurrentSlugProvider = {
   let (context, make, makeProps) = ReactExt.createContext("");
 };
@@ -71,16 +75,20 @@ module Item = {
   let make = (~title, ~slug) => {
     let folderSlug = React.useContext(SectionSlugProvider.context);
     let toggleMenu = React.useContext(ToggleMenuProvider.context);
+    let currentValue = React.useContext(CurrentValueProvider.context);
     let href =
       switch (folderSlug) {
       | Some(fs) => slugConcat(fs, slug)
       | None => slug
       };
+
+    // Don't render the item if it's currently selected
+    title === currentValue ? React.null :
     <li
       className=Styles.dropdown__item
       onClick={_ => {
-        toggleMenu.toggleMenu();
         toggleMenu.setItem(title);
+        toggleMenu.toggleMenu();
       }}>
       <Next.Link href> <span> {React.string(title)} </span> </Next.Link>
     </li>;
@@ -161,11 +169,13 @@ let make = (~currentSlug, ~defaultValue, ~children) => {
   <div className=Styles.dropdown>
     {renderCurrentItem()}
     <CurrentSlugProvider value=currentSlug>
-      <ToggleMenuProvider value={toggleMenu, setItem}>
-        {menuOpen
-           ? <ol role="list" className=Styles.dropdown__list> children </ol>
-           : React.null}
-      </ToggleMenuProvider>
+      <CurrentValueProvider value=currentItem>
+        <ToggleMenuProvider value={toggleMenu, setItem}>
+          {menuOpen
+            ? <ol role="list" className=Styles.dropdown__list> children </ol>
+            : React.null}
+        </ToggleMenuProvider>
+      </CurrentValueProvider>
     </CurrentSlugProvider>
   </div>;
 };
