@@ -43,9 +43,17 @@ module Styles = {
     merge([
       column,
       style([
-        media(Theme.MediaQuery.tablet, [marginRight(`rem(0.))]),
-        media(Theme.MediaQuery.desktop, [marginRight(`rem(7.))]),
+        media(
+          Theme.MediaQuery.tablet,
+          [position(`relative), marginRight(`rem(0.))],
+        ),
       ]),
+    ]);
+
+  let rowSpacer =
+    style([
+      height(`rem(4.)),
+      media(Theme.MediaQuery.tablet, [height(`rem(12.))]),
     ]);
   let secondColumn =
     merge([
@@ -79,11 +87,11 @@ module Styles = {
       style([
         media(
           Theme.MediaQuery.tablet,
-          [position(`absolute), right(`rem(-9.5))],
+          [position(`absolute), top(`rem(46.)), right(`rem(-10.))],
         ),
         media(
           Theme.MediaQuery.desktop,
-          [position(`absolute), right(`rem(0.))],
+          [top(`rem(58.)), right(`rem(-5.5))],
         ),
       ]),
     ]);
@@ -134,7 +142,7 @@ module Styles = {
     ]);
   let largestSpacer =
     style([
-      height(`rem(0.)),
+      height(`rem(4.)),
       media(Theme.MediaQuery.tablet, [height(`rem(8.))]),
     ]);
 };
@@ -181,6 +189,7 @@ let make = () => {
         src="/static/img/AboutHeroRow1Image.jpg"
       />
     </Wrapped>
+    <div className=Styles.rowSpacer />
     <Wrapped>
       <div className=Styles.secondColumn>
         <p className=Styles.subhead>

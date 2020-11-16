@@ -61,7 +61,7 @@ module Styles = {
       ),
       media(
         Theme.MediaQuery.desktop,
-        [width(small ? `rem(47.) : auto), left(`rem(-15.))],
+        [width(small ? `rem(47.) : auto), left(`rem(-12.))],
       ),
     ]);
 
