@@ -85,13 +85,17 @@ module Item = {
     // Don't render the item if it's currently selected
     title === currentValue
       ? React.null
-      : <li
-          className=Styles.dropdown__item
-          onClick={_ => {
-            toggleMenu.setItem(title);
-            toggleMenu.toggleMenu();
-          }}>
-          <Next.Link href> <span> {React.string(title)} </span> </Next.Link>
+      : <li className=Styles.dropdown__item>
+          <Next.Link href>
+            <span
+              className=Css.(style([width(`percent(100.))]))
+              onClick={_ => {
+                toggleMenu.setItem(title);
+                toggleMenu.toggleMenu();
+              }}>
+              {React.string(title)}
+            </span>
+          </Next.Link>
         </li>;
   };
 };

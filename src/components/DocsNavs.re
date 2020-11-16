@@ -107,8 +107,7 @@ module Dropdown = {
           | "snapps" => "Snapps"
           | "cli-reference" => "CLI Reference"
           | "tokens" => "Tokens"
-          | "troubleshooting" => "Snapps"
-          | "FAQ" => "Troubleshooting"
+          | "troubleshooting" => "FAQ"
           | "glossary" => "Glossary"
 
           | _ => "Documentation"
