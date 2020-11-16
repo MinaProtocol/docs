@@ -64,7 +64,7 @@ module Dropdown = {
         display(`block),
         top(`rem(2.)),
         marginBottom(`rem(4.)),
-        zIndex(100),
+        zIndex(Theme.StackingIndex.zNav),
         media(Theme.MediaQuery.desktop, [display(`none)]),
       ]);
   };
