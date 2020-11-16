@@ -11,7 +11,7 @@ module Styles = {
       height(`rem(4.25)),
       marginBottom(`rem(-4.25)),
       width(`percent(100.)),
-      zIndex(100),
+      zIndex(Theme.StackingIndex.zContent),
       media(
         Theme.MediaQuery.tablet,
         [

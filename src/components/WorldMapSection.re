@@ -58,7 +58,7 @@ module Styles = {
       bottom(`zero),
       right(`rem(35.5)),
       height(`rem(9.375)),
-      zIndex(99),
+      zIndex(Theme.StackingIndex.zContent),
       width(`rem(8.375)),
       display(`none),
       media(Theme.MediaQuery.desktop, [display(`grid)]),

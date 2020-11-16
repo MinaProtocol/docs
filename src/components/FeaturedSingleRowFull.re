@@ -71,7 +71,7 @@ module Styles = {
 
   let contentBlock = (contentBackground: Row.backgroundType) => {
     style([
-      zIndex(100),
+      zIndex(Theme.StackingIndex.zContent),
       width(`percent(100.)),
       maxHeight(`rem(35.)),
       overflow(`scroll),

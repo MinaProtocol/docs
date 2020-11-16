@@ -114,7 +114,7 @@ module ToggleButtons = {
           borderTopRightRadius(`px(1)),
           borderBottomLeftRadius(`px(1)),
           border(`px(1), `solid, Theme.Colors.digitalBlack),
-          zIndex(100),
+          zIndex(Theme.StackingIndex.zNav),
           selector(
             "*:not(:last-child)",
             [borderRight(`px(1), `solid, Theme.Colors.digitalBlack)],
@@ -132,7 +132,7 @@ module ToggleButtons = {
             borderBottomLeftRadius(`px(1)),
             border(`px(1), `solid, black),
             transform(translateZ(`px(-1))),
-            zIndex(-99),
+            zIndex(Theme.StackingIndex.zHide),
           ]),
         ]),
       ]);

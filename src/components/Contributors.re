@@ -21,7 +21,7 @@ module Styles = {
       top(`percent(50.)),
       left(`percent(50.)),
       transform(`translate((`percent(-50.), `percent(-50.)))),
-      zIndex(2),
+      zIndex(Theme.StackingIndex.zModal),
     ]);
 
   let modal = style([margin(`auto)]);
