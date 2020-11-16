@@ -41,7 +41,7 @@ module Styles = {
       top(sticky ? `rem(3.5) : `rem(107.)),
       marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
       width(`rem(14.)),
-      zIndex(100),
+      zIndex(Theme.StackingIndex.zNav),
       background(white),
       media(Theme.MediaQuery.desktop, [display(`block)]),
     ]);

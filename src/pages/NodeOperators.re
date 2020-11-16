@@ -7,7 +7,7 @@ module Styles = {
       top(sticky ? `rem(3.5) : `rem(66.)),
       marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
       width(`rem(14.)),
-      zIndex(100),
+      zIndex(Theme.StackingIndex.zContent),
       background(white),
       marginTop(`rem(3.5)),
       media(Theme.MediaQuery.desktop, [display(`block)]),
@@ -361,7 +361,7 @@ let make = () => {
         Theme.mobile: "/static/img/backgrounds/NodeOperatorHeroMobile.jpg",
       }
       title="Get Started For Node Operators"
-      header=Some("Run a Node")
+      header={Some("Run a Node")}
       copy={
         Some(
           {js|With the world’s lightest blockchain, running a node is easier than ever. Here you’ll find everything you need to get up and running.|js},

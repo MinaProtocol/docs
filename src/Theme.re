@@ -37,6 +37,13 @@ module MediaQuery = {
   let mobile = "(max-width:48rem)";
 };
 
+module StackingIndex = {
+  let zHide = (-100);
+  let zNav = 100;
+  let zContent = 200;
+  let zModal = 1000;
+};
+
 type backgroundImage = {
   desktop: string,
   tablet: string,
