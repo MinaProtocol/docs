@@ -11,7 +11,7 @@ module SideNav = {
       style([
         display(`none),
         position(sticky ? `fixed : `absolute),
-        top(sticky ? `rem(3.5) : `rem(70.)),
+        top(sticky ? `rem(3.5) : `rem(66.)),
         marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
         width(`rem(14.)),
         zIndex(100),
