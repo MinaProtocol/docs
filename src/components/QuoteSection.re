@@ -61,7 +61,7 @@ module Styles = {
       ),
       media(
         Theme.MediaQuery.desktop,
-        [width(small ? `rem(47.) : auto), marginLeft(`rem(9.5))],
+        [width(small ? `rem(47.) : auto), left(`rem(-15.))],
       ),
     ]);
 
@@ -120,18 +120,20 @@ let make =
       ~backgroundImg: Theme.backgroundImage,
     ) => {
   <div className={Styles.container(backgroundImg)}>
-    <div className={Styles.quoteContainer(small)}>
-      <p className=Styles.jumpQuote> {React.string({js|“|js})} </p>
-      <p className=Styles.quote> {React.string(copy)} </p>
-      <div className=Styles.attribute>
-        <img className=Styles.headshot src=authorImg />
-        <div className=Styles.name>
-          <p className=Theme.Type.pageLabel> {React.string(author)} </p>
-          <p className=Theme.Type.contributorLabel>
-            {React.string(authorTitle)}
-          </p>
+    <Wrapped>
+      <div className={Styles.quoteContainer(small)}>
+        <p className=Styles.jumpQuote> {React.string({js|“|js})} </p>
+        <p className=Styles.quote> {React.string(copy)} </p>
+        <div className=Styles.attribute>
+          <img className=Styles.headshot src=authorImg />
+          <div className=Styles.name>
+            <p className=Theme.Type.pageLabel> {React.string(author)} </p>
+            <p className=Theme.Type.contributorLabel>
+              {React.string(authorTitle)}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </Wrapped>
   </div>;
 };

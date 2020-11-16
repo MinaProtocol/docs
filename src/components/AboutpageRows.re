@@ -143,7 +143,7 @@ module Styles = {
 let make = () => {
   <div className=Styles.rowBackgroundImage>
     <div className=Styles.specialSpacer />
-    <div className=Styles.container>
+    <Wrapped>
       <div className=Styles.firstColumn>
         <hr className=Styles.rule />
         <Spacer height=1.5 />
@@ -180,8 +180,8 @@ let make = () => {
         className=Styles.firstImage
         src="/static/img/AboutHeroRow1Image.jpg"
       />
-    </div>
-    <div className=Styles.container>
+    </Wrapped>
+    <Wrapped>
       <div className=Styles.secondColumn>
         <p className=Styles.subhead>
           {React.string("That's why we created Mina.")}
@@ -240,6 +240,6 @@ let make = () => {
         />
         <div className=Styles.largestSpacer />
       </div>
-    </div>
+    </Wrapped>
   </div>;
 };
