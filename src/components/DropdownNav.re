@@ -83,15 +83,16 @@ module Item = {
       };
 
     // Don't render the item if it's currently selected
-    title === currentValue ? React.null :
-    <li
-      className=Styles.dropdown__item
-      onClick={_ => {
-        toggleMenu.setItem(title);
-        toggleMenu.toggleMenu();
-      }}>
-      <Next.Link href> <span> {React.string(title)} </span> </Next.Link>
-    </li>;
+    title === currentValue
+      ? React.null
+      : <li
+          className=Styles.dropdown__item
+          onClick={_ => {
+            toggleMenu.setItem(title);
+            toggleMenu.toggleMenu();
+          }}>
+          <Next.Link href> <span> {React.string(title)} </span> </Next.Link>
+        </li>;
   };
 };
 
@@ -172,8 +173,8 @@ let make = (~currentSlug, ~defaultValue, ~children) => {
       <CurrentValueProvider value=currentItem>
         <ToggleMenuProvider value={toggleMenu, setItem}>
           {menuOpen
-            ? <ol role="list" className=Styles.dropdown__list> children </ol>
-            : React.null}
+             ? <ol role="list" className=Styles.dropdown__list> children </ol>
+             : React.null}
         </ToggleMenuProvider>
       </CurrentValueProvider>
     </CurrentSlugProvider>

@@ -60,8 +60,11 @@ module Dropdown = {
 
     let dropdown =
       style([
+        position(`sticky),
         display(`block),
-        marginBottom(`rem(5.)),
+        top(`rem(2.)),
+        marginBottom(`rem(4.)),
+        zIndex(100),
         media(Theme.MediaQuery.desktop, [display(`none)]),
       ]);
   };
