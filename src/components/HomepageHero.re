@@ -70,7 +70,8 @@ module Styles = {
         display(`flex),
         justifyContent(`center),
         alignItems(`center),
-        bottom(`rem(12.)),
+        bottom(`rem(10.)),
+        media(Theme.MediaQuery.notMobile, [bottom(`rem(18.))]),
       ]),
     ]);
 
