@@ -98,6 +98,7 @@ module Styles = {
     merge([
       navLink,
       style([
+        hover([backgroundColor(Theme.Colors.orange)]),
         media(
           Theme.MediaQuery.desktop,
           [important(color(dark ? white : Theme.Colors.digitalBlack))],
