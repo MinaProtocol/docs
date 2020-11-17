@@ -53,10 +53,7 @@ module Styles = {
       width(`percent(90.)),
       margin2(~h=`auto, ~v=`zero),
       background(Theme.Colors.digitalBlack),
-      media(
-        Theme.MediaQuery.tablet,
-        [margin2(~h=`zero, ~v=`zero), top(`rem(6.25))],
-      ),
+      media(Theme.MediaQuery.tablet, [top(`rem(6.25))]),
       media(
         Theme.MediaQuery.desktop,
         [
@@ -66,6 +63,7 @@ module Styles = {
           flexDirection(`row),
           alignItems(`center),
           background(`none),
+          margin2(~h=`zero, ~v=`zero),
         ],
       ),
     ]);
