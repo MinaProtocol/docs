@@ -126,11 +126,13 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
           </div>
           <img src="/static/img/logos/LogoGeneralCatalyst.png" />
           <img src="/static/img/logos/Hashkey Capital 1.png" />
+          <img src="/static/img/logos/LogoImpero.jpg" />
           <img src="/static/img/logos/IOSG Ventures 1.png" />
           <div className=Styles.investorGridItemLarge>
             {React.string("Jack Herrick")}
           </div>
           <img src="/static/img/logos/LogoKilowattCapital.png" />
+          <img src="/static/img/logos/LogoLDCapital.jpg" />
           <img src="/static/img/logos/LogoKindredVentures.png" />
           <img src="/static/img/logos/LogoLibertusCapital.png" />
           <div className=Styles.investorGridItem>
