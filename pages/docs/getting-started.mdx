@@ -3,12 +3,12 @@ export default Page({ title: "Getting Started" });
 
 # Getting Started
 
-Welcome to Mina Genesis Program applicants! This section will walk you through the requirements needed to run a Mina protocol node on your local machine and connect to the network.
+Welcome to Mina Genesis Program applicants! This section will walk you through the process of setting up a Mina node. After we will show you how to generate a keypair for submission prior to a new Testnet. Finally we'll show you how to connect to the network and begin producing blocks.
 
 <Alert>
 
 
-This documentation is for the **beta** release. The commands and APIs may change before the initial release. Last updated for version `0.0.14-beta`.
+This documentation is for the **beta** release. The commands and APIs may change before the initial release. Last updated for version `0.0.16-beta7`.
 
 </Alert>
 
@@ -17,12 +17,12 @@ This documentation is for the **beta** release. The commands and APIs may change
 
 **Software**: macOS or Linux (currently supports Debian 9 and Ubuntu 18.04 LTS)
 
-Note: Windows is not officially supported at this time. However, community members succeeded in setting up nodes using Windows Subsystem for Linux. Click [here](https://minawiki.com/index.php?title=Mina_on_Windows) for instructions on using Windows, which are created by the community.
+Note: Windows is not officially supported at this time. However, community members succeeded in setting up nodes using Windows Subsystem for Linux. Click [here](https://minawiki.com/index.php?title=Mina_on_Windows) for instructions on using Windows, which are created by the community. Additionally Windows uers can use the Docker documentation.
 
 **Hardware**: Sending and receiving mina does not require any special hardware, but running a block producer on the Mina network currently requires:
 
-- at least a 4-core processor
-- at least 8GB of RAM
+- at least a 8-core processor
+- at least 16GB of RAM
 
 Note that if you plan on running a snark worker node, you may need more RAM -- 16GB is recommended. GPUs aren't currently required, but may be required for node operators when the protoctol is upgraded.
 
@@ -36,7 +36,7 @@ O(1) Labs has tested running nodes on several cloud providers, and recommends th
 - Azure - [Standard_F8s_v2](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-compute#fsv2-series-1)
 - Digital Ocean - [c-8-16gib](https://cloud.digitalocean.com/droplets/new?size=c-8-16gib)
 
-Check out our [guide](https://www.youtube.com/watch?v=iSrtjxOsC6A) for how to configure your Mina node on Google Cloud.
+Check out our [guide](https://youtu.be/M9lE2lgyVEo) for how to configure your Mina node on Google Cloud.
 
 ## Installation
 
