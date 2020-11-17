@@ -1,20 +1,47 @@
 import Page from "@reason/pages/Docs";
-export default Page({ title: "My First Transaction" });
+import StatusBadge from "@reason/components/StatusBadge";
+export default Page({ title: "Connect to the Network" });
 
-# My First Transaction
+# Connect to the Network
 
-In this section, we'll make our first transaction on the Mina network. After [installing the software](./getting-started), we'll need to create a new account before we can send or receive mina. Let's first start up the node so that we can start issuing commands.
+In this section, we'll connect to the Mina network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
+
+<Alert kind="warning">
+
+  We have recently undergone a rebrand, changing our name to Mina. However we haven't had an opportunity to fully audit our codebase so you will encounter instances where the name `coda` appears in commands and filenames. This is a known issue and we are working to fix this issue in the next release.
+
+</Alert>
+
+## Update your software
+
+The first step in connecting to the network is installing the latest daemon version. Follow the instructions for your operating system below.
+
+### macOS
+
+Use [Homebrew](https://brew.sh/) to update the `mina` package.
+
+```
+brew upgrade mina
+```
+
+Check that the output of the `coda -version` command is `Commit 4395e91 on branch master`.
+
+### Ubuntu 18.04 / Debian 9
+
+First remove any previously installed version of the daemon to prevent any errors when upgrading to the latest version. Then you can install the latest version as follows:
+
+```
+sudo apt-get remove mina-testnet-postake-medium-curves
+sudo apt-get install -y mina-testnet-postake-medium-curves=0.0.16-beta7+-hard-fork-test-11-12-2020-069333
+```
+
+Check that the output of the `coda -version` command is `Commit 4395e91 on branch master`.
 
 ## Get the network information
 
-Because only 200 participants can join testnet 3.2b, you'll first need to get the peer addresses of the seed nodes. The 200 participants have already been selected, but you can sign up for the waitlist [here](http://bit.ly/StakingSignup) in case a spot opens up.
+Due to the limited number of spots available, you'll first need to get the most recent peer list. The inital participants have already been selected, but you can sign up for the waitlist [here](http://bit.ly/StakingSignup) in case a spot opens up.
 
-Once you're in, you'll receive an email close to release 3.2b launch date with the seed node addresses and updated commands. We can start by storing the seed addresses as environment variables to help with the next steps:
-
-```
-export SEED1='<seed-address-1>'
-export SEED2='<seed-address-2>'
-```
+Once you're in, you'll receive an email with the latest peer list and updated commands.
 
 ## Start up a node
 
@@ -22,6 +49,8 @@ export SEED2='<seed-address-2>'
 
 
 You can find the current status of the network and related services here: [status.minaprotocol.com](https://status.minaprotocol.com)
+
+Testnet Status: <StatusBadge service="Network" />
 
 </Alert>
 
