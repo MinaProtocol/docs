@@ -384,7 +384,7 @@ module FrontEndProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens (minimum 2 months commitment)|js},
+                  copy: {js|Minimum of 40,000 Mina tokens per month (minimum two month commitment)|js},
                 },
                 secondColumn: {
                   title: "Description",
@@ -395,26 +395,6 @@ module FrontEndProjects = {
             buttonUrl=Constants.projectGrantApplication
           />
           <Spacer height=3. />
-          <Project.ThreeColumn
-            title="Telemetry Health Dashboard"
-            rows=[|
-              {
-                firstColumn: {
-                  title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens|js},
-                },
-                secondColumn: {
-                  title: "Project Type",
-                  copy: {js|Open source|js},
-                },
-                thirdColumn: {
-                  title: "Overview",
-                  copy: {js|Build a high-level dashboard that describes the current state of the network by aggregating data from as many nodes as it has access to.|js},
-                },
-              },
-            |]
-            buttonUrl=Constants.projectGrantApplication
-          />
           <Spacer height=3. />
           <Project.ThreeColumn
             title="Browser Wallet (with optional chrome extension)"
