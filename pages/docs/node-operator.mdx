@@ -130,7 +130,7 @@ You might want to run the mina daemon in the background. You have a couple of op
 - Use the `-background` flag to `mina daemon`. This will not autorestart the daemon for you.
 - Use your OS service manager to run it for you, and get the ability to have it restart automatically and other features.
 
-Either way, your logs will be saved to `~/.mina-config/mina.log` and configuration can be specified in the [`daemon.json`](#using-daemonjson-to-configure-your-mina-daemon) file.
+Either way, your logs will be saved to `~/.coda-config/mina.log` and configuration can be specified in the [`daemon.json`](#using-daemonjson-to-configure-your-mina-daemon) file.
 
 ### macOS
 
@@ -156,7 +156,7 @@ Interested in making it easier to use mina with systemd? [Help us](https://githu
 
 ### Using daemon.json to configure your mina daemon
 
-By creating a file at `~/.mina-config/daemon.json`, you can configure your mina daemon without needing to provide options on the commandline. This can be useful for running mina as a service as well as just for avoiding repetitive typing!
+By creating a file at `~/.coda-config/daemon.json`, you can configure your mina daemon without needing to provide options on the commandline. This can be useful for running mina as a service as well as just for avoiding repetitive typing!
 
 Most of the options that can be passed to `mina daemon` on the commandline can also be provided as options in the config file. See `mina daemon -help` for more documentation of the options. Below is an example of usage of all the usable configuration parameters (in your file, you only need to specify the ones you want to change):
 
