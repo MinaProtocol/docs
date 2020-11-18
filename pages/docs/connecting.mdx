@@ -71,11 +71,19 @@ Testnet Status: <StatusBadge service="Network" />
 
 </Alert>
 
-As we're still in the testnet phase of our protocol, there are a few rare situations where your node can run into some issues. We don't want for your nodes to break and you not realize! So we've made some officially supported auto-restart flows for you.
+As we're still in the testnet phase of our protocol, there are a few rare situations where your node can run into some issues. We don't want for your nodes to break and you not realize! So we've made some officially supported auto-restart flows for you. We'll be iterating on these in future releases.
 
-We'll be iterating on these in future releases.
+However, first we'll want to make sure everything works by running it manually before starting with the auto-restart flows.
+
+Run the following command to start up a Mina node instance and connect to the live network:
+
+<DaemonCommandExample />
+
+The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
 
 See [here](/docs/troubleshooting) for common issues when first running a node.
+
+Great! Now that you've confirmed things are okay by running the standalone process, let's start the auto-restart flow!
 
 ### macOS
 
