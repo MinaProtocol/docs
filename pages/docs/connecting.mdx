@@ -39,14 +39,31 @@ Check that the output of the `coda -version` command is `Commit 4395e91 on branc
 
 ## Get the network information
 
-Due to the limited number of spots available, you'll first need to get the most recent peer list. The inital participants have already been selected, but you can sign up for the waitlist [here](http://bit.ly/StakingSignup) in case a spot opens up.
+To connect to the network, we need two files: <em>peer list</em> and <em>genesis config</em>. 
 
-Once you're in, you'll receive an email with the latest peer list and updated commands.
+### Peer list
+
+A peer list contains a list of node addresses that your node can initially connect to while joining the network.
+
+Due to the limited number of spots available, you'll first need to be selected as a participant to get the latest peer list. The inital participants have already been selected, but you can sign up for the waitlist [here](http://bit.ly/StakingSignup) in case a spot opens up.
+
+Once you're in, you'll receive an email with instructions on how to download latest peer list. Use the following command but replace `<PEER-LIST-URL>` with the URL provided in the email.
+
+```
+wget -O ~/mina-peers.txt <PEER-LIST-URL>
+```
+
+### Genesis config
+
+The genesis config contains the genesis timestamp and ledger, which together consist of the initial state of the network. For the genesis config we can simply download it using the following command.
+
+```
+wget -O ~/mina-daemon.json https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/pickles-public/genesis_ledger_fork_11-12-2020.json
+```
 
 ## Start up a node
 
 <Alert kind="status">
-
 
 You can find the current status of the network and related services here: [status.minaprotocol.com](https://status.minaprotocol.com)
 
@@ -54,19 +71,18 @@ Testnet Status: <StatusBadge service="Network" />
 
 </Alert>
 
-
 Run the following command to start up a Mina node instance and connect to the live network:
-
-<DaemonCommandExample />
 
 The `-peer` arguments specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
 
 By default, the node connects to the network using the default external-port of 8302. This can be changed using the `-external-port` flag.
 
+The `-background` flag ensures that we don't accidentally kill the process.
+
 <Alert>
 
 
-The daemon process needs to be running whenever you issue commands from `mina client`, so make sure you don't kill it by accident.
+The daemon process needs to be running whenever you issue commands from `coda client`, so make sure you don't kill it by accident.
 
 </Alert>
 
@@ -77,14 +93,14 @@ See [here](/docs/troubleshooting) for common issues when first running a node.
 
 Now that we've started up a node and are running the Mina daemon, open up another shell and run the following command:
 
-    mina client status
+    coda client status
 
 <Alert>
 
 
-It may take up to a minute before `mina client status` connects to the daemon when first starting up. So if you see `Error: daemon not running. See mina daemon`, just a wait a bit and try again.
+It may take up to a minute before `coda client status` connects to the daemon when first starting up. So if you see `Error: daemon not running. See coda daemon`, just a wait a bit and try again.
 
-If you are using the [Sandbox Node](/docs/developers/sandbox-node), due to a quirk in the way we communicate for the mina client status command, you will need to run `mina client status` inside the container itself:
+If you are using the [Sandbox Node](/docs/developers/sandbox-node), due to a quirk in the way we communicate for the coda client status command, you will need to run `coda client status` inside the container itself:
 
 `docker exec -it mina bash`
 
@@ -98,19 +114,23 @@ Most likely we will see a response that include the fields below:
     ...
     Sync Status:                                   Bootstrap
 
-If you see `Sync Status: Bootstrap`, this means that the Mina node is bootstrapping and needs to sync with the rest of the network. You may need to be patient here as this step might take some time for the node to get all the data it needs. When sync status reaches `Synced` and the node is connected to 1 or more peers, we will have successfully connected to the network. We will also see a corresponding daemon log once we've synced: `[Info] Mina daemon is now synced`.
+If you see `Sync Status: Bootstrap`, this means that the node is bootstrapping and needs to sync with the rest of the network. You may need to be patient here as this step might take some time for the node to get all the data it needs. 
+
+After a while, your node should connect to more peers and then should move into `Sync Status: Catchup`, which means we're gathering the most recent blocks and state trying to catch up the the highest block.
+
+When sync status reaches `Synced` and the node is connected to 1 or more peers, we will have successfully connected to the network. We will also see a corresponding daemon log once we've synced: `[Info] Mina daemon is now synced`.
 
 If you the `Bootstrap` state persists for more than an hour, there may be an issue with your port configuration.
 
-## Create a new account
+## Import your account
 
-Once our node is synced, we'll create a public/private key-pair so that we can sign transactions and generate an address to receive payments. For security reasons, we'll want to put the keys under a directory that is harder for attackers to access.
+Once our node is synced, we'll need to import our public/private keypair so that we can sign transactions and generate an address to receive payments. For security reasons, we'll want to put the keys under a directory that is harder for attackers to access.
 
-Run the following command to create a new account/keypair:
+Run the following command to import your [previously generated](/docs/keypair) keypair file:
 
-    mina accounts create
+    coda accounts import -privkey-path ~/keys/my-wallet
 
-See `mina accounts -help` to learn more about how to use the command.
+You will be prompted for the password you entered when the account was created.
 
 <Alert kind="warning">
 
@@ -122,22 +142,27 @@ The public key can be shared freely with anyone, but be very careful with your p
 
 The response from this command will look like this:
 
-    😄 Added new account!
-    Public key: ZsMSUrGkF2TaBv9z2j6jco5JjL4MnywfAQtsHMuswj2zWnTUsArfEStetwuu63Um6jC
+    😄 Imported account!
+    Public key: B62qjaA4N9843FKM5FZk1HmeuDiojG42cbCDyZeUDQVjycULte9PFkC
+
+
+Additionally you can use the `coda accounts create` command to generate new accounts to send and recieve transactions.
 
 <Alert kind="warning">
 
 
-If you are one of the selected Testnet 3.2b participants that has been delegated stake, please complete the challenges using the account that you had previously created. You do not need to create a new account! (If you create a new account and use it to complete the challenges, we will not be able to track your points for your activities.)
+If you are one of the selected Testnet participants that has been delegated stake, please complete the challenges using the account that you had previously created. You do not need to create a new account!
+
+If you create a new account and use it to complete the challenges, we will not be able to track your points for your activities.
 
 </Alert>
 
 
-Since the public key is quite long and difficult to remember, let's save it as an environment variable:
+Since the public key is quite long and difficult to remember, let's save it as an environment variable. Use the following command but replace `<YOUR-PUBLIC-KEY>` with the public key output from the previous command:
 
-    export MINA_PUBLIC_KEY=<YOUR-PUBLIC-KEY>
+    export CODA_PUBLIC_KEY=<YOUR-PUBLIC-KEY>
 
-Now we can access this everywhere as `$MINA_PUBLIC_KEY` -- see if it saved properly by trying `echo $MINA_PUBLIC_KEY`.
+Now we can access this everywhere as `$CODA_PUBLIC_KEY` -- check if it saved properly by trying `echo $CODA_PUBLIC_KEY`.
 
 Note that these environment variables will only be saved for the current shell session, so if you want to save them for future use, you can add them to `~/.profile` or `~/.bash_profile`.
 
@@ -146,7 +171,7 @@ Note that these environment variables will only be saved for the current shell s
 
 If you are running the node on a cloud virtual machine, make sure to export and save the key file. You can export the key with:
 
-    mina accounts export -public-key <PUBLIC-KEY> -privkey-path <EXPORT-PATH>
+    coda accounts export -public-key <PUBLIC-KEY> -privkey-path <EXPORT-PATH>
 
 Then save it to your local machine, maybe using [scp](https://linux.die.net/man/1/scp):
 
@@ -154,14 +179,14 @@ Then save it to your local machine, maybe using [scp](https://linux.die.net/man/
 
 Later, when starting up a new VM, you can upload the key and then import it:
 
-    mina accounts import -privkey-path <PRIVATE-KEY-FILE>
+    coda accounts import -privkey-path <PRIVATE-KEY-FILE>
 
 </Alert>
 
 
 If you ever forget what keypairs you've already created, you can see them all with:
 
-    mina accounts list
+    coda accounts list
 
 ## Request mina
 
@@ -183,17 +208,17 @@ In order to send our first transaction, we'll first need to get some mina to pla
 
 It may take a few minutes for your funds to appear. We can check the balance of all our accounts using this command:
 
-    mina accounts list
+    coda accounts list
 
 You might see `Balance: 0 mina` for your account. Depending on the traffic in the network, it may take a few blocks before your transaction goes through.
 
-Hint: You can run `mina client status` to see the current block height updating.
+<em>Tip</em>: You can run `coda client status` to see the current block height updating.
 
 ## Make a payment
 
 Finally we get to the good stuff, sending our first transaction! Before you send a payment, you'll need to unlock your account:
 
-    mina accounts unlock -public-key $MINA_PUBLIC_KEY
+    coda accounts unlock -public-key $CODA_PUBLIC_KEY
 
 For testing purposes, there's already an echo service set up that will immediately refund your payment minus the transaction fees. You can use the following public key for the echo bot.
 
@@ -204,7 +229,7 @@ B62qk5jqp4nYPwDDdd9XJAV8bYQ5cSzaZ9Me7ccaMdSSJpqKasDqMx9
 <Alert kind="warning">
 
 
-Currently, there is a known issue with the echo service that prevents it from properly echoing back your payment! Don't worry, we'll still give you Testnet Points[\*](#disclaimer) for completing the challenge.
+There is a known issue with the echo service that may prevent it from properly echoing back your payment! Don't worry, we'll still give you Testnet Points[\*](#disclaimer) for completing the challenge.
 
 Echo Status: <StatusBadge service="Echo Bot" />
 
@@ -213,18 +238,18 @@ Echo Status: <StatusBadge service="Echo Bot" />
 
 Let's send some of our newly received mina to this service to see what a payment looks like:
 
-    mina client send-payment \
+    coda client send-payment \
       -amount 0.5 \
       -receiver B62qk5jqp4nYPwDDdd9XJAV8bYQ5cSzaZ9Me7ccaMdSSJpqKasDqMx9 \
       -fee 0.1 \
-      -sender $MINA_PUBLIC_KEY
+      -sender $CODA_PUBLIC_KEY
 
 If you're wondering what we passed in to the commands above:
 
 - For `amount`, we're sending a test value of `0.5` mina
 - The `receiver` is the public key of the [echo service](https://github.com/MinaProtocol/mina-automation/tree/master/services/echo)
 - For `fee`, let's use 0.1 mina
-- The `sender` is the full public key, eg. `4vsRCVQq9Ai...`
+- The `sender` is the full public key, eg. `B62qjaA4N9843FKM5FZk...`
 
 If this command is formatted properly, we should get a response that looks like the following:
 
@@ -235,10 +260,13 @@ You may not see the `Receipt chain hash` on the first transaction from the accou
 
 Once you feel comfortable with the basics of creating an address, and sending & receiving mina, we can move on to the truly unique parts of the Mina network - [participating in consensus and helping compress the blockchain](/docs/node-operator).
 
+## Stepping up your game
+
+Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon in [Tips for Node Operators](/docs/node-operators).
+
 <span id="disclaimer">
 
 
 \*_Testnet Points are designed solely to track contributions to the Testnet and Testnet Points have no cash or other monetary value. Testnet Points are not transferable and are not redeemable or exchangeable for any cryptocurrency or digital assets. We may at any time amend or eliminate Testnet Points._
 
 </span>
-
