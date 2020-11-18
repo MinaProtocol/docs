@@ -415,7 +415,7 @@ module Incentives = {
         <Spacer height=2. />
         <p className=Theme.Type.sectionSubhead>
           {React.string(
-             "The second type of node operator on Mina, SNARK producers, help compress data in the network by generating SNARK proofs of transactions.",
+             "Mina is breaking down barriers to participation and unleashing a host of exciting new opportunities.",
            )}
         </p>
         <Spacer height=3. />
