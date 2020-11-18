@@ -19,9 +19,9 @@ let make =
       copy={
         Some(
           {
-            "To create a vibrant decentralized network and open programmable currency "
+            "To create a vibrant decentralized network and open programmable currency"
             ++ {js|—|js}
-            ++ " so we can all participate, build, exchange and thrive.";
+            ++ "so we can all participate, build, exchange and thrive.";
           },
         )
       }
