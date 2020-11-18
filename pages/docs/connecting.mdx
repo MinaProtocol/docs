@@ -32,7 +32,7 @@ First remove any previously installed version of the daemon to prevent any error
 
 ```
 sudo apt-get remove mina-testnet-postake-medium-curves
-sudo apt-get install -y mina-testnet-postake-medium-curves=0.0.16-beta7+-hard-fork-test-11-12-2020-069333
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.16-beta7+-4.1-turbo-pickles-2f36b15 --allow-downgrades
 ```
 
 Check that the output of the `coda -version` command is `Commit 4395e91 on branch master`.
@@ -79,7 +79,7 @@ See [here](/docs/troubleshooting) for common issues when first running a node.
 
 ### macOS
 
-This flow is temporarily unsupported, but soon a `brew services start coda` should work
+This flow is temporarily unsupported, but soon a `brew services start coda` should work.
 
 ### Ubuntu 18.04 / Debian 9
 
