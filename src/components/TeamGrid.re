@@ -8,7 +8,6 @@ module Styles = {
       style([
         fontSize(`px(19)),
         lineHeight(`rem(1.75)),
-        marginBottom(`rem(2.93)),
         letterSpacing(`pxFloat(-0.4)),
         media(Theme.MediaQuery.desktop, [maxWidth(`rem(41.))]),
       ]),
@@ -19,7 +18,7 @@ module Styles = {
       display(`grid),
       paddingTop(`rem(2.)),
       gridTemplateColumns([`rem(11.5), `rem(11.5)]),
-      gridAutoRows(`rem(17.3)),
+      gridAutoRows(`rem(19.3)),
       gridColumnGap(`rem(1.)),
       gridRowGap(`rem(2.)),
       media(

@@ -5,7 +5,6 @@ module Styles = {
     style([
       height(`rem(4.)),
       media(Theme.MediaQuery.tablet, [height(`rem(0.))]),
-      media(Theme.MediaQuery.desktop, [height(`rem(8.))]),
     ]);
 
   let modalContainer = modalShowing =>
