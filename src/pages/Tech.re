@@ -496,9 +496,7 @@ let make = () => {
         rowType: FeaturedSingleRow.Row.ImageRightCopyLeft,
         title: "Get Started",
         description: {js|
-          We’re passionate about making it as simple as possible to participate
-          in Mina. With clear documentation, a supportive community and a chain
-          that syncs in seconds, we’ll get you up and running in record time.
+          We make it as simple as possible to participate in Mina. With clear documentation, a supportive community and a chain that syncs in seconds, we’ll get you up and running in record time.
         |js},
         textColor: `currentColor,
         copySize: `Large,
