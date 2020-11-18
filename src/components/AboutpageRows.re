@@ -190,8 +190,9 @@ let make = () => {
           {React.string(
              "In June of 2017, O(1) Labs kicked off an ambitious
                new open source project to design a layer one protocol
-               that could deliver on the original promise of blockchain
-               - true decentralization, scale and security.
+               that could deliver on the original promise of blockchain"
+             ++ {js|—|js}
+             ++ "true decentralization, scale and security.
                Rather than apply brute computing force, Mina offers
                an elegant solution using advanced cryptography
                and recursive zk-SNARKs. ",
@@ -229,7 +230,9 @@ let make = () => {
         <p className=Styles.copy>
           <strong>
             {React.string(
-               "Here's to a more efficient, elegant and fair future - for all of us.",
+               "Here's to a more efficient, elegant and fair future"
+               ++ {js|—|js}
+               ++ "for all of us.",
              )}
           </strong>
         </p>
