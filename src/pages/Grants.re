@@ -379,7 +379,7 @@ module FrontEndProjects = {
 
           <Spacer height=4. />
           <Project.TwoColumn
-            title="Graph QL API"
+            title="GraphQL API"
             rows=[|
               {
                 firstColumn: {
