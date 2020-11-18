@@ -160,11 +160,11 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|But in practice, this hasn’t been the case.|js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              With legacy blockchains like Bitcoin and Ethereum, when a new participant
@@ -180,14 +180,14 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                Mina offers an elegant solution: replacing the blockchain with an
                easily verifiable, consistent-sized cryptographic proof.
              |js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              Mina dramatically reduces the amount of data each user needs to download.
@@ -207,7 +207,7 @@ module HowMinaWorks = {
         />
         <Spacer height=4. />
         <p className=Theme.Type.paragraph>
-          <b> {React.string("But how do zk-SNARKs work?")} </b>
+          <strong> {React.string("But how do zk-SNARKs work?")} </strong>
           {React.string(
              {js|
             They capture the state of the entire blockchain as a lightweight snapshot
@@ -223,13 +223,13 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                Coming full circle, the world’s lightest blockchain empowers inclusive consensus.
              |js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              Our modified Ouroboros proof-of-stake protocol maximizes inclusivity in
@@ -240,13 +240,13 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                And that’s how Mina will deliver true decentralization, scale and security.
              |js},
              )}
-          </b>
+          </strong>
         </p>
       </Section>
     </div>;
