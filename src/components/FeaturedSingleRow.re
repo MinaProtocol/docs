@@ -112,7 +112,7 @@ module SingleRow = {
         justifyContent(`spaceBetween),
         padding(`rem(2.)),
         backgroundSize(`cover),
-        zIndex(Theme.StackingIndex.zContent),
+        zIndex(Theme.StackingIndex.zNav),
         media(
           Theme.MediaQuery.notMobile,
           [

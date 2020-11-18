@@ -60,6 +60,7 @@ module Styles = {
           position(`relative),
           top(`zero),
           width(`auto),
+          zIndex(Theme.StackingIndex.zContent),
           flexDirection(`row),
           alignItems(`center),
           background(`none),
@@ -101,7 +102,10 @@ module Styles = {
         hover([backgroundColor(Theme.Colors.orange)]),
         media(
           Theme.MediaQuery.desktop,
-          [important(color(dark ? white : Theme.Colors.digitalBlack))],
+          [
+            hover([unsafe("backgroundColor", "unset")]),
+            important(color(dark ? white : Theme.Colors.digitalBlack)),
+          ],
         ),
       ]),
     ]);
