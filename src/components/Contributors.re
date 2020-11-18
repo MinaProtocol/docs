@@ -113,7 +113,7 @@ let make =
          </div>}
     <div className=Styles.container>
       <div className=Styles.spacer />
-      <Wrapped>
+      <Wrapped maxWidthDesktop={`rem(93.)}>
         <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
         <GenesisMembersGrid
           genesisMembers
