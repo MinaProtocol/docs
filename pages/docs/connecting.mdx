@@ -43,14 +43,14 @@ To connect to the network, we need two files: <em>peer list</em> and <em>genesis
 
 ### Peer list
 
-A peer list contains a list of node addresses that your node can initially connect to while joining the network.
+A peer list contains a list of node addresses that your node can initially connect to while joining the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
 
 Due to the limited number of spots available, you'll first need to be selected as a participant to get the latest peer list. The inital participants have already been selected, but you can sign up for the waitlist [here](http://bit.ly/StakingSignup) in case a spot opens up.
 
 Once you're in, you'll receive an email with instructions on how to download latest peer list. Use the following command but replace `<PEER-LIST-URL>` with the URL provided in the email.
 
 ```
-wget -O ~/mina-peers.txt <PEER-LIST-URL>
+wget -O ~/peers.txt <PEER-LIST-URL>
 ```
 
 ### Genesis config
@@ -58,7 +58,7 @@ wget -O ~/mina-peers.txt <PEER-LIST-URL>
 The genesis config contains the genesis timestamp and ledger, which together consist of the initial state of the network. For the genesis config we can simply download it using the following command.
 
 ```
-wget -O ~/mina-daemon.json https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/pickles-public/genesis_ledger_fork_11-12-2020.json
+mkdir -p ~/.coda_config && wget -O ~/.coda_config/daemon.json https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/genesis_ledger.json
 ```
 
 ## Start up a node
@@ -71,23 +71,71 @@ Testnet Status: <StatusBadge service="Network" />
 
 </Alert>
 
-Run the following command to start up a Mina node instance and connect to the live network:
+As we're still in the testnet phase of our protocol, there are a few rare situations where your node can run into some issues. We don't want for your nodes to break and you not realize! So we've made some officially supported auto-restart flows for you.
 
-The `-peer` arguments specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
-
-By default, the node connects to the network using the default external-port of 8302. This can be changed using the `-external-port` flag.
-
-The `-background` flag ensures that we don't accidentally kill the process.
-
-<Alert>
-
-
-The daemon process needs to be running whenever you issue commands from `coda client`, so make sure you don't kill it by accident.
-
-</Alert>
-
+We'll be iterating on these in future releases.
 
 See [here](/docs/troubleshooting) for common issues when first running a node.
+
+### macOS
+
+This flow is temporarily unsupported, but soon a `brew services start coda` should work
+
+### Ubuntu 18.04 / Debian 9
+
+Ensure your peer-list file is located in `~/peers.txt` and your private-key that you've registered with is located at `~/keys/my-wallet`.
+
+Add a file `~/.mina-env` containing the following:
+
+```
+CODA_PRIVKEY_PASS="your password here"
+EXTRA_FLAGS=""
+```
+
+You can add extra flags later to `EXTRA_FLAGS` as you see fit.
+
+Then run the following commands to start up a Mina node instance and connect to the live network:
+
+```
+systemctl --user daemon-reload
+systemctl --user start mina
+```
+
+By default, the node connects to the network using the default external-port of 8302. This can be changed using the `-external-port` flag, just add that to EXTRA_FLAGS.
+
+You can also look into the mina process itself that's running in the background and auto-restarting.
+
+### macOS
+
+This flow is temporarily unsupported, but will be soon!
+
+### Ubuntu 18.04 / Debian 9
+
+This command will let you know if `mina` had any trouble getting started.
+
+```
+systemctl --user status mina
+```
+
+You can stop mina:
+
+```
+systemctl --user stop mina
+```
+
+Restart it:
+
+```
+systemctl --user restart mina
+```
+
+And look at logs:
+
+```
+journalctl --user -u mina -n 1000 -f
+```
+
+That command will show you the last 1000 lines and follow from there.
 
 ## Checking connectivity
 
@@ -96,7 +144,6 @@ Now that we've started up a node and are running the Mina daemon, open up anothe
     coda client status
 
 <Alert>
-
 
 It may take up to a minute before `coda client status` connects to the daemon when first starting up. So if you see `Error: daemon not running. See coda daemon`, just a wait a bit and try again.
 
