@@ -115,7 +115,7 @@ let fetchRelease = (username, release) => {
 
 let fetchReleases = name => {
   [|
-    ("Release 4.1a", "4.1!B4:Z", 2) /* offset for challenge titles in 4.1 starts on the 2nd column */
+    ("Release 4.1", "4.1!B4:Z", 2) /* offset for challenge titles in 4.1 starts on the 2nd column */
   |]
   |> Array.map(release => fetchRelease(name, release))
   |> Js.Promise.all
