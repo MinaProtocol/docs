@@ -536,7 +536,7 @@ let make = () => {
           FeaturedSingleRow.Row.Button({
             buttonColor: Theme.Colors.orange,
             buttonTextColor: Css.white,
-            buttonText: "Get Started",
+            buttonText: "Work with Mina",
             dark: false,
             href: `Internal("/work-with-mina"),
           }),
