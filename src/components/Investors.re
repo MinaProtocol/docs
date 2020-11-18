@@ -132,8 +132,8 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
             {React.string("Jack Herrick")}
           </div>
           <img src="/static/img/logos/LogoKilowattCapital.png" />
-          <img src="/static/img/logos/LogoLDCapital.jpg" />
           <img src="/static/img/logos/LogoKindredVentures.png" />
+          <img src="/static/img/logos/LogoLDCapital.jpg" />
           <img src="/static/img/logos/LogoLibertusCapital.png" />
           <div className=Styles.investorGridItem>
             {React.string("Linda Xie")}
