@@ -144,11 +144,11 @@ module HowMinaWorks = {
         />
         <Spacer height=4. />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                "In theory, blockchains are designed to be held accountable by its users.",
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
             When anyone can enforce the rules by validating an irrevocable public
