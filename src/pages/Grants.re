@@ -434,6 +434,22 @@ module FrontEndProjects = {
             buttonUrl=Constants.projectGrantApplication
           />
           <Spacer height=3. />
+          <Project.TwoColumn
+            title="Update Documents on Minaprotocol.com"
+            rows=[|
+              {
+                firstColumn: {
+                  title: "Allocation",
+                  copy: {js|Minimum of 16,000 Mina tokens|js},
+                },
+                secondColumn: {
+                  title: "Overview",
+                  copy: {js|Update the Docs and GraphQL documents for Mina Protocol|js},
+                },
+              },
+            |]
+            buttonUrl=Constants.projectGrantApplication
+          />
         </Section>
     </div>;
 };
