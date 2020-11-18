@@ -163,7 +163,7 @@ module SingleRow = {
             Theme.MediaQuery.desktop,
             [
               unsafe("display", "-webkit-box"),
-              unsafe("-webkit-line-clamp", "10"),
+              unsafe("-webkit-line-clamp", "6"),
               unsafe("-webkit-box-orient", "vertical"),
             ],
           ),
