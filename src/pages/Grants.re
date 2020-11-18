@@ -5,7 +5,7 @@ module Styles = {
     style([
       position(`relative),
       background(`url(bg)),
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundRepeat(`noRepeat),
       padding(`rem(2.)),
       media(Theme.MediaQuery.desktop, [padding(`zero)]),
@@ -34,18 +34,6 @@ module Styles = {
       media(Theme.MediaQuery.desktop, [paddingLeft(`rem(16.))]),
     ]);
 
-  let sideNav = sticky =>
-    style([
-      display(`none),
-      position(sticky ? `fixed : `absolute),
-      top(sticky ? `rem(3.5) : `rem(107.)),
-      marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
-      width(`rem(14.)),
-      zIndex(Theme.StackingIndex.zNav),
-      background(white),
-      media(Theme.MediaQuery.desktop, [display(`block)]),
-    ]);
-
   let typesOfGrantsImage =
     style([
       important(backgroundSize(`cover)),
@@ -56,6 +44,7 @@ module Styles = {
       display(`flex),
       justifyContent(`center),
       alignItems(`center),
+      overflow(`hidden),
       media(
         Theme.MediaQuery.notMobile,
         [padding2(~v=`zero, ~h=`zero), height(`rem(43.))],
@@ -132,43 +121,6 @@ module Styles = {
         ),
       ]),
     ]);
-};
-
-module GrantsSideNav = {
-  [@react.component]
-  let make = () => {
-    let router = Next.Router.useRouter();
-    let hashExp = Js.Re.fromString("#(.+)");
-    let scrollTop = Hooks.useScroll();
-    let calcHash = path =>
-      Js.Re.(exec_(hashExp, path) |> Option.map(captures))
-      |> Js.Option.andThen((. res) => Js.Nullable.toOption(res[0]))
-      |> Js.Option.getWithDefault("");
-    let (hash, setHash) = React.useState(() => calcHash(router.asPath));
-
-    React.useEffect(() => {
-      let handleRouteChange = url => setHash(_ => calcHash(url));
-      router.events
-      ->Next.Router.Events.on("hashChangeStart", handleRouteChange);
-      Some(
-        () =>
-          router.events
-          ->Next.Router.Events.off("hashChangeStart", handleRouteChange),
-      );
-    });
-
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1800)}>
-      <SideNav.Item title="Product / Front-end Projects" slug="#frontend" />
-      <SideNav.Item title="Protocol Projects" slug="#protocol" />
-      <SideNav.Item
-        title="Opening Marketing and Community Projects"
-        slug="#marketing-community"
-      />
-      <SideNav.Item title="How to Apply" slug="#how-to-apply" />
-      <SideNav.Item title="Contributers" slug="#contributors" />
-      <SideNav.Item title="FAQ" slug="#faq" />
-    </SideNav>;
-  };
 };
 
 module Section = {
@@ -741,7 +693,8 @@ let make = (~grants) => {
         </div>
       </Wrapped>
     </div>
-    <GrantsSideNav />
+    <GrantsNav.SideNav />
+    <GrantsNav.Dropdown />
     <FrontEndProjects />
     <ProtocolProjects />
     <MarketingAndCommunityProjects />

@@ -12,7 +12,7 @@ module Styles = {
       ),
       backgroundSize(`cover),
       paddingTop(`rem(12.)),
-      overflowX(`hidden),
+      overflow(`hidden),
     ]);
   // leaderboard css
   let disclaimer =

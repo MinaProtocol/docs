@@ -19,6 +19,7 @@ type kind =
   | ChevronDownLarge
   | ChevronDown
   | ChevronUp
+  | ChevronUpLarge
   | ChevronRight
   | Info
   | Plus
@@ -347,6 +348,161 @@ let make = (~kind, ~size=1.5) => {
            height="1"
            transform="rotate(180 12.5 10)"
            fill="currentColor"
+         />
+       </>
+     | ChevronUpLarge =>
+       <>
+         <rect
+           x="21"
+           y="16"
+           width="1"
+           height="1"
+           transform="rotate(180 21 16)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="20"
+           y="15"
+           width="1"
+           height="1"
+           transform="rotate(180 20 15)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="19"
+           y="14"
+           width="1"
+           height="1"
+           transform="rotate(180 19 14)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="18"
+           y="13"
+           width="1"
+           height="1"
+           transform="rotate(180 18 13)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="17"
+           y="12"
+           width="1"
+           height="1"
+           transform="rotate(180 17 12)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="16"
+           y="11"
+           width="1"
+           height="1"
+           transform="rotate(180 16 11)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="15"
+           y="10"
+           width="1"
+           height="1"
+           transform="rotate(180 15 10)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="14"
+           y="9"
+           width="1"
+           height="1"
+           transform="rotate(180 14 9)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="13"
+           y="8"
+           width="1"
+           height="1"
+           transform="rotate(180 13 8)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="12"
+           y="7"
+           width="1"
+           height="1"
+           transform="rotate(180 12 7)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="11"
+           y="8"
+           width="1"
+           height="1"
+           transform="rotate(180 11 8)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="10"
+           y="9"
+           width="1"
+           height="1"
+           transform="rotate(180 10 9)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="9"
+           y="10"
+           width="1"
+           height="1"
+           transform="rotate(180 9 10)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="8"
+           y="11"
+           width="1"
+           height="1"
+           transform="rotate(180 8 11)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="7"
+           y="12"
+           width="1"
+           height="1"
+           transform="rotate(180 7 12)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="6"
+           y="13"
+           width="1"
+           height="1"
+           transform="rotate(180 6 13)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="5"
+           y="14"
+           width="1"
+           height="1"
+           transform="rotate(180 5 14)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="4"
+           y="15"
+           width="1"
+           height="1"
+           transform="rotate(180 4 15)"
+           fill="#2D2D2D"
+         />
+         <rect
+           x="3"
+           y="16"
+           width="1"
+           height="1"
+           transform="rotate(180 3 16)"
+           fill="#2D2D2D"
          />
        </>
      | ChevronRight =>

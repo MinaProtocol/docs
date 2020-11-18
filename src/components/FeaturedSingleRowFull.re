@@ -132,8 +132,8 @@ module Styles = {
           Theme.MediaQuery.desktop,
           [
             unsafe("display", "-webkit-box"),
-            unsafe("-webkit-line-clamp", "10"),
-            unsafe("-webkit-box-orient", "vertical"),
+            unsafe("WebkitLineClamp", "10"),
+            unsafe("WebkitBoxOrient", "vertical"),
           ],
         ),
       ]),

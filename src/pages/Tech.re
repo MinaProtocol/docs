@@ -19,7 +19,7 @@ module Styles = {
     style([
       position(`relative),
       background(`url(bg)),
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundRepeat(`noRepeat),
       padding(`rem(2.)),
       media(Theme.MediaQuery.desktop, [padding(`zero)]),
@@ -41,7 +41,7 @@ module Styles = {
     style([
       background(`url("/static/img/tech-projects-bg.jpg")),
       // For some reason `auto doesn't count as a Css.length so...
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundRepeat(`noRepeat),
       paddingTop(`rem(8.)),
     ]);
@@ -124,39 +124,6 @@ module Section = {
       children
       <Spacer height=6.5 />
     </section>;
-  };
-};
-
-module TechSideNav = {
-  [@react.component]
-  let make = () => {
-    let router = Next.Router.useRouter();
-    let hashExp = Js.Re.fromString("#(.+)");
-    let scrollTop = Hooks.useScroll();
-    let calcHash = path =>
-      Js.Re.(exec_(hashExp, path) |> Option.map(captures))
-      |> Js.Option.andThen((. res) => Js.Nullable.toOption(res[0]))
-      |> Js.Option.getWithDefault("");
-    let (hash, setHash) = React.useState(() => calcHash(router.asPath));
-
-    React.useEffect(() => {
-      let handleRouteChange = url => setHash(_ => calcHash(url));
-      router.events
-      ->Next.Router.Events.on("hashChangeStart", handleRouteChange);
-      Some(
-        () =>
-          router.events
-          ->Next.Router.Events.off("hashChangeStart", handleRouteChange),
-      );
-    });
-
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1000)}>
-      <SideNav.Item title="How Mina Works" slug="#how-mina-works" />
-      <SideNav.Item title="Projects & Possibilities" slug="#projects" />
-      <SideNav.Item title="Incentive Structure" slug="#incentives" />
-      <SideNav.Item title="Where We're Headed" slug="#roadmap" />
-      <SideNav.Item title="Knowledge Base" slug="#knowledge" />
-    </SideNav>;
   };
 };
 
@@ -494,7 +461,8 @@ let make = () => {
         )
       }
     />
-    <TechSideNav />
+    <TechNav.SideNav />
+    <TechNav.Dropdown />
     <HowMinaWorks />
     <Projects />
     <Incentives />

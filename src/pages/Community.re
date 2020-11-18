@@ -53,7 +53,7 @@ module Styles = {
       ),
       backgroundSize(`cover),
       paddingTop(`rem(4.)),
-      overflowX(`hidden),
+      overflow(`hidden),
       width(`percent(100.)),
     ]);
 

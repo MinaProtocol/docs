@@ -19,6 +19,7 @@ module Styles = {
       ),
       backgroundSize(`cover),
       paddingTop(`rem(6.)),
+      overflow(`hidden),
       media(Theme.MediaQuery.desktop, [paddingTop(`rem(8.))]),
       media(Theme.MediaQuery.desktop, [paddingTop(`rem(12.))]),
     ]);
