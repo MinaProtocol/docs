@@ -7,13 +7,13 @@ In order to fully participate in the Mina network, the first step is to generate
 
 <Alert>
 
-If you have previously created a keypair, you can re-use the previous keypair and skip ahead to [connect to the network](/docs/connecting).
+If you have previously created a keypair after Testnet 3.2b (public key should begin with `B62...`), you can re-use the previous keypair and skip ahead to [connect to the network](/docs/connecting).
 
 </Alert>
 
 ## Installation
 
-To simplify the process of creating a keypair, we've created a simple command-line utility called `mina-generate-keypair`. Follow the instructions bellow to install the tool onto your system.
+To simplify the process of creating a keypair, we've created a simple command-line utility called `mina-generate-keypair`. Follow the instructions below to install the tool onto your system.
 
 ### macOS
 
@@ -27,7 +27,7 @@ You can now run `mina-generate-keypair -version` to check that the installation 
 
 ### Debian 18.04 / Debian 9
 
-After [adding the Mina repo](http://localhost:8000/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
+After [adding the Mina repo](/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
 
 ```
 sudo apt-get install mina-generate-keypair
@@ -57,7 +57,13 @@ Now we can generate our keys using the `mina-generate-keypair` command. You will
 mina-generate-keypair -privkey-path ~/keys/my-wallet`
 ```
 
-This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the password you used in a secure place, such as a password manager.
+This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
+
+Finally, ensure the permissions are set properly for the private key file, this prevents unwanted processes from accessing it.
+
+```
+chmod 600 ~/keys/my-wallet
+```
 
 ## Submit your Public Key
 
