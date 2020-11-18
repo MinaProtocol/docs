@@ -5,6 +5,7 @@ module Styles = {
     style([
       border(px(1), `solid, Theme.Colors.digitalBlackA(0.25)),
       borderRadius(px(4)),
+      marginBottom(`rem(1.)),
       overflow(`hidden),
     ]);
 
