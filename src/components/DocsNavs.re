@@ -35,7 +35,7 @@ module SideNav = {
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
-          <Item title="Timelocked Accounts" slug="timelock" />
+          <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
         </Section>
@@ -139,7 +139,7 @@ module Dropdown = {
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
-          <Item title="Timelocked Accounts" slug="timelock" />
+          <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
         </Section>
