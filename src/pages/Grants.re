@@ -682,6 +682,11 @@ let make = (~grants) => {
         Theme.mobile: "/static/img/backgrounds/GrantsHeroMobile.jpg",
       }
     />
+    <SimpleRow
+      img="/static/img/11_GrantsProgram_2_1120x1040 1.jpg"
+      title={js|Work on projects with us and earn Mina tokens|js}
+      copy={js|About 10 million Mina tokens have been allocated to to support the protocol and community prior to Mina's mainnet launch. Check out open opportunities below.|js}
+    />
     <div className=Styles.typesOfGrantsImage>
       <Wrapped>
         <div className=Styles.typeOfGrantsContainer>
