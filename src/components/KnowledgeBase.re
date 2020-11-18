@@ -72,7 +72,11 @@ let fetchCategories = () => {
   ContentType.(
     Contentful.getEntries(
       Lazy.force(Contentful.client),
-      {"include": 0, "content_type": KnowledgeBaseCategory.id},
+      {
+        "include": 0,
+        "content_type": KnowledgeBaseCategory.id,
+        "order": "fields.order",
+      },
     )
     |> Js.Promise.then_((entries: KnowledgeBaseCategory.entries) => {
          Array.map(

@@ -144,11 +144,11 @@ module HowMinaWorks = {
         />
         <Spacer height=4. />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                "In theory, blockchains are designed to be held accountable by its users.",
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
             When anyone can enforce the rules by validating an irrevocable public
@@ -160,11 +160,11 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|But in practice, this hasn’t been the case.|js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              With legacy blockchains like Bitcoin and Ethereum, when a new participant
@@ -180,14 +180,14 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                Mina offers an elegant solution: replacing the blockchain with an
                easily verifiable, consistent-sized cryptographic proof.
              |js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              Mina dramatically reduces the amount of data each user needs to download.
@@ -207,7 +207,7 @@ module HowMinaWorks = {
         />
         <Spacer height=4. />
         <p className=Theme.Type.paragraph>
-          <b> {React.string("But how do zk-SNARKs work?")} </b>
+          <strong> {React.string("But how do zk-SNARKs work?")} </strong>
           {React.string(
              {js|
             They capture the state of the entire blockchain as a lightweight snapshot
@@ -223,13 +223,13 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                Coming full circle, the world’s lightest blockchain empowers inclusive consensus.
              |js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              Our modified Ouroboros proof-of-stake protocol maximizes inclusivity in
@@ -240,13 +240,13 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                And that’s how Mina will deliver true decentralization, scale and security.
              |js},
              )}
-          </b>
+          </strong>
         </p>
       </Section>
     </div>;
@@ -415,7 +415,7 @@ module Incentives = {
         <Spacer height=2. />
         <p className=Theme.Type.sectionSubhead>
           {React.string(
-             "The second type of node operator on Mina, SNARK producers, help compress data in the network by generating SNARK proofs of transactions.",
+             "Mina is breaking down barriers to participation and unleashing a host of exciting new opportunities.",
            )}
         </p>
         <Spacer height=3. />
@@ -496,9 +496,7 @@ let make = () => {
         rowType: FeaturedSingleRow.Row.ImageRightCopyLeft,
         title: "Get Started",
         description: {js|
-          We’re passionate about making it as simple as possible to participate
-          in Mina. With clear documentation, a supportive community and a chain
-          that syncs in seconds, we’ll get you up and running in record time.
+          We make it as simple as possible to participate in Mina. With clear documentation, a supportive community and a chain that syncs in seconds, we’ll get you up and running in record time.
         |js},
         textColor: `currentColor,
         copySize: `Large,
@@ -538,7 +536,7 @@ let make = () => {
           FeaturedSingleRow.Row.Button({
             buttonColor: Theme.Colors.orange,
             buttonTextColor: Css.white,
-            buttonText: "Get Started",
+            buttonText: "Work with Mina",
             dark: false,
             href: `Internal("/work-with-mina"),
           }),
