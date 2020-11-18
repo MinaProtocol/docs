@@ -17,9 +17,9 @@ module SideNav = {
       <SideNav currentSlug>
         <Item title="Overview" slug="/docs" />
         <Item title="Getting Started" slug={f("getting-started")} />
-        <Item title="My First Transaction" slug={f("my-first-transaction")} />
-        <Item title="Become a Node Operator" slug={f("node-operator")} />
-        <Item title="Contributing to Mina" slug={f("contributing")} />
+        <Item title="Generate a Keypair" slug={f("keypair")} />
+        <Item title="Connect to the Network" slug={f("connecting")} />
+        <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
@@ -29,12 +29,15 @@ module SideNav = {
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
         </Section>
-        <Section title="Mina Protocol Architecture" slug={f("architecture")}>
+        <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
           <Item title="Lifecycle of a Payment" slug="lifecycle-payment" />
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
+          <Item title="Timelocked Accounts" slug="timelock" />
+          <Item title="Snapps" slug="snapps" />
+          <Item title="Tokens" slug="tokens" />
         </Section>
         <Section title="SNARKs" slug={f("snarks")}>
           <Item title="SNARKs Overview" slug="" />
@@ -43,9 +46,8 @@ module SideNav = {
           <Item title="The snarkyjs-crypto library" slug="snarkyjs-crypto" />
           <Item title="The snarky-universe library" slug="snarky-universe" />
         </Section>
-        <Item title="Snapps" slug={f("snapps")} />
+        <Item title="Contributing to Mina" slug={f("contributing")} />
         <Item title="CLI Reference" slug={f("cli-reference")} />
-        <Item title="Tokens" slug={f("tokens")} />
         <Item title="Troubleshooting" slug={f("troubleshooting")} />
         <Item title="FAQ" slug={f("faq")} />
         <Item title="Glossary" slug={f("glossary")} />
@@ -119,9 +121,9 @@ module Dropdown = {
       <DropdownNav currentSlug defaultValue={getCurrentValue(currentSlug)}>
         <Item title="Overview" slug="/docs" />
         <Item title="Getting Started" slug={f("getting-started")} />
-        <Item title="My First Transaction" slug={f("my-first-transaction")} />
-        <Item title="Become a Node Operator" slug={f("node-operator")} />
-        <Item title="Contributing to Mina" slug={f("contributing")} />
+        <Item title="Generate a Keypair" slug={f("keypair")} />
+        <Item title="Connect to the Network" slug={f("connecting")} />
+        <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
@@ -131,12 +133,15 @@ module Dropdown = {
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
         </Section>
-        <Section title="Mina Protocol Architecture" slug={f("architecture")}>
+        <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
           <Item title="Lifecycle of a Payment" slug="lifecycle-payment" />
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
+          <Item title="Timelocked Accounts" slug="timelock" />
+          <Item title="Snapps" slug="snapps" />
+          <Item title="Tokens" slug="tokens" />
         </Section>
         <Section title="SNARKs" slug={f("snarks")}>
           <Item title="SNARKs Overview" slug="" />
@@ -145,9 +150,8 @@ module Dropdown = {
           <Item title="The snarkyjs-crypto library" slug="snarkyjs-crypto" />
           <Item title="The snarky-universe library" slug="snarky-universe" />
         </Section>
-        <Item title="Snapps" slug={f("snapps")} />
+        <Item title="Contributing to Mina" slug={f("contributing")} />
         <Item title="CLI Reference" slug={f("cli-reference")} />
-        <Item title="Tokens" slug={f("tokens")} />
         <Item title="Troubleshooting" slug={f("troubleshooting")} />
         <Item title="FAQ" slug={f("faq")} />
         <Item title="Glossary" slug={f("glossary")} />
