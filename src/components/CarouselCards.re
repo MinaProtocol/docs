@@ -151,7 +151,7 @@ module GenesisMemberCard = {
             <div className=Styles.location>
               <Icon kind=Icon.Location />
               <Spacer width=0.3 />
-              <p className=Theme.Type.paragraph>
+              <p className=Theme.Type.paragraphMono>
                 {React.string(memberLocation)}
               </p>
             </div>
