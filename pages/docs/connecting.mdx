@@ -69,7 +69,9 @@ However, first we'll want to make sure everything works by running it manually b
 
 Run the following command to start up a Mina node instance and connect to the live network:
 
-<DaemonCommandExample />
+```
+coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -block-producer-password "password" -generate-genesis-proof true
+```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
 
