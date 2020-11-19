@@ -47,7 +47,7 @@ module SideNav = {
           <Item title="The snarky-universe library" slug="snarky-universe" />
         </Section>
         <Item title="Contributing to Mina" slug={f("contributing")} />
-        <Item title="CLI Reference" slug={f("cli-reference")} />
+        //<Item title="CLI Reference" slug={f("cli-reference")} />
         <Item title="Troubleshooting" slug={f("troubleshooting")} />
         <Item title="FAQ" slug={f("faq")} />
         <Item title="Glossary" slug={f("glossary")} />
@@ -151,7 +151,7 @@ module Dropdown = {
           <Item title="The snarky-universe library" slug="snarky-universe" />
         </Section>
         <Item title="Contributing to Mina" slug={f("contributing")} />
-        <Item title="CLI Reference" slug={f("cli-reference")} />
+        //<Item title="CLI Reference" slug={f("cli-reference")} />
         <Item title="Troubleshooting" slug={f("troubleshooting")} />
         <Item title="FAQ" slug={f("faq")} />
         <Item title="Glossary" slug={f("glossary")} />
