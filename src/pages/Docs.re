@@ -5,6 +5,7 @@ module Style = {
 
   let content =
     style([
+      width(`percent(100.)),
       maxWidth(`rem(53.)),
       marginBottom(`rem(2.875)),
       media(Theme.MediaQuery.notMobile, [marginLeft(`rem(1.))]),
