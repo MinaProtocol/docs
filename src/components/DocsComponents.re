@@ -189,7 +189,7 @@ module Img =
   });
 
 module DaemonCommandExample = {
-  let defaultArgs = ["mina daemon", "-peer $SEED1"];
+  let defaultArgs = ["coda daemon", "-peer-list ~/peers.txt"];
   [@react.component]
   let make = (~args: array(string)=[||]) => {
     let allArgs = defaultArgs @ Array.to_list(args);

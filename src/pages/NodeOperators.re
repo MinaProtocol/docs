@@ -1,23 +1,11 @@
 module Styles = {
   open Css;
-  let sideNav = sticky =>
-    style([
-      display(`none),
-      position(sticky ? `fixed : `absolute),
-      top(sticky ? `rem(3.5) : `rem(66.)),
-      marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
-      width(`rem(14.)),
-      zIndex(100),
-      background(white),
-      marginTop(`rem(3.5)),
-      media(Theme.MediaQuery.desktop, [display(`block)]),
-    ]);
 
   let sectionContainer = bg =>
     style([
       position(`relative),
       background(`url(bg)),
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundSize(`cover),
       backgroundRepeat(`noRepeat),
       padding(`rem(2.)),
@@ -103,43 +91,6 @@ module Styles = {
 
   let blockExplorerCard =
     style([width(`rem(17.)), display(`flex), flexDirection(`column)]);
-};
-
-module NodeOperatorsSideNav = {
-  [@react.component]
-  let make = () => {
-    let router = Next.Router.useRouter();
-    let hashExp = Js.Re.fromString("#(.+)");
-    let scrollTop = Hooks.useScroll();
-    let calcHash = path =>
-      Js.Re.(exec_(hashExp, path) |> Option.map(captures))
-      |> Js.Option.andThen((. res) => Js.Nullable.toOption(res[0]))
-      |> Js.Option.getWithDefault("");
-    let (hash, setHash) = React.useState(() => calcHash(router.asPath));
-
-    React.useEffect(() => {
-      let handleRouteChange = url => setHash(_ => calcHash(url));
-      router.events
-      ->Next.Router.Events.on("hashChangeStart", handleRouteChange);
-      Some(
-        () =>
-          router.events
-          ->Next.Router.Events.off("hashChangeStart", handleRouteChange),
-      );
-    });
-
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1000)}>
-      <SideNav.Item title="Node Overview" slug="#how-mina-works" />
-      <SideNav.Item title="Testnet" slug="#testnet" />
-      <SideNav.Item title="Genesis Program" slug="#genesis" />
-      <SideNav.Item title="Knowledge Base" slug="#knowledge" />
-      <SideNav.Item title="Help And Support" slug="#help-and-support" />
-    </SideNav>;
-    // <SideNav.Item
-    //   title="Block Explorers & Tools"
-    //   slug="#block-explorers-tools"
-    // />
-  };
 };
 
 module Section = {
@@ -361,7 +312,7 @@ let make = () => {
         Theme.mobile: "/static/img/backgrounds/NodeOperatorHeroMobile.jpg",
       }
       title="Get Started For Node Operators"
-      header=Some("Run a Node")
+      header={Some("Run a Node")}
       copy={
         Some(
           {js|With the world’s lightest blockchain, running a node is easier than ever. Here you’ll find everything you need to get up and running.|js},
@@ -378,7 +329,8 @@ let make = () => {
         {React.string("Go To Documentation")}
       </Button>
     </Hero>
-    <NodeOperatorsSideNav />
+    <NodeOperatorsNav.SideNav />
+    <NodeOperatorsNav.Dropdown />
     <NodeOverview />
     <section id="testnet">
       <FeaturedSingleRow

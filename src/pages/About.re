@@ -18,7 +18,11 @@ let make =
       header={Some("We're on a mission.")}
       copy={
         Some(
-          "To create a vibrant decentralized network and open programmable currency - so we can all participate, build, exchange and thrive.",
+          {
+            "To create a vibrant decentralized network and open programmable currency"
+            ++ {js|—|js}
+            ++ "so we can all participate, build, exchange and thrive.";
+          },
         )
       }
       background={
@@ -29,7 +33,10 @@ let make =
     />
     <AboutpageRows />
     <QuoteSection
-      copy="What attracted me was a small, scalable blockchain that's still independently verifiable on small nodes.\""
+      copy={
+        "What attracted me was a small, scalable blockchain that's still independently verifiable on small nodes."
+        ++ {js|”|js}
+      }
       author="Naval Ravikant"
       authorTitle="AngelList Co-Founder, O(1) Labs Investor"
       authorImg="/static/img/headshots/naval.jpg"

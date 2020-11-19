@@ -1,7 +1,6 @@
 module Styles = {
   open Css;
 
-  let genesisHeader = merge([Theme.Type.h2, style([])]);
   let genesisCopy =
     style([
       unsafe("grid-area", "1 /1 / span 1 / span 2"),
@@ -22,18 +21,17 @@ module Styles = {
     style([
       marginTop(`rem(1.)),
       display(`grid),
-      paddingTop(`rem(1.)),
-      gridTemplateColumns([`rem(10.), `rem(10.)]),
-      gridAutoRows(`rem(17.3)),
-      gridColumnGap(`rem(1.)),
+      gridTemplateColumns([`rem(11.5), `rem(11.5)]),
+      gridAutoRows(`rem(17.)),
+      gridColumnGap(`rem(2.)),
       gridRowGap(`rem(1.)),
       media(
         Theme.MediaQuery.tablet,
-        [gridTemplateColumns([`repeat((`num(3), `rem(10.)))])],
+        [gridTemplateColumns([`repeat((`num(3), `rem(11.5)))])],
       ),
       media(
         Theme.MediaQuery.desktop,
-        [gridTemplateColumns([`repeat((`num(5), `rem(11.)))])],
+        [gridTemplateColumns([`repeat((`num(5), `rem(11.5)))])],
       ),
     ]);
 };
@@ -41,11 +39,9 @@ module Styles = {
 [@react.component]
 let make = (~genesisMembers, ~switchModalState, ~setCurrentIndexAndMembers) => {
   <>
-    <Spacer height=3. />
+    <Spacer height=4. />
     <div className=Styles.genesisCopy>
-      <h2 className=Styles.genesisHeader>
-        {React.string("Genesis Members")}
-      </h2>
+      <h2 className=Theme.Type.h3> {React.string("Genesis Members")} </h2>
       <p className=Styles.sectionSubhead>
         {React.string(
            "Meet the node operators, developers, and community builders making Mina happen.",

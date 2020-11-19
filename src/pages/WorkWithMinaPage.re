@@ -11,10 +11,22 @@ module Styles = {
       media(Theme.MediaQuery.desktop, [paddingTop(`rem(8.))]),
       media(Theme.MediaQuery.desktop, [paddingTop(`rem(12.))]),
     ]);
+
+  let teamBackground =
+    style([
+      backgroundImage(
+        `url("/static/img/backgrounds/WorkWithMinaTeamBackground.jpg"),
+      ),
+      backgroundSize(`cover),
+      paddingTop(`rem(6.)),
+      overflow(`hidden),
+      media(Theme.MediaQuery.desktop, [paddingTop(`rem(8.))]),
+      media(Theme.MediaQuery.desktop, [paddingTop(`rem(12.))]),
+    ]);
 };
 
 [@react.component]
-let make = () => {
+let make = (~profiles) => {
   <Page title="Mina Cryptocurrency Protocol" footerColor=Theme.Colors.orange>
     <div className=Nav.Styles.spacer />
     <Hero
@@ -56,6 +68,20 @@ let make = () => {
       buttonCopy="Learn More"
       buttonUrl="/tech"
     />
+    <div className=Styles.teamBackground>
+      <Wrapped>
+        <Carousel
+          title="Meet the Team"
+          copy={
+            "Mina is an inclusive open source protocol uniting teams and technicians from San Francisco and around the world."
+            ->Some
+          }
+          cardKind={Carousel.TeamMembers(profiles)}
+          dark=true
+          numberOfItems={Array.length(profiles)}
+        />
+      </Wrapped>
+    </div>
     <div className=Styles.cultureBackground>
       <FeaturedSingleRowFull
         row={
@@ -104,3 +130,22 @@ let make = () => {
     </div>
   </Page>;
 };
+
+Next.injectGetInitialProps(make, _ => {
+  Contentful.getEntries(
+    Lazy.force(Contentful.client),
+    {
+      "include": 1,
+      "content_type": ContentType.TeamProfile.id,
+      "order": "fields.order",
+    },
+  )
+  |> Promise.map((entries: ContentType.TeamProfile.entries) => {
+       let profiles =
+         Array.map(
+           (e: ContentType.TeamProfile.entry) => e.fields,
+           entries.items,
+         );
+       {"profiles": profiles};
+     })
+});

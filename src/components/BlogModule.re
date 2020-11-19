@@ -26,7 +26,7 @@ module Fetch = (T: {
 module Styles = {
   open Css;
 
-  let container = style([margin2(~v=`rem(7.), ~h=`zero)]);
+  let container = style([margin2(~v=`rem(5.), ~h=`zero)]);
 
   let header =
     style([
@@ -102,7 +102,7 @@ let make =
           switch (itemKind) {
           | ListModule.Blog => "See all posts"
           | ListModule.Press => "See all press"
-          | ListModule.Announcement => "See all posts"
+          | ListModule.Announcement => "See all announcements"
           | ListModule.TestnetRetro => "See all posts"
           }
         }

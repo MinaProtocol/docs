@@ -19,7 +19,7 @@ module Styles = {
     style([
       position(`relative),
       background(`url(bg)),
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundRepeat(`noRepeat),
       padding(`rem(2.)),
       media(Theme.MediaQuery.desktop, [padding(`zero)]),
@@ -32,7 +32,7 @@ module Styles = {
       top(sticky ? `rem(3.5) : `rem(66.)),
       marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
       width(`rem(14.)),
-      zIndex(100),
+      zIndex(Theme.StackingIndex.zNav),
       background(white),
       media(Theme.MediaQuery.desktop, [display(`block)]),
     ]);
@@ -41,7 +41,7 @@ module Styles = {
     style([
       background(`url("/static/img/tech-projects-bg.jpg")),
       // For some reason `auto doesn't count as a Css.length so...
-      unsafe("background-size", "100% auto"),
+      unsafe("backgroundSize", "100% auto"),
       backgroundRepeat(`noRepeat),
       paddingTop(`rem(8.)),
     ]);
@@ -127,39 +127,6 @@ module Section = {
   };
 };
 
-module TechSideNav = {
-  [@react.component]
-  let make = () => {
-    let router = Next.Router.useRouter();
-    let hashExp = Js.Re.fromString("#(.+)");
-    let scrollTop = Hooks.useScroll();
-    let calcHash = path =>
-      Js.Re.(exec_(hashExp, path) |> Option.map(captures))
-      |> Js.Option.andThen((. res) => Js.Nullable.toOption(res[0]))
-      |> Js.Option.getWithDefault("");
-    let (hash, setHash) = React.useState(() => calcHash(router.asPath));
-
-    React.useEffect(() => {
-      let handleRouteChange = url => setHash(_ => calcHash(url));
-      router.events
-      ->Next.Router.Events.on("hashChangeStart", handleRouteChange);
-      Some(
-        () =>
-          router.events
-          ->Next.Router.Events.off("hashChangeStart", handleRouteChange),
-      );
-    });
-
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1000)}>
-      <SideNav.Item title="How Mina Works" slug="#how-mina-works" />
-      <SideNav.Item title="Projects & Possibilities" slug="#projects" />
-      <SideNav.Item title="Incentive Structure" slug="#incentives" />
-      <SideNav.Item title="Where We're Headed" slug="#roadmap" />
-      <SideNav.Item title="Knowledge Base" slug="#knowledge" />
-    </SideNav>;
-  };
-};
-
 module HowMinaWorks = {
   [@react.component]
   let make = () =>
@@ -177,11 +144,11 @@ module HowMinaWorks = {
         />
         <Spacer height=4. />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                "In theory, blockchains are designed to be held accountable by its users.",
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
             When anyone can enforce the rules by validating an irrevocable public
@@ -193,11 +160,11 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|But in practice, this hasn’t been the case.|js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              With legacy blockchains like Bitcoin and Ethereum, when a new participant
@@ -213,14 +180,14 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                Mina offers an elegant solution: replacing the blockchain with an
                easily verifiable, consistent-sized cryptographic proof.
              |js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              Mina dramatically reduces the amount of data each user needs to download.
@@ -240,7 +207,7 @@ module HowMinaWorks = {
         />
         <Spacer height=4. />
         <p className=Theme.Type.paragraph>
-          <b> {React.string("But how do zk-SNARKs work?")} </b>
+          <strong> {React.string("But how do zk-SNARKs work?")} </strong>
           {React.string(
              {js|
             They capture the state of the entire blockchain as a lightweight snapshot
@@ -256,13 +223,13 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                Coming full circle, the world’s lightest blockchain empowers inclusive consensus.
              |js},
              )}
-          </b>
+          </strong>
           {React.string(
              {js|
              Our modified Ouroboros proof-of-stake protocol maximizes inclusivity in
@@ -273,13 +240,13 @@ module HowMinaWorks = {
         </p>
         <Spacer height=1.5 />
         <p className=Theme.Type.paragraph>
-          <b>
+          <strong>
             {React.string(
                {js|
                And that’s how Mina will deliver true decentralization, scale and security.
              |js},
              )}
-          </b>
+          </strong>
         </p>
       </Section>
     </div>;
@@ -448,7 +415,7 @@ module Incentives = {
         <Spacer height=2. />
         <p className=Theme.Type.sectionSubhead>
           {React.string(
-             "The second type of node operator on Mina, SNARK producers, help compress data in the network by generating SNARK proofs of transactions.",
+             "Mina is breaking down barriers to participation and unleashing a host of exciting new opportunities.",
            )}
         </p>
         <Spacer height=3. />
@@ -494,7 +461,8 @@ let make = () => {
         )
       }
     />
-    <TechSideNav />
+    <TechNav.SideNav />
+    <TechNav.Dropdown />
     <HowMinaWorks />
     <Projects />
     <Incentives />
@@ -528,9 +496,7 @@ let make = () => {
         rowType: FeaturedSingleRow.Row.ImageRightCopyLeft,
         title: "Get Started",
         description: {js|
-          We’re passionate about making it as simple as possible to participate
-          in Mina. With clear documentation, a supportive community and a chain
-          that syncs in seconds, we’ll get you up and running in record time.
+          We make it as simple as possible to participate in Mina. With clear documentation, a supportive community and a chain that syncs in seconds, we’ll get you up and running in record time.
         |js},
         textColor: `currentColor,
         copySize: `Large,
@@ -570,7 +536,7 @@ let make = () => {
           FeaturedSingleRow.Row.Button({
             buttonColor: Theme.Colors.orange,
             buttonTextColor: Css.white,
-            buttonText: "Get Started",
+            buttonText: "Work with Mina",
             dark: false,
             href: `Internal("/work-with-mina"),
           }),

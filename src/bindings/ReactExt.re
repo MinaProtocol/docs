@@ -13,6 +13,13 @@ module Children = {
   external toArray: React.element => array(React.element) = "toArray";
 };
 
+module Window = {
+  [@bs.val] [@bs.scope "window"] external innerWidth: int = "innerWidth";
+  [@bs.val] [@bs.scope "window"]
+  external addEventListener: (string, unit => unit) => unit =
+    "addEventListener";
+};
+
 [@bs.obj]
 external makeProps:
   (~value: 'a, ~children: React.element, unit) =>
@@ -20,8 +27,7 @@ external makeProps:
     .
     "value": 'a,
     "children": React.element,
-  } =
-  "";
+  };
 
 let createContext = default => {
   let context = React.createContext(default);

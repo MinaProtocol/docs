@@ -1,0 +1,30 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Time-locked Accounts" });
+
+# Time-locked accounts
+
+A time-locked account disallows payments that would reduce the balance below a minimum, which depends on the block height.
+
+To create a  time-lock, you must provide the configuration when creating a new account. This can happen only in the genesis ledger at the beginning of a network. In this section, we'll explore the mechanism behind time-locks and see how to interact with time-locked accounts.
+
+<Alert>
+
+  For the current release, values for time-locked accounts were assigned based on the order in which you signed up.
+
+</Alert>
+
+## Understanding time-locks
+
+A time-lock consists of the following fields `initial_minimum_balance`, `cliff` time, a `vesting_period` time, and a `vesting_increment`.
+
+You can still use an account if it has a time-lock, as long as the account holds enough funds. The amount of funds that are time-locked starts off as `initial_minimum_balance` at the beginning of the network. Once the network reaches a block height equal to the `cliff`, the time-locked amount begins to decrease by the `vesting_increment` amount every `vesting_period`.
+
+For a more technical explanaition of this process, please see [RFC-0025](https://github.com/MinaProtocol/mina/blob/master/rfcs/0025-time-locked-accounts.md) which has a more in-depth overview.
+
+### Supercharged Rewards
+
+Along with time-locked accounts, we have introduced the notion of supercharged rewards. Once an account has no funds under time-lock (either a new account or the entire `initial_minimum_balance` has been vested) the block rewards are increased by a factor of 2x.
+
+## Creating a time-locked account
+
+As of the current release, the only way to create a time-locked account is with the genesis ledger. In future releases we may add commands to `coda client` and the GraphQL API that will allow you to create a new time-locked account.

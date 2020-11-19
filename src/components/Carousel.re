@@ -1,11 +1,15 @@
+type cardKind =
+  | GenesisMembers(array(ContentType.GenesisProfile.t))
+  | TeamMembers(array(ContentType.TeamProfile.t))
+  | Grants(array(ContentType.Grant.t));
+
 module Styles = {
   open Css;
   let container =
     style([
-      position(`relative),
       height(`rem(70.)),
       width(`percent(100.)),
-      paddingTop(`rem(6.)),
+      paddingTop(`rem(1.)),
     ]);
 
   let leftWrapped =
@@ -24,11 +28,10 @@ module Styles = {
 
   let contentContainer =
     style([
-      position(`absolute),
       display(`flex),
       alignItems(`center),
-      overflowX(`hidden),
-      width(`percent(110.)),
+      width(`vw(100.)),
+      unsafe("clip-path", "inset( -100vw -100vw -100vw 0 )"),
       selector(" > :not(:first-child)", [marginLeft(`rem(1.5))]),
     ]);
 
@@ -45,23 +48,56 @@ module Styles = {
       alignItems(`flexEnd),
       justifyContent(`spaceBetween),
       marginTop(`rem(3.)),
-      marginBottom(`rem(6.625)),
       media(Theme.MediaQuery.notMobile, [flexDirection(`row)]),
     ]);
 
   let headerCopy =
     style([
       width(`percent(100.)),
-      media(Theme.MediaQuery.tablet, [width(`percent(70.))]),
-      media(Theme.MediaQuery.desktop, [width(`percent(50.))]),
+      marginTop(`rem(2.)),
+      marginBottom(`zero),
+      media(
+        Theme.MediaQuery.tablet,
+        [marginBottom(`rem(4.)), width(`percent(70.))],
+      ),
+      media(Theme.MediaQuery.desktop, [width(`percent(80.))]),
+    ]);
+
+  let copyRow =
+    style([
+      width(`percent(100.)),
+      display(`flex),
+      flexDirection(`column),
+      justifyContent(`flexStart),
+      alignItems(`flexStart),
+      marginBottom(`rem(6.)),
+      media(
+        Theme.MediaQuery.notMobile,
+        [
+          alignItems(`center),
+          justifyContent(`spaceBetween),
+          flexDirection(`row),
+        ],
+      ),
     ]);
 
   let rule = style([marginTop(`rem(6.))]);
 
-  let h2 = textColor => merge([Theme.Type.h2, style([color(textColor)])]);
+  let h2 = dark =>
+    merge([
+      Theme.Type.h2,
+      style([
+        dark ? color(Theme.Colors.digitalBlack) : color(Theme.Colors.white),
+      ]),
+    ]);
 
-  let paragraph = textColor =>
-    merge([Theme.Type.paragraph, style([color(textColor)])]);
+  let paragraph = dark =>
+    merge([
+      Theme.Type.sectionSubhead,
+      style([
+        dark ? color(Theme.Colors.digitalBlack) : color(Theme.Colors.white),
+      ]),
+    ]);
 
   let buttons =
     style([
@@ -72,90 +108,107 @@ module Styles = {
       selector(">:first-child", [marginRight(`rem(1.))]),
       media(Theme.MediaQuery.notMobile, [marginTop(`zero)]),
     ]);
-
-  let button =
-    merge([
-      Button.Styles.button(
-        Theme.Colors.digitalBlack,
-        Theme.Colors.white,
-        Some(Theme.Colors.white),
-        false,
-        `rem(2.5),
-        Some(`rem(2.5)),
-        0.5,
-        0.,
-      ),
-      style([cursor(`pointer)]),
-    ]);
-};
-
-module Arrow = {
-  [@react.component]
-  let make = (~icon, ~onClick) => {
-    <div className=Styles.button onClick> <Icon kind=icon /> </div>;
-  };
 };
 
 module Slider = {
   [@react.component]
-  let make = (~items: array(ContentType.GenesisProfile.t), ~translate) => {
+  let make = (~cardKind, ~translate, ~dark) => {
     <div className=Styles.contentContainer>
-      {items
-       |> Array.map((p: ContentType.GenesisProfile.t) => {
-            <div key={p.name} className={Styles.slide(translate)}>
-              <GenesisMemberProfile
-                key={p.name}
-                name={p.name}
-                photo={p.image.fields.file.url}
-                quote={"\"" ++ p.quote ++ "\""}
-                location={p.memberLocation}
-                twitter={p.twitter}
-                github={p.github}
-                blogPost={p.blogPost.fields.slug}
-              />
-            </div>
-          })
-       |> React.array}
+      {switch (cardKind) {
+       | TeamMembers(members) =>
+         members
+         |> Array.map((member: ContentType.TeamProfile.t) => {
+              <div key={member.name} className={Styles.slide(translate)}>
+                <CarouselCards.TeamMemberCard key={member.name} member dark />
+              </div>
+            })
+         |> React.array
+       | GenesisMembers(members) =>
+         members
+         |> Array.map((member: ContentType.GenesisProfile.t) => {
+              <div key={member.name} className={Styles.slide(translate)}>
+                <CarouselCards.GenesisMemberCard
+                  key={member.name}
+                  member
+                  dark
+                />
+              </div>
+            })
+         |> React.array
+       | Grants(grants) =>
+         grants
+         |> Array.map((grant: ContentType.Grant.t) => {
+              <div key={grant.title} className={Styles.slide(translate)}>
+                <CarouselCards.GrantCard key={grant.title} grant dark />
+              </div>
+            })
+         |> React.array
+       }}
     </div>;
   };
 };
 
 [@react.component]
-let make =
-    (
-      ~title,
-      ~copy,
-      ~textColor,
-      ~items: array(ContentType.GenesisProfile.t),
-      ~slideWidthRem,
-    ) => {
+let make = (~title, ~copy, ~cardKind, ~numberOfItems, ~dark=true) => {
   let (itemIndex, setItemIndex) = React.useState(_ => 0);
   let (translate, setTranslate) = React.useState(_ => 0.);
 
+  // This is the translation amount for each individual carousel card
+  let slideWidth = 24.5;
+
   let nextSlide = _ =>
-    if (itemIndex < Array.length(items) - 1) {
+    if (itemIndex < numberOfItems - 1) {
       setItemIndex(_ => itemIndex + 1);
-      setTranslate(_ => translate -. slideWidthRem);
+      setTranslate(_ => translate -. slideWidth);
     };
 
   let prevSlide = _ =>
     if (itemIndex > 0) {
       setItemIndex(_ => itemIndex - 1);
-      setTranslate(_ => translate +. slideWidthRem);
+      setTranslate(_ => translate +. slideWidth);
     };
 
-  <div className=Styles.container>
-    <div className=Styles.headerContainer>
-      <span className=Styles.headerCopy>
-        <h2 className={Styles.h2(textColor)}> {React.string(title)} </h2>
-        <Spacer height=1. />
-        <p className={Styles.paragraph(textColor)}> {React.string(copy)} </p>
-      </span>
-      <span className=Styles.buttons>
-        <Arrow icon=Icon.ArrowLeftLarge onClick=prevSlide />
-        <Arrow icon=Icon.ArrowRightLarge onClick=nextSlide />
-      </span>
-    </div>
-    <Slider translate items />
-  </div>;
+  numberOfItems === 0
+    ? React.null
+    : <div className=Styles.container>
+        <div className=Styles.headerContainer>
+          <div className=Styles.copyRow>
+            <span className=Styles.headerCopy>
+              <h2 className={Styles.h2(dark)}> {React.string(title)} </h2>
+              {Belt.Option.mapWithDefault(copy, React.null, copy => {
+                 <>
+                   <Spacer height=1. />
+                   <p className={Styles.paragraph(dark)}>
+                     {React.string(copy)}
+                   </p>
+                   <Spacer height=3. />
+                 </>
+               })}
+            </span>
+            {numberOfItems <= 3
+               ? React.null
+               : <span className=Styles.buttons>
+                   <ModalButton
+                     bgColor=Theme.Colors.digitalBlack
+                     borderColor=Theme.Colors.white
+                     dark
+                     width={`rem(2.5)}
+                     paddingX=0.5
+                     onClick=prevSlide>
+                     <Icon kind=Icon.ArrowLeftLarge />
+                   </ModalButton>
+                   <ModalButton
+                     bgColor=Theme.Colors.digitalBlack
+                     borderColor=Theme.Colors.white
+                     dark
+                     width={`rem(2.5)}
+                     paddingX=0.5
+                     onClick=nextSlide>
+                     <Icon kind=Icon.ArrowRightLarge />
+                   </ModalButton>
+                 </span>}
+          </div>
+        </div>
+        <Slider cardKind translate dark />
+      </div>;
 };

@@ -3,7 +3,7 @@ open Css;
 module Styles = {
   let heroContainer = (backgroundImg: Theme.backgroundImage) =>
     style([
-      height(`rem(33.)),
+      height(`rem(37.)),
       display(`flex),
       flexDirection(`column),
       justifyContent(`flexEnd),
@@ -26,7 +26,7 @@ module Styles = {
   let marginX = x => [marginLeft(x), marginRight(x)];
   let heroContent =
     style(
-      [marginTop(`rem(4.2)), marginBottom(`rem(1.9))]
+      [marginTop(`rem(4.2)), marginBottom(`rem(4.0))]
       @ marginX(`rem(1.25))
       @ [
         media(
@@ -64,10 +64,10 @@ module Styles = {
         backgroundColor(white),
         marginRight(`rem(1.)),
         padding2(~v=`rem(1.3), ~h=`rem(1.3)),
-        unsafe("width", "max-content"),
+        width(`percent(100.)),
         media(
-          Theme.MediaQuery.desktop,
-          [padding2(~v=`rem(1.5), ~h=`rem(1.5))],
+          Theme.MediaQuery.tablet,
+          [maxWidth(`rem(40.)), padding2(~v=`rem(1.5), ~h=`rem(1.5))],
         ),
         marginTop(`rem(1.)),
         marginBottom(`rem(1.5)),

@@ -71,7 +71,7 @@ module Styles = {
 
   let contentBlock = (contentBackground: Row.backgroundType) => {
     style([
-      zIndex(100),
+      zIndex(Theme.StackingIndex.zNav),
       width(`percent(100.)),
       maxHeight(`rem(35.)),
       overflow(`scroll),
@@ -132,8 +132,8 @@ module Styles = {
           Theme.MediaQuery.desktop,
           [
             unsafe("display", "-webkit-box"),
-            unsafe("-webkit-line-clamp", "10"),
-            unsafe("-webkit-box-orient", "vertical"),
+            unsafe("WebkitLineClamp", "6"),
+            unsafe("WebkitBoxOrient", "vertical"),
           ],
         ),
       ]),

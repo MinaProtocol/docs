@@ -125,6 +125,7 @@ module GenesisProfile = {
     publishDate: string,
     blogPost: BlogPost.entry,
   };
+
   type entry = System.entry(t);
   type entries = System.entries(t);
 };
@@ -156,6 +157,20 @@ module Advisor = {
   type entries = System.entries(t);
 };
 
+module Grant = {
+  let id = "grants";
+  type t = {
+    title: string,
+    grantType: option(string),
+    contributer: string,
+    description: string,
+    repoSlug: option(string),
+    projectSlug: option(string),
+  };
+  type entry = System.entry(t);
+  type entries = System.entries(t);
+};
+
 module GenericMember = {
   type t = {
     name: string,
@@ -167,8 +182,8 @@ module GenericMember = {
     github: option(string),
     linkedIn: option(string),
     blogPost: BlogPost.entry,
-    memberLocation: string,
-    publishDate: string,
+    memberLocation: option(string),
+    publishDate: option(string),
   };
 
   type entry = System.entry(t);
@@ -180,7 +195,7 @@ module Press = {
   let dateKeyName = "datePublished";
   type t = {
     title: string,
-    image: Image.entry,
+    image: option(Image.entry),
     link: string,
     featured: bool,
     description: Js.Undefined.t(string),
@@ -229,7 +244,7 @@ module NormalizedPressBlog = {
   let ofPress = (press: Press.t) => {
     {
       title: press.title,
-      image: Some(press.image),
+      image: press.image,
       link: `Remote(press.link),
       featured: press.featured,
       description: Js.Undefined.toOption(press.description),

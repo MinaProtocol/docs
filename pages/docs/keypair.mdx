@@ -1,0 +1,80 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Generate a Keypair" });
+
+# Generating a Keypair
+
+In order to fully participate in the Mina network, the first step is to generate a Keypair, which consists of a Public Key and a Private Key. 
+
+<Alert>
+
+If you have previously created a keypair after Testnet 3.2b (public key should begin with `B62...`), you can re-use the previous keypair and skip ahead to [connect to the network](/docs/connecting).
+
+</Alert>
+
+## Installation
+
+To simplify the process of creating a keypair, we've created a simple command-line utility called `mina-generate-keypair`. Follow the instructions below to install the tool onto your system.
+
+### macOS
+
+Install using [Homebrew](https://brew.sh/)
+
+```
+brew install minaprotocol/mina/mina-generate-keypair
+```
+
+You can now run `mina-generate-keypair -version` to check that the installation completed successfully.
+
+### Debian 18.04 / Debian 9
+
+After [adding the Mina repo](/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
+
+```
+sudo apt-get install mina-generate-keypair
+```
+
+You can run `mina-generate-keypair -version` to check that the installation completed successfully.
+
+## Usage
+
+Creating a keypair is simple and is accomplished in a few short steps.
+
+First make sure you have a folder on your system where you can store the key files. We recommend using the `~/keys` folder.
+
+```
+mkdir ~/keys
+```
+
+Next, ensure the permissions are set properly this folder, this prevents unwanted processes from accessing these files.
+
+```
+chmod 700 ~/keys
+```
+
+Now we can generate our keys using the `mina-generate-keypair` command. You will be prompted to provide a password for the new keypair. <em>Do NOT forget this password.</em> 
+
+```
+mina-generate-keypair -privkey-path ~/keys/my-wallet`
+```
+
+This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
+
+Finally, ensure the permissions are set properly for the private key file, this prevents unwanted processes from accessing it.
+
+```
+chmod 600 ~/keys/my-wallet
+```
+
+## Submit your Public Key
+
+In the days leading up to a Testnet, we will begin collecting public keys from the community for Staking Signups. To see your public key use the following command:
+
+```
+cat ~/keys/my-wallet.pub
+```
+
+Copy the output of the command and submit it to the [Staking Signup](http://bit.ly/StakingSignup) form along with your Discord username.
+
+## Next
+
+Now that we have created our keypair, we can finally [connect to the network](/docs/connecting)!

@@ -221,7 +221,7 @@ module Styles = {
         backgroundColor(Theme.Colors.digitalBlack),
         color(white),
         top(`zero),
-        zIndex(99),
+        zIndex(Theme.StackingIndex.zContent),
         display(`none),
         paddingBottom(`rem(0.5)),
         fontSize(`rem(0.875)),

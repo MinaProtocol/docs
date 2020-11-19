@@ -1,6 +1,11 @@
 module Styles = {
   open Css;
   let container = style([margin2(~v=`rem(4.), ~h=`zero)]);
+  let spacer =
+    style([
+      height(`rem(4.)),
+      media(Theme.MediaQuery.tablet, [height(`rem(0.))]),
+    ]);
 
   let modalContainer = modalShowing =>
     style([
@@ -15,7 +20,7 @@ module Styles = {
       top(`percent(50.)),
       left(`percent(50.)),
       transform(`translate((`percent(-50.), `percent(-50.)))),
-      zIndex(2),
+      zIndex(Theme.StackingIndex.zModal),
     ]);
 
   let modal = style([margin(`auto)]);
@@ -80,8 +85,7 @@ let make =
   };
 
   let closeModal = e => {
-    modalBackgroundRef
-    |> React.Ref.current
+    modalBackgroundRef.current
     |> Js.Nullable.toOption
     |> Option.iter(modalRef =>
          if (modalRef === asDomElement(ReactEvent.Mouse.target(e))
@@ -108,10 +112,9 @@ let make =
            </div>
          </div>}
     <div className=Styles.container>
-      <Wrapped>
-        <Rule color=Theme.Colors.black />
+      <div className=Styles.spacer />
+      <Wrapped maxWidthDesktop={`rem(93.)}>
         <TeamGrid profiles switchModalState setCurrentIndexAndMembers />
-        <Rule color=Theme.Colors.black />
         <GenesisMembersGrid
           genesisMembers
           switchModalState
