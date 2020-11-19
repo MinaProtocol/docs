@@ -402,7 +402,7 @@ module FrontEndProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens|js},
+                  copy: {js|Minimum of 80,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Project Type",
@@ -423,7 +423,7 @@ module FrontEndProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens (minimum 2 months commitment)|js},
+                  copy: {js|Minimum of 160,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Overview",
@@ -494,7 +494,7 @@ module ProtocolProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $100,000 USD of Mina tokens|js},
+                  copy: {js|Minimum of 400,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Project Type",
@@ -536,7 +536,7 @@ module MarketingAndCommunityProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $1000 USD of Mina tokens per month|js},
+                  copy: {js|Minimum of 4,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Description",
