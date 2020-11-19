@@ -123,42 +123,11 @@ Snark workers can be fairly compute intensive, so if you need to limit their CPU
 
 That about covers the roles and responsibilities as a Code node operator. Since Mina is a permissionless peer-to-peer network, everything is managed and run in a decentralized manner by nodes all over the world. Similarly, the Mina project is also distributed and permissionless to join. The code is all open source, and there is much work to be done, both technical and non-technical. To learn more about how you can get involved with Mina, please check out the [Contributing to Mina section](./contributing).
 
-## Running mina as a service
+### Using daemon.json to configure your coda daemon
 
-You might want to run the mina daemon in the background. You have a couple of options:
+By creating a file at `~/.coda-config/daemon.json`, you can configure your coda daemon without needing to provide options on the commandline. This can be useful for running mina as a service as well as just for avoiding repetitive typing!
 
-- Use the `-background` flag to `mina daemon`. This will not autorestart the daemon for you.
-- Use your OS service manager to run it for you, and get the ability to have it restart automatically and other features.
-
-Either way, your logs will be saved to `~/.coda-config/mina.log` and configuration can be specified in the [`daemon.json`](#using-daemonjson-to-configure-your-mina-daemon) file.
-
-### macOS
-
-- [Install mina](/docs/getting-started#macOS) as usual.
-- You can then start the mina service like this:
-
-```
-brew services start mina
-```
-
-### Ubuntu 18.04 / Debian 9
-
-- [Install mina](/docs/getting-started#ubuntu-1804--debian-9) as usual.
-- Now you can check [here](https://github.com/jkrauska/mina-systemd) and [here](https://forums.minaprotocol.com/t/autodeploy-kinda-mina-node-and-systemd-integration-script/284) for some community-provided solutions to running mina as a service using systemd.
-
-<Alert>
-
-
-Interested in making it easier to use mina with systemd? [Help us](https://github.com/MinaProtocol/mina/issues/4493) to make the experience on Linux better!
-
-</Alert>
-
-
-### Using daemon.json to configure your mina daemon
-
-By creating a file at `~/.coda-config/daemon.json`, you can configure your mina daemon without needing to provide options on the commandline. This can be useful for running mina as a service as well as just for avoiding repetitive typing!
-
-Most of the options that can be passed to `mina daemon` on the commandline can also be provided as options in the config file. See `mina daemon -help` for more documentation of the options. Below is an example of usage of all the usable configuration parameters (in your file, you only need to specify the ones you want to change):
+Most of the options that can be passed to `coda daemon` on the commandline can also be provided as options in the config file. See `coda daemon -help` for more documentation of the options. Below is an example of usage of all the usable configuration parameters (in your file, you only need to specify the ones you want to change):
 
 ```json
 {
