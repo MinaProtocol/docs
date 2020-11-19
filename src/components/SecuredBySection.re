@@ -31,9 +31,9 @@ module Styles = {
       media(
         Theme.MediaQuery.desktop,
         [
-          gridTemplateColumns([`rem(31.5), `rem(29.)]),
+          gridTemplateColumns([`rem(36.), `rem(29.)]),
           gridTemplateRows([`rem(31.5), `rem(27.)]),
-          gridColumnGap(`rem(6.8)),
+          gridColumnGap(`rem(9.)),
           gridRowGap(`rem(6.)),
           backgroundSize(`cover),
         ],
@@ -47,7 +47,7 @@ module Styles = {
       height(`rem(62.)),
       padding2(~v=`rem(2.), ~h=`rem(2.)),
       unsafe("grid-area", "3"),
-      marginTop(`rem(2.)),
+      marginTop(`rem(4.)),
       media(
         Theme.MediaQuery.notMobile,
         [
@@ -134,6 +134,11 @@ module Styles = {
       Theme.Type.h2,
       style([lineHeight(`rem(3.0)), fontSize(`rem(2.5))]),
     ]);
+  let h3 =
+    merge([
+      Theme.Type.h3,
+      style([lineHeight(`rem(3.0)), fontSize(`rem(2.5))]),
+    ]);
   let h3White =
     merge([
       Theme.Type.h3,
@@ -147,13 +152,15 @@ module Styles = {
     merge([Theme.Type.sectionSubhead, style([color(white)])]);
   let dotsImage =
     style([
+      height(`rem(33.)),
+      marginBottom(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
         [marginRight(`rem(3.)), height(`rem(15.))],
       ),
       media(
         Theme.MediaQuery.desktop,
-        [marginRight(`zero), marginBottom(`zero), height(`rem(99.))],
+        [marginRight(`zero), marginBottom(`zero), height(`rem(35.))],
       ),
     ]);
   let button = style([media(Theme.MediaQuery.tablet, [])]);
@@ -170,7 +177,7 @@ let make = () => {
           <h2 className=Styles.h2>
             {React.string("Secured by Participants")}
           </h2>
-          <Spacer height=1. />
+          <Spacer height=2. />
           <p className=Theme.Type.sectionSubhead>
             {React.string(
                "The Mina network is secured by an uncapped number of block producers via proof-of-stake consensus. A uniquely decentralized blockchain, Mina gets even more secure and resilient as it grows.",
@@ -198,16 +205,16 @@ let make = () => {
         <div className=Styles.gridItem2>
           <Rule />
           <Spacer height=2. />
-          <h2 className=Styles.h2>
+          <h2 className=Styles.h3>
             {React.string("Featured Block Producers")}
           </h2>
-          <Spacer height=1. />
+          <Spacer height=2. />
           <p className=Theme.Type.sectionSubhead>
             {React.string(
                "Delegating is an alternative to staking Mina directly, with the benefit of not having to maintain a node that is always connected to the network. Here are some of the professional block producers offering staking services on Mina.",
              )}
           </p>
-          <Spacer height=2. />
+          <Spacer height=3. />
           <div className=Styles.logoGrid>
             <img className=Styles.logo src="/static/img/BisonTrailsLogo.png" />
             <img
@@ -221,7 +228,7 @@ let make = () => {
         <div className=Styles.gridItem3>
           <img
             className=Styles.dotsImage
-            src="/static/img/SecuredByDots.svg"
+            src="/static/img/SecuredByDots.png"
           />
           <span className=Styles.textColumn>
             <Rule color=Theme.Colors.white />

@@ -34,7 +34,7 @@ module Styles = {
       ),
     ]);
 
-  let header = merge([Theme.Type.h1, style([marginBottom(`rem(0.5))])]);
+  let header = merge([Theme.Type.h3, style([marginBottom(`rem(0.5))])]);
   let subhead =
     merge([Theme.Type.sectionSubhead, style([marginBottom(`rem(4.))])]);
   let investorGridItem =
@@ -78,7 +78,7 @@ module Styles = {
     ]);
   let advisors =
     merge([
-      Theme.Type.h2,
+      Theme.Type.h3,
       style([marginTop(`rem(2.)), marginBottom(`rem(0.5))]),
     ]);
   let advisorsSubhead =
@@ -126,12 +126,14 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
           </div>
           <img src="/static/img/logos/LogoGeneralCatalyst.png" />
           <img src="/static/img/logos/Hashkey Capital 1.png" />
+          <img src="/static/img/logos/LogoImpero.jpg" />
           <img src="/static/img/logos/IOSG Ventures 1.png" />
           <div className=Styles.investorGridItemLarge>
             {React.string("Jack Herrick")}
           </div>
           <img src="/static/img/logos/LogoKilowattCapital.png" />
           <img src="/static/img/logos/LogoKindredVentures.png" />
+          <img src="/static/img/logos/LogoLDCapital.jpg" />
           <img src="/static/img/logos/LogoLibertusCapital.png" />
           <div className=Styles.investorGridItem>
             {React.string("Linda Xie")}
@@ -152,6 +154,7 @@ let make = (~advisors, ~switchModalState, ~setCurrentIndexAndMembers) => {
           <img src="/static/img/logos/Three Arrows Capital 1.png" />
           <img src="/static/img/logos/Investor Logos_YBB Foundation 1.png" />
         </div>
+        <Spacer height=4. />
         <h2 className=Styles.advisors> {React.string("Advisors")} </h2>
         <p className=Styles.advisorsSubhead>
           {React.string("Supporting O(1) Labs")}

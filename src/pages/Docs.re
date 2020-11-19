@@ -5,6 +5,7 @@ module Style = {
 
   let content =
     style([
+      width(`percent(100.)),
       maxWidth(`rem(53.)),
       marginBottom(`rem(2.875)),
       media(Theme.MediaQuery.notMobile, [marginLeft(`rem(1.))]),
@@ -52,11 +53,7 @@ module EditLink = {
     <a
       name="Edit Link"
       target="_blank"
-      href={
-        Constants.minaDocsEditLink
-        ++ route
-        ++ ".mdx"
-      }
+      href={Constants.minaDocsEditLink ++ route ++ ".mdx"}
       className=Style.editLink>
       <span className=Style.link> {React.string("Edit")} </span>
       <Icon kind=Icon.ArrowRightMedium />
@@ -87,8 +84,9 @@ let make = (~metadata, ~children) => {
       <Wrapped>
         <div className=Nav.Styles.spacer />
         <div className=Style.page>
-          <DocsSideNav currentSlug />
+          <DocsNavs.SideNav currentSlug />
           <div className=Style.content>
+            <DocsNavs.Dropdown currentSlug />
             <div className=Style.eyebrow>
               <LabelEyebrow copy="Documentation" />
             </div>

@@ -219,22 +219,15 @@ module NavGroupLink = {
   };
 };
 
-[@bs.val] [@bs.scope "window"] external innerWidth: int = "innerWidth";
-[@bs.val] [@bs.scope "window"]
-external addEventListener: (string, unit => unit) => unit = "addEventListener";
-
 [@react.component]
 let make = (~dark=false) => {
   let (width, setWidth) = React.useState(() => 0);
 
   React.useEffect0(() => {
     let handleSize = () => {
-      switch ([%external innerWidth]) {
-      | Some(_) => setWidth(_ => innerWidth)
-      | None => ()
-      };
+      setWidth(_ => ReactExt.Window.innerWidth);
     };
-    addEventListener("resize", handleSize);
+    ReactExt.Window.addEventListener("resize", handleSize);
     handleSize();
     None;
   });
