@@ -18,13 +18,19 @@ The first step in connecting to the network is installing the latest daemon vers
 
 ### macOS
 
+<Alert kind="warning">
+
+  For `release 0.0.16-beta7` the MacOS has not been tested and as such will be temporarily unsupported. Instead please follow the [Docker](#docker) instructions below.
+
+</Alert>
+
 Use [Homebrew](https://brew.sh/) to update the `mina` package.
 
 ```
 brew upgrade mina
 ```
 
-Check that the output of the `coda -version` command is `Commit 4395e91 on branch master`.
+Check that process installed correctly by running `coda -help`.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -35,7 +41,7 @@ sudo apt-get remove mina-testnet-postake-medium-curves
 sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.16-beta7-757342b --allow-downgrades
 ```
 
-Check that the output of the `coda -version` command is `Commit 4395e91 on branch master`.
+Check that process installed correctly by running `coda -help`.
 
 ## Get the network information
 
