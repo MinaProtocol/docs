@@ -59,7 +59,7 @@ If you installed `mina` from a previous release, you'll need to upgrade it so th
 
 <Alert kind="warning">
 
-  For `release 0.0.16-beta7` the MacOS has not been tested and as such will be temporarily unsupported.
+  For `release 0.0.16-beta7` the MacOS has not been tested and as such will be temporarily unsupported. Instead please follow the [Docker](#docker) instructions bellow.
 
 </Alert>
 
@@ -82,9 +82,9 @@ You can run `mina -help` to check if the installation succeeded.
 Add the Mina Debian repo and install:
 
 ```
-echo "deb [trusted=yes] http://packages.o1test.net unstable main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.16-beta7+-4.1-turbo-pickles-2f36b15 --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.16-beta7-757342b --allow-downgrades
 ```
 
 You can run `mina -help` to check if the installation succeeded.
@@ -92,6 +92,12 @@ You can run `mina -help` to check if the installation succeeded.
 ### Windows
 
 Windows is not yet supported. If you are interested in receiving a grant to develop Mina for Windows, please email grants@o1labs.org or reach out in the [Discord server](https://bit.ly/MinaDiscord).
+
+Please instead use the Docker instructions below.
+
+### Docker
+
+Docker is cross-platform tool that allows you to run a virtual machine that will execute any needed software. Please follow the official installation instructions for your platform on [this page](https://docs.docker.com/get-docker/). 
 
 ### Build from source
 

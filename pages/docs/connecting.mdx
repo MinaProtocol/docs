@@ -137,6 +137,36 @@ journalctl --user -u mina -n 1000 -f
 
 That command will show you the last 1000 lines and follow from there.
 
+### Docker
+
+When running your daemon using Docker, first ensure that your private key has the correct permissions.
+
+```
+cd ~ 
+chmod 700 ~/keys/my-wallet
+```
+
+Now simply run the image with your keys and ~/.coda-config mounted:
+
+```
+docker run --name mina -d \
+-p 8301-8305:8301-8305 \
+--restart=always \
+--mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
+--mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
+--mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
+minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina757342b-auto811bf26 daemon \
+-peer-list-file /root/peers.txt \
+-block-producer-key /keys/my-wallet \
+-block-producer-password "YOUR PASSWORD HERE" \
+-insecure-rest-server \
+-log-level Info
+```
+
+Run `docker logs -f mina` to follow the logs, and if it crashes save the log output to a file with `docker logs mina > mina-log.txt` and post the output to the #mentor-nodes channel or attach the full ~/.coda-config/coda.log to a github issue and link the issue in discord.
+
+Run `docker exec -it mina coda client status` to monitor connectivity to the network, you should quickly find at least 10 peers and watch the block height / max observed block height climb.
+
 ## Checking connectivity
 
 Now that we've started up a node and are running the Mina daemon, open up another shell and run the following command:
