@@ -53,19 +53,18 @@ module Styles = {
       width(`percent(90.)),
       margin2(~h=`auto, ~v=`zero),
       background(Theme.Colors.digitalBlack),
-      media(
-        Theme.MediaQuery.tablet,
-        [margin2(~h=`zero, ~v=`zero), top(`rem(6.25))],
-      ),
+      media(Theme.MediaQuery.tablet, [top(`rem(6.25))]),
       media(
         Theme.MediaQuery.desktop,
         [
           position(`relative),
           top(`zero),
           width(`auto),
+          zIndex(Theme.StackingIndex.zContent),
           flexDirection(`row),
           alignItems(`center),
           background(`none),
+          margin2(~h=`zero, ~v=`zero),
         ],
       ),
     ]);
@@ -100,9 +99,13 @@ module Styles = {
     merge([
       navLink,
       style([
+        hover([backgroundColor(Theme.Colors.orange)]),
         media(
           Theme.MediaQuery.desktop,
-          [important(color(dark ? white : Theme.Colors.digitalBlack))],
+          [
+            hover([unsafe("backgroundColor", "unset")]),
+            important(color(dark ? white : Theme.Colors.digitalBlack)),
+          ],
         ),
       ]),
     ]);
@@ -252,16 +255,16 @@ let make = (~dark=false) => {
       <NavGroup label="Get Started" dark>
         <NavGroupLink icon=Icon.Box label="Overview" href="/get-started" />
         <NavGroupLink
-          icon=Icon.Documentation
-          label="Documentation"
-          href="/docs"
+          icon=Icon.NodeOperators
+          label="Node Operators"
+          href="/node-operators"
         />
         <NavGroupLink icon=Icon.Testnet label="Testnet" href="/testnet" />
         <NavGroupLink icon=Icon.GrantsProgram label="Grants" href="/grants" />
         <NavGroupLink
-          icon=Icon.NodeOperators
-          label="Node Operators"
-          href="/node-operators"
+          icon=Icon.Documentation
+          label="Documentation"
+          href="/docs"
         />
       </NavGroup>
       <NavLink label="Community" href="/community" dark />

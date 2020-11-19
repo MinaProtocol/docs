@@ -5,7 +5,14 @@ module Styles = {
       width(`percent(100.)),
       height(`percent(100.)),
       marginBottom(`rem(3.)),
-      media(Theme.MediaQuery.tablet, [margin2(~v=`rem(3.), ~h=`zero)]),
+      media(
+        Theme.MediaQuery.tablet,
+        [
+          marginLeft(`rem(3.)),
+          marginRight(`rem(3.)),
+          marginBottom(`rem(10.)),
+        ],
+      ),
     ]);
 
   let flex =
