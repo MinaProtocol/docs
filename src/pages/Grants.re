@@ -563,7 +563,7 @@ module MarketingAndCommunityProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $1000 USD of Mina tokens|js},
+                  copy: {js|Minimum of 4,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Description",
