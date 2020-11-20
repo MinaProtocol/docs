@@ -85,11 +85,9 @@ The `-peer-list` argument specified above refer to the seed peer address - this 
 
 See [here](/docs/troubleshooting) for common issues when first running a node.
 
-Great! Now that you've confirmed things are okay by running the standalone process, let's start the auto-restart flow! Feel free to kill the mina process with `Ctrl-C`.
+You're not done yet! Now that you've confirmed things are okay by running the standalone process, it is important we start Mina in a manner that will auto-restart itself when it dies.
 
-### macOS
-
-This flow is temporarily unsupported, but soon a `brew services start coda` should work.
+First kill the existing `coda daemon` process with `Ctrl-C`, and then keep reading:
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -114,12 +112,6 @@ systemctl --user start mina
 By default, the node connects to the network using the default external-port of 8302. This can be changed using the `-external-port` flag, just add that to EXTRA_FLAGS.
 
 You can also look into the mina process itself that's running in the background and auto-restarting.
-
-### macOS
-
-This flow is temporarily unsupported, but will be soon!
-
-### Ubuntu 18.04 / Debian 9
 
 This command will let you know if `mina` had any trouble getting started.
 
