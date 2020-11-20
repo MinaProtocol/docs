@@ -25,7 +25,7 @@ let minaWiki = "https://minawiki.com";
 let minaWikiMainPage = "https://minawiki.com/Main_Page";
 
 let leaderboardFAQ = "https://bit.ly/leaderboardFAQ";
-let currentChallenges = "https://forums.minaprotocol.com/t/testnet-beta-release-3-3-challenges/435";
+let currentChallenges = "https://bit.ly/MinaTestnetChallenges";
 
 let minaEmail = "https://github.com/minaprotocol/mina";
 let minaTwitter = "https://twitter.com/minaprotocol";
