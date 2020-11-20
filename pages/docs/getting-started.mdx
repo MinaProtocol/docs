@@ -57,12 +57,6 @@ If you installed `mina` from a previous release, you'll need to upgrade it so th
 
 ### macOS
 
-<Alert kind="warning">
-
-  For `release 0.0.16-beta7` the MacOS has not been tested and as such will be temporarily unsupported. Instead please follow the [Docker](#docker) instructions below.
-
-</Alert>
-
 Install using [Homebrew](https://brew.sh).
 
 ```
@@ -72,6 +66,8 @@ brew install minaprotocol/mina/mina
 If you already have `mina` installed from a previous release, run:
 
 ```
+brew remove coda
+brew untap codaprotocol/coda
 brew upgrade mina
 ```
 
