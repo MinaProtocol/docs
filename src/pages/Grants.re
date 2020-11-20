@@ -450,6 +450,22 @@ module FrontEndProjects = {
             |]
             buttonUrl=Constants.projectGrantApplication
           />
+          <Project.TwoColumn
+            title="Block Explorer"
+            rows=[|
+              {
+                firstColumn: {
+                  title: "Allocation",
+                  copy: {js|Minimum of 40,000 Mina tokens. Ongoing 8,000 tokens per month for hosting the new design and ongoing updates, on a 72 hour SLA.|js},
+                },
+                secondColumn: {
+                  title: "Overview",
+                  copy: {js|Redesign and update of https://github.com/gobitfly/coda-explorer, as hosted on http://coda.bitfly.at/. Enable users to explore the blockchain, view account details, blocks won, transactions, current block height, epoch, slot number, transaction details, etc|js},
+                },
+              },
+            |]
+            buttonUrl=Constants.projectGrantApplication
+          />
         </Section>
     </div>;
 };
