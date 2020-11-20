@@ -35,7 +35,7 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~img, ~title, ~copy, ~buttonCopy, ~buttonUrl) => {
+let make = (~img, ~title, ~copy, ~buttonCopy=?, ~buttonUrl=?) => {
   <Wrapped>
     <div className=Styles.simpleRowContainer>
       <img className=Styles.simpleRowImage src=img />
@@ -44,10 +44,15 @@ let make = (~img, ~title, ~copy, ~buttonCopy, ~buttonUrl) => {
         <Spacer height=1. />
         <p className=Theme.Type.paragraph> {React.string(copy)} </p>
         <Spacer height=2.5 />
-        <Button href={`Internal(buttonUrl)} bgColor=Theme.Colors.orange>
-          {React.string(buttonCopy)}
-          <Icon kind=Icon.ArrowRightSmall />
-        </Button>
+        {switch (buttonCopy, buttonUrl) {
+         | (Some(buttonCopy), Some(buttonUrl)) =>
+           <Button href={`Internal(buttonUrl)} bgColor=Theme.Colors.orange>
+             {React.string(buttonCopy)}
+             <Icon kind=Icon.ArrowRightSmall />
+           </Button>
+         | (None, None) => <> </>
+         | _ => <> </>
+         }}
       </div>
     </div>
   </Wrapped>;

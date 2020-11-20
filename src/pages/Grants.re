@@ -379,12 +379,12 @@ module FrontEndProjects = {
 
           <Spacer height=4. />
           <Project.TwoColumn
-            title="Graph QL API"
+            title="GraphQL API"
             rows=[|
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens (minimum 2 months commitment)|js},
+                  copy: {js|Minimum of 40,000 Mina tokens per month (minimum two month commitment)|js},
                 },
                 secondColumn: {
                   title: "Description",
@@ -395,26 +395,6 @@ module FrontEndProjects = {
             buttonUrl=Constants.projectGrantApplication
           />
           <Spacer height=3. />
-          <Project.ThreeColumn
-            title="Telemetry Health Dashboard"
-            rows=[|
-              {
-                firstColumn: {
-                  title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens|js},
-                },
-                secondColumn: {
-                  title: "Project Type",
-                  copy: {js|Open source|js},
-                },
-                thirdColumn: {
-                  title: "Overview",
-                  copy: {js|Build a high-level dashboard that describes the current state of the network by aggregating data from as many nodes as it has access to.|js},
-                },
-              },
-            |]
-            buttonUrl=Constants.projectGrantApplication
-          />
           <Spacer height=3. />
           <Project.ThreeColumn
             title="Browser Wallet (with optional chrome extension)"
@@ -422,7 +402,7 @@ module FrontEndProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens|js},
+                  copy: {js|Minimum of 80,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Project Type",
@@ -443,7 +423,7 @@ module FrontEndProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $10,000 USD per month of Mina tokens (minimum 2 months commitment)|js},
+                  copy: {js|Minimum of 160,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Overview",
@@ -454,6 +434,38 @@ module FrontEndProjects = {
             buttonUrl=Constants.projectGrantApplication
           />
           <Spacer height=3. />
+          <Project.TwoColumn
+            title="Update Documents on Minaprotocol.com"
+            rows=[|
+              {
+                firstColumn: {
+                  title: "Allocation",
+                  copy: {js|Minimum of 16,000 Mina tokens|js},
+                },
+                secondColumn: {
+                  title: "Overview",
+                  copy: {js|Update the Docs and GraphQL documents for Mina Protocol|js},
+                },
+              },
+            |]
+            buttonUrl=Constants.projectGrantApplication
+          />
+          <Project.TwoColumn
+            title="Block Explorer"
+            rows=[|
+              {
+                firstColumn: {
+                  title: "Allocation",
+                  copy: {js|Minimum of 40,000 Mina tokens. Ongoing 8,000 tokens per month for hosting the new design and ongoing updates, on a 72 hour SLA.|js},
+                },
+                secondColumn: {
+                  title: "Overview",
+                  copy: {js|Redesign and update of https://github.com/gobitfly/coda-explorer, as hosted on http://coda.bitfly.at/. Enable users to explore the blockchain, view account details, blocks won, transactions, current block height, epoch, slot number, transaction details, etc|js},
+                },
+              },
+            |]
+            buttonUrl=Constants.projectGrantApplication
+          />
         </Section>
     </div>;
 };
@@ -498,7 +510,7 @@ module ProtocolProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $100,000 USD of Mina tokens|js},
+                  copy: {js|Minimum of 400,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Project Type",
@@ -540,7 +552,7 @@ module MarketingAndCommunityProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $1000 USD of Mina tokens per month|js},
+                  copy: {js|Minimum of 4,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Description",
@@ -567,7 +579,7 @@ module MarketingAndCommunityProjects = {
               {
                 firstColumn: {
                   title: "Allocation",
-                  copy: {js|Minimum of $1000 USD of Mina tokens|js},
+                  copy: {js|Minimum of 4,000 Mina tokens|js},
                 },
                 secondColumn: {
                   title: "Description",
@@ -681,6 +693,11 @@ let make = (~grants) => {
         Theme.tablet: "/static/img/backgrounds/GrantsHeroTablet.jpg",
         Theme.mobile: "/static/img/backgrounds/GrantsHeroMobile.jpg",
       }
+    />
+    <SimpleRow
+      img="/static/img/11_GrantsProgram_2_1120x1040 1.jpg"
+      title={js|Work on projects with us and earn Mina tokens|js}
+      copy={js|About 10 million Mina tokens have been allocated to to support the protocol and community prior to Mina's mainnet launch. Check out open opportunities below.|js}
     />
     <div className=Styles.typesOfGrantsImage>
       <Wrapped>
