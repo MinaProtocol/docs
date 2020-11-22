@@ -7,11 +7,7 @@ module Styles = {
       marginBottom(`rem(3.)),
       media(
         Theme.MediaQuery.tablet,
-        [
-          marginLeft(`rem(3.)),
-          marginRight(`rem(3.)),
-          marginBottom(`rem(10.)),
-        ],
+        [marginRight(`rem(3.)), marginBottom(`rem(12.))],
       ),
     ]);
 
@@ -128,8 +124,8 @@ module Styles = {
 
 [@react.component]
 let make = () => {
-  <div className=Styles.componentContainer>
-    <Wrapped>
+  <Wrapped>
+    <div className=Styles.componentContainer>
       <div className=Styles.flex>
         <div className=Styles.comparisonContainer>
           <div className=Styles.contentContainer>
@@ -188,6 +184,6 @@ let make = () => {
           </div>
         </div>
       </div>
-    </Wrapped>
-  </div>;
+    </div>
+  </Wrapped>;
 };
