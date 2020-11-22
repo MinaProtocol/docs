@@ -20,7 +20,7 @@ module Section = {
         justifyContent(`spaceBetween),
         width(`percent(100.)),
         alignItems(`center),
-        marginTop(`rem(2.)),
+        marginTop(`rem(8.)),
         media(
           Theme.MediaQuery.tablet,
           [reverse ? flexDirection(`rowReverse) : flexDirection(`row)],
@@ -55,10 +55,10 @@ module Section = {
     let image =
       style([
         width(`percent(100.)),
-        maxWidth(`rem(11.5)),
+        maxWidth(`rem(22.)),
         height(`auto),
-        marginTop(`rem(2.)),
-        media(Theme.MediaQuery.desktop, [maxWidth(`rem(17.5))]),
+        marginTop(`rem(6.5)),
+        media(Theme.MediaQuery.desktop, [maxWidth(`rem(29.))]),
       ]);
   };
   module SimpleRow = {
