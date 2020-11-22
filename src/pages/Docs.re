@@ -142,6 +142,17 @@ let make = (~metadata, ~children) => {
     </div>;
   };
 
+  let renderMobileEditButton = () => {
+    <span className=Style.content__button>
+      <Button
+        href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
+        bgColor=Theme.Colors.orange>
+        {React.string("Edit")}
+        <Icon kind=Icon.ArrowRightMedium />
+      </Button>
+    </span>;
+  };
+
   <Page title={metadata.title}>
     <Next.Head>
       <link rel="stylesheet" href="/static/css/a11y-light.css" />
@@ -155,15 +166,10 @@ let make = (~metadata, ~children) => {
             <DocsNavs.Dropdown currentSlug />
             <div className=Style.content__flex>
               <span className=Style.content__row>
-                <span className=Style.content__button>
-                  <Button
-                    href={`External(router.route)}
-                    bgColor=Theme.Colors.orange>
-                    {React.string("Edit")}
-                    <Icon kind=Icon.ArrowRightMedium />
-                  </Button>
-                </span>
-                <LabelEyebrow copy="Documentation" />
+                {renderMobileEditButton()}
+                <h4 className=Theme.Type.h4>
+                  {React.string("Documentation")}
+                </h4>
                 <EditLink route={router.route} />
               </span>
               {renderStatusBadge()}

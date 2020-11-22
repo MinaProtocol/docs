@@ -19,7 +19,7 @@ let minaCodeOfConduct = "https://github.com/MinaProtocol/mina/blob/develop/CODE_
 
 let minaNewsletter = "https://share.hsforms.com/1olz9N8_zTHW-RKQus2o3Kw4xuul";
 let minaPressKit = "https://drive.google.com/file/d/177Xzj6Rqd9UnYwzRzMRLPKoyows-iwKx/view?usp=sharing";
-let minaDocsEditLink = "https://github.com/MinaProtocol/mina/edit/develop/frontend/website/pages";
+let minaDocsEditLink = "https://github.com/MinaProtocol/website/edit/main/pages";
 
 let minaWiki = "https://minawiki.com";
 let minaWikiMainPage = "https://minawiki.com/Main_Page";
