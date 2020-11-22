@@ -6,9 +6,12 @@ module Style = {
   let content =
     style([
       width(`percent(100.)),
-      maxWidth(`rem(53.)),
+      maxWidth(`rem(30.)),
       marginBottom(`rem(2.875)),
-      media(Theme.MediaQuery.notMobile, [marginLeft(`rem(1.))]),
+      media(
+        Theme.MediaQuery.notMobile,
+        [maxWidth(`rem(53.)), marginLeft(`rem(1.))],
+      ),
       selector("p > code, li > code", Theme.Type.inlineCode_),
       selector("h1 + p", Theme.Type.sectionSubhead_),
     ]);
