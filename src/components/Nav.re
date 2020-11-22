@@ -77,7 +77,7 @@ module Styles = {
         alignItems(`center),
         padding2(~v=`zero, ~h=`rem(1.5)),
         minHeight(`rem(5.5)),
-        important(color(white)),
+        color(white),
         borderBottom(`px(1), `solid, Theme.Colors.digitalGray),
         hover([color(Theme.Colors.orange)]),
         media(
@@ -99,13 +99,9 @@ module Styles = {
     merge([
       navLink,
       style([
-        hover([backgroundColor(Theme.Colors.orange)]),
         media(
           Theme.MediaQuery.desktop,
-          [
-            hover([unsafe("backgroundColor", "unset")]),
-            important(color(dark ? white : Theme.Colors.digitalBlack)),
-          ],
+          [color(dark ? white : Theme.Colors.digitalBlack)],
         ),
       ]),
     ]);
