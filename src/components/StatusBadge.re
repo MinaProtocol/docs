@@ -40,7 +40,18 @@ module Styles = {
     ]);
   let link = style([textDecoration(`none), display(`inline)]);
 
-  let icon = style([display(`inlineFlex), alignItems(`center)]);
+  let icon =
+    style([
+      color(Theme.Colors.gray),
+      display(`inlineFlex),
+      alignItems(`center),
+    ]);
+
+  let statusBadge__label =
+    merge([
+      Theme.Type.buttonLabel,
+      style([color(Theme.Colors.digitalBlack)]),
+    ]);
 };
 
 let url = Constants.minaStatus;
@@ -147,7 +158,7 @@ module Inner = {
     <a href=url className=Styles.link target="_blank">
       <span className={Styles.wrapper(bgColor, fgColor)}>
         <span className=Styles.statusCircle />
-        <span className=Theme.Type.buttonLabel>
+        <span className=Styles.statusBadge__label>
           {React.string(statusStr)}
         </span>
         <span className=Styles.icon> <Icon kind=Icon.ExternalLink /> </span>

@@ -35,16 +35,70 @@ module Style = {
 
   let editLink =
     style([
-      media(Theme.MediaQuery.tablet, [position(`relative), float(`right)]),
-      display(`flex),
-      alignItems(`center),
-      marginTop(`rem(1.5)),
-      marginBottom(`rem(0.5)),
+      display(`none),
       textDecoration(`none),
       color(Theme.Colors.orange),
+      media(
+        Theme.MediaQuery.notMobile,
+        [display(`flex), alignItems(`center)],
+      ),
     ]);
 
-  let link = merge([Theme.Type.link, style([])]);
+  let statusBadgeContainer =
+    merge([
+      Theme.Type.label,
+      style([
+        display(`flex),
+        alignItems(`flexStart),
+        flexDirection(`column),
+        marginTop(`rem(-3.)),
+        media(
+          Theme.MediaQuery.tablet,
+          [marginTop(`zero), alignItems(`center), flexDirection(`row)],
+        ),
+      ]),
+    ]);
+
+  let statusBadge =
+    style([media(Theme.MediaQuery.tablet, [marginLeft(`rem(1.))])]);
+
+  let statusBadge__header =
+    merge([
+      Theme.Type.h4,
+      style([
+        paddingBottom(`rem(1.)),
+        media(Theme.MediaQuery.notMobile, [paddingBottom(`zero)]),
+      ]),
+    ]);
+
+  let content__button =
+    style([
+      display(`block),
+      media(Theme.MediaQuery.notMobile, [display(`none)]),
+    ]);
+
+  let content__flex =
+    style([
+      display(`flex),
+      width(`percent(100.)),
+      justifyContent(`spaceBetween),
+      alignItems(`flexStart),
+      media(Theme.MediaQuery.notMobile, [alignItems(`center)]),
+    ]);
+
+  let content__row =
+    style([
+      width(`rem(15.)),
+      height(`rem(7.)),
+      display(`flex),
+      justifyContent(`spaceBetween),
+      flexDirection(`column),
+      marginBottom(`rem(1.5)),
+      media(
+        Theme.MediaQuery.notMobile,
+        [marginBottom(`zero), alignItems(`center), flexDirection(`row)],
+      ),
+    ]);
 };
 
 module EditLink = {
@@ -55,7 +109,7 @@ module EditLink = {
       target="_blank"
       href={Constants.minaDocsEditLink ++ route ++ ".mdx"}
       className=Style.editLink>
-      <span className=Style.link> {React.string("Edit")} </span>
+      <span className=Theme.Type.link> {React.string("Edit")} </span>
       <Icon kind=Icon.ArrowRightMedium />
     </a>;
   };
@@ -76,6 +130,18 @@ let make = (~metadata, ~children) => {
         router.route,
       );
     };
+
+  let renderStatusBadge = () => {
+    <div className=Style.statusBadgeContainer>
+      <h4 className=Style.statusBadge__header>
+        {React.string("Testnet Status: ")}
+      </h4>
+      <span className=Style.statusBadge>
+        <StatusBadge service=`Network />
+      </span>
+    </div>;
+  };
+
   <Page title={metadata.title}>
     <Next.Head>
       <link rel="stylesheet" href="/static/css/a11y-light.css" />
@@ -87,10 +153,21 @@ let make = (~metadata, ~children) => {
           <DocsNavs.SideNav currentSlug />
           <div className=Style.content>
             <DocsNavs.Dropdown currentSlug />
-            <div className=Style.eyebrow>
-              <LabelEyebrow copy="Documentation" />
+            <div className=Style.content__flex>
+              <span className=Style.content__row>
+                <span className=Style.content__button>
+                  <Button
+                    href={`External(router.route)}
+                    bgColor=Theme.Colors.orange>
+                    {React.string("Edit")}
+                    <Icon kind=Icon.ArrowRightMedium />
+                  </Button>
+                </span>
+                <LabelEyebrow copy="Documentation" />
+                <EditLink route={router.route} />
+              </span>
+              {renderStatusBadge()}
             </div>
-            <EditLink route={router.route} />
             <Next.MDXProvider components={DocsComponents.allComponents()}>
               children
             </Next.MDXProvider>
