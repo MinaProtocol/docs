@@ -61,7 +61,7 @@ let make = () => {
       <Next.Link href="/docs/node-operator">
         <a className=Styles.linkStyle> {React.string("Run a Node")} </a>
       </Next.Link>
-      <Next.Link href="/tech">
+      <Next.Link href="/docs">
         <a className=Styles.linkStyle> {React.string("Build on Mina")} </a>
       </Next.Link>
       <Next.Link href="/genesis">
@@ -76,7 +76,7 @@ let make = () => {
       <Next.Link href="/tech">
         <a className=Styles.linkStyle> {React.string("About the Tech")} </a>
       </Next.Link>
-      <Next.Link href="">
+      <Next.Link href="/get-started#knowledge-base">
         <a className=Styles.linkStyle> {React.string("Knowledge Base")} </a>
       </Next.Link>
       <Next.Link href="/static/pdf/technicalWhitepaper.pdf">
@@ -103,7 +103,7 @@ let make = () => {
     />
     <div className=Styles.linksGroup>
       <h4 className=Styles.linksHeader> {React.string("Community")} </h4>
-      <Next.Link href="/about">
+      <Next.Link href="/community">
         <a className=Styles.linkStyle> {React.string("Welcome")} </a>
       </Next.Link>
       <Next.Link href="/genesis">

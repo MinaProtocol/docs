@@ -338,7 +338,7 @@ module GetStarted = {
       <div className=ButtonBarStyles.grid>
         {renderCard(
            Icon.NodeOperators,
-           `Internal("/tech"),
+           `Internal("/docs/node-operator"),
            "Run a node",
            "Getting started is easier than you think.",
          )}
@@ -356,7 +356,7 @@ module GetStarted = {
          )}
         {renderCard(
            Icon.GrantsProgram,
-           `Internal("/docs/contributing#mina-grants"),
+           `Internal("/grants"),
            "Apply for a Grant",
            "Roll up your sleeves and help build Mina.",
          )}
