@@ -121,8 +121,7 @@ let make = () => {
       </span>
       <span>
         <span> {React.string(" Read our")} </span>
-        //TODO: Link to privacy policy
-        <Next.Link href="/">
+        <Next.Link href="/privacy">
           <span className=Styles.privacyText>
             {React.string(" privacy policy ")}
           </span>
