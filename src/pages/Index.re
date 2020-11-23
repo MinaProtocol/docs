@@ -43,7 +43,7 @@ let make = () => {
             },
             {
               title: "Private & Powerful Apps, Thanks to Snapps",
-              description: "Mina enables an entirely new category of applications — Snapps. These SNARK-powered decentralized apps are optimized for efficiency, privacy and scalability. Logic and data are computed off-chain, then verified on-chain by the end user's device. And information is validated without disclosing specifics, so people stay in control of their personal data.",
+              description: {js|Mina enables an entirely new category of applications—Snapps. These SNARK-powered decentralized apps are optimized for efficiency, privacy and scalability. Logic and data are computed off-chain, then verified on-chain by the end user's device. And information is validated without disclosing specifics, so people stay in control of their personal data.|js},
               linkCopy: "Learn about Snapps",
               linkUrl: "/docs/snapps",
               image: "/static/img/PrivateAndPowerful.png",
