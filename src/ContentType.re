@@ -152,6 +152,7 @@ module Advisor = {
     name: string,
     image: Image.entry,
     title: string,
+    bio: option(string),
   };
   type entry = System.entry(t);
   type entries = System.entries(t);
