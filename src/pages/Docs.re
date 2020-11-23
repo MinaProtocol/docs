@@ -57,13 +57,18 @@ module Style = {
         marginTop(`rem(-3.)),
         media(
           Theme.MediaQuery.tablet,
-          [marginTop(`zero), alignItems(`center), flexDirection(`row)],
+          [marginTop(`zero), alignItems(`flexStart), flexDirection(`row)],
         ),
       ]),
     ]);
 
   let statusBadge =
-    style([media(Theme.MediaQuery.tablet, [marginLeft(`rem(1.))])]);
+    style([
+      media(
+        Theme.MediaQuery.tablet,
+        [marginTop(`rem(-1.)), marginLeft(`rem(1.))],
+      ),
+    ]);
 
   let statusBadge__header =
     merge([
@@ -86,7 +91,6 @@ module Style = {
       width(`percent(100.)),
       justifyContent(`spaceBetween),
       alignItems(`flexStart),
-      media(Theme.MediaQuery.notMobile, [alignItems(`center)]),
     ]);
 
   let content__row =
@@ -99,7 +103,7 @@ module Style = {
       marginBottom(`rem(1.5)),
       media(
         Theme.MediaQuery.notMobile,
-        [marginBottom(`zero), alignItems(`center), flexDirection(`row)],
+        [marginBottom(`zero), alignItems(`flexStart), flexDirection(`row)],
       ),
     ]);
 };
@@ -135,14 +139,14 @@ let make = (~metadata, ~children) => {
     };
 
   let renderStatusBadge = () => {
-    <div className=Style.statusBadgeContainer>
+    <span className=Style.statusBadgeContainer>
       <h4 className=Style.statusBadge__header>
         {React.string("Testnet Status: ")}
       </h4>
       <span className=Style.statusBadge>
         <StatusBadge service=`Network />
       </span>
-    </div>;
+    </span>;
   };
 
   let renderMobileEditButton = () => {
