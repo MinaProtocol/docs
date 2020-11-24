@@ -42,7 +42,7 @@ module Styles = {
   let successState =
     style([
       width(`rem(8.)),
-      height(`rem(1.5)),
+      height(`percent(100.)),
       padding2(~v=`rem(0.875), ~h=`rem(1.)),
       border(px(1), `solid, Theme.Colors.orange),
     ]);
@@ -56,10 +56,10 @@ external urlSearchParams: Js.t('a) => Fetch.urlSearchParams =
 let make = () => {
   let (successState, showSuccess) = React.useState(() => false);
   let (email, setEmail) = React.useState(() => "");
-  let _submitForm = e => {
+  let submitForm = e => {
     ReactEvent.Mouse.preventDefault(e);
     ReFetch.fetch(
-      "https://jfs501bgik.execute-api.us-east-2.amazonaws.com/dev/subscribe",
+      Constants.hubspotServerlessEndpoint,
       ~method_=Post,
       ~body=
         Fetch.BodyInit.makeWithUrlSearchParams(
@@ -67,17 +67,19 @@ let make = () => {
         ),
       ~mode=NoCORS,
     )
-    |> Promise.iter(_ => {
+    |> Promise.iter(result => {
+         Js.log(result);
          showSuccess(_ => true);
          ignore @@ Js.Global.setTimeout(() => showSuccess(_ => false), 5000);
        });
     ();
   };
+
   <>
     {successState
        ? <div className=Styles.successState>
            <span className=Styles.successText>
-             {React.string([@reason.preserve_braces] "Check your email!")}
+             {React.string("Success!")}
            </span>
          </div>
        : <div className=Styles.inputContainer>
@@ -93,14 +95,10 @@ let make = () => {
            />
            <div className=Styles.submitButton>
              <Button
+               onClick=submitForm
                height={`rem(3.25)}
                width={`rem(7.93)}
-               href={
-                      `External(
-                        "https://share.hsforms.com/1olz9N8_zTHW-RKQus2o3Kw4xuul?email="
-                        ++ email,
-                      )
-                    }
+               href={`External("")}
                dark=true>
                {React.string("Submit")}
                <Icon kind=Icon.ArrowRightMedium />
