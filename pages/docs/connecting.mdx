@@ -154,6 +154,7 @@ docker run --name mina -d \
 --mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
 minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina7f0440c-auto1e39dbf \
+daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
 -insecure-rest-server \
