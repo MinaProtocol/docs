@@ -34,7 +34,7 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.16-beta7-757342b --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta6-7f0440c --allow-downgrades
 ```
 
 Check that process installed correctly by running `coda -help`.
@@ -90,7 +90,7 @@ Ensure your peer-list file is located in `~/peers.txt` and your private-key that
 Add a file `~/.mina-env` containing the following:
 
 ```
-CODA_PRIVKEY_PASS="your password here"
+CODA_PRIVKEY_PASS="YOUR PASSWORD HERE"
 EXTRA_FLAGS=""
 ```
 
@@ -152,7 +152,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
-minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina757342b-auto811bf26 daemon \
+minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina4995551-auto3a4e5ce \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
 -block-producer-password "YOUR PASSWORD HERE" \
