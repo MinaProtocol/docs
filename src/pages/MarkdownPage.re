@@ -32,7 +32,7 @@ module Style = {
       margin(`auto),
       paddingLeft(`rem(1.)),
       paddingRight(`rem(1.)),
-      marginTop(`rem(4.)),
+      marginTop(`rem(10.)),
       paddingBottom(`rem(4.)),
       media(Theme.MediaQuery.desktop, [display(`flex)]),
     ]);
