@@ -140,7 +140,7 @@ module TeamProfile = {
     quote: string,
     twitter: option(string),
     github: option(string),
-    linkedIn: option(string),
+    linkedin: option(string),
   };
   type entry = System.entry(t);
   type entries = System.entries(t);
@@ -181,7 +181,7 @@ module GenericMember = {
     bio: option(string),
     twitter: option(string),
     github: option(string),
-    linkedIn: option(string),
+    linkedin: option(string),
     blogPost: BlogPost.entry,
     memberLocation: option(string),
     publishDate: option(string),
