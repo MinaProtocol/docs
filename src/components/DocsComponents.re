@@ -17,9 +17,15 @@ module Styles = {
 
   let h1Spacing = style([marginBottom(`rem(1.))]);
 
-  let headerSpacing = merge([h1Spacing, style([marginTop(`rem(3.))])]);
+  let headerSpacing =
+    merge([
+      h1Spacing,
+      style([marginTop(`rem(3.)), marginBottom(`rem(1.5))]),
+    ]);
 
-  let paragraphSpacing = style([marginBottom(`rem(1.))]);
+  let paragraphSpacing = style([marginBottom(`rem(1.5))]);
+
+  let ruleSpacing = style([margin2(~v=`rem(3.), ~h=`zero)]);
 
   let code =
     style([
@@ -49,8 +55,7 @@ module Wrap = (C: Component) => {
     ReasonReact.cloneElement(C.element, ~props, [||]);
   };
 
-  [@bs.obj]
-  external makeProps: (~children: 'a, unit) => {. "children": 'a} = "";
+  [@bs.obj] external makeProps: (~children: 'a, unit) => {. "children": 'a};
 };
 
 module WrapHeader = (C: Component) => {
@@ -188,6 +193,11 @@ module Img =
     let element = <img width="100%" />;
   });
 
+module Rule =
+  WrapHeader({
+    let element = <div className=Styles.ruleSpacing> <Rule /> </div>;
+  });
+
 module DaemonCommandExample = {
   let defaultArgs = ["coda daemon", "-peer-list ~/peers.txt"];
   [@react.component]
@@ -228,4 +238,5 @@ let allComponents = () => {
   "ul": Ul.make,
   "ol": Ol.make,
   "img": Img.make,
+  "Rule": Rule.make,
 };
