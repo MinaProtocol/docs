@@ -8,13 +8,19 @@ Expects that the HUBSPOT_API_KEY environment variable is set.
 
 ## Deployment
 
-Make sure to configure the AWS CLI with the appropriate credentials.
+To deploy, you must have serverless installed.
+
+```
+  $ npm install -g serverless
+```
+
+Then provide the appropriate credentials.
 
 ```
   $ serverless config credentials --provider aws --key <YOUR-ACCESS-KEY> --secret <YOUR-SECRET-KEY>
 ```
 
-Once the AWS CLI has been configured, we can deploy
+Once configured, we can deploy.
 
 ```
   $ serverless deploy
