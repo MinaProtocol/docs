@@ -32,6 +32,7 @@ module Styles = {
       Theme.Typeface.monumentGroteskMono,
       fontSize(`rem(1.)),
       lineHeight(`rem(1.5)),
+      height(`percent(100.)),
     ]);
 
   let list =
@@ -187,6 +188,11 @@ module Ul =
     let element = <ul className=Styles.list />;
   });
 
+module Al =
+  Wrap({
+    let element = <ol type_="a" className=Styles.list />;
+  });
+
 module Ol =
   Wrap({
     let element = <ol className=Styles.list />;
@@ -239,6 +245,7 @@ let allComponents = () => {
   "strong": Strong.make,
   "pre": Pre.make,
   "code": Code.make,
+  "al": Al.make,
   "ul": Ul.make,
   "ol": Ol.make,
   "img": Img.make,
