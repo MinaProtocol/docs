@@ -43,6 +43,10 @@ module Styles = {
       marginTop(`rem(0.5)),
       marginBottom(`rem(1.)),
       marginLeft(`rem(2.6875)),
+      selector(
+        "> :not(:first-child)",
+        [maxWidth(`rem(40.)), marginTop(`rem(0.5))],
+      ),
     ]);
 
   let link = style([textDecoration(`none)]);

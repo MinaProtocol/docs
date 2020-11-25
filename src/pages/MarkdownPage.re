@@ -5,16 +5,8 @@ module Style = {
 
   let content =
     style([
-      maxWidth(`rem(43.)),
-      marginLeft(`rem(1.)),
-      selector(
-        "p > code, li > code",
-        [
-          boxSizing(`borderBox),
-          padding2(~v=`px(2), ~h=`px(6)),
-          borderRadius(`px(4)),
-        ],
-      ),
+      selector("p > code, li > code", Theme.Type.inlineCode_),
+      selector("h1 + p", Theme.Type.sectionSubhead_),
       selector(
         "table",
         [
@@ -41,7 +33,16 @@ module Style = {
       paddingLeft(`rem(1.)),
       paddingRight(`rem(1.)),
       marginTop(`rem(4.)),
+      paddingBottom(`rem(4.)),
       media(Theme.MediaQuery.desktop, [display(`flex)]),
+    ]);
+
+  let background__image =
+    style([
+      height(`percent(100.)),
+      width(`percent(100.)),
+      important(backgroundSize(`cover)),
+      backgroundImage(`url("/static/img/backgrounds/BlogBackground.jpg")),
     ]);
 };
 
@@ -50,12 +51,16 @@ type metadata = {title: string};
 [@react.component]
 let make = (~metadata, ~children) => {
   <Page title={metadata.title}>
-    <div className=Style.page>
-      <div className=Style.content>
-        <Next.MDXProvider components={DocsComponents.allComponents()}>
-          children
-        </Next.MDXProvider>
-      </div>
+    <div className=Style.background__image>
+      <Wrapped>
+        <div className=Style.page>
+          <div className=Style.content>
+            <Next.MDXProvider components={DocsComponents.allComponents()}>
+              children
+            </Next.MDXProvider>
+          </div>
+        </div>
+      </Wrapped>
     </div>
   </Page>;
 };
