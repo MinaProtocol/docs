@@ -111,7 +111,7 @@ module Dropdown = {
         <Item title="Access to Site" slug="#access-to-site" />
         <Item title="User content" slug="#user-content" />
         <Item title="License" slug="#license" />
-        <Item title="Acceptable Use Policyh" slug="#acceptable-use-policy" />
+        <Item title="Acceptable Use Policy" slug="#acceptable-use-policy" />
         <Item title="Enforcement" slug="#enforcement" />
         <Item title="Feedback" slug="#feedback" />
         <Item title="Indemnification" slug="#idemnification" />
