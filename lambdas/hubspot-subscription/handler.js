@@ -26,8 +26,11 @@ module.exports.sendConfirmation = async (event) => {
   } catch (e) {
     let body = "";
 
-    // Email already exists
-    if (e.body.status === "error" && e.body.category === "CONFLICT") {
+    if (
+      // Email already exists
+      e.body.status === "error" &&
+      e.body.category === "CONFLICT"
+    ) {
       body = "Email already exists";
     } else {
       console.error(e);
