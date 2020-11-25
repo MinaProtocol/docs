@@ -51,7 +51,7 @@ let make = () => {
             {
               title: "Programmable Money, For All",
               description: {js|Mina's peer-to-peer permissionless network empowers participants to build and interact with tokens directly—without going through a centralized wallet, exchange or intermediary. And payments can be made in Mina's native asset, stablecoin or in user-generated programmable tokens—opening a real world of possibilities.|js},
-              linkCopy: "Learn More",
+              linkCopy: "Build on Mina",
               linkUrl: "/docs/developers",
               image: "/static/img/ProgrammableMoney.png",
             },
