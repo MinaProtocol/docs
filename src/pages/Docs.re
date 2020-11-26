@@ -155,7 +155,7 @@ let make = (~metadata, ~children) => {
         href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
         bgColor=Theme.Colors.orange>
         {React.string("Edit")}
-        <Icon kind=Icon.ArrowRightMedium />
+        <Icon kind=Icon.ArrowRightSmall />
       </Button>
     </span>;
   };
