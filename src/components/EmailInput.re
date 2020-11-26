@@ -41,9 +41,11 @@ module Styles = {
   let successText = merge([Theme.Type.paragraph, style([color(white)])]);
   let successState =
     style([
+      display(`flex),
+      alignItems(`center),
+      justifyContent(`center),
       width(`rem(8.)),
-      height(`percent(100.)),
-      padding2(~v=`rem(0.875), ~h=`rem(1.)),
+      height(`rem(3.25)),
       border(px(1), `solid, Theme.Colors.orange),
     ]);
 };

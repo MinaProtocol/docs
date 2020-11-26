@@ -91,7 +91,7 @@ let make = (~buttonText="Submit") => {
     onSubmit={e => {
       ReactEvent.Form.preventDefault(e);
       ReFetch.fetch(
-        "https://jfs501bgik.execute-api.us-east-2.amazonaws.com/dev/subscribe",
+        Constants.hubspotServerlessEndpoint,
         ~method_=Post,
         ~body=
           Fetch.BodyInit.makeWithUrlSearchParams(
@@ -138,7 +138,7 @@ let make = (~buttonText="Submit") => {
              />
              <span className=Css.(style([paddingTop(`px(16))]))>
                <button className=Styles.button>
-                 {React.string("Submit")}
+                 {React.string(buttonText)}
                  <Icon kind=Icon.ArrowRightMedium />
                </button>
              </span>
