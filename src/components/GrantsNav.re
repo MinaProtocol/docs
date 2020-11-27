@@ -11,7 +11,7 @@ module SideNav = {
       style([
         display(`none),
         position(sticky ? `fixed : `absolute),
-        top(sticky ? `rem(3.5) : `rem(107.)),
+        top(sticky ? `rem(3.5) : `rem(152.)),
         marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
         width(`rem(14.)),
         zIndex(100),
@@ -45,7 +45,7 @@ module SideNav = {
       );
     });
 
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1800)}>
+    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 2400)}>
       <Item title="Product / Front-end Projects" slug="#frontend" />
       <Item title="Protocol Projects" slug="#protocol" />
       <Item
