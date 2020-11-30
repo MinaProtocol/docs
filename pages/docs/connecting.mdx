@@ -34,7 +34,7 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta6-7f0440c --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta6-4a053a4 --allow-downgrades
 ```
 
 Check that process installed correctly by running `coda -help`.
@@ -153,7 +153,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina7f0440c-auto1e39dbf \
+minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina4a053a4-auto8a44ae5 \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
