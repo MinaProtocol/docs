@@ -4,7 +4,7 @@ A serverless application that registers an email with our Hubspot service.
 
 ### Prerequisites
 
-Expects that the HUBSPOT_API_KEY environment variable is set.
+Expects that the PORTALID and FORMID environment variable is set. These correspond to the specific Hubsport newsletter form.
 
 ## Deployment
 
@@ -29,4 +29,4 @@ Once configured, we can deploy.
 ## Built With
 
 - [Serverless](https://www.serverless.com/framework/docs/)
-- [Hubspot API](https://github.com/HubSpot/hubspot-api-nodejs)
+- [Axios](https://github.com/axios/axios)

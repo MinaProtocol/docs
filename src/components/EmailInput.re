@@ -44,7 +44,8 @@ module Styles = {
       display(`flex),
       alignItems(`center),
       justifyContent(`center),
-      width(`rem(8.)),
+      width(`percent(100.)),
+      padding2(~h=`rem(1.5), ~v=`zero),
       height(`rem(3.25)),
       border(px(1), `solid, Theme.Colors.orange),
     ]);
@@ -69,8 +70,7 @@ let make = () => {
         ),
       ~mode=NoCORS,
     )
-    |> Promise.iter(result => {
-         Js.log(result);
+    |> Promise.iter(_ => {
          showSuccess(_ => true);
          ignore @@ Js.Global.setTimeout(() => showSuccess(_ => false), 5000);
        });
@@ -81,7 +81,7 @@ let make = () => {
     {successState
        ? <div className=Styles.successState>
            <span className=Styles.successText>
-             {React.string("Success!")}
+             {React.string("Thank you for signing up to receive Mina updates!")}
            </span>
          </div>
        : <div className=Styles.inputContainer>

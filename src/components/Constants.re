@@ -1,4 +1,4 @@
-let hubspotServerlessEndpoint = "https://9696mo9iuj.execute-api.us-east-2.amazonaws.com/dev/subscribe/";
+let hubspotServerlessEndpoint = "https://9696mo9iuj.execute-api.us-east-2.amazonaws.com/dev/subscribe";
 
 let codeOfConductUrl = "https://github.com/MinaProtocol/mina/blob/develop/CODE_OF_CONDUCT.md";
 let genesisGrantApplication = "https://share.hsforms.com/1y-QXRVSgQJ6nFnzbbYv_Pg4xuul";

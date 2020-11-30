@@ -1,10 +1,12 @@
 "use strict";
 
 const qs = require("querystring");
-const hubspot = require("@hubspot/api-client");
+const axios = require("axios");
 
-const { HUBSPOT_API_KEY } = process.env;
-const hubspotClient = new hubspot.Client({ apiKey: HUBSPOT_API_KEY });
+let HUBSPOT_FORM_URL =
+  "https://api.hsforms.com/submissions/v3/integration/submit";
+
+const { PORTALID, FORMID } = process.env;
 
 module.exports.sendConfirmation = async (event) => {
   if (event.httpMethod !== "POST" || !event.body) {
@@ -19,26 +21,19 @@ module.exports.sendConfirmation = async (event) => {
   }
 
   const data = qs.parse(event.body);
-  const payload = { properties: { email: data.email } };
+  const payload = { fields: [{ name: "email", value: data.email }] };
 
   try {
-    await hubspotClient.crm.contacts.basicApi.create(payload);
+    await axios.post(`${HUBSPOT_FORM_URL}/${PORTALID}/${FORMID}`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (e) {
-    let body = "";
-
-    if (
-      // Email already exists
-      e.body.status === "error" &&
-      e.body.category === "CONFLICT"
-    ) {
-      body = "Email already exists";
-    } else {
-      console.error(e);
-      body = "Unexpected error";
-    }
+    console.error(e);
     return {
       statusCode: 500,
-      body,
+      body: "",
     };
   }
 
