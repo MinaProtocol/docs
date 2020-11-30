@@ -19,7 +19,6 @@ module Section = {
         flexDirection(`column),
         justifyContent(`spaceBetween),
         width(`percent(100.)),
-        alignItems(`center),
         marginTop(`rem(8.)),
         media(
           Theme.MediaQuery.tablet,
@@ -56,9 +55,11 @@ module Section = {
       style([
         width(`percent(100.)),
         maxWidth(`rem(22.)),
+        maxHeight(`rem(22.)),
         height(`auto),
-        marginTop(`rem(6.5)),
-        media(Theme.MediaQuery.desktop, [maxWidth(`rem(29.))]),
+        media(Theme.MediaQuery.desktop, [
+          maxHeight(`rem(29.)),
+          maxWidth(`rem(29.))]),
       ]);
   };
   module SimpleRow = {
