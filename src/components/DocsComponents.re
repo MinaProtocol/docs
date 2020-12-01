@@ -17,15 +17,22 @@ module Styles = {
 
   let h1Spacing = style([marginBottom(`rem(1.))]);
 
-  let headerSpacing = merge([h1Spacing, style([marginTop(`rem(3.))])]);
+  let headerSpacing =
+    merge([
+      h1Spacing,
+      style([marginTop(`rem(3.)), marginBottom(`rem(1.5))]),
+    ]);
 
-  let paragraphSpacing = style([marginBottom(`rem(1.))]);
+  let paragraphSpacing = style([marginBottom(`rem(1.5))]);
+
+  let ruleSpacing = style([margin2(~v=`rem(3.), ~h=`zero)]);
 
   let code =
     style([
       Theme.Typeface.monumentGroteskMono,
       fontSize(`rem(1.)),
       lineHeight(`rem(1.5)),
+      height(`percent(100.)),
     ]);
 
   let list =
@@ -37,6 +44,10 @@ module Styles = {
       marginTop(`rem(0.5)),
       marginBottom(`rem(1.)),
       marginLeft(`rem(2.6875)),
+      selector(
+        "> :not(:first-child)",
+        [maxWidth(`rem(40.)), marginTop(`rem(0.5))],
+      ),
     ]);
 
   let link = style([textDecoration(`none)]);
@@ -49,8 +60,7 @@ module Wrap = (C: Component) => {
     ReasonReact.cloneElement(C.element, ~props, [||]);
   };
 
-  [@bs.obj]
-  external makeProps: (~children: 'a, unit) => {. "children": 'a} = "";
+  [@bs.obj] external makeProps: (~children: 'a, unit) => {. "children": 'a};
 };
 
 module WrapHeader = (C: Component) => {
@@ -178,6 +188,11 @@ module Ul =
     let element = <ul className=Styles.list />;
   });
 
+module Al =
+  Wrap({
+    let element = <ol type_="a" className=Styles.list />;
+  });
+
 module Ol =
   Wrap({
     let element = <ol className=Styles.list />;
@@ -186,6 +201,11 @@ module Ol =
 module Img =
   Wrap({
     let element = <img width="100%" />;
+  });
+
+module Rule =
+  WrapHeader({
+    let element = <div className=Styles.ruleSpacing> <Rule /> </div>;
   });
 
 module DaemonCommandExample = {
@@ -225,7 +245,9 @@ let allComponents = () => {
   "strong": Strong.make,
   "pre": Pre.make,
   "code": Code.make,
+  "al": Al.make,
   "ul": Ul.make,
   "ol": Ol.make,
   "img": Img.make,
+  "Rule": Rule.make,
 };

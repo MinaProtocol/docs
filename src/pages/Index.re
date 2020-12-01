@@ -22,7 +22,7 @@ let make = () => {
           AlternatingSections.Section.FeaturedRow([|
             {
               AlternatingSections.Section.FeaturedRow.title: "Easily Accessible, Now & Always",
-              description: {js|Other protocols are so heavy they require intermediaries to run nodes, recreating the same old power dynamics. But Mina is light, so anyone can connect peer-to-peer and sync and verify the chain in seconds. Built on a consistent-sized cryptographic proof, the blockchain will stay accessible — even as it scales to millions of users.|js},
+              description: {js|Other protocols are so heavy they require intermediaries to run nodes, recreating the same old power dynamics. But Mina is light, so anyone can connect peer-to-peer and sync and verify the chain in seconds. Built on a consistent-sized cryptographic proof, the blockchain will stay accessible—even as it scales to millions of users.|js},
               linkCopy: "Explore the Tech",
               linkUrl: "/tech",
               image: "/static/img/EasilyAccessible.png",
@@ -36,7 +36,7 @@ let make = () => {
             },
             {
               title: "Light Chain, High Speed",
-              description: {js|Other protocols are weighed down by terabytes of private user data and network congestion. But on Mina's 22kb chain, apps execute as fast as your bandwidth can carry them — paving the way for a seamless end user experience and mainstream adoption.|js},
+              description: {js|Other protocols are weighed down by terabytes of private user data and network congestion. But on Mina's 22kb chain, apps execute as fast as your bandwidth can carry them—paving the way for a seamless end user experience and mainstream adoption.|js},
               linkCopy: "Explore the Tech",
               linkUrl: "/tech",
               image: "/static/img/LightChainHighSpeed.png",
@@ -50,8 +50,8 @@ let make = () => {
             },
             {
               title: "Programmable Money, For All",
-              description: {js|Mina's peer-to-peer permissionless network empowers participants to build and interact with tokens directly — without going through a centralized wallet, exchange or intermediary. And payments can be made in Mina's native asset, stablecoin or in user-generated programmable tokens — opening a real world of possibilities.|js},
-              linkCopy: "Learn More",
+              description: {js|Mina's peer-to-peer permissionless network empowers participants to build and interact with tokens directly—without going through a centralized wallet, exchange or intermediary. And payments can be made in Mina's native asset, stablecoin or in user-generated programmable tokens—opening a real world of possibilities.|js},
+              linkCopy: "Build on Mina",
               linkUrl: "/docs/developers",
               image: "/static/img/ProgrammableMoney.png",
             },

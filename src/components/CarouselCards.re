@@ -279,13 +279,13 @@ module TeamMemberCard = {
                </a>
              | _ => React.null
              }}
-            {switch (member.linkedIn) {
+            {switch (member.linkedin) {
              | Some(linkedIn) =>
                <a
                  target="_blank"
                  href={Constants.linkedInUrl ++ linkedIn}
                  className={Styles.iconLink(dark)}>
-                 <Icon kind=Icon.Twitter />
+                 <Icon kind=Icon.LinkedIn/>
                </a>
              | _ => React.null
              }}

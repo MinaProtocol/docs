@@ -1,40 +1,27 @@
-// This is the layout for generic MDX pages
+// This is the layout for the docs MDX pages
 
 module Style = {
-  open Css;
+  open! Css;
 
   let content =
     style([
+      width(`percent(100.)),
+      maxWidth(`rem(30.)),
+      marginBottom(`rem(2.875)),
+      media(Theme.MediaQuery.notMobile, [maxWidth(`rem(53.))]),
       selector("p > code, li > code", Theme.Type.inlineCode_),
       selector("h1 + p", Theme.Type.sectionSubhead_),
-      selector(
-        "table",
-        [
-          Theme.Typeface.monumentGrotesk,
-          color(Theme.Colors.digitalBlack),
-          width(`percent(100.)),
-        ],
-      ),
-      selector(
-        "table, th, td",
-        [
-          border(`px(1), solid, Theme.Colors.digitalBlack),
-          borderCollapse(`collapse),
-          padding(`px(4)),
-        ],
-      ),
     ]);
 
   let page =
     style([
-      display(`block),
+      display(`flex),
       justifyContent(`center),
-      margin(`auto),
-      paddingLeft(`rem(1.)),
-      paddingRight(`rem(1.)),
-      marginTop(`rem(10.)),
-      paddingBottom(`rem(4.)),
-      media(Theme.MediaQuery.desktop, [display(`flex)]),
+      flexDirection(`row),
+      width(`percent(100.)),
+      marginTop(`rem(2.)),
+      paddingBottom(`rem(6.)),
+      media(Theme.MediaQuery.desktop, [justifyContent(`spaceBetween)]),
     ]);
 
   let background__image =
@@ -51,12 +38,19 @@ type metadata = {title: string};
 [@react.component]
 let make = (~metadata, ~children) => {
   <Page title={metadata.title}>
+    <Next.Head>
+      <link rel="stylesheet" href="/static/css/a11y-light.css" />
+    </Next.Head>
     <div className=Style.background__image>
       <Wrapped>
+        <div className=Nav.Styles.spacer />
         <div className=Style.page>
+          <div> <TermsOfServiceNav.SideNav /> </div>
           <div className=Style.content>
+            <TermsOfServiceNav.Dropdown />
+            <h4 className=Theme.Type.h4> {React.string("Token Program")} </h4>
             <Next.MDXProvider components={DocsComponents.allComponents()}>
-              children
+              <div> children </div>
             </Next.MDXProvider>
           </div>
         </div>

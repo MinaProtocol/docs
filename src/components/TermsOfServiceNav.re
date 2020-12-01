@@ -11,10 +11,9 @@ module SideNav = {
       style([
         display(`none),
         position(sticky ? `fixed : `absolute),
-        top(sticky ? `rem(3.5) : `rem(152.)),
-        marginLeft(`calc((`sub, `vw(50.), `rem(71. /. 2.)))),
+        top(sticky ? `rem(3.5) : `rem(11.)),
         width(`rem(14.)),
-        zIndex(100),
+        zIndex(Theme.StackingIndex.zNav),
         background(white),
         media(Theme.MediaQuery.desktop, [display(`block)]),
       ]);
@@ -45,16 +44,22 @@ module SideNav = {
       );
     });
 
-    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 2400)}>
-      <Item title="Product / Front-end Projects" slug="#frontend" />
-      <Item title="Protocol Projects" slug="#protocol" />
-      <Item
-        title="Opening Marketing and Community Projects"
-        slug="#marketing-community"
-      />
-      <Item title="How to Apply" slug="#how-to-apply" />
-      <Item title="Contributers" slug="#contributors" />
-      <Item title="FAQ" slug="#faq" />
+    <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 145)}>
+      <Item title="Account" slug="#accounts" />
+      <Item title="Access to Site" slug="#access-to-site" />
+      <Item title="User content" slug="#user-content" />
+      <Item title="License" slug="#license" />
+      <Item title="Acceptable Use Policyh" slug="#acceptable-use-policy" />
+      <Item title="Enforcement" slug="#enforcement" />
+      <Item title="Feedback" slug="#feedback" />
+      <Item title="Indemnification" slug="#idemnification" />
+      <Item title="Third Party Links & Ads; Other Users" slug="#third-party" />
+      <Item title="Release" slug="#release" />
+      <Item title="Disclaimers" slug="#disclaimers" />
+      <Item title="Limitation on Liability" slug="#liability" />
+      <Item title="Term and Termination" slug="#term-and-termination" />
+      <Item title="Copyright-Policy" slug="#copyright-policy" />
+      <Item title="General" slug="#general" />
     </SideNav>;
   };
 };
@@ -67,9 +72,11 @@ module Dropdown = {
       style([
         position(`sticky),
         display(`block),
+        width(`percent(100.)),
         top(`rem(2.)),
         marginTop(`rem(4.)),
-        zIndex(100),
+        marginBottom(`rem(4.)),
+        zIndex(Theme.StackingIndex.zNav),
         media(Theme.MediaQuery.desktop, [display(`none)]),
       ]);
   };
@@ -99,19 +106,26 @@ module Dropdown = {
     });
 
     <div className=Styles.container>
-      <Wrapped>
-        <DropdownNav currentSlug=hash defaultValue="Grants">
-          <Item title="Product / Front-end Projects" slug="#frontend" />
-          <Item title="Protocol Projects" slug="#protocol" />
-          <Item
-            title="Opening Marketing and Community Projects"
-            slug="#marketing-community"
-          />
-          <Item title="How to Apply" slug="#how-to-apply" />
-          <Item title="Contributers" slug="#contributors" />
-          <Item title="FAQ" slug="#faq" />
-        </DropdownNav>
-      </Wrapped>
+      <DropdownNav currentSlug=hash defaultValue="Token Program">
+        <Item title="Account" slug="#accounts" />
+        <Item title="Access to Site" slug="#access-to-site" />
+        <Item title="User content" slug="#user-content" />
+        <Item title="License" slug="#license" />
+        <Item title="Acceptable Use Policy" slug="#acceptable-use-policy" />
+        <Item title="Enforcement" slug="#enforcement" />
+        <Item title="Feedback" slug="#feedback" />
+        <Item title="Indemnification" slug="#idemnification" />
+        <Item
+          title="Third Party Links & Ads; Other Users"
+          slug="#third-party"
+        />
+        <Item title="Release" slug="#release" />
+        <Item title="Disclaimers" slug="#disclaimers" />
+        <Item title="Limitation on Liability" slug="#liability" />
+        <Item title="Term and Termination" slug="#term-and-termination" />
+        <Item title="Copyright-Policy" slug="#copyright-policy" />
+        <Item title="General" slug="#general" />
+      </DropdownNav>
     </div>;
   };
 };

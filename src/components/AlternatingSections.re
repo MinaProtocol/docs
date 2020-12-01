@@ -8,6 +8,9 @@ module Styles = {
       important(backgroundSize(`cover)),
       backgroundImage(`url(backgroundImg)),
     ]);
+
+  let section__items =
+    style([selector("> :not(:first-child)", [marginTop(`rem(8.))])]);
 };
 
 module Section = {
@@ -20,14 +23,19 @@ module Section = {
         justifyContent(`spaceBetween),
         width(`percent(100.)),
         alignItems(`center),
-        marginTop(`rem(2.)),
         media(
           Theme.MediaQuery.tablet,
-          [reverse ? flexDirection(`rowReverse) : flexDirection(`row)],
+          [
+            alignItems(`flexStart),
+            reverse ? flexDirection(`rowReverse) : flexDirection(`row),
+          ],
         ),
         media(
           Theme.MediaQuery.desktop,
-          [reverse ? flexDirection(`rowReverse) : flexDirection(`row)],
+          [
+            alignItems(`flexStart),
+            reverse ? flexDirection(`rowReverse) : flexDirection(`row),
+          ],
         ),
       ]);
 
@@ -55,10 +63,14 @@ module Section = {
     let image =
       style([
         width(`percent(100.)),
-        maxWidth(`rem(11.5)),
+        maxWidth(`rem(22.)),
+        maxHeight(`rem(22.)),
         height(`auto),
-        marginTop(`rem(2.)),
-        media(Theme.MediaQuery.desktop, [maxWidth(`rem(17.5))]),
+        marginTop(`rem(3.)),
+        media(
+          Theme.MediaQuery.desktop,
+          [marginTop(`zero), maxHeight(`rem(29.)), maxWidth(`rem(29.))],
+        ),
       ]);
   };
   module SimpleRow = {
@@ -103,7 +115,7 @@ module Section = {
                  <Button href={row.buttonUrl} bgColor=Theme.Colors.white>
                    {React.string(row.buttonCopy)}
                    <span className=SectionStyles.icon>
-                     <Icon kind=Icon.ArrowRightSmall />
+                     <Icon kind=Icon.ArrowRightMedium />
                    </span>
                  </Button>
                </div>
@@ -169,7 +181,7 @@ module Section = {
                    <span className=Theme.Type.buttonLink>
                      <span> {React.string(row.linkCopy)} </span>
                      <span className=SectionStyles.icon>
-                       <Icon kind=Icon.ArrowRightSmall />
+                       <Icon kind=Icon.ArrowRightMedium />
                      </span>
                    </span>
                  </span>
@@ -192,10 +204,12 @@ module Section = {
 let make = (~backgroundImg, ~sections) => {
   <div className={Styles.sectionBackgroundImage(backgroundImg)}>
     <Wrapped>
-      {switch (sections) {
-       | Section.FeaturedRow(rows) => <Section.FeaturedRow rows />
-       | Section.SimpleRow(rows) => <Section.SimpleRow rows />
-       }}
+      <div className=Styles.section__items>
+        {switch (sections) {
+         | Section.FeaturedRow(rows) => <Section.FeaturedRow rows />
+         | Section.SimpleRow(rows) => <Section.SimpleRow rows />
+         }}
+      </div>
     </Wrapped>
   </div>;
 };

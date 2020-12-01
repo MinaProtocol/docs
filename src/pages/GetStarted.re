@@ -54,7 +54,7 @@ let make = () => {
             AlternatingSections.Section.SimpleRow.title: "Run a Node",
             description: "Other protocols are so heavy they require intermediaries to run nodes, recreating the same old power dynamics. But Mina is light, so anyone can connect peer-to-peer and sync and verify the chain in seconds. Built on a consistent-sized cryptographic proof, the blockchain will stay accessible - even as it scales to millions of users.",
             buttonCopy: "Get Started",
-            buttonUrl: `Internal("/docs/getting-started"),
+            buttonUrl: `Internal("/docs/node-operator"),
             image: "/static/img/rowImages/RunANode.jpg",
           },
           {
@@ -75,7 +75,7 @@ let make = () => {
             title: "Apply for a Grant",
             description: "From front-end sprints and protocol development to community building initiatives and content creation, our Grants Program invites you to help strengthen the network in exchange for Mina tokens.",
             buttonCopy: "Learn More",
-            buttonUrl: `Internal("/docs/contributing#mina-grants"),
+            buttonUrl: `Internal("/grants"),
             image: "/static/img/rowImages/ApplyForGrant.jpg",
           },
         |])
@@ -105,7 +105,11 @@ let make = () => {
     </div>
     <div className=Styles.knowledgebaseBackground>
       <Wrapped>
-        <div className=Styles.knowledgebaseContainer> <KnowledgeBase /> </div>
+        <section id="knowledge-base">
+          <div className=Styles.knowledgebaseContainer>
+            <KnowledgeBase />
+          </div>
+        </section>
       </Wrapped>
     </div>
     <ButtonBar

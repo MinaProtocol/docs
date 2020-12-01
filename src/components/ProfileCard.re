@@ -179,13 +179,10 @@ let make =
              </a>
            | _ => React.null
            }}
-          {switch (member.linkedIn) {
+          {switch (member.linkedin) {
            | Some(linkedIn) =>
-             <a
-               target="_blank"
-               href={Constants.linkedInUrl ++ linkedIn}
-               className=Styles.iconLink>
-               <Icon kind=Icon.Twitter />
+             <a target="_blank" href=linkedIn className=Styles.iconLink>
+               <Icon kind=Icon.LinkedIn />
              </a>
            | _ => React.null
            }}

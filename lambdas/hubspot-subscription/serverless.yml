@@ -1,4 +1,4 @@
-service: sendgrid-subscription
+service: hubspot-subscription
 
 provider:
   name: aws
@@ -17,10 +17,3 @@ functions:
       - http:
           path: subscribe
           method: post
-  confirmEmail:
-    handler: handler.confirmEmail
-    events:
-      - http:
-          path: confirm
-          method: get
-

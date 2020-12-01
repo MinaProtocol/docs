@@ -41,9 +41,12 @@ module Styles = {
   let successText = merge([Theme.Type.paragraph, style([color(white)])]);
   let successState =
     style([
-      width(`rem(8.)),
-      height(`rem(1.5)),
-      padding2(~v=`rem(0.875), ~h=`rem(1.)),
+      display(`flex),
+      alignItems(`center),
+      justifyContent(`center),
+      width(`percent(100.)),
+      padding2(~h=`rem(1.5), ~v=`zero),
+      height(`rem(3.25)),
       border(px(1), `solid, Theme.Colors.orange),
     ]);
 };
@@ -56,10 +59,10 @@ external urlSearchParams: Js.t('a) => Fetch.urlSearchParams =
 let make = () => {
   let (successState, showSuccess) = React.useState(() => false);
   let (email, setEmail) = React.useState(() => "");
-  let _submitForm = e => {
+  let submitForm = e => {
     ReactEvent.Mouse.preventDefault(e);
     ReFetch.fetch(
-      "https://jfs501bgik.execute-api.us-east-2.amazonaws.com/dev/subscribe",
+      Constants.hubspotServerlessEndpoint,
       ~method_=Post,
       ~body=
         Fetch.BodyInit.makeWithUrlSearchParams(
@@ -73,11 +76,12 @@ let make = () => {
        });
     ();
   };
+
   <>
     {successState
        ? <div className=Styles.successState>
            <span className=Styles.successText>
-             {React.string([@reason.preserve_braces] "Check your email!")}
+             {React.string("Thank you for signing up to receive Mina updates!")}
            </span>
          </div>
        : <div className=Styles.inputContainer>
@@ -93,14 +97,10 @@ let make = () => {
            />
            <div className=Styles.submitButton>
              <Button
+               onClick=submitForm
                height={`rem(3.25)}
                width={`rem(7.93)}
-               href={
-                      `External(
-                        "https://share.hsforms.com/1olz9N8_zTHW-RKQus2o3Kw4xuul?email="
-                        ++ email,
-                      )
-                    }
+               href={`External("")}
                dark=true>
                {React.string("Submit")}
                <Icon kind=Icon.ArrowRightMedium />

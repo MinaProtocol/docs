@@ -460,7 +460,7 @@ module FrontEndProjects = {
                 },
                 secondColumn: {
                   title: "Overview",
-                  copy: {js|Redesign and update of https://github.com/gobitfly/coda-explorer, as hosted on http://coda.bitfly.at/. Enable users to explore the blockchain, view account details, blocks won, transactions, current block height, epoch, slot number, transaction details, etc|js},
+                  copy: {js|Redesign and update of https://github.com/gobitfly/coda-explorer, as hosted on http://coda.bitfly.at/. Enable users to explore the blockchain, view account details, blocks won, transactions, current block height, epoch, slot number, transaction details, etc.|js},
                 },
               },
             |]

@@ -5,9 +5,7 @@
   "main": "handler.js",
   "license": "MIT",
   "dependencies": {
-    "@sendgrid/client": "^6.4.0",
-    "@sendgrid/mail": "^6.4.0",
-    "cryptr": "^4.0.2",
+    "axios": "^0.21.0",
     "querystring": "^0.2.0"
   }
 }
