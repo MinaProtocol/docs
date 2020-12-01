@@ -20,13 +20,20 @@ module Section = {
         justifyContent(`spaceBetween),
         width(`percent(100.)),
         marginTop(`rem(8.)),
+        alignItems(`center),
         media(
           Theme.MediaQuery.tablet,
-          [reverse ? flexDirection(`rowReverse) : flexDirection(`row)],
+          [
+            alignItems(`flexStart),
+            reverse ? flexDirection(`rowReverse) : flexDirection(`row),
+          ],
         ),
         media(
           Theme.MediaQuery.desktop,
-          [reverse ? flexDirection(`rowReverse) : flexDirection(`row)],
+          [
+            alignItems(`flexStart),
+            reverse ? flexDirection(`rowReverse) : flexDirection(`row),
+          ],
         ),
       ]);
 
@@ -57,9 +64,10 @@ module Section = {
         maxWidth(`rem(22.)),
         maxHeight(`rem(22.)),
         height(`auto),
-        media(Theme.MediaQuery.desktop, [
-          maxHeight(`rem(29.)),
-          maxWidth(`rem(29.))]),
+        media(
+          Theme.MediaQuery.desktop,
+          [maxHeight(`rem(29.)), maxWidth(`rem(29.))],
+        ),
       ]);
   };
   module SimpleRow = {
