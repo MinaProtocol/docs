@@ -4,7 +4,7 @@ module Styles = {
     style([
       width(`percent(100.)),
       height(`percent(100.)),
-      marginBottom(`rem(3.)),
+      marginBottom(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
         [marginRight(`rem(3.)), marginBottom(`rem(2.))],

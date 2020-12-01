@@ -8,6 +8,9 @@ module Styles = {
       important(backgroundSize(`cover)),
       backgroundImage(`url(backgroundImg)),
     ]);
+
+  let section__items =
+    style([selector("> :not(:first-child)", [marginTop(`rem(8.))])]);
 };
 
 module Section = {
@@ -19,7 +22,6 @@ module Section = {
         flexDirection(`column),
         justifyContent(`spaceBetween),
         width(`percent(100.)),
-        marginTop(`rem(8.)),
         alignItems(`center),
         media(
           Theme.MediaQuery.tablet,
@@ -64,9 +66,10 @@ module Section = {
         maxWidth(`rem(22.)),
         maxHeight(`rem(22.)),
         height(`auto),
+        marginTop(`rem(3.)),
         media(
           Theme.MediaQuery.desktop,
-          [maxHeight(`rem(29.)), maxWidth(`rem(29.))],
+          [marginTop(`zero), maxHeight(`rem(29.)), maxWidth(`rem(29.))],
         ),
       ]);
   };
@@ -201,10 +204,12 @@ module Section = {
 let make = (~backgroundImg, ~sections) => {
   <div className={Styles.sectionBackgroundImage(backgroundImg)}>
     <Wrapped>
-      {switch (sections) {
-       | Section.FeaturedRow(rows) => <Section.FeaturedRow rows />
-       | Section.SimpleRow(rows) => <Section.SimpleRow rows />
-       }}
+      <div className=Styles.section__items>
+        {switch (sections) {
+         | Section.FeaturedRow(rows) => <Section.FeaturedRow rows />
+         | Section.SimpleRow(rows) => <Section.SimpleRow rows />
+         }}
+      </div>
     </Wrapped>
   </div>;
 };
