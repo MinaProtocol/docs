@@ -7,7 +7,7 @@ module Styles = {
       marginBottom(`rem(4.)),
       media(
         Theme.MediaQuery.tablet,
-        [marginRight(`rem(3.)), marginBottom(`rem(8.))],
+        [marginRight(`rem(3.)), marginBottom(`rem(16.))],
       ),
     ]);
 

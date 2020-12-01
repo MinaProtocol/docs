@@ -115,7 +115,7 @@ module Section = {
                  <Button href={row.buttonUrl} bgColor=Theme.Colors.white>
                    {React.string(row.buttonCopy)}
                    <span className=SectionStyles.icon>
-                     <Icon kind=Icon.ArrowRightSmall />
+                     <Icon kind=Icon.ArrowRightMedium />
                    </span>
                  </Button>
                </div>
@@ -181,7 +181,7 @@ module Section = {
                    <span className=Theme.Type.buttonLink>
                      <span> {React.string(row.linkCopy)} </span>
                      <span className=SectionStyles.icon>
-                       <Icon kind=Icon.ArrowRightSmall />
+                       <Icon kind=Icon.ArrowRightMedium />
                      </span>
                    </span>
                  </span>
