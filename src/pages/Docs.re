@@ -43,9 +43,12 @@ module Style = {
       color(Theme.Colors.orange),
       media(
         Theme.MediaQuery.notMobile,
-        [display(`flex), alignItems(`center)],
+        [marginLeft(`rem(1.5)), display(`flex), alignItems(`center)],
       ),
     ]);
+
+  let editLink__icon =
+    style([display(`flex), alignItems(`center), marginLeft(`rem(0.5))]);
 
   let statusBadgeContainer =
     merge([
@@ -116,8 +119,10 @@ module EditLink = {
       target="_blank"
       href={Constants.minaDocsEditLink ++ route ++ ".mdx"}
       className=Style.editLink>
-      <span className=Theme.Type.link> {React.string("Edit")} </span>
-      <Icon kind=Icon.ArrowRightMedium />
+      <span className=Theme.Type.link> {React.string("Edit ")} </span>
+      <span className=Style.editLink__icon>
+        <Icon kind=Icon.ArrowRightMedium />
+      </span>
     </a>;
   };
 };
