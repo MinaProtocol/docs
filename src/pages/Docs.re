@@ -152,6 +152,7 @@ let make = (~metadata, ~children) => {
   let renderMobileEditButton = () => {
     <span className=Style.content__button>
       <Button
+        width={`rem(7.25)}
         href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
         bgColor=Theme.Colors.orange>
         {React.string("Edit")}
