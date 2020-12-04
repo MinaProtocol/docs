@@ -8,7 +8,7 @@ Here are some common problems you might encounter while trying to set up the Min
 * [General](#general)
 * [Syncing a node](#syncing-a-node)
 * [Networking](#networking)
-* [Accounts / Transactions](#accounts-transactions)
+* [Accounts and Transactions](#accounts-and-transactions)
 * [Block producer](#block-producer)
 * [Snark worker](#snark-worker)
 * [Logging](#logging)
@@ -181,7 +181,7 @@ If you see one or more warnings like the below, then choose "Allow":
 Do you want the application "mina" to accept incoming network connections?
 ```
 
-## Accounts / Transactions
+## Accounts and Transactions
 
 ### What fee should I use to send a transaction / my transaction is stuck as pending?
 
@@ -207,7 +207,7 @@ Not currently due to [this bug](https://github.com/MinaProtocol/mina/issues/6605
 
 ### I sent a transaction, but it was never included in a block?
 
-See [this answer](#What-fee-should-I-use-to-send-a-transaction--My-transaction-is-stuck-as-pending). The transaction was likely stuck as pending and then eventually evicted from the transaction pool. Try sending again.
+See [this answer](#what-fee-should-I-use-to-send-a-transaction--My-transaction-is-stuck-as-pending). The transaction was likely stuck as pending and then eventually evicted from the transaction pool. Try sending again.
 
 ### Why is the coinbase 0 / there are no transactions included in a block?
 
@@ -243,7 +243,7 @@ Yes, but only if you have funds already in the ledger. If you requested funds fr
 
 ### Error: Specified sender is not in the ledger or sent a transaction in transaction pool when sending a transaction
 
-See [this answer](#Can-I-send-a-payment-before-I-am-synced), you will need to wait until you are synced if you do not have an existing balance in the ledger.
+See [this answer](#can-I-send-a-payment-before-I-am-synced), you will need to wait until you are synced if you do not have an existing balance in the ledger.
 
 ### I am running a block producer, but I don't see anything in coda accounts list?
 
@@ -299,7 +299,7 @@ The easiest way is to check a [block explorer](https://minaexplorer.com/). You c
 
 ### Why do I have a message of "No blocks won this this epoch"?
 
-See [this answer](#How-can-I-increase-my-chance-of-winning-a-block).
+See [this answer](#how-can-I-increase-my-chance-of-winning-a-block).
 
 ### Are orphaned blocks considered for the challenges?
 
@@ -325,7 +325,7 @@ Run `coda client set-snark-worker` to disable the snark worker. To enable again,
 
 Yes, you can, but you should stop the snark worker during block production so as not to compete for resources and miss producing a block. Snark workers also consume more resources in general. See the [snark stopper script](https://github.com/c29r3/mina-snark-stopper) to help in automating this.
 
-## Logs
+## Logging
 
 ### I see weird messages/errors in the logs?
 
