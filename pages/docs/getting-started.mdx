@@ -72,10 +72,10 @@ brew remove coda
 brew untap codaprotocol/coda
 brew upgrade mina
 mkdir -p ~/.coda_config
-cp /tmp/s3_cache_dir/config_9652f8e.json ~/.coda_config/daemon.json
+cp /tmp/s3_cache_dir/config_f5aa1fb.json ~/.coda_config/daemon.json
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit 9652f8ee092ea77e29f5ab49fa0a295e36743e8b on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]f5aa1fb1b6fa4e0fabbc8f7221c0ca94d31fa0c9 on branch HEAD`.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -84,10 +84,10 @@ Add the Mina Debian repo and install:
 ```
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta8-9652f8e --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta9-f5aa1fb --allow-downgrades
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]9652f8ee092ea77e29f5ab49fa0a295e36743e8b on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]f5aa1fb1b6fa4e0fabbc8f7221c0ca94d31fa0c9 on branch HEAD`.
 
 ### Windows
 
