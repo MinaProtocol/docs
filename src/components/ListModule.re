@@ -62,6 +62,11 @@ let renderInternalLinkKind = (itemKind, slug, inner) => {
     <Next.Link href="/blog/[slug]" _as={"/blog/" ++ slug} passHref=true>
       inner
     </Next.Link>
+  | TestnetRetro =>
+    /* TODO: TestnetRetros should have their own URL and not carry off of blog*/
+    <Next.Link href="/blog/[slug]" _as={"/blog/" ++ slug} passHref=true>
+      inner
+    </Next.Link>
   | Announcement =>
     <Next.Link
       href="/announcements/[slug]"
