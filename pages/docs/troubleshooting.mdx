@@ -22,8 +22,6 @@ This issue was fixed by the release `9652f8ee092ea77e29f5ab49fa0a295e36743e8b`, 
 
 This issue was fixed by the release `9652f8ee092ea77e29f5ab49fa0a295e36743e8b`, please ensure you have upgraded. After upgrading make sure you let the daemon run (20 mins to an hour), and the error should resolve itself.
 
-~~Just leave your node running as it should be operating correctly but incorrectly reporting the max observed block length. This should not affect your ability to produce blocks or send transactions.~~
-
 ### My node is stuck in catchup / the block height does not update
 
 When the node is synced, **Block height** should be equal to **Max observed block length**, as seen in the output of `coda client status` and should match the current height of the network, as shown in the screenshot below:
@@ -42,7 +40,7 @@ First, ensure that you have downloaded the latest peers file from the email rece
 
 Next, depending on the method you use to start the node, ensure that you are passing the correct path to this file. For example, if using `systemd`, there must be a `peers.txt` file in your home directory.
 
-~~If you are certain that you have the correct `peers.txt` file and still experiencing the issue, you can remove or move the existing `.coda-config` directory and restart the node, which should clear the error.~~ This error should have been resolved by a recent update, so ensure you are on the latest release and have the latest peers file.
+This error should have been resolved by a recent update, so ensure you are on the latest release and have the latest peers file.
 
 ### I see weird messages/errors in the logs?
 
@@ -125,7 +123,7 @@ If you're running Mina on macOS and see the following time out error `monitor.ml
 * $ `hostname` to get your hostname
 * Open the `/etc/hosts` file and add the mapping:
 
-```shell
+```
 ##
 # Host Database
 #
@@ -191,7 +189,7 @@ cat peers.txt | xargs -I % coda advanced add-peers %
 
 Transactions that are included in blocks are prioritized by their transaction fees. If many transactions are pending, then the highest fee transactions will be included first. So, increasing your fees is the best way to ensure that your transaction is included. To view the transaction pool on a running node, you can use the following command (you will need to install `jq,` which is used to format the output of the following command, e.g., `sudo apt install jq`):
 
-```bash
+```
 coda advanced pooled-user-commands | jq . | grep fee | sort | uniq -c | sort -n
       1     "fee": "0.031",
       5     "fee": "0.1",
@@ -211,7 +209,7 @@ Not currently due to [this bug](https://github.com/MinaProtocol/mina/issues/6605
 
 ### I sent a transaction, but it was never included in a block?
 
-See [this answer](https://hackmd.io/nzZFoUzVTiyHgezL2rpf1w?both#What-fee-should-I-use-to-send-a-transaction--My-transaction-is-stuck-as-pending). The transaction was likely stuck as pending and then eventually evicted from the transaction pool. Try sending again.
+See [this answer](#What-fee-should-I-use-to-send-a-transaction--My-transaction-is-stuck-as-pending). The transaction was likely stuck as pending and then eventually evicted from the transaction pool. Try sending again.
 
 ### Why is the coinbase 0 / there are no transactions included in a block?
 
@@ -247,7 +245,7 @@ Yes, but only if you have funds already in the ledger. If you requested funds fr
 
 ### Error: Specified sender is not in the ledger or sent a transaction in transaction pool when sending a transaction
 
-See [this answer](https://hackmd.io/@garethtdavies/rJg5G_BiD#Can-I-send-a-payment-before-I-am-synced), you will need to wait until you are synced if you do not have an existing balance in the ledger.
+See [this answer](#Can-I-send-a-payment-before-I-am-synced), you will need to wait until you are synced if you do not have an existing balance in the ledger.
 
 ### I am running a block producer, but I don't see anything in coda accounts list?
 
@@ -303,7 +301,7 @@ The easiest way is to check a [block explorer](https://minaexplorer.com/). You c
 
 ### Why do I have a message of "No blocks won this this epoch"?
 
-See [this answer](https://hackmd.io/nzZFoUzVTiyHgezL2rpf1w#How-can-I-increase-my-chance-of-winning-a-block).
+See [this answer](#How-can-I-increase-my-chance-of-winning-a-block).
 
 ### Are orphaned blocks considered for the challenges?
 
@@ -315,7 +313,7 @@ Yes, during this testnet, orphaned blocks will be considered.
 
 If you are running a snark worker and not seeing any work being included in blocks, then likely others are producing cheaper snark work. Multiple snark workers are all competing for the same snark work, with only the lowest fee for each being included in the snark pool to be bought by block producers.
 
-Sometimes high fees will be included in blocks, and this is a function of how snark workers select which work to complete and which work is required to be purchased by the block producer. You can read more about snark workers in these draft docs [here](https://hackmd.io/gHjzytCLT0qRUIGojZfxNQ).
+Sometimes high fees will be included in blocks, and this is a function of how snark workers select which work to complete and which work is required to be purchased by the block producer.
 
 By default, the work selection for a snark worker is random. You can change this by adding the `-work-selection seq` flag to the `coda daemon` command, which will work on jobs in the order required to be included from the scan state and will likely result in your snarks being included without a potentially lengthy delay.
 
