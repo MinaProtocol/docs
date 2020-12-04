@@ -5,67 +5,16 @@ export default Page({ title: "Troubleshooting" });
 
 Here are some common problems you might encounter while trying to set up the Mina daemon. If you can't find your issue here please ask for help on [Discord](https://bit.ly/MinaDiscord) or open an issue on [Github](https://github.com/MinaProtocol/mina/issues/new).
 
+* [General](#general)
+* [Syncing a node](#syncing-a-node)
+* [Networking](#networking)
+* [Accounts / Transactions](#accounts-transactions)
+* [Block producer](#block-producer)
+* [Snark worker](#snark-worker)
+* [Logging](#logging)
+* [Testnet challenges](#testnet-challenges)
+
 ## General
-
-### I am stuck at block height of 1 and a max observed block length of 1
-
-The output of `coda client status` outputs similar to the following:
-
-```
-Block height:                    1
-Max observed block length:       1
-```
-
-This issue was fixed by the release `9652f8ee092ea77e29f5ab49fa0a295e36743e8b`, please ensure you have upgraded. It is normal to see a height of 1 while the daemon initializes. It could take several minutes (20 mins to an hour) before the node progress to the catchup phase.
-
-### My "Max observed block length" is 1 but my block height is correct?
-
-This issue was fixed by the release `9652f8ee092ea77e29f5ab49fa0a295e36743e8b`, please ensure you have upgraded. After upgrading make sure you let the daemon run (20 mins to an hour), and the error should resolve itself.
-
-### My node is stuck in catchup / the block height does not update
-
-When the node is synced, **Block height** should be equal to **Max observed block length**, as seen in the output of `coda client status` and should match the current height of the network, as shown in the screenshot below:
-
-![Syncing a node](https://i.imgur.com/iWJTYTr.png)
-
-When starting the node, and the node is in a bootstrap/catchup state, the block height will display 1 or a number that is a few hundred blocks from the current best block length (but much greater than 1). During catchup, the block height will not incrementally update, other than when new blocks are produced and will jump to the correct height when catchup is complete. So be patient; this process can take several hours to complete and does vary depending on the hardware used.
-
-### I synced at height 1 / not at the current height of the network?
-
-What matters is that your current blockchain length, as seen in `coda client status`, is equal to the current network height. If your node is reporting it is synced at the wrong height, it should eventually enter the catchup phase to get the node to the correct height. You may occasionally switch between catchup and synced if the network sees any short forks it tries to catch up to.
-
-### Node fails with "Failed to find any peers, crashing as this is not a seed node"?
-
-First, ensure that you have downloaded the latest peers file from the email received - the URL does not change, but the list of peers is updated very frequently.
-
-Next, depending on the method you use to start the node, ensure that you are passing the correct path to this file. For example, if using `systemd`, there must be a `peers.txt` file in your home directory.
-
-This error should have been resolved by a recent update, so ensure you are on the latest release and have the latest peers file.
-
-### I see weird messages/errors in the logs?
-
-The logs are noisy and often contain "scary" looking messages such as failure to connect etc. As a general rule, if the message is not fatal and the node does not crash, it is likely nothing to be worried about. The below messages are all considered "normal":
-
-```
-"RPC #841 failed: \"internal RPC error error: unknown stream_idx\""
-"Peer $peer didn't have enough information to answer ledger_hash query. See error for more details: $error"
-"Timed out waiting for the parent of $cached_transition after 0 ms, signalling a catchup job"
-"Failed to reset stream (this means it was probably closed successfully): $error
-        error: {
-  "string":
-    "RPC #365 failed: \"internal RPC error error: unknown stream_idx\""
-}
-```
-
-### Why does my blockchain height jump to 1000+ and then get stuck?
-
-We only need the last `k` (290) blocks of the blockchain to produce blocks. So once bootstrap is completed, the root of the transition frontier (essentially your local store of blocks) should be the current maximum height minus `k` (290). The part of the syncing process that takes significant time is downloading those missing `k` blocks, which is the role of **catchup**. During catchup, you won't see your block height increase (other than new blocks produced on the network) until it jumps to the current height and is synced. This takes time, so leave it running!
-
-### What ports need to be open?
-
-The only port required to be open for the daemon to communicate with peers is TCP port `8302`. 
-
-The client port `8301` should **never** be exposed to the internet. There may be outdated references to other ports that were once used before but are no longer required.
 
 ### My node crashes every few minutes?
 
@@ -90,19 +39,6 @@ The `keys` directory should have 700 permissions, and the private key file 600. 
 chmod 700 ~/keys
 chmod 600 ~/keys/my-wallet
 ```
-
-### I get an error couldn't determine our IP from the internet?
-
-If you see `couldn't determine our IP from the internet, use -external-ip` flag, then the daemon failed to determine its own IP from [these service providers](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11). Your firewall may be blocking HTTP/S requests, or you have a misconfigured network connection.
-
-To bypass this, pass in the flag `-external-ip <your-ip-address>` when starting the Mina daemon. To get your external IP address, run `curl ifconfig.me`.
-
-### Do I need to configure port forwarding manually?
-The Mina node does its best to configure itself to be able to connect to the outside world without you needing to do any extra work. However, this may fail, depending on your router and network setup. In this case, you may have to manually forward the external-port.
-
-A common cause of this is routers not supporting UPnP, a protocol that allows the node to configure the port forwarding automatically. If you experience this type of problem, find your router model and search for `<model> port forwarding` and follow the instructions to forward the ports from your router to your device running the Mina node. You'll need to open the TCP port `8302` by default.
-
-Note: When running Mina in the cloud, you should instead configure security groups for your cloud provider.
 
 ### Can I run on a Raspberry Pi / ARM-based device?
 
@@ -133,14 +69,6 @@ If you're running Mina on macOS and see the following time out error `monitor.ml
 127.0.0.1       localhost
 127.0.0.1       <ADD YOUR HOSTNAME HERE>
 This is necessary because sometimes macOS doesn't resolve your hostname to your local IP address.
-```
-
-### Do I need to allow "Accept incoming connections"
-
-If you see one or more warnings like the below, then choose "Allow":
-
-```
-Do you want the application "mina" to accept incoming network connections?
 ```
 
 ### What hardware do I need?
@@ -175,12 +103,82 @@ Yes. Set the `CODA_PRIVKEY_PASS` environment variable to be your password.
 
 See this [guide](https://mina.docs.casso.io/english/testnet-4.1/ubuntu-20.04.1-lts) to manually resolve the required dependencies. Alternatively, use a supported OS (Ubuntu 18.04/Debian 9) or use Docker.
 
+## Syncing a node
+
+### I am stuck at block height of 1 and a max observed block length of 1
+
+The output of `coda client status` outputs similar to the following:
+
+```
+Block height:                    1
+Max observed block length:       1
+```
+
+This issue was fixed by the release `9652f8ee092ea77e29f5ab49fa0a295e36743e8b`, please ensure you have upgraded. It is normal to see a height of 1 while the daemon initializes. It could take several minutes (20 mins to an hour) before the node progress to the catchup phase.
+
+### My "Max observed block length" is 1 but my block height is correct?
+
+This issue was fixed by the release `9652f8ee092ea77e29f5ab49fa0a295e36743e8b`, please ensure you have upgraded. After upgrading make sure you let the daemon run (20 mins to an hour), and the error should resolve itself.
+
+### My node is stuck in catchup / the block height does not update
+
+When the node is synced, **Block height** should be equal to **Max observed block length**, as seen in the output of `coda client status` and should match the current height of the network, as shown in the screenshot below:
+
+![Syncing a node](https://i.imgur.com/iWJTYTr.png)
+
+When starting the node, and the node is in a bootstrap/catchup state, the block height will display 1 or a number that is a few hundred blocks from the current best block length (but much greater than 1). During catchup, the block height will not incrementally update, other than when new blocks are produced and will jump to the correct height when catchup is complete. So be patient; this process can take several hours to complete and does vary depending on the hardware used.
+
+### I synced at height 1 / not at the current height of the network?
+
+What matters is that your current blockchain length, as seen in `coda client status`, is equal to the current network height. If your node is reporting it is synced at the wrong height, it should eventually enter the catchup phase to get the node to the correct height. You may occasionally switch between catchup and synced if the network sees any short forks it tries to catch up to.
+
+### Why does my blockchain height jump to 1000+ and then get stuck?
+
+We only need the last `k` (290) blocks of the blockchain to produce blocks. So once bootstrap is completed, the root of the transition frontier (essentially your local store of blocks) should be the current maximum height minus `k` (290). The part of the syncing process that takes significant time is downloading those missing `k` blocks, which is the role of **catchup**. During catchup, you won't see your block height increase (other than new blocks produced on the network) until it jumps to the current height and is synced. This takes time, so leave it running!
+
 ### My sync status is offline?
 
 This status indicates that you have not received any messages from peers for the last ~24 minutes. Ensure that you are using the latest peers.txt file. You can add new peers to a running node via this command:
 
 ```
 cat peers.txt | xargs -I % coda advanced add-peers %
+```
+
+## Networking
+
+### What ports need to be open?
+
+The only port required to be open for the daemon to communicate with peers is TCP port `8302`. 
+
+The client port `8301` should **never** be exposed to the internet. There may be outdated references to other ports that were once used before but are no longer required.
+
+### Node fails with "Failed to find any peers, crashing as this is not a seed node"?
+
+First, ensure that you have downloaded the latest peers file from the email received - the URL does not change, but the list of peers is updated very frequently.
+
+Next, depending on the method you use to start the node, ensure that you are passing the correct path to this file. For example, if using `systemd`, there must be a `peers.txt` file in your home directory.
+
+This error should have been resolved by a recent update, so ensure you are on the latest release and have the latest peers file.
+
+### I get an error couldn't determine our IP from the internet?
+
+If you see `couldn't determine our IP from the internet, use -external-ip` flag, then the daemon failed to determine its own IP from [these service providers](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11). Your firewall may be blocking HTTP/S requests, or you have a misconfigured network connection.
+
+To bypass this, pass in the flag `-external-ip <your-ip-address>` when starting the Mina daemon. To get your external IP address, run `curl ifconfig.me`.
+
+### Do I need to configure port forwarding manually?
+The Mina node does its best to configure itself to be able to connect to the outside world without you needing to do any extra work. However, this may fail, depending on your router and network setup. In this case, you may have to manually forward the external-port.
+
+A common cause of this is routers not supporting UPnP, a protocol that allows the node to configure the port forwarding automatically. If you experience this type of problem, find your router model and search for `<model> port forwarding` and follow the instructions to forward the ports from your router to your device running the Mina node. You'll need to open the TCP port `8302` by default.
+
+Note: When running Mina in the cloud, you should instead configure security groups for your cloud provider.
+
+### Do I need to allow "Accept incoming connections"
+
+If you see one or more warnings like the below, then choose "Allow":
+
+```
+Do you want the application "mina" to accept incoming network connections?
 ```
 
 ## Accounts / Transactions
@@ -328,6 +326,21 @@ Run `coda client set-snark-worker` to disable the snark worker. To enable again,
 Yes, you can, but you should stop the snark worker during block production so as not to compete for resources and miss producing a block. Snark workers also consume more resources in general. See the [snark stopper script](https://github.com/c29r3/mina-snark-stopper) to help in automating this.
 
 ## Logs
+
+### I see weird messages/errors in the logs?
+
+The logs are noisy and often contain "scary" looking messages such as failure to connect etc. As a general rule, if the message is not fatal and the node does not crash, it is likely nothing to be worried about. The below messages are all considered "normal":
+
+```
+"RPC #841 failed: \"internal RPC error error: unknown stream_idx\""
+"Peer $peer didn't have enough information to answer ledger_hash query. See error for more details: $error"
+"Timed out waiting for the parent of $cached_transition after 0 ms, signalling a catchup job"
+"Failed to reset stream (this means it was probably closed successfully): $error
+        error: {
+  "string":
+    "RPC #365 failed: \"internal RPC error error: unknown stream_idx\""
+}
+```
 
 ### How can I get my logs running as a service?
 
