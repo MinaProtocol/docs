@@ -61,6 +61,8 @@ Install using [Homebrew](https://brew.sh).
 
 ```
 brew install minaprotocol/mina/mina
+mkdir -p ~/.coda_config
+cp /tmp/s3_cache_dir/config_9652f8e.json ~/.coda_config/daemon.json
 ```
 
 If you already have `mina` installed from a previous release, run:
@@ -69,9 +71,11 @@ If you already have `mina` installed from a previous release, run:
 brew remove coda
 brew untap codaprotocol/coda
 brew upgrade mina
+mkdir -p ~/.coda_config
+cp /tmp/s3_cache_dir/config_9652f8e.json ~/.coda_config/daemon.json
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]31219a6f16a25d7b8a73d884ee1f14585dc28a3d on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit 9652f8ee092ea77e29f5ab49fa0a295e36743e8b on branch HEAD`.
 
 ### Ubuntu 18.04 / Debian 9
 
