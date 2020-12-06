@@ -39,14 +39,22 @@ module Styles = {
         display(`flex),
         alignItems(`center),
         cursor(`pointer),
-        marginTop(`auto),
+        marginTop(`rem(1.)),
+        marginBottom(`rem(2.)),
       ]),
+    ]);
+
+  let icon =
+    style([
+      display(`flex),
+      justifyContent(`center),
+      alignItems(`center),
+      marginLeft(`rem(0.5)),
     ]);
 
   let mainListingContainer =
     style([
       width(`percent(100.)),
-      marginBottom(`rem(2.)),
       height(`percent(100.)),
       media(Theme.MediaQuery.notMobile, [width(`percent(75.))]),
     ]);
@@ -103,6 +111,13 @@ let renderHeadingLabel = (item: ContentType.NormalizedPressBlog.t, itemKind) => 
   </>;
 };
 
+let renderReadMoreLabel = () => {
+  <div className=Styles.link>
+    <span> {React.string("Read more")} </span>
+    <span className=Styles.icon> <Icon kind=Icon.ArrowRightMedium /> </span>
+  </div>;
+};
+
 module MainListing = {
   module MainListingStyles = {
     open Css;
@@ -118,6 +133,22 @@ module MainListing = {
     let anchor = style([textDecoration(`none)]);
   };
 
+  let renderArticle = (item: ContentType.NormalizedPressBlog.t, itemKind) => {
+    <article>
+      <h5 className=Styles.title> {React.string(item.title)} </h5>
+      {switch (itemKind) {
+       | JobPost =>
+         ReactExt.fromOpt(item.snippet, ~f=copy =>
+           <p className=Styles.description> {React.string(copy)} </p>
+         )
+       | _ =>
+         ReactExt.fromOpt(item.description, ~f=copy =>
+           <p className=Styles.description> {React.string(copy)} </p>
+         )
+       }}
+    </article>;
+  };
+
   [@react.component]
   let make = (~item: ContentType.NormalizedPressBlog.t, ~itemKind) => {
     <div className=MainListingStyles.container>
@@ -127,20 +158,11 @@ module MainListing = {
       {ReactExt.fromOpt(item.image, ~f=src =>
          <img src={src.ContentType.System.fields.ContentType.Image.file.url} />
        )}
-      <article>
-        <h5 className=Styles.title> {React.string(item.title)} </h5>
-        {ReactExt.fromOpt(item.description, ~f=copy =>
-           <p className=Styles.description> {React.string(copy)} </p>
-         )}
-      </article>
-      {let inner =
-         <div className=Styles.link>
-           <span> {React.string("Read more")} </span>
-           <Icon kind=Icon.ArrowRightSmall />
-         </div>;
+      {renderArticle(item, itemKind)}
+      {let inner = {renderReadMoreLabel()};
+
        switch (item.link) {
        | `Slug(slug) => renderInternalLinkKind(itemKind, slug, inner)
-
        | `Remote(href) =>
          <a className=MainListingStyles.anchor href> inner </a>
        }}
@@ -159,21 +181,16 @@ module Listing = {
         width(`percent(100.)),
         media(Theme.MediaQuery.notMobile, [width(`percent(100.))]),
       ]);
-
-    let link = merge([Styles.link, style([marginBottom(`rem(2.))])]);
   };
 
   [@react.component]
   let make = (~items, ~itemKind) => {
     let button = (item: ContentType.NormalizedPressBlog.t) => {
-      let inner =
-        <div className=ListingStyles.link>
-          <span> {React.string("Read more")} </span>
-          <Icon kind=Icon.ArrowRightSmall />
-        </div>;
+      let inner = {
+        renderReadMoreLabel();
+      };
       switch (item.link) {
       | `Slug(slug) => renderInternalLinkKind(itemKind, slug, inner)
-
       | `Remote(href) =>
         <a className=MainListing.MainListingStyles.anchor href> inner </a>
       };

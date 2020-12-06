@@ -84,6 +84,7 @@ module JobPost = {
   type t = {
     title: string,
     jobDescription: string,
+    snippet: string,
     slug: string,
     openingType: string,
   };
@@ -215,6 +216,7 @@ module NormalizedPressBlog = {
     link: [ | `Slug(string) | `Remote(string)],
     featured: bool,
     description: option(string),
+    snippet: option(string),
     publisher: option(string),
     date: string,
   };
@@ -226,6 +228,7 @@ module NormalizedPressBlog = {
       link: `Slug(blog.slug),
       featured: true,
       description: Some(blog.snippet),
+      snippet: None,
       publisher: Some(blog.author),
       date: blog.date,
     };
@@ -238,6 +241,7 @@ module NormalizedPressBlog = {
       link: `Slug(announcement.slug),
       featured: true,
       description: Some(announcement.snippet),
+      snippet: None,
       publisher: None,
       date: announcement.date,
     };
@@ -250,6 +254,7 @@ module NormalizedPressBlog = {
       link: `Remote(press.link),
       featured: press.featured,
       description: Js.Undefined.toOption(press.description),
+      snippet: None,
       publisher: Some(press.publisher),
       date: press.datePublished,
     };
@@ -262,6 +267,7 @@ module NormalizedPressBlog = {
       link: `Remote(job.slug),
       featured: true,
       description: Some(job.openingType),
+      snippet: Some(job.snippet),
       publisher: Some("O(1) Labs"),
       date: "San Francisco" /* Hack: The date property is used as the middle text in the top label in Listmodule.re */
     };
