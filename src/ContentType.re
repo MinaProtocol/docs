@@ -85,6 +85,7 @@ module JobPost = {
     title: string,
     jobDescription: string,
     slug: string,
+    openingType: string,
   };
   type entry = System.entry(t);
   type entries = System.entries(t);
@@ -251,6 +252,18 @@ module NormalizedPressBlog = {
       description: Js.Undefined.toOption(press.description),
       publisher: Some(press.publisher),
       date: press.datePublished,
+    };
+  };
+
+  let ofJobPost = (job: JobPost.t) => {
+    {
+      title: job.title,
+      image: None,
+      link: `Remote(job.slug),
+      featured: true,
+      description: Some(job.openingType),
+      publisher: Some("O(1) Labs"),
+      date: "San Francisco" /* Hack: The date property is used as the middle text in the top label in Listmodule.re */
     };
   };
 

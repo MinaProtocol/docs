@@ -128,6 +128,7 @@ let make = (~profiles) => {
         <Spacer height=7. />
       </FeaturedSingleRowFull>
     </div>
+    <Wrapped> <WorkWithMina /> </Wrapped>
   </Page>;
 };
 

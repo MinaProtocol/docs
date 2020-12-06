@@ -15,7 +15,9 @@ module Styles = {
       display(`flex),
       flexDirection(`column),
       alignItems(`center),
+      width(`percent(100.)),
       height(`percent(100.)),
+      media(Theme.MediaQuery.tablet, [marginLeft(`rem(7.))]),
     ]);
 
   let title =
@@ -46,7 +48,7 @@ module Styles = {
       width(`percent(100.)),
       marginBottom(`rem(2.)),
       height(`percent(100.)),
-      media(Theme.MediaQuery.notMobile, [width(`percent(40.))]),
+      media(Theme.MediaQuery.notMobile, [width(`percent(75.))]),
     ]);
 };
 
@@ -54,7 +56,8 @@ type itemKind =
   | Blog
   | TestnetRetro
   | Announcement
-  | Press;
+  | Press
+  | JobPost;
 
 let renderInternalLinkKind = (itemKind, slug, inner) => {
   switch (itemKind) {
@@ -78,6 +81,28 @@ let renderInternalLinkKind = (itemKind, slug, inner) => {
   };
 };
 
+let renderHeadingLabel = (item: ContentType.NormalizedPressBlog.t, itemKind) => {
+  <>
+    {switch (itemKind) {
+     | Blog => <span> {React.string("Blog")} </span>
+     | Announcement => <span> {React.string("Announcement")} </span>
+     | Press => <span> {React.string("Press")} </span>
+     | TestnetRetro => <span> {React.string("Testnet Retro")} </span>
+     | JobPost =>
+       <span>
+         {React.string(Belt.Option.getWithDefault(item.description, ""))}
+       </span>
+     }}
+    <span> {React.string(" / ")} </span>
+    <span> {React.string(item.date)} </span>
+    <span> {React.string(" / ")} </span>
+    {switch (item.publisher) {
+     | Some(publisher) => <span> {React.string(publisher)} </span>
+     | None => React.null
+     }}
+  </>;
+};
+
 module MainListing = {
   module MainListingStyles = {
     open Css;
@@ -97,19 +122,7 @@ module MainListing = {
   let make = (~item: ContentType.NormalizedPressBlog.t, ~itemKind) => {
     <div className=MainListingStyles.container>
       <div className=Styles.metadata>
-        {switch (itemKind) {
-         | Blog => <span> {React.string("Blog")} </span>
-         | Announcement => <span> {React.string("Announcement")} </span>
-         | TestnetRetro => <span> {React.string("Testnet Retro")} </span>
-         | Press => <span> {React.string("Press")} </span>
-         }}
-        <span> {React.string(" / ")} </span>
-        <span> {React.string(item.date)} </span>
-        <span> {React.string(" / ")} </span>
-        {switch (item.publisher) {
-         | Some(publisher) => <span> {React.string(publisher)} </span>
-         | None => React.null
-         }}
+        {renderHeadingLabel(item, itemKind)}
       </div>
       {ReactExt.fromOpt(item.image, ~f=src =>
          <img src={src.ContentType.System.fields.ContentType.Image.file.url} />
@@ -144,7 +157,7 @@ module Listing = {
         flexDirection(`column),
         borderTop(`px(1), `solid, Theme.Colors.digitalBlack),
         width(`percent(100.)),
-        media(Theme.MediaQuery.notMobile, [width(`percent(80.))]),
+        media(Theme.MediaQuery.notMobile, [width(`percent(100.))]),
       ]);
 
     let link = merge([Styles.link, style([marginBottom(`rem(2.))])]);
@@ -170,19 +183,7 @@ module Listing = {
     |> Array.map((item: ContentType.NormalizedPressBlog.t) => {
          <div className=ListingStyles.container key={item.title}>
            <div className=Styles.metadata>
-             {switch (itemKind) {
-              | Blog => <span> {React.string("Blog")} </span>
-              | Announcement => <span> {React.string("Announcement")} </span>
-              | Press => <span> {React.string("Press")} </span>
-              | TestnetRetro => <span> {React.string("Testnet Retro")} </span>
-              }}
-             <span> {React.string(" / ")} </span>
-             <span> {React.string(item.date)} </span>
-             <span> {React.string(" / ")} </span>
-             {switch (item.publisher) {
-              | Some(publisher) => <span> {React.string(publisher)} </span>
-              | None => React.null
-              }}
+             {renderHeadingLabel(item, itemKind)}
            </div>
            <h5 className=Styles.title> {React.string(item.title)} </h5>
            {button(item)}
@@ -194,22 +195,17 @@ module Listing = {
 
 [@react.component]
 let make = (~items, ~itemKind) => {
-  <Wrapped>
-    <div className=Styles.container>
-      {switch (Belt.Array.get(items, 0)) {
-       | Some(item) =>
-         <div className=Styles.mainListingContainer>
-           <MainListing item itemKind />
-         </div>
-       | None =>
-         <div className=Theme.Type.label> {React.string("Loading...")} </div>
-       }}
-      <div className=Styles.listingContainer>
-        <Listing
-          items={Belt.Array.slice(items, ~offset=1, ~len=3)}
-          itemKind
-        />
-      </div>
+  <div className=Styles.container>
+    {switch (Belt.Array.get(items, 0)) {
+     | Some(item) =>
+       <div className=Styles.mainListingContainer>
+         <MainListing item itemKind />
+       </div>
+     | None =>
+       <div className=Theme.Type.label> {React.string("Loading...")} </div>
+     }}
+    <div className=Styles.listingContainer>
+      <Listing items={Belt.Array.slice(items, ~offset=1, ~len=3)} itemKind />
     </div>
-  </Wrapped>;
+  </div>;
 };
