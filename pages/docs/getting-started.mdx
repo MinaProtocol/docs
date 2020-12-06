@@ -62,7 +62,7 @@ Install using [Homebrew](https://brew.sh).
 ```
 brew install minaprotocol/mina/mina
 mkdir -p ~/.coda_config
-cp /tmp/s3_cache_dir/config_9652f8e.json ~/.coda_config/daemon.json
+cp /tmp/s3_cache_dir/config_f5aa1fb.json ~/.coda_config/daemon.json
 ```
 
 If you already have `mina` installed from a previous release, run:
@@ -84,10 +84,10 @@ Add the Mina Debian repo and install:
 ```
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta9-f5aa1fb --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.0.17-beta10-880882e --allow-downgrades
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]f5aa1fb1b6fa4e0fabbc8f7221c0ca94d31fa0c9 on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]880882e45e48aaf987aca191f488c7f65609c305 on branch HEAD`.
 
 ### Windows
 
