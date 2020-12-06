@@ -7,7 +7,7 @@ module Styles = {
       flexDirection(`column),
       paddingBottom(`rem(3.)),
       width(`percent(100.)),
-      height(`rem(33.)),
+      height(`rem(36.)),
       dark
         ? background(Theme.Colors.digitalBlack) : background(`hex("F5F5F5")),
       padding2(~h=`rem(2.5), ~v=`rem(3.)),
@@ -285,7 +285,7 @@ module TeamMemberCard = {
                  target="_blank"
                  href={Constants.linkedInUrl ++ linkedIn}
                  className={Styles.iconLink(dark)}>
-                 <Icon kind=Icon.LinkedIn/>
+                 <Icon kind=Icon.LinkedIn />
                </a>
              | _ => React.null
              }}
