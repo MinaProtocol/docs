@@ -166,7 +166,7 @@ let make = () => {
             }),
         }
       />
-      <TestnetRetroModule />
+      <Wrapped> <TestnetRetroModule /> </Wrapped>
       <ButtonBar
         kind=ButtonBar.HelpAndSupport
         backgroundImg="/static/img/ButtonBarBackground.jpg"

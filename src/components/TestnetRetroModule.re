@@ -58,13 +58,11 @@ let make = () => {
   });
 
   <div className=Styles.container>
-    <Wrapped>
-      <div className=Styles.header>
-        <h2 className=Theme.Type.h2>
-          {React.string("Testnet Retros & Release Notes")}
-        </h2>
-      </div>
-    </Wrapped>
+    <div className=Styles.header>
+      <h2 className=Theme.Type.h2>
+        {React.string("Testnet Retros & Release Notes")}
+      </h2>
+    </div>
     <ListModule items=blogs itemKind=ListModule.TestnetRetro />
   </div>;
 };
