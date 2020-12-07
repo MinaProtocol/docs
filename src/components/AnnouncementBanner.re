@@ -76,16 +76,14 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~children, ~dark=false) => {
+let make = (~children, ~dark=false, ~copy) => {
   <div className={Styles.announcementBanner(dark)}>
 
       <div className=Styles.flexCenter>
         <span className=Styles.announcementText> children </span>
         <a className=Styles.linkAnchor href=Constants.minaNewsletter>
           <div className=Styles.link>
-            <span className=Styles.learnMoreText>
-              {React.string("Subscribe to stay updated")}
-            </span>
+            <span className=Styles.learnMoreText> {React.string(copy)} </span>
             <Icon kind=Icon.ArrowRightMedium />
           </div>
         </a>
