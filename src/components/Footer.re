@@ -164,7 +164,7 @@ module LeftSide = {
         <p className=Styles.emailSubtext>
           {React.string("Mina is growing fast! Subscribe to stay updated")}
         </p>
-        <EmailInput />
+        <EmailInput formId=Constants.hubspotNewsletterFormId />
         <Spacer height=2. />
         <div className=Styles.label> {React.string("Connect")} </div>
         <p className=Styles.emailSubtext>

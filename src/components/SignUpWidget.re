@@ -82,7 +82,7 @@ external urlSearchParams: Js.t('a) => Fetch.urlSearchParams =
   "URLSearchParams";
 
 [@react.component]
-let make = (~buttonText="Submit") => {
+let make = (~buttonText="Submit", ~formId) => {
   let (successState, showSuccess) = React.useState(() => false);
   let (email, setEmail) = React.useState(() => "");
 
@@ -95,7 +95,7 @@ let make = (~buttonText="Submit") => {
         ~method_=Post,
         ~body=
           Fetch.BodyInit.makeWithUrlSearchParams(
-            urlSearchParams({"email": email}),
+            urlSearchParams({"email": email, "formId": formId}),
           ),
         ~mode=NoCORS,
       )

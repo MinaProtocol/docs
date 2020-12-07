@@ -163,7 +163,13 @@ module Styles = {
 
 [@react.component]
 let make = () => {
-  <Page title="Testworld" showFooter=false darkTheme=true>
+  <Page
+    title="Testworld"
+    showFooter=false
+    darkTheme=true
+    announcementCopy="Mina's Advesarial Testnet is coming!"
+    announcementCTACopy="Sign up to be notified"
+    announcementFormUrl=Constants.minaAdversarial>
     <div className=Styles.page>
       <div className=Styles.background>
         <div className=Styles.container>
@@ -173,7 +179,9 @@ let make = () => {
               src="/static/img/logos/LogoTestWorld.svg"
             />
           </div>
-          <div className=Styles.textContainer> <SignUpWidget /> </div>
+          <div className=Styles.textContainer>
+            <SignUpWidget formId=Constants.hubspotAdversarialFormId />
+          </div>
           <div className=Styles.textContainer>
             <h1> {React.string("Welcome to Testworld")} </h1>
             <p>
@@ -230,7 +238,9 @@ let make = () => {
                )}
             </span>
           </div>
-          <div className=Styles.textContainer> <SignUpWidget /> </div>
+          <div className=Styles.textContainer>
+            <SignUpWidget formId=Constants.hubspotAdversarialFormId />
+          </div>
         </div>
       </div>
     </div>

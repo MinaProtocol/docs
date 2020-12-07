@@ -1,4 +1,6 @@
 let hubspotServerlessEndpoint = "https://9696mo9iuj.execute-api.us-east-2.amazonaws.com/dev/subscribe";
+let hubspotNewsletterFormId = "a25cfd37-cff3-4c75-be44-a42eb36a372b";
+let hubspotAdversarialFormId = "a083a12f-0d40-48ee-b3bb-c2014a36661c";
 
 let codeOfConductUrl = "https://github.com/MinaProtocol/mina/blob/develop/CODE_OF_CONDUCT.md";
 let genesisGrantApplication = "https://share.hsforms.com/1y-QXRVSgQJ6nFnzbbYv_Pg4xuul";
@@ -20,6 +22,7 @@ let minaGithubIssues = "https://github.com/MinaProtocol/mina/issues";
 let minaCodeOfConduct = "https://github.com/MinaProtocol/mina/blob/develop/CODE_OF_CONDUCT.md";
 
 let minaNewsletter = "https://share.hsforms.com/1olz9N8_zTHW-RKQus2o3Kw4xuul";
+let minaAdversarial = "https://share.hsforms.com/1oIOhLw1ASO6zu8IBSjZmHA4xuul";
 let minaPressKit = "https://drive.google.com/file/d/177Xzj6Rqd9UnYwzRzMRLPKoyows-iwKx/view?usp=sharing";
 let minaDocsEditLink = "https://github.com/MinaProtocol/website/edit/main/pages";
 
