@@ -73,16 +73,6 @@ module SingleRow = {
   module RowStyles = {
     open Css;
 
-    let childreWrapped =
-      style([
-        margin(`auto),
-        padding2(~v=`zero, ~h=`rem(1.5)),
-        media(
-          Theme.MediaQuery.notMobile,
-          [margin(`zero), padding2(~v=`zero, ~h=`zero)],
-        ),
-      ]);
-
     let container =
       style([
         position(`relative),
@@ -110,7 +100,7 @@ module SingleRow = {
         flexDirection(`column),
         alignItems(`flexStart),
         justifyContent(`spaceBetween),
-        padding(`rem(2.)),
+        padding(`rem(2.5)),
         backgroundSize(`cover),
         zIndex(Theme.StackingIndex.zNav),
         media(
@@ -143,6 +133,9 @@ module SingleRow = {
       ]);
     };
 
+    let icon =
+      style([display(`flex), alignItems(`center), marginLeft(`rem(0.5))]);
+
     let buttonText =
       style([
         display(`flex),
@@ -152,21 +145,25 @@ module SingleRow = {
         fontSize(`rem(0.7)),
       ]);
 
-    let description =
+    let description = copySize =>
       merge([
         Theme.Type.sectionSubhead,
         style([
           overflow(`hidden),
           marginTop(`rem(1.)),
           width(`percent(100.)),
-          media(
-            Theme.MediaQuery.desktop,
-            [
-              unsafe("display", "-webkit-box"),
-              unsafe("WebkitLineClamp", "10"),
-              unsafe("WebkitBoxOrient", "vertical"),
-            ],
-          ),
+          switch (copySize) {
+          | `Small => media(Theme.MediaQuery.desktop, [])
+          | `Large =>
+            media(
+              Theme.MediaQuery.desktop,
+              [
+                unsafe("display", "-webkit-box"),
+                unsafe("WebkitLineClamp", "6"),
+                unsafe("WebkitBoxOrient", "vertical"),
+              ],
+            )
+          },
         ]),
       ]);
 
@@ -232,7 +229,7 @@ module SingleRow = {
           className={Styles.contentBlock(row.copySize, row.contentBackground)}>
           <div className={RowStyles.copyText(row.textColor)}>
             <h2 className=Theme.Type.h2> {React.string(row.title)} </h2>
-            <p className=RowStyles.description>
+            <p className={RowStyles.description(row.copySize)}>
               {React.string(row.description)}
             </p>
           </div>
@@ -255,7 +252,9 @@ module SingleRow = {
                    <Spacer height=1. />
                    <span className=RowStyles.labelLink>
                      <span> {React.string(label.labelText)} </span>
-                     <Icon kind=Icon.ArrowRightMedium />
+                     <span className=RowStyles.icon>
+                       <Icon kind=Icon.ArrowRightMedium />
+                     </span>
                    </span>
                  </span>
                </Button.Link>
@@ -306,7 +305,7 @@ module SingleRow = {
           className={Styles.contentBlock(row.copySize, row.contentBackground)}>
           <div className={RowStyles.copyText(row.textColor)}>
             <h2 className=Theme.Type.h2> {React.string(row.title)} </h2>
-            <p className=RowStyles.description>
+            <p className={RowStyles.description(row.copySize)}>
               {React.string(row.description)}
             </p>
           </div>
@@ -329,7 +328,9 @@ module SingleRow = {
                    <Spacer height=1. />
                    <span className=RowStyles.labelLink>
                      <span> {React.string(label.labelText)} </span>
-                     <Icon kind=Icon.ArrowRightMedium />
+                     <span className=RowStyles.icon>
+                       <Icon kind=Icon.ArrowRightMedium />
+                     </span>
                    </span>
                  </span>
                </Button.Link>
@@ -354,6 +355,15 @@ module Styles = {
       | Color(color) => backgroundColor(color)
       },
     ]);
+  let childrenWrapped =
+    style([
+      margin(`auto),
+      padding2(~v=`zero, ~h=`rem(1.5)),
+      media(
+        Theme.MediaQuery.notMobile,
+        [margin(`zero), padding2(~v=`zero, ~h=`zero)],
+      ),
+    ]);
 };
 
 [@react.component]
@@ -366,7 +376,7 @@ let make = (~row: Row.t, ~children=?) => {
        }}
       {switch (children) {
        | Some(children) =>
-         <div className=SingleRow.RowStyles.childreWrapped> children </div>
+         <div className=Styles.childrenWrapped> children </div>
        | None => <> </>
        }}
     </CustomWrapped>
