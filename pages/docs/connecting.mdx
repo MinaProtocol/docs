@@ -22,10 +22,10 @@ Use [Homebrew](https://brew.sh/) to update the `mina` package.
 
 ```
 brew upgrade mina
-cp /tmp/s3_cache_dir/config_f5aa1fb.json ~/.coda_config/daemon.json
+wget -O ~/.coda_config/daemon.json https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/genesis_ledger.json
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]f5aa1fb1b6fa4e0fabbc8f7221c0ca94d31fa0c9 on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]60c98f961a50d93ea79ab465370d0bf3e886acf1 on branch HEAD`.
 
 ### Ubuntu 18.04 / Debian 9
 
