@@ -691,21 +691,21 @@ let make = (~grants) => {
   let (protocolRef, protocolVisible) =
     Hooks.useOnScreen(
       ~options=
-        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -100% 0px"}->Some,
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -100% 0%"}->Some,
       (),
     );
 
   let (marketingRef, marketingVisible) =
     Hooks.useOnScreen(
       ~options=
-        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -100% 0px"}->Some,
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -100% 0%"}->Some,
       (),
     );
 
   let (howToApplyRef, howToApplyVisible) =
     Hooks.useOnScreen(
       ~options=
-        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -80% 0px"}->Some,
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -80% 0%"}->Some,
       (),
     );
 
