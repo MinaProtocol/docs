@@ -82,14 +82,6 @@ module Styles = {
   let chevronWrap = style([height(`rem(1.)), marginRight(`rem(1.))]);
 };
 
-module CurrentSlugProvider = {
-  let (context, make, makeProps) = ReactExt.createContext("");
-};
-
-module SectionSlugProvider = {
-  let (context, make, makeProps) = ReactExt.createContext(None);
-};
-
 let slugConcat = (n1, n2) => {
   String.length(n2) > 0 ? n1 ++ "/" ++ n2 : n1;
 };
@@ -97,14 +89,13 @@ let slugConcat = (n1, n2) => {
 module Item = {
   [@react.component]
   let make = (~title, ~slug) => {
-    let folderSlug = React.useContext(SectionSlugProvider.context);
-    let currentItem =
-      Context.SideNavCurrentItemContext.useSideNavCurrentItem();
+    let folderSlug = Context.SectionSlugContext.useSection();
+    let currentItem = Context.SideNavCurrentItemContext.useCurrentItem();
 
     let (fullSlug, placement) =
       switch (folderSlug) {
-      | Some(fs) => (slugConcat(fs, slug), `Inner)
-      | None => (slug, `Top)
+      | SlugAvailable(fs) => (slugConcat(fs, slug), `Inner)
+      | SlugNotAvailable => (slug, `Top)
       };
     let isCurrentItem = currentItem == title;
     let href = fullSlug;
@@ -135,7 +126,7 @@ module Item = {
 module Section = {
   [@react.component]
   let make = (~title, ~slug, ~children) => {
-    let currentSlug = React.useContext(CurrentSlugProvider.context);
+    let currentSlug = Context.CurrentSlugContext.useCurrentSlug();
     let hasCurrentSlug = ref(false);
 
     // Check if the children's props contain the current slug
@@ -174,11 +165,12 @@ module Section = {
       </li>
       {!expanded
          ? React.null
-         : <SectionSlugProvider value={Some(slug)}>
+         : <Context.SectionSlugContext
+             value={Context.SectionSlugContext.SlugAvailable(slug)}>
              <div className=Styles.break>
                <ul className=Styles.childItem> children </ul>
              </div>
-           </SectionSlugProvider>}
+           </Context.SectionSlugContext>}
     </>;
   };
 };
@@ -186,8 +178,8 @@ module Section = {
 [@react.component]
 let make = (~currentSlug, ~className="", ~children) => {
   <aside className>
-    <CurrentSlugProvider value=currentSlug>
+    <Context.CurrentSlugContext value=currentSlug>
       <ol role="list" className=Styles.sideNav> children </ol>
-    </CurrentSlugProvider>
+    </Context.CurrentSlugContext>
   </aside>;
 };

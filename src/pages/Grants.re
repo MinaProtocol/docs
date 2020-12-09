@@ -150,11 +150,11 @@ module FAQ = {
     };
   };
   [@react.component]
-  let make = (~titleRef) => {
+  let make = (~ref_) => {
     <Wrapped>
       <Section title="General Questions" subhead="" slug="faq">
         <hr className=Theme.Type.divider />
-        <div ref={ReactDOMRe.Ref.domRef(titleRef)}>
+        <div ref={ReactDOMRe.Ref.domRef(ref_)}>
           <FAQRow
             title="Where do I begin if I want to understand how Mina works?">
             <Spacer height=1. />
@@ -363,9 +363,9 @@ module Project = {
 
 module FrontEndProjects = {
   [@react.component]
-  let make = (~titleRef) =>
+  let make = (~ref_) =>
     <div
-      ref={ReactDOMRe.Ref.domRef(titleRef)}
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
@@ -473,9 +473,9 @@ module FrontEndProjects = {
 
 module ProtocolProjects = {
   [@react.component]
-  let make = (~titleRef) =>
+  let make = (~ref_) =>
     <div
-      ref={ReactDOMRe.Ref.domRef(titleRef)}
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
@@ -533,9 +533,9 @@ module ProtocolProjects = {
 
 module MarketingAndCommunityProjects = {
   [@react.component]
-  let make = (~titleRef) =>
+  let make = (~ref_) =>
     <div
-      ref={ReactDOMRe.Ref.domRef(titleRef)}
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
@@ -606,9 +606,9 @@ module MarketingAndCommunityProjects = {
 
 module HowToApply = {
   [@react.component]
-  let make = (~titleRef) =>
+  let make = (~ref_) =>
     <section id="how-to-apply">
-      <div className=Styles.background ref={ReactDOMRe.Ref.domRef(titleRef)}>
+      <div className=Styles.background ref={ReactDOMRe.Ref.domRef(ref_)}>
         <FeaturedSingleRow
           row={
             FeaturedSingleRow.Row.rowType: ImageRightCopyLeft,
@@ -764,14 +764,12 @@ let make = (~grants) => {
   let renderSideNav = () => {
     <Context.SideNavCurrentItemContext value=currentItem>
       <GrantsNav.SideNav>
-        <>
-          {navItems
-           |> Array.map(item => {
-                let (title, slug) = item;
-                <span key=title> <SideNav.Item title slug /> </span>;
-              })
-           |> React.array}
-        </>
+        {navItems
+         |> Array.map(item => {
+              let (title, slug) = item;
+              <span key=title> <SideNav.Item title slug /> </span>;
+            })
+         |> React.array}
       </GrantsNav.SideNav>
     </Context.SideNavCurrentItemContext>;
   };
@@ -810,10 +808,10 @@ let make = (~grants) => {
     </div>
     {renderSideNav()}
     <GrantsNav.Dropdown />
-    <FrontEndProjects titleRef=frontEndRef />
-    <ProtocolProjects titleRef=protocolRef />
-    <MarketingAndCommunityProjects titleRef=marketingRef />
-    <HowToApply titleRef=howToApplyRef />
+    <FrontEndProjects ref_=frontEndRef />
+    <ProtocolProjects ref_=protocolRef />
+    <MarketingAndCommunityProjects ref_=marketingRef />
+    <HowToApply ref_=howToApplyRef />
     <section id="contributors">
       <div
         ref={ReactDOMRe.Ref.domRef(contributersRef)}
@@ -830,7 +828,7 @@ let make = (~grants) => {
         </Wrapped>
       </div>
     </section>
-    <FAQ titleRef=faqRef />
+    <FAQ ref_=faqRef />
   </Page>;
 };
 
