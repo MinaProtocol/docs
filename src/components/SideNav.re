@@ -97,14 +97,16 @@ let slugConcat = (n1, n2) => {
 module Item = {
   [@react.component]
   let make = (~title, ~slug) => {
-    let currentSlug = React.useContext(CurrentSlugProvider.context);
     let folderSlug = React.useContext(SectionSlugProvider.context);
+    let currentItem =
+      Context.SideNavCurrentItemContext.useSideNavCurrentItem();
+
     let (fullSlug, placement) =
       switch (folderSlug) {
       | Some(fs) => (slugConcat(fs, slug), `Inner)
       | None => (slug, `Top)
       };
-    let isCurrentItem = currentSlug == fullSlug;
+    let isCurrentItem = currentItem == title;
     let href = fullSlug;
     <li
       className={
