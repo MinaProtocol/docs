@@ -115,8 +115,9 @@ module Styles = {
 
 module Section = {
   [@react.component]
-  let make = (~title, ~subhead, ~slug, ~children) => {
-    <section className=Styles.section id=slug>
+  let make = (~title, ~subhead, ~slug, ~ref_, ~children) => {
+    <section
+      ref={ReactDOMRe.Ref.domRef(ref_)} className=Styles.section id=slug>
       <h2 className=Theme.Type.h2> {React.string(title)} </h2>
       <Spacer height=1.5 />
       <p className=Theme.Type.sectionSubhead> {React.string(subhead)} </p>
@@ -129,12 +130,13 @@ module Section = {
 
 module HowMinaWorks = {
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Styles.divider />
       <Section
+        ref_
         title="How Mina Works"
         subhead={js|Mina is a layer one protocol designed to deliver on the original promise of blockchain — true decentralization, scale and security.|js}
         slug="how-mina-works">
@@ -283,7 +285,7 @@ module Projects = {
   };
 
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div
       className={Css.merge([
         Styles.sectionContainer("/static/img/tech-projects-bg.jpg"),
@@ -291,6 +293,7 @@ module Projects = {
       ])}>
       <Spacer height=5. />
       <Section
+        ref_
         title="Projects & Possibilities"
         subhead={js|Developers are already building powerful applications on Mina — but this is just the beginning.|js}
         slug="projects">
@@ -394,11 +397,12 @@ module Incentives = {
   };
 
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div className={Styles.sectionContainer("")}>
       <Spacer height=1.5 />
       <hr className=Styles.divider />
       <Section
+        ref_
         title="Incentive Structure"
         subhead="From its protocol architecture and roles framework to its incentive structure and monetary policy, Mina is designed to maximize network scalability and security."
         slug="incentives">
@@ -445,6 +449,86 @@ module Incentives = {
 
 [@react.component]
 let make = () => {
+  let (howMinaWorksRef, howMinaWorksVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -150px 0px"}
+        ->Some,
+      (),
+    );
+  let (projectPossibilitiesRef, projectPossibilitiesVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -90% 0%"}->Some,
+      (),
+    );
+  let (incentiveRef, incentiveVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -90% 0%"}->Some,
+      (),
+    );
+
+  let (whereHeadedRef, whereHeadedVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -90% 0%"}->Some,
+      (),
+    );
+
+  let (knowledgebaseRef, knowledgebaseVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -90% 0%"}->Some,
+      (),
+    );
+  let (currentItem, setCurrentItem) = React.useState(_ => "");
+
+  let navItems = [|
+    ("How Mina Works", "#how-mina-works"),
+    ("Projects & Possibilities", "#projects"),
+    ("Incentive Structure", "#incentives"),
+    ("Where We're Headed", "#roadmap"),
+    ("Knowledge Base", "#knowledge"),
+  |];
+
+  React.useEffect5(
+    () => {
+      howMinaWorksVisible ? setCurrentItem(_ => "How Mina Works") : ();
+
+      projectPossibilitiesVisible
+        ? setCurrentItem(_ => "Projects & Possibilities") : ();
+
+      incentiveVisible ? setCurrentItem(_ => "Incentive Structure") : ();
+
+      whereHeadedVisible ? setCurrentItem(_ => "Where We're Headed") : ();
+
+      knowledgebaseVisible ? setCurrentItem(_ => "Knowledge Base") : ();
+
+      None;
+    },
+    (
+      howMinaWorksVisible,
+      projectPossibilitiesVisible,
+      incentiveVisible,
+      whereHeadedVisible,
+      knowledgebaseVisible,
+    ),
+  );
+
+  let renderSideNav = () => {
+    <Context.SideNavCurrentItemContext value=currentItem>
+      <TechNav.SideNav>
+        {navItems
+         |> Array.map(item => {
+              let (title, slug) = item;
+              <span key=title> <SideNav.Item title slug /> </span>;
+            })
+         |> React.array}
+      </TechNav.SideNav>
+    </Context.SideNavCurrentItemContext>;
+  };
+
   <Page title="Mina Cryptocurrency Protocol" footerColor=Theme.Colors.orange>
     <div className=Nav.Styles.spacer />
     <Hero
@@ -461,15 +545,16 @@ let make = () => {
         )
       }
     />
-    <TechNav.SideNav />
+    {renderSideNav()}
     <TechNav.Dropdown />
-    <HowMinaWorks />
-    <Projects />
-    <Incentives />
+    <HowMinaWorks ref_=howMinaWorksRef />
+    <Projects ref_=projectPossibilitiesRef />
+    <Incentives ref_=incentiveRef />
     <div
       className={Styles.sectionContainer("/static/img/tech-projects-bg.jpg")}>
       <Spacer height=1.5 />
       <Section
+        ref_=whereHeadedRef
         title="Mina Milestones and the Road Ahead"
         subhead={js|
           We’re proud of what we’ve accomplished with our community so far — and
@@ -514,7 +599,10 @@ let make = () => {
       }
     />
     <div className={Styles.sectionContainer("")}>
-      <section className=Styles.section id="knowledge">
+      <section
+        ref={ReactDOMRe.Ref.domRef(knowledgebaseRef)}
+        className=Styles.section
+        id="knowledge">
         <Spacer height=6. />
         <KnowledgeBase />
       </section>
