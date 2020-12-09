@@ -174,13 +174,12 @@ let make = () => {
         </p>
         <p className=Styles.copy>
           {React.string(
-             "In June of 2017, O(1) Labs kicked off an ambitious
+             {js|In June of 2017, O(1) Labs kicked off an ambitious
                new open source project to design a layer one protocol
-               that could deliver on the original promise of blockchain
-               - true decentralization, scale and security.
+               that could deliver on the original promise of blockchain—true decentralization, scale and security.
                Rather than apply brute computing force, Mina offers
                an elegant solution using advanced cryptography
-               and recursive zk-SNARKs. ",
+               and recursive zk-SNARKs.|js},
            )}
         </p>
         <Spacer height=1. />
