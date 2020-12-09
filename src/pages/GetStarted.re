@@ -52,7 +52,7 @@ let make = () => {
         AlternatingSections.Section.SimpleRow([|
           {
             AlternatingSections.Section.SimpleRow.title: "Run a Node",
-            description: "Other protocols are so heavy they require intermediaries to run nodes, recreating the same old power dynamics. But Mina is light, so anyone can connect peer-to-peer and sync and verify the chain in seconds. Built on a consistent-sized cryptographic proof, the blockchain will stay accessible - even as it scales to millions of users.",
+            description: {js|Other protocols are so heavy they require intermediaries to run nodes, recreating the same old power dynamics. But Mina is light, so anyone can connect peer-to-peer and sync and verify the chain in seconds. Built on a consistent-sized cryptographic proof, the blockchain will stay accessible—even as it scales to millions of users.|js},
             buttonCopy: "Get Started",
             buttonUrl: `Internal("/docs/node-operator"),
             image: "/static/img/rowImages/RunANode.jpg",
