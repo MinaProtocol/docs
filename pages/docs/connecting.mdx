@@ -99,7 +99,10 @@ Then run the following commands to start up a Mina node instance and connect to 
 ```
 systemctl --user daemon-reload
 systemctl --user start mina
+systemctl --user enable mina
+loginctl enable-linger
 ```
+These commands will allow the node to continue running after you logout, and restart automatically when the machine reboots.
 
 By default, the node connects to the network using the default external-port of 8302. This can be changed using the `-external-port` flag, just add that to EXTRA_FLAGS.
 
@@ -111,13 +114,13 @@ This command will let you know if `mina` had any trouble getting started.
 systemctl --user status mina
 ```
 
-You can stop mina:
+You can stop mina gracefully, and stop automatically-restarting the service:
 
 ```
 systemctl --user stop mina
 ```
 
-Restart it:
+Manually Restart it:
 
 ```
 systemctl --user restart mina
