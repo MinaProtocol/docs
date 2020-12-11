@@ -78,17 +78,19 @@ let make = () => {
             }),
         }
       />
-      <BlogModule
-        source=`Announcement
-        title="Mina Announcements"
-        itemKind=ListModule.Announcement
-        buttonHref={`Internal("/announcements")}
-      />
-      <BlogModule
-        source=`Press
-        itemKind=ListModule.Press
-        buttonHref={`Internal("/media")}
-      />
+      <Wrapped>
+        <BlogModule
+          source=`Announcement
+          title="Mina Announcements"
+          itemKind=ListModule.Announcement
+          buttonHref={`Internal("/announcements")}
+        />
+        <BlogModule
+          source=`Press
+          itemKind=ListModule.Press
+          buttonHref={`Internal("/media")}
+        />
+      </Wrapped>
     </div>
   </Page>;
 };

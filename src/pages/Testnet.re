@@ -148,7 +148,7 @@ let make = () => {
       <FeaturedSingleRow
         row={
           FeaturedSingleRow.Row.rowType: ImageRightCopyLeft,
-          copySize: `Large,
+          copySize: `Small,
           title: "Testnet Challenges",
           description: "Learn how to operate the protocol, while contributing to Mina's network resilience.",
           textColor: Theme.Colors.white,
@@ -166,7 +166,7 @@ let make = () => {
             }),
         }
       />
-      <TestnetRetroModule />
+      <Wrapped> <TestnetRetroModule /> </Wrapped>
       <ButtonBar
         kind=ButtonBar.HelpAndSupport
         backgroundImg="/static/img/ButtonBarBackground.jpg"

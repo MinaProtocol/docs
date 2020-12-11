@@ -499,7 +499,7 @@ let make = () => {
           We make it as simple as possible to participate in Mina. With clear documentation, a supportive community and a chain that syncs in seconds, we’ll get you up and running in record time.
         |js},
         textColor: `currentColor,
-        copySize: `Large,
+        copySize: `Small,
         image: "/static/img/tech-skateboard.jpg",
         background: Image("/static/img/MinaSpectrumPrimary3.jpg"),
         link:
@@ -529,7 +529,7 @@ let make = () => {
           coding skills to work at the protocol level?
         |js},
         textColor: `currentColor,
-        copySize: `Large,
+        copySize: `Small,
         image: "/static/img/tech-touch.jpg",
         background: Image("/static/img/MinaSpectrumPrimarySilver.jpg"),
         link:

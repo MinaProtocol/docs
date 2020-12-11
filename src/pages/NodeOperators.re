@@ -360,7 +360,7 @@ let make = () => {
       <FeaturedSingleRow
         row=FeaturedSingleRow.Row.{
           rowType: ImageRightCopyLeft,
-          copySize: `Large,
+          copySize: `Small,
           title: "Genesis Program",
           description: "Calling all block producers and snark producers, community leaders and content creators! Join Genesis, meet great people, play an essential role in the network, and earn Mina tokens.",
           textColor: Theme.Colors.white,

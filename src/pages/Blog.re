@@ -197,6 +197,7 @@ let make = (~posts) => {
               }),
             title: featured.ContentType.BlogPost.title,
             description: featured.snippet,
+            copySize: `Large,
             textColor: Theme.Colors.white,
             image: "/static/img/BlogLandingHero.jpg",
             background: Image(""),

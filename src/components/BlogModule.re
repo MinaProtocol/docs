@@ -95,20 +95,19 @@ let make =
   });
 
   <div className=Styles.container>
-    <Wrapped>
-      <Title
-        copy=title
-        buttonCopy={
-          switch (itemKind) {
-          | ListModule.Blog => "See all posts"
-          | ListModule.Press => "See all press"
-          | ListModule.Announcement => "See all announcements"
-          | ListModule.TestnetRetro => "See all posts"
-          }
+    <Title
+      copy=title
+      buttonCopy={
+        switch (itemKind) {
+        | ListModule.Blog => "See all posts"
+        | ListModule.Press => "See all press"
+        | ListModule.Announcement => "See all announcements"
+        | ListModule.TestnetRetro => "See all posts"
+        | ListModule.JobPost => "See all oppportunities"
         }
-        buttonHref
-      />
-    </Wrapped>
+      }
+      buttonHref
+    />
     <ListModule items=content itemKind />
   </div>;
 };

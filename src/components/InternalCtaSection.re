@@ -44,10 +44,7 @@ module Item = {
       <img className=Styles.image src={item.img} />
       <p className=Theme.Type.paragraph> {React.string(item.snippet)} </p>
       <Next.Link href={item.url}>
-        <div className=ListModule.Listing.ListingStyles.link>
-          <span> {React.string("Read more")} </span>
-          <Icon kind=Icon.ArrowRightMedium />
-        </div>
+        {ListModule.renderReadMoreLabel()}
       </Next.Link>
     </div>;
   };

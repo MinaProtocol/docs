@@ -36,6 +36,7 @@ module Row = {
     header: option(header),
     title: string,
     description: string,
+    copySize: [ | `Large | `Small],
     textColor: Css.color,
     image: string,
     background: backgroundType,
@@ -73,7 +74,7 @@ module Styles = {
     style([
       zIndex(Theme.StackingIndex.zNav),
       width(`percent(100.)),
-      maxHeight(`rem(35.)),
+      maxHeight(`rem(38.)),
       overflow(`scroll),
       unsafe("height", "fit-content"),
       margin2(~h=`rem(5.), ~v=`zero),
@@ -81,7 +82,7 @@ module Styles = {
       flexDirection(`column),
       alignItems(`flexStart),
       justifyContent(`spaceBetween),
-      padding(`rem(2.)),
+      padding(`rem(2.5)),
       backgroundSize(`cover),
       media(
         Theme.MediaQuery.notMobile,
@@ -121,21 +122,28 @@ module Styles = {
       fontSize(`rem(0.7)),
     ]);
 
-  let description =
+  let icon =
+    style([display(`flex), alignItems(`center), marginLeft(`rem(0.5))]);
+
+  let description = copySize =>
     merge([
       Theme.Type.sectionSubhead,
       style([
         overflow(`hidden),
         marginTop(`rem(1.)),
         width(`percent(100.)),
-        media(
-          Theme.MediaQuery.desktop,
-          [
-            unsafe("display", "-webkit-box"),
-            unsafe("WebkitLineClamp", "6"),
-            unsafe("WebkitBoxOrient", "vertical"),
-          ],
-        ),
+        switch (copySize) {
+        | `Small => media(Theme.MediaQuery.desktop, [])
+        | `Large =>
+          media(
+            Theme.MediaQuery.desktop,
+            [
+              unsafe("display", "-webkit-box"),
+              unsafe("WebkitLineClamp", "6"),
+              unsafe("WebkitBoxOrient", "vertical"),
+            ],
+          )
+        },
       ]),
     ]);
 
@@ -211,9 +219,8 @@ module ImageLeftCopyRight = {
                </>
              | None => React.null
              }}
-            <Spacer height=1.5 />
             <h2 className=Theme.Type.h2> {React.string(row.title)} </h2>
-            <p className=Styles.description>
+            <p className={Styles.description(row.copySize)}>
               {React.string(row.description)}
             </p>
           </div>
@@ -236,7 +243,9 @@ module ImageLeftCopyRight = {
                    <Spacer height=1. />
                    <span className=Theme.Type.buttonLink>
                      <span> {React.string(label.labelText)} </span>
-                     <Icon kind=Icon.ArrowRightMedium />
+                     <span className=Styles.icon>
+                       <Icon kind=Icon.ArrowRightMedium />
+                     </span>
                    </span>
                  </span>
                </Button.Link>
@@ -298,9 +307,8 @@ module ImageRightCopyLeft = {
                </>
              | None => React.null
              }}
-            <Spacer height=1.5 />
             <h2 className=Theme.Type.h2> {React.string(row.title)} </h2>
-            <p className=Styles.description>
+            <p className={Styles.description(row.copySize)}>
               {React.string(row.description)}
             </p>
           </div>
@@ -323,7 +331,9 @@ module ImageRightCopyLeft = {
                    <Spacer height=1. />
                    <span className=Theme.Type.buttonLink>
                      <span> {React.string(label.labelText)} </span>
-                     <Icon kind=Icon.ArrowRightMedium />
+                     <span className=Styles.icon>
+                       <Icon kind=Icon.ArrowRightMedium />
+                     </span>
                    </span>
                  </span>
                </Button.Link>

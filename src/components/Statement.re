@@ -58,7 +58,11 @@ module Styles = {
   let statement =
     merge([
       Theme.Type.quote,
-      style([fontSize(`rem(1.3)), marginBottom(`rem(1.))]),
+      style([
+        fontSize(`rem(1.3)),
+        marginTop(`rem(1.5)),
+        marginBottom(`rem(1.)),
+      ]),
     ]);
 
   let attribute =

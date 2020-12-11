@@ -29,11 +29,8 @@ module Styles = {
       media(Theme.MediaQuery.desktop, [marginTop(`zero)]),
     ]);
 
-  let h2 =
-    merge([
-      Theme.Type.h2,
-      style([color(black), width(`percent(80.)), fontWeight(`light)]),
-    ]);
+  let h3 =
+    merge([Theme.Type.h3, style([width(`rem(8.5)), fontWeight(`light)])]);
 
   let h4 = merge([Theme.Type.h4, style([fontWeight(`normal)])]);
 
@@ -87,7 +84,7 @@ module GridItem = {
 let make = (~title, ~description, ~sections: array(section)) => {
   <div className=Styles.container>
     <div>
-      <h2 className=Styles.h2> {React.string(title)} </h2>
+      <h3 className=Styles.h3> {React.string(title)} </h3>
       {switch (description) {
        | Some(description) =>
          <div className=Styles.description>
