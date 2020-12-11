@@ -150,11 +150,11 @@ module FAQ = {
     };
   };
   [@react.component]
-  let make = () => {
+  let make = (~ref_) => {
     <Wrapped>
       <Section title="General Questions" subhead="" slug="faq">
         <hr className=Theme.Type.divider />
-        <div>
+        <div ref={ReactDOMRe.Ref.domRef(ref_)}>
           <FAQRow
             title="Where do I begin if I want to understand how Mina works?">
             <Spacer height=1. />
@@ -363,8 +363,9 @@ module Project = {
 
 module FrontEndProjects = {
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
@@ -472,8 +473,9 @@ module FrontEndProjects = {
 
 module ProtocolProjects = {
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
@@ -531,8 +533,9 @@ module ProtocolProjects = {
 
 module MarketingAndCommunityProjects = {
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
@@ -603,9 +606,9 @@ module MarketingAndCommunityProjects = {
 
 module HowToApply = {
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <section id="how-to-apply">
-      <div className=Styles.background>
+      <div className=Styles.background ref={ReactDOMRe.Ref.domRef(ref_)}>
         <FeaturedSingleRow
           row={
             FeaturedSingleRow.Row.rowType: ImageRightCopyLeft,
@@ -678,6 +681,99 @@ module HowToApply = {
 
 [@react.component]
 let make = (~grants) => {
+  let (frontEndRef, frontEndVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -150px 0px"}
+        ->Some,
+      (),
+    );
+  let (protocolRef, protocolVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -100% 0%"}->Some,
+      (),
+    );
+
+  let (marketingRef, marketingVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -100% 0%"}->Some,
+      (),
+    );
+
+  let (howToApplyRef, howToApplyVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -80% 0%"}->Some,
+      (),
+    );
+
+  let (contributersRef, contributersVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -50% 0px"}->Some,
+      (),
+    );
+
+  let (faqRef, faqVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -70% 0px"}->Some,
+      (),
+    );
+  let (currentItem, setCurrentItem) = React.useState(_ => "");
+
+  let navItems = [|
+    ("Product / Front-end Projects", "#frontend"),
+    ("Protocol Projects", "#protocol"),
+    ("Opening Marketing and Community Projects", "#marketing-community"),
+    ("How to Apply", "#how-to-apply"),
+    ("Contributers", "#contributers"),
+    ("FAQ", "#faq"),
+  |];
+
+  React.useEffect6(
+    () => {
+      frontEndVisible
+        ? setCurrentItem(_ => "Product / Front-end Projects") : ();
+
+      protocolVisible ? setCurrentItem(_ => "Protocol Projects") : ();
+
+      marketingVisible
+        ? setCurrentItem(_ => "Opening Marketing and Community Projects") : ();
+
+      howToApplyVisible ? setCurrentItem(_ => "How to Apply") : ();
+
+      contributersVisible ? setCurrentItem(_ => "Contributers") : ();
+
+      faqVisible ? setCurrentItem(_ => "FAQ") : ();
+
+      None;
+    },
+    (
+      frontEndVisible,
+      protocolVisible,
+      marketingVisible,
+      howToApplyVisible,
+      contributersVisible,
+      faqVisible,
+    ),
+  );
+
+  let renderSideNav = () => {
+    <Context.SideNavCurrentItemContext value=currentItem>
+      <GrantsNav.SideNav>
+        {navItems
+         |> Array.map(item => {
+              let (title, slug) = item;
+              <span key=title> <SideNav.Item title slug /> </span>;
+            })
+         |> React.array}
+      </GrantsNav.SideNav>
+    </Context.SideNavCurrentItemContext>;
+  };
+
   <Page title="Mina Cryptocurrency Protocol" footerColor=Theme.Colors.orange>
     <div className=Nav.Styles.spacer />
     <Hero
@@ -710,14 +806,16 @@ let make = (~grants) => {
         </div>
       </Wrapped>
     </div>
-    <GrantsNav.SideNav />
+    {renderSideNav()}
     <GrantsNav.Dropdown />
-    <FrontEndProjects />
-    <ProtocolProjects />
-    <MarketingAndCommunityProjects />
-    <HowToApply />
+    <FrontEndProjects ref_=frontEndRef />
+    <ProtocolProjects ref_=protocolRef />
+    <MarketingAndCommunityProjects ref_=marketingRef />
+    <HowToApply ref_=howToApplyRef />
     <section id="contributors">
-      <div className=Styles.grantsBackground>
+      <div
+        ref={ReactDOMRe.Ref.domRef(contributersRef)}
+        className=Styles.grantsBackground>
         <Wrapped>
           <Rule color=Theme.Colors.white />
           <Carousel
@@ -730,7 +828,7 @@ let make = (~grants) => {
         </Wrapped>
       </div>
     </section>
-    <FAQ />
+    <FAQ ref_=faqRef />
   </Page>;
 };
 

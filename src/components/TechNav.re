@@ -24,7 +24,7 @@ module SideNav = {
   module Section = SideNav.Section;
 
   [@react.component]
-  let make = () => {
+  let make = (~children) => {
     let router = Next.Router.useRouter();
     let hashExp = Js.Re.fromString("#(.+)");
     let scrollTop = Hooks.useScroll();
@@ -46,11 +46,7 @@ module SideNav = {
     });
 
     <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 1000)}>
-      <Item title="How Mina Works" slug="#how-mina-works" />
-      <Item title="Projects & Possibilities" slug="#projects" />
-      <Item title="Incentive Structure" slug="#incentives" />
-      <Item title="Where We're Headed" slug="#roadmap" />
-      <Item title="Knowledge Base" slug="#knowledge" />
+      children
     </SideNav>;
   };
 };

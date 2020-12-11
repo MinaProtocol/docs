@@ -20,3 +20,36 @@ let useScroll = () => {
 
   bodyOffset;
 };
+
+let useOnScreen = (~options, ()) => {
+  open ReactExt.IntersectionObserver;
+  let currentRef = React.useRef(Js.Nullable.null);
+  let (visible, setVisible) = React.useState(() => false);
+
+  React.useEffect2(
+    () => {
+      let observer =
+        newIntersectionObserver(
+          ~cb=
+            (entries, _) => {
+              entries
+              ->Belt.Array.map(entry => setVisible(_ => entry.isIntersecting))
+              ->ignore;
+              ();
+            },
+          ~options,
+        );
+
+      let currentRef = Js.Nullable.toOption(currentRef.current);
+      Belt.Option.forEach(currentRef, ref_ => {observe(observer, ref_)});
+
+      Some(
+        () => {
+          Belt.Option.forEach(currentRef, ref_ => {unobserve(observer, ref_)})
+        },
+      );
+    },
+    (currentRef, visible),
+  );
+  (currentRef, visible);
+};

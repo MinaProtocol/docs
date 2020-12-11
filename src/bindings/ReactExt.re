@@ -20,6 +20,31 @@ module Window = {
     "addEventListener";
 };
 
+module IntersectionObserver = {
+  type entry = {
+    intersectionRatio: float,
+    isIntersecting: bool,
+    isVisible: bool,
+    target: Dom.element,
+  };
+  type entries = array(entry);
+  type observer = {
+    root: option(Dom.element),
+    rootMargin: string,
+    thresholds: array(float),
+  };
+  type options = {rootMargin: string};
+
+  [@bs.new]
+  external newIntersectionObserver:
+    (~cb: (entries, observer) => unit, ~options: option(options)) => observer =
+    "IntersectionObserver";
+
+  [@bs.send] external observe: (observer, Dom.element) => unit = "observe";
+
+  [@bs.send] external unobserve: (observer, Dom.element) => unit = "unobserve";
+};
+
 [@bs.obj]
 external makeProps:
   (~value: 'a, ~children: React.element, unit) =>

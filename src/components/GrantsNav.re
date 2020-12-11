@@ -20,11 +20,8 @@ module SideNav = {
       ]);
   };
 
-  module Item = SideNav.Item;
-  module Section = SideNav.Section;
-
   [@react.component]
-  let make = () => {
+  let make = (~children) => {
     let router = Next.Router.useRouter();
     let hashExp = Js.Re.fromString("#(.+)");
     let scrollTop = Hooks.useScroll();
@@ -46,15 +43,7 @@ module SideNav = {
     });
 
     <SideNav currentSlug=hash className={Styles.sideNav(scrollTop > 2400)}>
-      <Item title="Product / Front-end Projects" slug="#frontend" />
-      <Item title="Protocol Projects" slug="#protocol" />
-      <Item
-        title="Opening Marketing and Community Projects"
-        slug="#marketing-community"
-      />
-      <Item title="How to Apply" slug="#how-to-apply" />
-      <Item title="Contributers" slug="#contributors" />
-      <Item title="FAQ" slug="#faq" />
+      children
     </SideNav>;
   };
 };
