@@ -1,6 +1,6 @@
 type state = {jobs: array(ContentType.JobPost.entries)};
 
-let fetchBlogs = () => {
+let fetchJobs = () => {
   Contentful.getEntries(
     Lazy.force(Contentful.client),
     {"include": 0, "content_type": ContentType.JobPost.id},
@@ -39,7 +39,7 @@ let make = () => {
   let (jobs, setJobs) = React.useState(_ => [||]);
 
   React.useEffect0(() => {
-    fetchBlogs()
+    fetchJobs()
     |> Promise.iter(jobs => {
          setJobs(_ =>
            jobs |> Array.map(ContentType.NormalizedPressBlog.ofJobPost)

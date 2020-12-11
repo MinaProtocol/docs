@@ -89,26 +89,29 @@ let renderInternalLinkKind = (itemKind, slug, inner) => {
   };
 };
 
-let renderHeadingLabel = (item: ContentType.NormalizedPressBlog.t, itemKind) => {
-  <>
-    {switch (itemKind) {
-     | Blog => <span> {React.string("Blog")} </span>
-     | Announcement => <span> {React.string("Announcement")} </span>
-     | Press => <span> {React.string("Press")} </span>
-     | TestnetRetro => <span> {React.string("Testnet Retro")} </span>
-     | JobPost =>
-       <span>
-         {React.string(Belt.Option.getWithDefault(item.description, ""))}
-       </span>
-     }}
-    <span> {React.string(" / ")} </span>
-    <span> {React.string(item.date)} </span>
-    <span> {React.string(" / ")} </span>
-    {switch (item.publisher) {
-     | Some(publisher) => <span> {React.string(publisher)} </span>
-     | None => React.null
-     }}
-  </>;
+module HeadingLabel = {
+  [@react.component]
+  let make = (~item: ContentType.NormalizedPressBlog.t, ~itemKind) => {
+    <>
+      {switch (itemKind) {
+       | Blog => <span> {React.string("Blog")} </span>
+       | Announcement => <span> {React.string("Announcement")} </span>
+       | Press => <span> {React.string("Press")} </span>
+       | TestnetRetro => <span> {React.string("Testnet Retro")} </span>
+       | JobPost =>
+         <span>
+           {React.string(Belt.Option.getWithDefault(item.description, ""))}
+         </span>
+       }}
+      <span> {React.string(" / ")} </span>
+      <span> {React.string(item.date)} </span>
+      <span> {React.string(" / ")} </span>
+      {switch (item.publisher) {
+       | Some(publisher) => <span> {React.string(publisher)} </span>
+       | None => React.null
+       }}
+    </>;
+  };
 };
 
 let renderReadMoreLabel = () => {
@@ -152,9 +155,7 @@ module MainListing = {
   [@react.component]
   let make = (~item: ContentType.NormalizedPressBlog.t, ~itemKind) => {
     <div className=MainListingStyles.container>
-      <div className=Styles.metadata>
-        {renderHeadingLabel(item, itemKind)}
-      </div>
+      <div className=Styles.metadata> <HeadingLabel item itemKind /> </div>
       {ReactExt.fromOpt(item.image, ~f=src =>
          <img src={src.ContentType.System.fields.ContentType.Image.file.url} />
        )}
@@ -200,7 +201,7 @@ module Listing = {
     |> Array.map((item: ContentType.NormalizedPressBlog.t) => {
          <div className=ListingStyles.container key={item.title}>
            <div className=Styles.metadata>
-             {renderHeadingLabel(item, itemKind)}
+             <HeadingLabel item itemKind />
            </div>
            <h5 className=Styles.title> {React.string(item.title)} </h5>
            {button(item)}
