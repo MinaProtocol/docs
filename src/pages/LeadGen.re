@@ -168,7 +168,7 @@ let make = () => {
     showFooter=false
     darkTheme=true
     announcementCopy="Mina's Advesarial Testnet is coming!"
-    announcementCTACopy="Sign up to be notified"
+    announcementCTACopy="Sign Up to Participate"
     announcementFormUrl=Constants.minaAdversarial>
     <div className=Styles.page>
       <div className=Styles.background>
