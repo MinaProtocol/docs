@@ -56,7 +56,7 @@ external urlSearchParams: Js.t('a) => Fetch.urlSearchParams =
   "URLSearchParams";
 
 [@react.component]
-let make = () => {
+let make = (~formId) => {
   let (successState, showSuccess) = React.useState(() => false);
   let (email, setEmail) = React.useState(() => "");
   let submitForm = e => {
@@ -66,7 +66,7 @@ let make = () => {
       ~method_=Post,
       ~body=
         Fetch.BodyInit.makeWithUrlSearchParams(
-          urlSearchParams({"email": email}),
+          urlSearchParams({"email": email, "formId": formId}),
         ),
       ~mode=NoCORS,
     )
@@ -81,7 +81,9 @@ let make = () => {
     {successState
        ? <div className=Styles.successState>
            <span className=Styles.successText>
-             {React.string("Thank you for signing up to receive Mina updates!")}
+             {React.string(
+                "Thank you for signing up to receive Mina updates!",
+              )}
            </span>
          </div>
        : <div className=Styles.inputContainer>
