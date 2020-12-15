@@ -18,6 +18,8 @@ module Colors = {
   let operational = `hex("9FE4C9");
   let amber = `rgb((242, 149, 68));
   let amberAlpha = a => `rgba((242, 149, 68, a));
+  let announcementBar = `hex("737373");
+  let rewardPromo = `hex("595959");
 };
 
 module Typeface = {
@@ -292,6 +294,11 @@ module Type = {
       fontWeight(`num(500)),
       fontSize(`px(16)),
       lineHeight(`rem(1.5)),
+    ]);
+
+    let reward =
+    style([
+      Typeface.monumentGrotesk,
     ]);
 
   let errorMessage =
