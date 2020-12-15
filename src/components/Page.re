@@ -26,6 +26,9 @@ let make =
       ~footerColor=Theme.Colors.white,
       ~darkTheme=false,
       ~showFooter=true,
+      ~announcementCopy="Mina is growing fast!",
+      ~announcementCTACopy="Subscribe to stay updated",
+      ~announcementFormUrl=Constants.minaNewsletter,
     ) => {
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);
@@ -68,8 +71,9 @@ let make =
         {React.string("img:-moz-loading { visibility: hidden; }")}
       </style>
     </Next.Head>
-    <AnnouncementBanner dark=darkTheme>
-      {React.string("Mina is growing fast!")}
+    <AnnouncementBanner
+      dark=darkTheme copy=announcementCTACopy url=announcementFormUrl>
+      {React.string(announcementCopy)}
     </AnnouncementBanner>
     <Nav dark=darkTheme />
     <main> children </main>

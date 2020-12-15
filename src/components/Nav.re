@@ -271,7 +271,7 @@ let make = (~dark=false) => {
           href={`Internal("/genesis")}
           width={`rem(13.)}
           paddingX=1.
-          dark={width < Constants.desktopBreakpoint ? true : false}>
+          dark={width < Constants.desktopBreakpoint ? !dark : dark}>
           <img src="/static/img/promo-logo.svg" height="40" />
           <Spacer width=0.5 />
           <span> {React.string("Join Genesis Token Program")} </span>

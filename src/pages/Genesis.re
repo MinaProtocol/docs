@@ -249,7 +249,7 @@ module CultureFooter = {
 
 [@react.component]
 let make = (~profiles) => {
-  <Page title="Genesis Page">
+  <Page title="Mina Protocol Genesis">
     <div className=Nav.Styles.spacer />
     <Hero
       title="Community"

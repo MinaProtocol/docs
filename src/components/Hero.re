@@ -14,13 +14,17 @@ module Styles = {
         Theme.MediaQuery.tablet,
         [
           justifyContent(`flexStart),
-          height(`percent(100.)),
+          height(`rem(47.)),
           backgroundImage(`url(backgroundImg.tablet)),
         ],
       ),
       media(
         Theme.MediaQuery.desktop,
-        [backgroundImage(`url(backgroundImg.desktop))],
+        [
+          width(`percent(100.)),
+          height(`rem(47.)),
+          backgroundImage(`url(backgroundImg.desktop)),
+        ],
       ),
     ]);
   let marginX = x => [marginLeft(x), marginRight(x)];

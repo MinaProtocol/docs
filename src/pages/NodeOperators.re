@@ -206,8 +206,9 @@ module RunNode = {
 
 module NodeOverview = {
   [@react.component]
-  let make = () =>
+  let make = (~ref_) =>
     <div
+      ref={ReactDOMRe.Ref.domRef(ref_)}
       className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
       <Spacer height=6.5 />
       <hr className=Styles.divider />
@@ -303,6 +304,87 @@ module BlockExplorersAndTools = {
 
 [@react.component]
 let make = () => {
+  let (nodeOverviewRef, nodeOverviewVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -150px 0px"}
+        ->Some,
+      (),
+    );
+  let (testnetRef, testnetVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -70% 0%"}->Some,
+      (),
+    );
+
+  let (genesisProgramRef, genesisVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -70% 0%"}->Some,
+      (),
+    );
+
+  let (knowledgebaseRef, knowledgebaseVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0% 0% -80% 0%"}->Some,
+      (),
+    );
+
+  let (helpAndSupportRef, helpAndSupportVisible) =
+    Hooks.useOnScreen(
+      ~options=
+        {ReactExt.IntersectionObserver.rootMargin: "0px 0px -50% 0px"}->Some,
+      (),
+    );
+
+  let (currentItem, setCurrentItem) = React.useState(_ => "");
+
+  let navItems = [|
+    ("Node Overview", "#how-mina-works"),
+    ("Testnet", "#testnet"),
+    ("Genesis Program", "#genesis"),
+    ("Knowledge Base", "#knowledge"),
+    ("Help And Support", "#help-and-support"),
+  |];
+
+  React.useEffect5(
+    () => {
+      nodeOverviewVisible ? setCurrentItem(_ => "Node Overview") : ();
+
+      testnetVisible ? setCurrentItem(_ => "Testnet") : ();
+
+      genesisVisible ? setCurrentItem(_ => "Genesis Program") : ();
+
+      knowledgebaseVisible ? setCurrentItem(_ => "Knowledge Base") : ();
+
+      helpAndSupportVisible ? setCurrentItem(_ => "Help And Support") : ();
+
+      None;
+    },
+    (
+      nodeOverviewVisible,
+      testnetVisible,
+      genesisVisible,
+      knowledgebaseVisible,
+      helpAndSupportVisible,
+    ),
+  );
+
+  let renderSideNav = () => {
+    <Context.SideNavCurrentItemContext value=currentItem>
+      <NodeOperatorsNav.SideNav>
+        {navItems
+         |> Array.map(item => {
+              let (title, slug) = item;
+              <span key=title> <SideNav.Item title slug /> </span>;
+            })
+         |> React.array}
+      </NodeOperatorsNav.SideNav>
+    </Context.SideNavCurrentItemContext>;
+  };
+
   <Page title="Mina Cryptocurrency Protocol" footerColor=Theme.Colors.orange>
     <div className=Nav.Styles.spacer />
     <Hero
@@ -329,10 +411,10 @@ let make = () => {
         {React.string("Go To Documentation")}
       </Button>
     </Hero>
-    <NodeOperatorsNav.SideNav />
+    {renderSideNav()}
     <NodeOperatorsNav.Dropdown />
-    <NodeOverview />
-    <section id="testnet">
+    <NodeOverview ref_=nodeOverviewRef />
+    <section id="testnet" ref={ReactDOMRe.Ref.domRef(testnetRef)}>
       <FeaturedSingleRow
         row={
           FeaturedSingleRow.Row.rowType: ImageLeftCopyRight,
@@ -356,7 +438,7 @@ let make = () => {
     </section>
     // TODO: Not currently ready to ship. Update component with proper info when available.
     //<BlockExplorersAndTools />
-    <section id="genesis">
+    <section id="genesis" ref={ReactDOMRe.Ref.domRef(genesisProgramRef)}>
       <FeaturedSingleRow
         row=FeaturedSingleRow.Row.{
           rowType: ImageRightCopyLeft,
@@ -379,14 +461,17 @@ let make = () => {
         }
       />
     </section>
-    <div className=Styles.knowledgebaseBackground>
+    <div
+      ref={ReactDOMRe.Ref.domRef(knowledgebaseRef)}
+      className=Styles.knowledgebaseBackground>
       <Wrapped>
         <Section title="" subhead="" slug="knowledge">
           <KnowledgeBase />
         </Section>
       </Wrapped>
     </div>
-    <section id="help-and-support">
+    <section
+      ref={ReactDOMRe.Ref.domRef(helpAndSupportRef)} id="help-and-support">
       <ButtonBar
         kind=ButtonBar.HelpAndSupport
         backgroundImg="/static/img/ButtonBarBackground.jpg"
