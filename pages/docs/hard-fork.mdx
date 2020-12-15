@@ -1,0 +1,32 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Hard Fork" });
+
+# Hard Fork
+
+A hard fork occurs when there are major changes to the core protocol that require all nodes on the network to update to the latest software.
+
+## Overview
+
+A fork in a blockchain happens when the rules that determine which blocks are valid or invalid change. There are two types of forks: hard forks and soft forks. 
+
+A soft fork occurs when the new rules are still compatible with the old rules. This means users can still run an old version of the node software and still connect to the network.
+
+A hard fork means the old chain is incompatible with the new chain. An example of a hard fork is the Bitcoin Cash network, which used the original Bitcoin blockchain and then hard forked to a new network that is incompatible. As seen in this example, after a hard fork it is possible for two chains to exist. To avoid splitting the chain it is important that every node on the network updates to the latest software.
+
+## Process
+
+Participating in a hard fork is incredibly simple. Once a hard fork is announced, the first step is to update your node to the latest software. Next you will simply need to run your node and wait for the designated block height. After the fork occurs your node will sync to the latest chain and eventually a new block will be produced and the network will continue like usual.
+
+### Updating your node
+
+When the hard fork version is announced, first shut off any node(s) you have running.
+
+Next, remove your `.coda-config` folder since the fork will require syncing from scratch.
+
+```
+rm -rf ~/.coda-config
+```
+
+Now you can follow the instructions on the (Connecting to the Network)[/docs/connecting] to install the latest version of the daemon.
+
+Once your node syncs with the network you are all set. Just wait for the announced blockh height and your node will have successfully participated in a hard fork!
