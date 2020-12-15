@@ -105,10 +105,10 @@ let make = () => {
       </div>
       <div className=Theme.Type.metadata> {React.string("Metadata")} </div>
       <div className=Theme.Type.announcement>
-        <AnnouncementBar.Section/>
+        <AnnouncementBar/>
       </div>
       <div className=Theme.Type.reward>
-        <RewardsPromo.Rewards />
+        <RewardsPromo />
       </div>
       <div className=Theme.Type.errorMessage>
         {React.string("Error message")}

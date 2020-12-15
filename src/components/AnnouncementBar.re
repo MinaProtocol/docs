@@ -68,7 +68,7 @@ module Styles = {
 
 };
 
-module Section = {
+
 [@react.component]
 let make = () => {
   <div className=Styles.background>
@@ -89,5 +89,4 @@ let make = () => {
       </div>
     </div>
   </div>
-};
 };
