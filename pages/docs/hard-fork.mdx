@@ -15,7 +15,7 @@ A hard fork means the old chain is incompatible with the new chain. An example o
 
 ## Process
 
-Participating in a hard fork is incredibly simple. Once a hard fork is announced, the first step is to update your node to the latest software. Next you will simply need to run your node and wait for the designated block height. After the fork occurs your node will sync to the latest chain and eventually a new block will be produced and the network will continue like usual.
+Participating in a hard fork is incredibly simple. Once a hard fork is announced, the first step is to update your node to the latest software. Next you will simply need to run your node and wait until the configured network start time. After the fork occurs your node will sync to the latest chain and eventually a new block will be produced and the network will continue like usual.
 
 ### Updating your node
 
@@ -29,4 +29,17 @@ rm -rf ~/.coda-config
 
 Now you can follow the instructions on the [Connecting to the Network](/docs/connecting) to install the latest version of the daemon.
 
-Once your node syncs with the network you are all set. Just wait for the announced block height and your node will have successfully participated in a hard fork!
+Once your node syncs with the network you are all set. Just wait for the announced network start time and your node will have successfully participated in a hard fork!
+
+### Migrating your archive node
+
+If you are running an archive node, you will need to update the postgres database. We have included an automated script that will handle all the steps. Simply download [this sql script](https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql) and execute it on the machine running the archive node.
+
+First make sure your archive node is not running. Then download and execute the script.
+
+```
+wget -O https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql ~/update_schema.sql
+psql -d archive -f ~/update_schema.sql
+```
+
+Now you cam safely start the latest archive node.
