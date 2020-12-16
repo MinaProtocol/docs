@@ -18,7 +18,7 @@ module Styles = {
           textTransform(`uppercase),
           fontWeight(`num(100)),
           letterSpacing(`px(1)),
-          margin(`px(3))
+          margin(`px(7))
         ],
       ),
       selector(
@@ -59,7 +59,7 @@ module Styles = {
         media(
           Theme.MediaQuery.mobile,
           [
-            height(`px(625)),
+            height(`px(794)),
           ],
         ),
     ]);
@@ -111,9 +111,10 @@ let make = () => {
                <p>{React.string("IN BUG BOUNTY REWARDS")}</p>
           </div>
        <div className=Styles.column>
-         <p>{React.string(" AND")}</p>
-           <h1> {React.string("100,000+")} </h1> 
-             <p>{React.string("TESTNET POINTS*")}</p> 
+         <p>{React.string("AND HUNDREDS OF")}</p>
+           <h1> {React.string("Node Operator")} </h1> 
+            <p>{React.string("GENESIS PROGRAM")}</p> 
+            <p>{React.string("TOKEN GRANTS")}</p> 
          </div>
         </div>
   </div>

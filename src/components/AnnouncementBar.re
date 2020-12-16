@@ -5,7 +5,7 @@ module Styles = {
   merge([
     style([
       position(`absolute),
-      left(`px(0)),
+      left(`px(105)),
       right(`px(0)),
       display(`flex),
       flexDirection(`row),
@@ -39,6 +39,8 @@ module Styles = {
           flexDirection(`row),
           width(`percent(100.)),
           justifyContent(`spaceAround),
+          left(`px(-2)),
+          right(`px(0)),
         ],
       ),
     ]),
