@@ -33,9 +33,9 @@ Once your node syncs with the network you are all set. Just wait for the announc
 
 ### Migrating your archive node
 
-If you are running an archive node, you will need to update the postgres database. We have included an automated script that will handle all the steps. Simply download [this sql script](https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql) and execute it on the machine running the archive node.
+If you are running an archive node, you will need to update the postgres database. We have included an automated script that will handle all the steps.
 
-First make sure your archive node is not running. Then download and execute the script.
+First make sure your archive node is not running. Then simply download [this sql script](https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql) and execute it on the archive database.
 
 ```
 wget -O https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql ~/update_schema.sql
