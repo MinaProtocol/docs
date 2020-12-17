@@ -70,7 +70,7 @@ However, first we'll want to make sure everything works by running it manually b
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -block-producer-password "password" -generate-genesis-proof true
+coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -block-producer-password "password" -generate-genesis-proof true -file-log-level Info
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -89,7 +89,7 @@ Add a file `~/.mina-env` containing the following:
 
 ```
 CODA_PRIVKEY_PASS="YOUR PASSWORD HERE"
-EXTRA_FLAGS=""
+EXTRA_FLAGS=" -file-log-level Info "
 ```
 
 You can add extra flags later to `EXTRA_FLAGS` as you see fit.
@@ -159,7 +159,7 @@ daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
 -insecure-rest-server \
--file-log-level Debug \
+-file-log-level Info \
 -log-level Info
 ```
 
