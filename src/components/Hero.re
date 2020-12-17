@@ -1,9 +1,12 @@
 open Css;
 
 module Styles = {
-  let heroContainer = (backgroundImg: Theme.backgroundImage) =>
+  let heroContainer = (backgroundImg: Theme.backgroundImage, contentSize) =>
     style([
-      height(`rem(37.)),
+      switch (contentSize) {
+      | `Large => height(`percent(100.))
+      | `Small => height(`rem(37.))
+      },
       display(`flex),
       flexDirection(`column),
       justifyContent(`flexEnd),
@@ -14,7 +17,10 @@ module Styles = {
         Theme.MediaQuery.tablet,
         [
           justifyContent(`flexStart),
-          height(`rem(47.)),
+          switch (contentSize) {
+          | `Large => height(`percent(100.))
+          | `Small => height(`rem(47.))
+          },
           backgroundImage(`url(backgroundImg.tablet)),
         ],
       ),
@@ -22,7 +28,10 @@ module Styles = {
         Theme.MediaQuery.desktop,
         [
           width(`percent(100.)),
-          height(`rem(47.)),
+          switch (contentSize) {
+          | `Large => height(`percent(100.))
+          | `Small => height(`rem(47.))
+          },
           backgroundImage(`url(backgroundImg.desktop)),
         ],
       ),
@@ -112,9 +121,10 @@ let make =
       ~header: option(string),
       ~copy,
       ~background: Theme.backgroundImage,
+      ~contentSize=`Small,
       ~children=?,
     ) => {
-  <div className={Styles.heroContainer(background)}>
+  <div className={Styles.heroContainer(background, contentSize)}>
     <div className=Styles.heroContent>
       {ReactExt.fromOpt(title, ~f=s =>
          <h4 className=Styles.headerLabel> {React.string(s)} </h4>

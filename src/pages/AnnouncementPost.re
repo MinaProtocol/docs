@@ -119,6 +119,7 @@ let make = (~post: option(ContentType.Announcement.t)) => {
         title="Announcement"
         header={Some(title)}
         copy={Some(snippet)}
+        contentSize=`Large
         background=Theme.{
           desktop: "/static/img/BlogDetailImage.jpg",
           tablet: "/static/img/BlogDetailImage.jpg",

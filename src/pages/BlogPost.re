@@ -119,6 +119,7 @@ let make = (~post: option(ContentType.BlogPost.t)) => {
         title="Blog"
         header={Some(title)}
         copy={Js.Undefined.toOption(subtitle)}
+        contentSize=`Large
         background=Theme.{
           desktop: "/static/img/BlogDetailImage.jpg",
           tablet: "/static/img/BlogDetailImage.jpg",
