@@ -113,8 +113,7 @@ let make = () => {
        <div className=Styles.column>
          <p>{React.string("AND HUNDREDS OF")}</p>
            <h1> {React.string("Node Operator")} </h1> 
-            <p>{React.string("GENESIS PROGRAM")}</p> 
-            <p>{React.string("TOKEN GRANTS")}</p> 
+            <p>{React.string("GENESIS PROGRAM TOKEN GRANTS")}</p> 
          </div>
         </div>
   </div>
