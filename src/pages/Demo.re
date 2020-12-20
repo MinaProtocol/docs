@@ -308,7 +308,10 @@ let make = () => {
       </div>
       <div className=Theme.Type.metadata> {React.string("Metadata")} </div>
       <div className=Theme.Type.announcement>
-        {React.string("Announcement")}
+        <AnnouncementBar/>
+      </div>
+      <div className=Theme.Type.reward>
+        <RewardsPromo />
       </div>
       <div className=Theme.Type.errorMessage>
         {React.string("Error message")}
