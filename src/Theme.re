@@ -297,10 +297,15 @@ module Type = {
       lineHeight(`rem(1.5)),
     ]);
 
-    let reward =
+  let reward =
     style([
       Typeface.monumentGrotesk,
-    ]);
+  ]);
+
+  let testworld = 
+    style([
+      Typeface.monumentGrotesk,
+    ])
 
   let errorMessage =
     style([
