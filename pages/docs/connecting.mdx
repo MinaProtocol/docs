@@ -25,7 +25,7 @@ brew upgrade mina
 wget -O ~/.coda-config/daemon.json https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/genesis_ledger.json
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]56b97f1b73165b089725b85eef65c859460be2ea on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]41db20648b566908881a17c8b0248d05f517f25a on branch HEAD`.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -35,10 +35,10 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.1.0-beta1-56b97f1 --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.1.1-41db206 --allow-downgrades
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]56b97f1b73165b089725b85eef65c859460be2ea on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]41db20648b566908881a17c8b0248d05f517f25a on branch HEAD`.
 
 ## Get the network information
 
@@ -154,7 +154,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:4.1-turbo-pickles-forked-mina56b97f1-autoeaa923f \
+codaprotocol/coda-daemon-baked:0.1.1-41db206-turbo-pickles-534f712 \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
