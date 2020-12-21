@@ -132,6 +132,12 @@ And look at logs:
 journalctl --user -u mina -n 1000 -f
 ```
 
+In some cases in order to view logs you need to run the following command instead:
+
+```
+journalctl --user-unit mina -n 1000 -f
+```
+
 That command will show you the last 1000 lines and follow from there.
 
 ### Docker
