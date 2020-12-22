@@ -12,3 +12,4 @@ yarn-error.log
 .DS_STORE
 *.log
 .merlin*
+package-lock.json
