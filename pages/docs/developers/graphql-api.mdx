@@ -5,7 +5,7 @@ export default Page({ title: "GraphQL API" });
 
 <Alert kind="warning">
 
-- Mina APIs are still under construction, so these endpoints may change
+- Mina APIs are still under construction, so these endpoints may change.
 - By default, the GraphQL port is bound to localhost. Exposing the GraphQL API to the internet allows anyone to send Mina from the accounts known to the daemon.
 
 </Alert>
@@ -51,17 +51,17 @@ query {
 }
 ```
 
-<Alert>The sandbox does **NOT** connect you to a live network.
+<Alert>
 
 The memo field returned for a transaction is [Base58Check encoded](https://en.bitcoin.it/wiki/Base58Check_encoding).
 
 </Alert>
 
-To retrieve the details of an accountfor the primary mina [token](/docs/architecture/tokens):
+To retrieve the details of an account for the primary mina [token](https://minaprotocol.com/docs/architecture/tokens):
 
 ```
 query {
-  account(publicKey: "B62...") {
+  account(publicKey: "<B62...>") {
     balance {
       total
     }
@@ -85,9 +85,11 @@ curl -d '{"query": "{
 
 GraphQL mutations modify the running node in some way. For example, mutations may be used to send a payment, create a new account, or to add additional peers.
 
-:::info
-Consult the [GraphQL schema](/graphql-docs/mutation.doc.html) for all available mutations.
-:::
+<Alert>
+
+Consult the [GraphQL schema](https://minaprotocol.com/graphql-docs/mutation.doc.html) for all available mutations.
+
+</Alert>
 
 Adding a new peer:
 
@@ -111,7 +113,7 @@ mutation {
 
 ### Subscriptions:
 
-A GraphQL [subscription](h/graphql-docs/subscription.doc.html) allows a GraphQL client to have data pushed to it when an event occurs. In Mina, there are subscriptions for:
+A GraphQL [subscription](https://minaprotocol.com/graphql-docs/subscription.doc.html) allows a GraphQL client to have data pushed to it when an event occurs. In Mina, there are subscriptions for:
 
 * _newSyncUpdate_ - occurs when the sync status of the node changes.
 * _newBlock_ - occurs when a new block is received.
@@ -119,7 +121,7 @@ A GraphQL [subscription](h/graphql-docs/subscription.doc.html) allows a GraphQL 
 
 For example, to subscribe to all new blocks produced:
 
-```json=
+```
 subscription {
   newBlock {
     creator
@@ -145,4 +147,4 @@ While exposing the GraphQL API to the internet is not recommended, an implementa
 - [5-minute introduction video on Mina GraphQL API](http://bit.ly/GraphQLAPIin5)
 - [First steps with the Mina GraphQL API](https://garethtdavies.com/crypto/first-steps-with-coda-graphql-api.html)
 - [Introduction to GraphQL](https://graphql.org/learn/)
-- [Public GraphQL proxy](http://graphql.o1test.net/graphql) (doesn't allow GraphQL mutations)
+- [Public GraphQL proxy](http://graphql.o1test.net/graphql)
