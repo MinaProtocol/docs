@@ -29,6 +29,7 @@ module SideNav = {
           <Item title="Style Guide" slug="style-guide" />
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
+          <Item title="Logging" slug="logging" />
         </Section>
         <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
@@ -94,6 +95,7 @@ module Dropdown = {
           | "developers/style-guide" => "Style Guide"
           | "developers/sandbox-node" => "Sandbox Node"
           | "developers/graphql-api" => "GraphQL API"
+          | "developers/logging" => "Logging"
 
           | "architecture" => "Mina Overview"
           | "architecture/lifecycle-payment" => "Lifecycle of a Payment"
@@ -134,6 +136,7 @@ module Dropdown = {
           <Item title="Style Guide" slug="style-guide" />
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
+          <Item title="Logging" slug="logging" />
         </Section>
         <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
