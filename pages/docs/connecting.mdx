@@ -148,11 +148,11 @@ Now simply run the image with your keys and ~/.coda-config mounted:
 
 ```
 docker run --name mina -d \
--p 8301-8305:8301-8305 \
+-p 8302:8302 \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
---mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
+--mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
 codaprotocol/coda-daemon-baked:0.1.1-41db206-turbo-pickles-534f712 \
 daemon \
