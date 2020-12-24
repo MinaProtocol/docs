@@ -5,15 +5,14 @@ export default Page({ title: "Daemon Logging" });
 
 Mina logs are located in the configuration directory located at `~/.coda-config`. This directory contains the following log files:
 
-* `coda.log`. This file contains the latest logs of the daemon. Each log file is limited to 10 Mebibyte (MiB) in size and rotates though 50 log files. Rotated log files are named `coda.log.x` from `coda.log.0` to `coda.log.50`
-* `mina-best-tip.log`. This file contains the best tip logs that make it easier to collect the required logs from nodes to determine the state to fork off of. This file is limited to 5 Mebibyte (MiB) in size and rotates a single log file `mina-best-tip.log.0`.
-* `coda-prover.log`. Logs memory usage and batch size in prover. Limited to 128 MiB. Rotates through a single log file.
-* `coda-verifier.log`. Logs memory usage and batch size in verifier 128 MiB. Rotates for a single log file.
-* `coda.version` - This file contains the Git SHA of the running build.
+* `coda.log` - This file contains the latest logs of the daemon. Each log file is limited to 10 Mebibyte (MiB) in size and rotates over 50 log files. Rotated log files are named `coda.log.x` from `coda.log.0` to `coda.log.50`
+* `mina-best-tip.log` - This file contains the best tip logs of the daemon. This file makes it easier to collect the required logs from nodes to determine the best state for any hard fork. This file is limited to 5 Mebibyte (MiB) in size and rotates over a single log file `mina-best-tip.log.0`.
+* `coda-prover.log` - This file contains logs for the prover's memory usage and batch sizes. It is limited to 128 Mebibyte (MiB) and rotates over a single log file.
+* `coda-verifier.log` - This file contains logs for the verifier's memory usage and batch sizes. It is limited to 128 Mebibyte (MiB) and rotates over a single log file.
 
 ### Log levels:
 
-Mina's logs at the following levels, in this order of precendence, indicating the level of importance of the message.
+The Mina daemon logs at the following levels, in this order of precedence:
 
 * Spam
 * Trace
@@ -25,13 +24,13 @@ Mina's logs at the following levels, in this order of precendence, indicating th
 
 <Alert>
 
-Specifying a `log-level` of `Info` will only display messages from that log level and above and significantly reduce the verbosity of the logs.
+Specifying a `log-level` of `Info` will only display messages from that log level and above and significantly reduce the logs' verbosity.
 
 </Alert>
 
 ### Log format:
 
-The format of the logs is defined by the folowing structure. The `metadata` field contains additional information required for the log.
+The format of the logs is defined by the folowing structure:
 
 ```
 {
@@ -48,59 +47,47 @@ The format of the logs is defined by the folowing structure. The `metadata` fiel
 
 ### Exporting logs:
 
-Mina provides a CLI tool to package up the log files from a node. This is also available via the GraphQL:
+The Mina daemon provides a CLI helper to compress and package up the available log files from a node. 
 
-`export-logs` uses GraphQL which is why it dosn't work when stopped
-
-For a running daemon the command is `coda client export-logs` where you can pass an option of `-tarfile` to specify the basename of the tar archive (default: date_time).
-
-For a stopped daemon run `coda client export-local-logs` to export the local log files again passing the `tarfile` option to specify the output filename.
-
-### Logging options:
-
-The following options when starting the daemon affect the logging behaviour:
-
-* `file-log-level` log level for the log file (default: Trace)
-* `log-level`
-* `log-format`
-* `log-block-creation` Log the steps involved in including transactions and snark work in a block (default: true)
-* `log-json` Print log output as JSON (default: plain text)
-* `-log-received-blocks` Log blocks received from peers (default: false)
-* `-log-snark-work-gossip` Log snark-pool diff received from peers (default: false)
-* `-log-txn-pool-gossip` Log transaction-pool diff received from peers (default: false)
-
-### Crash Reports:
-
-When the deamon exits it will create a crash report. It will only maintain the last crash report. The filename will indicate the timestamp of the crash, 
-
-`coda_crash_report_2020-11-26_11-24-51.750285`
-
-This rport contain `coda_short_log` which is the last 4MiB of the logs. This file is zipped and contains the following files, if they exist:
-
-* "coda_short.log" - system info and crash summary
-* "registered_mask.dot" - ledger visualization
-* "frontier.dot" - frontier visualization
-* "coda_status.json"
-* "crash_summary.json"
-* "daemon.json" ]
+For a running daemon, run `coda client export-logs` where you can pass an optional flag `-tarfile` to specify the tar archive's filename, which defaults to the current date-time. This command compresses the available logs and exports them to the `exported_logs` directory in the `~/.coda-config` directory.
 
 <Alert>
 
-You can upload the crash summary file directly to a GitHub issue.
+The logs may be exported from a running node via GraphQL using the `exportLogs` [mutation](https://minaprotocol.com/docs/developers/graphql-api#mutations).
 
 </Alert>
 
-Crash summary
+To export logs from a node that is not running, run the `coda client export-local-logs` command to compress the available local log files. Pass the `tarfile` option to specify the tar archive's filename, and the logs will be compressed and exported to the `exported_logs` directory in the `~/.coda-config` directory.
 
-    [ ("OS_type", `String Sys.os_type)
-    ; ("Release", `String (Core.Unix.Utsname.release uname))
-    ; ("Machine", `String (Core.Unix.Utsname.machine uname))
-    ; ("Sys_name", `String (Core.Unix.Utsname.sysname uname))
-    ; ("Exception", exn_json)
-    ; ("Command", `String daemon_command)
-    ; ("Coda_branch", `String Coda_version.branch)
-    ; ("Coda_commit", `String Coda_version.commit_id) ]
-    
-    
-    https://github.com/MinaProtocol/mina/issues/6799
+<Alert>
+
+When creating or updating an issue on GitHub, you can upload the exported `tar.gz` file directly to the [issue](https://github.com/MinaProtocol/mina/issues).
+
+</Alert>
+
+### Logging options:
+
+The following options may be set when starting the daemon to customize the logging behaviour:
+
+* `file-log-level` - log level for the log file (default: Trace)
+* `log-level` - log level for output to the terminal via stdout (default: Info)
+* `log-json` - print log output as JSON (default: plain text)
+* `log-block-creation` - log the steps involved in including transactions and snark work in a block (default: true)
+* `-log-received-blocks` - log blocks received from peers (default: false)
+* `-log-snark-work-gossip` - log snark-pool diffs received from peers (default: false)
+* `-log-txn-pool-gossip` - log transaction-pool diffs received from peers (default: false)
+* `-log-precomputed-blocks` - include precomputed blocks in the logs (default: false)
+
+### Crash Reports:
+
+If the daemon crashes and is able, it will generate a crash report. Only the latest crash report will be retained, with the filename indicating the date-time of the crash, and the compressed file being exported to the `~/.coda-config` directory. You can upload this crash report to any [GitHub issue](https://github.com/MinaProtocol/mina/issues) to identify new issues and aid in debugging.
+
+The crash report will contain some, or all of, the following log files:
+
+* `crash_summary.json` - contains a summary of the crash, including the system info, the version information, and the final log output.
+* `coda_status.json` - an output of the `coda client status` command for a summary of the daemon's final state.
+* `coda_short.log` - contains the last 4MiB of the `coda.log` file.
+* `registered_mask.dot` - contains the latest ledger visualization.
+* `frontier.dot` - contains the latest frontier visualization.
+* `daemon.json` - A copy of the daemon configuration file.
     
