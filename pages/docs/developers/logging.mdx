@@ -5,10 +5,16 @@ export default Page({ title: "Daemon Logging" });
 
 Mina logs are located in the configuration directory located at `~/.coda-config`. This directory contains the following log files:
 
-* `coda.log` - This file contains the latest logs of the daemon. Each log file is limited to 10 Mebibyte (MiB) in size and rotates over 50 log files. Rotated log files are named `coda.log.x` from `coda.log.0` to `coda.log.50`
-* `mina-best-tip.log` - This file contains the best tip logs of the daemon. This file makes it easier to collect the required logs from nodes to determine the best state for any hard fork. This file is limited to 5 Mebibyte (MiB) in size and rotates over a single log file `mina-best-tip.log.0`.
-* `coda-prover.log` - This file contains logs for the prover's memory usage and batch sizes. It is limited to 128 Mebibyte (MiB) and rotates over a single log file.
-* `coda-verifier.log` - This file contains logs for the verifier's memory usage and batch sizes. It is limited to 128 Mebibyte (MiB) and rotates over a single log file.
+* `coda.log` - this file contains the latest logs of the daemon. Each log file is limited to 10 Mebibyte (MiB) in size and rotates over 50 log files. Rotated log files are named `coda.log.x` from `coda.log.0` to `coda.log.50`.
+* `mina-best-tip.log` - this file contains the best tip logs of the daemon. This file makes it easier to collect the required logs from nodes to determine the best state for any hard fork. This file is limited to 5 Mebibyte (MiB) in size and rotates over a single log file `mina-best-tip.log.0`.
+* `coda-prover.log` - this file contains logs for the prover's memory usage and batch sizes. It is limited to 128 Mebibyte (MiB) and rotates over a single log file.
+* `coda-verifier.log` - this file contains logs for the verifier's memory usage and batch sizes. It is limited to 128 Mebibyte (MiB) and rotates over a single log file.
+
+To follow the logs, use one of the following commands, depending on how you started the daemon:
+
+* Docker: `docker logs --follow mina`
+* Running as a service: `journalctl --user -u mina -n 1000 -f`
+* Other: `tail -f ~/.coda-config/coda.log`
 
 ### Log levels:
 
@@ -30,7 +36,7 @@ Specifying a `log-level` of `Info` will only display messages from that log leve
 
 ### Log format:
 
-The format of the logs is defined by the folowing structure:
+The format of the logs is defined by the following structure:
 
 ```
 {
@@ -42,6 +48,25 @@ The format of the logs is defined by the folowing structure:
   },
   "message": format_string,
   "metadata": {{...}}
+}
+```
+An example error message is shown below:
+
+```
+{
+  "timestamp": "2020-12-23 21:25:04.616526Z",
+  "level": "Error",
+  "source": {
+    "module": "Transition_router",
+    "location": "File \"src/lib/transition_router/transition_router.ml\", line 231, characters 12-24"
+  },
+  "message": "Failed to find any peers during initialization (crashing because this is not a seed node)",
+  "metadata": {
+    "host": "48.241.118.000",
+    "peer_id": "12D3KooWGQSPgo7ypy9717D3Vgz2RHaqB2ndDRHEFcAfJDAv284q",
+    "pid": 12,
+    "port": 8302
+  }
 }
 ```
 
@@ -80,7 +105,7 @@ The following options may be set when starting the daemon to customize the loggi
 
 ### Crash Reports:
 
-If the daemon crashes and is able, it will generate a crash report. Only the latest crash report will be retained, with the filename indicating the date-time of the crash, and the compressed file being exported to the `~/.coda-config` directory. You can upload this crash report to any [GitHub issue](https://github.com/MinaProtocol/mina/issues) to identify new issues and aid in debugging.
+If the daemon crashes and is able, it will generate a crash report. Only the latest crash report will be retained, with the filename indicating the date-time of the crash and the compressed file being exported to the `~/.coda-config` directory. You can upload this crash report to any [GitHub issue](https://github.com/MinaProtocol/mina/issues) to identify new issues and aid in debugging.
 
 The crash report will contain some, or all of, the following log files:
 
@@ -89,5 +114,5 @@ The crash report will contain some, or all of, the following log files:
 * `coda_short.log` - contains the last 4MiB of the `coda.log` file.
 * `registered_mask.dot` - contains the latest ledger visualization.
 * `frontier.dot` - contains the latest frontier visualization.
-* `daemon.json` - A copy of the daemon configuration file.
+* `daemon.json` - a copy of the daemon configuration file.
     
