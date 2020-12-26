@@ -33,6 +33,7 @@ module SideNav = {
         <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
           <Item title="Lifecycle of a Payment" slug="lifecycle-payment" />
+          <Item title="Block Producers" slug="block-producers" />
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
@@ -97,6 +98,7 @@ module Dropdown = {
 
           | "architecture" => "Mina Overview"
           | "architecture/lifecycle-payment" => "Lifecycle of a Payment"
+          | "architecture/block-producers" => "Block Producers"
           | "architecture/consensus" => "Consensus"
           | "architecture/proof-of-stake" => "Proof of Stake"
           | "architecture/snark-workers" => "Snark Workers"
@@ -138,6 +140,7 @@ module Dropdown = {
         <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
           <Item title="Lifecycle of a Payment" slug="lifecycle-payment" />
+          <Item title="Block Producers" slug="block-producers" />
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
