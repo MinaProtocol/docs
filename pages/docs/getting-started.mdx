@@ -55,28 +55,6 @@ If you installed `mina` from a previous release, you'll need to upgrade it so th
 </Alert>
 
 
-### macOS
-
-Install using [Homebrew](https://brew.sh).
-
-```
-brew install minaprotocol/mina/mina
-mkdir -p ~/.coda_config
-cp /tmp/s3_cache_dir/config_f5aa1fb.json ~/.coda_config/daemon.json
-```
-
-If you already have `mina` installed from a previous release, run:
-
-```
-brew remove coda
-brew untap codaprotocol/coda
-brew upgrade mina
-mkdir -p ~/.coda_config
-wget -O ~/.coda_config/daemon.json https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/genesis_ledger.json
-```
-
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]56b97f1b73165b089725b85eef65c859460be2ea on branch HEAD`.
-
 ### Ubuntu 18.04 / Debian 9
 
 Add the Mina Debian repo and install:
@@ -95,13 +73,19 @@ Windows is not yet natively supported. If you are interested in receiving a gran
 
 Please instead use the Docker instructions below.
 
+### macOS
+
+macOS is used by developers, but we are not officially supporting any pre-built packages at this time.
+
+Please instead use the Docker instructions below or you may build from source.
+
 ### Docker
 
 Docker is cross-platform tool that allows you to run a virtual machine that will execute any needed software. Please follow the official installation instructions for your platform on [this page](https://docs.docker.com/get-docker/). Once docker is installed, proceed to the Mina Docker instructions on [Connect to the Network](/docs/connecting)
 
 ### Build from source
 
-If you're running another Linux distro or a different version of macOS, you can [try building Mina from source code](https://github.com/MinaProtocol/mina/blob/master/README-dev.md#building-mina). Please note that other operating systems haven't been tested thoroughly, and may have issues. Feel free to share any logs and get troubleshooting help in the [Discord server](https://bit.ly/MinaDiscord).
+If you're running another Linux distro or some version of macOS, you can [try building Mina from source code](https://github.com/MinaProtocol/mina/blob/master/README-dev.md#building-mina). Please note that other operating systems haven't been tested thoroughly, and may have issues. Feel free to share any logs and get troubleshooting help in the [Discord server](https://bit.ly/MinaDiscord).
 
 ## Set up port forwarding and any firewalls
 
