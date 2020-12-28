@@ -21,19 +21,17 @@ The first step in connecting to the network is installing the latest daemon vers
 First remove any previously installed version of the daemon to prevent any errors when upgrading to the latest version. Then you can install the latest version as follows:
 
 ```
-Testworld coming soon!
-```
-
-<!--
-```
 sudo apt-get remove mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.1.1-41db206 --allow-downgrades
+sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.2.0-efc44df --allow-downgrades
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]41db20648b566908881a17c8b0248d05f517f25a on branch HEAD`.
--->
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]efc44df72dfc8fd1dab7ba5992e2566c10792fa3 on branch HEAD`.
+
+## Setup Keypair
+
+For Testworld, we are sending out pre-generated keypairs to every participant. Once you recieve your keypair, download it onto your computer and then unzip it and move the contents into the `~/keys` folder.
 
 ## Get the network information
 
@@ -43,9 +41,8 @@ To connect to the network, we need an extra file: the <em>peer list</em>.
 
 A peer list contains a list of node addresses that your node can initially connect to while joining the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
 
-Now that the network has been stable for a while, we are inviting anyone who is interested to download the peers list and connect to Testnet 4.1.
 ```
-wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/peers.txt
+wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/bug-bounty-net/terraform/testnets/testworld/peers.txt
 ```
 
 ## Start up a node
@@ -131,12 +128,6 @@ That command will show you the last 1000 lines and follow from there.
 
 ### Docker
 
-```
-Testworld coming soon!
-```
-
-<!--
-
 When running your daemon using Docker, first ensure that your private key has the correct permissions.
 
 ```
@@ -155,7 +146,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount type=bind,source="`pwd`/peers.txt,dst=/root/peers.txt",readonly \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-codaprotocol/coda-daemon-baked:0.1.1-41db206-turbo-pickles-534f712 \
+minaprotocol/mina-daemon-baked:0.2.0-efc44df-testworld-af5e10e \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
@@ -163,8 +154,6 @@ daemon \
 -file-log-level Info \
 -log-level Info
 ```
-
--->
 
 Run `docker logs -f mina` to follow the logs, and if it crashes save the log output to a file with `docker logs mina > mina-log.txt` and post the output to the #mentor-nodes channel or attach the full ~/.coda-config/coda.log to a github issue and link the issue in discord.
 
