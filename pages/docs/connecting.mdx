@@ -24,14 +24,32 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl mina-testnet-postake-medium-curves=0.2.0-efc44df --allow-downgrades
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.0-efc44df --allow-downgrades
 ```
 
 Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]efc44df72dfc8fd1dab7ba5992e2566c10792fa3 on branch HEAD`.
 
 ## Setup Keypair
 
-For Testworld, we are sending out pre-generated keypairs to every participant. Once you recieve your keypair, download it onto your computer and then unzip it and move the contents into the `~/keys` folder.
+For Testworld, we are sending out pre-generated keypairs to every participant. Once you recieve the link to claim your keypair, download it onto your computer.
+
+```
+wget -O ~/keys <keypair-download-url>
+```
+
+Next we need to unzip the file, every download has a different filename so first check the filename that you downloaded in the previous step.
+
+```
+cd ~/keys
+unzip <keypair-zip>
+```
+
+Finally you need to rename your keypair. Look at the filenames that were extracted in the previous command.
+
+```
+mv <testworld-keypair> my-wallet
+mv <testworld-keypair>.pub my-wallet.pub
+```
 
 ## Get the network information
 
