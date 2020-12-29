@@ -141,7 +141,7 @@ module Styles = {
         ],
       ),
     ]);
-    let headerLabelDark =
+  let headerLabelDark =
     merge([
       Theme.Type.label,
       style([
@@ -152,7 +152,7 @@ module Styles = {
       ]),
     ]);
 
-    let headerDark =
+  let headerDark =
     merge([
       Theme.Type.h1,
       style([
@@ -170,7 +170,7 @@ module Styles = {
       ]),
     ]);
 
-    let headerCopyDark =
+  let headerCopyDark =
     merge([
       Theme.Type.pageSubhead,
       style([
@@ -193,30 +193,22 @@ module Styles = {
       paddingBottom(`rem(0.5)),
     ]);
 
-  let logo =
-    style([
-      width(`percent(100.)), 
-      height(`auto),  
-    ]);
+  let logo = style([width(`percent(100.)), height(`auto)]);
 
   let logoBox =
     style([
       margin(`rem(3.)),
       paddingTop(`rem(5.)),
-      media(
-          Theme.MediaQuery.mobile,
-          [display(`none)],
-        ),
+      media(Theme.MediaQuery.mobile, [display(`none)]),
     ]);
 
-  let content = 
+  let content =
     style([
       display(`flex),
       flexDirection(`column),
       justifyContent(`center),
-      alignContent(`center)
-    ])
-
+      alignContent(`center),
+    ]);
 };
 
 /**
@@ -258,7 +250,6 @@ let make =
   </div>;
 };
 
-
 module Dark = {
   [@react.component]
   let make =
@@ -273,33 +264,33 @@ module Dark = {
       ) => {
     <>
       <div className={Styles.heroContainerDark(background, contentSize)}>
-          <div className=Styles.content>
-            {ReactExt.fromOpt(title, ~f=s =>
-              <h4 className=Styles.headerLabelDark> {React.string(s)} </h4>
-            )}
-            {ReactExt.fromOpt(metadata, ~f=metadata =>
-              <div className=Styles.categoryDateSourceContainer>
-                <CategoryDateSourceText metadata />
-              </div>
-            )}
-            {ReactExt.fromOpt(header, ~f=s =>
-              <h1 className=Styles.headerDark> {React.string(s)} </h1>
-            )}
-            {ReactExt.fromOpt(copy, ~f=s =>
-              <p className=Styles.headerCopyDark> {React.string(s)} </p>
-            )}
-            {switch (children) {
-            | Some(children) => children
-            | None => React.null
-            }}
-          </div>
-          <div className=Styles.logoBox>
-            <img
-              className=Styles.logo
-              src="/static/img/logos/LogoTestWorld.svg"
-            />
+        <div className=Styles.content>
+          {ReactExt.fromOpt(title, ~f=s =>
+             <h4 className=Styles.headerLabelDark> {React.string(s)} </h4>
+           )}
+          {ReactExt.fromOpt(metadata, ~f=metadata =>
+             <div className=Styles.categoryDateSourceContainer>
+               <CategoryDateSourceText metadata />
+             </div>
+           )}
+          {ReactExt.fromOpt(header, ~f=s =>
+             <h1 className=Styles.headerDark> {React.string(s)} </h1>
+           )}
+          {ReactExt.fromOpt(copy, ~f=s =>
+             <p className=Styles.headerCopyDark> {React.string(s)} </p>
+           )}
+          {switch (children) {
+           | Some(children) => children
+           | None => React.null
+           }}
+        </div>
+        <div className=Styles.logoBox>
+          <img
+            className=Styles.logo
+            src="/static/img/logos/LogoTestWorld.svg"
+          />
         </div>
       </div>
     </>;
   };
-}
+};

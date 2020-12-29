@@ -65,7 +65,8 @@ module Card = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
-    | `NewTab(href) => <a target="_blank"  href className=Styles.anchor> inner </a>
+    | `NewTab(href) =>
+      <a target="_blank" href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -95,7 +96,8 @@ module CardDarkGray = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
-    | `NewTab(href) => <a target="_blank"  href className=Styles.anchor> inner </a>
+    | `NewTab(href) =>
+      <a target="_blank" href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -125,7 +127,8 @@ module CardLightGray = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
-    | `NewTab(href) => <a target="_blank"  href className=Styles.anchor> inner </a>
+    | `NewTab(href) =>
+      <a target="_blank" href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -492,7 +495,7 @@ module TestworldHeader = {
 
     <div className=ButtonBarStyles.container>
       <div className=ButtonBarStyles.grid>
-         {renderCard(
+        {renderCard(
            Icon.Challenges,
            `Internal("#challenges"),
            "Earn MINA helping us prepare for mainnet",
@@ -516,7 +519,7 @@ module TestworldHeader = {
            "Docs",
            "The technical lowdown for getting started running Mina.",
          )}
-         {renderCard(
+        {renderCard(
            Icon.Resources,
            `Internal("#resources"),
            "Resources",
@@ -530,20 +533,20 @@ module TestworldHeader = {
 module TestworldFooter = {
   module Styles = {
     open Css;
-    
+
     let grid =
       merge([
         ButtonBarStyles.grid,
         style([
           marginBottom(`rem(2.)),
-          media(Theme.MediaQuery.tablet, [alignItems(`flexStart)])]),
+          media(Theme.MediaQuery.tablet, [alignItems(`flexStart)]),
+        ]),
       ]);
 
     let content =
       merge([
         ButtonBarStyles.content,
-        style([
-          media(Theme.MediaQuery.tablet, [alignItems(`flexStart)])]),
+        style([media(Theme.MediaQuery.tablet, [alignItems(`flexStart)])]),
       ]);
 
     let title =
@@ -597,7 +600,7 @@ module TestworldFooter = {
       </Card>;
     };
 
-     let renderLightGrayCard = (kind, href, title, description) => {
+    let renderLightGrayCard = (kind, href, title, description) => {
       <CardLightGray href>
         <div className=Styles.content>
           <span className=Styles.icon> <Icon kind /> </span>
@@ -657,7 +660,7 @@ module TestworldFooter = {
            "Wiki",
            "All sorts of useful information here.",
          )}
-         {renderLightGrayCard(
+        {renderLightGrayCard(
            Icon.Paper,
            `External(Constants.termsAndCondition),
            "Terms & Conditions",

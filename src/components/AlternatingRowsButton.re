@@ -98,12 +98,7 @@ module Section = {
       |> Array.mapi((idx, row) => {
            <div
              key={row.title}
-             className={Styles.rowContainer(
-               ~reverse={
-                 idx mod 2 != 0;
-               },
-               (),
-             )}>
+             className={Styles.rowContainer(~reverse={idx mod 2 != 0}, ())}>
              <div className=SectionStyles.textContainer>
                <h2 className=SectionStyles.title>
                  {React.string(row.title)}
@@ -171,9 +166,7 @@ module Section = {
            <div
              key={row.title}
              className={SectionStyles.rowContainer(
-               ~reverse={
-                 idx mod 2 != 0;
-               },
+               ~reverse={idx mod 2 != 0},
                (),
              )}>
              <div className=SectionStyles.textContainer>
