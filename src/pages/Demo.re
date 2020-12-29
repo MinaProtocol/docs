@@ -154,7 +154,6 @@ let make = () => {
                     "Node setup instructions are available in our documentation.",
                   |]
                 />
-                <TestworldChallenges.Link title="Docs: Getting Started" />
                 <TestworldChallenges.ContainerSm>
                   <Button
                     href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
@@ -203,7 +202,6 @@ let make = () => {
                     "Node setup instructions are available in our documentation.",
                   |]
                 />
-                <TestworldChallenges.Link title="Docs: Getting Started" />
                 <TestworldChallenges.ContainerSm>
                   <Button
                     href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
@@ -257,7 +255,6 @@ let make = () => {
                     "Node setup instructions are available in our documentation.",
                   |]
                 />
-                <TestworldChallenges.Link title="Docs: Getting Started" />
               </TestworldChallenges.Accordian>
             </TestworldChallenges.Item>
           </TestworldChallenges.Contanier>
@@ -302,7 +299,6 @@ let make = () => {
                     "Node setup instructions are available in our documentation.",
                   |]
                 />
-                <TestworldChallenges.Link title="Docs: Getting Started" />
                 <TestworldChallenges.ContainerSm>
                   <Button
                     href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
@@ -356,7 +352,6 @@ let make = () => {
                     "Node setup instructions are available in our documentation.",
                   |]
                 />
-                <TestworldChallenges.Link title="Docs: Getting Started" />
               </TestworldChallenges.Accordian>
             </TestworldChallenges.Item>
           </TestworldChallenges.Contanier>
@@ -398,7 +393,6 @@ let make = () => {
                     "Node setup instructions are available in our documentation.",
                   |]
                 />
-                <TestworldChallenges.Link title="Docs: Getting Started" />
               </TestworldChallenges.Accordian>
             </TestworldChallenges.Item>
           </TestworldChallenges.Contanier>
@@ -417,9 +411,6 @@ let make = () => {
                        "Earn leaderboard points by participating in challenges where testnet points* are awarded to challenge winners. See the challenges above for more information.",
                      )}
                   </p>
-                </TestworldChallenges.ContainerSm>
-                <TestworldChallenges.ContainerSm>
-                  <TestworldChallenges.Link title="Testnet Leaderboard" />
                 </TestworldChallenges.ContainerSm>
                 <TestworldChallenges.BonusTable
                   tableHead=[|"RESULT", "MINA TOKENS"|]
