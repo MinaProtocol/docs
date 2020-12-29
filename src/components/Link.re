@@ -21,3 +21,16 @@ let make = (~href="/", ~text="Read More") => {
     </div>
   </Next.Link>;
 };
+
+module Inline = {
+  [@react.component]
+  let make = (~href="/", ~text="Read More") => {
+    <Next.Link href>
+      <span className=Styles.link>
+        {React.string(text)}
+      </span>
+    </Next.Link>;
+  };
+};
+
+

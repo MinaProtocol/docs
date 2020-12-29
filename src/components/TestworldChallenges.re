@@ -510,9 +510,9 @@ module TransactionRules = {
                "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ",
              )}
           </span>
-          <Link href="/genesis" text="Genesis Program" />
+          <Link.Inline href="/genesis" text="Genesis Program" />
           <span> {React.string(", and will be eligible for ")} </span>
-          <Link href="#bonus-rewards" text="bonus rewards." />
+          <Link.Inline href="#bonus-rewards" text="bonus rewards." />
         </li>
       </ul>
     </div>;
@@ -534,9 +534,9 @@ module SnarkRules = {
                "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ",
              )}
           </span>
-          <Link href="/genesis" text="Genesis Program" />
+          <Link.Inline href="/genesis" text="Genesis Program" />
           <span> {React.string(", and will be eligible for ")} </span>
-          <Link href="#bonus-rewards" text="bonus rewards." />
+          <Link.Inline href="#bonus-rewards" text="bonus rewards." />
         </li>
       </ul>
     </div>;
@@ -558,9 +558,9 @@ module ProduceBlockRules = {
                "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ",
              )}
           </span>
-          <Link href="/genesis" text="Genesis Program" />
+          <Link.Inline href="/genesis" text="Genesis Program" />
           <span> {React.string(", and will be eligible for ")} </span>
-          <Link href="#bonus-rewards" text="bonus rewards." />
+          <Link.Inline href="#bonus-rewards" text="bonus rewards." />
         </li>
       </ul>
     </div>;
