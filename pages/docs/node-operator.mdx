@@ -129,24 +129,26 @@ By creating a file at `~/.coda-config/daemon.json`, you can configure your coda 
 
 Most of the options that can be passed to `coda daemon` on the commandline can also be provided as options in the config file. See `coda daemon -help` for more documentation of the options. Below is an example of usage of all the usable configuration parameters (in your file, you only need to specify the ones you want to change):
 
-```json
+```
 {
-  "client-port": 1000,
-  "libp2p-port": 1001,
-  "rest-port": 1002,
-  "block-producer-key": "/path/to/privkey-file",
-  "block-producer-password": "mypassword",
-  "block-producer-pubkey": "<MY PUBLICKEY>",
-  "coinbase-receiver": "<MY PUBLICKEY>",
-  "log-block-creation": false,
-  "log-received-blocks": false,
-  "log-snark-work-gossip": false,
-  "log-txn-pool-gossip": false,
-  "peers": ["seed-one.o1test.net", "seed-two.o1test.net"],
-  "run-snark-worker": "<MY PUBLICKEY>",
-  "snark-worker-fee": 10,
-  "snark-worker-parallelism": 1,
-  "work-reassignment-wait": 420000,
-  "work-selection": "seq"
+  "daemon": {
+    "client-port": 1000,
+    "libp2p-port": 1001,
+    "rest-port": 1002,
+    "block-producer-key": "/path/to/privkey-file",
+    "block-producer-password": "mypassword",
+    "block-producer-pubkey": "<MY PUBLICKEY>",
+    "coinbase-receiver": "<MY PUBLICKEY>",
+    "log-block-creation": false,
+    "log-received-blocks": false,
+    "log-snark-work-gossip": false,
+    "log-txn-pool-gossip": false,
+    "peers": ["seed-one.o1test.net", "seed-two.o1test.net"],
+    "run-snark-worker": "<MY PUBLICKEY>",
+    "snark-worker-fee": 10,
+    "snark-worker-parallelism": 1,
+    "work-reassignment-wait": 420000,
+    "work-selection": "seq"
+  }
 }
 ```
