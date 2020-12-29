@@ -13,6 +13,12 @@ module Styles = {
         style([
             marginTop(`rem(2.)),
             marginBottom(`rem(2.)),
+            selector(
+                "button",
+                [
+                    color(Theme.Colors.digitalBlack),
+                ],
+            ),
         ])
     }
 
@@ -145,6 +151,12 @@ module Styles = {
         style([
             display(`flex),
             media(
+                Theme.MediaQuery.desktop,
+                [
+                    marginTop(`rem(-1.)),
+                ],
+            ),
+            media(
                 Theme.MediaQuery.mobile,
                 [
                     display(`block),
@@ -164,6 +176,23 @@ module Styles = {
               ),
         ])
     }
+
+    let headCol2 = {
+        style([
+            display(`none),
+            media(
+                Theme.MediaQuery.desktop,
+                [
+                    display(`flex),
+                    flexDirection(`column),
+                    width(`percent(40.)),
+                    margin(`rem(0.5)),
+                    marginTop(`rem(-0.2)),
+                ],
+              ),
+        ])
+    }
+
 
     let col1 = {
         style([
@@ -196,6 +225,7 @@ module Styles = {
                     display(`flex),
                     flexDirection(`column),
                     width(`percent(40.)),
+                    marginTop(`rem(2.6)),
                 ],
               ),
         ])
@@ -213,6 +243,7 @@ module Styles = {
                     justifyContent(`center),
                     margin(`rem(0.5)),
                     width(`percent(25.)),
+                    marginTop(`rem(2.6)),
                 ],
               ),
               media(
@@ -245,6 +276,7 @@ module Styles = {
         style([
             display(`flex),
             justifyContent(`flexEnd),
+            width(`percent(100.)),
             alignItems(`center),
             padding(`rem(2.)),
             media(
@@ -262,7 +294,7 @@ module Styles = {
             media(
                 Theme.MediaQuery.desktop,
                 [
-                    width(`percent(60.)),
+                    width(`percent(65.)),
                 ],
               ),
         ])
@@ -338,8 +370,7 @@ module Styles = {
     
     let table = {
         style([
-            width(`percent(100.)),
-            margin(`rem(1.)),
+            width(`percent(100.))
         ])
     }
 
@@ -420,7 +451,7 @@ module Contanier = {
                     <div className=Styles.headCol1>
                         <p className=Styles.heading>{React.string(title1)}</p>
                     </div>
-                    <div className=Styles.col2>
+                    <div className=Styles.headCol2>
                         <p className=Styles.heading>{React.string(title2)}</p>
                     </div>
                 </div>
@@ -589,7 +620,7 @@ module TransactionRules = {
                 <li className=Styles.listItem><p>{React.string("Send as many transactions as you can. ")}</p></li>
                 <li className=Styles.listItem><p>{React.string("Transactions can be sent to any address in the network.")}</p></li>
                 <li className=Styles.listItem>
-                    <span>{React.string("Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina’s ")}</span>
+                    <span>{React.string("Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ")}</span>
                     <span className=Styles.inLineLink>{React.string("Genesis Program")} </span>
                     <span>{React.string(", and will be eligible for ")} </span>
                     <span className=Styles.inLineLink>{React.string("bonus rewards.")} </span>
@@ -609,7 +640,7 @@ module SnarkRules = {
                 <li className=Styles.listItem><p>{React.string("Produce as many SNARKs as you can")}</p></li>
                 <li className=Styles.listItem>
                     <span>{React.string("Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join ")}</span>
-                    <span className=Styles.inLineLink>{React.string("Mina’s Genesis Program")} </span>
+                    <span className=Styles.inLineLink>{React.string("Mina's Genesis Program")} </span>
                     <span>{React.string(", and will be eligible for ")} </span>
                     <span className=Styles.inLineLink>{React.string("bonus rewards.")} </span>
                 </li>
@@ -628,7 +659,7 @@ module ProduceBlockRules = {
                 <li className=Styles.listItem><p>{React.string("Produce as many blocks as you can")}</p></li>
                 <li className=Styles.listItem>
                     <span>{React.string("Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join ")}</span>
-                    <span className=Styles.inLineLink>{React.string("Mina’s Genesis Program")} </span>
+                    <span className=Styles.inLineLink>{React.string("Mina's Genesis Program")} </span>
                     <span>{React.string(", and will be eligible for ")} </span>
                     <span className=Styles.inLineLink>{React.string("bonus rewards.")} </span>
                 </li>
