@@ -510,13 +510,9 @@ module TransactionRules = {
                "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ",
              )}
           </span>
-          <span className=Styles.inLineLink>
-            {React.string("Genesis Program")}
-          </span>
+          <Link href="/genesis" text="Genesis Program" />
           <span> {React.string(", and will be eligible for ")} </span>
-          <span className=Styles.inLineLink>
-            {React.string("bonus rewards.")}
-          </span>
+          <Link href="#bonus-rewards" text="bonus rewards." />
         </li>
       </ul>
     </div>;
@@ -535,16 +531,12 @@ module SnarkRules = {
         <li className=Styles.listItem>
           <span>
             {React.string(
-               "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join ",
+               "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ",
              )}
           </span>
-          <span className=Styles.inLineLink>
-            {React.string("Mina's Genesis Program")}
-          </span>
+          <Link href="/genesis" text="Genesis Program" />
           <span> {React.string(", and will be eligible for ")} </span>
-          <span className=Styles.inLineLink>
-            {React.string("bonus rewards.")}
-          </span>
+          <Link href="#bonus-rewards" text="bonus rewards." />
         </li>
       </ul>
     </div>;
@@ -563,16 +555,12 @@ module ProduceBlockRules = {
         <li className=Styles.listItem>
           <span>
             {React.string(
-               "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join ",
+               "Winners will be awarded testnet leaderboard points.* Participants with high leaderboard scores at the end of our testnet will be invited to join Mina's ",
              )}
           </span>
-          <span className=Styles.inLineLink>
-            {React.string("Mina's Genesis Program")}
-          </span>
+          <Link href="/genesis" text="Genesis Program" />
           <span> {React.string(", and will be eligible for ")} </span>
-          <span className=Styles.inLineLink>
-            {React.string("bonus rewards.")}
-          </span>
+          <Link href="#bonus-rewards" text="bonus rewards." />
         </li>
       </ul>
     </div>;

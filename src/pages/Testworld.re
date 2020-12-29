@@ -485,6 +485,7 @@ let make = () => {
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
           </TestworldChallenges.Header>
+          <div id="bonus-rewards">
           <TestworldChallenges.Header title="Bonus Rewards">
             <TestworldChallenges.Contanier
               title1="TESTWORLD RESULTS" title2="REWARDS">
@@ -524,6 +525,7 @@ let make = () => {
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
           </TestworldChallenges.Header>
+          </div>
           <TestworldChallenges.Disclaimer
             title="Testnet Points are designed solely to track contributions to the Testnet and are non-transferable. Testnet Points have no cash or monetary value and are not redeemable for any cryptocurrency or digital assets. We may amend or eliminate Testnet Points at any time. "
           />
