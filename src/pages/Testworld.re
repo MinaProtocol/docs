@@ -209,6 +209,7 @@ let make = () => {
                       "If multiple participants are working together as a team, that team is limited to one wallet address, and one use of the faucet",
                       "If multiple wallet addresses are used, only one address will be counted by our judges",
                       "Node setup instructions are available in our documentation.",
+                      "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
                   <TestworldChallenges.Link title="Docs: Getting Started" />
@@ -247,7 +248,7 @@ let make = () => {
                     rules=[|
                       "Find unconventional way(s) to optimize your earnings",
                       "Tokens can only be earned via block production",
-                      "Look for approaches and strategies that could work on mainnet. If you’re confident your strategy would only work on testnet, it’s not worth trying. ",
+                      {j|Look for approaches and strategies that could work on mainnet. If you’re confident your strategy would only work on testnet, it’s not worth trying.|j},
                     |]
                   />
                   <TestworldChallenges.List
@@ -258,9 +259,18 @@ let make = () => {
                       "If multiple participants are working together as a team, that team is limited to one wallet address, and one use of the faucet",
                       "If multiple wallet addresses are used, only one address will be counted by our judges",
                       "Node setup instructions are available in our documentation.",
+                      "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
                   <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <TestworldChallenges.List
+                    title="Tell Us How You Did It"
+                    rules=[|
+                      "What was your unique approach?",
+                      "Max 200 words",
+                      "Don't worry about grammar",
+                    |]
+                  />
                   <TestworldChallenges.ContainerSm>
                     <Button
                       href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
@@ -268,14 +278,6 @@ let make = () => {
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
                   </TestworldChallenges.ContainerSm>
-                  <TestworldChallenges.List
-                    title="Tell Us How You Did It"
-                    rules=[|
-                      "What was your unique approach?",
-                      "Max 200 words",
-                      "Don’t worry about grammar",
-                    |]
-                  />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
               <TestworldChallenges.Item
@@ -312,6 +314,7 @@ let make = () => {
                       "If multiple participants are working together as a team, that team is limited to one wallet address, and one use of the faucet",
                       "If multiple wallet addresses are used, only one address will be counted by our judges",
                       "Node setup instructions are available in our documentation.",
+                      "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
                   <TestworldChallenges.Link title="Docs: Getting Started" />
@@ -346,7 +349,7 @@ let make = () => {
                     rules=[|
                       "Find unconventional way(s) to optimize your earnings",
                       "Tokens can only be earned via SNARK production",
-                      "Look for approaches and strategies that could work on mainnet. If you’re confident your strategy would only work on testnet, it’s not worth trying. ",
+                      {j|Look for approaches and strategies that could work on mainnet. If you’re confident your strategy would only work on testnet, it’s not worth trying.|j},
                     |]
                   />
                   <TestworldChallenges.List
@@ -357,9 +360,18 @@ let make = () => {
                       "If multiple participants are working together as a team, that team is limited to one wallet address, and one use of the faucet",
                       "If multiple wallet addresses are used, only one address will be counted by our judges",
                       "Node setup instructions are available in our documentation.",
+                      "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
                   <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <TestworldChallenges.List
+                    title="Tell Us How You Did It"
+                    rules=[|
+                      "What was your unique approach?",
+                      "Max 200 words",
+                      {j|Don’t worry about grammar|j},
+                    |]
+                  />
                   <TestworldChallenges.ContainerSm>
                     <Button
                       href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
@@ -367,18 +379,10 @@ let make = () => {
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
                   </TestworldChallenges.ContainerSm>
-                  <TestworldChallenges.List
-                    title="Tell Us How You Did It"
-                    rules=[|
-                      "What was your unique approach?",
-                      "Max 200 words",
-                      "Don’t worry about grammar",
-                    |]
-                  />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
               <TestworldChallenges.Item
-                title="Produce & Sell SNARKs"
+                title="Earn tokens selling SNARKs"
                 rewardsMain="Earn up to 6,500 Testnet Points*"
                 rewardsSub="Level up on the leaderboard, to get invited to our Genesis program.">
                 <TestworldChallenges.Accordian>
@@ -411,6 +415,7 @@ let make = () => {
                       "If multiple participants are working together as a team, that team is limited to one wallet address, and one use of the faucet",
                       "If multiple wallet addresses are used, only one address will be counted by our judges",
                       "Node setup instructions are available in our documentation.",
+                      "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
                   <TestworldChallenges.Link title="Docs: Getting Started" />
@@ -453,6 +458,7 @@ let make = () => {
                       "If multiple participants are working together as a team, that team is limited to one wallet address, and one use of the faucet",
                       "If multiple wallet addresses are used, only one address will be counted by our judges",
                       "Node setup instructions are available in our documentation.",
+                      "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
                   <TestworldChallenges.Link title="Docs: Getting Started" />

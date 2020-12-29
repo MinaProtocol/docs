@@ -540,7 +540,7 @@ module SnarkRules = {
       <h4 className=Styles.heading> {React.string(title)} </h4>
       <ul className=Styles.list>
         <li className=Styles.listItem>
-          <p> {React.string("Produce as many SNARKs as you can")} </p>
+          <p> {React.string("Earn as much MINA as you can producing & selling SNARKs")} </p>
         </li>
         <li className=Styles.listItem>
           <span>
