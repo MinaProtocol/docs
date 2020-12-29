@@ -7,11 +7,11 @@ export default Page({ title: "FAQ" });
 
 #### Do I need any specific hardware?
 
-Currently, a 4-core processor and 8 GB of RAM are the minimum requirements. In the near future though, GPUs may be required.
+Currently, a 8-core processor and 16 GB of RAM are the minimum requirements.
 
 #### What about software?
 
-You can download all the software required to run a Mina node [here](./getting-started/#installation). Right now, we have builds that work on MacOS, as well as Debian and Ubuntu. You can also [build from source](https://github.com/minaprotocol/mina).
+You can download all the software required to run a Mina node [here](./getting-started/#installation). Right now, we have builds that work on macOS, as well as Debian 9 and Ubuntu 18.04. You can also [build from source](https://github.com/minaprotocol/mina) or run via [Docker](./getting-started/#installation) for other unsupported systems.
 
 #### What can I do on the Mina network?
 
@@ -43,7 +43,7 @@ First, check out [Github issues](https://github.com/minaprotocol/mina/issues) to
 
 Yes, check out these block explorers:
 
-https://minaexplorer.garethtdavies.com/
+https://minaexplorer.com/
 
 https://mina.bitfly.at/
 
@@ -51,7 +51,7 @@ https://mina.bitfly.at/
 
 #### What consensus algorithm does Mina use?
 
-Mina's consensus mechanism is an implementation of Ouroboros Proof-of-Stake. Due to Mina's unique compressed blockchain, certain aspects of the algorithm have diverged from the Ouroboros papers, and the version Mina uses is affectionately called Minaboros. Stay tuned for more details on Minaboros and some technical writeups on its details and implementation.
+Mina's consensus mechanism is an implementation of Ouroboros Proof-of-Stake. Due to Mina's unique compressed blockchain, certain aspects of the algorithm have diverged from the Ouroboros papers, and the version Mina uses is called Ouroboros Samisika. Stay tuned for more details on Ouroboros Samisika and some technical writeups on its details and implementation.
 
 #### How does Mina achieve scalability?
 
@@ -59,7 +59,7 @@ Mina achieves scalability through the use of recursive zk-SNARKs. By generating 
 
 #### What is the maximum transaction throughput?
 
-Practically speaking, the limiting factor ends up being bandwidth, so it depends on the average quality of the internet connection among block producers. If the average connection is a symmetric 2MB/s, then it’s about 2000 tps.
+Practically speaking, the limiting factor ends up being bandwidth, so it depends on the average quality of the internet connection among block producers. If the average connection is a symmetric 2MB/s, then it’s about 2000 tps. We are not optimizing for maximum transaction throughput at this time, but rather, we are focusing on stability and correctness and shipping the world's first constant size blockchain! Throughput will be optimized later.
 
 #### Why did you develop a new protocol, rather than augmenting existing cryptocurrencies?
 
@@ -67,27 +67,21 @@ The reason for developing a new protocol instead of offering services to other b
 
 #### Will you require a trusted setup?
 
-It very likely will. However, it is far less of an issue than it was a few years ago. The Zcash team has done a lot of great work on improving the process, and it’s now possible to perform a multi-party computation (MPC) ceremony with hundreds of participants. There would only be issues if every one of those participants were to collude - if just one participant is honest everything is fine, so there is a lot more confidence in the modern approach.
+No! Mina uses a [Pickles SNARK](https://medium.com/minaprotocol/meet-pickles-snark-enabling-smart-contract-on-coda-protocol-7ede3b54c250), which requires no trusted setup.
 
 #### Does Mina support smart contracts? If so, what smart contracting languages does it support?
 
-Mina does not support smart contracts currently. The development team is looking into smart contract models, and it is on the roadmap for future development.
+See the [documentation for Snapps](https://minaprotocol.com/docs/architecture/snapps), Mina's Snarkified applications.
 
 #### Does Mina support shielded transactions, like in Zcash?
 
-No, Mina does not natively implement privacy features at the moment. However, privacy is key consideration for cryptocurrencies, and is also on the development roadmap.
-
-#
+No, Mina does not natively implement privacy features at the moment. However, privacy is a key consideration for cryptocurrencies, and is also on the development roadmap.
 
 #### Can I run the Mina daemon as a service
 
 [See here](/docs/node-operator#running-mina-as-a-service) for information about using launchd or systemd with mina.
 
 ## Block Producers
-
-#### Can I run multiple Block Producers with the same Private Key?
-
-No. It is important to only run one Block Producer process against a particular private key. In the event the Mina daemon receives two different blocks from the same Block Producer, both blocks would be discarded.
 
 #### How can I verify that I am indeed producing blocks?
 
@@ -107,7 +101,7 @@ The following text appears each time the daemon produces a block:
 
 #### I produced a block, why wasn't it selected for the _Canonical Chain_?
 
-Due to a property of the Minaboros consensus protocol, it's entirely possible that more than one block is produced in a particular slot. The network resolves the short-lived forks and will consolidate onto one block per slot by random selection.
+Due to a property of the Ouroboros Samisika consensus protocol, it's entirely possible that more than one block is produced in a particular slot. The network resolves the short-lived forks and will consolidate onto one block per slot by random selection.
 
 Below is a visualization of the Mina Blockchain:
 ![Visualization of the Mina Blockchain and its Singleton Forks](/static/img/faq/mina-singleton-forks.png)
@@ -125,7 +119,7 @@ No, they are different in several ways:
 - SNARK work is deterministic, while PoW mining requires randomly calculating hashes to try and solve a puzzle. There is no luck element in SNARK work — if a snark worker wants to generate a SNARK of a transaction, they only need to generate the proof once. This means SNARK work is much less expensive and environmentally wasteful, as the compute is all spent towards a productive goal.
 - There is no difficulty increase for SNARK work, as there is with PoW mining. In fact, as SNARK constructions, and proof generation times improve, the difficulty may actually decrease.
 - SNARK work is not directly involved in consensus. Snark workers play no role in determining the next state of the blockchain. Their role is to simply generate SNARKs of transactions observed in the network
-- As a snark worker, there is no requirement for uptime. PoW miners need to run their rigs non-stop to ensure they don't miss out on a potential block. Snark workers can come online and offline as they please — it is more like Uber, where there will always be work to be done, and it is nobody needs to say head of of time when they want to work.
+- As a snark worker, there is no requirement for uptime. PoW miners need to run their rigs non-stop to ensure they don't miss out on a potential block. Snark workers can come online and offline as they please — it is more like Uber, where there will always be work to be done, and nobody needs to say ahead of time when they want to work.
 
 #### Why have my SNARKs not been included? (A.K.A. How should I price my SNARKs?)
 
