@@ -92,7 +92,7 @@ let make = () => {
     <div className=Styles.container> 
         <div className=Styles.column>
           <p>{React.string("UP TO")}</p>
-          <h1> {React.string("2 Million Dollars")} </h1> 
+          <h1> {React.string("8,000,000 MINA")} </h1> 
           <p>{React.string("In MINA tokens, distributed ")}</p>
           <p>{React.string("after mainnnet launch")}</p>
           </div>
@@ -112,8 +112,8 @@ let make = () => {
           </div>
        <div className=Styles.column>
          <p>{React.string("AND HUNDREDS OF")}</p>
-           <h1> {React.string("Node Operator")} </h1> 
-            <p>{React.string("GENESIS PROGRAM TOKEN GRANTS")}</p> 
+           <h1> {React.string("Genesis Program")} </h1> 
+            <p>{React.string("Token Grants")}</p> 
          </div>
         </div>
   </div>

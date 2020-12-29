@@ -65,6 +65,7 @@ module Card = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
+    | `NewTab(href) => <a target="_blank"  href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -94,6 +95,7 @@ module CardDarkGray = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
+    | `NewTab(href) => <a target="_blank"  href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -123,6 +125,7 @@ module CardLightGray = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
+    | `NewTab(href) => <a target="_blank"  href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -488,37 +491,36 @@ module TestworldHeader = {
     };
 
     <div className=ButtonBarStyles.container>
-      <h2 className=Theme.Type.h2> {React.string("Help & Support")} </h2>
       <div className=ButtonBarStyles.grid>
          {renderCard(
            Icon.Challenges,
-           `External(Constants.minaWiki),
-           "Challenges & Rewards",
+           `Internal("#challenges"),
+           "Earn MINA helping us prepare for mainnet",
            "Join us & earn MINA.",
          )}
         {renderCard(
            Icon.Discord,
-           `External(Constants.minaWiki),
+           `NewTab(Constants.minaDiscordRulesAndGuidelines),
            "Discord",
            "Interact with other users, ask questions and get feedback.",
          )}
         {renderCard(
            Icon.Leaderboard,
-           `External(Constants.minaWiki),
+           `External(Constants.testworldLeadBoard),
            "Leaderboard",
            "Level up on your way to joining the Genesis Program.",
          )}
         {renderCard(
            Icon.Docs,
-           `External(Constants.minaWiki),
+           `External(Constants.testworldDocs),
            "Docs",
            "The technical lowdown for getting started running Mina.",
          )}
          {renderCard(
            Icon.Resources,
-           `External(Constants.minaWiki),
+           `Internal("#resources"),
            "Resources",
-           "Links to everything you’ll need, start to finish.",
+           "Links to everything you\'ll need, start to finish.",
          )}
       </div>
     </div>;
@@ -616,22 +618,22 @@ module TestworldFooter = {
     };
 
     <div className=ButtonBarStyles.container>
-      <div className=Styles.grid>
+      <div className=Styles.grid id="resources">
         {renderdarkGrayCard(
            Icon.FAQ,
-           `External(Constants.minaDiscordRulesAndGuidelines),
-           "Frequently Ask Questions",
+           `External(Constants.testworldFAQ),
+           "Frequently Asked Questions",
            "Lots of answers to the most commmon questions.",
          )}
         {renderdarkGrayCard(
            Icon.BlockExplorer,
-           `External(Constants.minaForums),
+           `NewTab(Constants.testworldBlockExplorer),
            "Block Explorer",
-           "All the on-chain data you’ll need to compete.",
+           "All the on-chain data you\'ll need to compete.",
          )}
         {renderdarkGrayCard(
            Icon.Discord,
-           `External(Constants.minaGithub),
+           `NewTab(Constants.minaDiscordRulesAndGuidelines),
            "Discord",
            "Interact with others, ask questions and get feedback.",
          )}
@@ -639,25 +641,25 @@ module TestworldFooter = {
       <div className=ButtonBarStyles.grid>
         {renderLightGrayCard(
            Icon.Genesis,
-           `External(Constants.minaDiscordRulesAndGuidelines),
+           `External(Constants.genesis),
            "Genesis Program",
-           "Join our community’s flagship program.",
+           "Join our community\'s flagship program.",
          )}
         {renderLightGrayCard(
            Icon.KnownVulnerabilities,
-           `External(Constants.minaForums),
-           "Big Bounty",
+           `NewTab(Constants.testworldBugBounty),
+           "Bug Bounty",
            "Help us find bugs in the protocol.",
          )}
         {renderLightGrayCard(
            Icon.Wiki,
-           `External(Constants.minaGithub),
+           `NewTab(Constants.minaWikiMainPage),
            "Wiki",
            "All sorts of useful information here.",
          )}
          {renderLightGrayCard(
            Icon.Paper,
-           `External(Constants.minaWiki),
+           `External(Constants.termsAndCondition),
            "Terms & Conditions",
            "If you need help falling asleep.",
          )}
