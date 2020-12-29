@@ -34,21 +34,24 @@ Check that daemon installed correctly by running `coda version`. The output shou
 For Testworld, we are sending out pre-generated keypairs to every participant. Once you recieve the link to claim your keypair, download it onto your computer.
 
 ```
-wget -O ~/keys <keypair-download-url>
+mkdir ~/keys
+wget -O ~/keys/new-keys.zip <keypair-download-url>
 ```
 
 Next we need to unzip the file, every download has a different filename so first check the filename that you downloaded in the previous step.
 
 ```
 cd ~/keys
-unzip <keypair-zip>
+unzip new-keys.zip
 ```
 
-Finally you need to rename your keypair. Look at the filenames that were extracted in the previous command.
+Finally you need to rename and set proper permissions on your keypair. Look at the filenames that were extracted in the previous command to determine the name of your `<testworld-keypair>`.
 
 ```
 mv <testworld-keypair> my-wallet
 mv <testworld-keypair>.pub my-wallet.pub
+chmod 700 ~/keys
+chmod 600 ~/keys/my-wallet
 ```
 
 ## Get the network information
@@ -80,7 +83,7 @@ However, first we'll want to make sure everything works by running it manually b
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -block-producer-password "password" -generate-genesis-proof true -file-log-level Info
+CODA_PRIVKEY_PASS="password from email" coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -generate-genesis-proof true -file-log-level Info
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -98,7 +101,7 @@ Ensure your peer-list file is located in `~/peers.txt` and your private-key that
 Add a file `~/.mina-env` containing the following:
 
 ```
-CODA_PRIVKEY_PASS="YOUR PASSWORD HERE"
+CODA_PRIVKEY_PASS="password from email"
 EXTRA_FLAGS=" -file-log-level Info "
 ```
 
@@ -110,7 +113,7 @@ Then run the following commands to start up a Mina node instance and connect to 
 systemctl --user daemon-reload
 systemctl --user start mina
 systemctl --user enable mina
-loginctl enable-linger
+sudo loginctl enable-linger
 ```
 These commands will allow the node to continue running after you logout, and restart automatically when the machine reboots.
 
@@ -149,9 +152,10 @@ That command will show you the last 1000 lines and follow from there.
 When running your daemon using Docker, first ensure that your private key has the correct permissions.
 
 ```
-cd ~ 
+cd ~
 chmod 700 ~/keys
 chmod 600 ~/keys/my-wallet
+mkdir ~/.coda-config
 ```
 
 Now simply run the image with your keys and ~/.coda-config mounted:
