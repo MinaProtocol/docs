@@ -13,7 +13,7 @@ module Styles = {
       selector(
         "p",
         [
-          fontSize(`rem(1.125)), 
+          fontSize(`rem(1.)), 
           lineHeight(`rem(1.75)),
           fontWeight(`num(10)),
           marginBottom(`rem(1.)),
@@ -85,7 +85,7 @@ let make = () => {
         <h1> {React.string("Announcement")} </h1> 
         <p>
           {React.string(
-            "Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet."
+            "While the spots for staking challenges have been filled (you should have received an email if you signed up and received stake), there are also SNARK and community challenges with unlimited participation. Check them out below."
           )}
         </p>
       </div>

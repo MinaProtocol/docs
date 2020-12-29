@@ -163,7 +163,7 @@ module Styles = {
         width(`percent(100.)),
         media(
           Theme.MediaQuery.tablet,
-          [maxWidth(`rem(20.)), padding2(~v=`rem(1.5), ~h=`rem(1.5))],
+          [maxWidth(`rem(16.)), padding2(~v=`rem(1.5), ~h=`rem(1.5))],
         ),
         marginTop(`rem(1.)),
         marginBottom(`rem(1.5)),

@@ -437,7 +437,7 @@ module Header = {
     [@react.component]
     let make = (~children, ~title) => {
         <div className=Styles.container>
-            <h1 className=Styles.h1> {React.string(title)} </h1>
+            <h1 className=Styles.h1 id="challenges"> {React.string(title)} </h1>
         children
         </div>
     }

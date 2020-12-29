@@ -39,5 +39,13 @@ let minaTelegram = "http://bit.ly/MinaTelegram";
 let minaWeChat = "https://forums.minaprotocol.com/t/mina-protocol-chinese-resources/200";
 let minaForums = "https://forums.minaprotocol.com/";
 
+let genesis = "https://minaprotocol.com/genesis";
+let testworldFAQ = "https://forums.minaprotocol.com/t/mina-testworld-overview-and-instructions/642";
+let testworldBlockExplorer = "https://minaexplorer.com/";
+let testworldBugBounty = "https://www.HackerOne.com/o1-labs";
+let termsAndCondition = "https://minaprotocol.com/tos";
+let testworldLeadBoard = "https://minaprotocol.com/leaderboard";
+let testworldDocs = "https://minaprotocol.com/docs";
+
 /* 1440 is the breakpoint width for desktop. Please refer to Theme.re for the specified breakpoints. */
 let desktopBreakpoint = 1440;
