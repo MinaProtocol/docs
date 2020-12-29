@@ -212,10 +212,15 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="minaprotocol.com/docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`External("forms.gle/Mnjq5QVJdLztJYR89") bgColor=Theme.Colors.mint dark=true>
+                      href={`External("forms.gle/Mnjq5QVJdLztJYR89")}
+                      bgColor=Theme.Colors.mint
+                      dark=true>
                       {React.string("APPLY FOR DELEGATION")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -262,10 +267,19 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="minaprotocol.com/docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`External("docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform") bgColor=Theme.Colors.mint dark=true>
+                      href={
+                             `External(
+                               "docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
+                             )
+                           }
+                      bgColor=Theme.Colors.mint
+                      dark=true>
                       {React.string("TELL US YOUR APPROACH")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -280,7 +294,13 @@ let make = () => {
                   />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`External("docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform") bgColor=Theme.Colors.mint dark=true>
+                      href={
+                             `External(
+                               "docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
+                             )
+                           }
+                      bgColor=Theme.Colors.mint
+                      dark=true>
                       {React.string("TELL US YOUR APPROACH")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -328,7 +348,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="minaprotocol.com/docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -374,7 +397,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="minaprotocol.com/docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
                   <TestworldChallenges.List
                     title="Tell Us How You Did It"
                     rules=[|
@@ -385,7 +411,13 @@ let make = () => {
                   />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`External("docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform") bgColor=Theme.Colors.mint dark=true>
+                      href={
+                             `External(
+                               "docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
+                             )
+                           }
+                      bgColor=Theme.Colors.mint
+                      dark=true>
                       {React.string("TELL US YOUR APPROACH")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -433,7 +465,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="minaprotocol.com/docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -480,7 +515,28 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="minaprotocol.com/docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
+                </TestworldChallenges.Accordian>
+              </TestworldChallenges.Item>
+            </TestworldChallenges.Contanier>
+          </TestworldChallenges.Header>
+          <TestworldChallenges.Header title="Community Challenges">
+            <TestworldChallenges.Contanier
+              title1="TESTWORLD RESULTS" title2="REWARDS">
+              <TestworldChallenges.Item
+                title="Raise Awareness"
+                rewardsMain="Earn up to 13,800 MINA Tokens"
+                rewardsSub="Level up on the leaderboard, and increase your eligibility to our Genesis program.">
+                <TestworldChallenges.Accordian>
+                  <TestworldChallenges.ContainerSm>
+                    <a
+                      href="https://forums.minaprotocol.com/t/testworld-community-challenges/763">
+                      <span className=Theme.Type.link>{React.string("See More")}</span>
+                    </a>
+                  </TestworldChallenges.ContainerSm>
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -501,7 +557,10 @@ let make = () => {
                     </p>
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.ContainerSm>
-                    <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                    <Link
+                      href="minaprotocol.com/docs/getting-started"
+                      text="Docs: Getting Started"
+                    />
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.BonusTable
                     tableHead=[|"RESULT", "MINA TOKENS"|]
@@ -561,9 +620,7 @@ let make = () => {
            )}
         </p>
         <p className=Styles.disclaimer>
-          {React.string(
-             "** Subject to Mina Foundation's approval.",
-           )}
+          {React.string("** Subject to Mina Foundation's approval.")}
         </p>
       </Wrapped>
     </div>
