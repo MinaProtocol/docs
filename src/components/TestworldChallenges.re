@@ -463,16 +463,6 @@ module List = {
   };
 };
 
-module Link = {
-  [@react.component]
-  let make = (~title) => {
-    <a className=Styles.link>
-      {React.string(title)}
-      <Icon kind=Icon.ArrowRightMedium />
-    </a>;
-  };
-};
-
 module Accordian = {
   [@react.component]
   let make = (~children) => {

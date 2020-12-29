@@ -211,10 +211,10 @@ let make = () => {
                       "Node setup instructions are available in our documentation.",
                     |]
                   />
-                  <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
+                      href=`External("forms.gle/Mnjq5QVJdLztJYR89") bgColor=Theme.Colors.mint dark=true>
                       {React.string("APPLY FOR DELEGATION")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -260,10 +260,10 @@ let make = () => {
                       "Node setup instructions are available in our documentation.",
                     |]
                   />
-                  <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
+                      href=`External("docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform") bgColor=Theme.Colors.mint dark=true>
                       {React.string("TELL US YOUR APPROACH")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -314,7 +314,7 @@ let make = () => {
                       "Node setup instructions are available in our documentation.",
                     |]
                   />
-                  <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -359,10 +359,10 @@ let make = () => {
                       "Node setup instructions are available in our documentation.",
                     |]
                   />
-                  <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href=`Scroll_to_top bgColor=Theme.Colors.mint dark=true>
+                      href=`External("docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform") bgColor=Theme.Colors.mint dark=true>
                       {React.string("TELL US YOUR APPROACH")}
                       <Icon kind=Icon.ArrowRightMedium />
                     </Button>
@@ -413,7 +413,7 @@ let make = () => {
                       "Node setup instructions are available in our documentation.",
                     |]
                   />
-                  <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -455,7 +455,7 @@ let make = () => {
                       "Node setup instructions are available in our documentation.",
                     |]
                   />
-                  <TestworldChallenges.Link title="Docs: Getting Started" />
+                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -476,7 +476,7 @@ let make = () => {
                     </p>
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.ContainerSm>
-                    <TestworldChallenges.Link title="Docs: Getting Started" />
+                    <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.BonusTable
                     tableHead=[|"RESULT", "MINA TOKENS"|]
@@ -524,9 +524,11 @@ let make = () => {
           </Button>
         </div>
         <div className=Styles.leaderboardContainer>
-          <a href="/leaderboard" className=Styles.leaderboardLink>
-            <Leaderboard interactive=false />
-          </a>
+          <Next.Link href="/leaderboard">
+            <div className=Styles.leaderboardLink>
+              <Leaderboard interactive=false />
+            </div>
+          </Next.Link>
         </div>
         <p className=Styles.disclaimer>
           {React.string(
