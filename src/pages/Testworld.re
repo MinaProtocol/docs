@@ -501,7 +501,7 @@ let make = () => {
                     </p>
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.ContainerSm>
-                    <Link href="docs/getting-started" text="Docs: Getting Started" />
+                    <Link href="leaderboard" text="Testnet Leaderboard" />
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.BonusTable
                     tableHead=[|"RESULT", "MINA TOKENS"|]
