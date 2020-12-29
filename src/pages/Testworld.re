@@ -295,13 +295,17 @@ let make = () => {
                       "5000",
                       "3rd place",
                       "4000",
-                      "Top 10",
-                      "3000",
-                      "Top 20",
-                      "2500",
+                      "Top 50",
+                      "3500",
                       "Top 100",
-                      "1500",
-                      "Top 200",
+                      "2000",
+                      "Top 250",
+                      "2000",
+                      "Top 500",
+                      "1000",
+                      "Top 750",
+                      "750",
+                      "Top 1000",
                       "1000",
                     |]
                   />
@@ -388,7 +392,7 @@ let make = () => {
                 <TestworldChallenges.Accordian>
                   <TestworldChallenges.RewardsTable
                     title="REWARDS"
-                    tableHead=[|"RESULT", "MINA TOKENS"|]
+                    tableHead=[|"RESULT", "TESTNET POINTS*"|]
                     tableRow=[|
                       "1st place",
                       "6500",
@@ -396,14 +400,18 @@ let make = () => {
                       "5000",
                       "3rd place",
                       "4000",
-                      "Top 10",
-                      "3000",
-                      "Top 20",
-                      "2500",
+                      "Top 50",
+                      "3500",
                       "Top 100",
-                      "1500",
-                      "Top 200",
+                      "3000",
+                      "Top 250",
+                      "2000",
+                      "Top 500",
                       "1000",
+                      "Top 750",
+                      "750",
+                      "Top 1000",
+                      "500",
                     |]
                   />
                   <TestworldChallenges.SnarkRules title="RULES" />
@@ -431,7 +439,7 @@ let make = () => {
                 <TestworldChallenges.Accordian>
                   <TestworldChallenges.RewardsTable
                     title="REWARDS"
-                    tableHead=[|"RESULT", "MINA TOKENS"|]
+                    tableHead=[|"RESULT", "TESTNET POINTS*"|]
                     tableRow=[|
                       "1st place",
                       "6500",
@@ -439,14 +447,18 @@ let make = () => {
                       "5000",
                       "3rd place",
                       "4000",
-                      "Top 10",
-                      "3000",
-                      "Top 20",
-                      "2500",
+                      "Top 50",
+                      "3500",
                       "Top 100",
-                      "1500",
-                      "Top 200",
+                      "3000",
+                      "Top 250",
+                      "2000",
+                      "Top 500",
                       "1000",
+                      "Top 750",
+                      "750",
+                      "Top 1000",
+                      "500",
                     |]
                   />
                   <TestworldChallenges.TransactionRules title="RULES" />
@@ -536,7 +548,12 @@ let make = () => {
         </div>
         <p className=Styles.disclaimer>
           {React.string(
-             "*Testnet Points are designed solely to track contributions to the Testnet and are non-transferable. Testnet Points have no cash or monetary value and are not redeemable for any cryptocurrency or digital assets. We may amend or eliminate Testnet Points at any time.",
+             "* Testnet Points are designed solely to track contributions to the Testnet and are non-transferable. Testnet Points have no cash or monetary value and are not redeemable for any cryptocurrency or digital assets. We may amend or eliminate Testnet Points at any time.",
+           )}
+        </p>
+        <p className=Styles.disclaimer>
+          {React.string(
+             "** Subject to Mina Foundation's approval.",
            )}
         </p>
       </Wrapped>
