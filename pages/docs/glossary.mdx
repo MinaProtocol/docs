@@ -23,18 +23,13 @@ The number of blocks added after the reference block. As the number of confirmat
 
 A node that participates in a process to determine what blocks it is allowed to produce, and then produces blocks that can be broadcast to the network.
 
-#### Mina
-
-- "Mina" with a capital C references the underlying cryptocurrency protocol and the network infrastructure that the system depends upon
-- "mina" is the unit of the cryptocurrency that is exchanged by participating nodes on the network
-
 #### Compressing
 
 Generating a SNARK for a computation output can be thought of as "compressing" that output, as the proofs are fixed size. For example, Mina maintains a succinct blockchain by compressing all the historical data in a blockchain into a zk-SNARK. However, this is computationally different from lossy compression, and the term compress is used to more figuratively describe the process of reducing the size of data required.
 
 #### Consensus
 
-An algorithm or set of rules that Mina nodes all agree upon when deciding to update the state of the network. Rules may include what data a new block can contain, and how nodes are selected and rewarded for adding a block. Mina implements Ouroboros Proof-of-Stake as its consensus mechanism.
+An algorithm or set of rules that Mina nodes all agree upon when deciding to update the state of the network. Rules may include what data a new block can contain, and how nodes are selected and rewarded for adding a block. Mina implements Ouroboros Samisika as its consensus mechanism.
 
 #### Cryptocurrency
 
@@ -59,6 +54,11 @@ A Mina node that is able to verify the state of the network trustlessly. In Mina
 #### Kademlia
 
 A distributed hash table (DHT) for decentralized peer-to-peer networks. Mina uses Kademlia for peer discovery, so that nodes can find neighbor nodes to share information about the network state.
+
+#### Mina
+
+- "Mina" with a capital M references the underlying cryptocurrency protocol and the network infrastructure that the system depends upon
+- "mina" is the unit of the cryptocurrency that is exchanged by participating nodes on the network
 
 #### Node
 
