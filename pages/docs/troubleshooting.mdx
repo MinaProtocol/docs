@@ -146,6 +146,34 @@ cat peers.txt | xargs -I % coda advanced add-peers %
 
 ## Networking
 
+### My hosting provider is warning me: "Abuse message: Netscan detected"
+
+There is some behavior with our p2p networking module that triggers this warning on some hosting providers (specifically we've heard this happening with Hetzner). To mitigate this configure your firewall to allow traffic from ssh, http, https and deny outgoing traffic to all private ip addresses.
+
+Here is an example of this using the [ufw](https://help.ubuntu.com/community/UFW#UFW_-_Uncomplicated_Firewall) firewall tool. Thanks Ducca for sharing these rules and confirming they fix the issues on Hetzner.
+
+Allow SSH, HTTP, HTTPS porst:
+
+```
+ufw allow 22
+ufw allow 80
+ufw allow 443
+ufw enable
+```
+
+Block outgoing private connection:
+
+```
+ufw deny out from any to 10.0.0.0/8
+ufw deny out from any to 172.16.0.0/12
+ufw deny out from any to 192.168.0.0/16
+ufw deny out from any to 100.64.0.0/10
+ufw deny out from any to 198.18.0.0/15
+ufw deny out from any to 169.254.0.0/16
+```
+
+See [#7053](https://github.com/MinaProtocol/mina/issues/7053) for more
+
 ### What ports need to be open?
 
 The only port required to be open for the daemon to communicate with peers is TCP port `8302`. 
