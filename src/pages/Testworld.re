@@ -212,14 +212,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-<<<<<<< HEAD
                   <Link
-                    href="minaprotocol.com/docs/getting-started"
+                    href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-=======
-                  <Link href="docs/getting-started" text="Docs: Getting Started" />
->>>>>>> 45f688a2ccb733aa768be1cf8d69164c6cd0cb37
                   <TestworldChallenges.ContainerSm>
                     <Button
                       href={`External("forms.gle/Mnjq5QVJdLztJYR89")}
@@ -271,14 +267,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-<<<<<<< HEAD
                   <Link
-                    href="minaprotocol.com/docs/getting-started"
+                    href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-=======
-                  <Link href="docs/getting-started" text="Docs: Getting Started" />
->>>>>>> 45f688a2ccb733aa768be1cf8d69164c6cd0cb37
                   <TestworldChallenges.ContainerSm>
                     <Button
                       href={
@@ -356,14 +348,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-<<<<<<< HEAD
                   <Link
-                    href="minaprotocol.com/docs/getting-started"
+                    href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-=======
-                  <Link href="docs/getting-started" text="Docs: Getting Started" />
->>>>>>> 45f688a2ccb733aa768be1cf8d69164c6cd0cb37
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -409,14 +397,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-<<<<<<< HEAD
                   <Link
-                    href="minaprotocol.com/docs/getting-started"
+                    href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-=======
-                  <Link href="docs/getting-started" text="Docs: Getting Started" />
->>>>>>> 45f688a2ccb733aa768be1cf8d69164c6cd0cb37
                   <TestworldChallenges.List
                     title="Tell Us How You Did It"
                     rules=[|
@@ -481,14 +465,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-<<<<<<< HEAD
                   <Link
-                    href="minaprotocol.com/docs/getting-started"
+                    href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-=======
-                  <Link href="docs/getting-started" text="Docs: Getting Started" />
->>>>>>> 45f688a2ccb733aa768be1cf8d69164c6cd0cb37
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -535,7 +515,10 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="docs/getting-started" text="Docs: Getting Started" />
+                  <Link
+                    href="docs/getting-started"
+                    text="Docs: Getting Started"
+                  />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -551,59 +534,56 @@ let make = () => {
                   <TestworldChallenges.ContainerSm>
                     <a
                       href="https://forums.minaprotocol.com/t/testworld-community-challenges/763">
-                      <span className=Theme.Type.link>{React.string("See More")}</span>
+                      <span className=Theme.Type.link>
+                        {React.string("See More")}
+                      </span>
                     </a>
                   </TestworldChallenges.ContainerSm>
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
           </TestworldChallenges.Header>
-          <TestworldChallenges.Header title="Bonus Rewards">
-            <TestworldChallenges.Contanier
-              title1="TESTWORLD RESULTS" title2="REWARDS">
-              <TestworldChallenges.Item
-                title="Leaderboard Standings"
-                rewardsMain="Earn up to 40,000 MINA Tokens"
-                rewardsSub="Distributed after mainnet launch.">
-                <TestworldChallenges.Accordian>
-                  <TestworldChallenges.ContainerSm>
-                    <p className=Theme.Type.paragraph>
-                      {React.string(
-                         "Earn leaderboard points by participating in challenges where testnet points* are awarded to challenge winners. See the challenges above for more information.",
-                       )}
-                    </p>
-                  </TestworldChallenges.ContainerSm>
-                  <TestworldChallenges.ContainerSm>
-<<<<<<< HEAD
-                    <Link
-                      href="minaprotocol.com/docs/getting-started"
-                      text="Docs: Getting Started"
+          <div id="bonus-rewards">
+            <TestworldChallenges.Header title="Bonus Rewards">
+              <TestworldChallenges.Contanier
+                title1="TESTWORLD RESULTS" title2="REWARDS">
+                <TestworldChallenges.Item
+                  title="Leaderboard Standings"
+                  rewardsMain="Earn up to 40,000 MINA Tokens"
+                  rewardsSub="Distributed after mainnet launch.">
+                  <TestworldChallenges.Accordian>
+                    <TestworldChallenges.ContainerSm>
+                      <p className=Theme.Type.paragraph>
+                        {React.string(
+                           "Earn leaderboard points by participating in challenges where testnet points* are awarded to challenge winners. See the challenges above for more information.",
+                         )}
+                      </p>
+                    </TestworldChallenges.ContainerSm>
+                    <TestworldChallenges.ContainerSm>
+                      <Link href="leaderboard" text="Testnet Leaderboard" />
+                    </TestworldChallenges.ContainerSm>
+                    <TestworldChallenges.BonusTable
+                      tableHead=[|"RESULT", "MINA TOKENS"|]
+                      tableRow=[|
+                        "1st place",
+                        "40,000",
+                        "2nd place",
+                        "20,000",
+                        "3rd place",
+                        "10,000",
+                        "Top 10",
+                        "5,000",
+                        "Top 20",
+                        "2,000",
+                        "Top 50",
+                        "1,000",
+                      |]
                     />
-=======
-                    <Link href="leaderboard" text="Testnet Leaderboard" />
->>>>>>> 45f688a2ccb733aa768be1cf8d69164c6cd0cb37
-                  </TestworldChallenges.ContainerSm>
-                  <TestworldChallenges.BonusTable
-                    tableHead=[|"RESULT", "MINA TOKENS"|]
-                    tableRow=[|
-                      "1st place",
-                      "40,000",
-                      "2nd place",
-                      "20,000",
-                      "3rd place",
-                      "10,000",
-                      "Top 10",
-                      "5,000",
-                      "Top 20",
-                      "2,000",
-                      "Top 50",
-                      "1,000",
-                    |]
-                  />
-                </TestworldChallenges.Accordian>
-              </TestworldChallenges.Item>
-            </TestworldChallenges.Contanier>
-          </TestworldChallenges.Header>
+                  </TestworldChallenges.Accordian>
+                </TestworldChallenges.Item>
+              </TestworldChallenges.Contanier>
+            </TestworldChallenges.Header>
+          </div>
           <TestworldChallenges.Disclaimer
             title="Testnet Points are designed solely to track contributions to the Testnet and are non-transferable. Testnet Points have no cash or monetary value and are not redeemable for any cryptocurrency or digital assets. We may amend or eliminate Testnet Points at any time. "
           />
