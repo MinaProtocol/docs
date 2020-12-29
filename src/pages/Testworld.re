@@ -212,7 +212,7 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link href="docs/getting-started" text="Docs: Getting Started" />
                   <TestworldChallenges.ContainerSm>
                     <Button
                       href=`External("forms.gle/Mnjq5QVJdLztJYR89") bgColor=Theme.Colors.mint dark=true>
@@ -262,7 +262,7 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link href="docs/getting-started" text="Docs: Getting Started" />
                   <TestworldChallenges.ContainerSm>
                     <Button
                       href=`External("docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform") bgColor=Theme.Colors.mint dark=true>
@@ -328,7 +328,7 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link href="docs/getting-started" text="Docs: Getting Started" />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -374,7 +374,7 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link href="docs/getting-started" text="Docs: Getting Started" />
                   <TestworldChallenges.List
                     title="Tell Us How You Did It"
                     rules=[|
@@ -433,7 +433,7 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link href="docs/getting-started" text="Docs: Getting Started" />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -480,7 +480,7 @@ let make = () => {
                       "You are encouraged to take advantage of any bugs to gain economic advantage, as long as it doesn't impact the ability for others to participate (e.g. hurting the connectivity of others).",
                     |]
                   />
-                  <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                  <Link href="docs/getting-started" text="Docs: Getting Started" />
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
             </TestworldChallenges.Contanier>
@@ -501,7 +501,7 @@ let make = () => {
                     </p>
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.ContainerSm>
-                    <Link href="minaprotocol.com/docs/getting-started" text="Docs: Getting Started" />
+                    <Link href="docs/getting-started" text="Docs: Getting Started" />
                   </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.BonusTable
                     tableHead=[|"RESULT", "MINA TOKENS"|]
