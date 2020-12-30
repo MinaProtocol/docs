@@ -131,7 +131,7 @@ module Styles = {
 
 [@react.component]
 let make = () => {
-  <Page title="Testworld" showFooter=true darkTheme=true>
+  <Page title="Testworld" showFooter=true darkTheme=true announcementCopy="Testworld is live!" announcementCTACopy="">
     <div className=Styles.page>
       <Hero.Dark
         title="ADVERSARIAL TESTNET"

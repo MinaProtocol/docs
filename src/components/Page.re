@@ -26,9 +26,9 @@ let make =
       ~footerColor=Theme.Colors.white,
       ~darkTheme=false,
       ~showFooter=true,
-      ~announcementCopy="Mina's Adversarial Testnet is coming!",
-      ~announcementCTACopy="Sign up to be notified",
-      ~announcementFormUrl=Constants.minaAdversarial,
+      ~announcementCopy="Mina's Adversarial Testnet, Testworld, is here!",
+      ~announcementCTACopy="Check it out",
+      ~announcementFormUrl="/testworld",
     ) => {
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);

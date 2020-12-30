@@ -81,12 +81,16 @@ let make = (~children, ~dark=false, ~copy, ~url) => {
 
       <div className=Styles.flexCenter>
         <span className=Styles.announcementText> children </span>
-        <a className=Styles.linkAnchor href=url>
-          <div className=Styles.link>
-            <span className=Styles.learnMoreText> {React.string(copy)} </span>
-            <Icon kind=Icon.ArrowRightMedium />
-          </div>
-        </a>
+        {copy === ""
+           ? React.null
+           : <a className=Styles.linkAnchor href=url>
+               <div className=Styles.link>
+                 <span className=Styles.learnMoreText>
+                   {React.string(copy)}
+                 </span>
+                 <Icon kind=Icon.ArrowRightMedium />
+               </div>
+             </a>}
       </div>
     </div>;
     //<div className=Styles.changeRegionSection>
