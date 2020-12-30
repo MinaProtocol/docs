@@ -189,7 +189,7 @@ let make = () => {
                   <TestworldChallenges.List
                     title="Applying For Delegation"
                     rules=[|
-                      "Block producers will need to apply after Testworld to indicate interest in receiving delegation.",
+                      "Eligible block producers will be invited to apply after Testworld to indicate their interest in receiving delegation.",
                       "Nodes must be staking no more than 8% of total Mina tokens available",
                     |]
                   />
@@ -216,15 +216,6 @@ let make = () => {
                     href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-                  <TestworldChallenges.ContainerSm>
-                    <Button
-                      href={`External("https://forms.gle/Mnjq5QVJdLztJYR89")}
-                      bgColor=Theme.Colors.mint
-                      dark=true>
-                      {React.string("APPLY FOR DELEGATION")}
-                      <Icon kind=Icon.ArrowRightMedium />
-                    </Button>
-                  </TestworldChallenges.ContainerSm>
                 </TestworldChallenges.Accordian>
               </TestworldChallenges.Item>
               <TestworldChallenges.Item

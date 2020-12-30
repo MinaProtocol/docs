@@ -117,7 +117,13 @@ module CardLightGray = {
   [@react.component]
   let make = (~href, ~children=?) => {
     let inner =
-      <div className=Styles.container>
+      <div
+        className=Css.(
+          merge([
+            Styles.container,
+            style([pointerEvents(href === `Inactive ? `none : `auto)]),
+          ])
+        )>
         {switch (children) {
          | Some(children) => children
          | None => React.null
