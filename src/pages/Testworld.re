@@ -312,7 +312,7 @@ let make = () => {
                       "Top 50",
                       "3500",
                       "Top 100",
-                      "2000",
+                      "3000",
                       "Top 250",
                       "2000",
                       "Top 500",
@@ -320,7 +320,7 @@ let make = () => {
                       "Top 750",
                       "750",
                       "Top 1000",
-                      "1000",
+                      "500",
                     |]
                   />
                   <TestworldChallenges.ProduceBlockRules title="RULES" />
