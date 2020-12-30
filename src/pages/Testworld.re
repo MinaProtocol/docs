@@ -218,7 +218,7 @@ let make = () => {
                   />
                   <TestworldChallenges.ContainerSm>
                     <Button
-                      href={`External("forms.gle/Mnjq5QVJdLztJYR89")}
+                      href={`External("https://forms.gle/Mnjq5QVJdLztJYR89")}
                       bgColor=Theme.Colors.mint
                       dark=true>
                       {React.string("APPLY FOR DELEGATION")}
@@ -271,19 +271,6 @@ let make = () => {
                     href="docs/getting-started"
                     text="Docs: Getting Started"
                   />
-                  <TestworldChallenges.ContainerSm>
-                    <Button
-                      href={
-                             `External(
-                               "docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
-                             )
-                           }
-                      bgColor=Theme.Colors.mint
-                      dark=true>
-                      {React.string("TELL US YOUR APPROACH")}
-                      <Icon kind=Icon.ArrowRightMedium />
-                    </Button>
-                  </TestworldChallenges.ContainerSm>
                   <TestworldChallenges.List
                     title="Tell Us How You Did It"
                     rules=[|
