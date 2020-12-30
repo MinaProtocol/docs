@@ -2,7 +2,9 @@ type kind =
   | GetStarted
   | Developers
   | CommunityLanding
-  | HelpAndSupport;
+  | HelpAndSupport
+  | TestworldFooter
+  | TestworldHeader;
 
 module Card = {
   module Styles = {
@@ -63,6 +65,77 @@ module Card = {
     switch (href) {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
+    | `NewTab(href) =>
+      <a target="_blank" href className=Styles.anchor> inner </a>
+    };
+  };
+};
+
+module CardDarkGray = {
+  module Styles = {
+    open Css;
+
+    let container =
+      merge([
+        Card.Styles.container,
+        style([backgroundColor(Theme.Colors.darkGrayBox)]),
+      ]);
+
+    let anchor = style([textDecoration(`none)]);
+  };
+  [@react.component]
+  let make = (~href, ~children=?) => {
+    let inner =
+      <div className=Styles.container>
+        {switch (children) {
+         | Some(children) => children
+         | None => React.null
+         }}
+      </div>;
+
+    switch (href) {
+    | `Internal(href) => <Next.Link href> inner </Next.Link>
+    | `External(href) => <a href className=Styles.anchor> inner </a>
+    | `NewTab(href) =>
+      <a target="_blank" href className=Styles.anchor> inner </a>
+    };
+  };
+};
+
+module CardLightGray = {
+  module Styles = {
+    open Css;
+
+    let container =
+      merge([
+        Card.Styles.container,
+        style([backgroundColor(Theme.Colors.lightGrayBox)]),
+      ]);
+
+    let anchor = style([textDecoration(`none)]);
+  };
+  [@react.component]
+  let make = (~href, ~children=?) => {
+    let inner =
+      <div
+        className=Css.(
+          merge([
+            Styles.container,
+            style([pointerEvents(href === `Inactive ? `none : `auto)]),
+          ])
+        )>
+        {switch (children) {
+         | Some(children) => children
+         | None => React.null
+         }}
+      </div>;
+
+    switch (href) {
+    | `Inactive => inner
+    | `Internal(href) => <Next.Link href> inner </Next.Link>
+    | `External(href) => <a href className=Styles.anchor> inner </a>
+    | `NewTab(href) =>
+      <a target="_blank" href className=Styles.anchor> inner </a>
     };
   };
 };
@@ -77,6 +150,8 @@ module ButtonBarStyles = {
       | Developers => (1.5, 5.75, 6.)
       | CommunityLanding => (1.5, 4.25, 4.25)
       | HelpAndSupport => (1.5, 5.75, 5.75)
+      | TestworldFooter => (1.5, 5.75, 5.75)
+      | TestworldHeader => (1.5, 5.75, 5.75)
       };
     style([
       padding2(~v=`rem(mobileV), ~h=`zero),
@@ -365,6 +440,234 @@ module GetStarted = {
   };
 };
 
+module TestworldHeader = {
+  module Styles = {
+    open Css;
+    let content =
+      merge([
+        ButtonBarStyles.content,
+        style([media(Theme.MediaQuery.tablet, [alignItems(`flexStart)])]),
+      ]);
+
+    let title =
+      merge([
+        style([
+          Theme.Typeface.monumentGrotesk,
+          color(Theme.Colors.white),
+          fontSize(`rem(0.75)),
+          lineHeight(`rem(1.)),
+          textTransform(`uppercase),
+          letterSpacing(`em(0.02)),
+          marginBottom(`rem(0.5)),
+          media(
+            Theme.MediaQuery.tablet,
+            [
+              textTransform(`none),
+              letterSpacing(`zero),
+              fontSize(`rem(1.3)),
+              lineHeight(`rem(1.56)),
+            ],
+          ),
+        ]),
+      ]);
+
+    let description =
+      merge([
+        Theme.Type.paragraphSmall,
+        style([
+          Theme.Typeface.monumentGroteskMono,
+          display(`none),
+          color(Theme.Colors.white),
+          media(Theme.MediaQuery.tablet, [display(`block)]),
+        ]),
+      ]);
+
+    let icon =
+      merge([
+        ButtonBarStyles.icon,
+        style([media(Theme.MediaQuery.tablet, [marginLeft(`auto)])]),
+      ]);
+  };
+  [@react.component]
+  let make = () => {
+    let renderCard = (kind, href, title, description) => {
+      <Card href>
+        <div className=Styles.content>
+          <span className=Styles.icon> <Icon kind /> </span>
+          <h5 className=Styles.title> {React.string(title)} </h5>
+          <p className=Styles.description> {React.string(description)} </p>
+        </div>
+      </Card>;
+    };
+
+    <div className=ButtonBarStyles.container>
+      <div className=ButtonBarStyles.grid>
+        {renderCard(
+           Icon.Challenges,
+           `Internal("#challenges"),
+           "Challenges & Rewards",
+           "Join us & earn MINA.",
+         )}
+        {renderCard(
+           Icon.Discord,
+           `NewTab(Constants.minaDiscordRulesAndGuidelines),
+           "Discord",
+           "Interact with other users, ask questions and get feedback.",
+         )}
+        {renderCard(
+           Icon.Leaderboard,
+           `External(Constants.testworldLeadBoard),
+           "Leaderboard",
+           "Level up on your way to joining the Genesis Program.",
+         )}
+        {renderCard(
+           Icon.Docs,
+           `External(Constants.testworldDocs),
+           "Docs",
+           "The technical lowdown for getting started running Mina.",
+         )}
+        {renderCard(
+           Icon.Resources,
+           `Internal("#resources"),
+           "Resources",
+           "Links to everything you\'ll need, start to finish.",
+         )}
+      </div>
+    </div>;
+  };
+};
+
+module TestworldFooter = {
+  module Styles = {
+    open Css;
+
+    let grid =
+      merge([
+        ButtonBarStyles.grid,
+        style([
+          marginBottom(`rem(2.)),
+          media(Theme.MediaQuery.tablet, [alignItems(`flexStart)]),
+        ]),
+      ]);
+
+    let content =
+      merge([
+        ButtonBarStyles.content,
+        style([media(Theme.MediaQuery.tablet, [alignItems(`flexStart)])]),
+      ]);
+
+    let title =
+      merge([
+        style([
+          Theme.Typeface.monumentGrotesk,
+          color(Theme.Colors.white),
+          fontSize(`rem(0.75)),
+          lineHeight(`rem(1.)),
+          textTransform(`uppercase),
+          letterSpacing(`em(0.02)),
+          marginBottom(`rem(0.5)),
+          media(
+            Theme.MediaQuery.tablet,
+            [
+              textTransform(`none),
+              letterSpacing(`zero),
+              fontSize(`rem(1.3)),
+              lineHeight(`rem(1.56)),
+            ],
+          ),
+        ]),
+      ]);
+
+    let description =
+      merge([
+        Theme.Type.paragraphSmall,
+        style([
+          Theme.Typeface.monumentGroteskMono,
+          display(`none),
+          color(Theme.Colors.white),
+          media(Theme.MediaQuery.tablet, [display(`block)]),
+        ]),
+      ]);
+
+    let icon =
+      merge([
+        ButtonBarStyles.icon,
+        style([media(Theme.MediaQuery.tablet, [marginLeft(`auto)])]),
+      ]);
+  };
+  [@react.component]
+  let make = () => {
+    let renderLightGrayCard = (kind, href, title, description) => {
+      <CardLightGray href>
+        <div className=Styles.content>
+          <span className=Styles.icon> <Icon kind /> </span>
+          <h5 className=Styles.title> {React.string(title)} </h5>
+          <p className=Styles.description> {React.string(description)} </p>
+        </div>
+      </CardLightGray>;
+    };
+
+    let renderdarkGrayCard = (kind, href, title, description) => {
+      <CardDarkGray href>
+        <div className=Styles.content>
+          <span className=Styles.icon> <Icon kind /> </span>
+          <h5 className=Styles.title> {React.string(title)} </h5>
+          <p className=Styles.description> {React.string(description)} </p>
+        </div>
+      </CardDarkGray>;
+    };
+
+    <div className=ButtonBarStyles.container>
+      <div className=Styles.grid id="resources">
+        {renderdarkGrayCard(
+           Icon.FAQ,
+           `External(Constants.testworldFAQ),
+           "Frequently Asked Questions",
+           "Lots of answers to the most commmon questions.",
+         )}
+        {renderdarkGrayCard(
+           Icon.BlockExplorer,
+           `NewTab(Constants.testworldBlockExplorer),
+           "Block Explorer",
+           "All the on-chain data you\'ll need to compete.",
+         )}
+        {renderdarkGrayCard(
+           Icon.Discord,
+           `NewTab(Constants.minaDiscordRulesAndGuidelines),
+           "Discord",
+           "Interact with others, ask questions and get feedback.",
+         )}
+      </div>
+      <div className=ButtonBarStyles.grid>
+        {renderLightGrayCard(
+           Icon.Genesis,
+           `External(Constants.genesis),
+           "Genesis Program",
+           "Join our community\'s flagship program.",
+         )}
+        {renderLightGrayCard(
+           Icon.KnownVulnerabilities,
+           `Inactive,
+           "Bug Bounty (Coming)",
+           "Help us find bugs in the protocol.",
+         )}
+        {renderLightGrayCard(
+           Icon.Wiki,
+           `NewTab(Constants.minaWikiMainPage),
+           "Wiki",
+           "All sorts of useful information here.",
+         )}
+        {renderLightGrayCard(
+           Icon.Paper,
+           `External(Constants.termsAndCondition),
+           "Terms & Conditions",
+           "If you need help falling asleep.",
+         )}
+      </div>
+    </div>;
+  };
+};
+
 [@react.component]
 let make = (~kind, ~backgroundImg) => {
   <div className={ButtonBarStyles.background(kind, backgroundImg)}>
@@ -374,6 +677,8 @@ let make = (~kind, ~backgroundImg) => {
        | Developers => React.null
        | CommunityLanding => <CommunityLanding />
        | HelpAndSupport => <HelpAndSupport />
+       | TestworldFooter => <TestworldFooter />
+       | TestworldHeader => <TestworldHeader />
        }}
     </Wrapped>
   </div>;

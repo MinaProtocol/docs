@@ -1,7 +1,14 @@
 open Css;
 
 [@react.component]
-let make = (~overflowHidden=false, ~children, ~maxWidthDesktop={`rem(90.0)}) => {
+let make =
+    (
+      ~overflowHidden=false,
+      ~children,
+      ~maxWidthDesktop={
+                         `rem(90.0);
+                       },
+    ) => {
   let paddingX = m => [paddingLeft(m), paddingRight(m)];
   <div
     className={style(

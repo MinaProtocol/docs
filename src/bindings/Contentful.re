@@ -23,5 +23,6 @@ external getEntries:
 
 [@bs.send]
 external getEntry:
-  (client, string, Js.t('args)) => Js.Promise.t(ContentType.System.entry('entry)) =
+  (client, string, Js.t('args)) =>
+  Js.Promise.t(ContentType.System.entry('entry)) =
   "getEntry";

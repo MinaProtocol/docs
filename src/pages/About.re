@@ -47,7 +47,7 @@ let make =
       modalOpen
       switchModalState
     />
-    <Wrapped><WorkWithMina /></Wrapped>
+    <Wrapped> <WorkWithMina /> </Wrapped>
   </Page>;
 };
 

@@ -6,6 +6,9 @@ module Colors = {
   let mint = `hex("9fe4c9");
   let greyScale = `hex("757575");
   let gray = `hex("d9d9d9");
+  let darkGrayBox = `hex("6D6D6D");
+  let lightGrayBox = `hex("9B9B9B");
+  let lightGray = `hex("f8f8f8");
   let white = Css.white;
   let black = Css.black;
   let digitalBlack = `hex("2d2d2d");
@@ -18,6 +21,8 @@ module Colors = {
   let operational = `hex("9FE4C9");
   let amber = `rgb((242, 149, 68));
   let amberAlpha = a => `rgba((242, 149, 68, a));
+  let announcementBar = `hex("737373");
+  let rewardPromo = `hex("595959");
 };
 
 module Typeface = {
@@ -293,6 +298,16 @@ module Type = {
       fontSize(`px(16)),
       lineHeight(`rem(1.5)),
     ]);
+
+  let reward =
+    style([
+      Typeface.monumentGrotesk,
+  ]);
+
+  let testworld = 
+    style([
+      Typeface.monumentGrotesk,
+    ])
 
   let errorMessage =
     style([
