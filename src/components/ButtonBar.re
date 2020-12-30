@@ -125,6 +125,7 @@ module CardLightGray = {
       </div>;
 
     switch (href) {
+    | `Inactive => inner
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
     | `NewTab(href) =>
@@ -640,7 +641,7 @@ module TestworldFooter = {
          )}
         {renderLightGrayCard(
            Icon.KnownVulnerabilities,
-           `Internal("#"),
+           `Inactive,
            "Bug Bounty (TBA)",
            "Help us find bugs in the protocol.",
          )}
