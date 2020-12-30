@@ -498,7 +498,7 @@ module TestworldHeader = {
         {renderCard(
            Icon.Challenges,
            `Internal("#challenges"),
-           "Earn MINA helping us prepare for mainnet",
+           "Challenges & Rewards",
            "Join us & earn MINA.",
          )}
         {renderCard(
