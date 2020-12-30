@@ -590,16 +590,6 @@ module TestworldFooter = {
   };
   [@react.component]
   let make = () => {
-    let renderCard = (kind, href, title, description) => {
-      <Card href>
-        <div className=Styles.content>
-          <span className=Styles.icon> <Icon kind /> </span>
-          <h5 className=Styles.title> {React.string(title)} </h5>
-          <p className=Styles.description> {React.string(description)} </p>
-        </div>
-      </Card>;
-    };
-
     let renderLightGrayCard = (kind, href, title, description) => {
       <CardLightGray href>
         <div className=Styles.content>
@@ -650,8 +640,8 @@ module TestworldFooter = {
          )}
         {renderLightGrayCard(
            Icon.KnownVulnerabilities,
-           `NewTab(Constants.testworldBugBounty),
-           "Bug Bounty",
+           `Internal("#"),
+           "Bug Bounty (TBA)",
            "Help us find bugs in the protocol.",
          )}
         {renderLightGrayCard(
