@@ -38,6 +38,7 @@ module SideNav = {
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
+          <Item title="Scan State" slug="scan-state" />
           <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
@@ -104,6 +105,7 @@ module Dropdown = {
           | "architecture/consensus" => "Consensus"
           | "architecture/proof-of-stake" => "Proof of Stake"
           | "architecture/snark-workers" => "Snark Workers"
+          | "architecture/scan-state" => "Scan State"
 
           | "snarks" => "SNARKs Overview"
           | "snarks/snarky" => "Getting started using SNARKs"
@@ -147,6 +149,7 @@ module Dropdown = {
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
+          <Item title="Scan State" slug="scan-state" />
           <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
