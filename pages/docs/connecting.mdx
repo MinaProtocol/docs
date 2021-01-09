@@ -29,8 +29,6 @@ sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.2-1-b1
 
 Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]b14e32415b15af04865ca069af31cea7716be251 on branch HEAD`.
 
-Note that the docker version below is different at the moment and will read `[DIRTY]9614ad972009c572a1bdcec402d58d83f23253aa`
-
 ## Setup Keypair
 
 For Testworld, we are sending out pre-generated keypairs to every participant. Once you receive the link to claim your keypair, download it onto your computer.
@@ -178,7 +176,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-gcr.io/o1labs-192920/coda-daemon-baked:0.2.2-hotfix-super-catchup-restart-libp2p-upload-blocks-9614ad9-testworld-c0e3c4c \
+gcr.io/o1labs-192920/coda-daemon-baked:0.2.2-1-b14e324-testworld-7bca682 \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
