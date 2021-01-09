@@ -21,6 +21,7 @@ module SideNav = {
         <Item title="Connect to the Network" slug={f("connecting")} />
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Item title="Hard Fork" slug={f("hard-fork")} />
+        <Item title="Archive Node" slug={f("archive-node")} />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
