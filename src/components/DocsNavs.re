@@ -22,7 +22,6 @@ module SideNav = {
           <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
         </Section>
-        //<Item title="Generate a Keypair" slug={f("keypair")} />
         <Item title="Connect to the Network" slug={f("connecting")} />
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Item title="Hard Fork" slug={f("hard-fork")} />
@@ -103,6 +102,10 @@ module Dropdown = {
           | "developers/graphql-api" => "GraphQL API"
           | "developers/logging" => "Logging"
 
+          | "keypair" => "Keypair Overview"
+          | "keypair/mina-generate-keypair" => "mina-generate-keypair"
+          | "keypair/ledger-app-mina" => "ledger-app-mina"
+
           | "architecture" => "Mina Overview"
           | "architecture/lifecycle-payment" => "Lifecycle of a Payment"
           | "architecture/block-producers" => "Block Producers"
@@ -131,7 +134,11 @@ module Dropdown = {
       <DropdownNav currentSlug defaultValue={getCurrentValue(currentSlug)}>
         <Item title="Overview" slug="/docs" />
         <Item title="Getting Started" slug={f("getting-started")} />
-        <Item title="Generate a Keypair" slug={f("keypair")} />
+        <Section title="Generate a Keypair" slug={f("keypair")}>
+          <Item title="Keypair Overview" slug="" />
+          <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
+          <Item title="ledger-app-mina" slug="ledger-app-mina" />
+        </Section>
         <Item title="Connect to the Network" slug={f("connecting")} />
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Item title="Hard Fork" slug={f("hard-fork")} />
