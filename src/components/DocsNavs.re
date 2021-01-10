@@ -25,6 +25,7 @@ module SideNav = {
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
           <Item title="Repository Structure" slug="directory-structure" />
+          <Item title="BIP44 Information" slug="bip44-information" />
           <Item title="Code Reviews" slug="code-reviews" />
           <Item title="Style Guide" slug="style-guide" />
           <Item title="Sandbox Node" slug="sandbox-node" />
