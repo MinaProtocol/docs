@@ -17,7 +17,12 @@ module SideNav = {
       <SideNav currentSlug>
         <Item title="Overview" slug="/docs" />
         <Item title="Getting Started" slug={f("getting-started")} />
-        <Item title="Generate a Keypair" slug={f("keypair")} />
+        <Section title="Generate a Keypair" slug={f("keypair")}>
+          <Item title="Keypair Overview" slug="" />
+          <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
+          <Item title="ledger-app-mina" slug="ledger-app-mina" />
+        </Section>
+        //<Item title="Generate a Keypair" slug={f("keypair")} />
         <Item title="Connect to the Network" slug={f("connecting")} />
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Item title="Hard Fork" slug={f("hard-fork")} />
