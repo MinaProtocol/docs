@@ -4,34 +4,28 @@ export default Page({ title: "Generate a Keypair" });
 # Generating a Keypair
 
 
-In order to fully participate in the Mina network, the first step is to generate a Keypair, which consists of a Public Key and a Private Key. Currently there are several ways to generate a Keypair, firstly being the mina-generate-keypair tool and secondly the ledger-app-mina tool.
-
-<Alert>
-
-If you have previously created a keypair after Testnet 3.2b (public key should begin with `B62...`), you can re-use the previous keypair and skip ahead to [connect to the network](/docs/connecting).
-
-</Alert>
+In order to create a keypair for Mainnet or to fully participate in a Mina test network, the first step is to generate a Keypair, which consists of a Public Key and a Private Key. Currently there are several ways to generate a Keypair, firstly being the mina-generate-keypair tool and secondly the ledger-app-mina tool.
 
 <br />
 
 ## mina-generate-keypair
 
-To simplify the process of creating a keypair, we've created a simple command-line utility called `mina-generate-keypair`. Please see our [mina-generate-keypair documentation](/docs/keypair/mina-generate-keypair) to get started with installing and using the tool to generate your Keypair. We recommend this method for now as the `ledger-app-mina` tool is still under development.
+We've created a simple command-line utility called `mina-generate-keypair`. Please see our [mina-generate-keypair documentation](/docs/keypair/mina-generate-keypair) to get started with installing and using the tool to generate your Keypair.
 
 ## ledger-app-mina 
 
-A Mina app for the [Nano S/X hardware wallet](https://www.ledger.com/) being developed currently and supports creating a Keypair as well. Please see our [ledger-app-mina documentation](/docs/keypair/ledger-app-mina) to get started with this tool.
+A Mina app for the [Nano S/X hardware wallet](https://www.ledger.com/) supports creating a Keypair as well. It is currently undergoing a security audit, otherwise development is nearly completed. Please see our [ledger-app-mina documentation](/docs/keypair/ledger-app-mina) to get started with this tool.
 
 <br />
 
 <Alert kind="warning">
 
-Never give out your private key and make sure they are stored safely. If you lose your private key or if a malicious actor gains access to your private key, you will lose access to your account and will lose your account funds. Always give out your public keys instead.
+Never give out your private key and make sure they are stored safely. If you lose your private key or if a malicious actor gains access to your private key, you will lose access to your account and will lose your account funds. Always give out your public keys instead. Mina will never ask you for your private keys.
 
 </Alert>
 
 <br />
 
-## Connecting to the network 
+## Next steps
 
-Now that we have created our keypair, we can finally [connect to the network](/docs/connecting)!
+Now that we have created our keypair, we can finally [connect to the network](/docs/connecting) or share your public key.
