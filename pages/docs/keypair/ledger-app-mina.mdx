@@ -4,13 +4,246 @@ export default Page({ title: "Ledger App Mina" });
 
 # ledger-app-mina
 
-A Mina app for the [Nano S/X hardware wallet](https://www.ledger.com/) being developed currently and supports creating a Keypair as well. Follow the instructions below to build and install the tool onto your system.
+You can use your [Ledger Nano X or Nano S](https://www.ledger.com/) hardware wallet to securely store your Mina private keys.
 
-## Installation
+The functionality currently supported is
+- Keypair generation
+- Signing payment transactions
+- Signing delegation transactions
 
-As this tool is under development, please visit the [Github readme](https://github.com/jspada/ledger-app-mina/blob/master/README.md) to keep up to date on how to use this tool. 
+This functionality is currently under development in a Pre-release for testing.
 
+Since it's in development the app isn't yet available for install through the Ledger Live user interface.
+If you have a Nano S, you can still sideload it onto your Ledger device by following the instructions below.
 
-## Connecting to the network 
+<Alert kind="warning">
+This is beta software and is still in development.  Use at your own risk.  Make sure your Ledger's BIP39 secret
+mnemonic phrase is backed up or use a separate Ledger device for testing this app.
+<Alert>
+
+## Installing on Ubuntu
+
+<Alert kind="note">
+Make sure Ledger's udev rules are installed!  To do this, check whether `/etc/udev/rules.d/20-hw1.rules` exists.
+If this file is not present, then you need to install the Ledger udev rules.  Visit Ledger's website and follow
+the [Linux instructions for fixing connection issues](https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) or,
+for advanced users, you can find Ledger's udev rules at the [LedgerHQ github](https://github.com/LedgerHQ/udev-rules).
+</Alert>
+
+### 1) Install Python 3
+
+```
+$ sudo apt-get install python3
+```
+
+### 2) Install pip3
+
+```
+$ sudo apt-get install pip3
+```
+
+### 3) Install Python tools for Ledger Blue, Nano S and Nano X
+
+```
+$ sudo pip3 install ledgerblue
+```
+
+### 4) Download mina-ledger-wallet
+
+Visit [Ledger App Mina Releases](https://github.com/jspada/ledger-app-mina/releases) and download the latest version.
+
+### 5) Extract the archive
+
+```
+$ tar xvzf mina-ledger-app-1.0.0-beta.2-0-XXX.tar.gz
+mina-ledger-app-1.0.0-beta.2-0-XXX/README
+mina-ledger-app-1.0.0-beta.2-0-XXX/install.sh
+mina-ledger-app-1.0.0-beta.2-0-XXX/uninstall.sh
+mina-ledger-app-1.0.0-beta.2-0-XXX/mina_ledger_wallet
+mina-ledger-app-1.0.0-beta.2-0-XXX/bin/app.hex
+```
+### 6) Launch the installation script
+
+```
+$ cd mina-ledger-app-1.0.0-beta.2-0-XXX
+$ ./install.sh
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+This will begin the installation of the app (continued in the next steps)
+
+### 7) Allow the "unsafe manager"
+
+Your Ledger device will warn you that the install script is an unsafe manager.
+
+```
+< X Deny unsafe manager >
+```
+
+Click left until you see
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Select this option.
+
+### 8) Install app Mina
+
+Your Ledger device will ask if you want to install the Mina app.
+
+```
+< M Install app Mina >
+```
+
+Click left until you see
+
+< ✓ Perform installation >
+
+Select this option and enter your Ledger PIN code.
+
+If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
+
+### 9) Install the mina_ledger_wallet command-line wallet
+
+```
+$ sudo cp ./mina_ledger_wallet /usr/local/bin/
+```
+
+## Installing on Mac
+
+### 1) Install Homebrew
+
+```
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 2) Install python3
+
+```
+brew install python3
+```
+
+### 3) Install Python tools for Ledger Blue, Nano S and Nano X
+
+```
+$ pip3 install ledgerblue
+```
+
+### 4) Download mina-ledger-wallet
+
+Visit [Ledger App Mina Releases](https://github.com/jspada/ledger-app-mina/releases) and download the latest version.
+
+### 5) Extract the archive
+
+```
+$ tar xvzf mina-ledger-app-1.0.0-beta.2-0-XXX.tar.gz
+mina-ledger-app-1.0.0-beta.2-0-XXX/README
+mina-ledger-app-1.0.0-beta.2-0-XXX/install.sh
+mina-ledger-app-1.0.0-beta.2-0-XXX/uninstall.sh
+mina-ledger-app-1.0.0-beta.2-0-XXX/mina_ledger_wallet
+mina-ledger-app-1.0.0-beta.2-0-XXX/bin/app.hex
+```
+### 6) Launch the installation script
+
+```
+$ cd mina-ledger-app-1.0.0-beta.2-0-XXX
+$ ./install.sh
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+This will begin the installation of the app (continued in the next steps)
+
+### 7) Allow the "unsafe manager"
+
+Your Ledger device will warn you that the install script is an unsafe manager.
+
+```
+< X Deny unsafe manager >
+```
+
+Click left until you see
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Select this option.
+
+### 8) Install app Mina
+
+Your Ledger device will ask if you want to install the Mina app.
+
+```
+< M Install app Mina >
+```
+
+Click left until you see
+
+< ✓ Perform installation >
+
+Select this option and enter your Ledger PIN code.
+
+If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
+
+### 9) Install the mina_ledger_wallet command-line wallet
+
+```
+$ sudo cp ./mina_ledger_wallet /usr/local/bin/
+```
+
+## Generating a keypair
+
+To generate a keypair and obtain the associated Mina address, open the Mina app on your Ledger device and then on your terminal use `mina_ledger_wallet` command.
+
+For example, to get the Mina address corresponding to hardware wallet account 42 (BIP44 account 44'/12586'/42'/0'/0') you would issue the following command.
+
+```
+$ mina_ledger_wallet get-addres 42
+```
+
+You will be prompted to confirm
+
+```
+Get address for account 42 (path 44'/12586'/42'/0'/0')
+Continue? (y/N) y
+```
+
+Once confirmed, you will see
+
+```
+Generating address (please confirm on Ledger device)...
+```
+
+on your terminal while the Ledger will display
+
+```
+Processing...
+```
+
+whilst it generates the keypair.
+
+Since Mina uses new cryptography and new elliptic curves, this process can take up to 47 seconds.
+
+Once completed the Ledger will display the address for you to carefully check and confirm.
+
+```
+ Address (1/4)
+B62qk2o9hqZRjAhG >
+```
+
+Once approved the `mina_ledger_wallet` command will output the result, which you can use.
+
+```
+Received address: B62qk2o9hqZRjAhG7skhWVXGtCfMdtqBvCTjVfYeh4mqLvrLmBQUmAY
+```
+
+(Note: your address 42 will be different than this one.)
+
+## Connecting to the network
 
 Now that we have created our keypair, we can finally [connect to the network](/docs/connecting)!
