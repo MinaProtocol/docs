@@ -647,8 +647,8 @@ module TestworldFooter = {
          )}
         {renderLightGrayCard(
            Icon.KnownVulnerabilities,
-           `Inactive,
-           "Bug Bounty (Coming)",
+           `External(Constants.testworldBugBounty),
+           "Bug Bounty",
            "Help us find bugs in the protocol.",
          )}
         {renderLightGrayCard(
