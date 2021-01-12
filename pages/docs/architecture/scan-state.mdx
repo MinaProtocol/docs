@@ -146,9 +146,9 @@ While multiple snark workers can complete the same work, only the lowest fee is 
 
 When a block producer includes completed proofs into a block to offset any transactions they add, they may purchase the corresponding work from the snark pool. For example, continuing the example above consider the next block (12). If the block producer wants to add three transactions, comprising a coinbase, a user payment, and a fee transfer to the snark worker, they need to purchase three completed snark work. This corresponds to the 6 `B9`, `B10`s, `M9`, and `M10` (from the seventh tree) proofs, as each snark work includes two _workIds_.
 
-During the time the block is generated, the snark pool may include completed work in addition to the best bids for both jobs (0.025 and 0.165, respectively, in the example).
+During the time the block is generated, the snark pool may include completed work in addition to the best bids for the required jobs (0.025, 0.165, 0.1 and 0.5) respectively, in the example).
 
-<img alt="Submitted work" src="/static/img/docsImages/scan-state/fDBZog9.png" width="550" />
+![Submitted work](/static/img/docsImages/scan-state/fDBZog9.png)
 
 A block producer will consider the price of available work before selecting transactions. The first transaction a block producer will add will be the coinbase transaction for which there is the coinbase reward. If transaction fees do not cover the snark work fees required for them to be included, they would not be added. A block producer will never purchase work if it is not economical to do so.
 
