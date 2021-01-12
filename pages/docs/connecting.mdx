@@ -85,7 +85,7 @@ Note: If you are using the Hetzner hosting provider, we are currently experienci
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-CODA_PRIVKEY_PASS="password from email" coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -generate-genesis-proof true -file-log-level Info -super-catchup
+CODA_PRIVKEY_PASS="password from email" coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -generate-genesis-proof true -file-log-level Debug -super-catchup
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -104,7 +104,7 @@ Add a file `~/.mina-env` containing the following:
 
 ```
 CODA_PRIVKEY_PASS="password from email"
-EXTRA_FLAGS=" -file-log-level Info -super-catchup"
+EXTRA_FLAGS=" -file-log-level Debug -super-catchup"
 ```
 
 You can add extra flags later to `EXTRA_FLAGS` as you see fit.
@@ -181,7 +181,7 @@ daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
 -insecure-rest-server \
--file-log-level Info \
+-file-log-level Debug \
 -log-level Info \
 -super-catchup
 ```
