@@ -156,3 +156,23 @@ WITH RECURSIVE chain AS (
   ON pk.id = c.creator_id
   WHERE c.height = 12
 ```
+
+**Example 3:** List the counts of blocks created by each public key and sort them in descending order
+
+```
+SELECT p.value, COUNT(*) FROM blocks
+INNER JOIN public_keys AS p ON creator_id = ip.id
+GROUP BY p.value
+ORDER BY count DESC;
+```
+
+**Example 4:** List the counts of applied payments created by each public key and sort them in descending order
+
+```
+SELECT p.value, COUNT(*) FROM user_commands
+INNER JOIN public_keys AS p ON source_id = p.id
+WHERE status = 'applied'
+AND type = 'payment'
+GROUP BY p.value ORDER BY count DESC;
+```
+
