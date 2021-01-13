@@ -4,31 +4,28 @@ export default Page({ title: "Ledger App Mina" });
 
 # ledger-app-mina
 
-You can use your [Ledger Nano X or Nano S](https://www.ledger.com/) hardware wallet to securely store your Mina private keys.
+You can use your [Ledger Nano S/X](https://www.ledger.com/) hardware wallet to securely store your Mina private keys.
 
-The functionality currently supported is
+The operations supported are
 - Keypair generation
 - Signing payment transactions
 - Signing delegation transactions
 
 This functionality is currently under development and there is a Pre-release for testing.
 
-Since it's in development the app isn't yet available for install through the Ledger Live user interface.
-If you have a Nano S, you can still sideload it onto your Ledger device by following the instructions below.
+The app is not yet available for install through the Ledger Live user interface, but if you have a Nano S, you can sideload it onto your Ledger device by following the instructions below.
 
 <Alert kind="warning">
-This is beta software and is still in development.  Use at your own risk.  Make sure your Ledger's BIP39 secret
-mnemonic phrase is backed up or use a separate Ledger device for testing this app.
+This is beta software and is still in development.  Use at your own risk.  Make sure you have a backup of your Ledger's BIP39 secret
+mnemonic phrase or use a separate Ledger device for testing this app.
 </Alert>
 
 ## Installing on Ubuntu
 
-<Alert kind="note">
-Make sure Ledger's udev rules are installed!  To do this, check whether `/etc/udev/rules.d/20-hw1.rules` exists.
-If this file is not present, then you need to install the Ledger udev rules.  Visit Ledger's website and follow
-the [Linux instructions for fixing connection issues](https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) or,
-for advanced users, you can find Ledger's udev rules at the [LedgerHQ github](https://github.com/LedgerHQ/udev-rules).
-</Alert>
+Before installing please make sure your Ledger device is fully set up and configured.  In particular, make sure that Ledger's udev rules are installed.
+
+If the udev rules are installed then `/etc/udev/rules.d/20-hw1.rules` will exist.  If this file is not present then you need to visit Ledger's website and follow the [Linux instructions for fixing connection issues](https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) or,
+for advanced users, you can find the udev rules on the [LedgerHQ Github](https://github.com/LedgerHQ/udev-rules).
 
 ### 1) Install Python 3
 
@@ -39,20 +36,26 @@ $ sudo apt-get install python3
 ### 2) Install pip3
 
 ```
-$ sudo apt-get install pip3
+$ sudo apt-get install python3-pip
 ```
 
-### 3) Install Python tools for Ledger Blue, Nano S and Nano X
+### 3) Install prerequisite libraries
+
+```
+sudo apt-get install libudev-dev libusb-1.0-0-dev python-dev virtualenv
+```
+
+### 4) Install Python tools for Ledger Blue, Nano S and Nano X
 
 ```
 $ sudo pip3 install ledgerblue
 ```
 
-### 4) Download ledger-app-mina
+### 5) Download ledger-app-mina
 
 Visit [Ledger App Mina Releases](https://github.com/jspada/ledger-app-mina/releases) and download the latest version.
 
-### 5) Extract the archive
+### 6) Extract the archive
 
 ```
 $ tar xvzf ledger-app-mina-1.0.0-beta.2-0-XXX.tar.gz
@@ -62,7 +65,7 @@ ledger-app-mina-1.0.0-beta.2-0-XXX/uninstall.sh
 ledger-app-mina-1.0.0-beta.2-0-XXX/mina_ledger_wallet
 ledger-app-mina-1.0.0-beta.2-0-XXX/bin/app.hex
 ```
-### 6) Launch the installation script
+### 7) Launch the installation script
 
 ```
 $ cd ledger-app-mina-1.0.0-beta.2-0-XXX
@@ -74,7 +77,7 @@ Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e
 
 This will begin the installation of the app (continued in the next steps)
 
-### 7) Allow the "unsafe manager"
+### 8) Allow the "unsafe manager"
 
 Your Ledger device will warn you that the install script is an unsafe manager.
 
@@ -90,7 +93,7 @@ Click left until you see
 
 Select this option.
 
-### 8) Install app Mina
+### 9) Install app Mina
 
 Your Ledger device will ask if you want to install the Mina app.
 
@@ -108,7 +111,7 @@ Select this option and enter your Ledger PIN code.
 
 If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
 
-### 9) Install the mina_ledger_wallet command-line wallet
+### 10) Install the command-line wallet
 
 ```
 $ sudo cp ./mina_ledger_wallet /usr/local/bin/
@@ -121,6 +124,8 @@ $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 ```
 $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
+For more information please visit the [Homebrew website](https://brew.sh/)
 
 ### 2) Install python3
 
@@ -194,7 +199,7 @@ Select this option and enter your Ledger PIN code.
 
 If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
 
-### 9) Install the mina_ledger_wallet command-line wallet
+### 9) Install the command-line wallet
 
 ```
 $ sudo cp ./mina_ledger_wallet /usr/local/bin/
@@ -207,7 +212,7 @@ To generate a keypair and obtain the associated Mina address, open the Mina app 
 For example, to get the Mina address corresponding to hardware wallet account 42 (BIP44 account 44'/12586'/42'/0'/0') you would issue the following command.
 
 ```
-$ mina_ledger_wallet get-addres 42
+$ mina_ledger_wallet get-address 42
 ```
 
 You will be prompted to confirm
@@ -231,12 +236,12 @@ Processing...
 
 whilst it generates the keypair.
 
-Since Mina uses new cryptography and new elliptic curves, this process can take up to 47 seconds.
+Since Mina uses new elliptic curves that are not yet supported in hardware, this process can take up to 47 seconds.
 
 Once completed the Ledger will display the address for you to carefully check and confirm.
 
 ```
- Address (1/4)
+  Address (1/4)
 B62qk2o9hqZRjAhG >
 ```
 
@@ -247,4 +252,3 @@ Received address: B62qk2o9hqZRjAhG7skhWVXGtCfMdtqBvCTjVfYeh4mqLvrLmBQUmAY
 ```
 
 (Note: your address 42 will be different than this one.)
-
