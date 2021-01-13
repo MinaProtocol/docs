@@ -1,0 +1,102 @@
+import Page from '@reason/pages/Docs';
+export default Page({title: "Archive Redundancy"});
+
+# Archive Redundancy
+
+Presented here are three flows for accessing historical information about blocks and transactions.
+
+The paths presented here are sorted from "rawest" to "most processed".
+
+O(1) labs will be deploying all three flows in their infrastructure (with lots of redundancy) so they will be able to provide missing information for consumers of (A), (B), or (C) if their nodes go offline for any reason and miss information.
+
+## A. Raw Block Logging
+
+We have a mechanism in place for logging a high-fidelity machine-readable representation of blocks using JSON including some opaque information deep within. We use these logs internally to quickly replay blocks to get to certain chain-states for debugging. This information suffices to recreate exact states of the network.
+
+Some of the internal data look like this:
+
+```json
+{"data":["Signed_command",{"payload":{"common":{"fee":"100","fee_token":"1","fee_payer_pk":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","nonce":"340","valid_until":"4294967295","memo":"E4YM2vTHhWEg66xpj52JErHUBU4pZ1yageL4TVDDpTTSsv8mK6YaH"},"body":["Payment",{"source_pk":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","receiver_pk":"B62qm2GCuGCEK79mEjeyaeiFoukThuZLJCHGe9HAzuAnfbtS5FHtPnP","token_id":"1","amount":"100000000"}]},"signer":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","signature":"7mXGz8Df1gu92HVWGue24wcrGxDWkgQrDK59xQGXc627PKFQvVAPSzZn7JMkHtfdBUXavDHcgLBZy4iR4UmA5seRCPMkFDci"}],"status":["Applied",{"fee_payer_account_creation_fee_paid":null,"receiver_account_creation_fee_paid":null,"created_token":null},{"fee_payer_balance":"31866000100000","source_balance":"31866000100000","receiver_balance":"34099000000"}]}],"coinbase":["One",null],"internal_command_balances":[["Coinbase",{"coinbase_receiver_balance":"75477804514901","fee_transfer_receiver_balance":null}],["Fee_transfer",{"receiver1_balance":"65266376010003","receiver2_balance":"78601129170700"}],["Fee_transfer",{"receiver1_balance":"66001820000000","receiver2_balance":"76870784414900"}],["Fee_transfer",{"receiver1_balance":"71158365898775","receiver2_balance":"59264207944722"}],["Fee_transfer",{"receiver1_balance":"68546088449962","receiver2_balance":"66721919100000"}],["Fee_transfer",{"receiver1_balance":"67700798001000","receiver2_balance":"66372760000000"}],["Fee_transfer",{"receiver1_balance":"85383891400000","receiver2_balance":"107174952265469"}],["Fee_transfer",{"receiver1_balance":"65879310000000","receiver2_balance":"66282230000000"}]]}]},"delta_transition_chain_proof":["jxLZWooV57gKCmanzCHHt1CDbHfUpMu6MkynUdqN9ZkBUJi7B1W",[]]}
+```
+
+This JSON will evolve as the format of the block and transaction payloads evolve in the network. Though we don't expect much churn before mainnet.
+
+This information is exposed via a structured log and fed to stdout. We can supply filtering tooling for capturing just these messages so they can be safely and permanently stored.
+
+## B. GraphQL JSON Snapshotting
+
+The Mina daemon hosts a GraphQL server on port `0xc0d` or 3085 (by default, configurable via config file or -rest-server-port flag) to this machine (you can make it open to 0.0.0.0 with -insecure-reset-server). It is not safe for this port to be open to the public internet.
+
+We expose a `bestChain` query that will remain able to get *at least* the last few blocks (though not all of them) see the docs here for more: [https://minaprotocol.com/graphql-docs/query.doc.html](https://minaprotocol.com/graphql-docs/query.doc.html) that should have all the information you need in JSON. If you poll this at a rate faster than every 3minutes, you will keep up with every block. You can also get this same information via subscription pushed to you via [https://minaprotocol.com/graphql-docs/subscription.doc.html](https://minaprotocol.com/graphql-docs/subscription.doc.html) .
+
+Currently both many applications exist on testnets that consume this information. O(1) labs is relying on this data source in a few places and there will likely be other consumers by mainnet.
+
+## C. Official Archive Node PostgreSQL
+
+O(1) labs will support recovering missing data here from both (B) or (A) backups.
+
+The nice thing about the archive node is there are already consumers relying on queries for "what is the block at height N on the canonical chain". See [https://minaprotocol.com/docs/archive-node](https://minaprotocol.com/docs/archive-node) for more info.
+
+```
+WITH RECURSIVE chain AS (
+  (SELECT ... FROM blocks b WHERE height = (select MAX(height) from blocks)
+  ORDER BY timestamp ASC
+  LIMIT 1)
+
+  UNION ALL
+
+  SELECT ... FROM blocks b
+  INNER JOIN chain
+  ON b.id = chain.parent_id AND chain.id <> chain.parent_id
+) SELECT ..., pk.value as creator FROM chain c
+  INNER JOIN public_keys pk
+  ON pk.id = c.creator_id
+  WHERE c.height = ?
+
+```
+
+This can be tweaked to get all blocks within a window or all transactions within the blocks within a certain slice.
+
+===
+
+## Liquid Balance Details:
+
+All (A), (B), (C) have enough information to compute liquid balances for vesting accounts.
+
+If you'd like to expose liquid balances for vesting accounts at some particular time period it is governed by the following function (Note: this computes the locked portion of an account):
+
+```
+(*  
+ *  uint32 global_slot -- the "clock" it starts at 0 at the genesis block and ticks up every 3minutes.
+ *  uint32 cliff_time -- the slot where the cliff is (similar to startup equity vesting)
+ *  uint32 cliff_amount -- the amount that unlocks at the cliff
+ *  amount vesting_increment -- unlock this amount every "period"
+ *  uint32 vesting_period -- the period that we increment the unlocked amount
+ *  balance initial_minimum_balance -- the total locked amount until the cliff
+ *)
+let min_balance_at_slot ~global_slot ~cliff_time ~cliff_amount ~vesting_period
+    ~vesting_increment ~initial_minimum_balance =
+  let open Unsigned in
+  if Global_slot.(global_slot < cliff_time) then initial_minimum_balance
+  else
+    match Balance.(initial_minimum_balance - cliff_amount) with
+    | None ->
+        Balance.zero
+    | Some min_balance_past_cliff -> (
+        (* take advantage of fact that global slots are uint32's *)
+        let num_periods =
+          UInt32.(
+            Infix.((global_slot - cliff_time) / vesting_period)
+            |> to_int64 |> UInt64.of_int64)
+        in
+        let vesting_decrement =
+          UInt64.Infix.(num_periods * Amount.to_uint64 vesting_increment)
+          |> Amount.of_uint64
+        in
+        match Balance.(min_balance_past_cliff - vesting_decrement) with
+        | None ->
+            Balance.zero
+        | Some amt ->
+            amt )
+
+```
