@@ -23,7 +23,7 @@ module SideNav = {
         <Item title="Hard Fork" slug={f("hard-fork")} />
         <Item title="Archive Node" slug={f("archive-node")} />
         <Item title="Archive Redundancy" slug={f("archive-redundancy")} />
-        <Item title="Node Operation for Data" slug={f("operating-for-data")} />
+        <Item title="Data Querying for Node Operators" slug={f("operating-for-data")} />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
