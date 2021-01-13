@@ -274,7 +274,7 @@ let make = () => {
                     <Button
                       href={
                              `External(
-                               "docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
+                               "https://docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
                              )
                            }
                       bgColor=Theme.Colors.mint
@@ -391,7 +391,7 @@ let make = () => {
                     <Button
                       href={
                              `External(
-                               "docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
+                               "https://docs.google.com/forms/d/e/1FAIpQLScYAS4XjqXkBlvGPSBHhJaYyYXjy5exB4YagvC88V4dznkoSg/viewform",
                              )
                            }
                       bgColor=Theme.Colors.mint
