@@ -22,7 +22,7 @@ The best way to explore all the specific details available for each of the Graph
 
 ### Block data
 
-```graphql
+```javascript
 query BlockData {
   bestChain(maxLength: 10) {
     stateHash
@@ -41,7 +41,7 @@ We will soon add support for a `block` query that can request specific blocks wi
 
 The following is a query for accessing the current balance of a public key. Note that you can also ask for the blockHeight and stateHash of the block that this balance is inspected within.
 
-```graphql
+```javascript
 query CurrentBalance {
   account(publicKey: "B62qmyjqEtUEZrsBpUaiz18DCkwh1ovCrJboiHbDhpvH8JEoaag5fUP") {
     balance {
@@ -57,7 +57,7 @@ query CurrentBalance {
 
 In Mina, accounts are either staked or delegated completely. There is no alternative state. The following is a way to query this information that is present in the current ledger.
 
-```graphql
+```javascript
 query StakingInfo {
   account(publicKey: "B62qmyjqEtUEZrsBpUaiz18DCkwh1ovCrJboiHbDhpvH8JEoaag5fUP") {
     balance {
@@ -80,7 +80,7 @@ Note that the actual staking and delegating in the current "epoch" is drawn from
 
 Via GraphQL, you can lookup transactions within blocks on the bestChain as follows:
 
-```graphql
+```javascript
 query TransactionDetails {
   bestChain(maxLength: 10) {
     stateHash
@@ -118,7 +118,7 @@ query TransactionDetails {
 
 You can send a signed transaction using the following GraphQL mutation. You can get information about the payment returned back to you as a sanity check.
 
-```graphql
+```javascript
 mutation SubmitSignedTransaction {
   __typename
   sendPayment(input: {
