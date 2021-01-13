@@ -21,13 +21,13 @@ The first step in connecting to the network is installing the latest daemon vers
 First remove any previously installed version of the daemon to prevent any errors when upgrading to the latest version. Then you can install the latest version as follows:
 
 ```
-sudo apt-get remove mina-testnet-postake-medium-curves
+sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.2-1-b14e324 --allow-downgrades
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.4-16ebdd6 --allow-downgrades
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]b14e32415b15af04865ca069af31cea7716be251 on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]16ebdd6597ab050fdaf8a075cc39d9b7be1233cf on branch HEAD`.
 
 ## Setup Keypair
 
@@ -85,7 +85,7 @@ Note: If you are using the Hetzner hosting provider, we are currently experienci
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-CODA_PRIVKEY_PASS="password from email" coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -generate-genesis-proof true -file-log-level Info -super-catchup
+CODA_PRIVKEY_PASS="password from email" coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -generate-genesis-proof true -file-log-level Debug -super-catchup
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -104,7 +104,7 @@ Add a file `~/.mina-env` containing the following:
 
 ```
 CODA_PRIVKEY_PASS="password from email"
-EXTRA_FLAGS=" -file-log-level Info -super-catchup"
+EXTRA_FLAGS=" -file-log-level Debug -super-catchup"
 ```
 
 You can add extra flags later to `EXTRA_FLAGS` as you see fit.
@@ -176,12 +176,12 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:0.2.2-1-b14e324-testworld-7bca682 \
+minaprotocol/mina-daemon-baked:0.2.4-16ebdd6-testworld-16ebdd6 \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
 -insecure-rest-server \
--file-log-level Info \
+-file-log-level Debug \
 -log-level Info \
 -super-catchup
 ```
