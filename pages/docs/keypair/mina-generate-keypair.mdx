@@ -1,0 +1,73 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Mina Generate Keypair" });
+
+
+# mina-generate-keypair
+
+To simplify the process of creating a keypair, we've created a simple command-line utility called `mina-generate-keypair`. The `mina-generate-keypair` tool has easy to use functionality to create your own Keypair to start participating in the Mina network. Please see below to see how to install and use on your local system.
+
+## Installation
+
+We support several different operating systems for the `mina-generate-keypair` tool. Follow the instructions below to install the tool onto your system.
+
+
+### macOS
+
+Install using [Homebrew](https://brew.sh/)
+
+```
+brew install minaprotocol/mina/mina-generate-keypair
+```
+
+You can now run `mina-generate-keypair -version` to check that the installation completed successfully.
+
+### Debian 18.04 / Debian 9
+
+After [adding the Mina repo](/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
+
+```
+sudo apt-get install mina-generate-keypair
+```
+
+You can run `mina-generate-keypair -version` to check that the installation completed successfully.
+
+## Usage
+
+Creating a keypair is simple and is accomplished in a few short steps.
+
+First make sure you have a folder on your system where you can store the key files. We recommend using the `~/keys` folder.
+
+```
+mkdir ~/keys
+```
+
+Next, ensure the permissions are set properly this folder, this prevents unwanted processes from accessing these files.
+
+```
+chmod 700 ~/keys
+```
+
+Now we can generate our keys using the `mina-generate-keypair` command. You will be prompted to provide a password for the new keypair. <em>Do NOT forget this password.</em>
+
+```
+mina-generate-keypair -privkey-path ~/keys/my-wallet
+```
+
+This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
+
+<br />
+
+<Alert kind="warning">
+
+Never give out your private key and make sure they are stored safely. If you lose your private key or if a malicious actor gains access to your private key, you will lose access to your account and will lose your account funds. Always give out your public keys instead. Mina will never ask you for your private keys.
+
+</Alert>
+
+<br />
+
+Finally, ensure the permissions are set properly for the private key file, this prevents unwanted processes from accessing it.
+
+```
+chmod 600 ~/keys/my-wallet
+```
+
