@@ -13,6 +13,16 @@ We support several different operating systems for the `mina-generate-keypair` t
 
 ### macOS
 
+<br />
+
+<Alert kind="warning">
+
+The brew package is currently out of date and will generate INVALID keys. Please follow the docker instructions in step 3b below until this warning is removed.
+
+</Alert>
+
+<br />
+
 Install using [Homebrew](https://brew.sh/)
 
 ```
@@ -35,22 +45,29 @@ You can run `mina-generate-keypair -version` to check that the installation comp
 
 Creating a keypair is simple and is accomplished in a few short steps.
 
-First make sure you have a folder on your system where you can store the key files. We recommend using the `~/keys` folder.
+1. First make sure you have a folder on your system where you can store the key files. We recommend using the `~/keys` folder.
 
 ```
 mkdir ~/keys
 ```
 
-Next, ensure the permissions are set properly this folder, this prevents unwanted processes from accessing these files.
+2. Next, ensure the permissions are set properly this folder, this prevents unwanted processes from accessing these files.
 
 ```
 chmod 700 ~/keys
 ```
 
-Now we can generate our keys using the `mina-generate-keypair` command. You will be prompted to provide a password for the new keypair. <em>Do NOT forget this password.</em>
+3a. Now we can generate our keys using the `mina-generate-keypair` command. You will be prompted to provide a password for the new keypair. <em>Do NOT forget this password.</em>
 
 ```
 mina-generate-keypair -privkey-path ~/keys/my-wallet
+```
+
+3b. OR in Docker on any machine that supports it (including Windows and MacOS)
+
+```
+cd ~
+docker run --interactive --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:latest -privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
@@ -65,9 +82,8 @@ Never give out your private key and make sure they are stored safely. If you los
 
 <br />
 
-Finally, ensure the permissions are set properly for the private key file, this prevents unwanted processes from accessing it.
+4. Finally, ensure the permissions are set properly for the private key file, this prevents unwanted processes from accessing it.
 
 ```
 chmod 600 ~/keys/my-wallet
 ```
-
