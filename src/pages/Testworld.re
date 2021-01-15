@@ -166,23 +166,23 @@ let make = () => {
               title1="BLOCK PRODUCTION" title2="REWARDS">
               <TestworldChallenges.Item
                 title="Be a Top Block Producer"
-                rewardsMain="5% of MINA Foundation Treasury **"
+                rewardsMain="1% of MINA Foundation Treasury**"
                 rewardsSub="Delegated to you at mainnet. Grow your stake with our help.">
                 <TestworldChallenges.Accordian>
                   <TestworldChallenges.RewardsTable
                     title="REWARDS"
                     tableHead=[|"RESULT", "DELEGATION"|]
                     tableRow=[|
-                      "Top 20 Block Producers",
-                      "5% of MINA Treasury",
+                      "Top 100 Block Producers",
+                      "1% of MINA Treasury",
                     |]
                   />
                   <TestworldChallenges.List
                     title="RULES"
                     rules=[|
                       "MINA foundation will delegate 100% of its tokens post-mainnet to Testworld's top block producers.",
-                      {j|Testworld’s top 20 block producing nodes will receive equal delegation.|j},
-                      "Each node will be delegated 5% of Foundation tokens.",
+                      {j|Testworld’s top 100 block producing nodes will receive equal delegation.|j},
+                      "Each node will be delegated 1% of Foundation tokens..",
                       {j|Eligibility will be determined based on a total performance score each block producer will receive. Total performance score is a function of each participant’s ranking in terms of total uptime and number of blocks produced. Exact forumla: performance_score = (100 - (uptime_ranking -1 )) + (100 - (block_production_rank - 1))|j},
                     |]
                   />
