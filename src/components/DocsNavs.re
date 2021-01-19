@@ -37,6 +37,7 @@ module SideNav = {
           <Item title="Style Guide" slug="style-guide" />
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
+          <Item title="Client SDK" slug="client-sdk" />
           <Item title="Logging" slug="logging" />
         </Section>
         <Section title="Protocol Architecture" slug={f("architecture")}>
@@ -105,6 +106,7 @@ module Dropdown = {
           | "developers/style-guide" => "Style Guide"
           | "developers/sandbox-node" => "Sandbox Node"
           | "developers/graphql-api" => "GraphQL API"
+          | "developers/client-sdk" => "Client SDK"
           | "developers/logging" => "Logging"
 
           | "keypair" => "Keypair Overview"
@@ -156,6 +158,7 @@ module Dropdown = {
           <Item title="Style Guide" slug="style-guide" />
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
+          <Item title="Client SDK" slug="client-sdk" />
           <Item title="Logging" slug="logging" />
         </Section>
         <Section title="Protocol Architecture" slug={f("architecture")}>
