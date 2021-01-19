@@ -36,7 +36,7 @@ You can now run `mina-generate-keypair -version` to check that the installation 
 After [adding the Mina repo](/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
 
 ```
-sudo apt-get install mina-generate-keypair
+sudo apt-get install mina-generate-keypair=0.2.6-5dfcc52 --allow-downgrades
 ```
 
 You can run `mina-generate-keypair -version` to check that the installation completed successfully.
@@ -79,7 +79,7 @@ CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" mina-generate-keypair -privkey
 
 ```
 cd ~
-docker run -e CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:latest -privkey-path /keys/my-wallet
+docker run -e CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.6-5dfcc52 -privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
