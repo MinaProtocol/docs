@@ -56,18 +56,30 @@ mkdir ~/keys
 ```
 chmod 700 ~/keys
 ```
+3. Generate a key using either the instructions in Step 3a on Debian/Ubuntu, or Step 3b in Docker
 
-3a. Now we can generate our keys using the `mina-generate-keypair` command. You will be prompted to provide a password for the new keypair. <em>Do NOT forget this password.</em>
+<br />
+
+<Alert kind="warning">
+
+Make sure to set a new and secure password for the following commands. Mina will never ask you for this password, and you should not share it with anyone.
+
+</Alert>
+
+<br />
+
+
+3a. In Ubuntu/Debian: Generate your keys using the `mina-generate-keypair` command. Replae "Insert a SECURE PASSWORD here" with a new password for this key. <em>Do NOT forget this password.</em>
 
 ```
-mina-generate-keypair -privkey-path ~/keys/my-wallet
+CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" mina-generate-keypair -privkey-path ~/keys/my-wallet
 ```
 
-3b. OR in Docker on any machine that supports it (including Windows and MacOS)
+3b. In Docker on Windows/MacOS/Linux: Generate your keys using the `minaprotocol/generate-keypair` docker image. Replae "Insert a SECURE PASSWORD here" with a new password for this key. <em>Do NOT forget this password.</em>
 
 ```
 cd ~
-docker run --interactive --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:latest -privkey-path /keys/my-wallet
+docker run -e CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:latest -privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
