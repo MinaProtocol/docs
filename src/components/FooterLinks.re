@@ -135,8 +135,8 @@ let make = () => {
       <a className=Styles.linkStyle href=Constants.minaWikiMainPage>
         {React.string("Wiki")}
       </a>
-      <a className=Styles.linkStyle href=Constants.minaGithubIssues>
-        {React.string("Report a Bug")}
+      <a className=Styles.linkStyle href=Constants.minaSupport>
+        {React.string("Contact Us")}
       </a>
     </div>
     <div />
