@@ -13,16 +13,6 @@ We support several different operating systems for the `mina-generate-keypair` t
 
 ### macOS
 
-<br />
-
-<Alert kind="warning">
-
-The brew package is currently out of date and will generate INVALID keys. Please follow the docker instructions in step 3b below until this warning is removed.
-
-</Alert>
-
-<br />
-
 Install using [Homebrew](https://brew.sh/)
 
 ```
@@ -40,6 +30,10 @@ sudo apt-get install mina-generate-keypair=0.2.6-5c08d6d --allow-downgrades
 ```
 
 You can run `mina-generate-keypair -version` to check that the installation completed successfully.
+
+### Windows / Other Platforms
+
+Install Docker and follow the Docker-based instructions in step 3b. below.
 
 ## Usage
 
@@ -69,17 +63,17 @@ Make sure to set a new and secure password for the following commands. Mina will
 <br />
 
 
-3a. In Ubuntu/Debian: Generate your keys using the `mina-generate-keypair` command. Replae "Insert a SECURE PASSWORD here" with a new password for this key. <em>Do NOT forget this password.</em>
+3a. In Ubuntu/Debian: Generate your keys using the `mina-generate-keypair` command. When prompted, type in the password you intend to use to secure this key. If is set, the tool will use the password from the CODA_PRIVKEY_PASS environment variable instead of prompting you. <em>Do NOT forget this password.</em>
 
 ```
-CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" mina-generate-keypair -privkey-path ~/keys/my-wallet
+mina-generate-keypair -privkey-path ~/keys/my-wallet
 ```
 
-3b. In Docker on Windows/MacOS/Linux: Generate your keys using the `minaprotocol/generate-keypair` docker image. Replae "Insert a SECURE PASSWORD here" with a new password for this key. <em>Do NOT forget this password.</em>
+3b. In Docker on Windows/MacOS/Linux: Generate your keys using the `minaprotocol/generate-keypair` docker image. When prompted, type in the password you intend to use to secure this key. <em>Do NOT forget this password.</em>
 
 ```
 cd ~
-docker run -e CODA_PRIVKEY_PASS="Insert a SECURE PASSWORD here" --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.6-5dfcc52 -privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.6-5dfcc52 -privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
