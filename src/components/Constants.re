@@ -13,6 +13,7 @@ let twitterUrl = "https://twitter.com/";
 let linkedInUrl = "https://linkedin.com/in/";
 
 let minaStatus = "https://status.minaprotocol.com";
+let minaSupport = "https://support.minaprotocol.com/";
 
 let minaDiscordSocial = "https://bit.ly/MinaDiscord";
 let minaDiscordRulesAndGuidelines = "https://discord.com/invite/Vexf4ED";
