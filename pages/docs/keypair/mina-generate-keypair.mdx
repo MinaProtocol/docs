@@ -19,17 +19,17 @@ Install using [Homebrew](https://brew.sh/)
 brew install minaprotocol/mina/mina-generate-keypair
 ```
 
-You can now run `mina-generate-keypair -version` to check that the installation completed successfully.
+Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit [DIRTY]fbe3495da7ffe7378a900dd080918095972e70a0 on branch HEAD`.
 
 ### Ubuntu 18.04 / Debian 9
 
 After [adding the Mina repo](/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
 
 ```
-sudo apt-get install mina-generate-keypair=0.2.6-5c08d6d --allow-downgrades
+sudo apt-get install mina-generate-keypair=0.2.7-fbe3495
 ```
 
-You can run `mina-generate-keypair -version` to check that the installation completed successfully.
+Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit [DIRTY]fbe3495da7ffe7378a900dd080918095972e70a0 on branch HEAD`.
 
 ### Windows / Other Platforms
 
@@ -73,7 +73,7 @@ mina-generate-keypair -privkey-path ~/keys/my-wallet
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.6-5dfcc52 -privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.7-fbe3495 -privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
