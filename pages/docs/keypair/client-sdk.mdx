@@ -7,11 +7,28 @@ export default Page({ title: "Mina Client SDK Keypair" });
 This is a NodeJS client SDK that allows you to generate Mina key pairs and sign transactions and strings using Mina's key pairs.
 The project contains Typescript and ReasonML typings but can be used from plain NodeJS as well. 
 
+
+<br />
+
+<Alert kind="warning">
+
+Please be advised that generating key pairs with this method is unadvised and should only be used by experienced security professionals.
+Please use our [mina-generate-keyair](/docs/keypair/mina-generate-keypair) tool instead for creating key pairs.
+
+</Alert>
+
+
 ## Installation
 
+The source code for our client SDK is open source and be seen [here](https://github.com/MinaProtocol/mina/tree/develop/frontend/client_sdk).
+
+To get the client SDK installed, you will need NodeJS on your system. Make sure it is available on your machine and then use either yarn or npm to install the client SDK
+
 ```bash
+# yarn:
 yarn add @o1labs/client-sdk
-# or with npm:
+
+# npm:
 npm install --save @o1labs/client-sdk
 ```
 
@@ -19,7 +36,7 @@ npm install --save @o1labs/client-sdk
 
 Creating a key pair is simple with our client SDK. See the snippet below to see how to get create a key pair.
 
-NodeJS:
+### NodeJS:
 ```javascript
 const CodaSDK = require("@o1labs/client-sdk");
 
@@ -27,8 +44,9 @@ let keys = CodaSDK.genKeys();
 console.log(`Public key: ${keys.publicKey}`)
 console.log(`Private key: ${keys.privateKey}`)
 ```
+This will print your private key so make sure you are in a secure environment when using this method.
 
-Please see the [client SDK readme](https://github.com/MinaProtocol/mina/blob/develop/frontend/client_sdk/README.md) for more information.
+Please see the [client SDK readme](https://github.com/MinaProtocol/mina/blob/develop/frontend/client_sdk/README.md) for more information on how to use our SDK.
 
 <br />
 
@@ -54,13 +72,13 @@ Accomplishing this takes only a few short steps.
 mkdir ~/keys
 ```
 
-2. Next, ensure the permissions are set properly this folder, this prevents unwanted processes from accessing these files.
+2. Next, ensure the permissions are set properly in this folder, this prevents unwanted processes from accessing these files.
 
 ```
 chmod 700 ~/keys
 ```
 
-3. Copy the private key output into a file in the ~/keys folder
+3. Copy the private key output into a file in the ~/keys folder.
 
 ```
 echo 'YOUR-PRIVATE_KEY' > ~/keys/my-wallet
@@ -74,7 +92,7 @@ chmod 600 ~/keys/my-wallet
 5. Use the `coda advanced wrap-key` tool to format your key pair into an importable format for the Mina client. Please note that using `coda advanced wrap-key` will force you to reset your password on your private key.
 
 ```
-mina advanced wrap-key -privkey-path ~/keys/my-wallet
+coda advanced wrap-key -privkey-path ~/keys/my-wallet
 ```
 
 You will be prompted for a new password, as shown below.
@@ -101,7 +119,6 @@ chmod 600 ~/keys/my-wallet
 7. Finally, we can import the account created by the client SDK into the client.
 
 ```
-ls ~/keys/
 coda accounts import -privkey-path ~/keys/my-wallet
 ```
 
