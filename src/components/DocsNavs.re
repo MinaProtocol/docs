@@ -21,6 +21,7 @@ module SideNav = {
           <Item title="Keypair Overview" slug="" />
           <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
+          <Item title="client-sdk" slug="client-sdk" />
         </Section>
         <Item title="Connect to the Network" slug={f("connecting")} />
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
@@ -110,6 +111,7 @@ module Dropdown = {
           | "keypair" => "Keypair Overview"
           | "keypair/mina-generate-keypair" => "mina-generate-keypair"
           | "keypair/ledger-app-mina" => "ledger-app-mina"
+          | "keypair/client-sdk" => "client-sdk"
 
           | "architecture" => "Mina Overview"
           | "architecture/lifecycle-payment" => "Lifecycle of a Payment"
@@ -144,6 +146,7 @@ module Dropdown = {
           <Item title="Keypair Overview" slug="" />
           <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
+          <Item title="client-sdk" slug="client-sdk" />
         </Section>
         <Item title="Connect to the Network" slug={f("connecting")} />
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
