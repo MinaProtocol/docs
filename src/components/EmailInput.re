@@ -90,7 +90,7 @@ let make = (~formId) => {
            <input
              type_="email"
              value=email
-             placeholder="Enter Email:"
+             placeholder="Enter Email"
              onChange={e => {
                let value = ReactEvent.Form.target(e)##value;
                setEmail(_ => value);
