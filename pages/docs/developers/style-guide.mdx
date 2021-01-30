@@ -17,7 +17,7 @@ Our style guidelines are an extension of a couple of existing style guidelines. 
 
 [ocaml-mli]: #ocaml-mli
 
-A `*.mli` file should not be included for a `*.ml` file iff the `*.ml` file's automatically derived interface is different. Many `*.ml` files in our codebase consist of only signatures and a functor. In the case of those files, there is not purpose to redefining the `*.mli` file because there is no new or restricted information in that file. If a `*.ml` file contains implementations in the root structure, then a `*.mli` file should most likely be created.
+A `*.mli` file should not be included for a `*.ml` file if the `*.ml` file's automatically derived interface is different. Many `*.ml` files in our codebase consist of only signatures and a functor. In the case of those files, there is not purpose to redefining the `*.mli` file because there is no new or restricted information in that file. If a `*.ml` file contains implementations in the root structure, then a `*.mli` file should most likely be created.
 
 ### Modules
 
