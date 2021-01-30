@@ -57,7 +57,7 @@ $ sudo pip3 install ledgerblue
 
 ### 5) Download ledger-app-mina
 
-Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/latest) from Github. We've currently tested version 1.0.0-beta.3
+Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/latest) from Github.  We've currently tested version 1.0.0-beta.3
 
 ### 6) Extract the archive
 
@@ -157,7 +157,6 @@ ledger-app-mina-1.0.0-beta.3-0-g0680a71c/uninstall.sh
 ledger-app-mina-1.0.0-beta.3-0-g0680a71c/mina_ledger_wallet
 ledger-app-mina-1.0.0-beta.3-0-g0680a71c/bin/app.hex
 ```
-
 ### 6) Launch the installation script
 
 ```
@@ -214,7 +213,7 @@ $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 
 To generate a keypair and obtain the associated Mina address, open the Mina app on your Ledger device and then on your terminal use `mina_ledger_wallet` command.
 
-For example, to get the Mina address corresponding to hardware wallet account 42 (BIP44 account 44'/12586'/42'/0'/0') you would issue the following command.
+For example, to get the Mina address corresponding to hardware wallet account 42 (BIP44 account `44'/12586'/42'/0/0`) you would issue the following command.
 
 ```
 $ mina_ledger_wallet get-address 42
@@ -223,7 +222,7 @@ $ mina_ledger_wallet get-address 42
 You will be prompted to confirm
 
 ```
-Get address for account 42 (path 44'/12586'/42'/0'/0')
+Get address for account 42 (path 44'/12586'/42'/0/0)
 Continue? (y/N) y
 ```
 
@@ -247,13 +246,13 @@ Once completed the Ledger will display the address for you to carefully check an
 
 ```
   Address (1/4)
-B62qk2o9hqZRjAhG >
+B62qnh5DZeX6eYFv >
 ```
 
 Once approved the `mina_ledger_wallet` command will output the result, which you can use.
 
 ```
-Received address: B62qk2o9hqZRjAhG7skhWVXGtCfMdtqBvCTjVfYeh4mqLvrLmBQUmAY
+Received address: B62qnh5DZeX6eYFvtBn4nBTniXbN7R6cgKo6gYqQ7E2bKwLD3PTYZ4b
 ```
 
 (Note: your address 42 will be different than this one.)
@@ -281,4 +280,3 @@ If you accept, a test-transaction will be generated and you should see the follo
 Transaction was valid
 All transactions were valid
 ```
-
