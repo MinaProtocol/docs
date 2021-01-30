@@ -5,7 +5,7 @@ export default Page({ title: "Hot / Cold Block Production" });
 
 Block production is a complex process and requires a node to connect to the internet. A wallet is said to be "hot" if the private key is available on a machine that is connected to the internet. More careful block producers may wish to avoid having hot wallets with substantial stake on them to mitigate risk in the case of hackers breaking into their systems.
 
-A wallet is said to be "cold" if the private key is not and never has been available on the internet. Cold storage is preferred for wallets associated with meaningful stake as it is harder to hack into such systems if they never have been on the internet. This could be as easy as generating a keypair on a laptop with the internet turned off or using a hardware wallet [like the a ledger device](TODO link here).
+A wallet is said to be "cold" if the private key is not and never has been available on the internet. Cold storage is preferred for wallets associated with meaningful stake as it is harder to hack into such systems if they never have been on the internet. This could be as easy as generating a keypair on a laptop with the internet turned off or using a hardware wallet [like the a ledger device](https://shop.ledger.com/).
 
 Mina's protocol requires block producers to stake using a hot wallet (see why in the last section of this article) -- however, there are some mechanisms in place to allow careful block producers to keep the vast majority of their stake in a cold wallet. Produced blocks and all the earnings associated with the produced blocks occur via delegation from this cold wallet to a hot one.
 
@@ -17,7 +17,7 @@ Before running your block producer, you'll need at least two accounts: One cold 
 
 ### Creating a hot wallet
 
-See our documentation page on [generating keys](docs/keypair). Note that as this is a hot wallet, you should not use the ledger or any other HSM for this keypair.
+See our documentation page on [generating keys](/docs/keypair). Note that as this is a hot wallet, you should not use the ledger or any other HSM for this keypair.
 
 Take note of your hot public key.
 
@@ -27,7 +27,7 @@ Your hot wallet must be present in the consensus ledger before it can be used fo
 
 ### Creating a cold wallet
 
-See our documentation page on [generating keys](docs/keypair). Note that as this is a cold wallet, you should prefer using the most secure mechanism for generating keys as you can preferably on a machine disconnected from the internet.
+See our documentation page on [generating keys](/docs/keypair). Note that as this is a cold wallet, you should prefer using the most secure mechanism for generating keys as you can preferably on a machine disconnected from the internet.
 
 ### Configuring your cold wallet
 

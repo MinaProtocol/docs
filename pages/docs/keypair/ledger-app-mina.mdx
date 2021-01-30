@@ -22,7 +22,17 @@ We are currently wrapping up a security audit which has found no vulnerabilities
 
 Use at your own risk.  Make sure you have a backup of your Ledger's BIP39 secret
 mnemonic phrase or use a separate Ledger device for testing this app.
+
+Never reuse the same keypair from a testnet on mainnet!
 </Alert>
+
+## Contents
+
+- [Installing on Ubuntu](#installing-on-ubuntu)
+- [Installing on Mac](#installing-on-mac)
+- [Installing on Windows](#installing-on-windows)
+- [Generating a keypair](#generating-a-keypair)
+- [Validating your private key](#validating-your-private-key)
 
 ## Installing on Ubuntu
 
@@ -307,7 +317,9 @@ $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 
 ## Generating a keypair
 
-To generate a keypair and obtain the associated Mina address, open the Mina app on your Ledger device and then on your terminal use `mina_ledger_wallet` command.
+Note that on a Ledger device, generating a keypair doesn't actually store anything! The Ledger rederives the key every time it runs. This means you don't need to worry about losing your key when you uninstall/reinstall this application.
+
+To derive a keypair and obtain the associated Mina address, open the Mina app on your Ledger device and then on your terminal use `mina_ledger_wallet` command.
 
 For example, to get the Mina address corresponding to hardware wallet account 42 (BIP44 account `44'/12586'/42'/0/0`) you would issue the following command.
 
@@ -353,7 +365,7 @@ Received address: B62qnh5DZeX6eYFvtBn4nBTniXbN7R6cgKo6gYqQ7E2bKwLD3PTYZ4b
 
 (Note: your address 42 will be different than this one.)
 
-## Validate your private key
+## Validating your private key
 
 The parts of validation here that are embedded into the Mina client will ship officially early next week. If you're so inclined, you can build from source yourself on the `compatible` branch and you'll find the functionality you need.
 
