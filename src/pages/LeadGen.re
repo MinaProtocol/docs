@@ -29,9 +29,10 @@ module Styles = {
     merge([
       flexCenter,
       style([
-        width(`percent(100.)),
+        width(`rem(32.)),
         maxWidth(`rem(34.)),
         marginTop(`rem(6.25)),
+        marginLeft(`rem(10.)),
         selector(
           "p,li,span",
           [fontSize(`rem(1.125)), lineHeight(`rem(1.75))],
@@ -60,14 +61,14 @@ module Styles = {
   let background =
     style([
       width(`percent(100.)),
-      height(`rem(180.)),
+      height(`rem(100.)),
       backgroundColor(Theme.Colors.digitalBlack),
       backgroundSize(`cover),
       backgroundImage(`url("/static/img/backgrounds/LeadGen.jpg")),
     ]);
 
   let logo =
-    style([width(`percent(100.)), height(`auto), marginTop(`rem(6.))]);
+    style([width(`percent(100.)), height(`auto), marginTop(`rem(13.5))]);
 
   let link = style([color(Theme.Colors.orange), cursor(`pointer)]);
 
@@ -174,66 +175,16 @@ let make = () => {
             />
           </div>
           <div className=Styles.textContainer>
-            <SignUpWidget formId=Constants.hubspotAdversarialFormId />
-          </div>
-          <div className=Styles.textContainer>
-            <h1> {React.string("Welcome to Testworld")} </h1>
+            <h2> {React.string("Testworld Has Ended.")} </h2>
+            <h2> {React.string("Mainnet Is Coming.")} </h2>
+            <Spacer height=1.5 />
             <p>
               {React.string(
-                 "Get ready to join Mina's adversarial testnet, Testworld, starting later this year. In contrast to Mina's regular testnet, Testworld is where you will compete with others to maximize the amount of tokens earned, find critical bugs, and push the boundaries of the network in order to make Mina as secure as possible for mainnet.",
+                 "Sign up for the community newsletter for updates.",
                )}
             </p>
-          </div>
-          <div className=Styles.textContainer>
-            <h2> {React.string("How Testworld works")} </h2>
-            <p>
-              {React.string(
-                 "To ensure the security of the protocol prior to mainnet, Mina is offering 1% of the total token supply as well as USD in rewards, which you can win by:",
-               )}
-            </p>
-            <ul className=Css.(style([marginLeft(`rem(1.))]))>
-              <li> {React.string("Uncovering vulnerabilities")} </li>
-              <li> {React.string("Accruing testnet tokens")} </li>
-              <li>
-                {React.string(
-                   "Scoring high points on the testnet leaderboard",
-                 )}
-              </li>
-            </ul>
-            <p className=Css.(style([marginTop(`rem(3.))]))>
-              {React.string(
-                 "In addition, the Mina Foundation will be delegating tokens reserved for future grants to participants who score top points for reliability and block production once mainnet is live.",
-               )}
-            </p>
-          </div>
-          <div className=Styles.textContainer>
-            <h2> {React.string("Genesis Token Grant")} </h2>
-            <span className=Css.(style([marginTop(`rem(1.))]))>
-              {React.string(
-                 "Testworld will be the last phase of Mina's testnet for community members to qualify for the ",
-               )}
-              <Next.Link href="/genesis">
-                <span className=Styles.link>
-                  {React.string("Genesis token grant ")}
-                </span>
-              </Next.Link>
-              {React.string(
-                 "before mainnet launches. There are up to 800 Genesis grants still available, and Genesis grant recipients, otherwise known as Genesis Founding Members (GFMs), will each receive 66,000 tokens. ",
-               )}
-              <Next.Link href="/genesis">
-                <span className=Styles.link>
-                  {React.string("Apply for Genesis now. ")}
-                </span>
-              </Next.Link>
-            </span>
-            <span className=Css.(style([marginTop(`rem(2.))]))>
-              {React.string(
-                 "Prepare to engage in Testworld and we'll see you later this year.",
-               )}
-            </span>
-          </div>
-          <div className=Styles.textContainer>
-            <SignUpWidget formId=Constants.hubspotAdversarialFormId />
+            <Spacer height=2. />
+            <EmailInput formId=Constants.hubspotNewsletterFormId />
           </div>
         </div>
       </div>
