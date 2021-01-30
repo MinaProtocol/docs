@@ -213,6 +213,98 @@ If the installation was successful the install script will terminate successfull
 $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 ```
 
+## Installing on Windows
+
+### 1) Install Python 3.9.1
+
+Download and run the python installer: (https://www.python.org/ftp/python/3.9.1/python-3.9.1-amd64.exe)
+
+### 2) Open Windows Powershell
+
+Press Windows + R to open the run menu, type 'powershell.exe', and press Enter to launch Powershell
+
+### 3) Install Python tools for Ledger Blue, Nano S and Nano X
+
+In the powershell terminal, run the following command:
+```
+$ pip3 install ledgerblue
+```
+
+### 4) Download ledger-app-mina
+
+Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/download/v1.0.0-beta.3/ledger-app-mina-1.0.0-beta.3-0-g0680a71c.zip) from Github.
+
+### 5) Extract the archive
+
+Right-click the .zip file in your Downloads folder and select `Extract All...`. In the resulting window just press "Extract" to unpack the archive.
+
+### 6) Change directory to the newly extracted archive
+
+```
+PS > cd ledger-app-mina-1.0.0-beta.3-0-g0680a71c
+```
+
+### 7) (Optional) Uninstall a previous version of the mina app
+
+If you have installed the mina app before, begin by uninstalling the old version with the following command:
+```
+PS ...\ledger-app-mina-1.0.0-beta.3-0-g0680a71c> python3 -m ledgerblue.deleteApp "--targetId" "0x31100004" "--appName" "Mina"
+```
+Make sure to approve any prompts on the ledger device itself.
+
+
+### 8) Start the Installation of the new release
+
+```
+PS ...\ledger-app-mina-1.0.0-beta.3-0-g0680a71c> python3 -m ledgerblue.loadApp "--path" "44'/12586'" "--appFlags" "0x240" "--tlv" "--targetId" "0x31100004" "--targetVersion=1.6.0" "--delete" "--fileName" "bin/app.hex" "--appName" "Mina" "--appVersion" "1.0.0" "--dataSize" "64" "--icon" "010000000000ffffffffffffffffffeff7c7e393c9b3cdb3cdb3cdb3cdb3cd33cc799effffffffffff"
+
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+This will begin the installation of the app (continued in the next steps)
+
+### 7) Allow the "unsafe manager"
+
+Your Ledger device will warn you that the install script is an unsafe manager.
+
+```
+< X Deny unsafe manager >
+```
+
+Click left until you see
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Select this option.
+
+### 8) Install app Mina
+
+Your Ledger device will ask if you want to install the Mina app.
+
+```
+< M Install app Mina >
+```
+
+Click left until you see
+
+```
+< ✓ Perform installation >
+```
+
+Select this option and enter your Ledger PIN code.
+
+If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
+
+### 9) Install the command-line wallet
+
+```
+$ sudo cp ./mina_ledger_wallet /usr/local/bin/
+```
+
 ## Generating a keypair
 
 To generate a keypair and obtain the associated Mina address, open the Mina app on your Ledger device and then on your terminal use `mina_ledger_wallet` command.
