@@ -268,13 +268,13 @@ let make = (~dark=false) => {
       <Spacer width=1.5 />
       <div className=Styles.ctaContainer>
         <Button
-          href={`Internal("/genesis")}
+          href={`External(Constants.minaNewsletter)}
           width={`rem(13.)}
           paddingX=1.
           dark={width < Constants.desktopBreakpoint ? !dark : dark}>
           <img src="/static/img/promo-logo.svg" height="40" />
           <Spacer width=0.5 />
-          <span> {React.string("Join Genesis Token Program")} </span>
+          <span> {React.string("Sign Up For Newsletter")} </span>
         </Button>
       </div>
     </nav>
