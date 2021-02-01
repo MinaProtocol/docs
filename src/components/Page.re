@@ -26,8 +26,8 @@ let make =
       ~footerColor=Theme.Colors.white,
       ~darkTheme=false,
       ~showFooter=true,
-      ~announcementCopy="Mina's Adversarial Testnet, Testworld, is here!",
-      ~announcementCTACopy="Check it out",
+      ~announcementCopy="Mainnet is coming!",
+      ~announcementCTACopy="Sign up to be notified",
       ~announcementFormUrl="/testworld",
     ) => {
   let router = Next.Router.useRouter();
@@ -72,7 +72,7 @@ let make =
       </style>
     </Next.Head>
     <AnnouncementBanner
-      dark=darkTheme copy=announcementCTACopy url=announcementFormUrl>
+      dark=darkTheme copy=announcementCTACopy url=Constants.minaNewsletter>
       {React.string(announcementCopy)}
     </AnnouncementBanner>
     <Nav dark=darkTheme />
