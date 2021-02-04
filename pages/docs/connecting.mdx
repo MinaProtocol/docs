@@ -24,14 +24,14 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.2.12-718eba4
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.3.0-5493fe3
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]718eba4826794f83d51c0d8dcf538e78b0259528 on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]5493fe344b40b6e668315fb8db4aa7eef4f1963f on branch HEAD`.
 
 ## Setup Keypair
 
-For Testworld, we are sending out pre-generated keypairs to every participant. Once you receive the link to claim your keypair, download it onto your computer.
+For Encore, we are using the same ledger from Testworld, with pre-generated keypairs that you should have recieved via email in December. If you did not recieve a key via email, you can also generate one.
 
 ```
 mkdir ~/keys
@@ -63,7 +63,7 @@ To connect to the network, we need an extra file: the <em>peer list</em>.
 A peer list contains a list of node addresses that your node can initially connect to while joining the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
 
 ```
-wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/bug-bounty-net/terraform/testnets/testworld/peers.txt
+wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/mina/encore-peers/automation/terraform/testnets/testworld/peers.txt
 ```
 
 ## Start up a node
@@ -176,7 +176,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:0.2.12-718eba4-testworld-6276828 \
+minaprotocol/mina-daemon-baked:0.3.0-5493fe3-encore-6fe6a3e \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
