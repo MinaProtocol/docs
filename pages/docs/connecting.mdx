@@ -176,7 +176,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:0.3.0-5493fe3-encore-7b5c386 \
+minaprotocol/mina-daemon-baked:0.3.0-5493fe3-encore-6fe6a3e \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
