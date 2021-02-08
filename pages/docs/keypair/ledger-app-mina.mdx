@@ -36,7 +36,7 @@ Never reuse the same keypair from a testnet on mainnet!
 
 ## Installing on Ubuntu
 
-Before installing please make sure your Ledger device is fully set up and configured.  In particular, make sure that Ledger's udev rules are installed.
+Before installing please make sure your Ledger device is updated to the latest firmware and fully configured.  In particular, make sure that Ledger's udev rules are installed.
 
 If the udev rules are installed then `/etc/udev/rules.d/20-hw1.rules` will exist.  If this file is not present then you need to visit Ledger's website and follow the [Linux instructions for fixing connection issues](https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) or,
 for advanced users, you can find the udev rules on the [LedgerHQ Github](https://github.com/LedgerHQ/udev-rules).
@@ -135,6 +135,8 @@ $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 
 ## Installing on Mac
 
+Before installing please make sure your Ledger device is updated to the latest firmware and fully configured.
+
 ### 1) Install Homebrew
 
 ```
@@ -224,6 +226,8 @@ $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 ```
 
 ## Installing on Windows
+
+Before installing please make sure your Ledger device is updated to the latest firmware and fully configured.
 
 ### 1) Install Python 3.9.1
 
@@ -363,7 +367,11 @@ Once approved the `mina_ledger_wallet` command will output the result, which you
 Received address: B62qnh5DZeX6eYFvtBn4nBTniXbN7R6cgKo6gYqQ7E2bKwLD3PTYZ4b
 ```
 
-(Note: your address 42 will be different than this one.)
+Your address 42 will be different than the one above.
+
+<Alert kind="note">
+When generating addresses you should, if possible, start with account 0 and increase the account number sequentially each time you require a new address.
+</Alert>
 
 ## Validating your private key
 
