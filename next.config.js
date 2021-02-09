@@ -44,9 +44,14 @@ module.exports = withTM(
           include: 0,
           content_type: "jobPost",
         });
+        let announcementPosts = await client.getEntries({
+          include: 0,
+          content_type: "announcement",
+        });
 
         // Add versions with trailing slash for backwards compatibility
         pages["/blog/"] = { page: "/blog" };
+        pages["/announcements/"] = { page: "/announcements" };
 
         blogPosts.items.forEach(({ fields: { slug } }) => {
           pages["/blog/" + slug] = {
@@ -56,6 +61,18 @@ module.exports = withTM(
           // Add .html for backwards compatibility
           pages["/blog/" + slug + ".html"] = {
             page: "/blog/[slug]",
+            query: { slug: slug },
+          };
+        });
+
+        announcementPosts.items.forEach(({ fields: { slug } }) => {
+          pages["/announcements/" + slug] = {
+            page: "/announcements/[slug]",
+            query: { slug: slug },
+          };
+          // Add .html for backwards compatibility
+          pages["/announcements/" + slug + ".html"] = {
+            page: "/announcements/[slug]",
             query: { slug: slug },
           };
         });
