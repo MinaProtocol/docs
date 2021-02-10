@@ -24,10 +24,10 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.3.0-5493fe3
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.3.3-3ef8663
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]5493fe344b40b6e668315fb8db4aa7eef4f1963f on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]3ef86631e3a38150b5092faec47da144b0a46020 on branch HEAD`.
 
 ## Setup Keypair
 
@@ -176,7 +176,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:0.3.0-5493fe3-encore-6fe6a3e \
+minaprotocol/mina-daemon-baked:0.3.3-3ef8663-encore-3b5824a \
 daemon \
 -peer-list-file /root/peers.txt \
 -block-producer-key /keys/my-wallet \
