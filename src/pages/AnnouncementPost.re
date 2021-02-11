@@ -66,6 +66,7 @@ module Style = {
       selector("ul", [paddingLeft(`rem(1.))]),
       selector("ul > li", [paddingLeft(`rem(0.5))]),
       selector("ul > li > ul", [marginLeft(`rem(1.))]),
+      selector("strong", [fontWeight(`bold)]),
       selector(
         "img + em",
         [
