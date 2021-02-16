@@ -19,13 +19,7 @@ We support several different operating systems for the `mina-generate-keypair` t
 
 ### macOS
 
-Install using [Homebrew](https://brew.sh/)
-
-```
-brew install minaprotocol/mina/mina-generate-keypair
-```
-
-Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit [DIRTY]a9402473584c36b347d52df4f4000b7286385987 on branch HEAD`.
+If you are using macOS please install Docker and follow the docker based instructions bellow.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -56,6 +50,7 @@ mkdir ~/keys
 ```
 chmod 700 ~/keys
 ```
+
 3. Generate a key using either the instructions in Step 3a on Debian/Ubuntu, or Step 3b in Docker
 
 <br />
@@ -104,9 +99,15 @@ chmod 600 ~/keys/my-wallet
 
 Now that you've created your key -- you'll want to validate that it works. It's sufficient to verify that you can sign a transaction. You can verify this using the `mina-validate-keypair` tool.
 
-Run the following command:
+On Linux run the following command:
 
 ```
 mina-validate-keypair -privkey-path <path-to-the-private-key-file>
+```
+
+If you are using Docker run the following command:
+
+```
+docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.12-718eba4 -privkey-path /keys/my-wallet
 ```
 
