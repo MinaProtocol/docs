@@ -24,47 +24,10 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.3.3-3ef8663
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.2-245a3f7
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]3ef86631e3a38150b5092faec47da144b0a46020 on branch HEAD`.
-
-## Setup Keypair
-
-For Encore, we are using the same ledger from Testworld, with pre-generated keypairs that you should have recieved via email in December. If you did not recieve a key via email, you can also generate one.
-
-```
-mkdir ~/keys
-wget -O ~/keys/new-keys.zip <keypair-download-url>
-```
-
-Next we need to unzip the file, every download has a different filename so first check the filename that you downloaded in the previous step.
-
-```
-cd ~/keys
-unzip new-keys.zip
-```
-
-Finally you need to rename and set proper permissions on your keypair. Look at the filenames that were extracted in the previous command to determine the name of your `<testworld-keypair>`.
-
-```
-mv <testworld-keypair> my-wallet
-mv <testworld-keypair>.pub my-wallet.pub
-chmod 700 ~/keys
-chmod 600 ~/keys/my-wallet
-```
-
-## Get the network information
-
-To connect to the network, we need an extra file: the <em>peer list</em>.
-
-### Peer list
-
-A peer list contains a list of node addresses that your node can initially connect to while joining the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
-
-```
-wget -O ~/peers.txt https://raw.githubusercontent.com/MinaProtocol/mina/encore-peers/automation/terraform/testnets/encore/peers.txt
-```
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]245a3f7d883c516f5f16742cb1ca672872612851 on branch HEAD`.
 
 ## Start up a node
 
@@ -85,7 +48,7 @@ Note: If you are using the Hetzner hosting provider, we are currently experienci
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-CODA_PRIVKEY_PASS="password from email" coda daemon -peer-list-file ~/peers.txt -block-producer-key ~/keys/my-wallet -generate-genesis-proof true -file-log-level Debug -super-catchup
+coda daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/zenith_seeds.txt
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -98,13 +61,13 @@ First kill the existing `coda daemon` process with `Ctrl-C`, and then keep readi
 
 ### Ubuntu 18.04 / Debian 9
 
-Ensure your peer-list file is located in `~/peers.txt` and your private-key that you've registered with is located at `~/keys/my-wallet`.
+Ensure your private-key that you've registered with is located at `~/keys/my-wallet`.
 
 Add a file `~/.mina-env` containing the following:
 
 ```
-CODA_PRIVKEY_PASS="password from email"
-EXTRA_FLAGS=" -file-log-level Debug -super-catchup"
+CODA_PRIVKEY_PASS="private key password"
+EXTRA_FLAGS=" --file-log-level Debug"
 ```
 
 You can add extra flags later to `EXTRA_FLAGS` as you see fit.
@@ -176,14 +139,13 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 --mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:0.3.3-3ef8663-encore-3b5824a \
+gcr.io/o1labs-192920/coda-daemon-baked:0.4.2-245a3f7-zenith-7a89538 \
 daemon \
--peer-list-file /root/peers.txt \
--block-producer-key /keys/my-wallet \
--insecure-rest-server \
--file-log-level Debug \
--log-level Info \
--super-catchup
+--block-producer-key /keys/my-wallet \
+--insecure-rest-server \
+--file-log-level Debug \
+--log-level Info \
+--peer-list-url https://storage.googleapis.com/seed-lists/zenith_seeds.txt
 ```
 
 Run `docker logs -f mina` to follow the logs, and if it crashes save the log output to a file with `docker logs mina > mina-log.txt` and post the output to the #mentor-nodes channel or attach the full ~/.coda-config/coda.log to a github issue and link the issue in discord.
