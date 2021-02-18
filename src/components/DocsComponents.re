@@ -44,9 +44,15 @@ module Styles = {
       marginTop(`rem(0.5)),
       marginBottom(`rem(1.)),
       marginLeft(`rem(2.6875)),
+      selector("> :not(:first-child)", [marginTop(`rem(0.5))]),
       selector(
-        "> :not(:first-child)",
-        [maxWidth(`rem(40.)), marginTop(`rem(0.5))],
+        "> li > img",
+        [
+          display(`flex),
+          flexDirection(`column),
+          justifyContent(`center),
+          margin(`auto),
+        ],
       ),
     ]);
 
@@ -200,7 +206,7 @@ module Ol =
 
 module Img =
   Wrap({
-    let element = <img width="100%" />;
+    let element = <img />;
   });
 
 module Rule =
@@ -229,7 +235,7 @@ module Blog = {
 
   module Img =
     Wrap({
-      let element = <img className=Styles.spacing width="100%" />;
+      let element = <img className=Styles.spacing />;
     });
 };
 
