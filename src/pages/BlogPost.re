@@ -90,7 +90,17 @@ module Style = {
         selector(".large-only, .not-mobile", [display(`block)]),
         selector(".mobile-only, .not-large", [display(`none)]),
       ]),
-      mediaVeryLarge([selector("img", [maxWidth(`percent(50.))])]),
+      mediaVeryLarge([
+        selector(
+          "img",
+          [
+            maxWidth(`percent(50.)),
+            display(`flex),
+            justifyContent(`center),
+            margin(`auto),
+          ],
+        ),
+      ]),
     ]);
 
   let container = merge([basicContainer, blogContent]);
