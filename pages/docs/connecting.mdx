@@ -137,7 +137,6 @@ docker run --name mina -d \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
---mount "type=bind,source=`pwd`/peers.txt,dst=/root/peers.txt,readonly" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
 gcr.io/o1labs-192920/coda-daemon-baked:0.4.2-245a3f7-zenith-7a89538 \
 daemon \
