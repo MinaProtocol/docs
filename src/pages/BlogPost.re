@@ -78,13 +78,14 @@ module Style = {
           textAlign(`center),
         ],
       ),
+      selector("img", [maxWidth(`percent(100.))]),
       mediaMedium([
         selector(".not-large, .not-mobile", [display(`block)]),
         selector(".mobile-only, .large-only", [display(`none)]),
         selector("ul", [marginLeft(`rem(-1.0)), paddingLeft(`rem(0.))]),
         selector("ul > li", [marginLeft(`rem(2.5))]),
         selector("ul > li > ul", [marginLeft(`rem(1.))]),
-        selector("img", [maxWidth(`percent(100.))]),
+        selector("img", [maxWidth(`percent(70.))]),
       ]),
       mediaLarge([
         selector(".large-only, .not-mobile", [display(`block)]),
@@ -95,7 +96,7 @@ module Style = {
           "img",
           [
             height(`auto),
-            maxWidth(`percent(60.)),
+            maxWidth(`percent(70.)),
             display(`flex),
             justifyContent(`center),
             margin(`auto),
