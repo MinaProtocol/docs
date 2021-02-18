@@ -33,6 +33,7 @@ module Style = {
 
   let mediaMedium = media("screen and (min-width:30em)");
   let mediaLarge = media("screen and (min-width:60em)");
+  let mediaVeryLarge = media("screen and (min-width:90em)");
 
   let notLarge = selector(".not-large");
   let notMobile = selector(".not-mobile");
@@ -63,7 +64,7 @@ module Style = {
       onlyMobile([display(`block)]),
       notMobile([display(`none)]),
       onlyLarge([display(`none)]),
-      selector("ul", [paddingLeft(`rem(1.))]),
+      selector("ul", [paddingLeft(`rem(1.)), marginLeft(`zero)]),
       selector("ul > li", [paddingLeft(`rem(0.5))]),
       selector("ul > li > ul", [marginLeft(`rem(1.))]),
       selector("strong", [fontWeight(`bold)]),
@@ -81,13 +82,15 @@ module Style = {
         selector(".not-large, .not-mobile", [display(`block)]),
         selector(".mobile-only, .large-only", [display(`none)]),
         selector("ul", [marginLeft(`rem(-1.0)), paddingLeft(`rem(0.))]),
-        selector("ul > li", [paddingLeft(`rem(1.0))]),
+        selector("ul > li", [marginLeft(`rem(2.5))]),
         selector("ul > li > ul", [marginLeft(`rem(1.))]),
+        selector("img", [maxWidth(`percent(100.))]),
       ]),
       mediaLarge([
         selector(".large-only, .not-mobile", [display(`block)]),
         selector(".mobile-only, .not-large", [display(`none)]),
       ]),
+      mediaVeryLarge([selector("img", [maxWidth(`percent(50.))])]),
     ]);
 
   let container = merge([basicContainer, blogContent]);
