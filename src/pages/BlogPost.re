@@ -94,7 +94,8 @@ module Style = {
         selector(
           "img",
           [
-            maxWidth(`percent(50.)),
+            height(`auto),
+            maxWidth(`percent(60.)),
             display(`flex),
             justifyContent(`center),
             margin(`auto),
