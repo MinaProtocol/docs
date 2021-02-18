@@ -45,6 +45,7 @@ module Styles = {
       marginBottom(`rem(1.)),
       marginLeft(`rem(2.6875)),
       selector("> :not(:first-child)", [marginTop(`rem(0.5))]),
+      selector("> li > img", [display(`flex), flexDirection(`column)]),
     ]);
 
   let link = style([textDecoration(`none)]);
