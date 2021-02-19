@@ -26,9 +26,9 @@ let make =
       ~footerColor=Theme.Colors.white,
       ~darkTheme=false,
       ~showFooter=true,
-      ~announcementCopy="Mainnet is coming!",
-      ~announcementCTACopy="Sign up to be notified",
-      ~announcementFormUrl="/testworld",
+      ~announcementCopy="Community Leaderboard Challenges are live!",
+      ~announcementCTACopy="Take part now",
+      ~announcementFormUrl=Constants.communityChallenges,
     ) => {
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);
