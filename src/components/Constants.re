@@ -32,6 +32,7 @@ let minaWikiMainPage = "https://minawiki.com/Main_Page";
 
 let leaderboardFAQ = "https://bit.ly/leaderboardFAQ";
 let currentChallenges = "/testworld";
+let communityChallenges = "https://forums.minaprotocol.com/t/mina-community-leaderboard-challenges/1449";
 
 let minaEmail = "https://github.com/minaprotocol/mina";
 let minaTwitter = "https://twitter.com/minaprotocol";
