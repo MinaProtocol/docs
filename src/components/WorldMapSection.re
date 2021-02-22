@@ -101,7 +101,7 @@ let make = () => {
       </div>
       <div className=Styles.remainingSpots>
         <div>
-          <p className=Styles.number> {React.string("850")} </p>
+          <p className=Styles.number> {React.string("338")} </p>
           <span className=Styles.label>
             {React.string("Genesis Spots Remaining")}
           </span>
@@ -117,7 +117,7 @@ let make = () => {
         src="/static/svg/World_Map_Illustration.svg"
       />
       <div className=Styles.activeMembers>
-        <p className=Styles.mintNumber> {React.string("150")} </p>
+        <p className=Styles.mintNumber> {React.string("662")} </p>
         <span className=Styles.whiteLabel>
           {React.string("Active Genesis Members")}
         </span>
