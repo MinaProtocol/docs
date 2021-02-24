@@ -131,7 +131,7 @@ module Section = {
   module FeaturedRow = {
     type t = {
       title: string,
-      description: string,
+      description: React.element,
       linkCopy: string,
       linkUrl: string,
       image: string,
@@ -172,9 +172,7 @@ module Section = {
                <h2 className=SectionStyles.title>
                  {React.string(row.title)}
                </h2>
-               <p className=SectionStyles.paragraphText>
-                 {React.string(row.description)}
-               </p>
+               {row.description}
                <Next.Link href={row.linkUrl}>
                  <span>
                    <Spacer height=1. />

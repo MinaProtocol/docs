@@ -150,11 +150,18 @@ let make = (~backgroundImg) => {
         <div className=Styles.heroContentContainer>
           <div className=Styles.heroTextButtonContainer>
             <span>
-              <p className=Styles.heroText>
+              <span className=Styles.heroText>
                 {React.string(
-                   "By design, the entire Mina blockchain is and will always be about 22kb - the size of a couple of tweets. So anyone with a smartphone will be able to sync and verify the network in seconds.",
+                   "By design, the entire Mina blockchain is about 22kb ",
                  )}
-              </p>
+              </span>
+              // TODO: Update Link
+              <Footnote refNumber="[1]" link="/blog" />
+              <span className=Styles.heroText>
+                {React.string(
+                   " - the size of a couple of tweets. So participants can quickly sync and verify the network.",
+                 )}
+              </span>
             </span>
             <span className=Styles.heroButton>
               <Button
