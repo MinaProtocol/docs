@@ -195,10 +195,9 @@ module HowMinaWorks = {
              Mina dramatically reduces the amount of data each user needs to download.
              Instead of verifying the entire chain from the beginning of time,
              participants fully verify the network and transactions using recursive
-             zero knowledge proofs (or zk-SNARKs). Nodes can then store just this proof,
-             as opposed to the entire chain. And because it’s a consistent size, Mina
-             stays accessible and can be trustlessly accessed from any device — even
-             as it scales to millions of users and accumulates years of transaction data.
+             zero knowledge proofs (or zk-SNARKs). Nodes can then store the small proof, as opposed to the entire chain.
+             And because it’s a consistent size, Mina stays accessible — even
+             as it scales to many users and accumulates years of transaction data.
           |js},
            )}
         </p>
@@ -278,9 +277,9 @@ module Projects = {
       <div>
         <img src=image />
         <Spacer height=1. />
-        <h4 className=Theme.Type.h4> {React.string(title)} </h4>
+        title
         <Spacer height=0.5 />
-        <p className=Theme.Type.paragraph> {React.string(description)} </p>
+        description
       </div>;
   };
 
@@ -338,33 +337,97 @@ module Projects = {
           <Spacer height=3. />
           <div className=Styles.possibilities>
             <Possibility
-              title="Build Snapps: Privacy-Enabled apps"
-              description="Leverage Mina to develop decentralized apps that use zk-SNARKs to ensure privacy, without exposing users' data to a public blockchain."
+              title={
+                <h4 className=Theme.Type.h4>
+                  {React.string("Build Snapps ")}
+                  <Footnote refNumber="[3]" link="/disclaimers" />
+                  {React.string(" Privacy-Enabled apps")}
+                </h4>
+              }
+              description={
+                <p className=Theme.Type.paragraph>
+                  {React.string(
+                     "Leverage Mina to develop decentralized apps that use zk-SNARKs to ensure privacy, without exposing users' data to a public blockchain.",
+                   )}
+                </p>
+              }
               image="/static/img/tech-build-snapps.svg"
             />
             <Possibility
-              title="Power Enterprise Interoperability"
-              description="Use Mina to combine the cost-efficiency and privacy of a private chain with the interoperability of a public chain."
+              title={
+                <h4 className=Theme.Type.h4>
+                  {React.string("Power Enterprise Interoperability")}
+                </h4>
+              }
+              description={
+                <p className=Theme.Type.paragraph>
+                  {React.string(
+                     "Use Mina to combine the cost-efficiency and privacy of a private chain with the interoperability of a public chain.",
+                   )}
+                </p>
+              }
               image="/static/img/tech-power-interop.svg"
             />
             <Possibility
-              title="Minimize Transaction Fees"
-              description="Power trustless e-commerce and global peer-to-peer transactions without using centralized intermediaries, or paying costly transaction fees."
+              title={
+                <h4 className=Theme.Type.h4>
+                  {React.string("Minimize Transaction Fees")}
+                </h4>
+              }
+              description={
+                <p className=Theme.Type.paragraph>
+                  {React.string(
+                     "Power trustless e-commerce and global peer-to-peer transactions without using centralized intermediaries, or paying costly transaction fees.",
+                   )}
+                </p>
+              }
               image="/static/img/tech-txn-fees.svg"
             />
             <Possibility
-              title="Power secure & Fair Financial services"
-              description="Ensure lenders only use fair criteria to make decisions and securely verify relevant information without accessing  private user data."
+              title={
+                <h4 className=Theme.Type.h4>
+                  {React.string("Power Secure & Fair Financial Services")}
+                </h4>
+              }
+              description={
+                <p className=Theme.Type.paragraph>
+                  {React.string(
+                     "Ensure lenders only use fair criteria to make decisions and securely verify relevant information without accessing private user data.",
+                   )}
+                </p>
+              }
               image="/static/img/tech-power-fair.svg"
             />
             <Possibility
-              title="Enable private & auditable elections "
-              description="Guarantee fully verifiable and auditable elections, while keeping the process private and  protecting individuals' voting information. "
+              title={
+                <h4 className=Theme.Type.h4>
+                  {React.string("Enable private & auditable elections ")}
+                </h4>
+              }
+              description={
+                <p className=Theme.Type.paragraph>
+                  {React.string(
+                     "Guarantee fully verifiable and auditable elections, while keeping the process private and  protecting individuals' voting information.",
+                   )}
+                </p>
+              }
               image="/static/img/tech-audit.svg"
             />
             <Possibility
-              title="Access Money from Anywhere in the world"
-              description="With a 22kb Mina chain, access peer-to-peer stablecoins and tokens via smartphone and bring hard-earned money anywhere you go."
+              title={
+                <h4 className=Theme.Type.h4>
+                  {React.string("Access Money from Anywhere in the world")}
+                </h4>
+              }
+              description={
+                <p className=Theme.Type.paragraph>
+                  {React.string("With a 22kb ")}
+                  <Footnote refNumber="[1]" link="blog" />
+                  {React.string(
+                     " Mina chain, access peer-to-peer stablecoins and tokens via smartphone and bring hard-earned money anywhere you go.",
+                   )}
+                </p>
+              }
               image="/static/img/tech-access.svg"
             />
           </div>
@@ -581,7 +644,7 @@ let make = () => {
         rowType: FeaturedSingleRow.Row.ImageRightCopyLeft,
         title: "Get Started",
         description: {js|
-          We make it as simple as possible to participate in Mina. With clear documentation, a supportive community and a chain that syncs in seconds, we’ll get you up and running in record time.
+          We make it as simple as possible to participate in Mina. With clear documentation, a supportive community and a chain that syncs quickly, we’ll get you up and running in record time.
         |js},
         textColor: `currentColor,
         copySize: `Small,
