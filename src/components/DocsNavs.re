@@ -23,13 +23,23 @@ module SideNav = {
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
           <Item title="client-sdk" slug="client-sdk" />
         </Section>
-        <Item title="Connect to the Network" slug={f("connecting")} />
+        <Section title="Connect to the Network" slug={f("connecting")}>
+          <Item title="Connecting Overview" slug="" />
+          <Item title="Connect to Zenith" slug="connecting-zenith" />
+          <Item title="Connect to Devnet" slug="connecting-devnet" />
+        </Section>
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Item title="Hard Fork" slug={f("hard-fork")} />
         <Item title="Archive Node" slug={f("archive-node")} />
         <Item title="Archive Redundancy" slug={f("archive-redundancy")} />
-        <Item title="Data Querying for Node Operators" slug={f("operating-for-data")} />
-        <Item title="Hot/Cold Secure Block Production" slug={f("hot-cold-block-production")} />
+        <Item
+          title="Data Querying for Node Operators"
+          slug={f("operating-for-data")}
+        />
+        <Item
+          title="Hot/Cold Secure Block Production"
+          slug={f("hot-cold-block-production")}
+        />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
@@ -100,6 +110,10 @@ module Dropdown = {
           | "node-operator" => "Become a Node Operator"
           | "contributing" => "Contributing to Mina"
 
+          | "connecting" => "Connecting Overview"
+          | "connecting/connecting-zenith" => "Connecting To Zenith"
+          | "connecting/connecting-devnet" => "Connecting To Devnet"
+
           | "developers" => "Developers Overview"
           | "developers/snarkyjs-crypto" => "Codebase Overview"
           | "developers/codebase-overview" => "Codebase Overview"
@@ -151,7 +165,10 @@ module Dropdown = {
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
           <Item title="client-sdk" slug="client-sdk" />
         </Section>
-        <Item title="Connect to the Network" slug={f("connecting")} />
+        <Section title="Connect to the Network" slug={f("connecting")}>
+          <Item title="Connect to Zenith" slug="connecting-zenith" />
+          <Item title="Connect to Devnet" slug="connecting-devnet" />
+        </Section>
         <Item title="Tips for Node Operators" slug={f("node-operator")} />
         <Item title="Hard Fork" slug={f("hard-fork")} />
         <Section title="Developers" slug={f("developers")}>
