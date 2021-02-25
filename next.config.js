@@ -4,8 +4,8 @@ const { createClient } = require("contentful");
 
 const withMDX = require("@next/mdx")({
   options: {
-    remarkPlugins: [require("remark-slug")],
-    rehypePlugins: [[require("rehype-highlight"), { subset: false }]],
+    remarkPlugins: [require("remark-slug"), require("remark-math")],
+    rehypePlugins: [require("rehype-katex"), [require("rehype-highlight"), { subset: false }]],
   },
 });
 

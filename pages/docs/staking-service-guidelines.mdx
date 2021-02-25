@@ -1,0 +1,36 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Staking Service Guidelines" });
+
+# Staking Service Guidelines
+
+An important part of running a staking service is predicting/determining winning slots in which you can produce blocks, as well as paying out participants. This document covers protocol details related to computing the odds of winning blocks and expected rewards.
+
+## Odds of Winning a Block
+
+Blocks in Mina are produced within distinct time intervals called "slots". Each account in the ledger has a chance of winning each slot on the network, which allows them to produce a block for that slot (or, in the case of delegation, allows the delegated account to produce a block on their behalf). An account computes a random number (via a [Verifiable Random Function, or VRF](https://en.wikipedia.org/wiki/Verifiable_random_function)) for each slot, and compares that random number against a required threshold to determine if they have "won" that slot and can produce a block at that time. Their chance of winning a slot is thus determined by the threshold, which is a function of their relative stake in the network.
+
+The stake distribution that is sampled when determining the VRF threshold are contained in a special ledger called the "staking ledger". Staking ledgers are fixed ledgers from past epochs in the network (epochs are fixed spans of slots; every epoch is 7140 slots long). Using past fixed ledgers prevents malicious stakers from increasing their chances of winning during an epoch by altering the distribution of stake on the main ledger (the "staged ledger"). Every epoch, the staking ledger changes. Due to this constraint, any account on the system can only check for "winning slots" within the next 2 epochs at any given time.
+
+Once you know the staking ledger that will be used for a given epoch, the required VRF threshold for producing blocks in that epoch can be computed for each account. We can compute a stake ratio for a given account by dividing the stake that account controls in the staking ledger by the total amount of currency in the staking ledger. Figure 1 on page 20 of the [Ouroboros Genesis](https://eprint.iacr.org/2018/378.pdf) paper provides the raw function for computing VRF thresholds. Filling in Mina's value for the active slots coefficient $f$ gives us the following function: $\phi(\alpha) \triangleq 1 - \left(\dfrac{1}{4}\right)^\alpha$. This function takes as a parameter $\alpha$, which is the stake ratio we compute for an account.
+
+Since each VRF is compared against this threshold (which is between 0 and 1), and each VRF is a psuedo-random number between 0 and 1, the VRF threshold for a given account is essentially the probability that a slot will be won by that account. Thus, we can extrapolate this function for computing VRF thresholds to compute the mean number of blocks we can expect a given account to win within an epoch. This can be done merely by summing all the probabilities for winning each slot of an epoch, and since the probability for an entire epoch is fixed, the mathematical expression to compute this simplifies to $\phi(\alpha)\times7140$.
+
+## Dumping Staking Ledgers
+
+In order to compute odds of winning a block for a given epoch, you need to have the staking ledger from that epoch. Mina daemons only keep around the staking ledger for the current epoch and the staking ledger for the next epoch, so if you want to capture a staking ledger for an epoch, you need to do it before or during that epoch.
+
+The `coda ledger export` command can be used to export ledgers from a running daemon. It takes, as an argument, an identifier of the ledger you wish to export. The table below describes what each of these identifiers represent.
+
+| Identifier           | Description                                                     |
+|----------------------|-----------------------------------------------------------------|
+| staking-epoch-ledger | The staking ledger for the current epoch.                       |
+| next-epoch-ledger    | The staking ledger for the next epoch (epoch after current).    |
+| staged-ledger        | The most recent staged ledger (from the best tip of that node). |
+
+## Staking Rewards
+
+The coinbase reward for producing a block is 760 tokens. However, some accounts will receive 2x supercharged rewards if they contain only unlocked tokens. In the case of stake delegations, whether or not the reward is supercharged is based off of the account that won the block, not the account that is doing the staking and block production.
+
+## Proposed Staking Payout Computation
+
+For calculating staking service payouts, we recommend taking a look at a document put together by a member of our community over at [docs.minaexplorer.com](https://docs.minaexplorer.com/minaexplorer/calculating-payments).
