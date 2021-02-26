@@ -1,20 +1,20 @@
 import Page from "@reason/pages/Docs";
 import StatusBadge from "@reason/components/StatusBadge";
-export default Page({ title: "Connect to the Network" });
+export default Page({ title: "Connect to Zenith" });
 
 # Connect to the Network
 
-In this section, we'll connect to the Mina network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
+In this section, we'll connect to the `Zenith` network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
 
 <Alert kind="warning">
 
-  We have recently undergone a rebrand, changing our name to Mina. However we haven't had an opportunity to fully audit our codebase so you will encounter instances where the name `coda` appears in commands and filenames. This is a known issue and we are working to fix this issue in the next release.
+We have recently undergone a rebrand, changing our name to Mina. However we haven't had an opportunity to fully audit our codebase so you will encounter instances where the name `coda` appears in commands and filenames. This is a known issue and we are working to fix this issue in the next release.
 
 </Alert>
 
 ## Update your software
 
-The first step in connecting to the network is installing the latest daemon version. Follow the instructions for your operating system below.
+The first step in connecting to `Zenith` is installing the latest daemon version. Follow the instructions for your operating system below.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -80,6 +80,7 @@ systemctl --user start mina
 systemctl --user enable mina
 sudo loginctl enable-linger
 ```
+
 These commands will allow the node to continue running after you logout, and restart automatically when the machine reboots.
 
 By default, the node connects to the network using the default external-port of 8302. This can be changed using the `-external-port` flag, just add that to EXTRA_FLAGS.
@@ -167,7 +168,6 @@ If you are using the [Sandbox Node](/docs/developers/sandbox-node), due to a qui
 
 </Alert>
 
-
 Most likely we will see a response that include the fields below:
 
     ...
@@ -175,7 +175,7 @@ Most likely we will see a response that include the fields below:
     ...
     Sync Status:                                   Bootstrap
 
-If you see `Sync Status: Bootstrap`, this means that the node is bootstrapping and needs to sync with the rest of the network. You may need to be patient here as this step might take some time for the node to get all the data it needs. 
+If you see `Sync Status: Bootstrap`, this means that the node is bootstrapping and needs to sync with the rest of the network. You may need to be patient here as this step might take some time for the node to get all the data it needs.
 
 After a while, your node should connect to more peers and then should move into `Sync Status: Catchup`, which means we're gathering the most recent blocks and state trying to catch up the the highest block.
 
@@ -195,29 +195,24 @@ You will be prompted for the password you entered when the account was created.
 
 <Alert kind="warning">
 
-
 The public key can be shared freely with anyone, but be very careful with your private key file. Never share this private key with anyone, as it is the equivalent of a password for your funds.
 
 </Alert>
-
 
 The response from this command will look like this:
 
     😄 Imported account!
     Public key: B62qjaA4N9843FKM5FZk1HmeuDiojG42cbCDyZeUDQVjycULte9PFkC
 
-
 Additionally you can use the `coda accounts create` command to generate new accounts to send and recieve transactions.
 
 <Alert kind="warning">
-
 
 If you are one of the selected Testnet participants that has been delegated stake, please complete the challenges using the account that you had previously created. You do not need to create a new account!
 
 If you create a new account and use it to complete the challenges, we will not be able to track your points for your activities.
 
 </Alert>
-
 
 Since the public key is quite long and difficult to remember, let's save it as an environment variable. Use the following command but replace `<YOUR-PUBLIC-KEY>` with the public key output from the previous command:
 
@@ -228,7 +223,6 @@ Now we can access this everywhere as `$MINA_PUBLIC_KEY` -- check if it saved pro
 Note that these environment variables will only be saved for the current shell session, so if you want to save them for future use, you can add them to `~/.profile` or `~/.bash_profile`.
 
 <Alert>
-
 
 If you are running the node on a cloud virtual machine, make sure to export and save the key file. You can export the key with:
 
@@ -244,7 +238,6 @@ Later, when starting up a new VM, you can upload the key and then import it:
 
 </Alert>
 
-
 If you ever forget what keypairs you've already created, you can see them all with:
 
     coda accounts list
@@ -253,13 +246,11 @@ If you ever forget what keypairs you've already created, you can see them all wi
 
 <Alert kind="note">
 
-
 If the faucet is currently under maintenance, please request mina in the #faucet channel, and a core team member or community member will send you some tokens shortly.
 
 Faucet Status: <StatusBadge service="Faucet" />
 
 </Alert>
-
 
 In order to send our first transaction, we'll first need to get some mina to play with. Head over to the [Mina Discord server](https://bit.ly/MinaDiscord) and join the `#faucet` channel. Once there, ask Tiny the dog for some mina (you'll receive 10 mina). Here's an example:
 
@@ -273,7 +264,8 @@ It may take a few minutes for your funds to appear. We can check the balance of 
 
 You might see `Balance: 0 mina` for your account. Depending on the traffic in the network, it may take a few blocks before your transaction goes through.
 
-<em>Tip</em>: You can run `coda client status` to see the current block height updating.
+<em>Tip</em>: You can run `coda client status` to see the current block height
+updating.
 
 ## Make a payment
 
@@ -289,13 +281,11 @@ B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ
 
 <Alert kind="warning">
 
-
 There is a known issue with the echo service that may prevent it from properly echoing back your payment! Don't worry, we'll still give you Testnet Points[\*](#disclaimer) for completing the challenge.
 
 Echo Status: <StatusBadge service="Echo Bot" />
 
 </Alert>
-
 
 Let's send some of our newly received mina to this service to see what a payment looks like:
 
@@ -326,7 +316,6 @@ Once you feel comfortable with the basics of creating an address, and sending & 
 Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon in [Tips for Node Operators](/docs/node-operator).
 
 <span id="disclaimer">
-
 
 \*_Testnet Points are designed solely to track contributions to the Testnet and Testnet Points have no cash or other monetary value. Testnet Points are not transferable and are not redeemable or exchangeable for any cryptocurrency or digital assets. We may at any time amend or eliminate Testnet Points._
 
