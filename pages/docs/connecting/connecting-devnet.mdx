@@ -30,7 +30,7 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.2-245a3f7
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.3-8dfa4837
 ```
 
 Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]245a3f7d883c516f5f16742cb1ca672872612851 on branch HEAD`.
@@ -79,7 +79,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-gcr.io/o1labs-192920/coda-daemon-baked:0.4.2-245a3f7-devnet-4744658 \
+minaprotocol/mina-daemon-baked:0.4.3-8dfa483-devnet-ee24b4f \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \
