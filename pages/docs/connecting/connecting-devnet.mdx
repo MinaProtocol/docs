@@ -47,16 +47,8 @@ Testnet Status: <StatusBadge service="Network" />
 
 Run the following commands to start up a Mina node instance and connect to the `Devnet` network:
 
-1. Download the genesis ledger that will be needed for `Devnet`
-
 ```
-  wget -O config.json https://raw.githubusercontent.com/MinaProtocol/Mina/devnet/automation/terraform/testnets/devnet/genesis_ledger.json
-```
-
-2. Run the daemon with the specified genesis ledger we just downloaded:
-
-```
-  coda daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt -config-file config.json
+  coda daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 
 ### Docker
