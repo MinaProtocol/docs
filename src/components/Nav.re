@@ -248,6 +248,7 @@ let make = (~dark=false) => {
     <nav className=Styles.nav>
       <NavLink label="About" href="/about" dark />
       <NavLink label="Tech" href="/tech" dark />
+      <NavLink label="Docs" href="/docs" dark />
       <NavGroup label="Get Started" dark>
         <NavGroupLink icon=Icon.Box label="Overview" href="/get-started" />
         <NavGroupLink
@@ -257,11 +258,6 @@ let make = (~dark=false) => {
         />
         <NavGroupLink icon=Icon.Testnet label="Testnet" href="/testworld" />
         <NavGroupLink icon=Icon.GrantsProgram label="Grants" href="/grants" />
-        <NavGroupLink
-          icon=Icon.Documentation
-          label="Documentation"
-          href="/docs"
-        />
       </NavGroup>
       <NavLink label="Community" href="/community" dark />
       <NavLink label="Blog" href="/blog" dark />
