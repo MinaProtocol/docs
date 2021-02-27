@@ -34,7 +34,7 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.3-8dfa4837
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.3-8dfa483
 ```
 
 Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]8dfa4837f72c9c4d8a4daa3d416d9c852619fbb4 on branch HEAD`.
