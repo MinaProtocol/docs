@@ -66,7 +66,9 @@ module Card = {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
     | `NewTab(href) =>
-      <a target="_blank" href className=Styles.anchor> inner </a>
+      <a target="_blank" rel="noopener" href className=Styles.anchor>
+        inner
+      </a>
     };
   };
 };
@@ -97,7 +99,9 @@ module CardDarkGray = {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
     | `NewTab(href) =>
-      <a target="_blank" href className=Styles.anchor> inner </a>
+      <a target="_blank" rel="noopener" href className=Styles.anchor>
+        inner
+      </a>
     };
   };
 };
@@ -135,7 +139,9 @@ module CardLightGray = {
     | `Internal(href) => <Next.Link href> inner </Next.Link>
     | `External(href) => <a href className=Styles.anchor> inner </a>
     | `NewTab(href) =>
-      <a target="_blank" href className=Styles.anchor> inner </a>
+      <a target="_blank" rel="noopener" href className=Styles.anchor>
+        inner
+      </a>
     };
   };
 };

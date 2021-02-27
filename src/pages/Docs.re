@@ -117,6 +117,7 @@ module EditLink = {
     <a
       name="Edit Link"
       target="_blank"
+      rel="noopener"
       href={Constants.minaDocsEditLink ++ route ++ ".mdx"}
       className=Style.editLink>
       <span className=Theme.Type.link> {React.string("Edit ")} </span>

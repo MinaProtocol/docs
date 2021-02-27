@@ -155,7 +155,7 @@ module Inner = {
         )
       };
     };
-    <a href=url className=Styles.link target="_blank">
+    <a href=url className=Styles.link target="_blank" rel="noopener">
       <span className={Styles.wrapper(bgColor, fgColor)}>
         <span className=Styles.statusCircle />
         <span className=Styles.statusBadge__label>

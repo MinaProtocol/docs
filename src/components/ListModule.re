@@ -165,7 +165,13 @@ module MainListing = {
        switch (item.link) {
        | `Slug(slug) => renderInternalLinkKind(itemKind, slug, inner)
        | `Remote(href) =>
-         <a target="_blank" className=MainListingStyles.anchor href> inner </a>
+         <a
+           target="_blank"
+           rel="noopener"
+           className=MainListingStyles.anchor
+           href>
+           inner
+         </a>
        }}
     </div>;
   };
@@ -193,7 +199,13 @@ module Listing = {
       switch (item.link) {
       | `Slug(slug) => renderInternalLinkKind(itemKind, slug, inner)
       | `Remote(href) =>
-        <a target="_blank" className=MainListing.MainListingStyles.anchor href> inner </a>
+        <a
+          target="_blank"
+          rel="noopener"
+          className=MainListing.MainListingStyles.anchor
+          href>
+          inner
+        </a>
       };
     };
 
