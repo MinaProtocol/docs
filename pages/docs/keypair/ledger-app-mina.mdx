@@ -67,24 +67,134 @@ $ sudo pip3 install ledgerblue
 
 ### 5) Download ledger-app-mina
 
-Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/latest) from Github.  We've currently tested version 1.0.0-beta.3
+Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/latest) from Github.  We've currently tested version 1.0.0-beta.4
+
+### 6) Verify the checksum
+
+```
+sha256sum ledger-app-mina-1.0.0-beta.4-0-g5421f6f4.tar.gz
+```
+
+Compare the output of the above command to the SHA256 hash on the release download page.  If they match, then proceed to the next step.
+
+### 7) Extract the archive
+
+```
+$ tar xvzf ledger-app-mina-1.0.0-beta.4-0-g5421f6f4.tar.gz
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/README
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/install.sh
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/uninstall.sh
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/mina_ledger_wallet
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/bin/app.hex
+```
+### 8) Launch the installation script
+
+Note: You can uninstall via `uninstall.sh` if you've installed a prior version.
+
+```
+$ cd ledger-app-mina-1.0.0-beta.4-0-g5421f6f4
+$ ./install.sh
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+This will begin the installation of the app (continued in the next steps).
+
+Important: If you have verified the checksum in step (6), you can ignore the public keys above and the "Application identifier" and "Application full hash" in subsequent steps.  These warnings are because ledger-app-mina is not yet an approved Ledger app.
+
+### 9) Allow the "unsafe manager"
+
+Your Ledger device will warn you that the install script is an unsafe manager.
+
+```
+< X Deny unsafe manager >
+```
+
+Click left until you see
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Select this option.
+
+### 10) Install app Mina
+
+Your Ledger device will ask if you want to install the Mina app.
+
+```
+< M Install app Mina >
+```
+
+Click left until you see
+
+```
+< ✓ Perform installation >
+```
+
+Select this option and enter your Ledger PIN code.
+
+If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
+
+### 11) Install the command-line wallet
+
+```
+$ sudo cp ./mina_ledger_wallet /usr/local/bin/
+```
+
+## Installing on Mac
+
+Before installing please make sure your Ledger device is updated to the latest firmware and fully configured.
+
+### 1) Install Homebrew
+
+```
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+For more information please visit the [Homebrew website](https://brew.sh/)
+
+### 2) Install python3
+
+```
+brew install python3
+```
+
+### 3) Install Python tools for Ledger Blue, Nano S and Nano X
+
+```
+$ pip3 install ledgerblue
+```
+
+### 4) Download ledger-app-mina
+
+Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/latest) from Github.
+
+### 5) Verify the checksum
+
+```
+shasum -a 256 ledger-app-mina-1.0.0-beta.4-0-g5421f6f4.tar.gz
+```
+
+Compare the output of the above command to the SHA256 hash on the release download page.  If they match, then proceed to the next step.
 
 ### 6) Extract the archive
 
 ```
-$ tar xvzf ledger-app-mina-1.0.0-beta.3-0-g0680a71c.tar.gz
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/README
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/install.sh
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/uninstall.sh
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/mina_ledger_wallet
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/bin/app.hex
+$ tar xvzf ledger-app-mina-1.0.0-beta.4-0-g5421f6f4.tar.gz
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/README
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/install.sh
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/uninstall.sh
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/mina_ledger_wallet
+ledger-app-mina-1.0.0-beta.4-0-g5421f6f4/bin/app.hex
 ```
 ### 7) Launch the installation script
 
 Note: You can uninstall via `uninstall.sh` if you've installed a prior version.
 
 ```
-$ cd ledger-app-mina-1.0.0-beta.3-0-g0680a71c
+$ cd ledger-app-mina-1.0.0-beta.4-0-g5421f6f4
 $ ./install.sh
 Please unlock your Ledger device and exit any apps (press any key to continue)
 Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
@@ -92,6 +202,8 @@ Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e
 ```
 
 This will begin the installation of the app (continued in the next steps)
+
+Important: If you have verified the checksum in step (5), you can ignore messages about the public keys above and the "Application identifier" and "Application full hash" in subsequent steps.  These warnings are because ledger-app-mina is not yet an approved Ledger app.
 
 ### 8) Allow the "unsafe manager"
 
@@ -133,98 +245,6 @@ If the installation was successful the install script will terminate successfull
 $ sudo cp ./mina_ledger_wallet /usr/local/bin/
 ```
 
-## Installing on Mac
-
-Before installing please make sure your Ledger device is updated to the latest firmware and fully configured.
-
-### 1) Install Homebrew
-
-```
-$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-For more information please visit the [Homebrew website](https://brew.sh/)
-
-### 2) Install python3
-
-```
-brew install python3
-```
-
-### 3) Install Python tools for Ledger Blue, Nano S and Nano X
-
-```
-$ pip3 install ledgerblue
-```
-
-### 4) Download ledger-app-mina
-
-Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/latest) from Github.
-
-### 5) Extract the archive
-
-```
-$ tar xvzf ledger-app-mina-1.0.0-beta.3-0-g0680a71c.tar.gz
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/README
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/install.sh
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/uninstall.sh
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/mina_ledger_wallet
-ledger-app-mina-1.0.0-beta.3-0-g0680a71c/bin/app.hex
-```
-### 6) Launch the installation script
-
-Note: You can uninstall via `uninstall.sh` if you've installed a prior version.
-
-```
-$ cd ledger-app-mina-1.0.0-beta.3-0-g0680a71c
-$ ./install.sh
-Please unlock your Ledger device and exit any apps (press any key to continue)
-Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
-Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
-```
-
-This will begin the installation of the app (continued in the next steps)
-
-### 7) Allow the "unsafe manager"
-
-Your Ledger device will warn you that the install script is an unsafe manager.
-
-```
-< X Deny unsafe manager >
-```
-
-Click left until you see
-
-```
-< ✓ Allow unsafe manager >
-```
-
-Select this option.
-
-### 8) Install app Mina
-
-Your Ledger device will ask if you want to install the Mina app.
-
-```
-< M Install app Mina >
-```
-
-Click left until you see
-
-```
-< ✓ Perform installation >
-```
-
-Select this option and enter your Ledger PIN code.
-
-If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
-
-### 9) Install the command-line wallet
-
-```
-$ sudo cp ./mina_ledger_wallet /usr/local/bin/
-```
-
 ## Installing on Windows
 
 Before installing please make sure your Ledger device is updated to the latest firmware and fully configured.
@@ -246,31 +266,39 @@ $ pip3 install ledgerblue
 
 ### 4) Download ledger-app-mina
 
-Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/download/v1.0.0-beta.3/ledger-app-mina-1.0.0-beta.3-0-g0680a71c.zip) from Github.
+Download the [Latest Ledger App Mina Release](https://github.com/jspada/ledger-app-mina/releases/download/v1.0.0-beta.4/ledger-app-mina-1.0.0-beta.4-0-g5421f6f4.zip) from Github.
 
-### 5) Extract the archive
+### 5) Verify the checksum
+
+In the powershell terminal, run the following command:
+```
+Get-FileHash -Path ledger-app-mina-1.0.0-beta.4-0-g5421f6f4.zip
+```
+
+Compare the output of the above command to the SHA256 hash on the release download page.  If they match, then proceed to the next step.
+
+### 6) Extract the archive
 
 Right-click the .zip file in your Downloads folder and select `Extract All...`. In the resulting window just press "Extract" to unpack the archive.
 
-### 6) Change directory to the newly extracted archive
+### 7) Change directory to the newly extracted archive
 
 ```
-PS > cd ledger-app-mina-1.0.0-beta.3-0-g0680a71c
+PS > cd ledger-app-mina-1.0.0-beta.4-0-g5421f6f4
 ```
 
-### 7) (Optional) Uninstall a previous version of the mina app
+### 8) (Optional) Uninstall a previous version of the mina app
 
 If you have installed the mina app before, begin by uninstalling the old version with the following command:
 ```
-PS ...\ledger-app-mina-1.0.0-beta.3-0-g0680a71c> python3 -m ledgerblue.deleteApp "--targetId" "0x31100004" "--appName" "Mina"
+PS ...\ledger-app-mina-1.0.0-beta.4-0-g5421f6f4> python3 -m ledgerblue.deleteApp "--targetId" "0x31100004" "--appName" "Mina"
 ```
 Make sure to approve any prompts on the ledger device itself.
 
-
-### 8) Start the Installation of the new release
+### 9) Start the Installation of the new release
 
 ```
-PS ...\ledger-app-mina-1.0.0-beta.3-0-g0680a71c> python3 -m ledgerblue.loadApp "--path" "44'/12586'" "--appFlags" "0x240" "--tlv" "--targetId" "0x31100004" "--targetVersion=1.6.0" "--delete" "--fileName" "bin/app.hex" "--appName" "Mina" "--appVersion" "1.0.0" "--dataSize" "64" "--icon" "010000000000ffffffffffffffffffeff7c7e393c9b3cdb3cdb3cdb3cdb3cd33cc799effffffffffff"
+PS ...\ledger-app-mina-1.0.0-beta.4-0-g5421f6f4> python3 -m ledgerblue.loadApp "--path" "44'/12586'" "--appFlags" "0x240" "--tlv" "--targetId" "0x31100004" "--targetVersion=1.6.0" "--delete" "--fileName" "bin/app.hex" "--appName" "Mina" "--appVersion" "1.0.0" "--dataSize" "64" "--icon" "010000000000ffffffffffffffffffeff7c7e393c9b3cdb3cdb3cdb3cdb3cd33cc799effffffffffff"
 
 Please unlock your Ledger device and exit any apps (press any key to continue)
 Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
@@ -279,7 +307,9 @@ Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e
 
 This will begin the installation of the app (continued in the next steps)
 
-### 7) Allow the "unsafe manager"
+Important: If you have verified the checksum in step (5), you can ignore messages about the public keys above and the "Application identifier" and "Application full hash" in subsequent steps.  These warnings are because ledger-app-mina is not yet an approved Ledger app.
+
+### 10) Allow the "unsafe manager"
 
 Your Ledger device will warn you that the install script is an unsafe manager.
 
@@ -295,7 +325,7 @@ Click left until you see
 
 Select this option.
 
-### 8) Install app Mina
+### 11) Install app Mina
 
 Your Ledger device will ask if you want to install the Mina app.
 
@@ -313,7 +343,7 @@ Select this option and enter your Ledger PIN code.
 
 If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
 
-### 9) Install the command-line wallet
+### 12) Install the command-line wallet
 
 ```
 $ sudo cp ./mina_ledger_wallet /usr/local/bin/
@@ -344,7 +374,35 @@ Once confirmed, you will see
 Generating address (please confirm on Ledger device)...
 ```
 
-on your terminal while the Ledger will display
+on your terminal while the Ledger device will display
+
+```
+👁  Get Address    >
+```
+
+This tells you what type of operation is being requested.
+
+Follow the arrow indicator by pressing and releasing the right button on your Ledger.
+
+The Ledger will now display the BIP44 path for the address you are requesting.
+
+```
+    Path (1/2)
+  44'/12586'/42'/0 >
+```
+
+Note that the 42' in the path above corresponds to the account number.  Check that your path's account number matches whatever account number argument you supplied to your `get-address` command.
+
+Press the right button again until the Ledger displays
+
+```
+        ✓
+<    Generate     >
+```
+
+Now press both left and right buttons simultaneously to select this option and generate the address.
+
+The Ledger will now display
 
 ```
 Processing...
