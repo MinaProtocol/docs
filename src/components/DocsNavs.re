@@ -15,32 +15,32 @@ module SideNav = {
     let f = s => "/docs/" ++ s;
     <div className=Styles.container>
       <SideNav currentSlug>
-        <Item title="Overview" slug="/docs" />
-        <Item title="Getting Started" slug={f("getting-started")} />
-        <Section title="Generate a Keypair" slug={f("keypair")}>
-          <Item title="Keypair Overview" slug="" />
+        <Section title="Getting Started" slug={f("getting-started")}>
+          <Item title="Installation" slug="" />
+          <Item title="Keypair Generation" slug="keypair" />
+          <Item title="Connect to the Network" slug="connecting" />
           <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
           <Item title="client-sdk" slug="client-sdk" />
+          <Item title="Troubleshooting" slug="troubleshooting" />
+          <Item title="FAQ" slug="faq" />
         </Section>
-        <Section title="Connect to the Network" slug={f("connecting")}>
-          <Item title="Connecting Overview" slug="" />
-          <Item title="Connect to Zenith" slug="connecting-zenith" />
+        <Section title="Advanced" slug={f("advanced")}>
+          <Item title="Tips for Node Operators" slug={f("node-operator")} />
+          <Item title="Hard Fork" slug={f("hard-fork")} />
+          <Item title="Archive Node" slug={f("archive-node")} />
+          <Item title="Archive Redundancy" slug={f("archive-redundancy")} />
+          <Item title="Staking Service Guidelines" slug={f("staking-service-guidelines")} />
+          <Item
+            title="Data Querying for Node Operators"
+            slug={f("operating-for-data")}
+          />
+          <Item
+            title="Hot/Cold Secure Block Production"
+            slug={f("hot-cold-block-production")}
+          />
           <Item title="Connect to Devnet" slug="connecting-devnet" />
         </Section>
-        <Item title="Tips for Node Operators" slug={f("node-operator")} />
-        <Item title="Staking Service Guidelines" slug={f("staking-service-guidelines")} />
-        <Item title="Hard Fork" slug={f("hard-fork")} />
-        <Item title="Archive Node" slug={f("archive-node")} />
-        <Item title="Archive Redundancy" slug={f("archive-redundancy")} />
-        <Item
-          title="Data Querying for Node Operators"
-          slug={f("operating-for-data")}
-        />
-        <Item
-          title="Hot/Cold Secure Block Production"
-          slug={f("hot-cold-block-production")}
-        />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
@@ -52,6 +52,7 @@ module SideNav = {
           <Item title="GraphQL API" slug="graphql-api" />
           <Item title="Client SDK" slug="client-sdk" />
           <Item title="Logging" slug="logging" />
+          <Item title="Contributing to Mina" slug={f("contributing")} />
         </Section>
         <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
@@ -64,18 +65,13 @@ module SideNav = {
           <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
-        </Section>
-        <Section title="SNARKs" slug={f("snarks")}>
           <Item title="SNARKs Overview" slug="" />
           <Item title="Getting started using SNARKs" slug="snarky" />
           <Item title="Which SNARK is right for me?" slug="constructions" />
           <Item title="The snarkyjs-crypto library" slug="snarkyjs-crypto" />
           <Item title="The snarky-universe library" slug="snarky-universe" />
         </Section>
-        <Item title="Contributing to Mina" slug={f("contributing")} />
-        //<Item title="CLI Reference" slug={f("cli-reference")} />
-        <Item title="Troubleshooting" slug={f("troubleshooting")} />
-        <Item title="FAQ" slug={f("faq")} />
+        <Item title="CLI Reference" slug={f("cli-reference")} />
         <Item title="Glossary" slug={f("glossary")} />
       </SideNav>
     </div>;
@@ -158,30 +154,44 @@ module Dropdown = {
 
     <div className=Styles.dropdown>
       <DropdownNav currentSlug defaultValue={getCurrentValue(currentSlug)}>
-        <Item title="Overview" slug="/docs" />
-        <Item title="Getting Started" slug={f("getting-started")} />
-        <Section title="Generate a Keypair" slug={f("keypair")}>
-          <Item title="Keypair Overview" slug="" />
+        <Section title="Getting Started" slug={f("getting-started")}>
+          <Item title="Installation" slug="" />
+          <Item title="Keypair Generation" slug="keypair" />
+          <Item title="Connect to the Network" slug="connecting" />
           <Item title="mina-generate-keypair" slug="mina-generate-keypair" />
           <Item title="ledger-app-mina" slug="ledger-app-mina" />
           <Item title="client-sdk" slug="client-sdk" />
+          <Item title="Troubleshooting" slug="troubleshooting" />
+          <Item title="FAQ" slug="faq" />
         </Section>
-        <Section title="Connect to the Network" slug={f("connecting")}>
-          <Item title="Connect to Zenith" slug="connecting-zenith" />
+        <Section title="Advanced" slug={f("advanced")}>
+          <Item title="Tips for Node Operators" slug={f("node-operator")} />
+          <Item title="Hard Fork" slug={f("hard-fork")} />
+          <Item title="Archive Node" slug={f("archive-node")} />
+          <Item title="Archive Redundancy" slug={f("archive-redundancy")} />
+          <Item title="Staking Service Guidelines" slug={f("staking-service-guidelines")} />
+          <Item
+            title="Data Querying for Node Operators"
+            slug={f("operating-for-data")}
+          />
+          <Item
+            title="Hot/Cold Secure Block Production"
+            slug={f("hot-cold-block-production")}
+          />
           <Item title="Connect to Devnet" slug="connecting-devnet" />
         </Section>
-        <Item title="Tips for Node Operators" slug={f("node-operator")} />
-        <Item title="Hard Fork" slug={f("hard-fork")} />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
           <Item title="Repository Structure" slug="directory-structure" />
+          <Item title="BIP44 Information" slug="bip44-information" />
           <Item title="Code Reviews" slug="code-reviews" />
           <Item title="Style Guide" slug="style-guide" />
           <Item title="Sandbox Node" slug="sandbox-node" />
           <Item title="GraphQL API" slug="graphql-api" />
           <Item title="Client SDK" slug="client-sdk" />
           <Item title="Logging" slug="logging" />
+          <Item title="Contributing to Mina" slug={f("contributing")} />
         </Section>
         <Section title="Protocol Architecture" slug={f("architecture")}>
           <Item title="Mina Overview" slug="" />
@@ -194,18 +204,13 @@ module Dropdown = {
           <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
-        </Section>
-        <Section title="SNARKs" slug={f("snarks")}>
           <Item title="SNARKs Overview" slug="" />
           <Item title="Getting started using SNARKs" slug="snarky" />
           <Item title="Which SNARK is right for me?" slug="constructions" />
           <Item title="The snarkyjs-crypto library" slug="snarkyjs-crypto" />
           <Item title="The snarky-universe library" slug="snarky-universe" />
         </Section>
-        <Item title="Contributing to Mina" slug={f("contributing")} />
-        //<Item title="CLI Reference" slug={f("cli-reference")} />
-        <Item title="Troubleshooting" slug={f("troubleshooting")} />
-        <Item title="FAQ" slug={f("faq")} />
+        <Item title="CLI Reference" slug={f("cli-reference")} />
         <Item title="Glossary" slug={f("glossary")} />
       </DropdownNav>
     </div>;
