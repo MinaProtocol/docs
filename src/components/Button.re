@@ -90,7 +90,11 @@ module Link = {
     switch (href) {
     | `Scroll_to_top => <Next.Link href=""> children </Next.Link>
     | `External(href) =>
-      <a className=Css.(style([textDecoration(`none)])) href target="_blank">
+      <a
+        className=Css.(style([textDecoration(`none)]))
+        href
+        target="_blank"
+        rel="noopener">
         children
       </a>
     | `Internal(href) => <Next.Link href> children </Next.Link>

@@ -161,6 +161,7 @@ module GenesisMemberCard = {
              | Some(twitter) =>
                <a
                  target="_blank"
+                 rel="noopener"
                  href={Constants.twitterUrl ++ twitter}
                  className={Styles.iconLink(dark)}>
                  <Icon kind=Icon.Twitter />
@@ -171,6 +172,7 @@ module GenesisMemberCard = {
              | Some(github) =>
                <a
                  target="_blank"
+                 rel="noopener"
                  href={Constants.githubUrl ++ github}
                  className={Styles.iconLink(dark)}>
                  <Icon kind=Icon.Github />
@@ -263,6 +265,7 @@ module TeamMemberCard = {
              | Some(twitter) =>
                <a
                  target="_blank"
+                 rel="noopener"
                  href={Constants.twitterUrl ++ twitter}
                  className={Styles.iconLink(dark)}>
                  <Icon kind=Icon.Twitter />
@@ -273,6 +276,7 @@ module TeamMemberCard = {
              | Some(github) =>
                <a
                  target="_blank"
+                 rel="noopener"
                  href={Constants.githubUrl ++ github}
                  className={Styles.iconLink(dark)}>
                  <Icon kind=Icon.Github />
@@ -283,6 +287,7 @@ module TeamMemberCard = {
              | Some(linkedIn) =>
                <a
                  target="_blank"
+                 rel="noopener"
                  href={Constants.linkedInUrl ++ linkedIn}
                  className={Styles.iconLink(dark)}>
                  <Icon kind=Icon.LinkedIn />
