@@ -24,7 +24,8 @@ module Resource = {
     <a
       href={resource.url}
       className=Css.(style([textDecoration(`none)]))
-      target="_blank">
+      target="_blank"
+      rel="noopener">
       <div className=Styles.resource>
         <img src={resource.image.fields.file.url} />
         <Spacer height=1. />

@@ -163,6 +163,7 @@ let make =
            | Some(twitter) =>
              <a
                target="_blank"
+               rel="noopener"
                href={Constants.twitterUrl ++ twitter}
                className=Styles.iconLink>
                <Icon kind=Icon.Twitter />
@@ -173,6 +174,7 @@ let make =
            | Some(github) =>
              <a
                target="_blank"
+               rel="noopener"
                href={Constants.githubUrl ++ github}
                className=Styles.iconLink>
                <Icon kind=Icon.Github />
@@ -181,7 +183,11 @@ let make =
            }}
           {switch (member.linkedin) {
            | Some(linkedIn) =>
-             <a target="_blank" href=linkedIn className=Styles.iconLink>
+             <a
+               target="_blank"
+               rel="noopener"
+               href=linkedIn
+               className=Styles.iconLink>
                <Icon kind=Icon.LinkedIn />
              </a>
            | _ => React.null
