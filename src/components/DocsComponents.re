@@ -256,4 +256,5 @@ let allComponents = () => {
   "ol": Ol.make,
   "img": Img.make,
   "Rule": Rule.make,
+  "Footnote": Footnote.make,
 };

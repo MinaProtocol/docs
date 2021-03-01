@@ -27,7 +27,7 @@ The Mina testnet's goal is to improve Mina's stability, improve the software thr
 
 #### Where can I try out the testnet?
 
-Head over to the [testnet landing page](/testnet.html) to learn more and get started.
+Head over to the [Testworld landing page](/testworld.html) to learn more and get started.
 
 #### My daemon crashed -- where should I share the error log?
 
@@ -37,7 +37,7 @@ First, check out [Github issues](https://github.com/minaprotocol/mina/issues) to
 
 - The Mina community's live discussion channel is the [Discord server](https://bit.ly/MinaDiscord)
 - You can also create Github issues: https://github.com/minaprotocol/mina/issues
-- If you need to get in touch privately, you can email: contact@minaprotocol.org
+- If you need to get in touch, you can submit a ticket via the [Mina Support chat](https://support.minaprotocol.com/).
 
 #### Is there a block explorer?
 
@@ -56,10 +56,6 @@ Mina's consensus mechanism is an implementation of Ouroboros Proof-of-Stake. Due
 #### How does Mina achieve scalability?
 
 Mina achieves scalability through the use of recursive zk-SNARKs. By generating a proof that attests to the validity of historic blockchain states, Mina can keep the blockchain size fixed. This allows for increased throughput due to block size limits not being as taxing on the network, thereby increasing the scalability of the network.
-
-#### What is the maximum transaction throughput?
-
-Practically speaking, the limiting factor ends up being bandwidth, so it depends on the average quality of the internet connection among block producers. If the average connection is a symmetric 2MB/s, then it’s about 2000 tps. We are not optimizing for maximum transaction throughput at this time, but rather, we are focusing on stability and correctness and shipping the world's first constant size blockchain! Throughput will be optimized later.
 
 #### Why did you develop a new protocol, rather than augmenting existing cryptocurrencies?
 
