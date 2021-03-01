@@ -41,6 +41,7 @@ module SideNav = {
           title="Hot/Cold Secure Block Production"
           slug={f("hot-cold-block-production")}
         />
+        <Item title="Seed Peers" slug={f("seed-peers")} />
         <Section title="Developers" slug={f("developers")}>
           <Item title="Developers Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
