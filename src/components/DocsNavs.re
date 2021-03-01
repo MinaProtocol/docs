@@ -58,6 +58,7 @@ module SideNav = {
           <Item title="Mina Overview" slug="" />
           <Item title="Lifecycle of a Payment" slug="lifecycle-payment" />
           <Item title="Block Producers" slug="block-producers" />
+          <Item title="What's in a Block" slug="whats-in-a-block" />
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
@@ -135,6 +136,7 @@ module Dropdown = {
           | "architecture" => "Mina Overview"
           | "architecture/lifecycle-payment" => "Lifecycle of a Payment"
           | "architecture/block-producers" => "Block Producers"
+          | "architecture/whats-in-a-block" => "What's in a Block"
           | "architecture/consensus" => "Consensus"
           | "architecture/proof-of-stake" => "Proof of Stake"
           | "architecture/snark-workers" => "Snark Workers"
@@ -188,6 +190,7 @@ module Dropdown = {
           <Item title="Mina Overview" slug="" />
           <Item title="Lifecycle of a Payment" slug="lifecycle-payment" />
           <Item title="Block Producers" slug="block-producers" />
+          <Item title="What's in a Block" slug="whats-in-a-block" />
           <Item title="Consensus" slug="consensus" />
           <Item title="Proof of Stake" slug="proof-of-stake" />
           <Item title="Snark Workers" slug="snark-workers" />
