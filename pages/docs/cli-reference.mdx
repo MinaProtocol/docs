@@ -406,38 +406,57 @@ Advanced client commands
 
 === subcommands ===
 
-  batch-send-payments        Send multiple payments from a file
-  client-trustlist           Client trustlist management
-  compile-time-constants     Print a JSON map of the compile-time consensus
-                             parameters
-  constraint-system-digests  Print MD5 digest of each SNARK constraint
-  dump-keypair               Print out a keypair from a private key file
-  dump-ledger                Print the ledger with given Merkle root
-  generate-keypair           Generate a new public-key/private-key pair
-  generate-libp2p-keypair    Generate a new libp2p keypair and print out the
-                             peer ID
-  generate-receipt           Generate a receipt for a sent payment
-  get-nonce                  Get the current nonce for an account
-  get-public-keys            Get public keys
-  get-trust-status           Get the trust status associated with an IP address
-  get-trust-status-all       Get trust statuses for all peers known to the trust
-                             system
-  pending-snark-work         List of snark works in JSON format that are not
-                             available in the pool yet
-  pooled-user-commands       Retrieve all the user commands that are pending
-                             inclusion
-  reset-trust-status         Reset the trust status associated with an IP
-                             address
-  snark-job-list             List of snark jobs in JSON format that are yet to
-                             be included in the blocks
-  snark-pool-list            List of snark works in the snark pool in JSON
-                             format
-  start-tracing              Start async tracing to $config-directory/$pid.trace
-  status-clear-hist          Clear histograms reported in status
-  stop-tracing               Stop async tracing
-  telemetry                  Get the trust status associated with an IP address
-  verify-receipt             Verify a receipt of a sent payment
-  visualization              Visualize data structures special to Mina
-  wrap-key                   Wrap a private key into a private key file
-  help                       explain a given subcommand (perhaps recursively)
+  add-peers                   Add peers to the daemon
+                              Addresses take the format
+                              /ip4/IPADDR/tcp/PORT/p2p/PEERID
+  archive-blocks              Archive a block from a file.
+                              If an archive address is given, this process will
+                              communicate with the archive node directly;
+                              otherwise it will communicate through the daemon
+                              over the rest-server
+  batch-send-payments         Send multiple payments from a file
+  client-trustlist            Client trustlist management
+  compile-time-constants      Print a JSON map of the compile-time consensus
+                              parameters
+  compute-receipt-chain-hash  Compute the next receipt chain hash from the
+                              previous hash and transaction ID
+  constraint-system-digests   Print MD5 digest of each SNARK constraint
+  dump-keypair                Print out a keypair from a private key file
+  generate-keypair            Generate a new public, private keypair
+  generate-libp2p-keypair     Generate a new libp2p keypair and print out the
+                              peer ID
+  get-nonce                   Get the current nonce for an account
+  get-peers                   List the peers currently connected to the daemon
+  get-public-keys             Get public keys
+  get-trust-status            Get the trust status associated with an IP address
+  get-trust-status-all        Get trust statuses for all peers known to the
+                              trust system
+  next-available-token        The next token ID that has not been allocated.
+                              Token IDs are allocated sequentially, so all lower
+                              token IDs have been allocated
+  object-lifetime-statistics  Dump internal object lifetime statistics to JSON
+  pending-snark-work          List of snark works in JSON format that are not
+                              available in the pool yet
+  pooled-user-commands        Retrieve all the user commands that are pending
+                              inclusion
+  reset-trust-status          Reset the trust status associated with an IP
+                              address
+  snark-job-list              List of snark jobs in JSON format that are yet to
+                              be included in the blocks
+  snark-pool-list             List of snark works in the snark pool in JSON
+                              format
+  start-tracing               Start async tracing to
+                              $config-directory/trace/$pid.trace
+  status-clear-hist           Clear histograms reported in status
+  stop-tracing                Stop async tracing
+  telemetry                   Get telemetry data for a set of peers
+  time-offset                 Get the time offset in seconds used by the daemon
+                              to convert real time into blockchain time
+  validate-keypair            Validate a public, private keypair
+  validate-transaction        Validate the signature on one or more
+                              transactions, provided to stdin in rosetta format
+  verify-receipt              Verify a receipt of a sent payment
+  visualization               Visualize data structures special to Coda
+  wrap-key                    Wrap a private key into a private key file
+  help                        explain a given subcommand (perhaps recursively)
 ```
