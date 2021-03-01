@@ -179,7 +179,7 @@ module RunNode = {
           <RunNodeSection
             sectionNumber="01"
             title="Install Mina"
-            copy={js|Check the systems requirements and install Mina. It’s around 1GB — which is smaller than most, but still takes some time.|js}
+            copy={js|Check the systems requirements and install Mina. The Mina package is around 100MB — which is smaller than most, but still takes some time.|js}
           />
           <RunNodeSection
             sectionNumber="02"
