@@ -343,11 +343,10 @@ Select this option and enter your Ledger PIN code.
 
 If the installation was successful the install script will terminate successfully and you will see the Mina logo among your list of installed apps.
 
-### 12) Install the command-line wallet
+### 12) Using the command line wallet
 
-```
-$ sudo cp ./mina_ledger_wallet /usr/local/bin/
-```
+When a command references `mina_ledger_wallet` later on in these docs, run the commands as `./mina_ledger_wallet ...` from the same powershell prompt.
+
 
 ## Generating a keypair
 
@@ -433,14 +432,14 @@ When generating addresses you should, if possible, start with account 0 and incr
 
 ## Validating your private key
 
-In order to validate your private key. make sure you have updated to the latest version of the `mina` damemon. Instructions can be found on the [connecting](/docs/connecting) page.
+In order to validate your private key. make sure you have updated to the latest version of the `mina` damemon. Installation instructions can be found on the [connecting](/docs/connecting) page.
 
 Now that you've created your key -- you'll want to validate that it works. For this keypair, it suffices to verify that signed transactions coming out of the ledger are parsed correctly and that the signature verifies on Mina.
 
 Run the following command:
 
 ```
-mina_ledger_wallet test-transaction 42 B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV | coda advanced validate-transaction
+mina_ledger_wallet test-transaction 42 B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV | mina advanced validate-transaction
 ```
 
 Replace "B62q... " with your public key and 42 with your BIP44 account number. Warning: Make sure that your account_address is the one that corresponds to the account_number!
