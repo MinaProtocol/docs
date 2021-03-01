@@ -25,16 +25,10 @@ module SideNav = {
           <Item title="Archive Node" slug="archive-node" />
           <Item title="Archive Redundancy" slug="archive-redundancy" />
           <Item title="Client SDK" slug="client-sdk" />
-          <Item
-            title="Data Querying"
-            slug="operating-for-data"
-          />
+          <Item title="Data Querying" slug="operating-for-data" />
           <Item title="Devnet" slug="connecting-devnet" />
           <Item title="Hard Fork" slug="hard-fork" />
-          <Item
-            title="Hot/Cold Wallets"
-            slug="hot-cold-block-production"
-          />
+          <Item title="Hot/Cold Wallets" slug="hot-cold-block-production" />
           <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
           <Item title="Seed Peers" slug={f("seed-peers")} />
           <Item
@@ -170,16 +164,10 @@ module Dropdown = {
           <Item title="Archive Node" slug="archive-node" />
           <Item title="Archive Redundancy" slug="archive-redundancy" />
           <Item title="Client SDK" slug="client-sdk" />
-          <Item
-            title="Data Querying"
-            slug="operating-for-data"
-          />
+          <Item title="Data Querying" slug="operating-for-data" />
           <Item title="Devnet" slug="connecting-devnet" />
           <Item title="Hard Fork" slug="hard-fork" />
-          <Item
-            title="Hot/Cold Wallets"
-            slug="hot-cold-block-production"
-          />
+          <Item title="Hot/Cold Wallets" slug="hot-cold-block-production" />
           <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
           <Item title="Seed Peers" slug={f("seed-peers")} />
           <Item
@@ -227,5 +215,3 @@ module Dropdown = {
     </div>;
   };
 };
-
-
