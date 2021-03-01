@@ -4,11 +4,11 @@ export default Page({ title: "Connect to the Network" });
 
 # Connect to the Network
 
-In this section, we'll connect to the `Zenith` network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
+In this section, we'll connect to the `FinalFinal2` network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
 
 ## Update your software
 
-The first step in connecting to `Zenith` is installing the latest daemon version. Follow the instructions for your operating system below.
+The first step in connecting to `FinalFinal2` is installing the latest daemon version. Follow the instructions for your operating system below.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -18,10 +18,10 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.2-245a3f7
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.0-fd39808
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit [DIRTY]245a3f7d883c516f5f16742cb1ca672872612851 on branch HEAD`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit fd3980820fb82c7355af49462ffefe6718800b77 on branch master`.
 
 ## Start up a node
 
@@ -42,7 +42,7 @@ Note: If you are using the Hetzner hosting provider, we are currently experienci
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/zenith_seeds.txt
+mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/finalfinal2_seeds.txt
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -133,13 +133,13 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-gcr.io/o1labs-192920/mina-daemon-baked:0.4.2-245a3f7-zenith-7a89538 \
+minaprotocol/mina-daemon-baked:1.0.0-fd39808 \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \
 --file-log-level Debug \
 --log-level Info \
---peer-list-url https://storage.googleapis.com/seed-lists/zenith_seeds.txt
+--peer-list-url https://storage.googleapis.com/seed-lists/finalfinal2_seeds.txt
 ```
 
 Run `docker logs -f mina` to follow the logs, and if it crashes save the log output to a file with `docker logs mina > mina-log.txt` and post the output to the #mentor-nodes channel or attach the full ~/.mina-config/mina.log to a github issue and link the issue in discord.
