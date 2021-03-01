@@ -15,36 +15,34 @@ module SideNav = {
     let f = s => "/docs/" ++ s;
     <div className=Styles.container>
       <SideNav currentSlug>
-        <Item title="Mina Overview" slug={f("")} />
-        <Section title="Getting Started" slug={f("getting-started")}>
-          <Item title="Installation" slug="" />
-          <Item title="Keypair Generation" slug="keypair" />
-          <Item title="Connect to the Network" slug="connecting" />
-          <Item title="Staking & Snarking" slug="staking" />
-          <Item title="Troubleshooting" slug="troubleshooting" />
-        </Section>
+        <Item title="Mina Overview" slug={f("/")} />
+        <Item title="Getting Started" slug={f("getting-started")} />
+        <Item title="Keypair Generation" slug={f("keypair")} />
+        <Item title="Connect to the Network" slug={f("connecting")} />
+        <Item title="Staking & Snarking" slug={f("staking")} />
+        <Item title="Troubleshooting" slug={f("troubleshooting")} />
         <Section title="Advanced" slug={f("advanced")}>
-          <Item title="Hard Fork" slug="hard-fork" />
           <Item title="Archive Node" slug="archive-node" />
           <Item title="Archive Redundancy" slug="archive-redundancy" />
+          <Item title="Client SDK" slug="client-sdk" />
+          <Item
+            title="Data Querying"
+            slug="operating-for-data"
+          />
+          <Item title="Devnet" slug="connecting-devnet" />
+          <Item title="Hard Fork" slug="hard-fork" />
+          <Item
+            title="Hot/Cold Wallets"
+            slug="hot-cold-block-production"
+          />
+          <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
           <Item
             title="Staking Service Guidelines"
             slug="staking-service-guidelines"
           />
-          <Item title="client-sdk" slug="client-sdk" />
-          <Item title="ledger-app-mina" slug="ledger-app-mina" />
-          <Item
-            title="Data Querying for Node Operators"
-            slug="operating-for-data"
-          />
-          <Item
-            title="Hot/Cold Secure Block Production"
-            slug="hot-cold-block-production"
-          />
-          <Item title="Devnet" slug="connecting-devnet" />
         </Section>
         <Section title="Developers" slug={f("developers")}>
-          <Item title="Developers Overview" slug="" />
+          <Item title="Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
           <Item title="Repository Structure" slug="directory-structure" />
           <Item title="BIP44 Information" slug="bip44-information" />
@@ -67,7 +65,9 @@ module SideNav = {
           <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
-          <Item title="SNARKs Overview" slug="" />
+        </Section>
+        <Section title="SNARKs" slug={f("snarks")}>
+          <Item title="Overview" slug="" />
           <Item title="Getting started using SNARKs" slug="snarky" />
           <Item title="Which SNARK is right for me?" slug="constructions" />
           <Item title="The snarkyjs-crypto library" slug="snarkyjs-crypto" />
@@ -158,35 +158,33 @@ module Dropdown = {
     <div className=Styles.dropdown>
       <DropdownNav currentSlug defaultValue={getCurrentValue(currentSlug)}>
         <Item title="Mina Overview" slug={f("/")} />
-        <Section title="Getting Started" slug={f("getting-started")}>
-          <Item title="Installation" slug="" />
-          <Item title="Keypair Generation" slug="keypair" />
-          <Item title="Connect to the Network" slug="connecting" />
-          <Item title="Staking & Snarking" slug="staking" />
-          <Item title="Troubleshooting" slug="troubleshooting" />
-        </Section>
+        <Item title="Getting Started" slug={f("getting-started")} />
+        <Item title="Keypair Generation" slug={f("keypair")} />
+        <Item title="Connect to the Network" slug={f("connecting")} />
+        <Item title="Staking & Snarking" slug={f("staking")} />
+        <Item title="Troubleshooting" slug={f("troubleshooting")} />
         <Section title="Advanced" slug={f("advanced")}>
-          <Item title="Hard Fork" slug="hard-fork" />
           <Item title="Archive Node" slug="archive-node" />
           <Item title="Archive Redundancy" slug="archive-redundancy" />
+          <Item title="Client SDK" slug="client-sdk" />
+          <Item
+            title="Data Querying"
+            slug="operating-for-data"
+          />
+          <Item title="Devnet" slug="connecting-devnet" />
+          <Item title="Hard Fork" slug="hard-fork" />
+          <Item
+            title="Hot/Cold Wallets"
+            slug="hot-cold-block-production"
+          />
+          <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
           <Item
             title="Staking Service Guidelines"
             slug="staking-service-guidelines"
           />
-          <Item title="client-sdk" slug="client-sdk" />
-          <Item title="ledger-app-mina" slug="ledger-app-mina" />
-          <Item
-            title="Data Querying for Node Operators"
-            slug="operating-for-data"
-          />
-          <Item
-            title="Hot/Cold Secure Block Production"
-            slug="hot-cold-block-production"
-          />
-          <Item title="Devnet" slug="connecting-devnet" />
         </Section>
         <Section title="Developers" slug={f("developers")}>
-          <Item title="Developers Overview" slug="" />
+          <Item title="Overview" slug="" />
           <Item title="Codebase Overview" slug="codebase-overview" />
           <Item title="Repository Structure" slug="directory-structure" />
           <Item title="BIP44 Information" slug="bip44-information" />
@@ -209,7 +207,9 @@ module Dropdown = {
           <Item title="Time-locked Accounts" slug="timelock" />
           <Item title="Snapps" slug="snapps" />
           <Item title="Tokens" slug="tokens" />
-          <Item title="SNARKs Overview" slug="" />
+        </Section>
+        <Section title="SNARKs" slug={f("snarks")}>
+          <Item title="Overview" slug="" />
           <Item title="Getting started using SNARKs" slug="snarky" />
           <Item title="Which SNARK is right for me?" slug="constructions" />
           <Item title="The snarkyjs-crypto library" slug="snarkyjs-crypto" />
