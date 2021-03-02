@@ -61,10 +61,10 @@ Add the Mina Debian repo and install:
 ```
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.2-245a3f7
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.0-fd39808
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]245a3f7d883c516f5f16742cb1ca672872612851 on branch HEAD`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit fd3980820fb82c7355af49462ffefe6718800b77 on branch master`.
 
 ### Windows
 
