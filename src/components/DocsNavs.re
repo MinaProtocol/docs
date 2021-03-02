@@ -30,7 +30,7 @@ module SideNav = {
           <Item title="Hard Fork" slug="hard-fork" />
           <Item title="Hot/Cold Wallets" slug="hot-cold-block-production" />
           <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
-          <Item title="Seed Peers" slug={f("seed-peers")} />
+          <Item title="Seed Peers" slug="seed-peers" />
           <Item
             title="Staking Service Guidelines"
             slug="staking-service-guidelines"
@@ -169,7 +169,7 @@ module Dropdown = {
           <Item title="Hard Fork" slug="hard-fork" />
           <Item title="Hot/Cold Wallets" slug="hot-cold-block-production" />
           <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
-          <Item title="Seed Peers" slug={f("seed-peers")} />
+          <Item title="Seed Peers" slug="seed-peers" />
           <Item
             title="Staking Service Guidelines"
             slug="staking-service-guidelines"
