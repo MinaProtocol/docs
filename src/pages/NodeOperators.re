@@ -60,6 +60,10 @@ module Styles = {
       style([
         display(`flex),
         alignItems(`center),
+        marginBottom(`rem(3.)),
+        fontSize(`rem(1.)),
+        lineHeight(`rem(1.)),
+        color(Theme.Colors.orange),
         selector(">:last-child", [marginLeft(`rem(0.5))]),
       ]),
     ]);
@@ -121,7 +125,6 @@ module Roles = {
         <h4 className=Theme.Type.h4> {React.string(title)} </h4>
         <Spacer height=0.5 />
         <p className=Theme.Type.paragraph> {React.string(copy)} </p>
-        <Spacer height=0.5 />
         <Next.Link href=linkUrl>
           <span className=Styles.roleLink>
             <p> {React.string(linkCopy)} </p>
@@ -218,7 +221,6 @@ module NodeOverview = {
         slug="how-mina-works">
         <hr className=Styles.divider />
         <Roles />
-        <Spacer height=3. />
         <hr className=Styles.divider />
         <RunNode />
         <Spacer height=13.5 />

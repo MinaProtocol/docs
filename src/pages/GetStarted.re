@@ -11,9 +11,15 @@ module Styles = {
 
   let knowledgebaseBackground =
     style([
-      backgroundImage(`url("/static/img/backgrounds/KnowledgeBase.jpg")),
+      backgroundImage(
+        `url("/static/img/backgrounds/TechKnowledgeBaseBackground.jpg"),
+      ),
       backgroundSize(`cover),
-      padding2(~v=`rem(12.), ~h=`zero),
+      padding2(~v=`rem(4.), ~h=`zero),
+      media(
+        Theme.MediaQuery.notMobile,
+        [padding2(~v=`rem(12.), ~h=`zero)],
+      ),
     ]);
 
   let knowledgebaseContainer =

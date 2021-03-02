@@ -6,7 +6,11 @@ module FeaturedPress = {
     let gridContainer =
       style([
         display(`grid),
-        gridTemplateColumns([`repeat((`num(2), `fr(1.)))]),
+        gridTemplateColumns([`repeat((`num(1), `fr(1.)))]),
+        media(
+          Theme.MediaQuery.notMobile,
+          [gridTemplateColumns([`repeat((`num(2), `fr(1.)))])],
+        ),
         gridColumnGap(`rem(1.)),
       ]);
     let container =
@@ -199,7 +203,7 @@ let make = () => {
       background={
         Theme.desktop: "/static/img/backgrounds/PressAndMediaDesktop.jpg",
         Theme.tablet: "/static/img/backgrounds/PressAndMediaTablet.jpg",
-        Theme.mobile: "/static/img/backgrounds/15_PressandMedia_1_750x1056_mobile.jpg",
+        Theme.mobile: "/static/img/backgrounds/PressAndMediaTablet.jpg",
       }>
       <Spacer height=1.5 />
       <Button

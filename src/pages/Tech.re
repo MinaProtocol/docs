@@ -17,12 +17,13 @@ module Styles = {
 
   let sectionContainer = bg =>
     style([
-      position(`relative),
       background(`url(bg)),
-      unsafe("backgroundSize", "100% auto"),
-      backgroundRepeat(`noRepeat),
-      padding(`rem(2.)),
-      media(Theme.MediaQuery.desktop, [padding(`zero)]),
+      backgroundSize(`cover),
+      padding2(~v=`rem(4.), ~h=`zero),
+      media(
+        Theme.MediaQuery.desktop,
+        [paddingTop(`rem(4.)), paddingBottom(`rem(10.))],
+      ),
     ]);
 
   let sideNav = sticky =>
@@ -661,16 +662,19 @@ let make = () => {
         contentBackground: Color(Css.white),
       }
     />
-    <div className={Styles.sectionContainer("")}>
-      <section
-        ref={ReactDOMRe.Ref.domRef(knowledgebaseRef)}
-        className=Styles.section
-        id="knowledge">
-        <Spacer height=6. />
-        <KnowledgeBase />
-      </section>
+    <div
+      className={Styles.sectionContainer(
+        "/static/img/backgrounds/TechKnowledgeBaseBackground.jpg",
+      )}>
+      <Wrapped>
+        <section
+          ref={ReactDOMRe.Ref.domRef(knowledgebaseRef)}
+          className=Styles.section
+          id="knowledge">
+          <KnowledgeBase />
+        </section>
+      </Wrapped>
     </div>
-    <Spacer height=12. />
     <FeaturedSingleRow
       row={
         rowType: FeaturedSingleRow.Row.ImageLeftCopyRight,
