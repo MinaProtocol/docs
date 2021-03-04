@@ -57,7 +57,7 @@ let make = () => {
                   className=AlternatingSections.Section.SectionStyles.paragraphText>
                   <span>
                     {React.string(
-                       {js|Other protocols are weighed down by terabytes of private user data and network congestion. But on Mina's 22kb |js},
+                       {js|Other protocols are weighed down by terabytes of private user data and network congestion. But on Mina's 22kb|js},
                      )}
                   </span>
                   // TODO: Update link here

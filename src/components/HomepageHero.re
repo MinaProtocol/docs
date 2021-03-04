@@ -152,7 +152,7 @@ let make = (~backgroundImg) => {
             <span>
               <span className=Styles.heroText>
                 {React.string(
-                   "By design, the entire Mina blockchain is about 22kb ",
+                   "By design, the entire Mina blockchain is about 22kb",
                  )}
               </span>
               // TODO: Update Link

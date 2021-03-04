@@ -198,7 +198,7 @@ let make = () => {
             </span>
           </Next.Link>
           {React.string(
-             " like Snapps ",
+             " like Snapps",
            )}
            <Footnote refNumber="[3]" link="/disclaimers" />
            {React.string(" (SNARK-powered apps)
