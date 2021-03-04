@@ -200,7 +200,7 @@ let make = () => {
           {React.string(
              " like Snapps",
            )}
-           <Footnote refNumber="[3]" link="/disclaimers" />
+           <Footnote refNumber="3" link="/disclaimers" />
            {React.string(" (SNARK-powered apps)
                to offer financial services without compromising data privacy
                and programmable money that anyone can access trustlessly from their phones.

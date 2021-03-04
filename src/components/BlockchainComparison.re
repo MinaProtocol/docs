@@ -140,7 +140,7 @@ let make = () => {
                     {React.string("KB")}
                   </span>
                   // TODO: Update Link
-                  <Footnote refNumber="[1]" link="/blog" />
+                  <Footnote refNumber="1" link="/blog" />
                 </span>
                 <span className=Styles.comparisonLabel>
                   {React.string("Fixed Size")}
@@ -170,7 +170,7 @@ let make = () => {
                   <span className=Styles.formatText>
                     {React.string("GB")}
                   </span>
-                  <Footnote refNumber="[2]" link="/disclaimers" />
+                  <Footnote refNumber="2" link="/disclaimers" />
                 </span>
                 <span className=Styles.comparisonLabel>
                   {React.string("Increasing Size")}

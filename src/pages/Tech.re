@@ -341,7 +341,7 @@ module Projects = {
               title={
                 <h4 className=Theme.Type.h4>
                   {React.string("Build Snapps")}
-                  <Footnote refNumber="[3]" link="/disclaimers" />
+                  <Footnote refNumber="3" link="/disclaimers" />
                   {React.string(" Privacy-Enabled apps")}
                 </h4>
               }
@@ -423,7 +423,7 @@ module Projects = {
               description={
                 <p className=Theme.Type.paragraph>
                   {React.string("With a 22kb")}
-                  <Footnote refNumber="[1]" link="blog" />
+                  <Footnote refNumber="1" link="blog" />
                   {React.string(
                      " Mina chain, access peer-to-peer stablecoins and tokens via smartphone and bring hard-earned money anywhere you go.",
                    )}
