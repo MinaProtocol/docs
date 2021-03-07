@@ -170,10 +170,11 @@ Mina daemon
                                                       peer, the relationship is
                                                       intended to be symmetric
                                                       (alias: -direct-peer)
-  [--disable-telemetry]                               Disable reporting
-                                                      telemetry to other nodes
+  [--disable-node-status]                             Disable reporting node
+                                                      status to other nodes
+                                                      (default: enabled)
                                                       (alias:
-                                                      -disable-telemetry)
+                                                      -disable-node-status)
   [--discovery-keypair KEYFILE]                       Keypair (generated from
                                                       `mina advanced
                                                       generate-libp2p-keypair`)
@@ -449,7 +450,7 @@ Advanced client commands
                               $config-directory/trace/$pid.trace
   status-clear-hist           Clear histograms reported in status
   stop-tracing                Stop async tracing
-  telemetry                   Get telemetry data for a set of peers
+  node-status                 Get node statuses for a set of peers
   time-offset                 Get the time offset in seconds used by the daemon
                               to convert real time into blockchain time
   validate-keypair            Validate a public, private keypair

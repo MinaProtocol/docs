@@ -26,10 +26,10 @@ If you are using macOS please install Docker and follow the docker based instruc
 After [adding the Mina repo](/docs/getting-started#ubuntu-1804--debian-9) you can simply run the following command.
 
 ```
-sudo apt-get install mina-generate-keypair=0.2.12-718eba4
+sudo apt-get install mina-generate-keypair=1.0.2-06f3c5c
 ```
 
-Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit [DIRTY]718eba4826794f83d51c0d8dcf538e78b0259528 on branch HEAD`.
+Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit 06f3c5cdeb635b2564fcb2edac4f10db85b93c36 on branch master`.
 
 ### Windows / Other Platforms
 
@@ -74,7 +74,7 @@ mina-generate-keypair -privkey-path ~/keys/my-wallet
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.12-718eba4 -privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
@@ -108,6 +108,6 @@ mina-validate-keypair -privkey-path <path-to-the-private-key-file>
 If you are using Docker run the following command:
 
 ```
-docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.12-718eba4 -privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
 ```
 
