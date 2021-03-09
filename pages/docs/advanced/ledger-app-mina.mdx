@@ -474,7 +474,27 @@ First step is to sign a transaction using the offline mode of the ledger:
 
 2. Copy the output of this command.
 
-The output will be a JSON blob that you will need for the next section.
+The output will be a JSON blob that you will need for the next section. It should look something like this:
+
+```
+{
+  "signature": "389ac7d4077f3d485c1494782870979faa222cd906b25b2687333a92f41e40b925adb08705eddf2a7098e5ac9938498e8a0ce7c70b25ea392f4846b854086d43",
+  "payment": {
+    "to": "B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV",
+    "from": "B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV",
+    "fee": "10000000",
+    "token": "1",
+    "nonce": "0",
+    "memo": null,
+    "amount": "1000000000",
+    "valid_until": "4294967295"
+  },
+  "stake_delegation": null,
+  "create_token": null,
+  "create_token_account": null,
+  "mint_tokens": null
+}
+```
 
 ### Submit the transaction
 
@@ -488,7 +508,11 @@ This step currently requires a running daemon that's connected to the network, b
   mina advanced send-rosetta-transactions
   ```
 
-3. Paste the output from the `mina_ledger_wallet` in the previous section.
+3. Paste the output from the `mina_ledger_wallet` in the previous section and then press Ctrl-D to submit the transaction.
 
-This will send the signed transaction on the network.
+This will send the signed transaction on the network. You should see the following output if the transaction was successfully sent:
+
+```
+Dispatched command with TRANSACTION_ID 4Rs6xMHVyo1J1TTQDCzynYvWPdBr9QRY23fuqvnHFvQiM2B4YD14dtWY2sDccbgx7eh5FYAsPSNrZ2M3AqEPfXoXjNxuWTgiwkL3nwaTaGhSoPA7LcfqiWT6uN9oookDeR6ZSMfd2bs9QSPRit8gPt3FSrDo8i3qM383AEG6g5pEm2i1m1cTTwrUe7y4Z2eB6DdWKhFhoYnx5ndQRtZt3D3o7gojdwwdpRzrWZgT9KcJfbXdZNTfXxr3G1VCVqgqmNJ6iGzn4uTGqpqCmJf6zRn196SWUyZ4DYrphvGF8GhJZYyPTwA2BMTBkF9xWC9zzJP8ZrAeyV1qV8k94dZaiyVt7Fac3r6BcDaMonMcpvnGy8fHF9Q25L2tjzHzwKMePkJztB5r
+```
 
