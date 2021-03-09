@@ -34,10 +34,10 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=0.4.3-8dfa483
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-68200c7
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]8dfa4837f72c9c4d8a4daa3d416d9c852619fbb4 on branch HEAD`.
+Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD`.
 
 ## Start up a node
 
@@ -52,7 +52,7 @@ Testnet Status: <StatusBadge service="Network" />
 Run the following commands to start up a Mina node instance and connect to the `Devnet` network:
 
 ```
-  coda daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+coda daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 
 ### Docker
@@ -75,7 +75,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:0.4.3-8dfa483-devnet-ee24b4f \
+minaprotocol/mina-daemon-baked:1.0.5-68200c7 \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \
