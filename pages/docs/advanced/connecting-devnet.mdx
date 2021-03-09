@@ -10,9 +10,9 @@ and experimintation of developers and holds no real value. Users can reach out o
 Only use the `Devnet` network if you are a developer and building on top of the Mina protocol. If you are interested in running a node, please connect
 to [Zenith](./connecting-zenith) instead.
 
-Please note that `Devnet` will be the final release that will be referencing the `coda` executable and `~/.coda-config` config directory
-as `coda`. Future releases will refer to the executable and config directory as `mina` and `~/.mina-config` respectively. We recommend users to take time to update
-any scripts and tools that use the old `coda` name to now use the new `mina` name as this will be a breaking change in future releases.
+Please note that `Devnet` will be the final release that will be referencing the `mina` executable and `~/.mina-config` config directory
+as `mina`. Future releases will refer to the executable and config directory as `mina` and `~/.mina-config` respectively. We recommend users to take time to update
+any scripts and tools that use the old `mina` name to now use the new `mina` name as this will be a breaking change in future releases.
 
 ## Update your software
 
@@ -31,7 +31,7 @@ sudo apt-get update
 sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-68200c7
 ```
 
-Check that daemon installed correctly by running `coda version`. The output should read `Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD`.
 
 ## Start up a node
 
@@ -46,7 +46,7 @@ Testnet Status: <StatusBadge service="Network" />
 Run the following commands to start up a Mina node instance and connect to the `Devnet` network:
 
 ```
-coda daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+mina daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 
 ### Docker
@@ -57,17 +57,17 @@ When running your daemon using Docker, first ensure that your private key has th
 cd ~
 chmod 700 ~/keys
 chmod 600 ~/keys/my-wallet
-mkdir ~/.coda-config
+mkdir ~/.mina-config
 ```
 
-Now simply run the image with your keys and ~/.coda-config mounted:
+Now simply run the image with your keys and ~/.mina-config mounted:
 
 ```
 docker run --name mina -d \
 -p 8302:8302 \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
---mount "type=bind,source=`pwd`/.coda-config,dst=/root/.coda-config" \
+--mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
 minaprotocol/mina-daemon-baked:1.0.5-68200c7 \
 daemon \
@@ -80,4 +80,4 @@ daemon \
 
 Run `docker logs -f mina` to follow the logs, and if it crashes save the log output to a file with `docker logs mina > mina-log.txt`.
 
-Run `docker exec -it mina coda client status` to monitor connectivity to the network.
+Run `docker exec -it mina mina client status` to monitor connectivity to the network.
