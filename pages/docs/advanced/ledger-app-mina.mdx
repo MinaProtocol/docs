@@ -33,6 +33,7 @@ Never reuse the same keypair from a testnet on mainnet!
 - [Installing on Windows](#installing-on-windows)
 - [Generating a keypair](#generating-a-keypair)
 - [Validating your private key](#validating-your-private-key)
+- [Offline Mode](#offline-mode)
 
 ## Installing on Ubuntu
 
@@ -455,3 +456,39 @@ If you accept, a test-transaction will be generated and you should see the follo
 Transaction was valid
 All transactions were valid
 ```
+
+## Offline Mode
+
+An alternate method for sending transactions is to use the offline mode of the ledger tool. This mode allows you to sign a transaction without connecting your ledger device to a running daemon. You can append the flag `--offline` to any commands with the `mina_ledger_wallet` tool but we will provide an example of how to use offline mode to send a transaction.
+
+### Sign an offline transaction
+
+First step is to sign a transaction using the offline mode of the ledger:
+
+
+1. Generate a signed transaction with the following command:
+
+  ```
+  mina_ledger_wallet send-payment --offline
+  ```
+
+2. Copy the output of this command.
+
+The output will be a JSON blob that you will need for the next section.
+
+### Submit the transaction
+
+This step currently requires a running daemon that's connected to the network, but you can also submit this transaction to any third-party gateway.
+
+1. Run a daemon on [Devnet](/docs/advanced/connecting-devnet).
+
+2. Execute the following `send-rosetta-transactions` command.
+
+  ```
+  mina advanced send-rosetta-transactions
+  ```
+
+3. Paste the output from the `mina_ledger_wallet` in the previous section.
+
+This will send the signed transaction on the network.
+
