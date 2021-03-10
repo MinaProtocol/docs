@@ -471,6 +471,7 @@ First step is to sign a transaction using the offline mode of the ledger:
   ```
   mina_ledger_wallet send-payment --offline
   ```
+In offline mode you must specify the `--nonce` and `--fee` parameters.  To sign testnet transactions you must specify the `--network testnet` parameter (the default is `mainnet`).
 
 2. Copy the output of this command.
 
