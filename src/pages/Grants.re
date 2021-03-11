@@ -506,27 +506,6 @@ module ProtocolProjects = {
             buttonUrl=Constants.projectGrantApplication
           />
           <Spacer height=3. />
-          <Project.ThreeColumn
-            title="Alternative Client Implementation (e.g. Rust)"
-            rows=[|
-              {
-                firstColumn: {
-                  title: "Allocation",
-                  copy: {js|Minimum of 400,000 Mina tokens|js},
-                },
-                secondColumn: {
-                  title: "Project Type",
-                  copy: {js|Open source|js},
-                },
-                thirdColumn: {
-                  title: "Overview",
-                  copy: {js|Enable Mina nodes to parse and verify the Mina transactions, its smart contracts and everything related. Provide an interfaces to create transactions, product blocks, and create snarks in Mina.|js},
-                },
-              },
-            |]
-            buttonUrl=Constants.projectGrantApplication
-          />
-          <Spacer height=3. />
         </Section>
     </div>;
 };
