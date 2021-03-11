@@ -58,7 +58,7 @@ let make = () => {
       <Next.Link href="/docs/getting-started">
         <a className=Styles.linkStyle> {React.string("Documentation")} </a>
       </Next.Link>
-      <Next.Link href="/docs/node-operator">
+      <Next.Link href="/node-operator">
         <a className=Styles.linkStyle> {React.string("Run a Node")} </a>
       </Next.Link>
       <Next.Link href="/docs">
