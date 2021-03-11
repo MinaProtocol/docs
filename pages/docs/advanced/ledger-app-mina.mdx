@@ -473,6 +473,13 @@ First step is to sign a transaction using the offline mode of the ledger:
   ```
 In offline mode you must specify the `--nonce` and `--fee` parameters.  To sign testnet transactions you must specify the `--network testnet` parameter (the default is `mainnet`).
 
+<Alert kind="note">
+
+If you are not on the mainnet, make sure you include the flag `--network testnet` so the ledger knows to sign the transaction for the testnet. Signed transactions for mainnet can be replayed on mainnet.
+
+</Alert>
+
+
 2. Copy the output of this command.
 
 The output will be a JSON blob that you will need for the next section. It should look something like this:
