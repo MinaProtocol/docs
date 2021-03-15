@@ -156,7 +156,10 @@ let make = (~backgroundImg) => {
                  )}
               </span>
               // TODO: Update Link
-              <Footnote refNumber="1" link="/blog" />
+              <Footnote
+                refNumber="1"
+                link="/blog/22kb-sized-blockchain-a-technical-reference"
+              />
               <span className=Styles.heroText>
                 {React.string(
                    " - the size of a couple of tweets. So participants can quickly sync and verify the network.",

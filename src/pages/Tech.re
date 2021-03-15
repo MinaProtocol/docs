@@ -423,7 +423,10 @@ module Projects = {
               description={
                 <p className=Theme.Type.paragraph>
                   {React.string("With a 22kb")}
-                  <Footnote refNumber="1" link="blog" />
+                  <Footnote
+                    refNumber="1"
+                    link="blog/22kb-sized-blockchain-a-technical-reference"
+                  />
                   {React.string(
                      " Mina chain, access peer-to-peer stablecoins and tokens via smartphone and bring hard-earned money anywhere you go.",
                    )}

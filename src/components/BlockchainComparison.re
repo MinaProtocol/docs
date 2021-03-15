@@ -140,7 +140,10 @@ let make = () => {
                     {React.string("KB")}
                   </span>
                   // TODO: Update Link
-                  <Footnote refNumber="1" link="/blog" />
+                  <Footnote
+                    refNumber="1"
+                    link="/blog/22kb-sized-blockchain-a-technical-reference"
+                  />
                 </span>
                 <span className=Styles.comparisonLabel>
                   {React.string("Fixed Size")}

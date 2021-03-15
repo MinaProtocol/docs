@@ -61,7 +61,10 @@ let make = () => {
                      )}
                   </span>
                   // TODO: Update link here
-                  <Footnote refNumber="1" link="/blog" />
+                  <Footnote
+                    refNumber="1"
+                    link="/blog/22kb-sized-blockchain-a-technical-reference"
+                  />
                   <span>
                     {React.string(
                        {js| chain, apps execute as fast as your bandwidth can carry them—paving the way for a seamless end user experience and mainstream adoption.|js},
