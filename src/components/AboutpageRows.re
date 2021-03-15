@@ -198,11 +198,13 @@ let make = () => {
             </span>
           </Next.Link>
           {React.string(
-             " like Snapps (SNARK-powered apps)
+             " like Snapps",
+           )}
+           <Footnote refNumber="3" link="/disclaimers" />
+           {React.string(" (SNARK-powered apps)
                to offer financial services without compromising data privacy
                and programmable money that anyone can access trustlessly from their phones.
-               And that's just the beginning.",
-           )}
+               And that's just the beginning.")}
         </p>
         <Spacer height=1. />
         <p className=Styles.copy>

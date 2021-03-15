@@ -7,7 +7,7 @@ module Styles = {
       bottom(`zero),
       height(`percent(100.)),
       padding2(~v=`rem(4.), ~h=`rem(1.25)),
-      backgroundImage(`url("/static/img/Small.jpg")),
+      backgroundImage(`url("/static/img/Medium.jpg")),
       backgroundSize(`cover),
       media(
         Theme.MediaQuery.tablet,

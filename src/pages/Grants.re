@@ -1,12 +1,8 @@
 module Styles = {
   open Css;
 
-  let sectionContainer = bg =>
+  let sectionContainer =
     style([
-      position(`relative),
-      background(`url(bg)),
-      unsafe("backgroundSize", "100% auto"),
-      backgroundRepeat(`noRepeat),
       padding(`rem(2.)),
       media(Theme.MediaQuery.desktop, [padding(`zero)]),
     ]);
@@ -72,6 +68,12 @@ module Styles = {
       backgroundSize(`cover),
       paddingTop(`rem(4.)),
       media(Theme.MediaQuery.notMobile, [paddingTop(`rem(12.))]),
+    ]);
+
+  let projectsBackground =
+    style([
+      backgroundImage(`url("/static/img/backgrounds/BlogBackground.jpg")),
+      backgroundSize(`cover),
     ]);
 
   let grantDescriptionOuterContainer =
@@ -182,20 +184,24 @@ module FAQ = {
             <Spacer height=1. />
             <span className=Theme.Type.paragraph>
               <span> {React.string("See the ")} </span>
-              <a href=Constants.projectGrantApplication>
-                <span className=Styles.link>
-                  {React.string("Application Process ")}
-                </span>
+              <a
+                target="_blank"
+                rel="noopener"
+                className=Styles.link
+                href=Constants.projectGrantApplication>
+                {React.string("Application Process ")}
               </a>
               <span>
                 {React.string(
                    "section for selection criteria. Please also reach out to us if you have any unique skills that don't apply to current projects. You can also start ",
                  )}
               </span>
-              <a href=Constants.minaGithub>
-                <span className=Styles.link>
-                  {React.string("contributing code to Mina ")}
-                </span>
+              <a
+                target="_blank"
+                rel="noopener"
+                className=Styles.link
+                href=Constants.minaGithub>
+                {React.string("contributing code to Mina ")}
               </a>
               <span>
                 {React.string(
@@ -364,9 +370,7 @@ module Project = {
 module FrontEndProjects = {
   [@react.component]
   let make = (~ref_) =>
-    <div
-      ref={ReactDOMRe.Ref.domRef(ref_)}
-      className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
+    <div ref={ReactDOMRe.Ref.domRef(ref_)} className=Styles.sectionContainer>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
       <Section
@@ -451,6 +455,7 @@ module FrontEndProjects = {
             |]
             buttonUrl=Constants.projectGrantApplication
           />
+          <Spacer height=3. />
           <Project.TwoColumn
             title="Block Explorer"
             rows=[|
@@ -474,9 +479,7 @@ module FrontEndProjects = {
 module ProtocolProjects = {
   [@react.component]
   let make = (~ref_) =>
-    <div
-      ref={ReactDOMRe.Ref.domRef(ref_)}
-      className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
+    <div ref={ReactDOMRe.Ref.domRef(ref_)} className=Styles.sectionContainer>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
       <Section
@@ -513,9 +516,7 @@ module ProtocolProjects = {
 module MarketingAndCommunityProjects = {
   [@react.component]
   let make = (~ref_) =>
-    <div
-      ref={ReactDOMRe.Ref.domRef(ref_)}
-      className={Styles.sectionContainer("/static/img/tech-gradient-1.jpg")}>
+    <div ref={ReactDOMRe.Ref.domRef(ref_)} className=Styles.sectionContainer>
       <Spacer height=6.5 />
       <hr className=Theme.Type.divider />
       <Section
@@ -787,9 +788,11 @@ let make = (~grants) => {
     </div>
     {renderSideNav()}
     <GrantsNav.Dropdown />
-    <FrontEndProjects ref_=frontEndRef />
-    <ProtocolProjects ref_=protocolRef />
-    <MarketingAndCommunityProjects ref_=marketingRef />
+    <div className=Styles.projectsBackground>
+      <FrontEndProjects ref_=frontEndRef />
+      <ProtocolProjects ref_=protocolRef />
+      <MarketingAndCommunityProjects ref_=marketingRef />
+    </div>
     <HowToApply ref_=howToApplyRef />
     <section id="contributors">
       <div
