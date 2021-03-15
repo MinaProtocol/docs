@@ -27,6 +27,7 @@ module SideNav = {
           <Item title="Client SDK" slug="client-sdk" />
           <Item title="Data Querying" slug="operating-for-data" />
           <Item title="Devnet" slug="connecting-devnet" />
+          <Item title="Foundation Delegation Program" slug="foundation-delegation-program" />
           <Item title="Hard Fork" slug="hard-fork" />
           <Item title="Hot/Cold Wallets" slug="hot-cold-block-production" />
           <Item title="Ledger Hardware Wallet" slug="ledger-app-mina" />
