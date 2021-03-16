@@ -30,7 +30,7 @@ We will need to update the config file with the correct parameters. So use your 
 ```
 {
   "uploadURL": "https://us-central1-mina-mainnet-303900.cloudfunctions.net/block-producer-stats-ingest/?token=72941420a9595e1f4006e2f3565881b5",
-  "nodeURL": "http://localhost:3085"
+  "nodeURL": "http://localhost:3095"
 }
 ```
 
@@ -49,7 +49,7 @@ cd $HOME && touch ./mina-sidecar-config.json
 cat << EOF > ./mina-sidecar-config.json
 {
   "uploadURL": "https://us-central1-mina-mainnet-303900.cloudfunctions.net/block-producer-stats-ingest/?token=72941420a9595e1f4006e2f3565881b5",
-  "nodeURL": "http://localhost:3085"
+  "nodeURL": "http://localhost:3095"
 }
 EOF
 ```
@@ -58,11 +58,11 @@ We will pass this file into the Docker container in the next step.
 
 ## Usage
 
-This sidecar will need to communicate with a running daemon, so you will first need to start your daemon. You will need to run the daemon with the flag `--limited-graphql-port 3085` in order for the sidecar to be able to communicate with the daemon. Further instructions can be found on the [connecting page](/docs/connecting).
+This sidecar will need to communicate with a running daemon, so you will first need to start your daemon. You will need to run the daemon with the flag `--limited-graphql-port 3095` in order for the sidecar to be able to communicate with the daemon. Further instructions can be found on the [connecting page](/docs/connecting).
 
 ### Debian / Ubuntu
 
-First ensure the daemon is running on the same machine with the flag `--limited-graphql-port 3085`.
+First ensure the daemon is running on the same machine with the flag `--limited-graphql-port 3095`.
 
 To (optionally) enable the sidecar service to run on reboot you can use:
 
@@ -92,15 +92,16 @@ First you will need to create a network for the daemon and sidecar containers:
 docker network create mina-network
 ```
 
-Next you will need to start the daemon with the `--network mina-network` and `--insecure-graphql-port 3085` flags.
+Next you will need to start the daemon with the `--network mina-network` and `--insecure-graphql-port 3095` flags.
 
 To start the sidecar container, simply use the following command:
 
 ```
-docker run --rm -it \
+docker run \
 --name mina-sidecar \
 --network mina-network \
--v $(pwd)/mina-sidecar.json:/etc/mina-sidecar.json \
+--restart=always -d \
+-v $(pwd)/mina-sidecar-config.json:/etc/mina-sidecar.json \
 minaprotocol/mina-bp-stats-sidecar:latest
 ```
 
