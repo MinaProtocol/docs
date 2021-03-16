@@ -49,6 +49,48 @@ Firstly, don't run block production or snark working on this node. Full stop. By
 
 It would be preferable to run with a larger `--max-connection` flag. At least 100. You'll still be able to seed with more than 100 nodes in total, it's just that you'll only be able to maintain connections with 100 at once.
 
+## Example daemon command
+
+When we put together all the needed configuration, a basic seed node configuration could look like the following example.
+
+```
+mina daemon \
+--seed \
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
+--file-log-level Info -log-level Info \
+--log-block-creation false \
+--log-snark-work-gossip false \
+--log-txn-pool-gossip false \
+--metrics-port 9100 \
+--discovery-keypair /keys/my-libp2p \
+--generate-genesis-proof true \
+--max-connection 100
+```
+
+Please note that `--discovery-keypair` could change in value depending on where you stored your libp2p keypair from the previous steps. Ensure also that you're running on a version later than `1.1.2` to handle `Mainnet` traffic.
+
+If you're using Docker, then here is a similar example.
+
+```
+docker run --name mina-seed-node -d \
+--restart always \
+-p 8302:8302 \
+-p 9100:9100 \
+-v $(pwd)/keys:/root/keys:ro \
+-v $(pwd)/.mina-config:/root/.mina-config \
+--env CODA_LIBP2P_PASS='PASS' \
+minaprotocol/mina-daemon-baked:1.1.2-0975867 daemon \
+--discovery-keypair /keys/libp2p-keys \
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
+--metrics-port 9100 \
+--seed \
+--max-connection 100 \
+--file-log-level Info \
+--log-level Info
+```
+
+Make sure to replace the `--env CODA_LIBP2P_PASS=''` with your correct password for the libp2p keypair. Also as with the previous example, ensure you set the correct value with `--discovery-keypair`.
+
 ## Peers List
 
 There will be a peers list hosted with a handful of O(1) Labs nodes and another much larger handful of addresses from folks unaffiliated with O(1). This list is curated for nodes that should be great seed peers and will try their best to keep the list up-to-date as well.
