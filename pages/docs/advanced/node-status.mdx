@@ -21,10 +21,18 @@ sudo apt-get install -y mina-bp-stats-sidecar=1.1.3-48401e9
 
 This will install the following files:
 
+1. `/usr/local/bin/mina-bp-stats-sidecar` (the mina sidecar program)
+2. `/etc/mina-sidecar.json` (the config file for the mina sidecar)
+3. `/etc/systemd/system/mina-bp-stats-sidecar.service` (the systemd config to run it as a service)
 
-1. /usr/local/bin/mina-bp-stats-sidecar (the mina sidecar program)
-2. /etc/mina-sidecar.json (the config file for the mina sidecar)
-3. /etc/systemd/system/mina-bp-stats-sidecar.service (the systemd config to run it as a service)
+We will need to update the config file with the correct parameters. So use your prefered editor to replace the contents of `/etc/mina-sidecar.json` with the following:
+
+```
+{
+  "uploadURL": "https://us-central1-mina-mainnet-303900.cloudfunctions.net/block-producer-stats-ingest/?token=72941420a9595e1f4006e2f3565881b5",
+  "nodeURL": "http://localhost:3085"
+}
+```
 
 ### Docker
 
@@ -41,7 +49,7 @@ cd $HOME && touch ./mina-sidecar-config.json
 cat << EOF > ./mina-sidecar-config.json
 {
   "uploadURL": "https://us-central1-mina-mainnet-303900.cloudfunctions.net/block-producer-stats-ingest/?token=72941420a9595e1f4006e2f3565881b5",
-  "nodeURL": "http://localhost:4321"
+  "nodeURL": "http://localhost:3085"
 }
 EOF
 ```
@@ -50,17 +58,19 @@ We will pass this file into the Docker container in the next step.
 
 ## Usage
 
-This sidecar will need to communicate with a running daemon, so you will first need to start your daemon. Instructions can be found on the [connecting page](/docs/connecting).
+This sidecar will need to communicate with a running daemon, so you will first need to start your daemon. You will need to run the daemon with the flag `--limited-graphql-port 3085` in order for the sidecar to be able to communicate with the daemon. Further instructions can be found on the [connecting page](/docs/connecting).
 
 ### Debian / Ubuntu
 
-To (optionally) enable the service to run on reboot you can use:
+First ensure the daemon is running on the same machine with the flag `--limited-graphql-port 3085`.
+
+To (optionally) enable the sidecar service to run on reboot you can use:
 
 ```
 systemctl enable mina-bp-stats-sidecar
 ```
 
-Then to manually start the service, use this command:
+Then to manually start the sidecar service, use this command:
 
 ```
 service mina-bp-stats-sidecar start
@@ -75,6 +85,14 @@ journalctl -f -u mina-bp-stats-sidecar.service
 ```
 
 ### Docker
+
+First you will need to create a network for the daemon and sidecar containers:
+
+```
+docker network create mina-network
+```
+
+Next you will need to start the daemon with the `--network mina-network` and `--insecure-rgraphql-port 3085` flags.
 
 To start the sidecar container, simply use the following command:
 
