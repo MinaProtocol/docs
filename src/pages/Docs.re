@@ -50,38 +50,6 @@ module Style = {
   let editLink__icon =
     style([display(`flex), alignItems(`center), marginLeft(`rem(0.5))]);
 
-  let statusBadgeContainer =
-    merge([
-      Theme.Type.label,
-      style([
-        display(`flex),
-        alignItems(`flexStart),
-        flexDirection(`column),
-        marginTop(`rem(-3.)),
-        media(
-          Theme.MediaQuery.tablet,
-          [marginTop(`zero), alignItems(`flexStart), flexDirection(`row)],
-        ),
-      ]),
-    ]);
-
-  let statusBadge =
-    style([
-      media(
-        Theme.MediaQuery.tablet,
-        [marginTop(`rem(-1.)), marginLeft(`rem(1.))],
-      ),
-    ]);
-
-  let statusBadge__header =
-    merge([
-      Theme.Type.h4,
-      style([
-        paddingBottom(`rem(1.)),
-        media(Theme.MediaQuery.notMobile, [paddingBottom(`zero)]),
-      ]),
-    ]);
-
   let content__button =
     style([
       display(`block),
@@ -144,17 +112,6 @@ let make = (~metadata, ~children) => {
       );
     };
 
-  let renderStatusBadge = () => {
-    <span className=Style.statusBadgeContainer>
-      <h4 className=Style.statusBadge__header>
-        {React.string("Testnet Status: ")}
-      </h4>
-      <span className=Style.statusBadge>
-        <StatusBadge service=`Network />
-      </span>
-    </span>;
-  };
-
   let renderMobileEditButton = () => {
     <span className=Style.content__button>
       <Button
@@ -187,7 +144,6 @@ let make = (~metadata, ~children) => {
                 </h4>
                 <EditLink route={router.route} />
               </span>
-              {renderStatusBadge()}
             </div>
             <Next.MDXProvider components={DocsComponents.allComponents()}>
               children

@@ -1,2 +1,3 @@
 /docs/my-first-transaction   /docs/connecting
 /wolf                        /?utm_source=podcast&utm_campaign=wolf
+/docs/*                      /:splat

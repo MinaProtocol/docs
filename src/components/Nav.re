@@ -162,6 +162,47 @@ module Styles = {
       padding2(~v=`rem(1.5), ~h=`rem(1.5)),
       media(Theme.MediaQuery.desktop, [padding(`zero)]),
     ]);
+
+  let logoContainer = style([display(`flex), alignItems(`center)]);
+
+  let docsLabel =
+    merge([
+      Theme.Type.h3,
+      style([opacity(0.7), fontSize(`em(2.)), marginLeft(`em(0.5))]),
+    ]);
+
+let statusBadgeContainer =
+    merge([
+      Theme.Type.label,
+      style([
+        display(`flex),
+        alignItems(`flexStart),
+        flexDirection(`column),
+        marginTop(`rem(-3.)),
+        media(
+          Theme.MediaQuery.tablet,
+          [marginTop(`zero), alignItems(`flexStart), flexDirection(`row)],
+        ),
+      ]),
+    ]);
+
+
+  let statusBadge__header =
+    merge([
+      Theme.Type.h4,
+      style([
+        paddingBottom(`rem(1.)),
+        media(Theme.MediaQuery.notMobile, [paddingBottom(`zero)]),
+      ]),
+    ]);
+
+  let statusBadge =
+    style([
+      media(
+        Theme.MediaQuery.tablet,
+        [marginTop(`rem(-1.)), marginLeft(`rem(1.))],
+      ),
+    ]);
 };
 
 module NavLink = {
@@ -215,6 +256,9 @@ module NavGroupLink = {
   };
 };
 
+
+
+
 [@react.component]
 let make = (~dark=false) => {
   let (width, setWidth) = React.useState(() => 0);
@@ -229,50 +273,27 @@ let make = (~dark=false) => {
   });
 
   <header className=Styles.container>
-    <Next.Link href="/">
-      {dark
-         ? <img
-             src="/static/img/mina-wordmark-dark.svg"
-             className=Styles.logo
-           />
-         : <img
-             src="/static/img/mina-wordmark-light.svg"
-             className=Styles.logo
-           />}
-    </Next.Link>
-    <input type_="checkbox" id="nav_toggle" className=Styles.hiddenToggle />
-    <label htmlFor="nav_toggle" className=Styles.navToggle>
-      <span id="open-nav"> <Icon kind=Icon.BurgerMenu size=2. /> </span>
-      <span id="close-nav"> <Icon kind=Icon.CloseMenu size=3. /> </span>
-    </label>
-    <nav className=Styles.nav>
-      <NavLink label="About" href="/about" dark />
-      <NavLink label="Tech" href="/tech" dark />
-      <NavLink label="Docs" href="/docs" dark />
-      <NavGroup label="Get Started" dark>
-        <NavGroupLink icon=Icon.Box label="Overview" href="/get-started" />
-        <NavGroupLink
-          icon=Icon.NodeOperators
-          label="Node Operators"
-          href="/node-operators"
-        />
-        <NavGroupLink icon=Icon.Testnet label="Testnet" href="/testworld" />
-        <NavGroupLink icon=Icon.GrantsProgram label="Grants" href="/grants" />
-      </NavGroup>
-      <NavLink label="Community" href="/community" dark />
-      <NavLink label="Blog" href="/blog" dark />
-      <Spacer width=1.5 />
-      <div className=Styles.ctaContainer>
-        <Button
-          href={`External(Constants.minaNewsletter)}
-          width={`rem(13.)}
-          paddingX=1.
-          dark={width < Constants.desktopBreakpoint ? !dark : dark}>
-          <img src="/static/img/promo-logo.svg" height="40" />
-          <Spacer width=0.5 />
-          <span> {React.string("Sign Up For Newsletter")} </span>
-        </Button>
-      </div>
-    </nav>
+    <div className=Styles.logoContainer>
+      <Next.Link href="/">
+        {dark
+           ? <img
+               src="/static/img/mina-wordmark-dark.svg"
+               className=Styles.logo
+             />
+           : <img
+               src="/static/img/mina-wordmark-light.svg"
+               className=Styles.logo
+             />}
+      </Next.Link>
+      <p className=Styles.docsLabel> {React.string("Documentation")} </p>
+    </div>
+<span className=Styles.statusBadgeContainer>
+      <h4 className=Styles.statusBadge__header>
+        {React.string("Testnet Status: ")}
+      </h4>
+      <span className=Styles.statusBadge>
+        <StatusBadge service=`Network />
+      </span>
+    </span>
   </header>;
 };

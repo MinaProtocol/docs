@@ -20,7 +20,6 @@
     "bs-css": "^9.0.1",
     "bs-fetch": "^0.5.0",
     "bsc-stdlib-polyfill": "Schmavery/bsc-stdlib-polyfill",
-    "contentful": "^7.10.0",
     "emotion-server": "^10.0.17",
     "isomorphic-unfetch": "^3.0.0",
     "moment": "^2.26.0",
