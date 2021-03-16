@@ -4,11 +4,11 @@ export default Page({ title: "Connect to the Network" });
 
 # Connect to the Network
 
-In this section, we'll connect to the `FinalFinal2` network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
+In this section, we'll connect to the `Mainnet` network and send our first transaction. Let's first start up the node so that we can begin issuing commands.
 
 ## Update your software
 
-The first step in connecting to `FinalFinal2` is installing the latest daemon version. Follow the instructions for your operating system below.
+The first step in connecting to `Mainnet` is installing the latest daemon version. Follow the instructions for your operating system below.
 
 ### Ubuntu 18.04 / Debian 9
 
@@ -18,10 +18,10 @@ First remove any previously installed version of the daemon to prevent any error
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.2-06f3c5c
+sudo apt-get install -y curl unzip mina-mainnet=1.1.3-48401e9
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit 06f3c5cdeb635b2564fcb2edac4f10db85b93c36 on branch master`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit 48401e92d94948c066c03ca76326c065e5cbfc92 on branch master`.
 
 ## Start up a node
 
@@ -29,7 +29,7 @@ Check that daemon installed correctly by running `mina version`. The output shou
 
 You can find the current status of the network and related services here: [status.minaprotocol.com](https://status.minaprotocol.com)
 
-Testnet Status: <StatusBadge service="Network" />
+Network Status: <StatusBadge service="Network" />
 
 </Alert>
 
@@ -42,7 +42,7 @@ Note: If you are using the Hetzner hosting provider, we are currently experienci
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/finalfinal2_seeds.txt
+mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
 The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
@@ -133,13 +133,13 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:1.0.2-06f3c5c \
+minaprotocol/mina-daemon-baked:1.1.3-48401e9 \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \
 --file-log-level Debug \
 --log-level Info \
---peer-list-url https://storage.googleapis.com/seed-lists/finalfinal2_seeds.txt
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
 Run `docker logs -f mina` to follow the logs, and if it crashes save the log output to a file with `docker logs mina > mina-log.txt` and post the output to the #mentor-nodes channel or attach the full ~/.mina-config/mina.log to a github issue and link the issue in discord.
@@ -293,7 +293,7 @@ Once you feel comfortable with the basics of creating an address, and sending & 
 
 ## Stepping up your game
 
-Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon in [Staking & Delegating](/docs/staking).
+Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon in [Staking & Delegating](/docs/staking). And if you want to earn more tokens, check out the [Foundation Delegation Program](/docs/advanced/foundation-delegation-program).
 
 <span id="disclaimer">
 

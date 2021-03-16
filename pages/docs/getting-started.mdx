@@ -9,7 +9,7 @@ Welcome to Mina Genesis Program applicants! This section will walk you through t
 <Alert>
 
 
-This documentation is for the **beta** release. The commands and APIs may change before the initial release. Last updated for version `0.2.0`.
+This documentation is for the **Mainnet** release.
 
 Testnet status: <StatusBadge service="Network" />
 
@@ -61,10 +61,10 @@ Add the Mina Debian repo and install:
 ```
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.2-06f3c5c
+sudo apt-get install -y curl unzip mina-mainnet=1.1.3-48401e9
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit 06f3c5cdeb635b2564fcb2edac4f10db85b93c36 on branch master`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit 48401e92d94948c066c03ca76326c065e5cbfc92 on branch master`.
 
 ### Windows
 
