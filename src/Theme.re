@@ -439,7 +439,7 @@ global(
   [boxSizing(`borderBox)],
 );
 
-global("body", [unsafe("minWidth", "fit-content")]);
+global("body", [margin(px(0)), unsafe("minWidth", "fit-content")]);
 
 global("html", [unsafe("scrollPaddingTop", "6rem")]);
 

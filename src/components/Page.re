@@ -71,10 +71,6 @@ let make =
         {React.string("img:-moz-loading { visibility: hidden; }")}
       </style>
     </Next.Head>
-    <AnnouncementBanner
-      dark=darkTheme copy=announcementCTACopy url=announcementFormUrl>
-      {React.string(announcementCopy)}
-    </AnnouncementBanner>
     <Nav dark=darkTheme />
     <main> children </main>
     <CookieWarning />
