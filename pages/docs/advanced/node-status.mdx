@@ -67,13 +67,13 @@ First ensure the daemon is running on the same machine with the flag `--limited-
 To (optionally) enable the sidecar service to run on reboot you can use:
 
 ```
-systemctl enable mina-bp-stats-sidecar
+sudo systemctl enable mina-bp-stats-sidecar
 ```
 
 Then to manually start the sidecar service, use this command:
 
 ```
-service mina-bp-stats-sidecar start
+sudo service mina-bp-stats-sidecar start
 ```
 
 From there you can check that it's running and see the most recent logs with `service mina-bp-stats-sidecar status`
@@ -92,7 +92,7 @@ First you will need to create a network for the daemon and sidecar containers:
 docker network create mina-network
 ```
 
-Next you will need to start the daemon with `--network mina-network` passed to docker and a new flag `--limited-graphql-port 3095` passed to the daemon.
+Next you will need to start the daemon with `--network mina-network` passed to docker, and some new flags `--open-limited-graphql-port --limited-graphql-port 3095` passed to the daemon.
 
 To start the sidecar container, simply use the following command:
 
