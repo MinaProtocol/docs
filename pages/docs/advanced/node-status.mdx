@@ -97,7 +97,11 @@ Next you will need to start the daemon with the `--network mina-network` and `--
 To start the sidecar container, simply use the following command:
 
 ```
-docker run --name mina-sidecar --rm -it -v $(pwd)/mina-sidecar.json:/etc/mina-sidecar.json minaprotocol/mina-bp-stats-sidecar:latest
+docker run --rm -it \
+--name mina-sidecar \
+--network mina-network \
+-v $(pwd)/mina-sidecar.json:/etc/mina-sidecar.json \
+minaprotocol/mina-bp-stats-sidecar:latest
 ```
 
 You can check the logs using the `docker logs` command:
