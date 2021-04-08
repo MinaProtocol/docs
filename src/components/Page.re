@@ -20,10 +20,9 @@ let make =
     (
       ~title,
       ~description=siteDescription,
-      ~image="/static/img/mina_facebook_OG.jpg",
+      ~image="/static/img/favicon/favicon-96x96.png",
       ~route=?,
       ~children,
-      ~footerColor=Theme.Colors.white,
       ~darkTheme=false,
       ~showFooter=true,
       ~announcementCopy="Community Leaderboard Challenges are live!",

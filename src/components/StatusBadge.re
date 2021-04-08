@@ -66,7 +66,13 @@ type response = {components: array(component)};
 
 external parseStatusResponse: Js.Json.t => response = "%identity";
 
-type service = [ | `Summary | `Network | `Faucet | `EchoBot | `GraphQLProxy];
+type service = [
+  | `Summary
+  | `Network
+  | `ReleaseCandidate
+  | `Devnet
+  | `SeedNodes
+];
 
 type status =
   | Unknown
@@ -91,10 +97,9 @@ let parseStatus = status =>
 let parseServiceName = name =>
   switch (name) {
   | "Network" => `Network
-  | "Faucet" => `Faucet
-  | "Echo Bot" => `EchoBot
-  | "GraphQL Proxy" => `GraphQLProxy
-  | "Mina Testnet"
+  | "Release Candidate" => `ReleaseCandidate
+  | "Devnet" => `Devnet
+  | "Seed Nodes" => `SeedNodes
   | "Summary" => `Summary
   | s =>
     Js.Console.warn("Unknown status service `" ++ s ++ "`");
@@ -164,7 +169,6 @@ module Inner = {
         <span className=Styles.icon> <Icon kind=Icon.ExternalLink /> </span>
       </span>
     </a>;
-    //Icons.externalLink
   };
 };
 
