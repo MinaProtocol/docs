@@ -12,7 +12,7 @@ module Styles = {
         important(backgroundSize(`cover)),
         dark
           ? backgroundColor(black)
-          : backgroundImage(`url("/static/img/AnnouncementBanner.png")),
+          : backgroundImage(`url("/static/img/backgrounds/AnnouncementBanner.png")),
         padding2(~v=`rem(0.5), ~h=`rem(1.5)),
         media(
           Theme.MediaQuery.tablet,

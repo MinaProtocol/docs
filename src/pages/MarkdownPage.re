@@ -42,7 +42,7 @@ module Style = {
       height(`percent(100.)),
       width(`percent(100.)),
       important(backgroundSize(`cover)),
-      backgroundImage(`url("/static/img/backgrounds/BlogBackground.jpg")),
+      backgroundImage(`url("/static/img/backgrounds/DocsBackground.jpg")),
     ]);
 };
 

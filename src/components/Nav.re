@@ -171,7 +171,7 @@ module Styles = {
       style([opacity(0.7), fontSize(`em(2.)), marginLeft(`em(0.5))]),
     ]);
 
-let statusBadgeContainer =
+  let statusBadgeContainer =
     merge([
       Theme.Type.label,
       style([
@@ -185,7 +185,6 @@ let statusBadgeContainer =
         ),
       ]),
     ]);
-
 
   let statusBadge__header =
     merge([
@@ -256,12 +255,9 @@ module NavGroupLink = {
   };
 };
 
-
-
-
 [@react.component]
 let make = (~dark=false) => {
-  let (width, setWidth) = React.useState(() => 0);
+  let (_, setWidth) = React.useState(() => 0);
 
   React.useEffect0(() => {
     let handleSize = () => {
@@ -277,22 +273,22 @@ let make = (~dark=false) => {
       <Next.Link href="/">
         {dark
            ? <img
-               src="/static/img/mina-wordmark-dark.svg"
+               src="/static/img/svg/mina-wordmark-dark.svg"
                className=Styles.logo
              />
            : <img
-               src="/static/img/mina-wordmark-light.svg"
+               src="/static/img/svg/mina-wordmark-light.svg"
                className=Styles.logo
              />}
       </Next.Link>
       <p className=Styles.docsLabel> {React.string("Documentation")} </p>
     </div>
-<span className=Styles.statusBadgeContainer>
+    <span className=Styles.statusBadgeContainer>
       <h4 className=Styles.statusBadge__header>
-        {React.string("Testnet Status: ")}
+        {React.string("Devnet Status: ")}
       </h4>
       <span className=Styles.statusBadge>
-        <StatusBadge service=`Network />
+        <StatusBadge service=`Devnet />
       </span>
     </span>
   </header>;
