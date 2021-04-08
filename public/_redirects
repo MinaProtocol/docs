@@ -1,3 +1,21 @@
 /docs/my-first-transaction   /docs/connecting
 /wolf                        /?utm_source=podcast&utm_campaign=wolf
-/docs/*                      /:splat
+/docs/*                      /en/:splat
+
+/                            /en
+/faq                         /en/faq
+/getting-started             /en/getting-started
+/snapp-credit                /en/snapp-credit
+/troubleshooting             /en/troubleshooting
+/advanced/*                  /en/advanced/:splat
+/architecture/*              /en/architecture/:splat
+/developers/*                /en/developers/:spalt
+/snarks/*                    /en/snarks/:splat
+/using-mina/*                /en/using-mina/:splat
+
+/node-operator               /en/using-mina/staking
+/contributing                /en/developers/contributing
+/keypair                     /en/using-mina/keypair
+/connecting                  /en/using-mina/connecting
+/staking                     /en/using-mina/staking
+/cli-reference               /en/using-mina-cli-reference
