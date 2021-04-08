@@ -108,7 +108,7 @@ let make = (~buttonText="Submit", ~formId) => {
        ? <div>
            <h2> {React.string("Thanks for signing up!")} </h2>
            <div className=Styles.successMessage>
-             <img src="/static/img/TestWorldConfirmation.png" />
+             <img src="/static/img/component-images/confirmation.png" />
              <span className=Styles.successText>
                {React.string("Good to go!")}
              </span>

@@ -7,14 +7,14 @@ module Styles = {
       bottom(`zero),
       height(`percent(100.)),
       padding2(~v=`rem(4.), ~h=`rem(1.25)),
-      backgroundImage(`url("/static/img/Medium.jpg")),
+      backgroundImage(`url("/static/img/backgrounds/FooterMedium.jpg")),
       backgroundSize(`cover),
       media(
         Theme.MediaQuery.tablet,
         [
           padding2(~v=`rem(4.), ~h=`rem(2.68)),
           height(`percent(100.)),
-          backgroundImage(`url("/static/img/Medium.jpg")),
+          backgroundImage(`url("/static/img/backgrounds/FooterMedium.jpg")),
         ],
       ),
       media(
@@ -22,7 +22,7 @@ module Styles = {
         [
           padding2(~v=`rem(5.5), ~h=`rem(9.5)),
           height(`auto),
-          backgroundImage(`url("/static/img/Large.jpg")),
+          backgroundImage(`url("/static/img/backgrounds/FooterLarge.jpg")),
         ],
       ),
     ]);
@@ -155,7 +155,7 @@ module LeftSide = {
   let make = () => {
     <div className=Styles.leftSide>
       <img
-        src="/static/svg/footerLogo.svg"
+        src="/static/img/svg/mina-wordmark-dark.svg"
         alt="Mina Logo"
         className=Styles.logo
       />

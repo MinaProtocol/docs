@@ -34,7 +34,7 @@ module Styles = {
       style([
         unsafe(
           "background",
-          "url(/static/img/MinaSepctrumSecondary.png) right no-repeat, linear-gradient(0deg, #2D2D2D, #2D2D2D), #FFFFFF",
+          "url(/static/img/component-images/MinaSepctrumSecondary.png) right no-repeat, linear-gradient(0deg, #2D2D2D, #2D2D2D), #FFFFFF",
         ),
       ]),
     ]);
@@ -155,7 +155,7 @@ module Section = {
           <span className=Styles.item> {React.string(title)} </span>
           <div className=Styles.chevronWrap>
             <img
-              src="/static/img/ChevronRight.svg"
+              src="/static/img/svg/ChevronRight.svg"
               width="16"
               height="16"
               className={expanded ? Styles.flip : ""}

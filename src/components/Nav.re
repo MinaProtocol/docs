@@ -277,11 +277,11 @@ let make = (~dark=false) => {
       <Next.Link href="/">
         {dark
            ? <img
-               src="/static/img/mina-wordmark-dark.svg"
+               src="/static/img/svg/mina-wordmark-dark.svg"
                className=Styles.logo
              />
            : <img
-               src="/static/img/mina-wordmark-light.svg"
+               src="/static/img/svg/mina-wordmark-light.svg"
                className=Styles.logo
              />}
       </Next.Link>

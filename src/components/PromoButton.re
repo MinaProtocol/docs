@@ -37,8 +37,8 @@ module Styles = {
           background(
             {
               dark
-                ? `url("/static/ButtonHoverDark.png")
-                : `url("/static/ButtonHoverLight.png");
+                ? `url("/static/img/component-images/ButtonHoverDark.png")
+                : `url("/static/img/component-images/ButtonHoverLight.png");
             },
           ),
         ]),

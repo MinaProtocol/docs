@@ -46,19 +46,19 @@ let make =
       <link
         rel="icon"
         type_="image/png"
-        href="/static/favicon-96x96.png"
+        href="/static/img/favicon/favicon-96x96.png"
         sizes="96x96"
       />
       <link
         rel="icon"
         type_="image/png"
-        href="/static/favicon-32x32.png"
+        href="/static/img/favicon/favicon-32x32.png"
         sizes="32x32"
       />
       <link
         rel="icon"
         type_="image/png"
-        href="/static/favicon-16x16.png"
+        href="/static/img/favicon/favicon-16x16.png"
         sizes="16x16"
       />
       <link href="/static/css/monument-grotesk.css" rel="stylesheet" />

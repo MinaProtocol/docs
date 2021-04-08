@@ -28,7 +28,7 @@ module ButtonStyles = {
           color(white),
           backgrounds([
             {
-              `url("/static/ButtonHoverLight.png");
+              `url("/static/img/component-images/ButtonHoverLight.png");
             },
             black,
           ]),
