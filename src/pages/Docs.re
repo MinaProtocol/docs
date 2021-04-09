@@ -82,11 +82,20 @@ module Style = {
 module EditLink = {
   [@react.component]
   let make = (~route) => {
+    /*
+       Check if we are on the `Mina Overview` page. If so, we specify the index.mdx file.
+       Otherwise the route binding will hold the correct .mdx to edit.
+     */
+    let href =
+      switch (route) {
+      | "/en" => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
+      | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
+      };
     <a
       name="Edit Link"
       target="_blank"
       rel="noopener"
-      href={Constants.minaDocsEditLink ++ route ++ ".mdx"}
+      href
       className=Style.editLink>
       <span className=Theme.Type.link> {React.string("Edit ")} </span>
       <span className=Style.editLink__icon>
