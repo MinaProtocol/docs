@@ -5,7 +5,7 @@ export default Page({ title: "Mina SNAPP Credit App" });
 
 The Mina SNAPP Credit App is here! Using the Mina SNAPP Credit App, you will be able to create a SNARK proof that verifies to [Teller Finance](https://www.teller.finance/) that you have a credit score above the 700 credit threshold.
 
-We have developed an [Electron](https://www.electronjs.org/) application that is packaged for Ubuntu, macOS, and even WSL2. To start using the application, please make sure you have a verified [Credit Karma account](https://www.creditkarma.com/) (both .COM and .CA domains are supported). This application will only verify accounts for Credit Karma, any other credit providers are not supported currently.
+An [Electron](https://www.electronjs.org/) application has been developed that is packaged for Ubuntu, macOS, and even WSL2. To start using the application, please make sure you have a verified [Credit Karma account](https://www.creditkarma.com/) (both .COM and .CA domains are supported). This application will only verify accounts for Credit Karma, any other credit providers are not supported currently.
 
 ## Installing the Mina SNAPP Credit App
 
@@ -62,7 +62,7 @@ sudo apt install -y /path/to/snapp-credit-check-ubuntu20.04.deb
 
 ## Usage
 
-To get started using the Mina SNAPP Credit app, you will need an existing Credit Karma account. We currently support both the USA and Canadian versions of the website.
+To get started using the Mina SNAPP Credit app, you will need an existing Credit Karma account. Both the USA and Canadian versions of the website are supported.
 
 Let's create a SNARK proof to prove we have a credit score above 700 according to Credit Karma.
 
@@ -70,7 +70,7 @@ Let's create a SNARK proof to prove we have a credit score above 700 according t
 
 <img
   alt="Mina App Info Filled"
-  src="/static/img/mina_snapp/info_filled.png"
+  src="/static/img/docs-images/snapp-credit/info_filled.png"
   width="45%"
 />
 
@@ -80,7 +80,7 @@ Let's create a SNARK proof to prove we have a credit score above 700 according t
 
 <img
   alt="Mina App Logging In"
-  src="/static/img/mina_snapp/logging_in.png"
+  src="/static/img/docs-images/snapp-credit/logging_in.png"
   width="45%"
 />
 
@@ -89,7 +89,7 @@ Let's create a SNARK proof to prove we have a credit score above 700 according t
 
 <img
   alt="Mina App SNAPP proof"
-  src="/static/img/mina_snapp/snapp_proof.png"
+  src="/static/img/docs-images/snapp-credit/snapp_proof.png"
   width="45%"
 />
 
@@ -98,36 +98,124 @@ to Teller to validate an unsecured loan request.
 
 <img
   alt="Mina App SNAPP success"
-  src="/static/img/mina_snapp/snapp_success.png"
+  src="/static/img/docs-images/snapp-credit/snapp_success.png"
   width="45%"
 />
 
 ## Submitting to Teller
 
-Once you have created your SNARK proof and have saved it to your local machine, it is now time to submit this file to Teller Finance to issue a unsecured loan request. Start by visiting [Teller's website](https://www.teller.finance/) and signing in.
-Once signed in, open the Mina app as shown below and click the `Upload Proof` button.
+To get started with submitting your SNARK proof, please visit [Teller's website](https://mina.teller.finance/) to get started. You will need a wallet connected to your browser, we recommend [Metamask](https://metamask.io/).
+
+Once you have visited Teller's website, select a wallet to connect with. Make sure that you are currently logged into your wallet to allow Teller to connect.
+
+Once you have your wallet set up, follow the instructions below to get started with submitting your SNARK proof:
+
+1. Visit [Teller's website](https://mina.teller.finance/)
 
 <img
   alt="Mina Teller Modal"
-  src="/static/img/mina_snapp/mina_modal.png"
+  src="/static/img/docs-images/snapp-credit/teller_landing.png"
   width="45%"
 />
 
-Select your proof file and then click `Submit`. This will submit the SNARK proof to the Mina Snappnet chain and Teller will await it's confirmation. This process of verifying a SNARK proof on the chain takes a few blocks at most so please be patient as you wait for confirmation.
+2. Click on `Borrow` in the navigation menu and click on `Unsecured loan`
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/unsecured_loan.png"
+  width="45%"
+/>
+
+3. Read the terms and click `Next`
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/unsecured_loan_next.png"
+  width="45%"
+/>
+
+4. Specify the loan details you would like to agree too. In the image below, we have specified a loan of `1 DAI` on a loan term of 1 day. Click on the `Connect` button beside the `Credit Score` field to submit your SNARK proof
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/borrow.png"
+  width="45%"
+/>
+
+5. Sign the incoming request from Teller in your specified wallet - Below shows how to do it with `Metamask`
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/teller_metamask_sign.png"
+  width="45%"
+/>
+
+6. The Mina modal will open. Click on `Upload Proof` and select the SNAPP proof file that was created
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/mina_modal.png"
+  width="45%"
+/>
+
+7. Click `Submit`. Make sure to click `Submit` once as clicking it multiple times will cause an error. Please be patient if it is hanging.
+
+This will submit the SNARK proof to the Mina Snappnet chain and Teller will await it's confirmation. This process of verifying a SNARK proof on the chain takes 3-10 min so please be patient as you wait for confirmation
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/request_terms_pending.png"
+  width="45%"
+/>
+
+8. Once the proof is submitted, review your loan terms and click `Accept Terms` to make a loan request
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/accept_terms.png"
+  width="45%"
+/>
+
+9. Review your loan terms once more and click `Request Loan`
+
+<img
+  alt="Mina Teller Modal"
+  src="/static/img/docs-images/snapp-credit/finalize_loan.png"
+  width="45%"
+/>
 
 ## FAQ
 
-- I'm getting `Login unsuccessful. Please check your credentials or restart the application and try again`, what does this mean?
+1. I'm getting `Login unsuccessful. Please check your credentials or restart the application and try again`, what does this mean?
 
 Usually this means that the Credit Karma credentials were not correct and the application could not sign into Credit Karma. Check your credentials and try again.
 
 If your credentials are correct and you are still getting this error message, it is likely that the Mina application is having trouble opening up an instance of Credit Karma. If this is the case, try closing the application and removing any running processes of the Mina app.
 
-- I'm getting `Credit score is less than 700, cannot produce SNAPP proof to: /home/.../snapp-credit-score`, what does this mean?
+2. I'm getting `Credit score is less than 700, cannot produce SNAPP proof to: /.../snapp-credit-score`, what does this mean?
 
 This means that the users credit score was below the 700 threshold range and so a proof will not be generated.
 
-- I'm getting `Failed to generate proof to: /.../snapp-credit-score`, what does this mean?
+3. I'm getting `Failed to generate proof to: /.../snapp-credit-score`, what does this mean?
 
 This error indicates that Mina app failed to generate a SNARK proof.
-If this error occurs, please file an [issue](https://github.com/MinaProtocol/mina/issues) on our Github with a title including `SNAPP Credit App` and your operating system information.
+
+If this error occurs, please file an [issue](https://github.com/MinaProtocol/mina/issues) on Mina's Github with a title including `SNAPP Credit App` and your operating system information.
+
+4. Do I need Mina to create a SNAPP proof for Teller?
+
+No, you do not need Mina to create a SNAPP proof.
+
+We have set up a network called `Snappnet` that is architected in a way where a few specified accounts pay for all the fees. To create a SNAPP proof, you just need your Ethereum address and valid Credit Karma credentials.
+
+5. Are the proofs that are submitted valid?
+
+The Mina `Snappnet` network is not Mina mainnet and is instead acting as a testnet. Teller Finance are using the [Rinkeby Testnet](https://www.rinkeby.io/) to conduct all the loans on their end so this is not committed to any current mainnet.
+
+6. When will I be able to particpate in `Snappnet`?
+
+Currently, only Teller connected to `Snappnet`. We will enable SNAPP's at a later time for everybody to connect and participate.
+
+7. My SNAPP proof is taking a long time to be verified on Teller, what is the issue?
+
+If you notice that your proof valdiation is taking longer than 15 min, please let us know in our Discord channel.
