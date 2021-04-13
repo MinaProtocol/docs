@@ -121,7 +121,7 @@ let make = () => {
       </span>
       <span>
         <span> {React.string(" Read our")} </span>
-        <Next.Link href="/privacy">
+        <Next.Link href={Constants.minaProtocolUrl ++ "privacy"}>
           <span className=Styles.privacyText>
             {React.string(" privacy policy ")}
           </span>

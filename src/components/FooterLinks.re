@@ -52,31 +52,32 @@ module Styles = {
 // TODO: Add links to footer
 [@react.component]
 let make = () => {
+  open Constants;
   <div className=Styles.linksGrid>
     <div className=Styles.linksGroup>
       <h4 className=Styles.linksHeader> {React.string("Get Started")} </h4>
-      <Next.Link href="/docs/getting-started">
+      <Next.Link href={minaDocsUrl ++ "getting-started"}>
         <a className=Styles.linkStyle> {React.string("Documentation")} </a>
       </Next.Link>
-      <Next.Link href="/node-operators">
+      <Next.Link href={minaProtocolUrl ++ "node-operators"}>
         <a className=Styles.linkStyle> {React.string("Run a Node")} </a>
       </Next.Link>
-      <Next.Link href="/docs">
+      <Next.Link href=minaDocsUrl>
         <a className=Styles.linkStyle> {React.string("Build on Mina")} </a>
       </Next.Link>
-      <Next.Link href="/genesis">
+      <Next.Link href={minaProtocolUrl ++ "genesis"}>
         <a className=Styles.linkStyle> {React.string("Join Genesis")} </a>
       </Next.Link>
-      <Next.Link href="/grants">
+      <Next.Link href={minaProtocolUrl ++ "grants"}>
         <a className=Styles.linkStyle> {React.string("Apply for Grants")} </a>
       </Next.Link>
     </div>
     <div className=Styles.linksGroup>
       <h4 className=Styles.linksHeader> {React.string("Resources")} </h4>
-      <Next.Link href="/tech">
+      <Next.Link href={minaProtocolUrl ++ "tech"}>
         <a className=Styles.linkStyle> {React.string("About the Tech")} </a>
       </Next.Link>
-      <Next.Link href="/get-started#knowledge-base">
+      <Next.Link href={minaProtocolUrl ++ "get-started#knowledge-base"}>
         <a className=Styles.linkStyle> {React.string("Knowledge Base")} </a>
       </Next.Link>
       <Next.Link href="/static/pdf/technicalWhitepaper.pdf">
@@ -89,7 +90,7 @@ let make = () => {
           {React.string("Economics Whitepaper")}
         </a>
       </Next.Link>
-      <Next.Link href="/media">
+      <Next.Link href={minaProtocolUrl ++ "media"}>
         <a className=Styles.linkStyle> {React.string("Media")} </a>
       </Next.Link>
     </div>
@@ -103,19 +104,19 @@ let make = () => {
     />
     <div className=Styles.linksGroup>
       <h4 className=Styles.linksHeader> {React.string("Community")} </h4>
-      <Next.Link href="/community">
+      <Next.Link href={minaProtocolUrl ++ "community"}>
         <a className=Styles.linkStyle> {React.string("Welcome")} </a>
       </Next.Link>
-      <Next.Link href="/genesis">
+      <Next.Link href={minaProtocolUrl ++ "genesis"}>
         <a className=Styles.linkStyle> {React.string("Genesis Program")} </a>
       </Next.Link>
-      <Next.Link href="/leaderboard">
+      <Next.Link href={minaProtocolUrl ++ "leaderboard"}>
         <a className=Styles.linkStyle> {React.string("Leaderboard")} </a>
       </Next.Link>
-      <Next.Link href="/grants">
+      <Next.Link href={minaProtocolUrl ++ "grants"}>
         <a className=Styles.linkStyle> {React.string("Grant Program")} </a>
       </Next.Link>
-      <Next.Link href="/work-with-mina">
+      <Next.Link href={minaProtocolUrl ++ "work-with-mina"}>
         <a className=Styles.linkStyle> {React.string("Careers")} </a>
       </Next.Link>
     </div>

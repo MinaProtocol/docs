@@ -7,6 +7,7 @@ let genesisGrantApplication = "https://share.hsforms.com/1y-QXRVSgQJ6nFnzbbYv_Pg
 let projectGrantApplication = "https://forms.gle/ekPwDKE1BArTqVCu9";
 
 let minaProtocolUrl = "https://minaprotocol.com/";
+let minaDocsUrl = "https://docs.minaprotocol.com/"
 let o1LabsUrl = "https://o1labs.org/";
 let githubUrl = "https://github.com/";
 let twitterUrl = "https://twitter.com/";
