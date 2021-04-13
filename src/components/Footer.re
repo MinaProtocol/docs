@@ -248,12 +248,12 @@ module Subfooter = {
         <a href=Constants.minaCodeOfConduct className=Styles.smallLinks>
           {React.string("Code of Conduct")}
         </a>
-        <Next.Link href="/privacy">
+        <Next.Link href={Constants.minaProtocolUrl ++ "privacy"}>
           <a className=Styles.smallLinks>
             {React.string("Privacy Policy")}
           </a>
         </Next.Link>
-        <Next.Link href="/tos">
+        <Next.Link href={Constants.minaProtocolUrl ++ "tos"}>
           <a className=Styles.smallLinks>
             {React.string("Terms of Service")}
           </a>
