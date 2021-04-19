@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export default function Index() {
   useEffect(() => {
-    const language = navigator.language.slice(0, 2);
+    const language = "en" // Only show English docs
     document.location.href = '/' + language;
   });
 
