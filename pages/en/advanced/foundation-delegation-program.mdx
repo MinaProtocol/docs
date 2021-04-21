@@ -43,18 +43,20 @@ The block producer can keep all of the transaction fees or divide them equally a
 Consider the following:
 
 - Account A has 2 million **locked** MINA
-- Account B and C are controlled by the Mina Foundation and have 3 million **locked** MINA each. Both accounts are delegating to Account A.
-- Account D is a controlled by a third party and has 2 million MINA fully **unlocked**. This account also delegates to Account A.
+- Account B is controlled by the Mina Foundation and has 6 million **locked** MINA.
+- Account C is a controlled by a third party and has 2 million MINA fully **unlocked**. This account also delegates to Account A.
 
-In this example, the total amount of stake for Account A is 10 million calculated by adding up the balances from all the accounts. Note that since Account D has all its tokens unlocked, any block rewards won when `winnerAccount` equals Account D will be super-charged. 
+In this example, the total amount of stake for Account A is 10 million calculated by adding up the balances from all the accounts. Note that since Account C has all its tokens unlocked, any block rewards won when `winnerAccount` equals Account C will be super-charged. 
 
 Now let's consider Epoch 5. The share of the stake from the Foundation is `6 million MINA / 10 million MINA = 0.6` or 60%. Three blocks are produced this epoch that end up on the canonical chain.
 
-The first block has a `winnerAccount` equal to Account A. The total Foundation payout for this block is calculated as `(0.6 * 0.95) * 720 MINA = 410.4 MINA`. In the second block the `winnerAccount` is Account B — the total Foundation payout is again calculated as `(0.6 * 0.95) * 720 MINA = 410.4 MINA`. The third and final block has the `winnerAccount` as Account D. Now the actual coinbase is super-charged for this block and will be 1440 MINA, but despite this the Foundation rewards are still `410.4 MINA` since they are calculated using the non-supercharged coinbase. Thus the total payout to the Foundation from all blocks is `410.4 MINA * 3 blocks = 1,231.2 MINA` .
+The first block has a `winnerAccount` equal to Account A. The total Foundation payout for this block is calculated as `(0.6 * 0.95) * 720 MINA = 410.4 MINA`. In the second block the `winnerAccount` is Account B — the total Foundation payout is again calculated as `(0.6 * 0.95) * 720 MINA = 410.4 MINA`. The third and final block has the `winnerAccount` as Account C. Now the actual coinbase is super-charged for this block and will be 1440 MINA, but despite this the Foundation rewards are still `410.4 MINA` since they are calculated using the non-supercharged coinbase. Thus the total payout to the Foundation from all blocks is `410.4 MINA * 3 blocks = 1,231.2 MINA` .
 
-Finally, before slot 3,500 of the next epoch, two payments are made from any account that this block producer controls to each of the Foundation accounts — remember to follow the rules outlined in the "Payout Attribution" section above -- in this case we will send the transaction from Account A's coinbase receiver. Each payment is `1231.2 MINA / 2 = 615.6 MINA` tokens. Note that the transaction fees for these two transactions are paid for by the block producer.
+Finally, before slot 3,500 of the next epoch, a payment is made from any account that this block producer controls to each of the Foundation accounts — remember to follow the rules outlined in the "Payout Attribution" section above -- in this case we will send the transaction from Account A's coinbase receiver. The payment is `1231.2 MINA` tokens. Note that the transaction fees for these two transactions are paid for by the block producer.
 
-The token provider, either the Foundation or O(1) Labs respectively, will check to see that you have sent back with this mechanism by the middle of the next epoch as described above. Failing to do so, can result in ineligibility for receiving delegations.
+This process is to be repeated for each of the token provider accounts that delegate to you. The token provider, either the Foundation or O(1) Labs respectively, will check to see that you have sent back with this mechanism by the middle of the next epoch as described above. Failing to do so, can result in ineligibility for receiving delegations.
+
+Please repeat the process independently for each delegation, do not sum the results and divide by the number of total delegations.
 
 ## Avoiding Rounding Issues
 
