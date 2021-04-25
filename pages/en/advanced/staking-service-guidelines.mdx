@@ -50,7 +50,7 @@ By default, ledgers are exported as json data. See `mina ledger export -help` fo
 }
 ```
 
-For a running staking service, you are interested in the accounts which you control and the accounts which are staking to accounts you control. As an example, if we only had one account in our staking service, we could grab all the accounts we are intersted in for a ledger using a command like:
+For a running staking service, you are interested in the accounts which you control and the accounts which are staking to accounts you control. As an example, if we only had one account in our staking service, we could grab all the accounts we are interested in for a ledger using a command like:
 
 ```sh
 mina ledger export staking-epoch-ledger | jq "$(cat <<EOF
