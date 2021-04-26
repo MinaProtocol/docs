@@ -283,13 +283,13 @@ let make = (~dark=false) => {
       </Next.Link>
       <p className=Styles.docsLabel> {React.string("Documentation")} </p>
     </div>
-    <span className=Styles.statusBadgeContainer>
+    /*<span className=Styles.statusBadgeContainer>
       <h4 className=Styles.statusBadge__header>
         {React.string("Devnet Status: ")}
       </h4>
       <span className=Styles.statusBadge>
         <StatusBadge service=`Devnet />
       </span>
-    </span>
+    </span>*/
   </header>;
 };
