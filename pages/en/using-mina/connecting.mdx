@@ -124,6 +124,8 @@ chmod 600 ~/keys/my-wallet
 mkdir ~/.mina-config
 ```
 
+Note: if using Docker Desktop, you may need to configure resource constraints in preferences to use a larger number of CPUs and/or amount of memory. Docker Desktop by default uses half of the number of CPUs as the host machine and `2` GB of runtime memory, which does not meet the resource requirements for running a block producer (see [Getting Started](https://docs.minaprotocol.com/en/getting-started)).
+
 Now simply run the image with your keys and ~/.mina-config mounted:
 
 ```
