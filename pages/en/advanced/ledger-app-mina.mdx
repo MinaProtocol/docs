@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Ledger App Mina" });
 
 # Ledger Hardware Wallet
@@ -440,7 +441,7 @@ Your address 42 will be different than the one above.
 
 ## Validating your private key
 
-In order to validate your private key. make sure you have updated to the latest version of the `mina` damemon. Installation instructions can be found on the [connecting](/docs/using-mina/connecting) page.
+In order to validate your private key. make sure you have updated to the latest version of the `mina` damemon. Installation instructions can be found on the <DocLink copy="connecting" url="/using-mina/connecting" /> page.
 
 Now that you've created your key -- you'll want to validate that it works. For this keypair, it suffices to verify that signed transactions coming out of the ledger are parsed correctly and that the signature verifies on Mina.
 
@@ -513,7 +514,7 @@ The output will be a JSON blob that you will need for the next section. It shoul
 
 This step currently requires a running daemon that's connected to the network, but you can also submit this transaction to any third-party gateway.
 
-1. Run a daemon on [Devnet](/docs/advanced/connecting-devnet).
+1. Run a daemon on <DocLink copy="Devnet" url="/advanced/connecting-devnet" />.
 
 2. Execute the following `send-rosetta-transactions` command.
 

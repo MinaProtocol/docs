@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Hardware Wallet" });
 
 # Hardware Wallet
@@ -65,7 +66,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0004", MODE="0660
 
 Either download the precompiled app binary from
 [here](https://github.com/MinaProtocol/ledger-mina-app/releases/tag/v0.1.0), or follow the instructions
-at the end of this document to [build the app from source](/docs/hardware-wallet#building-from-source).
+at the end of this document to <DocLink copy="build the app from source" url="/hardware-wallet#building-from-source" />.
 
 To load the precompiled app onto the Ledger device, after downloading `ledger-precompile.zip`
 from the link above, navigate to the directory that `ledger-precompile.zip` is in, and run the following:
@@ -129,7 +130,7 @@ properly by trying `echo $MINA_PUBLIC_KEY`.
 ## Make a payment
 
 You can use the same commands to send payments found in
-[the docs](/docs/my-first-transaction/).
+<DocLink copy="the docs" url="/my-first-transaction" />.
 
 There are 2 differences:
 

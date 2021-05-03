@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Block Producer Sidecar" });
 
 # Block Producer Sidecar
@@ -57,7 +58,7 @@ We will pass this file into the Docker container in the next step.
 
 ## Usage
 
-This sidecar will need to communicate with a running daemon, so you will first need to start your daemon. You will need to run the daemon with the flag `--limited-graphql-port 3095` in order for the sidecar to be able to communicate with the daemon. Further instructions can be found on the [connecting page](/docs/using-mina/connecting).
+This sidecar will need to communicate with a running daemon, so you will first need to start your daemon. You will need to run the daemon with the flag `--limited-graphql-port 3095` in order for the sidecar to be able to communicate with the daemon. Further instructions can be found on the <DocLink copy="connecting page" url="/using-mina/connecting" />.
 
 ### Debian / Ubuntu
 

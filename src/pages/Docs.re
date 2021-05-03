@@ -112,12 +112,11 @@ let make = (~metadata, ~children) => {
   let router = Next.Router.useRouter();
   let currentLanguage = Context.LanguageContext.useLanguageContext();
   let lang = Context.LanguageContext.stringOfLanguage(currentLanguage);
-
   let currentUrl = "/" ++ lang;
 
   let currentSlug =
     if (router.route == currentUrl) {
-      currentUrl;
+      router.route;
     } else {
       Js.String.replaceByRe(
         Js.Re.fromString("^/" ++ lang ++ "/?"),

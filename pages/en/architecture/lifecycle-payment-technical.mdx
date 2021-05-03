@@ -1,9 +1,10 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Lifecycle of a Payment Technical Guide" });
 
 # The Lifecycle of a Payment - Technical Guide
 
-In Mina, payments pass through several steps before they are considered verified and complete. This document is meant to walk through what happens to a single payment as it works its way through the codebase. For a more high-level overview aimed at users who want to understand how payments work on a macroscopic level, check out the [lifecycle of a payment](/docs/architecture/lifecycle-payment).
+In Mina, payments pass through several steps before they are considered verified and complete. This document is meant to walk through what happens to a single payment as it works its way through the codebase. For a more high-level overview aimed at users who want to understand how payments work on a macroscopic level, check out the <DocLink copy="lifecycle of a payment" url="/architecture/lifecycle-payment" />.
 
 Let's say you want to send a payment in Mina, assuming you've already created an account and have received funds.
 Your friend gives you her public key -- it's `KEFLx5TOqJNzd6buc+dW3HCjkL57NjnZIaplYJ50DO1uTfogKfwAAAAA`.
@@ -42,12 +43,12 @@ In [payment.mli](https://github.com/minaprotocol/mina/tree/master/src/lib/mina_b
 
 For more see:
 
-- [Parameterized records](/docs/developers/style-guide/#parameterized-records)
-- [Ppx deriving](/docs/developers/style-guide/#ppx_deriving)
-- [Stable.V1](/docs/developers/style-guide/#stable-v1)
-- [Property based tests](/docs/developers/style-guide/#quickcheck-gen)
-- [Typesafe Invariants](/docs/developers/style-guide/#typesafe-invariants)
-- [Unit Tests](/docs/developers/style-guide/#unit-tests)
+- <DocLink copy="Parameterized records" url="/developers/style-guide/#parameterized-records" />
+- <DocLink copy="Ppx deriving" url="/developers/style-guide/#ppx_deriving" />
+- <DocLink copy="Stable.V1" url="/developers/style-guide/#stable-v1" />
+- <DocLink copy="Property based tests" url="/developers/style-guide/#quickcheck-gen" />
+- <DocLink copy="Typesafe Invariants" url="/developers/style-guide/#typesafe-invariants" />
+- <DocLink copy="Unit Tests" url="/developers/style-guide/#unit-tests" />
 
 Let's dig into the payment payload:
 
@@ -61,7 +62,7 @@ Check out [payment_payload.mli](https://github.com/minaprotocol/mina/tree/master
 
 We use [Schnorr signatures](https://en.wikipedia.org/wiki/Schnorr_signature). A [Schnorr signature](https://en.wikipedia.org/wiki/Schnorr_signature) is an element in a [group](https://en.wikipedia.org/wiki/Group_(mathematics). Our group is a point on an [elliptic curve](https://en.wikipedia.org/wiki/Elliptic_curve). So what is a signature? Open up [signature lib's checked.ml](https://github.com/minaprotocol/mina/tree/master/src/lib/signature_lib/checked.ml) and scroll to `module Signature` within `module type S`. It's a non-zero point on a curve, aka a pair of two `curve_scalar` values. To sign we give a [private key](#private-key) and a message, we can verify a signature on a message with a [public key](#public-key).
 
-This is the first time we see heavily functored code, so see [functors](/docs/developers/style-guide/#functors) if you're confused. This is also the first time we see custom SNARK circuit logic, see [custom SNARK circuit logic](/docs/developers/style-guide/#snark-checked) for more.
+This is the first time we see heavily functored code, so see <DocLink copy="functors" url="/developers/style-guide/#functors" /> if you're confused. This is also the first time we see custom SNARK circuit logic, see <DocLink copy="custom SNARK circuit logic" url="/developers/style-guide/#snark-checked" /> for more.
 
 ## Private key
 
