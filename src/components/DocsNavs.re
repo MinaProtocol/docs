@@ -12,7 +12,10 @@ module SideNav = {
   let make = (~currentSlug) => {
     module Item = SideNav.Item;
     module Section = SideNav.Section;
-    let f = s => "/docs/" ++ s;
+    let currentLanguage = Context.LanguageContext.useLanguageContext();
+    let language = Context.LanguageContext.stringOfLanguage(currentLanguage);
+    let f = url => {j|/$(language)/$(url)|j};
+
     <div className=Styles.container>
       <SideNav currentSlug>
         <Item title="Mina Overview" slug={f("/")} />
@@ -104,64 +107,13 @@ module Dropdown = {
   let make = (~currentSlug) => {
     module Item = DropdownNav.Item;
     module Section = DropdownNav.Section;
-    let f = s => "/docs/" ++ s;
-    let getCurrentValue = s => {
-      Js.String.match([%re "/(\/docs\/)(.*)/"], s)
-      ->Belt.Option.mapWithDefault("Documentation", match => {
-          switch (match[2]) {
-          | "getting-started" => "Getting Started"
-          | "my-first-transaction" => "My First Transaction"
-          | "node-operator" => "Become a Node Operator"
-          | "contributing" => "Contributing to Mina"
+    let currentLanguage = Context.LanguageContext.useLanguageContext();
+    let language = Context.LanguageContext.stringOfLanguage(currentLanguage);
 
-          | "connecting" => "Connecting Overview"
-          | "connecting/connecting-zenith" => "Connecting To Zenith"
-          | "connecting/connecting-devnet" => "Connecting To Devnet"
-
-          | "developers" => "Developers Overview"
-          | "developers/snarkyjs-crypto" => "Codebase Overview"
-          | "developers/codebase-overview" => "Codebase Overview"
-          | "developers/directory-structure" => "Repository Structure"
-          | "developers/code-reviews" => "Code Reviews"
-          | "developers/style-guide" => "Style Guide"
-          | "developers/sandbox-node" => "Sandbox Node"
-          | "developers/graphql-api" => "GraphQL API"
-          | "developers/client-sdk" => "Client SDK"
-          | "developers/logging" => "Logging"
-
-          | "keypair" => "Keypair Overview"
-          | "keypair/mina-generate-keypair" => "mina-generate-keypair"
-          | "keypair/ledger-app-mina" => "ledger-app-mina"
-          | "keypair/client-sdk" => "client-sdk"
-
-          | "architecture" => "Mina Overview"
-          | "architecture/lifecycle-payment" => "Lifecycle of a Payment"
-          | "architecture/block-producers" => "Block Producers"
-          | "architecture/whats-in-a-block" => "What's in a Block"
-          | "architecture/consensus" => "Consensus"
-          | "architecture/proof-of-stake" => "Proof of Stake"
-          | "architecture/snark-workers" => "Snark Workers"
-          | "architecture/scan-state" => "Scan State"
-
-          | "snarks" => "SNARKs Overview"
-          | "snarks/snarky" => "Getting started using SNARKs"
-          | "snarks/constructions" => "Which SNARK is right for me?"
-          | "snarks/snarkyjs-crypto" => "The snarkyjs-crypto library"
-          | "snarks/snarky-universe" => "The snarky-universe library"
-
-          | "snapps" => "Snapps"
-          | "cli-reference" => "CLI Reference"
-          | "tokens" => "Tokens"
-          | "troubleshooting" => "FAQ"
-          | "glossary" => "Glossary"
-
-          | _ => "Documentation"
-          }
-        });
-    };
+    let f = url => {j|/$(language)/$(url)|j};
 
     <div className=Styles.dropdown>
-      <DropdownNav currentSlug defaultValue={getCurrentValue(currentSlug)}>
+      <DropdownNav currentSlug defaultValue="Mina Documentation">
         <Item title="Mina Overview" slug={f("/")} />
         <Item title="Getting Started" slug={f("getting-started")} />
         <Section title="Using Mina" slug={f("using-mina")}>

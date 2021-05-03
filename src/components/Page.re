@@ -25,12 +25,10 @@ let make =
       ~children,
       ~darkTheme=false,
       ~showFooter=true,
-      ~announcementCopy="Community Leaderboard Challenges are live!",
-      ~announcementCTACopy="Take part now",
-      ~announcementFormUrl=Constants.communityChallenges,
     ) => {
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);
+  let currentLanguage = Context.LanguageContext.useLanguageContext();
 
   <div className=Styles.main>
     <Next.Head>
@@ -71,7 +69,9 @@ let make =
       </style>
     </Next.Head>
     <Nav dark=darkTheme />
-    <main> children </main>
+    <Context.LanguageContext value=currentLanguage>
+      <main> children </main>
+    </Context.LanguageContext>
     <CookieWarning />
     {showFooter ? <Footer /> : React.null}
   </div>;

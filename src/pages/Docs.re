@@ -110,13 +110,18 @@ type metadata = {title: string};
 [@react.component]
 let make = (~metadata, ~children) => {
   let router = Next.Router.useRouter();
+  let currentLanguage = Context.LanguageContext.useLanguageContext();
+  let lang = Context.LanguageContext.stringOfLanguage(currentLanguage);
+
+  let currentUrl = "/" ++ lang;
+
   let currentSlug =
-    if (router.route == "/docs") {
-      "/docs";
+    if (router.route == currentUrl) {
+      currentUrl;
     } else {
       Js.String.replaceByRe(
-        Js.Re.fromString("^/docs/?"),
-        "/docs/",
+        Js.Re.fromString("^/" ++ lang ++ "/?"),
+        currentUrl ++ "/",
         router.route,
       );
     };

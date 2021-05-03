@@ -31,6 +31,7 @@ module Router = {
   [@bs.module "next/router"] [@bs.val]
   external useRouter: unit => t('a) = "useRouter";
 
+  [@bs.send] external push: (t('a), string) => unit = "push";
   module Events = {
     type handler = string => unit;
     [@bs.send] external on: (events, string, handler) => unit = "on";
