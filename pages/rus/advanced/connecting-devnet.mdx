@@ -1,0 +1,80 @@
+import Page from "@reason/pages/Docs";
+import StatusBadge from "@reason/components/StatusBadge";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Connect to Devnet" });
+
+# Подключение к Devnet
+
+В этом разделе мы подключимся к `Devnet`. `Devnet` - это сеть, предназначенная для разработчиков, использующих протокол Mina. Она создана для тестирования
+и экспериментов разработчиков и не имеет реальной ценности. Пользователи могут связаться с нами в Discord, чтобы запросить доступ к предварительно пополненной учетной записи.
+
+Используйте `Devnet`, только если вы являетесь разработчиком и работаете на протоколе Mina. Если вы заинтересованы в запуске собственной ноды, вместо этого подключитесь
+к [Mainnet RC](/connecting).
+
+## Обновите Ваше ПО
+
+Подключение к `Devnet` требует определенной сборки клиента Mina, а также определенной версии списка пиров. Использование сборки `Devnet` и списка пиров неактуально для `Zenith`.
+
+Следуйте приведенным ниже инструкциям для вашей операционной системы.
+
+### Ubuntu 18.04 / Debian 9
+
+Сначала удалите любую версию daemon, установленную ранее, чтобы избежать ошибок при обновлении. После этого вы можете установить последнюю версию следующим образом:
+
+```
+sudo apt-get remove -y mina-testnet-postake-medium-curves
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+sudo apt-get update
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-68200c7
+```
+
+Убедитесь, что daemon установлен правильно, запустив `mina version`. На выходе должно появиться сообщение `Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD`.
+
+## Запустите ноду
+
+<Alert kind="status">
+
+Здесь вы можете увидеть текущий статус сети и связанных с ней сервисов: [status.minaprotocol.com](https://status.minaprotocol.com)
+
+Статус Тестовой Сети: <StatusBadge service="Network" />
+
+</Alert>
+
+Выполните следующие команды, чтобы запустить ноду Mina и подключиться к сети `Devnet`:
+
+```
+mina daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+```
+
+### Docker
+
+При запуске вашего daemon с помощью Docker сначала убедитесь, что разрешения к вашему закрытому ключу настроены правильно.
+
+```
+cd ~
+chmod 700 ~/keys
+chmod 600 ~/keys/my-wallet
+mkdir ~/.mina-config
+```
+
+Теперь просто запустите образ с вашими ключами и смонтированным ~/.mina-config:
+
+```
+docker run --name mina -d \
+-p 8302:8302 \
+--restart=always \
+--mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
+--mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
+-e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
+minaprotocol/mina-daemon-baked:1.0.5-68200c7 \
+daemon \
+--block-producer-key /keys/my-wallet \
+--insecure-rest-server \
+--file-log-level Debug \
+--log-level Info \
+--peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+```
+
+Запустите `docker logs -f mina`, чтобы следить за логами, и в случае сбоя сохраните логи в файл с `docker logs mina > mina-log.txt`.
+
+Запустите `docker exec -it mina mina client status`, чтобы отслеживать состояние подключения к сети.

@@ -1,0 +1,102 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Client SDK" });
+
+# Клиент SDK
+
+[Mina Client Javascript SDK](https://www.npmjs.com/package/@o1labs/клиент-sdk) позволяет генерировать пары ключей, подписывать и проверять сообщения, а также подписывать транзакции, которые могут транслироваться в сеть.
+
+Проект содержит типы Typescript и ReasonML, но может быть использован и из обычного NodeJS. Доступны следующие методы:
+
+- `genKeys` - генерирует пару публичных/приватных ключей.
+- `derivePublicKey` - производит открытый ключ соответствующего частного ключа.
+- `signMessage` - подписывает случайное сообщение.
+- `verifyMessage` - проверяет соответствие подписи сообщению.
+- `signPayment` - подписывает платеж с помощью приватного ключа.
+- `signStakeDelegation` - подписывает передачу стейка с помощью приватного ключа.
+
+<Alert>
+
+Клиент SDK позволяет генерировать и подписывать транзакции на air-gap устройстве, которое никогда не раскрывает приватный ключ в сети Интернет.
+
+</Alert>
+
+## Установка
+
+```
+yarn add @o1labs/client-sdk
+# or with npm:
+npm install --save @o1labs/client-sdk
+```
+
+## Использование
+
+### Typescript
+
+```
+import * as MinaSDK from "@o1labs/client-sdk";
+
+let keys = MinaSDK.genKeys();
+let signed = MinaSDK.signMessage("hello", keys);
+if (MinaSDK.verifyMessage(signed)) {
+    console.log("Message was verified successfully")
+};
+
+let signedPayment = MinaSDK.signPayment({
+    to: keys.publicKey,
+    from: keys.publicKey,
+    amount: 1,
+    fee: 1,
+    nonce: 0
+  }, keys);
+```
+
+### NodeJS
+
+```
+const MinaSDK = require("@o1labs/client-sdk");
+
+let keys = MinaSDK.genKeys();
+let signed = MinaSDK.signMessage("hello", keys);
+if (MinaSDK.verifyMessage(signed)) {
+    console.log("Message was verified successfully")
+};
+
+let signedPayment = MinaSDK.signPayment({
+    to: keys.publicKey,
+    from: keys.publicKey,
+    amount: 1,
+    fee: 1,
+    nonce: 0
+  }, keys);
+```
+
+### ReasonML
+
+- Install gentype: `yarn add -D gentype`
+- Install bs-platform: `yarn add -D bs-platform`
+- Build dependencies: `yarn bsb -make-world`
+
+```
+module MinaSDK = O1labsClientSdk.CodaSDK;
+
+let keys = MinaSDK.genKeys();
+let signed = MinaSDK.signMessage(. "hello", keys);
+if (MinaSDK.verifyMessage(. signed)) {
+  Js.log("Message was verified successfully");
+};
+
+let signedPayment = MinaSDK.signPayment({
+    to_: keys.publicKey,
+    from: keys.publicKey,
+    amount: "1",
+    fee: "1",
+    nonce: "0"
+  }, keys);
+```
+
+<Alert>
+
+При генерации транзакций вам необходимо будет указать порядковый номер счета nonce. Это можно сделать через CLI, используя `mina advanced get-nonce -address <PUBLIC_KEY>` или используя <DocLink copy="GraphQL" url="/developers/graphql-api" />.
+
+</Alert>

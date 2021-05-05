@@ -1,0 +1,151 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "GraphQL API" });
+
+# GraphQL API
+
+<Alert kind="warning">
+
+- API Mina все еще находятся в стадии разработки, поэтому эти конечные точки могут измениться.
+- По умолчанию порт GraphQL привязан к локальному хосту. Размещение GraphQL API в интернете позволяет любому желающему отправить Mina с аккаунтов, которые знает daemon.
+
+</Alert>
+
+Daemon Mina раскрывает [GraphQL API](https://graphql.org/), используемый для запроса информации и отправки команд работающей ноде. По умолчанию HTTP-сервер работает через порт `3085`, хотя эту конфигурацию можно изменить, передав флаг `-rest-server` команде запуска daemon.
+
+Для использования API GraphQL, подключите клиент GraphQL к `http://localhost:3085/graphql`, или откройте в своем браузере, чтобы пользоваться [GraphiQL IDE](https://github.com/graphql/graphiql). В целях безопасности, по умолчанию разрешены только соединения с `localhost`. Чтобы прослушивать на всех интерфейсах, добавьте флаг `-insecure-rest-server` к команде запуска daemon.
+
+Помимо информации о работающей ноде, API GraphQL может возвращать данные о последних блоках сети. Однако, так как в Mina не сохраняется историческое состояние блокчейна, возвращаются только те блоки, которые находятся на границе перехода ноды, т.е. последние блоки `k`. Для других исторических данных следует использовать архивную ноду, которая предназначена для хранения и извлечения исторических данных.
+
+Полная схема GraphQL Mina доступна [здесь] (https://minaprotocol.com/graphql-docs/index.html).
+
+### Запросы:
+
+В API GraphQL Mina есть ряд [запросов](https://minaprotocol.com/graphql-docs/query.doc.html) для извлечения данных из работающей ноды. [GraphQL-запросы](https://graphql.org/learn/queries/) позволяют указать данные для их возврата в ответе. Например, чтобы получить самую свежую информацию о блоке и создателе, известную daemon:
+
+```
+query {
+  bestChain(maxLength: 1) {
+    creator
+    stateHash
+    protocolState {
+      consensusState {
+        blockHeight
+      }
+      previousStateHash
+    }
+    transactions {
+      coinbase
+    }
+  }
+}
+```
+
+В следующем запросе запрашиваются все отложенные транзакции в [пуле транзакций](#) вместе с их комиссиям.. Этот запрос может быть использован для определения предполагаемой платы за транзакцию:
+
+```
+query {
+  pooledUserCommands {
+    id,
+    fee
+  }
+}
+```
+
+<Alert>
+
+Поле memo, возвращаемое для транзакции - это [Base58Check encoded](https://en.bitcoin.it/wiki/Base58Check_encoding).
+
+</Alert>
+
+Для получения подробной информации об аккаунте для основного mina <DocLink copy="token" url="/architecture/tokens" />:
+
+```
+query {
+  account(publicKey: "<B62...>") {
+    balance {
+      total
+    }
+    delegate
+    nonce
+  }
+}
+```
+
+Вы можете отправлять GraphQL-запросы из командной строки ноды. Например, использовать cURL, чтобы получить последние десять известных создателей блоков для ноды:
+
+```
+curl -d '{"query": "{
+  bestChain(maxLength: 10) {
+    creator
+  }
+}"}' -H 'Content-Type: application/json' http://localhost:3085/graphql
+```
+
+### Мутации:
+
+Мутации GraphQL модифицируют запущенную ноду несколькими способами. Например, мутации могут быть использованы для отправки платежа, создания нового аккаунта, или добавления дополнительных пиров.
+
+<Alert>
+
+Консультируйтесь с [GraphQL schema](https://minaprotocol.com/graphql-docs/mutation.doc.html) о всех доступных мутациях.
+
+</Alert>
+
+Добавление нового пира:
+
+```
+mutation {
+   addPeers(peers:{
+      libp2p_port:10511,
+      host:"34.73.68.198",
+      peer_id:"12D3KooWSJB2gZWi3ruVmtTF9JBCEBpCrJfuWCWzzRr8mMQWFQ9U"
+   })
+}
+```
+
+Обновить снарк-работника, чтобы использовать комиссию 0,1 mina:
+
+```
+mutation {
+  setSnarkWorkFee(input: {fee: "100000000"})
+}
+```
+
+### Подписки:
+
+Подписка на GraphQL [подписка](https://minaprotocol.com/graphql-docs/subscription.doc.html) позволяет клиенту GraphQL-получать пуш-уведомления при возникновении события. В Mina имеются подписки на:
+
+- _newSyncUpdate_ - происходит при изменении статуса синхронизации ноды.
+- _newBlock_ - происходит при получении нового блока.
+- chainReorganisation - происходит, когда вершина ноды меняется нетривиальным образом..
+
+Например, подписаться на все новые произведённые блоки:
+
+```
+subscription {
+  newBlock {
+    creator
+    stateHash
+    protocolState {
+      consensusState {
+        blockHeight
+      }
+      previousStateHash
+    }
+  }
+}
+```
+
+Подписка на новые блоки также может быть ограничена только возвратом новых блоков, созданных определенным открытым ключом с аргументом `publicKey`.
+
+### Открытый GraphQL Proxy:
+
+Так как не рекомендуется открывать API GraphQL в интернете, доступна реализация [GraphQL proxy](https://github.com/MinaProtocol/mina/tree/master/automation/services/graphql-public-proxy), которая удаляет запросы, представляющие угрозу, но все же позволяет запрашивать данные ноды с публичной конечной точки. Доступ к публичному прокси [здесь](http://graphql.o1test.net/graphql).
+
+### Источники:
+
+- [5-минутный вводный видеоролик о Mina GraphQL API](http://bit.ly/GraphQLAPIin5)
+- [Первые шаги в Mina GraphQL API](https://garethtdavies.com/crypto/first-steps-with-coda-graphql-api.html)
+- [Введение в GraphQL](https://graphql.org/learn/)
+- [Открытый GraphQL proxy](http://graphql.o1test.net/graphql)

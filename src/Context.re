@@ -25,14 +25,16 @@ module SectionSlugContext = {
 module LanguageContext = {
   type t =
     | English
-    | Yiddish;
+    | Russian;
+
   let stringOfLanguage = t => {
     switch (t) {
     | English => "en"
-    | Yiddish => "ji"
+    | Russian => "rus"
     };
   };
-  let context = React.createContext(English);
+
+  let context = React.createContext(Russian);
   let make = React.Context.provider(context);
   let makeProps = ReactExt.makeProps;
   let useLanguageContext = () => React.useContext(context);

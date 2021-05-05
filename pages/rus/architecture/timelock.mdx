@@ -1,0 +1,71 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink"
+export default Page({ title: "Time-locked Accounts" });
+
+# Временно заблокированные аккаунты
+
+Временно заблокированный счет не допускает платежи, которые могли бы уменьшить баланс ниже минимального, в зависимости от высоты блока.
+
+Для создания временной блокировки, вы должны обеспечить соответствующую конфигурацию при создании новой учетной записи. Это может произойти только в журнале генезиса в начале сети. В этом разделе мы рассмотрим механизм, стоящий за временной блокировкой, и посмотрим, как происходит взаимодействие с временно заблокированными учетными записями.
+
+<Alert>
+
+  Для текущего релиза стоимость аккаунтов с временной блокировкой назначалась на основании порядка, в котором производилась их регистрация.
+
+</Alert>
+
+## Понимание временной блокировки
+
+Механизм временной блокировки содержит следующие поля: `initial_minimum_balance`, время `cliff`, время `vesting_period`, и `vesting_increment`.
+
+Вы все еще можете использовать счет, если он временно заблокирован, при условии, что на нем достаточно средств. Сумма средств, которые находятся во временной блокировке, начинается с `initial_minimum_balance` в самом начале сети. Как только сеть достигает высоты блока, равной `cliff`, временно заблокированная сумма начинает уменьшаться на величину `vesting_increment` каждый `vesting_period`.
+
+Более подробное техническое описание этого процесса см. в [RFC-0025] (https://github.com/MinaProtocol/mina/blob/master/rfcs/0025-time-locked-accounts.md) где представлен более глубокий обзор.
+
+### Supercharged Rewards
+
+Наряду с временно заблокированными счетами, мы ввели такое понятие как "награда суперчардж". Как только на счете нет временно заблокированных средств (будь то новый счет, или в случаях, когда весь `initial_minimum_balance` был передан), блок вознаграждения увеличивается в 2 раза.
+
+### Детали ликвидного баланса:
+
+Если вы хотите выставлять на продажу ликвидные остатки для вестинговых счетов в какой-то конкретный период времени, то это регулируется следующей функцией (Примечание: при этом рассчитывается заблокированная часть счета):
+
+```
+(*
+ *  uint32 global_slot -- the "clock" it starts at 0 at the genesis block and ticks up every 3minutes.
+ *  uint32 cliff_time -- the slot where the cliff is (similar to startup equity vesting)
+ *  uint32 cliff_amount -- the amount that unlocks at the cliff
+ *  amount vesting_increment -- unlock this amount every "period"
+ *  uint32 vesting_period -- the period that we increment the unlocked amount
+ *  balance initial_minimum_balance -- the total locked amount until the cliff
+ *)
+let min_balance_at_slot ~global_slot ~cliff_time ~cliff_amount ~vesting_period
+    ~vesting_increment ~initial_minimum_balance =
+  let open Unsigned in
+  if Global_slot.(global_slot < cliff_time) then initial_minimum_balance
+  else
+    match Balance.(initial_minimum_balance - cliff_amount) with
+    | None ->
+        Balance.zero
+    | Some min_balance_past_cliff -> (
+        (* take advantage of fact that global slots are uint32's *)
+        let num_periods =
+          UInt32.(
+            Infix.((global_slot - cliff_time) / vesting_period)
+            |> to_int64 |> UInt64.of_int64)
+        in
+        let vesting_decrement =
+          UInt64.Infix.(num_periods * Amount.to_uint64 vesting_increment)
+          |> Amount.of_uint64
+        in
+        match Balance.(min_balance_past_cliff - vesting_decrement) with
+        | None ->
+            Balance.zero
+        | Some amt ->
+            amt )
+
+```
+
+## Создание временно заблокированного счета
+
+Начиная с текущего релиза, единственный способ создать временно заблокированную учетную запись - это журнал генезиса. В будущих релизах мы можем добавить команды для `mina client` и GraphQL API, которые позволят вам создать новый временно заблокированный аккаунт.
