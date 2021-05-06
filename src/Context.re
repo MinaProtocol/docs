@@ -27,14 +27,38 @@ module LanguageContext = {
     | English
     | Russian;
 
-  let stringOfLanguage = t => {
+  let allLanguages = [|English, Russian|];
+
+  let toISOCode = t => {
     switch (t) {
     | English => "en"
     | Russian => "rus"
     };
   };
 
-  let context = React.createContext(Russian);
+  let isoCodeToLanguageType = t => {
+    switch (t) {
+    | "rus" => Russian
+    | "en"
+    | _ => English
+    };
+  };
+
+  let toStringLanguage = t => {
+    switch (t) {
+    | English => "English"
+    | Russian => "Russian"
+    };
+  };
+
+  type contextType = {
+    currentLanguage: t,
+    setCurrentLanguage: t => unit,
+  };
+
+  let initValue = {currentLanguage: English, setCurrentLanguage: _ => ()};
+
+  let context = React.createContext(initValue);
   let make = React.Context.provider(context);
   let makeProps = ReactExt.makeProps;
   let useLanguageContext = () => React.useContext(context);

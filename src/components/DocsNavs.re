@@ -12,8 +12,11 @@ module SideNav = {
   let make = (~currentSlug) => {
     module Item = SideNav.Item;
     module Section = SideNav.Section;
-    let currentLanguage = Context.LanguageContext.useLanguageContext();
-    let language = Context.LanguageContext.stringOfLanguage(currentLanguage);
+    let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+    let language =
+      Context.LanguageContext.toISOCode(
+        currentLanguageContext.currentLanguage,
+      );
     let f = url => {j|/$(language)/$(url)|j};
 
     <div className=Styles.container>
@@ -107,9 +110,11 @@ module Dropdown = {
   let make = (~currentSlug) => {
     module Item = DropdownNav.Item;
     module Section = DropdownNav.Section;
-    let currentLanguage = Context.LanguageContext.useLanguageContext();
-    let language = Context.LanguageContext.stringOfLanguage(currentLanguage);
-
+    let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+    let language =
+      Context.LanguageContext.toISOCode(
+        currentLanguageContext.currentLanguage,
+      );
     let f = url => {j|/$(language)/$(url)|j};
 
     <div className=Styles.dropdown>

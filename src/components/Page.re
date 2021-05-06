@@ -28,7 +28,47 @@ let make =
     ) => {
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);
-  let currentLanguage = Context.LanguageContext.useLanguageContext();
+  let languageContext = Context.LanguageContext.useLanguageContext();
+
+  let (language, setLanguage) =
+    React.useState(() => {languageContext.currentLanguage});
+
+  /*
+     On page load, check if there is a selected language in localStorage. If there is no selected language,
+     set localStorage to the default language (english). Otherwise, there is a selected language and we set
+     the component state to the corresponding selected language in localStorage
+   */
+  React.useEffect0(() => {
+    open Context.LanguageContext;
+    switch (ReactExt.LocalStorage.getValueFromLocalStorage("lang")) {
+    | None =>
+      let stringifiedLanguage = toISOCode(languageContext.currentLanguage);
+      ReactExt.LocalStorage.saveValueToLocalStorage(
+        "lang",
+        stringifiedLanguage,
+      );
+    | Some(language) => setLanguage(_ => {isoCodeToLanguageType(language)})
+    };
+    None;
+  });
+
+  let setCurrentLanguage = language => {
+    open Context.LanguageContext;
+    let stringifiedISO = toISOCode(language);
+
+    // Set localStorage and component state to newly selected
+    ReactExt.LocalStorage.saveValueToLocalStorage("lang", stringifiedISO);
+    setLanguage(_ => language);
+
+    // Replace language part of URL to newly selected language
+    let redirectURL =
+      Js.String.replaceByRe(
+        [%re "/(^\/[^/]*\/?)/"],
+        "/" ++ stringifiedISO ++ "/",
+        router.route,
+      );
+    Next.Router.push(router, redirectURL);
+  };
 
   <div className=Styles.main>
     <Next.Head>
@@ -68,8 +108,12 @@ let make =
         {React.string("img:-moz-loading { visibility: hidden; }")}
       </style>
     </Next.Head>
-    <Nav dark=darkTheme />
-    <Context.LanguageContext value=currentLanguage>
+    <Context.LanguageContext
+      value={
+        Context.LanguageContext.currentLanguage: language,
+        setCurrentLanguage,
+      }>
+      <Nav dark=darkTheme />
       <main> children </main>
     </Context.LanguageContext>
     <CookieWarning />

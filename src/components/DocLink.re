@@ -5,8 +5,9 @@
 module Inner = {
   [@react.component]
   let make = (~copy, ~url) => {
-    let currentLanguage = Context.LanguageContext.useLanguageContext();
-    let lang = Context.LanguageContext.stringOfLanguage(currentLanguage);
+    let languageContext = Context.LanguageContext.useLanguageContext();
+    let lang =
+      Context.LanguageContext.toISOCode(languageContext.currentLanguage);
     let href = "/" ++ lang ++ url;
     <Next.Link href>
       <span className=Theme.Type.link> {React.string(copy)} </span>

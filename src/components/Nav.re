@@ -5,6 +5,7 @@ module Styles = {
     style([
       position(`sticky),
       display(`flex),
+      flexDirection(`column),
       alignItems(`center),
       justifyContent(`spaceBetween),
       padding2(~v=`zero, ~h=`rem(1.5)),
@@ -15,6 +16,7 @@ module Styles = {
       media(
         Theme.MediaQuery.tablet,
         [
+          flexDirection(`row),
           position(`absolute),
           height(`rem(6.25)),
           padding2(~v=`zero, ~h=`rem(2.5)),
@@ -202,6 +204,12 @@ module Styles = {
         [marginTop(`rem(-1.)), marginLeft(`rem(1.))],
       ),
     ]);
+
+  let dropdown =
+    style([
+      marginTop(`rem(0.5)),
+      media(Theme.MediaQuery.notMobile, [marginTop(`zero)]),
+    ]);
 };
 
 module NavLink = {
@@ -258,6 +266,12 @@ module NavGroupLink = {
 [@react.component]
 let make = (~dark=false) => {
   let (_, setWidth) = React.useState(() => 0);
+  let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+  let href =
+    "/"
+    ++ Context.LanguageContext.toISOCode(
+         currentLanguageContext.currentLanguage,
+       );
 
   React.useEffect0(() => {
     let handleSize = () => {
@@ -270,7 +284,7 @@ let make = (~dark=false) => {
 
   <header className=Styles.container>
     <div className=Styles.logoContainer>
-      <Next.Link href="/">
+      <Next.Link href>
         {dark
            ? <img
                src="/static/img/svg/mina-wordmark-dark.svg"
@@ -283,13 +297,18 @@ let make = (~dark=false) => {
       </Next.Link>
       <p className=Styles.docsLabel> {React.string("Documentation")} </p>
     </div>
-    /*<span className=Styles.statusBadgeContainer>
-      <h4 className=Styles.statusBadge__header>
-        {React.string("Devnet Status: ")}
-      </h4>
-      <span className=Styles.statusBadge>
-        <StatusBadge service=`Devnet />
-      </span>
-    </span>*/
+    <div className=Styles.dropdown>
+      <LanguageDropdown items=Context.LanguageContext.allLanguages />
+    </div>
   </header>;
+  /*
+    TODO: Status badge currently returning an error
+    <span className=Styles.statusBadgeContainer>
+     <h4 className=Styles.statusBadge__header>
+       {React.string("Devnet Status: ")}
+     </h4>
+     <span className=Styles.statusBadge>
+       <StatusBadge service=`Devnet />
+     </span>
+   </span>*/
 };

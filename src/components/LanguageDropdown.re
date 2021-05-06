@@ -14,7 +14,7 @@ module Styles = {
       Theme.Type.paragraphMono,
       style([
         position(`relative),
-        width(`percent(100.)),
+        width(`rem(10.)),
         letterSpacing(`rem(-0.0125)),
         fontWeight(`num(500)),
         border(`px(1), `solid, Theme.Colors.gray),
@@ -33,7 +33,7 @@ module Styles = {
       fontWeight(`num(500)),
       backgroundColor(Theme.Colors.white),
       pointerEvents(`none),
-      border(`px(1), `solid, Theme.Colors.orange),
+      border(`px(1), `solid, Theme.Colors.gray),
       opacity(0.),
     ]);
   };
@@ -62,25 +62,33 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~items, ~currentItem, ~onItemPress) => {
+let make = (~items: array(Context.LanguageContext.t)) => {
+  open Context.LanguageContext;
   let (menuOpen, toggleMenu) = React.useState(() => false);
+  let currentLanguageContext = useLanguageContext();
 
   let onDropdownItemPress = item => {
-    onItemPress(item);
+    currentLanguageContext.setCurrentLanguage(item);
     toggleMenu(_ => !menuOpen);
   };
 
   <div className=Styles.container onClick={_ => {toggleMenu(_ => !menuOpen)}}>
     <span className=Styles.currentItemTitle>
-      <span> {React.string(currentItem)} </span>
+      <span>
+        {currentLanguageContext.currentLanguage
+         |> toStringLanguage
+         |> React.string}
+      </span>
       <Icon kind=Icon.ChevronDown />
     </span>
     <ul
       className={menuOpen ? Styles.expandedDropdown : Styles.collapsedDropdown}>
       {items
-       |> Array.map(item => {
-            <li key=item onClick={_ => {onDropdownItemPress(item)}}>
-              {React.string(item)}
+       |> Array.map((item: Context.LanguageContext.t) => {
+            <li
+              key={toStringLanguage(item)}
+              onClick={_ => {onDropdownItemPress(item)}}>
+              {item |> toStringLanguage |> React.string}
             </li>
           })
        |> React.array}

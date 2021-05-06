@@ -20,6 +20,16 @@ module Window = {
     "addEventListener";
 };
 
+module LocalStorage = {
+  let saveValueToLocalStorage = (localStorageKey, value) => {
+    Dom.Storage.(localStorage |> setItem(localStorageKey, value));
+  };
+
+  let getValueFromLocalStorage = localStorageKey => {
+    Dom.Storage.(localStorage |> getItem(localStorageKey));
+  };
+};
+
 module IntersectionObserver = {
   type entry = {
     intersectionRatio: float,

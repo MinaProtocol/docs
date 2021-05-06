@@ -110,8 +110,9 @@ type metadata = {title: string};
 [@react.component]
 let make = (~metadata, ~children) => {
   let router = Next.Router.useRouter();
-  let currentLanguage = Context.LanguageContext.useLanguageContext();
-  let lang = Context.LanguageContext.stringOfLanguage(currentLanguage);
+  let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+  let lang =
+    Context.LanguageContext.toISOCode(currentLanguageContext.currentLanguage);
   let currentUrl = "/" ++ lang;
 
   let currentSlug =

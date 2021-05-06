@@ -1,7 +1,8 @@
 [@react.component]
 let make = () => {
-  let currentLanguage = Context.LanguageContext.useLanguageContext();
-  let lang = Context.LanguageContext.stringOfLanguage(currentLanguage);
+  let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+  let lang =
+    Context.LanguageContext.toISOCode(currentLanguageContext.currentLanguage);
   let router = Next.Router.useRouter();
 
   React.useEffect0(() => {
