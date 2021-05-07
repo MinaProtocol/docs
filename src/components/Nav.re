@@ -297,11 +297,9 @@ let make = (~dark=false) => {
              />}
       </Next.Link>
       <p className=Styles.docsLabel>
-        {React.string(
-           {
-             Translations.translate(currentLanguage, "Documentation");
-           },
-         )}
+        {currentLanguage
+         ->Translations.translate("Documentation")
+         ->React.string}
       </p>
     </div>
     <div className=Styles.dropdown>

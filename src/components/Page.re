@@ -30,22 +30,19 @@ let make =
   let route = Option.value(route, ~default=router.route);
 
   /*
-   Define the current selected language component state that will be used to rerender all children on a Page
-   */
-  let (language, setLanguage) =
+   Use the current url as the default language state (the website will redirect the user to /en if no language is specified).
+    */
+  let (language, _) =
     React.useState(() => {
       Context.LanguageContext.currentLangFromUrl(router.route)
     });
 
   /*
-   This function is used to define the `setCurrentLanguage` property on the LanguageContext.t record.
-   We accept a language as an argument and update the component state with the newly selected language.
-   Following the state update, we route the user to the newly constructed url with the selected language.
+   When a new language is selected, we replace the current language in the URL with the newly selected one
+   and redirect the user to that newly constructed URL.
     */
   let setCurrentLanguage = language => {
-    open Context.LanguageContext;
-    let stringifiedISO = toISOCode(language);
-    setLanguage(_ => isoCodeToLanguageType(stringifiedISO));
+    let stringifiedISO = Context.LanguageContext.toISOCode(language);
 
     // Replace language part of URL to newly selected language
     let redirectURL =

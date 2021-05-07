@@ -101,7 +101,7 @@ module EditLink = {
       href
       className=Style.editLink>
       <span className=Theme.Type.link>
-        {React.string(Translations.translate(currentLangFromUrl, "Edit"))}
+        {currentLangFromUrl->Translations.translate("Edit")->React.string}
       </span>
       <span className=Style.editLink__icon>
         <Icon kind=Icon.ArrowRightMedium />
@@ -125,7 +125,7 @@ let make = (~metadata, ~children) => {
         width={`rem(10.)}
         href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
         bgColor=Theme.Colors.orange>
-        {React.string(Translations.translate(currentLangFromUrl, "Edit"))}
+        {currentLangFromUrl->Translations.translate("Edit")->React.string}
         <Icon kind=Icon.ArrowRightSmall />
       </Button>
     </span>;
@@ -147,12 +147,9 @@ let make = (~metadata, ~children) => {
               <span className=Style.content__row>
                 {renderMobileEditButton()}
                 <h4 className=Theme.Type.h4>
-                  {React.string(
-                     Translations.translate(
-                       currentLangFromUrl,
-                       "Documentation",
-                     ),
-                   )}
+                  {currentLangFromUrl
+                   ->Translations.translate("Documentation")
+                   ->React.string}
                 </h4>
                 <EditLink route={router.route} />
               </span>

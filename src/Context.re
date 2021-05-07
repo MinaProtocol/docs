@@ -51,8 +51,8 @@ module LanguageContext = {
     };
   };
 
-  let currentLangFromUrl = router =>
-    Js.String.split("/", router)->Belt.Array.sliceToEnd(1)[0]
+  let currentLangFromUrl = url =>
+    Js.String.split("/", url)->Belt.Array.sliceToEnd(1)[0]
     ->isoCodeToLanguageType;
 
   type contextType = {
