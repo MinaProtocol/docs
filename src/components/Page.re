@@ -28,46 +28,24 @@ let make =
     ) => {
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);
-  let languageContext = Context.LanguageContext.useLanguageContext();
 
   /*
-   Define the current selected language component state that will be used to rerender all children when
+   Define the current selected language component state that will be used to rerender all children on a Page
    */
   let (language, setLanguage) =
-    React.useState(() => {languageContext.currentLanguage});
+    React.useState(() => {
+      Context.LanguageContext.currentLangFromUrl(router.route)
+    });
 
   /*
-     On page load, check if there is a selected language in localStorage. If there is no selected language,
-     set localStorage to the default language (english). Otherwise, there is a selected language and we set
-     the component state to the corresponding selected language in localStorage
-   */
-  React.useEffect0(() => {
-    open Context.LanguageContext;
-    switch (ReactExt.LocalStorage.getValueFromLocalStorage("lang")) {
-    | None =>
-      let stringifiedLanguage = toISOCode(languageContext.currentLanguage);
-      ReactExt.LocalStorage.saveValueToLocalStorage(
-        "lang",
-        stringifiedLanguage,
-      );
-    | Some(language) => setLanguage(_ => {isoCodeToLanguageType(language)})
-    };
-    None;
-  });
-
-  /*
-     This function is defined to be the update function for changing the language context value.
-     We define a new function that sets the user's local storage and this components state
-     to the currents selected value when a state change needs to be initiated. We assign
-     this function to the `setCurrentLanguage` property in the language context
-   */
+   This function is used to define the `setCurrentLanguage` property on the LanguageContext.t record.
+   We accept a language as an argument and update the component state with the newly selected language.
+   Following the state update, we route the user to the newly constructed url with the selected language.
+    */
   let setCurrentLanguage = language => {
     open Context.LanguageContext;
     let stringifiedISO = toISOCode(language);
-
-    // Set localStorage and component state to newly selected
-    ReactExt.LocalStorage.saveValueToLocalStorage("lang", stringifiedISO);
-    setLanguage(_ => language);
+    setLanguage(_ => isoCodeToLanguageType(stringifiedISO));
 
     // Replace language part of URL to newly selected language
     let redirectURL =

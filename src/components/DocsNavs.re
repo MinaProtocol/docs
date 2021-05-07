@@ -16,7 +16,7 @@ module SideNav = {
     module Section = SideNav.Section;
     let currentLanguageContext = useLanguageContext();
     let currentLanguage = currentLanguageContext.currentLanguage;
-    let language = toISOCode(currentLanguageContext.currentLanguage);
+    let language = toISOCode(currentLanguage);
     let f = url => {j|/$(language)/$(url)|j};
 
     <div className=Styles.container>
@@ -246,7 +246,7 @@ module Dropdown = {
     module Section = DropdownNav.Section;
     let currentLanguageContext = useLanguageContext();
     let currentLanguage = currentLanguageContext.currentLanguage;
-    let language = toISOCode(currentLanguageContext.currentLanguage);
+    let language = toISOCode(currentLanguage);
     let f = url => {j|/$(language)/$(url)|j};
 
     <div className=Styles.dropdown>
