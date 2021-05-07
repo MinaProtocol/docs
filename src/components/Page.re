@@ -30,6 +30,9 @@ let make =
   let route = Option.value(route, ~default=router.route);
   let languageContext = Context.LanguageContext.useLanguageContext();
 
+  /*
+   Define the current selected language component state that will be used to rerender all children when
+   */
   let (language, setLanguage) =
     React.useState(() => {languageContext.currentLanguage});
 
@@ -52,6 +55,12 @@ let make =
     None;
   });
 
+  /*
+     This function is defined to be the update function for changing the language context value.
+     We define a new function that sets the user's local storage and this components state
+     to the currents selected value when a state change needs to be initiated. We assign
+     this function to the `setCurrentLanguage` property in the language context
+   */
   let setCurrentLanguage = language => {
     open Context.LanguageContext;
     let stringifiedISO = toISOCode(language);
@@ -115,8 +124,8 @@ let make =
       }>
       <Nav dark=darkTheme />
       <main> children </main>
+      <CookieWarning />
+      {showFooter ? <Footer /> : React.null}
     </Context.LanguageContext>
-    <CookieWarning />
-    {showFooter ? <Footer /> : React.null}
   </div>;
 };

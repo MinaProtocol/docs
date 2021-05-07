@@ -267,6 +267,7 @@ module NavGroupLink = {
 let make = (~dark=false) => {
   let (_, setWidth) = React.useState(() => 0);
   let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+  let currentLanguage = currentLanguageContext.currentLanguage;
   let href =
     "/"
     ++ Context.LanguageContext.toISOCode(
@@ -295,7 +296,13 @@ let make = (~dark=false) => {
                className=Styles.logo
              />}
       </Next.Link>
-      <p className=Styles.docsLabel> {React.string("Documentation")} </p>
+      <p className=Styles.docsLabel>
+        {React.string(
+           {
+             Translations.translate(currentLanguage, "Documentation");
+           },
+         )}
+      </p>
     </div>
     <div className=Styles.dropdown>
       <LanguageDropdown items=Context.LanguageContext.allLanguages />

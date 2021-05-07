@@ -91,13 +91,18 @@ module EditLink = {
       | "/en" => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
       | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
       };
+
+    let currentLangFromUrl =
+      Context.LanguageContext.currentLangFromUrl(route);
     <a
       name="Edit Link"
       target="_blank"
       rel="noopener"
       href
       className=Style.editLink>
-      <span className=Theme.Type.link> {React.string("Edit ")} </span>
+      <span className=Theme.Type.link>
+        {React.string(Translations.translate(currentLangFromUrl, "Edit"))}
+      </span>
       <span className=Style.editLink__icon>
         <Icon kind=Icon.ArrowRightMedium />
       </span>
@@ -110,29 +115,17 @@ type metadata = {title: string};
 [@react.component]
 let make = (~metadata, ~children) => {
   let router = Next.Router.useRouter();
-  let currentLanguageContext = Context.LanguageContext.useLanguageContext();
-  let lang =
-    Context.LanguageContext.toISOCode(currentLanguageContext.currentLanguage);
-  let currentUrl = "/" ++ lang;
 
-  let currentSlug =
-    if (router.route == currentUrl) {
-      router.route;
-    } else {
-      Js.String.replaceByRe(
-        Js.Re.fromString("^/" ++ lang ++ "/?"),
-        currentUrl ++ "/",
-        router.route,
-      );
-    };
+  let currentLangFromUrl =
+    Context.LanguageContext.currentLangFromUrl(router.route);
 
   let renderMobileEditButton = () => {
     <span className=Style.content__button>
       <Button
-        width={`rem(7.25)}
+        width={`rem(10.)}
         href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
         bgColor=Theme.Colors.orange>
-        {React.string("Edit")}
+        {React.string(Translations.translate(currentLangFromUrl, "Edit"))}
         <Icon kind=Icon.ArrowRightSmall />
       </Button>
     </span>;
@@ -147,14 +140,19 @@ let make = (~metadata, ~children) => {
       <Wrapped>
         <div className=Nav.Styles.spacer />
         <div className=Style.page>
-          <DocsNavs.SideNav currentSlug />
+          <DocsNavs.SideNav currentSlug={router.route} />
           <div className=Style.content>
-            <DocsNavs.Dropdown currentSlug />
+            <DocsNavs.Dropdown currentSlug={router.route} />
             <div className=Style.content__flex>
               <span className=Style.content__row>
                 {renderMobileEditButton()}
                 <h4 className=Theme.Type.h4>
-                  {React.string("Documentation")}
+                  {React.string(
+                     Translations.translate(
+                       currentLangFromUrl,
+                       "Documentation",
+                     ),
+                   )}
                 </h4>
                 <EditLink route={router.route} />
               </span>

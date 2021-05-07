@@ -51,6 +51,10 @@ module LanguageContext = {
     };
   };
 
+  let currentLangFromUrl = router =>
+    Js.String.split("/", router)->Belt.Array.sliceToEnd(1)[0]
+    ->isoCodeToLanguageType;
+
   type contextType = {
     currentLanguage: t,
     setCurrentLanguage: t => unit,

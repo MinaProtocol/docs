@@ -115,7 +115,7 @@ module Item = {
             className={Css.merge([
               isCurrentItem ? Styles.currentItem : Styles.item,
             ])}>
-            {React.string(title)}
+            {React.string({j|$(title)|j})}
           </span>
         </a>
       </Next.Link>
@@ -152,7 +152,7 @@ module Section = {
           onClick=toggleExpanded
           ariaExpanded=expanded
           className=Styles.cell>
-          <span className=Styles.item> {React.string(title)} </span>
+          <span className=Styles.item> {React.string({j|$(title)|j})} </span>
           <div className=Styles.chevronWrap>
             <img
               src="/static/img/svg/ChevronRight.svg"
