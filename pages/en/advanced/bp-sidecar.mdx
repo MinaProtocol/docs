@@ -93,6 +93,26 @@ docker network create mina-network
 
 Next you will need to start the daemon with `--network mina-network` passed to docker, and some new flags `--open-limited-graphql-port --limited-graphql-port 3095` passed to the daemon.
 
+For example:
+
+```
+docker run --name mina -d \
+--network mina-network \
+-p 8302:8302 \
+--restart=always \
+--mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
+--mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
+-e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
+minaprotocol/mina-daemon-baked:1.1.5-a42bdee \
+daemon \
+--open-limited-graphql-port --limited-graphql-port 3095 \
+--block-producer-key /keys/my-wallet \
+--insecure-rest-server \
+--file-log-level Debug \
+--log-level Info \
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+```
+
 To start the sidecar container, simply use the following command:
 
 ```
