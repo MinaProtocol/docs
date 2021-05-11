@@ -293,11 +293,11 @@ module SideNav = {
             title={intl->Intl.formatMessage(graphqlAPI)}
             slug="graphql-api"
           />
-          <Item title={intl->Intl.formatMessage(logging)} slug="client-sdk" />
           <Item
-            title={intl->Intl.formatMessage(protocolArchitecture)}
-            slug="logging"
+            title={intl->Intl.formatMessage(clientSDK)}
+            slug="client-sdk"
           />
+          <Item title={intl->Intl.formatMessage(logging)} slug="logging" />
           <Item
             title={intl->Intl.formatMessage(contributingToMina)}
             slug="contributing"
@@ -343,36 +343,33 @@ module SideNav = {
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
         <Section title={intl->Intl.formatMessage(snarks)} slug={f("snarks")}>
+          <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(gettingStartedUsingSnarks)}
-            slug=""
-          />
-          <Item
-            title={intl->Intl.formatMessage(whichSnarkRightForMe)}
             slug="snarky"
           />
           <Item
-            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
+            title={intl->Intl.formatMessage(whichSnarkRightForMe)}
             slug="constructions"
           />
           <Item
-            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
+            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
             slug="snarkyjs-crypto"
           />
           <Item
-            title={intl->Intl.formatMessage(troubleshooting)}
+            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
             slug="snarky-universe"
           />
         </Section>
         <Item
-          title={intl->Intl.formatMessage(glossary)}
+          title={intl->Intl.formatMessage(troubleshooting)}
           slug={f("troubleshooting")}
         />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("glossary")} />
         <Item
-          title={intl->Intl.formatMessage(contributingToMina)}
-          slug={f("faq")}
+          title={intl->Intl.formatMessage(glossary)}
+          slug={f("glossary")}
         />
+        <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
       </SideNav>
     </div>;
   };
@@ -518,11 +515,11 @@ module Dropdown = {
             title={intl->Intl.formatMessage(graphqlAPI)}
             slug="graphql-api"
           />
-          <Item title={intl->Intl.formatMessage(logging)} slug="client-sdk" />
           <Item
-            title={intl->Intl.formatMessage(protocolArchitecture)}
-            slug="logging"
+            title={intl->Intl.formatMessage(clientSDK)}
+            slug="client-sdk"
           />
+          <Item title={intl->Intl.formatMessage(logging)} slug="logging" />
           <Item
             title={intl->Intl.formatMessage(contributingToMina)}
             slug="contributing"
@@ -568,36 +565,33 @@ module Dropdown = {
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
         <Section title={intl->Intl.formatMessage(snarks)} slug={f("snarks")}>
+          <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(gettingStartedUsingSnarks)}
-            slug=""
-          />
-          <Item
-            title={intl->Intl.formatMessage(whichSnarkRightForMe)}
             slug="snarky"
           />
           <Item
-            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
+            title={intl->Intl.formatMessage(whichSnarkRightForMe)}
             slug="constructions"
           />
           <Item
-            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
+            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
             slug="snarkyjs-crypto"
           />
           <Item
-            title={intl->Intl.formatMessage(troubleshooting)}
+            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
             slug="snarky-universe"
           />
         </Section>
         <Item
-          title={intl->Intl.formatMessage(glossary)}
+          title={intl->Intl.formatMessage(troubleshooting)}
           slug={f("troubleshooting")}
         />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("glossary")} />
         <Item
-          title={intl->Intl.formatMessage(contributingToMina)}
-          slug={f("faq")}
+          title={intl->Intl.formatMessage(glossary)}
+          slug={f("glossary")}
         />
+        <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
       </DropdownNav>
     </div>;
   };
