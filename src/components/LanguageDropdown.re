@@ -62,7 +62,7 @@ module Styles = {
 };
 
 [@react.component]
-let make = (~items: array(Context.LanguageContext.t)) => {
+let make = (~items: array(Locale.t)) => {
   open Context.LanguageContext;
   let (menuOpen, toggleMenu) = React.useState(() => false);
   let currentLanguageContext = useLanguageContext();
@@ -76,7 +76,7 @@ let make = (~items: array(Context.LanguageContext.t)) => {
     <span className=Styles.currentItemTitle>
       <span>
         {currentLanguageContext.currentLanguage
-         |> toStringLanguage
+         |> Locale.toStringLanguage
          |> React.string}
       </span>
       <Icon kind=Icon.ChevronDown />
@@ -84,11 +84,11 @@ let make = (~items: array(Context.LanguageContext.t)) => {
     <ul
       className={menuOpen ? Styles.expandedDropdown : Styles.collapsedDropdown}>
       {items
-       |> Array.map((item: Context.LanguageContext.t) => {
+       |> Array.map((item: Locale.t) => {
             <li
-              key={toStringLanguage(item)}
+              key={Locale.toStringLanguage(item)}
               onClick={_ => {onDropdownItemPress(item)}}>
-              {item |> toStringLanguage |> React.string}
+              {item |> Locale.toStringLanguage |> React.string}
             </li>
           })
        |> React.array}

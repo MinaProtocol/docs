@@ -23,41 +23,9 @@ module SectionSlugContext = {
 };
 
 module LanguageContext = {
-  type t =
-    | English
-    | Russian;
-
-  let allLanguages = [|English, Russian|];
-
-  let toISOCode = t => {
-    switch (t) {
-    | English => "en"
-    | Russian => "rus"
-    };
-  };
-
-  let isoCodeToLanguageType = t => {
-    switch (t) {
-    | "rus" => Russian
-    | "en"
-    | _ => English
-    };
-  };
-
-  let toStringLanguage = t => {
-    switch (t) {
-    | English => "English"
-    | Russian => "Russian"
-    };
-  };
-
-  let currentLangFromUrl = url =>
-    Js.String.split("/", url)->Belt.Array.sliceToEnd(1)[0]
-    ->isoCodeToLanguageType;
-
   type contextType = {
-    currentLanguage: t,
-    setCurrentLanguage: t => unit,
+    currentLanguage: Locale.t,
+    setCurrentLanguage: Locale.t => unit,
   };
 
   let initValue = {currentLanguage: English, setCurrentLanguage: _ => ()};

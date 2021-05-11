@@ -29,31 +29,6 @@ let make =
   let router = Next.Router.useRouter();
   let route = Option.value(route, ~default=router.route);
 
-  /*
-   Use the current url as the default language state (the website will redirect the user to /en if no language is specified).
-    */
-  let (language, _) =
-    React.useState(() => {
-      Context.LanguageContext.currentLangFromUrl(router.route)
-    });
-
-  /*
-   When a new language is selected, we replace the current language in the URL with the newly selected one
-   and redirect the user to that newly constructed URL.
-    */
-  let setCurrentLanguage = language => {
-    let stringifiedISO = Context.LanguageContext.toISOCode(language);
-
-    // Replace language part of URL to newly selected language
-    let redirectURL =
-      Js.String.replaceByRe(
-        [%re "/(^\/[^/]*\/?)/"],
-        "/" ++ stringifiedISO ++ "/",
-        router.route,
-      );
-    Next.Router.push(router, redirectURL);
-  };
-
   <div className=Styles.main>
     <Next.Head>
       <title> {React.string(title)} </title>
@@ -92,15 +67,9 @@ let make =
         {React.string("img:-moz-loading { visibility: hidden; }")}
       </style>
     </Next.Head>
-    <Context.LanguageContext
-      value={
-        Context.LanguageContext.currentLanguage: language,
-        setCurrentLanguage,
-      }>
-      <Nav dark=darkTheme />
-      <main> children </main>
-      <CookieWarning />
-      {showFooter ? <Footer /> : React.null}
-    </Context.LanguageContext>
+    <Nav dark=darkTheme />
+    <main> children </main>
+    <CookieWarning />
+    {showFooter ? <Footer /> : React.null}
   </div>;
 };

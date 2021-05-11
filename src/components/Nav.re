@@ -265,14 +265,16 @@ module NavGroupLink = {
 
 [@react.component]
 let make = (~dark=false) => {
+  open ReactIntl;
   let (_, setWidth) = React.useState(() => 0);
+  let intl = ReactIntl.useIntl();
   let currentLanguageContext = Context.LanguageContext.useLanguageContext();
-  let currentLanguage = currentLanguageContext.currentLanguage;
-  let href =
-    "/"
-    ++ Context.LanguageContext.toISOCode(
-         currentLanguageContext.currentLanguage,
-       );
+
+  let href = "/" ++ Locale.toISOCode(currentLanguageContext.currentLanguage);
+  let documentation = {
+    id: "sidenav.documentation",
+    defaultMessage: "Documentation",
+  };
 
   React.useEffect0(() => {
     let handleSize = () => {
@@ -297,13 +299,11 @@ let make = (~dark=false) => {
              />}
       </Next.Link>
       <p className=Styles.docsLabel>
-        {currentLanguage
-         ->Translations.translate("Documentation")
-         ->React.string}
+        {intl->Intl.formatMessage(documentation)->React.string}
       </p>
     </div>
     <div className=Styles.dropdown>
-      <LanguageDropdown items=Context.LanguageContext.allLanguages />
+      <LanguageDropdown items=Locale.allLanguages />
     </div>
   </header>;
   /*

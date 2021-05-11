@@ -82,6 +82,9 @@ module Style = {
 module EditLink = {
   [@react.component]
   let make = (~route) => {
+    open ReactIntl;
+    let intl = ReactIntl.useIntl();
+    let edit = {id: "sidenav.edit", defaultMessage: "Edit"};
     /*
        Check if we are on the `Mina Overview` page. If so, we specify the index.mdx file.
        Otherwise the route binding will hold the correct .mdx to edit.
@@ -92,8 +95,6 @@ module EditLink = {
       | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
       };
 
-    let currentLangFromUrl =
-      Context.LanguageContext.currentLangFromUrl(route);
     <a
       name="Edit Link"
       target="_blank"
@@ -101,7 +102,7 @@ module EditLink = {
       href
       className=Style.editLink>
       <span className=Theme.Type.link>
-        {currentLangFromUrl->Translations.translate("Edit")->React.string}
+        {intl->Intl.formatMessage(edit)->React.string}
       </span>
       <span className=Style.editLink__icon>
         <Icon kind=Icon.ArrowRightMedium />
@@ -114,10 +115,14 @@ type metadata = {title: string};
 
 [@react.component]
 let make = (~metadata, ~children) => {
+  open ReactIntl;
   let router = Next.Router.useRouter();
-
-  let currentLangFromUrl =
-    Context.LanguageContext.currentLangFromUrl(router.route);
+  let intl = ReactIntl.useIntl();
+  let documentation = {
+    id: "sidenav.documentation",
+    defaultMessage: "Documentation",
+  };
+  let edit = {id: "sidenav.edit", defaultMessage: "Edit"};
 
   let renderMobileEditButton = () => {
     <span className=Style.content__button>
@@ -125,7 +130,7 @@ let make = (~metadata, ~children) => {
         width={`rem(10.)}
         href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
         bgColor=Theme.Colors.orange>
-        {currentLangFromUrl->Translations.translate("Edit")->React.string}
+        {intl->Intl.formatMessage(edit)->React.string}
         <Icon kind=Icon.ArrowRightSmall />
       </Button>
     </span>;
@@ -147,9 +152,7 @@ let make = (~metadata, ~children) => {
               <span className=Style.content__row>
                 {renderMobileEditButton()}
                 <h4 className=Theme.Type.h4>
-                  {currentLangFromUrl
-                   ->Translations.translate("Documentation")
-                   ->React.string}
+                  {intl->Intl.formatMessage(documentation)->React.string}
                 </h4>
                 <EditLink route={router.route} />
               </span>

@@ -10,7 +10,8 @@
     "reason-react",
     "bs-css",
     "bsc-stdlib-polyfill",
-    "bs-fetch"
+    "bs-fetch",
+    "bs-react-intl"
   ],
   "reason": {
     "react-jsx": 3
@@ -19,9 +20,6 @@
     "module": "es6"
   },
   "suffix": ".bs.js",
-  "bsc-flags": [
-    "-bs-super-errors",
-    "-open BscStdlibPolyfill"
-  ],
+  "bsc-flags": ["-bs-super-errors", "-open BscStdlibPolyfill"],
   "refmt": 3
 }
