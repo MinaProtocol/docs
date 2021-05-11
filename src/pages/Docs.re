@@ -79,62 +79,11 @@ module Style = {
     ]);
 };
 
-module EditLink = {
-  [@react.component]
-  let make = (~route) => {
-    open ReactIntl;
-    let intl = ReactIntl.useIntl();
-    let edit = {id: "sidenav.edit", defaultMessage: "Edit"};
-    /*
-       Check if we are on the `Mina Overview` page. If so, we specify the index.mdx file.
-       Otherwise the route binding will hold the correct .mdx to edit.
-     */
-    let href =
-      switch (route) {
-      | "/en" => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
-      | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
-      };
-
-    <a
-      name="Edit Link"
-      target="_blank"
-      rel="noopener"
-      href
-      className=Style.editLink>
-      <span className=Theme.Type.link>
-        {intl->Intl.formatMessage(edit)->React.string}
-      </span>
-      <span className=Style.editLink__icon>
-        <Icon kind=Icon.ArrowRightMedium />
-      </span>
-    </a>;
-  };
-};
-
 type metadata = {title: string};
 
 [@react.component]
 let make = (~metadata, ~children) => {
-  open ReactIntl;
   let router = Next.Router.useRouter();
-  let intl = ReactIntl.useIntl();
-  let documentation = {
-    id: "sidenav.documentation",
-    defaultMessage: "Documentation",
-  };
-  let edit = {id: "sidenav.edit", defaultMessage: "Edit"};
-
-  let renderMobileEditButton = () => {
-    <span className=Style.content__button>
-      <Button
-        width={`rem(10.)}
-        href={`External(Constants.minaDocsEditLink ++ router.route ++ ".mdx")}
-        bgColor=Theme.Colors.orange>
-        {intl->Intl.formatMessage(edit)->React.string}
-        <Icon kind=Icon.ArrowRightSmall />
-      </Button>
-    </span>;
-  };
 
   <Page title={metadata.title}>
     <Next.Head>
@@ -148,15 +97,6 @@ let make = (~metadata, ~children) => {
           <DocsNavs.SideNav currentSlug={router.route} />
           <div className=Style.content>
             <DocsNavs.Dropdown currentSlug={router.route} />
-            <div className=Style.content__flex>
-              <span className=Style.content__row>
-                {renderMobileEditButton()}
-                <h4 className=Theme.Type.h4>
-                  {intl->Intl.formatMessage(documentation)->React.string}
-                </h4>
-                <EditLink route={router.route} />
-              </span>
-            </div>
             <Next.MDXProvider components={DocsComponents.allComponents()}>
               children
             </Next.MDXProvider>

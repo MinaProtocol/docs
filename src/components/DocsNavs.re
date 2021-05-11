@@ -165,7 +165,10 @@ module SideNav = {
     let container =
       style([
         display(`none),
-        media(Theme.MediaQuery.desktop, [display(`block)]),
+        media(
+          Theme.MediaQuery.desktop,
+          [position(`sticky), display(`block), top(`rem(2.))],
+        ),
       ]);
   };
 
@@ -405,8 +408,7 @@ module Dropdown = {
 
     <div className=Styles.dropdown>
       <DropdownNav
-        currentSlug
-        defaultValue={intl->Intl.formatMessage(minaDocumentation)}>
+        currentSlug defaultValue={intl->Intl.formatMessage(minaOverview)}>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
         <Item
           title={intl->Intl.formatMessage(gettingStarted)}
