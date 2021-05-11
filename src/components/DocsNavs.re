@@ -167,7 +167,12 @@ module SideNav = {
         display(`none),
         media(
           Theme.MediaQuery.desktop,
-          [position(`sticky), display(`block), top(`rem(2.))],
+          [
+            position(`sticky),
+            display(`block),
+            top(`rem(2.)),
+            height(`percent(100.)),
+          ],
         ),
       ]);
   };
