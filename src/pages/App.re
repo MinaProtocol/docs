@@ -53,6 +53,14 @@ let make = (props: props): React.element => {
     None;
   });
 
+  React.useEffect1(
+    () => {
+      setLocale(_ => Locale.currentLangFromUrl(router.route));
+      None;
+    },
+    [|router.route|],
+  );
+
   <Context.LanguageContext
     value={
       Context.LanguageContext.currentLanguage: locale,
