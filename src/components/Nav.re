@@ -5,18 +5,22 @@ module Styles = {
     style([
       position(`sticky),
       display(`flex),
+      flexDirection(`column),
       alignItems(`center),
       justifyContent(`spaceBetween),
       padding2(~v=`zero, ~h=`rem(1.5)),
       height(`rem(4.25)),
+      marginTop(`rem(2.)),
       marginBottom(`rem(-4.25)),
       width(`percent(100.)),
       zIndex(Theme.StackingIndex.zContent),
       media(
         Theme.MediaQuery.tablet,
         [
+          marginTop(`zero),
+          flexDirection(`row),
           position(`absolute),
-          height(`rem(6.25)),
+          height(`auto),
           padding2(~v=`zero, ~h=`rem(2.5)),
         ],
       ),
@@ -202,6 +206,18 @@ module Styles = {
         [marginTop(`rem(-1.)), marginLeft(`rem(1.))],
       ),
     ]);
+
+  let dropdown =
+    style([
+      marginTop(`rem(0.5)),
+      display(`flex),
+      flexDirection(`column),
+      alignItems(`center),
+      justifyContent(`center),
+      height(`rem(10.)),
+      selector("> :first-child", [marginBottom(`rem(1.5))]),
+      media(Theme.MediaQuery.notMobile, [marginTop(`rem(2.))]),
+    ]);
 };
 
 module NavLink = {
@@ -255,9 +271,49 @@ module NavGroupLink = {
   };
 };
 
+module EditLink = {
+  [@react.component]
+  let make = (~route) => {
+    open ReactIntl;
+    let intl = ReactIntl.useIntl();
+    let edit = {
+      id: "docs.suggest-changes",
+      defaultMessage: "Suggest Changes",
+    };
+
+    /*
+       Check if the user is trying to edit the index page by checking the length of the url when split on "/".
+       If the calculated length is 1, we are on the index page and we append "index.mdx" to the route.
+     */
+    let href =
+      switch (
+        Js.String.split("/", route)->Belt.Array.sliceToEnd(1)->Array.length
+      ) {
+      | 1 => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
+      | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
+      };
+
+    <Button
+      width={`rem(8.5)} href={`External(href)} bgColor=Theme.Colors.orange>
+      {intl->Intl.formatMessage(edit)->React.string}
+      <Icon kind=Icon.ArrowRightMedium />
+    </Button>;
+  };
+};
+
 [@react.component]
 let make = (~dark=false) => {
+  open ReactIntl;
   let (_, setWidth) = React.useState(() => 0);
+  let intl = ReactIntl.useIntl();
+  let router = Next.Router.useRouter();
+  let currentLanguageContext = Context.LanguageContext.useLanguageContext();
+
+  let href = "/" ++ Locale.toISOCode(currentLanguageContext.currentLanguage);
+  let documentation = {
+    id: "sidenav.documentation",
+    defaultMessage: "Documentation",
+  };
 
   React.useEffect0(() => {
     let handleSize = () => {
@@ -270,7 +326,7 @@ let make = (~dark=false) => {
 
   <header className=Styles.container>
     <div className=Styles.logoContainer>
-      <Next.Link href="/">
+      <Next.Link href>
         {dark
            ? <img
                src="/static/img/svg/mina-wordmark-dark.svg"
@@ -281,15 +337,23 @@ let make = (~dark=false) => {
                className=Styles.logo
              />}
       </Next.Link>
-      <p className=Styles.docsLabel> {React.string("Documentation")} </p>
+      <p className=Styles.docsLabel>
+        {intl->Intl.formatMessage(documentation)->React.string}
+      </p>
     </div>
-    /*<span className=Styles.statusBadgeContainer>
-      <h4 className=Styles.statusBadge__header>
-        {React.string("Devnet Status: ")}
-      </h4>
-      <span className=Styles.statusBadge>
-        <StatusBadge service=`Devnet />
-      </span>
-    </span>*/
+    <div className=Styles.dropdown>
+      <LanguageDropdown items=Locale.allLanguages />
+      <EditLink route={router.route} />
+    </div>
   </header>;
+  /*
+    TODO: Status badge currently returning an error
+    <span className=Styles.statusBadgeContainer>
+     <h4 className=Styles.statusBadge__header>
+       {React.string("Devnet Status: ")}
+     </h4>
+     <span className=Styles.statusBadge>
+       <StatusBadge service=`Devnet />
+     </span>
+   </span>*/
 };

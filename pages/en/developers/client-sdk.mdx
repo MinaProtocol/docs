@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Client SDK" });
 
 # Client SDK
@@ -96,6 +97,6 @@ let signedPayment = MinaSDK.signPayment({
 
 <Alert>
 
-When generating transactions, you will need to specify the account nonce. This is available for an account via the CLI using `mina advanced get-nonce -address <PUBLIC_KEY>` or using [GraphQL](/docs/developers/graphql-api).
+When generating transactions, you will need to specify the account nonce. This is available for an account via the CLI using `mina advanced get-nonce -address <PUBLIC_KEY>` or using <DocLink copy="GraphQL" url="/developers/graphql-api" />.
 
 </Alert>

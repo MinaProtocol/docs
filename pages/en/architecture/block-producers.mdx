@@ -1,13 +1,14 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Block Producers" });
 
 # Block Producers
 
-The role of a block producer in Mina is to achieve [consensus](/docs/architecture/consensus) and provide security to the blockchain. The block producer is responsible for creating new blocks, which include recent transactions broadcast on the network and a blockchain proof that proves the current state of the chain is valid.
+The role of a block producer in Mina is to achieve <DocLink copy="consensus" url="/architecture/consensus" /> and provide security to the blockchain. The block producer is responsible for creating new blocks, which include recent transactions broadcast on the network and a blockchain proof that proves the current state of the chain is valid.
 
 In Mina, anyone may become a block producer. There is an unbounded number of participants with the chance of producing a block proportional to the funds staked. Funds are not locked and are not subject to slashing.
 
-In return for staking funds and generating the required blockchain proofs, blocks produced and included in the canonical chain are rewarded in the form of a coinbase and transaction fees, less any fees paid to purchase required [transaction snark work](/docs/architecture/snark-workers).
+In return for staking funds and generating the required blockchain proofs, blocks produced and included in the canonical chain are rewarded in the form of a coinbase and transaction fees, less any fees paid to purchase required <DocLink copy="transaction snark work" url="/architecture/snark-workers" />.
 
 To produce a block successfully, a block producer must have the current state of the blockchain. Additionally, they must have enough available compute to produce a blockchain SNARK within the slot time and be connected to peers to broadcast the generated block within an acceptable delay as defined by the network consensus parameters.
 
@@ -45,6 +46,6 @@ Delegated funds are not spendable and may be undelegated at any time by re-deleg
 
 ## Supercharged coinbase
 
-To further incentivize staking, if the account that wins the slot is one that does not have any [time-locked tokens](/docs/architecture/timelock), the block producer will receive double the coinbase rewards.
+To further incentivize staking, if the account that wins the slot is one that does not have any <DocLink copy="time-locked tokens" url="/architecture/timelock" />, the block producer will receive double the coinbase rewards.
 
 The supercharged coinbase applies to all accounts, either delegating or staking. The supercharged reward is determined using the account that won the slot. For example, if a non-time-locked account delegates to a time-locked account, if the non-time-locked account wins the slot, the coinbase is supercharged. If the time-locked account wins, the coinbase is not supercharged.

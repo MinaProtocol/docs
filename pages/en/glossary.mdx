@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Glossary" });
 
 # Glossary
@@ -9,7 +10,7 @@ Mina uses accounts to track each public key's state. This is distinct from Bitco
 
 #### Archive Node
 
-Mina nodes are succinct by default, meaning they don't need to maintain historical information about the network, block, or transactions. An [archive node](/docs/advanced/archive-node) stores the historical chain data to a persistent data source so it can later be retrieved.
+Mina nodes are succinct by default, meaning they don't need to maintain historical information about the network, block, or transactions. An <DocLink copy="archive node" url="/advanced/archive-node" /> stores the historical chain data to a persistent data source so it can later be retrieved.
 
 #### Best Tip
 
@@ -178,7 +179,7 @@ A remote procedure call [(RPC)] (https://en.wikipedia.org/wiki/Remote_procedure_
 
 #### Scan State
 
-The [scan state](/docs/architecture/scan-state) is a data structure that queues transactions requiring transaction SNARK proofs and allows parallel processing of these transaction SNARKS by [snark workers](#snark-worker).
+The <DocLink copy="scan state" url="/architecture/scan-state" /> is a data structure that queues transactions requiring transaction SNARK proofs and allows parallel processing of these transaction SNARKS by [snark workers](#snark-worker).
 
 #### Signatures
 

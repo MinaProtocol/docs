@@ -3,11 +3,19 @@ const path = require("path");
 const withMDX = require("@next/mdx")({
   options: {
     remarkPlugins: [require("remark-slug"), require("remark-math")],
-    rehypePlugins: [require("rehype-katex"), [require("rehype-highlight"), { subset: false }]],
+    rehypePlugins: [
+      require("rehype-katex"),
+      [require("rehype-highlight"), { subset: false }],
+    ],
   },
 });
 
-const withTM = require("next-transpile-modules");
+const withTM = require("next-transpile-modules")([
+  "bs-platform",
+  "bs-css",
+  "bsc-stdlib-polyfill",
+  "bs-fetch",
+]);
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -23,12 +31,6 @@ module.exports = withTM(
         return pages;
       },
       pageExtensions: ["jsx", "js", "mdx"],
-      transpileModules: [
-        "bs-platform",
-        "bs-css",
-        "bsc-stdlib-polyfill",
-        "bs-fetch",
-      ],
       webpack(config, options) {
         config.resolve.alias["@reason"] = path.join(
           __dirname,

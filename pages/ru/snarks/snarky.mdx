@@ -1,0 +1,151 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Snarky DSL Guide" });
+
+Здесь вы можете найти документацию по использованию **snarky**, DSL для использования zk-SNARKS, а также **snarkyjs-crypto** (сопутствующей библиотеки JavaScript, предоставляющей набор криптографических примитивов, подходящих для использования с **snarky**).
+
+## Структура SNAPP
+
+SNAPP (или SNARK-приложение) состоит из двух частей:
+
+1. Определение вашей программы zk-SNARK. Эта часть будет построена с использованием **snarky**
+   и прежде всего стандартной библиотеки <DocLink copy="snarky-universe" url="/snarks/snarky-universe" />.
+2. Остальная часть приложения, которое вызывает **snarky** для создания и проверки доказательств.
+   В настоящее время существуют API для Node.js и OCaml/ReasonML для взаимодействия с программами **snarky** таким образом.
+
+   Мы используем две библиотеки Node.js:
+
+   - <DocLink copy="snarkyjs-crypto" url="/snarks/snarkyjs-crypto" />, что дает
+     нам доступ к криптографическим хэшам, деревьям Меркла и подписям, которые
+     зеркально отражают то, что есть в snarky-universe.
+   - [snarkyjs](https://www.npmjs.com/package/snarkyjs), который дает нам методы для создания и проверки SNARK-доказательств.
+
+## Пример приложения
+
+Давайте создадим простое приложение для доказательства того, что мы знаем предварительную картинку хэш-функции.
+Готовое приложение вы можете найти [здесь](https://github.com/o1-labs/sfbw-workshop/tree/master/solutions/ex_preimage).
+
+### Строительство SNARK
+
+Первым шагом в построении SNAPP является определение нашего SNARK. В этом случае, наш SNARK
+докажет, применив значение хэша **h**
+
+> Я знаю элемент поля **x** таким образом, чтобы **hash(x) = h**.
+
+где **hash** - это хэш-функция Посейдона, предоставляемая в snarky-universe.
+
+Компонент snarky -- [определенный в этом файле](https://github.com/o1-labs/sfbw-workshop/blob/master/solutions/ex_preimage/ex_preimage.re) -- следующий:
+
+```reasonml
+module Universe = (val Snarky_universe.default());
+open! Universe.Impl;
+open! Universe;
+
+let input = InputSpec.[(module Hash)];
+
+module Witness = Field;
+
+let main = (preimage: Witness.t, h, ()) =>
+  Field.assertEqual(Hash.hash([|preimage|]), h);
+
+runMain(input, (module Witness), main);
+```
+
+Давайте разобьем этот файл по частям. Верхние 3 строки
+
+```reasonml
+module Universe = (val Snarky_universe.default());
+open! Universe.Impl;
+open! Universe;
+```
+
+это всего лишь преамбула, в которую включены все необходимые нам функции. Она использует бэкэнд сборки SNARK "по умолчанию",
+который представляет собой Groth16 SNARK, приведенный в качестве примера в виде кривой bn128.
+
+Следующая линия
+
+```reasonml
+let input = InputSpec.[(module Hash)];
+```
+
+декларирует, что общественный вклад в наш SNARK будет хэшем. "Общественный вклад" (или "оператор") - это значение, которое наш
+SNARK вновь проверяет.
+
+Следующая линия
+
+```reasonml
+module Witness = Field;
+```
+
+утверждает, что наш "свидетель" высшего уровня (когда мы должны доказать, что мы знаем) будет единым элементом поля,
+как описано выше.
+
+Далее, у нас есть функция `main`, которая действительно определяет наш SNARK.
+
+```reasonml
+let main = (preimage: Witness.t, h, ()) =>
+  Field.assertEqual(Hash.hash([|preimage|]), h);
+```
+
+Здесь мы пишем именно то, что описывалось выше: `main` вычисляет хэш свидетеля и утверждает что он
+равен общественному вкладу `h`.
+
+Аргументы для `main` должны содержать:
+
+1. Высший уровень значения свидетеля.
+2. Любой общественный вклад. Здесь у нас только один, `h`.
+3. Формальный аргумент `()`.
+
+Последняя линия
+
+```reasonml
+runMain(input, (module Witness), main);
+```
+
+настраивает нашу программу для работы с API Node.js.
+
+### Использование SNARK
+
+Теперь мы готовы использовать наш SNARK. Мы собираемся использовать API Node.js.
+
+API довольно простой. Мы можем создать объект "snarky", который имеет 2 метода:
+
+1. `prove`, которая берет стейтмент и свидетеля, возвращая обещание доказательств.
+2. `verify`, который берет стейтмент и доказательство, возвращая обещание bool.
+
+Вот как все это сочетается:
+
+```javascript
+const { bn128 } = require("snarkyjs-crypto");
+const Snarky = require("snarkyjs");
+const snarky = new Snarky("./ex_preimage.exe");
+
+const preImage = bn128.Field.ofInt(5);
+const statement = bn128.Hash.hash([preImage]);
+
+snarky
+  .prove({
+    statement: [statement],
+    witness: preImage,
+  })
+  .then((proof) => {
+    console.log("Created proof:\n" + proof + "\n");
+    return snarky.verify({
+      statement: [statement],
+      proof: proof,
+    });
+  }, console.log)
+  .then(
+    (verified) => {
+      console.log("Was the proof verified? " + verified);
+      if (verified) {
+        process.exit(0);
+      } else {
+        process.exit(1);
+      }
+    },
+    () => {
+      process.exit(1);
+    }
+  );
+```

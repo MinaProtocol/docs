@@ -1,0 +1,203 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "What's in a Block" });
+
+# Что в блоке?
+
+Блок - это набор транзакций и информации о консенсусе, который влияет на состояние сети. Блок в сети Mina включает в себя доказательство того, что текущее состояние сети является в полной мере подтвержденным.
+
+Блок в Mina состоит из:
+
+- [Состояние протокола](#protocol-state)
+- [Доказательство состояния протокола](#protocol-state-proof)
+- [Дифф распределенного реестра](#staged-ledger-diff)
+- [Доказательство дельта-перехода цепи](#delta-transition-chain-proof)
+- Текущая версия протокола
+- Предлагаемая версия протокола
+
+Когда нода получает блок от пира, он сначала проверяется, применяется к существующему состоянию и добавляется к граничной транзакции ноды. Если, согласно правилам <DocLink copy="консенсуса" url="/architecture/consensus" />, это приводит к увеличению длины блокчейна, вершина ноды обновляется, а корень границы транзакции сдвигается вверх, чтобы поддерживать только блоки `k` на границе транзакции.
+
+<Alert>
+
+В Mina блоки - это синоним "переходов". Когда этот переход (блок) получен от пира, он называется "внешним переходом", а локально сгенерированный и примененный - "внутренним переходом".
+
+</Alert>
+
+### Состояние протокола
+
+Состояние протокола состоит из **предыдущего хэша состояния протокола** и тела, которое содержит:
+
+- [Хэш состояния генезиса](#genesis-state-hash)
+- [Состояние блокчейна](#blockchain-state)
+- [Состояние консенсуса](#consensus_state)
+- [Константы консенсуса](#consensus-constants)
+
+Каждый блок содержит хэш состояния протокола предыдущего блока, таким образом, блоки могут быть соединены вместе, образуя непрерывную цепь.
+
+Хэш состояния протокола определяется из хэша предыдущего состояния и тела, выступая в качестве уникального идентификатора для каждого блока.
+
+#### Хэш состояния генезиса
+
+Хэш состояния генезиса - это хэш состояния протокола для состояния протокола генезиса.
+
+#### Состояние блокчейна
+
+Состояние блокчейна включает:
+
+- Хэш состояния реестра
+- Хэш реестра SNARK
+- Следующий доступный токен с SNARK
+- Хэш реестра генезиса
+- Временная метка
+
+#### Состояние консенсуса
+
+Состояние консенсуса включает:
+
+- Длину блокчейна
+- Отсчет эпохи
+- Минимальную плотность окна
+- Плотность подокна
+- Последний VRF-выход
+- Общий баланс
+- Текущий глобальный слот
+- Глобальный слот с момента генезиса
+- Данные по эпохе стейкинга
+- Данные следующей эпохи
+- Has ancestor in same checkpoint window
+- Победителя стейкинга в блоке
+- Создателя блока
+- Получателя на Coinbase
+- <DocLink
+    copy="Удвоенную награду Суперчардж"
+    url="/architecture/block-producers#supercharged-coinbase"
+  />
+
+#### Константы консенсуса
+
+Константы задают параметры консенсуса:
+
+- k
+- delta
+- slots_per_sub_window
+- slots_per_window
+- sub_windows_per_window
+- slots_per_epoch
+- epoch duration
+- checkpoint_window_slots_per_year
+- checkpoint_window_size_in_slots
+- block_window_duration_ms
+- acceptable network delay
+- slot_duration_ms
+- epoch_duration
+- delta_duration
+- genesis_state_timestamp
+
+### Доказательство состояния протокола
+
+Доказательство состояния протокола - это доказательство блокчейн, подтверждающее, что новое состояние протокола, сгенерированное блок-продюсером, является действительным. Благодаря использованию рекурсивных SNARK, это доказательство состояния протокола подтверждает, что вся история цепи является истинной.
+
+### Дифф распределенного реестра
+
+Когда <DocLink copy="блок-продюсер" url="/architecture/block-producers" /> выигрывает слот для производства блока, он выбирает транзакции и любую снарк-работу из пулов транзакций и snark. Таким образом, они создают предлагаемое следующее состояние блокчейна, которое включает в себя создание диффа распределенного реестра. Дифф состоит из:
+
+- Транзакций, включенных в блок
+- Списка SNARK-доказательств, сгенерированных <DocLink copy="снарк-воркерами" url="/architecture/snark-workers" /> для ранее добавленных транзакций
+- Отложенной монетной базы
+
+Распределенный реестр может рассматриваться как база данных нерассмотренных счетов, в которую занесены транзакции (платежи, монетная база и комиссионные за доказательства), для которых еще нет SNARK'ов. Распределенный реестр состоит из состояния счетов (реестр) и очередью транзакций без SNARK-доказательств , что представляет [состояние сканирования] (/документы/архитектура/сканирование-состояние).
+
+### Доказательство дельта-перехода цепи
+
+В случае неблагоприятных сетевых условий, допускается сетевая задержка при трансляции или вирусной передачи вновь создаваемых блоков. Доказательство дельта-перехода цепи свидетельствует о том, что блок был изготовлен в пределах отведенного времени слота.
+
+### Пример блока
+
+```
+{
+  "external_transition": {
+    "protocol_state": {
+      "previous_state_hash": "3NLKJLNbD7rBAbGdjZz3tfNBPYxUJJaLmwCP9jMKR65KSz4RKV6b",
+      "body": {
+        "genesis_state_hash": "3NLxYrjb7zmHdoFgBrubCN8ijM8v7eT8kvLiPLc9DHt3M8XrDDEG",
+        "blockchain_state": {
+          "staged_ledger_hash": {
+            "non_snark": {
+              "ledger_hash": "jxV4SS44wHUVrGEucCsfxLisZyUC5QddsiokGH3kz5xm2hJWZ25",
+              "aux_hash": "UmosfM82dH5xzqdckXgA1JoAvJ5tLxch2wsty4sXmiEPKnPTPq",
+              "pending_coinbase_aux": "WLo8mDN6oBUTSyBkFCy7Fky7Na5fN4R6oGq4HMf3YoHCAj4cwY"
+            },
+            "pending_coinbase_hash": "2mze7iXKwA9JAqVDC1MVvgWfJDgvbgSexKtuShdkgqMfv1tjATQQ"
+          },
+          "snarked_ledger_hash": "jx9171AbMApHNG1guAcKct1E6nyUFweA7M4ZPCjBZpgNNrE21Nj",
+          "genesis_ledger_hash": "jxX6VJ84HaafrKozFRA4qjnni4aPXqXC2H5vQLKSryNpKTXuz1R",
+          "snarked_next_available_token": "2",
+          "timestamp": "1611691710000"
+        },
+        "consensus_state": {
+          "blockchain_length": "3852",
+          "epoch_count": "1",
+          "min_window_density": "1",
+          "sub_window_densities": [
+            "3",
+            "1",
+            "3",
+            "1",
+            "4",
+            "2",
+            "1",
+            "2",
+            "2",
+            "4",
+            "5"
+          ],
+          "last_vrf_output": "g_1vrXSXLhvn1e4Ap1Ey5e8yh3PFMJT0vZyhZLlTBAA=",
+          "total_currency": "167255800000001000",
+          "curr_global_slot": {
+            "slot_number": "12978",
+            "slots_per_epoch": "7140"
+          },
+          "global_slot_since_genesis": "12978",
+          "staking_epoch_data": {
+            "ledger": {
+              "hash": "jxX6VJ84HaafrKozFRA4qjnni4aPXqXC2H5vQLKSryNpKTXuz1R",
+              "total_currency": "165950000000001000"
+            },
+            "seed": "2vb1Mjvydod6sEwn7qpbejKCfRqugMgyG3MHXXRKcAkwQLRs9fj8",
+            "start_checkpoint": "3NK2tkzqqK5spR2sZ7tujjqPksL45M3UUrcA4WhCkeiPtnugyE2x",
+            "lock_checkpoint": "3NK5G8Xqn1Prh3XoTyZ2tqntJC6X2nVwruv5mEJCL3GaTk7jKUNo",
+            "epoch_length": "1769"
+          },
+          "next_epoch_data": {
+            "ledger": {
+              "hash": "jx7XXjRfJj2mGXmiHQmpm6ZgTxz14udpugyFtw4DefJFpie7apN",
+              "total_currency": "166537000000001000"
+            },
+            "seed": "2vavBR2GfJWvWkpC7yGJQFnts18nHaFjdVEr84r1Y9DQXvnJRhmd",
+            "start_checkpoint": "3NLdAqxtBRYxYbCWMXxGu6j1hGDrpQwGkBDF9QvGxmtpziXQDADu",
+            "lock_checkpoint": "3NL4Eis1pS1yrPdfCbiJcpCCYsHuXY3ZgEzHojPnFWfMK9gKmhZh",
+            "epoch_length": "2084"
+          },
+          "has_ancestor_in_same_checkpoint_window": true,
+          "block_stake_winner": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
+          "block_creator": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
+          "coinbase_receiver": "B62qpBrUYW8SHcKTFWLbHKD7d3FqYFvGRBaWRLQCgsr3V9pwsPSd7Ms",
+          "supercharge_coinbase": true
+        },
+        "constants": {
+          "k": "290",
+          "slots_per_epoch": "7140",
+          "slots_per_sub_window": "7",
+          "delta": "0",
+          "genesis_state_timestamp": "1609355670000"
+        }
+      }
+    },
+    "protocol_state_proof": "<opaque>",
+    "staged_ledger_diff": "<opaque>",
+    "delta_transition_chain_proof": "<opaque>",
+    "current_protocol_version": "1.1.0",
+    "proposed_protocol_version": "<None>"
+  }
+}
+```

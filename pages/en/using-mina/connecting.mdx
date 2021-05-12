@@ -1,5 +1,6 @@
 import Page from "@reason/pages/Docs";
 import StatusBadge from "@reason/components/StatusBadge";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Connect to the Network" });
 
 # Connect to the Network
@@ -29,7 +30,7 @@ Since this technology is still relatively new, there are a few rare situations w
 
 However, first we'll want to make sure everything works by running it manually before starting with the auto-restart flows.
 
-Note: If you are using the Hetzner hosting provider, we are currently experiencing an issue where Hetzner believes our software is being malicious. See the [Networking section of the troubleshooting page](/docs/troubleshooting#networking) to learn how to mitigate this before starting a node.
+Note: If you are using the Hetzner hosting provider, we are currently experiencing an issue where Hetzner believes our software is being malicious. See the <DocLink copy="Networking section of the troubleshooting page" url="/troubleshooting#networking" /> to learn how to mitigate this before starting a node.
 
 Run the following command to start up a Mina node instance and connect to the live network:
 
@@ -39,9 +40,9 @@ mina daemon --generate-genesis-proof true --peer-list-url https://storage.google
 
 If you have a key with stake and would like to produce blocks, also provide `--block-producer-key ~/keys/my-wallet`, replacing `~/keys/my-wallet` with the path to your private key if not the default.
 
-The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a [peer-to-peer](/docs/glossary#peer-to-peer) protocol, there is no single centralized server we rely on.
+The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a <DocLink copy="peer-to-peer" url="/glossary#peer-to-peer" /> protocol, there is no single centralized server we rely on.
 
-See [here](/docs/troubleshooting) for common issues when first running a node.
+See <DocLink copy="here" url="/troubleshooting" /> for common issues when first running a node.
 
 You're not done yet! Now that you've confirmed things are okay by running the standalone process, it is important we start Mina in a manner that will auto-restart itself when it dies.
 
@@ -156,7 +157,7 @@ Now that we've started up a node and are running the Mina daemon, open up anothe
 
 It may take up to a minute before `mina client status` connects to the daemon when first starting up. So if you see `Error: daemon not running. See mina daemon`, just a wait a bit and try again.
 
-If you are using the [Sandbox Node](/docs/developers/sandbox-node), due to a quirk in the way we communicate for the mina client status command, you will need to run `mina client status` inside the container itself:
+If you are using the <DocLink copy="GetSandbox Nodeing" url="/developers/sandbox-node" />, due to a quirk in the way we communicate for the mina client status command, you will need to run `mina client status` inside the container itself:
 
 `docker exec -it mina bash`
 
@@ -179,7 +180,7 @@ If you the `Bootstrap` state persists for more than an hour, there may be an iss
 
 ## Stepping up your game
 
-Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon such as [Sending a payment](/docs/using-mina/send-payment) and [Staking & Delegating](/docs/using-mina/staking). And if you want to earn more tokens, check out the [Foundation Delegation Program](/docs/advanced/foundation-delegation-program).
+Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon such as <DocLink copy="Sending a payment" url="/using-mina/send-payment" /> and <DocLink copy="Staking & Delegating" url="/using-mina/staking" />. And if you want to earn more tokens, check out the <DocLink copy="Foundation Delegation Program" url="/advanced/foundation-delegation-program" />.
 
 <span id="disclaimer">
 

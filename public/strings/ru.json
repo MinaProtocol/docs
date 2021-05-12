@@ -1,0 +1,272 @@
+[
+  {
+    "id": "sidenav.overview",
+    "defaultMessage": "Overview",
+    "message": "Разработчики"
+  },
+  {
+    "id": "sidenav.mina-overview",
+    "defaultMessage": "Mina Overview",
+    "message": "Обзор Mina0"
+  },
+  {
+    "id": "sidenav.getting-started",
+    "defaultMessage": "Getting Started",
+    "message": "Начало работы"
+  },
+  {
+    "id": "sidenav.using-mina",
+    "defaultMessage": "Using Mina",
+    "message": "Использование Мины"
+  },
+  {
+    "id": "sidenav.keypair-generation",
+    "defaultMessage": "Keypair Generation",
+    "message": "Генерация Keypair"
+  },
+  {
+    "id": "sidenav.connect-to-network",
+    "defaultMessage": "Connect To The Network",
+    "message": "Подключение к сети"
+  },
+  {
+    "id": "sidenav.sending-a-payment",
+    "defaultMessage": "Sending a Payment",
+    "message": "Отправка платежа"
+  },
+  {
+    "id": "sidenav.staking-snarking",
+    "defaultMessage": "Staking & Snarking",
+    "message": "Стейкинг и снаркинг"
+  },
+  {
+    "id": "sidenav.cli-reference",
+    "defaultMessage": "CLI Reference",
+    "message": "Справка по CLI"
+  },
+  {
+    "id": "sidenav.advanced",
+    "defaultMessage": "Advanced",
+    "message": "Передовой"
+  },
+  {
+    "id": "sidenav.archive-node",
+    "defaultMessage": "Archive Node",
+    "message": "Архивная нода"
+  },
+  {
+    "id": "sidenav.archive-redundancy",
+    "defaultMessage": "Archive Redundancy",
+    "message": "Архивное резервирование"
+  },
+  {
+    "id": "sidenav.data-querying",
+    "defaultMessage": "Data Querying",
+    "message": "Запросы данных для операторов нод"
+  },
+  {
+    "id": "sidenav.bp-producer-sidecar",
+    "defaultMessage": "Block Producer Sidecar",
+    "message": "Sidecar для блок-продюсера"
+  },
+  {
+    "id": "sidenav.client-sdk",
+    "defaultMessage": "Client SDK",
+    "message": "Клиентский SDK"
+  },
+  {
+    "id": "sidenav.devnet",
+    "defaultMessage": "Devnet",
+    "message": "Devnet"
+  },
+  {
+    "id": "sidenav.foundation-delegation",
+    "defaultMessage": "Foundation Delegation",
+    "message": "Делегация Фонда"
+  },
+  {
+    "id": "sidenav.hard-fork",
+    "defaultMessage": "Hard Fork",
+    "message": "Хардфорк"
+  },
+  {
+    "id": "sidenav.hot-cold-wallets",
+    "defaultMessage": "Hot/Cold Wallets",
+    "message": "Горячее / холодное создание блоков"
+  },
+  {
+    "id": "sidenav.ledger-hardware-wallet",
+    "defaultMessage": "Ledger Hardware Wallet",
+    "message": "Аппатный кошелек Ledger"
+  },
+  {
+    "id": "sidenav.seed-peers",
+    "defaultMessage": "Seed Peers",
+    "message": "Сид-пиры"
+  },
+  {
+    "id": "sidenav.staking-service-guidelines",
+    "defaultMessage": "Staking Service Guidelines",
+    "message": "Рекомендации по стейкингу"
+  },
+  {
+    "id": "sidenav.developers",
+    "defaultMessage": "Developers",
+    "message": "Разработчики"
+  },
+  {
+    "id": "sidenav.codebase-overview",
+    "defaultMessage": "Codebase Overview",
+    "message": "Обзор кодовой базы"
+  },
+  {
+    "id": "sidenav.repository-structure",
+    "defaultMessage": "Repository Structure",
+    "message": "Структура репозитория"
+  },
+  {
+    "id": "sidenav.BIP44-information",
+    "defaultMessage": "BIP44 Information",
+    "message": "Информация о BIP44"
+  },
+  {
+    "id": "sidenav.code-reviews",
+    "defaultMessage": "Code Reviews",
+    "message": "Руководящие принципы пересмотра кода"
+  },
+  {
+    "id": "sidenav.style-guide",
+    "defaultMessage": "Style Guide",
+    "message": "Руководство по стилю"
+  },
+  {
+    "id": "sidenav.sandbox-node",
+    "defaultMessage": "Sandbox Node",
+    "message": "Нода песочницы"
+  },
+  {
+    "id": "sidenav.graphql-api",
+    "defaultMessage": "GraphQL API",
+    "message": "GraphQL API"
+  },
+  {
+    "id": "sidenav.logging",
+    "defaultMessage": "Logging",
+    "message": "Логгинг"
+  },
+  {
+    "id": "sidenav.protocol-architecture",
+    "defaultMessage": "Protocol Architecture",
+    "message": "Архитектура протокола"
+  },
+  {
+    "id": "sidenav.lifecycle-of-a-payment",
+    "defaultMessage": "Lifecycle of a Payment",
+    "message": "Жизненный цикл транзакций"
+  },
+  {
+    "id": "sidenav.block-producers",
+    "defaultMessage": "Block Producers",
+    "message": "Блок-продюсеры"
+  },
+  {
+    "id": "sidenav.whats-in-a-block",
+    "defaultMessage": "What's in a Block",
+    "message": "Что в блоке"
+  },
+  {
+    "id": "sidenav.consensus",
+    "defaultMessage": "Consensus",
+    "message": "Консенсус"
+  },
+  {
+    "id": "sidenav.proof-of-stake",
+    "defaultMessage": "Proof of Stake",
+    "message": "Proof of Stake"
+  },
+  {
+    "id": "sidenav.snark-workers",
+    "defaultMessage": "Snark Workers",
+    "message": "Введение"
+  },
+  {
+    "id": "sidenav.scan-state",
+    "defaultMessage": "Scan State",
+    "message": "Scan State"
+  },
+  {
+    "id": "sidenav.time-locked-accounts",
+    "defaultMessage": "Time-locked Accounts",
+    "message": "Временно заблокированные аккаунты"
+  },
+  {
+    "id": "sidenav.snapps",
+    "defaultMessage": "Snapps",
+    "message": "Snapps"
+  },
+  {
+    "id": "sidenav.tokens",
+    "defaultMessage": "Tokens",
+    "message": "Токены"
+  },
+  {
+    "id": "sidenav.snarks",
+    "defaultMessage": "SNARKs",
+    "message": "SNARKs"
+  },
+  {
+    "id": "sidenav.getting-starting-using-snarks",
+    "defaultMessage": "Getting started using SNARKs",
+    "message": "Начало работы с SNARKs"
+  },
+  {
+    "id": "sidenav.which-snark-right-for-me",
+    "defaultMessage": "Which SNARK is right for me?",
+    "message": "Какой SNARK мне подходит?"
+  },
+  {
+    "id": "sidenav.snarkyjs-crypto-library",
+    "defaultMessage": "The snarkyjs-crypto library",
+    "message": "Библиотека snarkyjs-crypto"
+  },
+  {
+    "id": "sidenav.snarky-universe-library",
+    "defaultMessage": "The snarky-universe library",
+    "message": "Библиотека вселенной snkary"
+  },
+  {
+    "id": "sidenav.troubleshooting",
+    "defaultMessage": "Troubleshooting",
+    "message": "Поиск проблем"
+  },
+  {
+    "id": "sidenav.glossary",
+    "defaultMessage": "Glossary",
+    "message": "Глоссарий"
+  },
+  {
+    "id": "sidenav.faq",
+    "defaultMessage": "FAQ",
+    "message": "FAQ"
+  },
+  {
+    "id": "sidenav.documentation",
+    "defaultMessage": "Documentation",
+    "message": "Документация"
+  },
+  {
+    "id": "sidenav.contributing-to-mina",
+    "defaultMessage": "Contributing to Mina",
+    "message": "Участие в развитии Mina"
+  },
+  {
+    "id": "docs.suggest-changes",
+    "defaultMessage": "Suggest Changes",
+    "message": "Предложить изменения"
+  },
+  {
+    "id": "sidenav.mina-documentation",
+    "defaultMessage": "Mina Documentation",
+    "message": "Документация Mina"
+  }
+]

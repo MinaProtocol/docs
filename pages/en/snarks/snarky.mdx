@@ -1,4 +1,5 @@
 import Page from '@reason/pages/Docs';
+import DocLink from "@reason/components/DocLink";
 export default Page({title: "Snarky DSL Guide"});
 
 Here you can find documentation on how to use **snarky**, a DSL for using zk-SNARKS, as well as **snarkyjs-crypto** a companion JavaScript library providing a suite of cryptographic primitives suitable for use with **snarky**.
@@ -9,13 +10,13 @@ Here you can find documentation on how to use **snarky**, a DSL for using zk-SNA
 A SNAPP (or snarkified app) has two parts:
 
 1. The definition of your zk-SNARK program. This part will be built using **snarky**
-   and specifically the [snarky-universe](/docs/snarks/snarky-universe) standard library.
+   and specifically the <DocLink copy="snarky-universe" url="/snarks/snarky-universe" /> standard library.
 2. The rest of the application, which calls into **snarky** to create and verify proofs.
    There are currently APIs for Node.js and OCaml/ReasonML for interacting with **snarky** programs in this way.
 
     We'll use two Node.js libraries:
 
-    - [snarkyjs-crypto](/docs/snarks/snarkyjs-crypto), which gives us access
+    - <DocLink copy="snarkyjs-crypto" url="/snarks/snarkyjs-crypto" />, which gives us access
       to cryptographic hashes, merkle-trees, and signatures that mirror those in snarky-universe
     - [snarkyjs](https://www.npmjs.com/package/snarkyjs) which gives us methods for creating and verifying SNARK proofs.
 

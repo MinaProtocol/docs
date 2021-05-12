@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Hard Fork" });
 
 # Hard Fork
@@ -27,7 +28,7 @@ Next, remove your `.mina-config` folder since the fork will require syncing from
 rm -rf ~/.mina-config
 ```
 
-Now you can follow the instructions on the [Connecting to the Network](/docs/using-mina/connecting) to install the latest version of the daemon.
+Now you can follow the instructions on the <DocLink copy="Connecting to the Network" url="/using-mina/connecting" /> to install the latest version of the daemon.
 
 Once your node syncs with the network you are all set. Just wait for the announced network start time and your node will have successfully participated in a hard fork!
 
