@@ -50,12 +50,6 @@ module Style = {
   let editLink__icon =
     style([display(`flex), alignItems(`center), marginLeft(`rem(0.5))]);
 
-  let content__button =
-    style([
-      display(`block),
-      media(Theme.MediaQuery.notMobile, [display(`none)]),
-    ]);
-
   let content__flex =
     style([
       display(`flex),
@@ -79,6 +73,27 @@ module Style = {
     ]);
 };
 
+module EditLink = {
+  [@react.component]
+  let make = (~route) => {
+    open ReactIntl;
+    let intl = ReactIntl.useIntl();
+    let edit = {id: "sidenav.edit", defaultMessage: "Edit"};
+
+    let href =
+      switch (route) {
+      | "/en" => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
+      | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
+      };
+
+    <Button
+      width={`rem(7.25)} href={`External(href)} bgColor=Theme.Colors.orange>
+      {intl->Intl.formatMessage(edit)->React.string}
+      <Icon kind=Icon.ArrowRightSmall />
+    </Button>;
+  };
+};
+
 type metadata = {title: string};
 
 [@react.component]
@@ -97,6 +112,11 @@ let make = (~metadata, ~children) => {
           <DocsNavs.SideNav currentSlug={router.route} />
           <div className=Style.content>
             <DocsNavs.Dropdown currentSlug={router.route} />
+            <div className=Style.content__flex>
+              <span className=Style.content__row>
+                <EditLink route={router.route} />
+              </span>
+            </div>
             <Next.MDXProvider components={DocsComponents.allComponents()}>
               children
             </Next.MDXProvider>
