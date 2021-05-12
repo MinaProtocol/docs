@@ -281,9 +281,15 @@ module EditLink = {
       defaultMessage: "Suggest Changes",
     };
 
+    /*
+       Check if the user is trying to edit the index page by checking the length of the url when split on "/".
+       If the calculated length is 1, we are on the index page and we append "index.mdx" to the route.
+     */
     let href =
-      switch (route) {
-      | "/en" => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
+      switch (
+        Js.String.split("/", route)->Belt.Array.sliceToEnd(1)->Array.length
+      ) {
+      | 1 => Constants.minaDocsEditLink ++ route ++ "/index.mdx"
       | _ => Constants.minaDocsEditLink ++ route ++ ".mdx"
       };
 
