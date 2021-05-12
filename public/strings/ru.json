@@ -260,9 +260,9 @@
     "message": "Участие в развитии Mina"
   },
   {
-    "id": "sidenav.edit",
-    "defaultMessage": "Edit",
-    "message": "Редактировать"
+    "id": "docs.suggest-changes",
+    "defaultMessage": "Suggest Changes",
+    "message": "Предложить изменения"
   },
   {
     "id": "sidenav.mina-documentation",
