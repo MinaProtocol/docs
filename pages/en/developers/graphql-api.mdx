@@ -16,11 +16,11 @@ To use the GraphQL API, connect your GraphQL client to `http://localhost:3085/gr
 
 In addition to information about the running node, the GraphQL API can return data about the network's latest blocks. However, as the blockchain's historical state is not persisted in Mina, only blocks in the node's transition frontier will be returned, i.e., the last `k` blocks. For other historical data, you should use the archive node, which is designed to retain and retrieve historical data.
 
-The full Mina GraphQL schema is available [here](https://minaprotocol.com/graphql-docs/index.html).
+The full Mina GraphQL schema is available [here](https://docs.minaprotocol.com/graphql-docs/).
 
 ### Queries:
 
-The Mina GraphQL API has a number of [queries](https://minaprotocol.com/graphql-docs/query.doc.html) to extract data from a running node. [GraphQL queries](https://graphql.org/learn/queries/) allow specifying the data to be returned in the response. For example to get the latest block and creator information known to the daemon:
+The Mina GraphQL API has a number of [queries](https://docs.minaprotocol.com/graphql-docs/query.doc.html) to extract data from a running node. [GraphQL queries](https://graphql.org/learn/queries/) allow specifying the data to be returned in the response. For example to get the latest block and creator information known to the daemon:
 
 ```
 query {
