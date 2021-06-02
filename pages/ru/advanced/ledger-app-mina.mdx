@@ -14,28 +14,17 @@ export default Page({ title: "Ledger App Mina" });
 - Подпись транзакций
 - Подпись транзакций при делегировании
 
-Мы проходим независимый аудит безопасности, на данный момент не обнаружено никаких уязвимостей. Остальная разработка практически завершена. В течение следующей недели мы будем заниматься настройкой работы с подписями, чтобы транзакции из тестовой сети не могли быть воспроизведены в mainnet. Заметьте, что это не влияет на процесс генераци ключей.
-
 Приложение еще не доступно для установки через интерфейс Ledger Live, но если у вас есть Nano S, вы можете загрузить его на свой Ledger, следуя приведенным ниже инструкциям.
-
-<Alert kind="warning">
-В настоящее время мы завершаем аудит безопасности, который не обнаружил уязвимостей, остальная разработка почти завершена.
-
-Используйте на ваш собственный риск. Убедитесь, что у вас есть резервная копия BIP39 секретной
-мнемонической фразы вашего Ledger или используйте отдельный Ledger для тестирования этого приложения.
-
-Никогда не используйте один и тот же keypair из тестовой сети в mainnet!
-
-</Alert>
 
 ## Содержание
 
-- [Установка на Ubuntu](#installing-on-ubuntu)
-- [Установка на Mac](#installing-on-mac)
-- [Установка на Windows](#installing-on-windows)
-- [Генерация keypair](#generating-a-keypair)
-- [Проверка вашего закрытого ключа](#validating-your-private-key)
-- [Автономный режим](#offline-mode)
+- [Установка на Ubuntu](#установка-на-ubuntu)
+- [Установка на Mac](#установка-на-mac)
+- [Установка на Windows](#установка-на-windows)
+- [Генерация keypair](#генерация-keypair)
+- [Проверка вашего закрытого ключа](#проверка-вашего-закрытого-ключа)
+- [Автономный режим](#автономный-режим)
+- [Аудит](#аудит)
 
 ## Установка на Ubuntu
 
@@ -530,3 +519,7 @@ mina advanced send-rosetta-transactions
 ```
 Dispatched command with TRANSACTION_ID 4Rs6xMHVyo1J1TTQDCzynYvWPdBr9QRY23fuqvnHFvQiM2B4YD14dtWY2sDccbgx7eh5FYAsPSNrZ2M3AqEPfXoXjNxuWTgiwkL3nwaTaGhSoPA7LcfqiWT6uN9oookDeR6ZSMfd2bs9QSPRit8gPt3FSrDo8i3qM383AEG6g5pEm2i1m1cTTwrUe7y4Z2eB6DdWKhFhoYnx5ndQRtZt3D3o7gojdwwdpRzrWZgT9KcJfbXdZNTfXxr3G1VCVqgqmNJ6iGzn4uTGqpqCmJf6zRn196SWUyZ4DYrphvGF8GhJZYyPTwA2BMTBkF9xWC9zzJP8ZrAeyV1qV8k94dZaiyVt7Fac3r6BcDaMonMcpvnGy8fHF9Q25L2tjzHzwKMePkJztB5r
 ```
+
+## Аудит
+
+Аудит безопасности приложения Mina Ledger и его интеграции с аппаратным кошельком Nano S / X был проведен компанией Least Authority. Чтобы прочитать отчет, [щелкните здесь] (https://leastauthority.com/blog/audit-of-mina-ledger-application-for-o1-labs/)
