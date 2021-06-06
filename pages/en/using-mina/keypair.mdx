@@ -50,10 +50,11 @@ If you are using macOS please install Docker and follow the docker based instruc
 After <DocLink copy="adding the Mina repo" url="/getting-started#ubuntu-1804--debian-9" /> you can simply run the following command.
 
 ```
-sudo apt-get install mina-generate-keypair=0.2.12-718eba4
+sudo apt-get install mina-generate-keypair=1.1.5-a42bdee
 ```
 
-Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit [DIRTY]718eba4826794f83d51c0d8dcf538e78b0259528 on branch HEAD`.
+Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit a42bdeef6b0c15ee34616e4df76c882b0c5c7c2a on branch master
+`.
 
 ### Windows / Other Platforms
 
@@ -131,7 +132,7 @@ mina-validate-keypair -privkey-path <path-to-the-private-key-file>
 If you are using Docker run the following command:
 
 ```
-docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.12-718eba4 -privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.1.5-a42bdee -privkey-path /keys/my-wallet
 ```
 
 ## Next steps
