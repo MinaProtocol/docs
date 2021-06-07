@@ -97,7 +97,7 @@ mina-generate-keypair -privkey-path ~/keys/my-wallet
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:0.2.12-718eba4 -privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
 ```
 
 В вашей системе будет создано два файла: `~/keys/my-wallet`, который содержит зашифрованный приватный ключ, и `~/keys/my-wallet.pub`, который содержит публичный ключ в виде обычного текста. Пожалуйста, сохраните файл приватного ключа и пароль, которые вы использовали, в надежном месте, например в диспетчере паролей.
