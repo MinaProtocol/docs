@@ -147,6 +147,12 @@ Run `docker logs -f mina` to follow the logs, and if it crashes save the log out
 
 Run `docker exec -it mina mina client status` to monitor connectivity to the network, you should quickly find at least 10 peers and watch the block height / max observed block height climb.
 
+<Alert>
+
+If you encounter `[Warn] Shutdown before Coda instance was created, not saving a visualization` when attempting to run your Docker container, [increase the resources that the Docker container is allowed to use](https://docs.docker.com/config/containers/resource_constraints/).
+
+</Alert>
+
 ## Checking connectivity
 
 Now that we've started up a node and are running the Mina daemon, open up another shell and run the following command:
