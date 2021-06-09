@@ -1,3 +1,5 @@
+<img src="https://docs.minaprotocol.com/static/img/svg/mina-wordmark-redviolet.svg" width="350" alt="Mina logo">
+
 # Website using NextJS and Contentful
 
 First of all, make sure you have `git lfs` installed. 
