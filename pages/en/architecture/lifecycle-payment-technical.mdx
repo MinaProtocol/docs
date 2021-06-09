@@ -93,7 +93,7 @@ A payment is valid if:
 
 When we apply a payment we also cons it onto the [receipt chain](#receipt-chain-hash), and increment the account nonce.
 
-Fees are handled out-of-band see the [fee excess system](#fee-excess).
+Fees are handled out-of-band by the fee excess system.
 
 This is encoded inside the SNARK in [transaction_snark.ml](https://github.com/minaprotocol/mina/tree/master/src/lib/transaction_snark/transaction_snark.ml), specifically the `apply_tagged_transaction` function, although you'll need to look at how the bool flags are set in the `is_normal` case.
 
