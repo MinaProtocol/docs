@@ -2,6 +2,8 @@ module Styles = {
   open Css;
   let dropdown =
     style([
+      maxHeight(`vh(90.)),
+      overflowY(`scroll),
       backgroundColor(Theme.Colors.white),
       width(`percent(100.)),
       border(`px(1), `solid, Theme.Colors.digitalBlack),
