@@ -1,8 +1,18 @@
 <img src="https://github.com/MinaProtocol/docs/blob/main/public/static/img/svg/mina-wordmark-redviolet.svg" width="350" alt="Mina logo">
 
-# Website using NextJS and Contentful
+# Mina Documentation
 
-First of all, make sure you have `git lfs` installed. 
+To view this website, visit [docs.minaprotocol.com](https://docs.minaprotocol.com/).
+
+## Contributing
+
+Click the `Suggest changes` button at the top right of any page on [the docs website](https://docs.minaprotocol.com/) to edit that page and submit a pull request via Github.
+
+## How to run (for devs)
+
+This website is built with NextJS & Contentful. Any commit to the `main` branch will be built and deployed automatically.
+
+To run locally, first make sure you have `git lfs` installed. 
 
 On Mac run:
 
