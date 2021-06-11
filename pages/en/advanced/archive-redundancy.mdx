@@ -4,7 +4,11 @@ export default Page({title: "Archive Redundancy"});
 
 # Archive Redundancy
 
-Archive data is critical for applications that require historical lookup. On the protocol side, archive data is important for disaster recovery in that it is needed to reconstruct a certain state. To that end, having a single <DocLink copy="archive node setup" url="/advanced/archive-node" /> might not be sufficient. If the daemon that sends blocks to the archive process or if the archive process itself fails for some reason, there can be missing blocks in the database. To minimize the risk of archive data loss there are a few redundancy techniques that can be employed.
+The <DocLink copy="archive node" url="/advanced/archive-node" /> will store its data in a PostgreSQL database that node operators host on a provider of their choice, including self-hosting, if desired. 
+
+However, for redundancy, archive node data can also be stored to an object storage (e.g. [Google Cloud Storage](#upload-block-data-to-google-cloud-storage); soon S3 & others) or to a [`mina.log`](#save-block-data-from-logs) file, which can live on your computer or be streamed to any typical logging service (e.g. LogDNA).
+
+Archive data is critical for applications that require historical lookup. On the protocol side, archive data is currently important for disaster recovery to reconstruct a certain state, but may not be required in a future version of Mina. To that end, having a single <DocLink copy="archive node setup" url="/advanced/archive-node" /> might not be sufficient. If the daemon that sends blocks to the archive process or if the archive process itself fails for some reason, there can be missing blocks in the database. To minimize the risk of archive data loss there are a few redundancy techniques that can be employed.
 
 A single archive node setup has a daemon sending blocks to an archive process which writes them to the database.
 
@@ -38,20 +42,20 @@ Some of the internal data look like this:
 {"data":["Signed_command",{"payload":{"common":{"fee":"100","fee_token":"1","fee_payer_pk":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","nonce":"340","valid_until":"4294967295","memo":"E4YM2vTHhWEg66xpj52JErHUBU4pZ1yageL4TVDDpTTSsv8mK6YaH"},"body":["Payment",{"source_pk":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","receiver_pk":"B62qm2GCuGCEK79mEjeyaeiFoukThuZLJCHGe9HAzuAnfbtS5FHtPnP","token_id":"1","amount":"100000000"}]},"signer":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","signature":"7mXGz8Df1gu92HVWGue24wcrGxDWkgQrDK59xQGXc627PKFQvVAPSzZn7JMkHtfdBUXavDHcgLBZy4iR4UmA5seRCPMkFDci"}],"status":["Applied",{"fee_payer_account_creation_fee_paid":null,"receiver_account_creation_fee_paid":null,"created_token":null},{"fee_payer_balance":"31866000100000","source_balance":"31866000100000","receiver_balance":"34099000000"}]}],"coinbase":["One",null],"internal_command_balances":[["Coinbase",{"coinbase_receiver_balance":"75477804514901","fee_transfer_receiver_balance":null}],["Fee_transfer",{"receiver1_balance":"65266376010003","receiver2_balance":"78601129170700"}],["Fee_transfer",{"receiver1_balance":"66001820000000","receiver2_balance":"76870784414900"}],["Fee_transfer",{"receiver1_balance":"71158365898775","receiver2_balance":"59264207944722"}],["Fee_transfer",{"receiver1_balance":"68546088449962","receiver2_balance":"66721919100000"}],["Fee_transfer",{"receiver1_balance":"67700798001000","receiver2_balance":"66372760000000"}],["Fee_transfer",{"receiver1_balance":"85383891400000","receiver2_balance":"107174952265469"}],["Fee_transfer",{"receiver1_balance":"65879310000000","receiver2_balance":"66282230000000"}]]}]},"delta_transition_chain_proof":["jxLZWooV57gKCmanzCHHt1CDbHfUpMu6MkynUdqN9ZkBUJi7B1W",[]]}
 ```
 
-This JSON will evolve as the format of the block and transaction payloads evolve in the network. Though we don't expect much churn before mainnet. This block data can be uploaded to a google storage bucket or written to mina.log files which can be backed-up separately.
+This JSON will evolve as the format of the block and transaction payloads evolve in the network. 
 
-### Upload block data to google cloud storage
+### Upload block data to Google Cloud Storage
 
-To indicate a daemon to upload block data to google cloud storage, pass the flag `--upload-blocks-to-gcloud` . To successfully upload the file, daemon requires the following environment variables to be set:
+To indicate a daemon to upload block data to Google Cloud Storage, pass the flag `--upload-blocks-to-gcloud` . To successfully upload the file, daemon requires the following environment variables to be set:
     1. `GCLOUD_KEYFILE` : Key file for authentication
     2. `NETWORK_NAME`: Network name to be used in the filename to easily distinguish between blocks in different networks (main-net and testnets)
-    3. `GCLOUD_BLOCK_UPLOAD_BUCKET` : Google cloud storage bucket where the files are uploaded
+    3. `GCLOUD_BLOCK_UPLOAD_BUCKET` : Google Cloud Storage bucket where the files are uploaded
 
 The daemon generates a file for each block with the name `<network-name>-<protocol-state-hash>.json` . These are called precomputed blocks and will have all the fields of a block.
 
 ### Save block data from logs
 
-The daemon also logs the block data if the flag `-log-precomputed-blocks` is passed. The log to look for is `Saw block with state hash $state_hash` that contains `precomputed_block` in the metadata and has the block information. This is the same information (precomputed blocks) that gets uploaded to google cloud storage.
+The daemon also logs the block data if the flag `-log-precomputed-blocks` is passed. The log to look for is `Saw block with state hash $state_hash` that contains `precomputed_block` in the metadata and has the block information. This is the same information (precomputed blocks) that gets uploaded to Google Cloud Storage.
 
 ### Generate block data from another archive database
 
