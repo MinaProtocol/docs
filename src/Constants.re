@@ -13,7 +13,7 @@ let githubUrl = "https://github.com/";
 let twitterUrl = "https://twitter.com/";
 let linkedInUrl = "https://linkedin.com/in/";
 
-let minaStatus = "https://minaprotocol.statuspage.io/";
+let minaStatus = "https://status.minaprotocol.com";
 let minaSupport = "https://support.minaprotocol.com/";
 
 let minaDiscordSocial = "https://bit.ly/MinaDiscord";
