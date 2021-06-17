@@ -13,13 +13,7 @@ going live on MainNet. This includes simulating expected MainNet conditions such
 as transaction volume and frequency, to help identify and solve potential issues
 ahead of time.
 
-See our
-
-<DocLink
-  copy="instructions for connecting to DevNet"
-  url="/advanced/connecting-devnet"
-/>
-.
+See our <DocLink copy="instructions for connecting to DevNet" url="/advanced/connecting-devnet" />.
 
 ## Why do fewer tokens appear in a new account? (Account Creation Fee)
 
@@ -68,11 +62,9 @@ optional `memo` field during a Mina send transaction.
 
 ## Our archive node is missing block information after a restart. How can the data be recovered?
 
-Archive node operators often choose to run
-
-<DocLink copy="redundant archive nodes" url="/advanced/archive-redundancy" /> to
-store block data to one or more locations of their choice (e.g. PostgreSQL, GCP,
-local files, a logging service, etc) and to backfill any missed block data if needed.
+Archive node operators often choose to run <DocLink copy="redundant archive nodes" url="/advanced/archive-redundancy" /> to store block data to one or more locations of their
+choice (e.g. PostgreSQL, GCP, local files, a logging service, etc) and to
+backfill any missed block data if needed.
 
 For convenience, O(1) Labs makes data from its archive node
 [available here](https://console.cloud.google.com/storage/browser/mina_network_block_data),
@@ -103,10 +95,7 @@ You can download a specific block using curl:
 
 ## How do I query for the canonical block at a certain height from the archive node
 
-This can be accomplished using a recursive query. See
-
-<DocLink copy="Example #3" url="/advanced/archive-node#try-a-query" /> in the Archive
-Node docs, for a full example.
+This can be accomplished using a recursive query. See <DocLink copy="Example #3" url="/advanced/archive-node#try-a-query" /> in the Archive Node docs, for a full example.
 
 ## "Not able to connect to the network"
 
