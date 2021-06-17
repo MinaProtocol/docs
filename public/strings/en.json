@@ -250,6 +250,11 @@
     "message": ""
   },
   {
+    "id": "sidenav.exchange-faq",
+    "defaultMessage": "Exchange FAQ",
+    "message": ""
+  },
+  {
     "id": "sidenav.documentation",
     "defaultMessage": "Documentation",
     "message": ""
