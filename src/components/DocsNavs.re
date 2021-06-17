@@ -379,7 +379,7 @@ module SideNav = {
           slug={f("glossary")}
         />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("exchangeFaq")} />
+        <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-faq")} />
       </SideNav>
     </div>;
   };
@@ -601,7 +601,7 @@ module Dropdown = {
           slug={f("glossary")}
         />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("exchangeFaq")} />
+        <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-faq")} />
       </DropdownNav>
     </div>;
   };
