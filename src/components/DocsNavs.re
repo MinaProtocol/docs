@@ -146,6 +146,7 @@ module DocsNavsTranslations = {
   };
   let glossary = {id: "sidenav.glossary", defaultMessage: "Glossary"};
   let faq = {id: "sidenav.faq", defaultMessage: "FAQ"};
+  let exchangeFaq = {id: "sidenav.exchange-faq", defaultMessage: "Exchange FAQ"};
   let contributingToMina = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
@@ -378,6 +379,7 @@ module SideNav = {
           slug={f("glossary")}
         />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
+        <Item title={intl->Intl.formatMessage(faq)} slug={f("exchangeFaq")} />
       </SideNav>
     </div>;
   };
@@ -599,6 +601,7 @@ module Dropdown = {
           slug={f("glossary")}
         />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
+        <Item title={intl->Intl.formatMessage(faq)} slug={f("exchangeFaq")} />
       </DropdownNav>
     </div>;
   };
