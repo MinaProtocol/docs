@@ -21,6 +21,16 @@ The Mina Protocol currently charges a 1 MINA fee to create a new account. This
 is to help protect the network from denial of service-type attacks. We
 anticipate reducing this over time.
 
+## What is the maximum size of the mempool? How do we work around this?
+
+Currently, the transaction mempool can hold a max of 3,000 transactions.
+This will be increased in a future hard fork. You can view the number of
+transactions recently in the mempool at
+[https://minaexplorer.com/mempool#mempool-over-time](https://minaexplorer.com/mempool#mempool-over-time)
+. The mempool sorts transactions by fee—if the pool is almost full, we suggest
+raising the fee used for withdrawals of MINA from your exchange to help ensure
+they are processed quickly.
+
 ## My Mina node gets stuck sometimes, how can I detect this and fix it?
 
 We aim to improve this in future versions. For now, this can be resolved by
