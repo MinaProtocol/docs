@@ -1,0 +1,277 @@
+[
+  {
+    "id": "sidenav.overview",
+    "defaultMessage": "요약",
+    "message": ""
+  },
+  {
+    "id": "sidenav.mina-overview",
+    "defaultMessage": "미나 한눈에 보기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.getting-started",
+    "defaultMessage": "시작하기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.using-mina",
+    "defaultMessage": "미나 사용하기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.keypair-generation",
+    "defaultMessage": "키 쌍 생성하기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.connect-to-network",
+    "defaultMessage": "네트워크에 연결하기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.sending-a-payment",
+    "defaultMessage": "지불해보기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.staking-snarking",
+    "defaultMessage": "스테이킹 & 스나킹",
+    "message": ""
+  },
+  {
+    "id": "sidenav.cli-reference",
+    "defaultMessage": "CLI 툴 도움말",
+    "message": ""
+  },
+  {
+    "id": "sidenav.advanced",
+    "defaultMessage": "고급",
+    "message": ""
+  },
+  {
+    "id": "sidenav.archive-node",
+    "defaultMessage": "아카이브 노드",
+    "message": ""
+  },
+  {
+    "id": "sidenav.archive-redundancy",
+    "defaultMessage": "아카이브 복제",
+    "message": ""
+  },
+  {
+    "id": "sidenav.data-querying",
+    "defaultMessage": "데이터 조회",
+    "message": ""
+  },
+  {
+    "id": "sidenav.bp-producer-sidecar",
+    "defaultMessage": "블록 생산자 사이드카",
+    "message": ""
+  },
+  {
+    "id": "sidenav.client-sdk",
+    "defaultMessage": "클라이언트 SDK",
+    "message": ""
+  },
+  {
+    "id": "sidenav.devnet",
+    "defaultMessage": "Devnet",
+    "message": ""
+  },
+  {
+    "id": "sidenav.foundation-delegation",
+    "defaultMessage": "재단 위임",
+    "message": ""
+  },
+  {
+    "id": "sidenav.hard-fork",
+    "defaultMessage": "하드 포크",
+    "message": ""
+  },
+  {
+    "id": "sidenav.hot-cold-wallets",
+    "defaultMessage": "핫/콜드 월렛",
+    "message": ""
+  },
+  {
+    "id": "sidenav.ledger-hardware-wallet",
+    "defaultMessage": "하드웨어 월렛",
+    "message": ""
+  },
+  {
+    "id": "sidenav.seed-peers",
+    "defaultMessage": "시드 피어",
+    "message": ""
+  },
+  {
+    "id": "sidenav.staking-service-guidelines",
+    "defaultMessage": "스테이킹 서비스 가이드라인",
+    "message": ""
+  },
+  {
+    "id": "sidenav.developers",
+    "defaultMessage": "개발자 문서",
+    "message": ""
+  },
+  {
+    "id": "sidenav.codebase-overview",
+    "defaultMessage": "구조 한눈에 보기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.repository-structure",
+    "defaultMessage": "저장소 구조",
+    "message": ""
+  },
+  {
+    "id": "sidenav.BIP44-information",
+    "defaultMessage": "BIP44 정보",
+    "message": ""
+  },
+  {
+    "id": "sidenav.code-reviews",
+    "defaultMessage": "코드 리뷰",
+    "message": ""
+  },
+  {
+    "id": "sidenav.style-guide",
+    "defaultMessage": "코드 스타일링",
+    "message": ""
+  },
+  {
+    "id": "sidenav.sandbox-node",
+    "defaultMessage": "샌드박스 노드",
+    "message": ""
+  },
+  {
+    "id": "sidenav.graphql-api",
+    "defaultMessage": "GraphQL API",
+    "message": ""
+  },
+  {
+    "id": "sidenav.logging",
+    "defaultMessage": "로깅",
+    "message": ""
+  },
+  {
+    "id": "sidenav.protocol-architecture",
+    "defaultMessage": "프로토콜 설계",
+    "message": ""
+  },
+  {
+    "id": "sidenav.lifecycle-of-a-payment",
+        "defaultMessage": "지불 생명 주기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.block-producers",
+    "defaultMessage": "블록 생산자",
+    "message": ""
+  },
+  {
+    "id": "sidenav.whats-in-a-block",
+    "defaultMessage": "블록내의 정보",
+    "message": ""
+  },
+  {
+    "id": "sidenav.consensus",
+    "defaultMessage": "컨센서스",
+    "message": ""
+  },
+  {
+    "id": "sidenav.proof-of-stake",
+    "defaultMessage": "지분증명",
+    "message": ""
+  },
+  {
+    "id": "sidenav.snark-workers",
+    "defaultMessage": "스나크 채굴자",
+    "message": ""
+  },
+  {
+    "id": "sidenav.scan-state",
+    "defaultMessage": "스캔 상태",
+    "message": ""
+  },
+  {
+    "id": "sidenav.time-locked-accounts",
+    "defaultMessage": "타임락 계좌",
+    "message": ""
+  },
+  {
+    "id": "sidenav.snapps",
+    "defaultMessage": "스냅",
+    "message": ""
+  },
+  {
+    "id": "sidenav.tokens",
+    "defaultMessage": "토큰",
+    "message": ""
+  },
+  {
+    "id": "sidenav.snarks",
+    "defaultMessage": "스나크",
+    "message": ""
+  },
+  {
+    "id": "sidenav.getting-starting-using-snarks",
+    "defaultMessage": "스나크 사용해보기",
+    "message": ""
+  },
+  {
+    "id": "sidenav.which-snark-right-for-me",
+    "defaultMessage": "나에게 적합한 스나크",
+    "message": ""
+  },
+  {
+    "id": "sidenav.snarkyjs-crypto-library",
+    "defaultMessage": "snarkyjs-crypto 라이브러리",
+    "message": ""
+  },
+  {
+    "id": "sidenav.snarky-universe-library",
+    "defaultMessage": "snarky-universe 라이브러리",
+    "message": ""
+  },
+  {
+    "id": "sidenav.troubleshooting",
+    "defaultMessage": "문제 해결",
+    "message": ""
+  },
+  {
+    "id": "sidenav.glossary",
+    "defaultMessage": "용어 모음",
+    "message": ""
+  },
+  {
+    "id": "sidenav.faq",
+    "defaultMessage": "자주묻는 질문",
+    "message": ""
+  },
+  {
+    "id": "sidenav.exchange-faq",
+    "defaultMessage": "거래소 전용 자주묻는 질문",
+    "message": ""
+  },
+  {
+    "id": "sidenav.documentation",
+    "defaultMessage": "문서",
+    "message": ""
+  },
+  {
+    "id": "sidenav.contributing-to-mina",
+    "defaultMessage": "미나에 기여하기",
+    "message": ""
+  },
+  {
+    "id": "docs.suggest-changes",
+    "defaultMessage": "수정 제안",
+    "message": ""
+  },
+  {
+    "id": "sidenav.mina-documentation",
+    "defaultMessage": "미나 문서",
+    "message": ""
+  }
+]
