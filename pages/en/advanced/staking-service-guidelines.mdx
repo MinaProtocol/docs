@@ -1,4 +1,5 @@
 import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Staking Service Guidelines" });
 
 # Staking Service Guidelines
@@ -105,3 +106,7 @@ Once you know the staking ledger that will be used for a given epoch, the requir
 Since each VRF is compared against this threshold (which is between 0 and 1), and each VRF is a psuedo-random number between 0 and 1, the VRF threshold for a given account is essentially the probability that a slot will be won by that account. Thus, we can extrapolate this function for computing VRF thresholds to compute the mean number of blocks we can expect a given account to win within an epoch. This can be done merely by summing all the probabilities for winning each slot of an epoch, and since the probability for an entire epoch is fixed, the mathematical expression to compute this simplifies to $\phi\left(\alpha\right)\times7140$.
 
 As an example, let's say there is an account on the network which has $10^6$ (1 million) mina tokens in the staking ledger epoch $ep$. This same staking ledger for epoch $ep$ has a total supply of $8\times10^8$ (800 million) mina tokens. We can compute the odds that this account will win an individual slot in $ep$ using $\phi\left(\dfrac{10^6}{8\times10^8}\right) = 0.0017313674$. This gives us a $\sim0.17\%$ chance that this account will win each slot during epoch $ep$. We can then compute the mean number of blocks we expect this account to produce for this epoch by multiplying the result by $7140$, giving us a probabilistic mean of $\sim12.36$ blocks for the epoch.
+
+## Sending Many Transactions
+
+See the advanced section of the <DocLink copy="sending payments page" url="/using-mina/send-payment" />

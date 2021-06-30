@@ -142,3 +142,25 @@ You may not see the `Receipt chain hash` on the first transaction from the accou
 ## Staking and Snarking
 
 Once you feel comfortable with the basics of creating an address, and sending & receiving mina, we can move on to the truly unique parts of the Mina network - <DocLink copy="participating in consensus and helping compress the blockchain" url="/using-mina/staking" />.
+
+## Advanced
+
+### Sending Many Transactions
+
+Sometimes you may wish to send many transactions: For example, to payout rewards to those delegating to you if you're running a staking pool.
+
+All information here is relevant as of the 1.2.0 build (currently in beta):
+
+### Rate limiting
+
+Currently, nodes on the network will rate limit receiving messages from a given node. As of the 1.2.0 build, your node will also follow this rate limit when sending transactions. Specifically, the limit is currently set at 10 transactions every 15 seconds computed over a 5 minute window. If you attempt to send transactions faster than this rate, your node will queue them up and flush them as older transactions expire from the window upon which the rate limit is computed. You do not need to throttle sending these transactions yourself.
+
+### My node crashed or disconnected before I could finish sending transactions
+
+The Mina daemon does _not_ currently persist the transaction pool -- this means that the transactions that your node will be unaware of any transactions that you've sent so far if your node crashes in the middle of this process. As of the 1.2.0 build, you can resend all transactions (exactly in the same manner as before) and they will be rebroadcasted on the network.
+
+If you believe you were temporarily disconnected from the network, but your node stayed online (ie. the gossip network may have missed one or more of your transactions) -- as of the 1.2.0 build, you can resend any of the transactions locally and they will be broadcasted again to the network even if your node thinks they've already been shared.
+
+### Cancelling a transaction and setting a new fee
+
+To cancel a transaction, you'll need to have all the transactions that haven't been committed to the chain yet before in your local transaction mempool. This means if your node crashed (see above) you'll need to resend those earlier transactions. Finally, to cancel a transaction, all you need to do is send a transaction with the same nonce of the one you want to cancel with a larger fee. There is no minimum increment, it just needs to be slightly larger (and large enough such that a block producer will choose your transaction).
