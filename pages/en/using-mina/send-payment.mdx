@@ -16,7 +16,7 @@ To generate a signed transaction offline if your private key is on a Ledger devi
 
 ### Using a keypair generated with the generate-keypair tool
 
-Coming soon a better tool -- see https://github.com/MinaProtocol/mina/issues/8928 , for now, please use the workaround provided in a comment on that issue.
+A better tool is coming soon: https://github.com/MinaProtocol/mina/issues/8928. For now, please use the [workaround](https://github.com/MinaProtocol/mina/issues/8928#issuecomment-857095846) provided in a comment on that issue.
 
 ### Using a keypair generated with the offline client-sdk
 
@@ -26,9 +26,9 @@ To generate a signed transaction using the client-sdk, log the signed payment cr
 
 You can use a hosted service to broadcast your signed transaction. Sending your signed transaction _does not_ leak your private key.
 
-Transactions signed with the client-sdk can use [https://minaexplorer.com/broadcast-tx](https://minaexplorer.com/broadcast-tx)
+Transactions signed with the client-sdk can use: [https://minaexplorer.com/broadcast-tx](https://minaexplorer.com/broadcast-tx)
 
-Transactions signed with the ledger can use [https://minaexplorer.com/broadcast-ledger](https://minaexplorer.com/broadcast-ledger)
+Transactions signed with the ledger can use: [https://minaexplorer.com/broadcast-ledger](https://minaexplorer.com/broadcast-ledger)
 
 ## Using a connected node
 
@@ -101,7 +101,7 @@ Tip: You can run `mina client status` to see the current block height updating.
 
 ## Make a payment
 
-Finally we get to the good stuff, sending our first transaction! Before you send a payment, you'll need to unlock your account:
+Finally, we get to the good stuff–sending our first transaction! Before you send a payment, you'll need to unlock your account:
 
     mina accounts unlock -public-key $MINA_PUBLIC_KEY
 
@@ -141,4 +141,28 @@ You may not see the `Receipt chain hash` on the first transaction from the accou
 
 ## Staking and Snarking
 
-Once you feel comfortable with the basics of creating an address, and sending & receiving mina, we can move on to the truly unique parts of the Mina network - <DocLink copy="participating in consensus and helping compress the blockchain" url="/using-mina/staking" />.
+Once you feel comfortable with the basics of creating an address, and sending & receiving mina, we can move on to the truly unique parts of the Mina network like <DocLink copy="participating in consensus and helping compress the blockchain" url="/using-mina/staking" />.
+
+## Advanced
+
+### Sending Many Transactions
+
+Sometimes you may wish to send many transactions: for example, to payout rewards to those delegating to you if you're running a staking pool.
+
+All information here is relevant as of the 1.2.0 build (currently in beta):
+
+### Rate limiting
+
+Currently, nodes on the network will rate limit receiving messages from a given node. As of the 1.2.0 build, your node will also follow this rate limit when sending transactions. Specifically, the limit is currently set at 10 transactions every 15 seconds computed over a 5 minute window. If you attempt to send transactions faster than this rate, your node will queue them up and flush them as older transactions expire from the window upon which the rate limit is computed. You do not need to throttle sending these transactions yourself.
+
+Note that older releases of the mina daemon do not perform this rate limiting; if you are running an older version, you should manually limit the number of transactions. Due to overheads from rebroadcasting transactions, we do not recommend sending more than 50 transactions every 5 minutes if you need to manually rate limit.
+
+### My node crashed or disconnected before I could finish sending transactions
+
+The Mina daemon does _not_ currently persist the transaction pool. This means that the transactions that your node will be unaware of any transactions that you've sent so far if your node crashes in the middle of this process. As of the 1.2.0 build, you can resend all transactions (exactly in the same manner as before) and they will be rebroadcasted on the network.
+
+If you believe you were temporarily disconnected from the network, but your node stayed online (i.e. the gossip network may have missed one or more of your transactions), as of the 1.2.0 build, you can resend any of the transactions locally and they will be broadcasted again to the network even if your node thinks they've already been shared.
+
+### Cancelling a transaction and setting a new fee
+
+To cancel a transaction, you'll need to have all the transactions that haven't been committed to the chain yet before in your local transaction mempool. This means if your node crashed (see above) you'll need to resend those earlier transactions. Finally, to cancel a transaction, all you need to do is send a transaction with the same nonce of the one you want to cancel with a larger fee. There is no minimum increment, it just needs to be slightly larger (and large enough such that a block producer will choose your transaction).
