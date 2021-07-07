@@ -1,0 +1,148 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Snapps: SNARK Powered Applications" });
+
+# Snapps: SNARK Destekli Uygulamalar Uygulamalar
+
+<Alert kind="uyarý">
+
+`0.0.16-beta7` yayýmýndan itibaren bu özellik devre dýþý býrakýlmýþtýr ve yalnýzca bir derleme zamaný bayraðý etkinleþtirilerek kullanýlabilir. Bu özelliði gelecekteki sürümlerde etkinleþtirmeyi planlýyoruz.
+
+</Alert>
+
+### Snapps = Dapps + Gizlilik + Zincir dýþý Veriler + Ölçeklenebilirlik
+
+Mina, dünyanýn en hafif blockchain'i olarak Snapps <Footnote refNumber="[3]" link="/disclaimers" /> : Snarkified Uygulamalarý adlý tamamen yeni bir uygulama kategorisi saðlar. Snapp'ler, özellik açýsýndan Ethereum'daki Dapps'a benzer, ancak üç özel özelliði sayesinde üstündür:
+
+1. Bir veri parçasýnýn bütünlüðünü, ne olduðunu açýklamadan doðrular.
+2. Pahalý hesaplamalarýn doðru þekilde yürütüldüðünü doðrular.
+3. Önemli ölçeklenebilirlik avantajlarý.
+
+Bu tür uygulamalar yeni deðildir â bir þekilde her ikisi de günümüz blok zincirleri olarak mevcuttur: 1. özellikli bir Snapp olarak ZCash ve 2. özellikli bir Snapp olarak Mina.
+Bir Snapp, Ethereum'daki bir Dapp'tan daha etkilidir. Ethereum dünya bilgisayarýnýn kullanýcýlarýna bir Dapp'ýn yürütülmesi konusunda taahhüt vermesi için, aðdaki her düðüm ve madencinin ayný hesaplamayý çalýþtýrmasý gerekir. Bu oldukça verimsizdir. Mina'da bir Snapp ile Snapp, geliþtiricisi tarafýndan bir kez çalýþtýrýlýr, ardýndan diðer tüm düðümler yalnýzca ilgili SNARK kanýtýný doðrulayabilir. Ayný argümaný Ethereum'daki SNARK destekli Katman 2 Dapps için de yapýlabilir, ancak bu Dapp'ler hala ana zincirin sýnýrlý iþ hacmi ile yükümlüdür, oysa Mina'daki bir Snapp, kýsa ve öz yapýsý sayesinde Mina blok zincirinin ölçeklenebilirlik potansiyelinden faydalanýr.
+
+Mina'da bir Snapp aþaðýdaki iþ akýþýna sahiptir:
+
+1. Çalýþtýrýlacak kodu tanýmlayýn,deðilse açýk kaynak kodlayýn
+2. Mina'da bir iþlev çaðrýsý aracýlýðýyla bir SNARK devresini uygulamak için kodu kullanýn
+3. Hesaplamayý gerçekleþtirmek için kaynak ara
+4. Ýþlevi ilgili verilerle çaðýrýn
+5. Hesaplama, akýllý sözleþmeye benzer þekilde zincir üzerinde çalýþýr [ana aðdan 6-12 ay sonra hazýr]
+6. Ýþlevden dönen SNARK kanýtýný bir Mina adresine ekleyin
+7. Mina, SNARK kanýtý sonucuna göre iþlemleri gerçekleþtirir
+
+## Teknik Genel Bakýþ
+
+Þu anda tasarlandýðý gibi, Minanýn Snapps iþlevi aþaðýdaki gibi çalýþacaktýr.
+
+- Açýk anahtar ve bakiyeye ek olarak, bir Pickles SNARK doðrulama anahtarý K ve küçük bir dizi alan öðelerinden oluþan bir S durumu da içerecek olan, âSnapp hesabýâ adý verilen yeni bir tür hesap olacak.
+- âTek Snapp iþlemiâ adý verilen yeni bir tür iþlem olacaktýr. Bu, standart bir hesaba ve standart bir hesaptan aktarýmýn yaný sýra bir Snappâin durumunu güncellemeyi de saðlayacaktýr. Aþaðýdakileri içerecektir:
+
+  - Standart bir hesap adresi
+  - Bir Snapp hesabý adresi
+  - Snapp hesabýnýn bakiyesindeki deðiþikliði temsil eden imzalý bir âsnapp_account_deltaâtutarý
+  - Snapp hesabý için isteðe baðlý önerilen yeni durum âsnapp_new_stateâ
+  - Snapp_account_delta> 0 ise, iþlemde standart hesaptan bir imza
+  - Aþaðýdakileri içeren bir beyana göre (Snapp hesabýnýn doðrulama anahtarýyla) doðrulanmasý gereken bir Pickles SNARK kanýtý:
+    - snapp_account_delta : SignedAmount
+    - snapp_prev_state : Array&lt;Field>
+    - snapp_new_state : Array&lt;Field>
+
+  Bu iþlemin uygulanmasýnýn sonucu, Snappâin durumunu belirtildiði gibi güncellemek, Snappâin bakiyesini snapp_acount_delta ile deðiþtirmek ve standart hesapâýn
+  bakiyesini -snapp_account_delta ile deðiþtirmek olacaktýr.
+
+- âDouble Snapp iþlemiâadý verilen yeni bir tür iþlem olacak. Bu, durumlarýn ayný anda güncellenmesini (ve iki Snapp hesabý arasýnda para aktarýlmasýný) mümkün kýlacaktýr.
+- Aþaðýdakileri içerecektir:
+
+  - Snapp hesap adresi âadres1â
+  - Snapp hesap adresi âadres2â
+  - Ýlk hesap için bakiyedeki deðiþikliði temsil eden imzalý bir âaccount1_deltaâ tutarý.
+  - Ýsteðe baðlý önerilen 2 durum âaccount1_new_stateâ and âaccount2_new_stateâ
+  - snapp_acount_delta > 0 ise , iþlemde standart hesaptan bir imza
+  - Ý = 1, 2 için iki Pickles SNARK kanýtlarý: kanýt1, kanýt2, aþaðýdakileri içeren bir beyana göre (hesap doðrulama anahtarý ile)
+    - account1_delta : SignedAmount
+    - account1_prev_state : Array&lt;Field>
+    - account1_new_state : Array&lt;Field>
+    - account2_prev_state : Array&lt;Field>
+    - account2_new_state : Array&lt;Field>
+
+  Bu iþlemin uygulanmasýnýn sonucu, her iki hesabýn durumunu belirtildiði gibi güncellemek, account1âin bakiyesini account1_delta ile deðiþtirmek ve hesap2ânin bakiyesini -account1_delta ile deðiþtirmek olacaktýr.
+
+O (1) Labs þu anda uygulama geliþtiricileri için [snarky](https://github.com/o1-labs/snarky) gibi mevcut olanlarý içeren, Snapp'leri kolayca geliþtirmek ve bir düðmeye týklayarak gerekli SNARK provalarýný hesaplamak için araçlar geliþtiriyor. Aletler kutudan çýktýðýnda Mina ile uyumlu olacak ve Snapp'lara durum ve mali deðer kazanmanýn kolay bir yolunu saðlayacaktýr.
+
+Snapps'in gerçek gücünü gösterecek birkaç örneðe bakalým.
+
+## Örnekler
+
+### Örnek 1: Kredi Skoru Kanýtý
+
+**Deðer Önerisi: **Borçlulara, puanýn kendisini göstermeden kredi puanlarýnýn belirli bir eþiðin üzerinde olduðunu kanýtlama ve böylece herhangi bir teminat koymadan fon ödünç alabilme imkaný saðlamak.
+
+**Örnek Kullanýcý Akýþý:**
+
+- Kullanýcý borç verenin sitesini ziyaret eder
+- CreditKarma gibi bir kredi puaný saðlayýcýsýndan kriptografik olarak imzalanmýþ bilgileri indirmesi istenir
+- Web sitesi, kredi puanýnýn eþiðin üzerinde olup olmadýðýný yerel olarak kontrol eder ve sonucu döndüren SNARK kanýtýný hesaplar
+- SNARK kanýtý ve sonucu, kullanýcýnýn Mina adresine eklenir ve ödünç verenin bulut sistemi ile paylaþýlýr (akýllý bir sözleþme de olabilir)
+- Borç veren, SNARK kanýtýný ve eþiðin geçtiðini doðrular
+- Kriterleri karþýlýyorsa Mina adresine stabilcoin cinsinden kredi verilir.
+
+**Snapp Toolset Nasýl Kullanýlýr: **Snapp Geliþtiricileri, kullanýcýnýn saðlayýcýdan imzalý bir kredi puaný indirmesini saðlayan belirli bir programý entegre etmek için araç setini kullanýr, puanýn kriterleri karþýlayýp karþýlamadýðýný kullanýcýnýn bilgisayarýnda yerel olarak kontrol eder ve yerel olarak kontrol için bir kanýt oluþturur,daha sonra geliþtiriciyle paylaþýlýr. Araç seti ayrýca kullanýcýya, Mina blok zincirindeki blok numarasý aracýlýðýyla hesaplamaya bir zaman damgasý saðlamak için kullanýlan perde arkasýnda bir Mina adresi saðlar. Yerel hesaplamanýn geçerliliðini doðrulamak için bir SNARK doðrulayýcýsýný kendi backend'lerine entegre etmek için araç setini de kullanýrlar.
+
+### Örnek 2: Orjinal Kimlik Kanýtý Belgesi
+
+**Deðer Önerisi: **Deðer Önerisi: Mina adresinin sahibinin, belgenin kendisini ifþa etmeden, belirli bir blok yüksekliðinden baþlayarak gerçek bir kimlik belgesine (ehliyet gibi) eriþimi olduðunu kanýtlamak. Kimlik belgesinin geçerliliði, standartlaþtýrýlmýþ bir açýk kaynak algoritmasý ile kontrol edilecektir.
+
+**Örnek Kullanýcý Akýþý:**
+
+- Kullanýcý web sitesini ziyaret eder, uygulamayý dizüstü bilgisayara veya cep telefonuna indirir
+- Kimliði taramak, gerçekliðini doðrulamak için uygulamayý kullanýr
+- Uygulama ayrýca kullanýcý için Mina cüzdaný oluþturur
+- Uygulama, SNARK kanýtýný kullanýcýnýn Mina adresiyle ve kimliðin fotoðrafýnýn karmasýyla iliþkilendirir
+- Kullanýcý, gerçek kimlik isteyen baþka bir web sitesini ziyaret eder. Mina adresinin gerçek bir kimlik üzerinde hak talebinde bulunduðunu onaylamak için kimliðin hash'i ile birlikte kimlik kanýtýný paylaþabilir
+
+**Snapp Toolset Nasýl Kullanýlýr: **Snapp araç seti, geliþtiriciye, uygulamalarýna bir Mina arayüzü ile birlikte SNARK prova oluþturucu ve hash oluþturucuyu yerleþtirmek için bir SDK saðlar. Snapp araç seti ayrýca, söz konusu kimlik doðrulamalarýný bir SNARK doðrulayýcýsý ile doðrulayabilmek isteyen diðer tüm geliþtiricilere de saðlar.
+
+### Örnek 3: Coinbase Bakiyesinin Kanýtý
+
+**Deðer Önerisi: **Üçüncü taraflara, gerçek para yatýrma miktarýný ifþa etmeden, belirli bir e-postaya ait bir Coinbase hesabýnda belirli kriterleri (örneðin >\$10,000) karþýlayan fonlarýn kanýtýný saðlamak.
+
+**Örnek Kullanýcý Akýþý:**
+
+- Kullanýcý Coinbase Hesabýna Giriþ Yapar
+
+- Kullanýcý bir lending uygulamasýný ziyaret eder. Para ödünç alabilmek için Coinbase hesaplarýnda en az 10.000 $ 'dan fazla Bitcoin bulundurmalarý istenir.
+- Coinbase hesabýna Kullanýcý OAuth'larý
+- Web sitesi, her ikisi de Coinbase anahtarlarýyla imzalanmýþ olan kullanýcýnýn bakiyesini ve e-postasýný yerel olarak kontrol eder
+- Web sitesi yerel olarak kullanýcýnýn bakiyesinin >\$10,000 'dan fazla olduðuna dair SNARK kanýtý oluþturur
+- SNARK kanýtý kullanýcýnýn Mina adresine eklenir.
+- Kullanýcý, SNARK kanýtýna sahip olduðunu Mina adresini kullanarak imzalar ve Coinbase hesabýnýn e-posta adresini lending uygulamasýnýn backend'i ile paylaþýr.
+
+**Snapp Toolset Nasýl Kullanýlýr: **Snapp Geliþtiricileri , kullanýcý OAuth'a sahip belirli bir programý Coinbase hesabýna entegre etmek, imzalý bir bakiye bilgisi, hesabýn e-posta adresi ve bir zaman damgasý için hesap bakiyesini sorgulamak için araç setini kullanýr. Araç seti, servis saðlayýcýnýn backende herhangi bir bilgi paylaþmadan yerel olarak bir SNARK kanýtýnýn oluþturulmasýna olanak tanýr, böylece tüm bakiye bilgileri gizli kalýr. Geliþtirici ayrýca, yerel hesaplamanýn geçerliliðini doðrulamak için bir SNARK doðrulayýcýsýný kendi backend'ine entegre etmek için araç setini kullanýr.
+
+### Örnek 4: Gizli Oylama
+
+**Deðer Önerisi:** Bir dizi uygun seçmenin (ör. >100 'den fazla takipçisi olan herhangi bir Twitter hesabý) kim olduklarýný ve neye oy verdiklerini açýklamadan özel olarak oy kullanmasýna izin vermek. Oylama süresi sona erdiðinde herkes tüm oylamanýn sonucunu kolayca doðrulayabilir.
+
+**Örnek Kullanýcý Akýþý:**
+
+- Kullanýcý, twitter.com'da baþarýyla oturum açan kiþinin HTTPS transkriptini göstererek belirli bir hesabýn sahipliðini kanýtlayabilir.Doðrulamak ve oy vermek için, turuncu açýk girdi olarak þu þekilde kanýtlamalýdýr: "P þifresine sahip bir A hesabý, (A, P) ve hash(A, P) = N için geçerli bir giriþ transkripti biliyorum ve oyum V seçeneði içindir N, âgeçersiz kýlmaâ olarak adlandýrýlýr ve belirli bir kullanýcý / þifre kombinasyonu için benzersizdir ve çift oylamayý önlemek için kullanýlýr.
+
+- Tamamen merkezi olmayan bir modda, kullanýcý bu kanýtý Mina zincirindeki seçim uygulamasýnýn durumunu güncellemek için kullanabilir.
+- Daha yüksek bir aktarým hýzý, kýsmen merkezi olmayan modda, kullanýcý sýfýr bilgi kanýtýný seçimin durumunu koruyan ve kullanýcý kanýtlarýný bir araya toplanmýþ tek bir kanýtta toplayan ve ardýndan Mina Zincir'e gönderilen bir kanýt toplayýcýya gönderir.
+- Seçim sonuçlarýný görüntülerken, kullanýcý, seçim durumuna karþýlýk gelen yaprak dahil olmak üzere tüm Mina merkle aðacýnýn geçerliliðini onaylayan ana Mina blok zinciri kanýtýný elde eder. Ayrýca durumu görebilmeleri için bu yapraða bir merkle yolu da elde ederler.
+
+### Diðer Fikirler
+
+Snapps için tasarým alaný çok büyük ve çerçeve daha iyi anlaþýldýkça giriþimcilerin ortaya çýkardýðý diðer birçok yenilikçi fikirden oluþacak. Düþündüðümüz diðer bazý örnekler:
+
+- Kimlik belgesini kullanarak yaþ kanýtý
+- Kimlik belgesini kullanarak vatandaþlýk kanýtý
+- Banka hesabý üzerinden maaþ kanýtý
+- Bir aktivite yapýlmadýðýnýn kanýtý, ör. Belirli bir kimlikle iliþkili blok zinciri adresi, adresi ifþa etmeden kara listeye alýnmýþ cüzdan adreslerine para göndermemek
+- Bir belgede sýnýrlý deðiþikliklerin kanýtý, ör. doðrulanmýþ bir fotoðrafý yeniden boyutlandýrma
+
+## Sonraki Adýmlar ve Topluluk Katýlýmý
+
+O (1) Labs, Mina blok zincirinde yukarýdaki örnekleri mümkün kýlacak Snapp araç setini oluþturmak için çok çalýþýyor ve konsept uygulamalarýnýn ilk kanýtýný oluþturmak için yetenekli geliþtiricilerle ortaklýk yapýyor.
+
+Ancak, Snapps için sýnýrýmýz gökyüzüdür. Bu nedenle, Mina topluluðunu farklý Snapp kullaným durumlarý ve kullanýcý akýþlarý hakkýnda fikir edinmenin yaný sýra koda katkýda bulunarak araçlarý ve uygulamalarý geliþtirmemize yardýmcý olmak için bize katýlmaya davet ediyoruz. Gizli ve doðrulanabilir uygulamalar için bu tamamen yeni tasarým alanýnýn keþfine katýlmak istiyorsanýz, bu [formu](https://forms.gle/PsM1AmZMveE3RhaV8) doldurarak baþlayýn.

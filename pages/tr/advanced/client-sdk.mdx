@@ -1,0 +1,144 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Mina Client SDK Keypair" });
+
+# SDK Ýstemcisi (Yazýlým Geliþtirme Kiti)
+
+Bu, Mina anahtar çiftleri oluþturmanýza ve Mina'nýn anahtar çiftlerini kullanarak iþlemleri ve dizileri imzalamanýza olanak tanýyan bir NodeJS istemci SDK'sýdýr. Proje, Typescript ve ReasonML tiplerini içerir, ancak düz NodeJS'den de kullanýlabilir.
+
+<br />
+
+<Alert kind="warning">
+
+Lütfen bu yöntemle anahtar çifti oluþturmanýn tavsiye edilmediðini ve yalnýzca deneyimli güvenlik uzmanlarý tarafýndan kullanýlmasý gerektiðini unutmayýn.
+Anahtar çiftleri oluþturmak yerine lütfen <DocLink copy="mina-oluþumlu-anahtar çiftimizi" url="/using-mina/keypair#mina-generate-keypair" /> kullanýn.
+
+Ana að üzerindeki bir testnetten ayný anahtar çiftini asla tekrar kullanmayýn!
+
+</Alert>
+
+## Kurulum
+
+Ýstemci SDK'mýzýn kaynak kodu açýk kaynaklýdýr ve[buradan](https://github.com/MinaProtocol/mina/tree/develop/frontend/client_sdk) görülebilir.
+
+Ýstemci SDK'sýný kurmak için, sisteminizde NodeJS'ye ihtiyacýnýz olacak. Makinenizde mevcut olduðundan emin olun ve ardýndan istemci SDK'sýný kurmak için yarn veya npm kullanýn.
+
+```bash
+# yarn:
+yarn add @o1labs/client-sdk
+
+# npm:
+npm install --save @o1labs/client-sdk
+```
+
+## Kullaným
+
+Ýstemci SDK'mýzla bir anahtar çifti oluþturmak basittir. Nasýl anahtar çifti oluþturacaðýnýzý görmek için aþaðýdaki kod parçacýðýna bakýn.
+
+### NodeJS:
+
+```javascript
+const MinaSDK = require("@o1labs/client-sdk");
+
+let keys = MinaSDK.genKeys();
+console.log(`Public key: ${keys.publicKey}`);
+console.log(`Private key: ${keys.privateKey}`);
+```
+
+Bu, özel anahtarýnýzý yazdýracaktýr, bu nedenle bu yöntemi kullanýrken güvenli bir ortamda olduðunuzdan emin olun.
+
+Lütfen SDK'mýzýn nasýl kullanýlacaðý hakkýnda daha fazla bilgi için[istemci SDK beni oku](https://github.com/MinaProtocol/mina/blob/develop/frontend/client_sdk/README.md)sayfasýna bakýn.
+
+<br />
+
+<Alert kind="warning">
+
+Asla özel anahtarýnýzý kimse ile paylaþmayýn ve güvenli bir þekilde saklandýklarýndan emin olun. Özel anahtarýnýzý kaybederseniz veya kötü niyetli bir kiþi özel anahtarýnýza eriþim kazanýrsa, hesabýnýza eriþiminizi kaybedersiniz ve hesabýnýzýn parasýný kaybedersiniz. Bunun yerine her zaman açýk anahtarlarýnýzý verin. Mina sizden asla özel anahtarlarýnýzý istemez.
+
+</Alert>
+
+<br />
+
+## SDK'dan oluþturulan hesabýnýzý içe aktarýn
+
+Mina istemcisinin beklediði ile istemci SDK'nýn ürettiði arasýnda anahtar çifti biçiminde farklýlýklar olduðunu lütfen unutmayýn.
+Ýstemci SDK'sý bir anahtar çifti oluþturmak için kullanýldýðýnda, döndürülen anahtar çifti çýktýsý Mina istemcimize doðrudan aktarýlamayan dizelerdir.
+Bunun için, anahtar çifti dizelerimizi doðrudan istemcimize aktarýlabilecek bir biçime biçimlendirmek için `mina geliþmiþ wrap-anahtarý` aracýný kullanmamýz gerekecek.
+
+Bunu baþarmak yalnýzca birkaç kýsa adým alýr.
+
+1. Öncelikle, sisteminizde anahtar dosyalarý saklayabileceðiniz bir klasörünüz olduðundan emin olun.Anahtar klasörünü kullanmanýzý öneririz.
+
+```
+mkdir ~/keys
+```
+
+2. Ardýndan, bu klasördeki izinlerin doðru þekilde ayarlandýðýndan emin olun, bu, istenmeyen iþlemlerin bu dosyalara eriþmesini engeller.
+
+```
+chmod 700 ~/keys
+```
+
+3.Özel anahtar çýktýsýný ~ / anahtar klasöründeki bir dosyaya kopyalayýn.
+
+```
+echo 'YOUR-PRIVATE_KEY' > ~/keys/my-wallet
+```
+
+4. Özel anahtar dosyasý için izinlerin doðru þekilde ayarlandýðýndan emin olun, bu istenmeyen iþlemlerin ona eriþmesini engeller.
+
+```
+chmod 600 ~/keys/my-wallet
+```
+
+5. Anahtar çiftinizi Mina istemcisi için içe aktarýlabilir bir biçime biçimlendirmek için `mina geliþmiþ wrap-anahtarýný` kullanýn. Lütfen `mina geliþmiþ wrap-anahtarý` kullanmanýn sizi özel anahtarýnýzda þifrenizi sýfýrlamaya zorlayacaðýný unutmayýn.
+
+```
+mina advanced wrap-key -privkey-path ~/keys/my-wallet
+```
+
+Aþaðýda gösterildiði gibi yeni bir þifre girmeniz istenecektir.
+
+```
+Private key:
+Password for new private key file:
+Again to confirm:
+```
+
+Bu yeni bir `my-wallet.pub` ve `my-wallet` dosyasýný oluþturacaktýr.
+
+```
+ls ~/keys/
+my-wallet  my-wallet.pub
+```
+
+6. Yeni oluþturulan özel anahtar dosyasý için izinlerin doðru þekilde ayarlandýðýndan emin olun.
+
+```
+chmod 600 ~/keys/my-wallet
+```
+
+7. Son olarak, istemci SDK'sý tarafýndan oluþturulan hesabý istemciye aktarabiliriz.
+
+```
+mina accounts import -privkey-path ~/keys/my-wallet
+```
+
+Hesap `mina adavanced wrap-key` ile oluþturulduðunda girdiðiniz þifre istenecektir.
+
+Bu komutun cevabý þöyle görünecektir:
+
+```
+😄 Imported account!
+Public key: B62qjaA4N9843FKM5FZk1HmeuDiojG42cbCDyZeUDQVjycULte9PFkC
+```
+
+## Özel anahtarýnýzý doðrulayýn
+
+Artýk anahtarýnýzý oluþturduðunuza göre - çalýþtýðýný doðrulamak isteyeceksiniz.Bir iþlemi imzalayabildiðinizi doðrulamanýz yeterlidir. Bunu `mina-validate-keypair` aracýný kullanarak doðrulayabilirsiniz.
+
+Aþaðadaki komutu çalýþtýrýn:
+
+```
+mina-validate-keypair -privkey-path ~/keys/my-wallet
+```

@@ -1,0 +1,111 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Staking Service Guidelines" });
+
+# Stake Etme Hizmeti Yönergeleri
+
+Bir stake etme hizmeti yürütmenin önemli bir parçasý, katýlýmcýlara ödeme yapmanýn yaný sýra blok üretebileceðiniz kazanan slotlarý tahmin etmek / belirlemektir. Mina protokolü, ödülleri delegelere otomatik olarak ödemiyor, bu nedenle stake etme hizmetinin bir kýsmý katýlýmcýlara manuel olarak ödeme yapmaktýr.
+
+Bu belge, bu ödemeleri yönetirken düþünmeniz gereken farklý bileþenleri açýklamayý amaçlamaktadýr. Spesifik olarak, bu belge, kazanma bloklarýnýn olasýlýklarýnýn anlaþýlmasýný, daha sonra kullanýlmak üzere defterden veri toplanmasýný ve bu verilerden ilgili stake ödeme bilgilerinin hesaplanmasýný saðlar.
+
+## Stake Etme Ödülleri
+
+Bir blok üretmenin coinbase ödülü 720 tokendýr. Bununla birlikte, bazý hesaplar, yalnýzca kilidi açýlmýþ tokenlar içeriyorsa, 2x supecharged ödül alýr. Pay delegasyonlarý söz konusu olduðunda, ödülün supercharged olup olmamasý, stake etme ve blok üretimi yapan hesaba deðil, bloðu kazanan hesaba baðlýdýr.
+
+## Dumping Staking Defterleri
+
+Belirli bir dönem için bir blok kazanma olasýlýðýný hesaplamak veya belirli bir hesabýn alacaðý madeni para tabaný ödülünü geriye dönük olarak hesaplamak için, o döneme ait stake defterine sahip olmanýz gerekir. Mina daemonlarý sadece mevcut dönem için staking defteri ve bir sonraki dönem için staking defteri etrafýnda tutar, bu nedenle bir dönem için bir staking defteri yakalamak istiyorsanýz, bunu o dönemden önce veya o dönem sýrasýnda yapmanýz gerekir.
+
+`mina ledger export` komutu, çalýþan daemondan defterleri dýþa aktarmak için kullanýlabilir. Dýþa aktarmak istediðiniz defterin bir tanýmlayýcýsýný argüman olarak alýr. Aþaðýdaki tablo, bu tanýmlayýcýlarýn her birinin neyi temsil ettiðini açýklamaktadýr.
+
+| Taným                | Açýklama                                                     |
+| -------------------- | ------------------------------------------------------------ |
+| staking-epoch-ledger | Mevcut dönem için staking defteri.                           |
+| next-epoch-ledger    | Gelecek dönem için staking defteri (mevcut dönemden sonra ). |
+| staged-ledger        | En sonki aþamalý defter (from the düðümün en iyi ucundan ).  |
+
+<!-- insert breakpoints to space out table -->
+
+<br /> <br />
+
+Dönemler sona erdikten sonra her bir stake defteri defterine her zaman sahip olmanýzý saðlamak için, staking-epoch-ledger'ý her seferinde dýþa aktarmanýzý öneririz $\dfrac{7140\times3}{60} = 357 saat (bir dönemde 71407140 yuva vardýr ve her yuva 33 dakika uzunluðundadýr).
+
+Varsayýlan olarak, defterler json verileri olarak dýþa aktarýlýr. Diðer biçimleri etkinleþtirecek bayraklarýn dokümantasyonu için `mina ledger export -help` sayfasýna bakýn. Json olarak çýktýðýnda, defter bir hesap nesneleri dizisi olarak temsil edilecektir. Aþaðýda, json'daki bir hesap nesnesinin nasýl göründüðüne dair bir örnek verilmiþtir.
+
+```json
+{
+  "pk": "B62qrwZRsNkU39TrGpFwDdpRS2JaCB2yFZKMFNqLFYjcqGE5G5fWA8p",
+  "balance": "17000",
+  "delegate": "B62qrwZRsNkU39TrGpFwDdpRS2JaCB2yFZKMFNqLFYjcqGE5G5fWA8p",
+  "token": "1",
+  "token_permissions": {},
+  "receipt_chain_hash": "2mzbV7WevxLuchs2dAMY4vQBS6XttnCUF8Hvks4XNBQ5qiSGGBQe",
+  "voting_for": "3NK2tkzqqK5spR2sZ7tujjqPksL45M3UUrcA4WhCkeiPtnugyE2x",
+  "permissions": {
+    "stake": true,
+    "edit_state": "signature",
+    "send": "signature",
+    "set_delegate": "signature",
+    "set_permissions": "signature",
+    "set_verification_key": "signature"
+  }
+}
+```
+
+Devam eden bir stake etme hizmeti için, kontrol ettiðiniz hesaplarla ve kontrol ettiðiniz hesaplara baðlý olan hesaplarla ilgileniyorsunuz. Örnek olarak, stake etme hizmetimizde yalnýzca bir hesabýmýz olsaydý, aþaðýdaki gibi bir komut kullanarak bir defter için yakaladýðýmýz tüm hesaplarý alabilirdik:
+
+```sh
+mina ledger export staking-epoch-ledger | jq "$(cat <<EOF
+  .[] | \
+  select( \
+    .pk == "B62qjwvvHoM9RVt9onMpSMS5rFzhy3jjXY1Q9JU7HyHW4oWFEbWpghe" or \
+    .delegate == "B62qjwvvHoM9RVt9onMpSMS5rFzhy3jjXY1Q9JU7HyHW4oWFEbWpghe" \
+  )
+EOF
+)"
+```
+
+Bir stake hizmeti olarak hesaplamak isteyeceðiniz önemli bir ayrýntý, bir hesabýn, katýlýmcýlara ödeme yaparken büyük olasýlýkla stake hizmetinin aðýrlýklandýrmasýna dahil etmek isteyeceðiniz supercharged coinbase ödülleri alýp almayacaðýdýr. Kilitli jetonlara sahip hesaplar (SUPERCHARGED stake ödülleri almayan hesaplardýr), json temsillerinde özel bir `"timing"` alanýna sahip olacaktýr. Ýþte bunun neye benzediðine dair bir örnek:
+
+```json
+{
+  "pk": "B62qmVHmj3mNhouDf1hyQFCSt3ATuttrxozMunxYMLctMvnk5y7nas1",
+  "balance": "230400",
+  "delegate": "B62qk2ujo9BoBxCs9BFQUsv3efaJDzbJeLs4YJdZMJzJoVj69ShVdKs",
+  "timing": {
+    "initial_minimum_balance": "230400",
+    "cliff_time": "86400",
+    "cliff_amount": "230400",
+    "vesting_period": "1",
+    "vesting_increment": "0"
+  }
+}
+```
+
+Bir hesabýn bir `"timing"` alaný olmasý, o hesabýn kilitli jetonlarý olduðu anlamýna gelmez. Zamanlanmýþ hesaplar, kilitli ve kilidi açýlmýþ tokenler içerir ve `"timing"` alaný, o hesaptaki kilitli tokenlar için kilit açma programýný açýklar. Bir hesabýn bir `"timing"` alaný varsa, o hesabýn tokenlarýnýn tam olarak açýlacaðý global aralýðý hesaplayabilirsiniz, bu noktadan sonra hesap SUPERCHARGED ödüller alacaktýr. Bu, zamanlanmýþ bir hesabýn tokenlerini tam olarak yatýrmak için ne kadar zaman alacaðýný belirleyerek ve bunu, hesabýn token almaya baþladýðý slot olan `"cliff_time"` 'a ekleyerek hesaplanabilir. Ýþte bu kilit açma zamanýný bir hesabýn zamanlama bilgisinden hesaplayacak bazý örnek python kodu.
+
+```python
+vesting_amount = initial_min_balance - cliff_amount
+vesting_time = vesting_amount * math.ceil(vesting_period / vesting_increment)
+unlocked_time = cliff_time + vesting_time
+```
+
+## Ödemelerin Nasýl Yapýlacaðýný Seçme
+
+Ödülleri nasýl hesaplayacaklarýna karar vermek her stake hizmetine baðlýdýr. Ödülleri nasýl ödemeyi seçeceðinize baðlý olarak, SUPERCAHRGED ve farklý delegatörlerin aðýrlýklarýný hesaba katmak önemlidir.
+
+Stake hizmeti ödemelerini hesaplamaya bir örnek olarak, at [docs.minaexplorer.com](https://docs.minaexplorer.com/minaexplorer/calculating-payments).adresinde topluluðumuzun bir üyesi tarafýndan bir araya getirilen bir belgeye göz atmanýzý öneririz.
+
+## Blok Kazanma Olasýlýklar Oraný
+
+Mina'da bloklar "slot" adý verilen farklý zaman aralýklarýnda üretilmektedir. Defterdeki her hesabýn, aðdaki her bir slotu kazanma þansý vardýr ve bu, bu yuva için bir blok oluþturmalarýna izin verir (veya delegasyon durumunda, temsil edilen hesabýn kendi adýna bir blok oluþturmasýna izin verir). Bir hesap, her yuva için rasgele bir sayý
+[Doðrulanabilir Rastgele Ýþlem , veya VRF](https://en.wikipedia.org/wiki/Verifiable_random_function)) hesaplar ve bu rasgele sayýyý, bu yuvayý "kazanýp kazanmadýklarýný" ve o anda bir blok oluþturup oluþturmadýklarýný belirlemek için gerekli bir eþikle karþýlaþtýrýr. Dolayýsýyla, bir slot kazanma þanslarý, aðdaki göreceli hisselerinin bir iþlevi olan eþik ile belirlenir.
+
+VRF eþiði belirlenirken örneklenen pay daðýlýmý, "stake etme defteri " adý verilen özel bir defterde yer alýr. Staking defterleri, aðdaki geçmiþ dönemlerden sabit defterlerdir (dönemler sabit slot aralýklarýdýr; her dönem 7140 slot uzunluðundadýr). Geçmiþ sabit defterlerin kullanýlmasý, kötü niyetli kiþilerin, ana defterdeki ("aþamalý defter") hissenin daðýlýmýný deðiþtirerek, bir dönem boyunca kazanma þanslarýný artýrmalarýný önler. Her dönem, stake defteri deðiþir. Bu kýsýtlama nedeniyle, sistemdeki herhangi bir hesap, herhangi bir zamanda yalnýzca sonraki 2 dönem içinde "kazanan slotlarý" kontrol edebilir.
+
+Belirli bir dönem için kullanýlacak stake etme defterini öðrendikten sonra, o dönemde bloklar üretmek için gerekli VRF eþiði her hesap için hesaplanabilir. Stake defterinde hesabýn kontrol ettiði hisseyi, stake defterindeki toplam para birimi miktarýna bölerek, belirli bir hesap için bir stake oraný hesaplayabiliriz. [Ouroboros Genesis](https://eprint.iacr.org/2018/378.pdf) belgesinin 20. sayfasýndaki Þekil 1, VRF eþiklerini hesaplamak için ham iþlevi saðlar.Aktif yuva katsayýsý $f$ için Mina'nýn deðerini doldurmak bize þu iþlevi verir: $\phi\left(\alpha\right) \triangleq 1 - \left(\dfrac{1}{4}\right)^\alpha$.
+
+Bu iþlev, bir hesap için hesapladýðýmýz stake oraný olan $\alpha$ parametresini alýr.
+
+Her VRF, bu eþikle (0 ile 1 arasýnda) karþýlaþtýrýldýðýndan ve her bir VRF, 0 ile 1 arasýnda rastgele bir sayý olduðundan, belirli bir hesap için VRF eþiði, esasen bununla bir slotun kazanýlma olasýlýðýdýr.Bu nedenle, belirli bir hesabýn bir dönem içinde kazanmasýný bekleyebileceðimiz ortalama blok sayýsýný hesaplamak için VRF eþiklerini hesaplamak için bu iþlevi tahmin edebiliriz. Bu, yalnýzca bir dönemin her slotunu kazanmak için tüm olasýlýklarý toplayarak yapýlabilir ve tüm bir çaðýn olasýlýðý sabit olduðundan, bunu hesaplamak için matematiksel ifade basitleþtirir: $\phi\left(\alpha\right)\times7140$
+
+Örnek olarak að üzerinde staking defter döneminde $ep$ $10^6$ (1 million)mina token'ý olan bir hesap olduðunu varsayalým. Epoch $ep$ için ayný staking defterinde toplam $8\times10^8$ (800 million) mina token'ý vardýr. Bu hesabýn $ep$ bireysel bir slot kazanma olasýlýðýný $\phi\left(\dfrac{10^6}{8\times10^8}\right) = 0.0017313674$ kullanarak hesaplayabiliriz. Bu bize $\sim0.17\%$ þansla bu hesabýn dönemi $ep$ boyunca her slotu kazanma þansý veriyor. Daha sonra, sonucu $7140$ ile çarparak bu hesabýn bu dönem için üretmesini beklediðimiz ortalama blok sayýsýný hesaplayabiliriz, bu bize dönem için $\sim12.36$ blokluk olasýlýklý bir ortalama verir.

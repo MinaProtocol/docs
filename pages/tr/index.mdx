@@ -1,0 +1,23 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Overview" });
+
+# Genel Bakış
+
+Mina ile çalışmaya başlama ve çalıştırma sürecinin tamamı için tüm belgeleri burada bulabilirsiniz.
+
+## Mina nedir ?
+
+Mina, kısa ve öz bir blokzincire sahip ilk kripto para birimi protokolüdür. Bitcoin ve Ethereum gibi mevcut kripto para birimleri yüzlerce gigabayt veri depolar ve zaman geçtikçe blokzincirleri yalnızca boyut olarak artacaktır.Bununla birlikte Mina ile, kullanım ne kadar büyürse büyüsün, blockchain her zaman aynı boyutta kalır - about 22kb <Footnote refNumber="[1]" link="/blog/22kb-sized-blockchain-a-technical-reference" /> (birkaç tweet boyutu). Bu, katılımcıların ağı hızla senkronize edip doğrulayabileceği anlamına gelir.
+
+Bu atılım, bir tür kısa ve öz kriptografik kanıt olan zk-SNARK'lar sayesinde mümkün olmuştur. Bir Mina düğümü her yeni blok ürettiğinde, bloğun geçerli olduğunu doğrulayan bir SNARK kanıtı da üretir. Daha sonra tüm düğümler, tüm zincirin aksine küçük kanıtı depolayabilir. Blok boyutu hakkında endişelenmenize gerek kalmadan Mina protokolü, ölçeğe göre merkezi olmayan bir blokzincir sağlar.
+
+## Mina nasıl çalışır ?
+
+“Kısa ve öz” bir blokzincir nasıl çalışır? Mina'da kullanılan kriptografik ön bilgilerimiz ve kısa ve öz blokzincir yapısı hakkında daha fazla bilgi edinmek için [teknik white paper](https://minaprotocol.com/static/pdf/technicalWhitepaper.pdf) 'ımızı okuyun.
+
+Mina Protokolü içindeki roller, teşvik tasarımı ve para politikası hakkında bilgi edinmek için [ekonomi white paper](https://minaprotocol.com/static/pdf/economicsWhitepaper.pdf)'ımıza bakın.
+
+## Mina'yı Dene
+
+Mina'yı yüklemeye ve bir düğüm çalıştırmaya hazırsanız, <DocLink copy="Başlama Sayfasına" url="/getting-started" /> gidin.

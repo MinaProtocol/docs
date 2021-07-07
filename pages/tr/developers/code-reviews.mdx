@@ -1,0 +1,25 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Code Reviews" });
+
+# Kod inceleme yönergeleri
+
+Ýyi bir pull request:
+
+- Tek bir þey yapar(yeni özellik, hata düzeltme, vb)
+- Herhangi bir yeni iþlev için testler ve belgeler ekler
+- Bir hatayý düzeltirken, söz konusu hatayý yakalayacak testi ekler veya düzeltir
+
+## OCaml
+
+- <DocLink copy="Stil yönergeleri" url="/style-guide" /> takip ediliyor mu?
+- Ýmzalar mantýklý mý? Minimal ve yeniden kullanýlabilir mi?
+- Herhangi bir þeyin funktör etmesi gerekiyor mu?---
+- Doðru þekilde ele alýnmayan herhangi bir hata durumu var mý?
+- `_exn` iþlevlerine yapýlan çaðrýlar haklý mý? Bir istisna yapmamak için ön koþullarý karþýlanýyor mu? Yarattýðý istisna yararlý mý?
+- Kod yorumlanmamalýdýr.
+- Etrafta stray hata ayýklama kodu yok.
+- Herhangi bir log kaydý uygundur. Tüm `Logger.trace` loglarý, varsayýlan olarak kimseye gösterilmeyecekleri için önemsiz olmalýdýr.
+- Bu kod kendi kütüphanesinde yaþamalý mý? Farklý bir kütüphanede yaþamalý mý?
+- Kod kafanýzý karýþtýrýyor mu? Belki bir yorum yapýlmalý ya da farklý bir þekilde yapýlandýrýlmalýdýr.
+- Bir davranýþ deðiþikliði diðer kodun yaptýðý varsayýmlarý bozar mý?

@@ -1,0 +1,65 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Hot / Cold Block Production" });
+
+# Sýcak / Soðuk Blok Üretimi
+
+Blok üretimi karmaþýk bir süreçtir ve internete baðlanmak için bir düðüm gerektirir. Özel anahtar internete baðlý bir makinede mevcutsa, cüzdanýn "sýcak" olduðu söylenir. Daha dikkatli blok üreticileri, bilgisayar korsanlarýnýn sistemlerine girmesi durumunda riski azaltmak için üzerlerinde önemli miktarda hisseye sahip sýcak cüzdanlardan kaçýnmak isteyebilir.
+
+Özel anahtar internette yoksa ve hiçbir zaman mevcut deðilse, cüzdanýn "soðuk" olduðu söylenir. Anlamlý payla iliþkili cüzdanlar için soðuk depolama tercih edilir, çünkü internette hiç bulunmamýþlarsa bu tür sistemlere girmek daha zordur. Bu, internet kapalýyken bir dizüstü bilgisayarda bir anahtar çifti oluþturmak veya bir donaným cüzdaný[bir defter cihazý gibi](https://shop.ledger.com/) kullanmak kadar kolay olabilir.
+
+Mina'nýn protokolü, blok üreticilerinin sýcak bir cüzdan kullanarak pay almasýný gerektiriyor (nedenine bu makalenin son bölümünde bakýn) - ancak dikkatli blok üreticilerinin hisselerinin büyük çoðunluðunu soðuk bir cüzdanda tutmasýna izin veren bazý mekanizmalar var. Üretilen bloklar ve üretilen bloklarla ilgili tüm kazançlar, bu soðuk cüzdandan sýcak olana delegasyon yoluyla gerçekleþir.
+
+Bu makalenin bir sonraki bölümü, hissenizin çoðunluðunun soðuk bir cüzdanda baþlayýp onda kalmasýyla etkili bir þekilde bloklar üretmek için gereken eylemleri açýklamaktadýr.
+
+## Önkoþullar
+
+Önkoþullar
+Blok üreticinizi çalýþtýrmadan önce en az iki hesaba ihtiyacýnýz olacak: Bir soðuk cüzdan ve bir sýcak cüzdan
+
+### Sýcak cüzdan oluþturma
+
+<DocLink copy="Anahtar oluþturmayla" url="/using-mina/keypair" /> ilgili döküman
+sayfamýza bakýn.Bu bir sýcak cüzdan olduðundan, bu anahtar çifti için defteri veya
+baþka bir HSM(Donanýmsal Güvenlik Modülü) kullanmamanýz gerektiðini unutmayýn.
+
+Sýcak açýk anahtarýnýzý not alýn.
+
+### Sýcak cüzdanýnýzý doldurun
+
+Sýcak cüzdanýnýz, stake etme için kullanýlmadan önce konsensüs defterinde bulunmalýdýr. Sýcak cüzdan adresiniz oluþum defterinde mevcutsa, baþka bir iþlem yapmanýz gerekmez. Ancak, deðilse, hesap oluþturma ücretini karþýlamak için en azýndan yeterli mina token'ý edinmeniz ve bu token'larý bu açýk anahtara göndermeniz önemlidir.
+
+### Soðuk cüzdan oluþturma
+
+{" "}
+
+<DocLink copy="Anahtar oluþturma" url="/using-mina/keypair" />
+ile ilgili dökümantasyon sayfamýza bakýn.Bu soðuk bir cüzdan olduðundan, tercihen
+internet baðlantýsý kesilmiþ bir makinede yapabileceðiniz gibi, anahtar oluþturmak
+için en güvenli mekanizmayý kullanmayý tercih etmeniz gerektiðini unutmayýn.
+
+### Soðuk cüzdanýnýzý yapýlandýrma
+
+Soðuk cüzdanýnýz, sýcak cüzdanýnýza delege edildiðinde hissesi sayýlmadan önce konsensüs defterinde bulunmalýdýr. Eðer soðuk cüzdan adresi oluþum defterinde mevcutsa, baþka bir iþlem yapmanýz gerekmez. Aksi takdirde, konsensüsa anlamlý bir þekilde katýlmak için yeterli token alýn ve bu soðuk cüzdan adresine gönderin.
+
+### Soðuk Cüzdanýnýzý Sýcak Cüzdanýnýza Devredin
+
+Ardýndan, soðuk hesabýnýzý sýcak hesabýnýza atadýðýnýzdan emin olun. Hesabýnýzý, oluþum defterinde doðru noktaya delege edecek þekilde ayarladýysanýz, baþka bir iþlem yapmanýz gerekmez.Aksi takdirde, anahtarýnýz bir bilgisayarda oluþturulmuþsa,`mina client delegate-stake` komutunu kullanarak temsilci atayabilirsiniz.Aksi takdirde, daha fazla bilgi edinmek için [Mina defterindeki OKU BENÝ](https://github.com/jspada/ledger-app-mina/tree/v1.0.0-beta.2) delege talimatlarýna bakýn.
+
+## Blok Üretimi
+
+Sýcak cüzdan anahtarýnýzý kullanarak <DocLink copy="Aða Baðlanma" url="/using-mina/connecting" /> sayfasýndaki "Düðüm baþlat" talimatlarýný takip edin.
+
+## Protokol Detaylarý
+
+Þöyle düþünüyor olabilirsiniz: Mina protokolündeki güvenli bir bölgeden veya baþka bir HSM cihazýndan neden doðrudan bloklar oluþturamýyorum?
+
+Blok üretiminin iki bileþeni, özel anahtarýn ilginç þekillerde kullanýlmasýný gerektirir: Bir slot kazanmak ve Blockchain SNARK'ý yaratmak. SNARK'ý güvenli donaným içinde oluþturmak özellikle son derece zordur ve günümüz teknolojisi göz önüne alýndýðýnda protokolümüz için yeterince hýzlý yapýlmasý muhtemelen imkansýzdýr.
+
+### Snark Üzerinde Slot Kazanmak
+
+Bir blok üreticisi, özel anahtarýný kullanarak bir VRF'yi (veya doðrulanabilir rastgele iþlevi) deðerlendirerek bir slot kazanýp kazanmadýðýný belirleyebilir.VRF'nin hesabýnýz ve bir dönem içindeki tüm slotlar için size yetki veren her hesap için deðerlendirilmesi gerekir.Bildiðimiz kadarýyla, hiç kimse bir HSM'ye bir VRF uygulamamýþtýr, ancak bu muhtemelen çok zor deðildir.
+
+### Blockzincir SNARK ' ý oluþturmak
+
+Bir blok üreticisi bir slot kazandýðýnda, sadece bir blok oluþturup yayýnlamaya ek olarak, bir blok üreticisi, bu yeni blok dahil olmak üzere blok zincirinin geçerli olduðunu kanýtlayan yeni bir SNARK kanýtý oluþturmalýdýr.SNARK kanýtý, VRF bilgilerini kanýta katýþtýrýrken özel anahtarý kullanýr.Bu kanýt, diðer protokollerin doðrulayýcýlarýndan gerçekleþtirmelerini istediði basit bir imza yerine geçer.Bu SNARK kanýtýný oluþturmak hesaplama açýsýndan çok pahalýdýr ve çok sayýda geliþmiþ kriptografiye dayanýr.Pazardaki hiçbir HSM, SNARK kanýtlama algoritmasýný uygulamak için zaman harcasa bile, bu SNARK kanýtýný yeterince verimli bir þekilde yaratma yeteneðine sahip deðildir.

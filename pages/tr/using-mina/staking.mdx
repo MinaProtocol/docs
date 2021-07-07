@@ -1,0 +1,158 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Staking & Snarking" });
+
+# Staking & Snarking
+
+Mina düðümümüzü kurduðumuza ve ilk iþlemimizi gönderdiðimize göre, dikkatimizi Mina aðýyla etkileþim kurabileceðimiz diðer yollara çevirelim - konsensüsa katýlmak ve zk-SNARK'lar oluþturarak verileri sýkýþtýrmaya yardýmcý olmak. Aðýn güvenliðini saðlamaya yardýmcý olan bir düðümü çalýþtýrarak çabalarýnýz karþýlýðýnda mina alabilirsiniz.
+
+## Konsensüsa katýlmak
+
+Mina aðý<DocLink copy="Hisse Kanýtý konsensüsu" url="/glossary#proof-of-stake" /> ile güvence altýna alýnmýþtýr.Bu konsensüs modeliyle, Bitcoin madenciliðinde olduðu gibi karmaþýk ekipmanlara sahip olmanýza gerek yok. Cüzdanýmýzda sadece mina bulundurarak, ya kendi payýmýza stake etmeyi ya da baþka bir düðüme devretmeyi seçebiliriz. Ýlk önce mina'yý nasýl stake edeceðimizi görelim:
+
+<Alert kind="warning">
+
+Að ile düzgün þekilde senkronize halde kalmak ve konsensüsa katýlmak için, sunucunuzun bir tür [saat senkronizasyon protokolü](https://en.wikipedia.org/wiki/Clock_synchronization)çalýþtýrmasý önemlidir. Kurulumu nispeten kolay olan ve birçok popüler linux daðýtýmýnda zaten varsayýlan bir hizmet olarak yüklenmiþ olarak gelen [NTP](https://en.wikipedia.org/wiki/Network_Time_Protocol)'yi kullanmanýzý öneririz.
+
+</Alert>
+
+### Staking mina
+
+Aşağıdaki komutu vererek minamızla stake yapmayı deneyebiliriz:
+
+    mina client set-staking -public-key $MINA_PUBLIC_KEY
+
+Alternatif olarak, daemon`-block-producer-pubkey` bayraðýný kullanarak yeniden baþlatabilirsiniz:
+
+<DaemonCommandExample args={["-block-producer-pubkey $MINA_PUBLIC_KEY"]} />
+
+`mina client status` komutunu kullanarak þu anda hangi hesaplarla stake yaptýðýmýzý her zaman kontrol edebiliriz:
+
+```
+mina client status
+
+Mina daemon status
+-----------------------------------
+
+Global number of accounts:  372
+Block height:               20
+Max observed block length:  20
+Local uptime:               1m48s
+Ledger Merkle root:         ...
+Protocol state hash:        ...
+Staged Hash:                ...
+Git SHA-1:                  ...
+Configuration directory:    ...
+Peers:                      5 (...)
+User_commands sent:         0
+SNARK worker:               None
+SNARK work fee:             1
+Sync status:                Synced
+Block producers running:    1 (...)
+Best tip consensus time:    epoch=0, slot=133
+Next proposal:              None this epochâŠ checking at in 5.284h
+Consensus time now:         epoch=0, slot=134
+Consensus mechanism:        proof_of_stake
+Consensus configuration:    ...
+Addresses and ports:        ...
+Libp2p PeerID:              ...
+```
+
+Yukarýdaki yanýtta yer alan `Block producers running` alaný, ilgili anahtarla birlikte halihazýrda hesaplarýn sayýsýný döndürür.
+
+<Alert kind="warning">
+
+Bir hesaptaki fonlarla baðýmsýz olarak stake yapýyorsanýz, baþarýlý bir þekilde bloklar oluþturmak için her zaman aða baðlý kalmanýz gerekeceðini unutmayýn. Sýk sýk çevrimdýþý olmanýz gerekiyorsa, hissenizi devretmeniz daha iyi olabilir.
+
+</Alert>
+
+Coinbase stake eden hesaptan baþka bir hesaba göndermek isterseniz, daemon'ý baþlattýðýnýzda `-coinbase-receiver` bayraðýný kullanabilirsiniz. Coinbase'i soðuk bir cüzdana bile yöneltebilirsiniz!
+
+### Mina'ya Yetki Verme
+
+Mina'ya yetki verme, her zaman aða baðlý olan bir düðümü sürdürmek zorunda kalmama avantajý ile onu doðrudan stake etmek için alternatif bir seçenektir.
+
+Öncelikle hesabýnýzýn kilidini açtýðýnýzdan emin olun:
+
+    mina account unlock -public-key $MINA_PUBLIC_KEY
+
+Ardýndan hissenizi devretmek için bu komutu çalýþtýrýn:
+
+    mina client delegate-stake \
+        -receiver <DELEGATE-PUBLIC-KEY> \
+        -sender $MINA_PUBLIC_KEY \
+        -fee 0.1
+
+Bu komuttaki Alanlar:
+
+- `receiver` Alýcý bayraðý, stake temsilcinizin alýcýsýnýn açýk anahtarýdýr
+- `gönderici` yetki vermek istediðiniz hesabýn açýk anahtarýdýr
+- `fee` iþleminizi blok zincirine kaydetmek için iþlem ücretidir
+
+Bu komutun þüpheli bir þekilde bir <DocLink copy="ödeme iþlemi" url="/my-first-transaction#make-a-payment" /> gibi göründüðünü fark edeceksiniz. Bunun nedeni, bir pay delegasyonunun ayný zamanda bir iþlem olmasýdýr! Bu nedenle, bu ayarý deðiþtirmek için küçük bir iþlem ücreti ödememiz gerekiyor.
+
+Aþaðýdakilerle ilgileniyorsanýz, hissenizi devretmek yararlý olabilir:
+
+- "Soðuk cüzdandan" gelen fonlarý kullanan kendi stake düðümünüzü çalýþtýrmak
+- Periyodik olarak token ödemeleri saðlayacak bir "stake havuzuna" yetki verme
+- Veya bir blok üreticisini tam zamanlý olarak yönetmeye deðer kýlmak için yeterli token'ýnýz yoksa
+
+<Alert>
+
+Yeni stake yetkinizin yürürlüðe girmesinden önce 2-4 haftalýk bir gecikme süresi vardýr.
+
+</Alert>
+
+## Mina aðýndaki verileri sýkýþtýrmak
+
+Mina protokolü, diðer kripto para protokolleri gibi blok zincirinin tam geçmiþini korumak için düðümlere ihtiyaç duymamasý bakýmýndan benzersizdir. Mina protokolü, kriptografik kanýtlarý tekrar tekrar kullanarak blok zincirini sabit boyuta etkili bir þekilde sýkýþtýrýr. Bu sýkýþtýrma diyoruz çünkü terabaytlarca veriyi birkaç kilobayta düþürüyor.
+
+Ancak, bu geleneksel anlamda veri kodlama veya sýkýþtýrma deðildir - daha ziyade düðümler kriptografik kanýtlar üreterek aðdaki verileri "sýkýþtýrýr". Düðüm operatörleri, bloklara eklenen iþlemler için zk-SNARK'lar oluþturan "snark-iþçileri" olarak kendilerini tanýmlayarak bu süreçte çok önemli bir rol oynarlar.
+
+Þu komutlarý kullanarak bir snark-worker'ý baþlatabilirsiniz:
+
+    mina client set-snark-work-fee <FEE>
+    mina client set-snark-worker -address $MINA_PUBLIC_KEY
+
+Alternatif olarak, daemon'ý þu bayraklarla yeniden baþlatabilirsiniz:
+
+<DaemonCommandExample
+  args={["-run-snark-worker $MINA_PUBLIC_KEY", "-snark-worker-fee <fee>"]}
+/>
+
+Bir snark iþçisi olarak, sýkýþtýrýlmýþ iþlemlerinizin içine girdiði her blok için bazý blok ödüllerini paylaþabilirsiniz. Blok üreticisi, sýkýþtýrýlmýþ iþlemleri bir bloða dahil etmeden önce toplamaktan sorumludur ve protokol tarafýndan iþçileri ödüllendirmek için teþvik edilecektir.
+
+Snark iþçileri oldukça yoðun iþlem gerektirebilirler, bu nedenle CPU kullanýmlarýný sýnýrlamanýz gerekiyorsa, snark iþçilerinin `-snark-worker-parallelism` bayraðýyla kullanacaðý iþ parçacýðý sayýsýný belirtebilirsiniz. Bu, özellikle ayný makinede bir blok üreticisi ve iþçiyi çalýþtýrmaya çalýþýyorsanýz ve bloklarý zamanýnda üretmekte sorun yaþýyorsanýz yararlý olabilir.
+
+Bu, bir Kod düðümü operatörü olarak rolleri ve sorumluluklarý kapsar. Mina izinsiz bir eþler arasý að olduðundan, her þey tüm dünyadaki düðümler tarafýndan merkezi olmayan bir þekilde yönetilir ve çalýþtýrýlýr. Benzer þekilde Mina projesi de daðýtýlýr ve katýlým izni yoktur. Kodun tamamý açýk kaynaktýr ve hem teknik hem de teknik olmayan yapýlacak çok iþ vardýr. Mina'ya nasýl dahil olabileceðiniz hakkýnda daha fazla bilgi edinmek için lütfen Mina'ya [Contributing to Mina section](./contributing).
+bakýn.
+
+### Mina daemon'unuzu yapýlandýrmak için daemon.json kullanma
+
+`~/.mina-config/daemon.json` adresinde bir dosya oluþturarak, mina daemon'unuzu komut satýrýnda seçenekler saðlamanýza gerek kalmadan yapýlandýrabilirsiniz. Bu, mina'yý bir hizmet olarak çalýþtýrmanýn yaný sýra tekrarlayan yazýmlardan kaçýnmak için de yararlý olabilir!
+
+Komut satýrýnda `mina daemon` a aktarýlabilen seçeneklerin çoðu, yapýlandýrma dosyasýnda seçenekler olarak da saðlanabilir. Seçeneklerle ilgili daha fazla belge için `mina daemon -help` bölümüne bakýn. Kullanýlabilir tüm yapýlandýrma parametrelerinin kullanýmýna iliþkin bir örnek aþaðýda verilmiþtir (dosyanýzda, yalnýzca deðiþtirmek istediklerinizi belirtmeniz gerekir):
+
+```
+{
+  "daemon": {
+    "client-port": 1000,
+    "external-port": 1001,
+    "rest-port": 1002,
+    "block-producer-key": "/path/to/privkey-file",
+    "block-producer-password": "mypassword",
+    "block-producer-pubkey": "<MY PUBLICKEY>",
+    "coinbase-receiver": "<MY PUBLICKEY>",
+    "log-block-creation": false,
+    "log-received-blocks": false,
+    "log-snark-work-gossip": false,
+    "log-txn-pool-gossip": false,
+    "peers": ["seed-one.o1test.net", "seed-two.o1test.net"],
+    "run-snark-worker": "<MY PUBLICKEY>",
+    "snark-worker-fee": 10,
+    "snark-worker-parallelism": 1,
+    "work-reassignment-wait": 420000,
+    "work-selection": "seq"
+  }
+}
+```

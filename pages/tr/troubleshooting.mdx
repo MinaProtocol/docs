@@ -1,0 +1,423 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Troubleshooting" });
+
+# Sorun giderme
+
+Mina daemonu kurmaya çalýþýrken karþýlaþabileceðiniz bazý genel sorunlar. Sorununuzu burada bulamazsanýz, lütfen [Discord](https://bit.ly/MinaDiscord)'da yardým isteyin veya [Github](https://github.com/MinaProtocol/mina/issues/new)'a bir sorunu bildirin.
+
+- [Genel](#general)
+- [Bir düðümü senkronize etme](#syncing-a-node)
+- [Að oluþturma](#networking)
+- [Hesaplar ve Ýþlemler](#accounts-and-transactions)
+- [Blok üreticileri](#block-producer)
+- [Snark iþçileri](#snark-worker)
+- [Logging](#logging)
+- [Testnet zorluklarý](#testnet-challenges)
+
+## Genel
+
+### Düðümün birkaç dakikada bir çöküyor
+
+Düðüm hýzlý ve tekrar tekrar çökerse, bu büyük olasýlýkla özel anahtarda yanlýþ izinler, peers.txt dosyasýný yanlýþ bir þekilde geçirme nedeniyle eþlerin bulunamamasý, yanlýþ bir parola veya paroladaki özel karakterler gibi bir yapýlandýrma sorunudur. Loglarýn son birkaç satýrý, sorunla ilgili daha fazla bilgi saðlamalýdýr.
+
+### SSH terminalimi kapattým ve düðüm çöktü
+
+Mina daemon'u ön planda baþlatýrsanýz, ondan ayrýldýktan sonra kapanacaktýr (bir SIGINT sinyali aracýlýðýyla). Süreci ayýrabilmeniz için arka planda çalýþtýrmak için birçok seçeneðiniz vardýr:
+
+- Daemon'u `-background` bayraðý ile baþlatýn.
+- Bir systemd hizmeti olarak çalýþtýrýn ([dökümanlara](https://minaprotocol.com/docs/connecting)bakýnýz).
+- Docker ile çalýþtýr([dökümanlara](https://minaprotocol.com/docs/connecting)bakýnýz).
+- Ýþlemi devam ettirmek için ayýrabileceðiniz ekran veya [tmux](https://icohigh.gitbook.io/mina-node-testnet/english/setting-up-tmux) gibi bir terminal çoklayýcýda daemon'u çalýþtýrýn.
+
+Düðümünüz çökerse otomatik yeniden baþlatma avantajýna sahip olduklarýndan, hizmet olarak / Docker aracýlýðýyla çalýþtýrýlmasý önerilir.
+
+### Anahtarlar dizini için hangi izinler gereklidir
+
+`Anahtarlar` dizini 700 ve özel anahtar dosyasý 600'e sahip olmalýdýr. Örneðin, anahtarlar dizini ana dizininizde yer aldýðýnda ve özel anahtar dosyanýz `cüzdaným`olarak adlandýrýldýðýnda bu komutlar izinleri günceller:
+
+```
+chmod 700 ~/keys
+chmod 600 ~/keys/my-wallet
+```
+
+### Raspberry Pi / ARM tabanlý bir cihazda çalýþabilir miyim ?
+
+Hayýr. Yalnýzca x86-64 desteklenir ve ARM desteklenmez.
+
+### Þifremde özel karakterler var ve hata veriyor
+
+Parolanýn etrafýnda týrnak iþaretleri kullanmalýsýnýz, yani `"MY_PASSWORD"` ve / veya \ karakterini kullanarak þifrede `$` gibi özel karakterlerden kaçabilirsiniz.
+
+### Docker komutunu çalýþtýrýrken bir izin hatasý alýyorum
+
+Geçerli kullanýcýyý [bu makaleye](https://docs.docker.com/engine/install/linux-postinstall/). göre docker grubuna ekleyin. Komutun önüne `sudo` ekleyebilirsiniz, ancak bu önerilmez.
+
+### MacOS'ta monitor.ml.Error "Ýþlemden baðlantý alýnýrken zaman aþýmýna uðradý" 'yý görüyorum
+
+Mina macOS üzerinde çalýþtýrýyorsanýz ve aþaðýdaki zaman aþýmý hatasý `monitor.ml.Error "Ýþlemden baðlantý alýnýrken zaman aþýmýna uðradý"` mesajýný görüyorsanýz, aþaðýdakileri çalýþtýrarak ana bilgisayar adýnýzý `/etc/hosts` dosyasýna eklemeniz gerekir:
+
+- ana bilgisayar adýnýzý almak için $ `hostname`
+- `/etc/hosts` dosyasýný açýn ve mapping'i ekleyin:
+
+```
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1       localhost
+127.0.0.1       <ADD YOUR HOSTNAME HERE>
+This is necessary because sometimes macOS doesn't resolve your hostname to your local IP address.
+```
+
+### Hangi donanýma ihtiyacým var ?
+
+Mevcut að için gereksinimleri [buradan](https://minaprotocol.com/docs/getting-started) görün. Bazý düþük seviyeli VPS saðlayýcýlarý, slot süresi içinde blok üretme sorunu yaþayabilir. Eksik bloklar yaþamaya devam ederseniz, daha güçlü bir donaným denemek isteyebilirsiniz.
+
+### Mina hizmetinin önyüklemede baþlamasýný istiyorum?
+
+Mina daemon sürecini yönetmek için systemd kullanýrsanýz, makine yeniden baþlatýldýðýnda otomatik olarak yeniden baþlamaz. Hizmeti `systemctl user start mina` aracýlýðýyla manuel olarak çalýþtýrabilir veya `systemctl user enable mina` 'yý çalýþtýrarak hizmetin önyüklemede otomatik olarak baþlatýlmasýný saðlayabilirsiniz.
+
+### CODA_PRIVKEY_PASS için ne eklemeliyim?
+
+Bir anahtar çifti oluþturduðunuzda, bir þifre oluþturdunuz. `CODA_PRIVKEY_PASS` deðeri için oluþturduðunuz þifreyi kullanýn.
+
+### ~/.mina-config/daemon.json ile ilgili bir hata alýyorum.
+
+Bu, [yapýlandýrma seçeneklerini](https://minaprotocol.com/docs/node-operator) daemon'a iletmek için isteðe baðlý bir dosyadýr (komut satýrýndan geçmek yerine). Daemon varsayýlan olarak arar, bu da dahil etmezseniz bir hatayla sonuçlanýr. Önemli olmadýðý için bu hatayý yok sayýn (eklemeye çalýþmadýðýnýz sürece) ve daemon normal þekilde baþlayacaktýr.
+
+### Düzenli aralýklarla öldürülen kanýtlayýcý / doðrulayýcýyla ilgili mesajlar görüyorum
+
+Bu normaldir ve bu iþlemler þu anda periyodik olarak öldürülür ve yeniden baþlatýlýr. Önemli bir hata / çökme ile sonuçlanmadýkça bu mesajlarý göz ardý edin.
+
+### "Önemli hata: bellek yetersiz" ile çöktüm?
+
+Bu yaygýn bir sorundur - GitHub'da bu [issue](https://github.com/MinaProtocol/mina/issues/6851) bakýn ve loglarla ilgili tüm bilgileri ekleyin ve düðümünüzü yeniden baþlatýn.
+
+### Parolamý bir ortam deðiþkeni kullanarak saðlayabilir miyim?
+
+Yes. `CODA_PRIVKEY_PASS` ortam deðiþkenini þifreniz olarak ayarlayýn.
+
+### Ubuntu 20.04 / Debian 10'a yüklemeye çalýþýyorum ve baðlýlýk hatalarý alýyorum
+
+Gerekli baðlýlýklarý manuel olarak çözmek için Discord'umuzdaki bu [kýlavuza](https://mina.docs.casso.io/english/testnet-4.1/ubuntu-20.04.1-lts) bakýn. Alternatif olarak, desteklenen bir iþletim sistemi (Ubuntu 18.04 / Debian 9) veya Docker kullanýn.
+
+## Bir düðümü senkronize etme
+
+### 1 blok yüksekliðinde ve gözlemlenen maksimum 1 blok uzunluðunda takýlý kaldým
+
+Mina istemci durumunun çýktýsý aþaðýdakine benzer çýktýlar::
+
+```
+Block height:                    1
+Max observed block length:       1
+```
+
+Bu sorun `9652f8ee092ea77e29f5ab49fa0a295e36743e8b` sürümüyle düzeltildi, lütfen yükseltme yaptýðýnýzdan emin olun. Daemon baþlatýlýrken yüksekliði 1 olarak görmek normaldir. Düðümün yakalama aþamasýna ilerlemesi birkaç dakika (20 dakika ila bir saat) sürebilir.
+
+### "Maksimum gözlemlenen blok uzunluðum" 1, ancak blok yüksekliðim doðru
+
+Bu sorun `9652f8ee092ea77e29f5ab49fa0a295e36743e8b` sürümüyle düzeltildi lütfen yükseltme yaptýðýnýzdan emin olun.Yükseltme iþleminden sonra, daemon'un çalýþmasýna izin verdikten (20 dakika ila bir saat arasý) sonra ve hata kendi kendine çözüldüðünden emin olun.
+
+### Düðümüm yakalama da kaldý / blok yüksekliði güncellenmiyor
+
+Düðüm senkronize edildiðinde, **Blok yüksekliði**, mina istemci durumunun çýktýsýnda görüldüðü gibi, **gözlemlenen maksimum blok uzunluðuna** eþit olmalý ve aþaðýdaki ekran görüntüsünde gösterildiði gibi aðýn mevcut yüksekliðiyle eþleþmelidir:
+
+![Bir düðümü senkronize etme](https://i.imgur.com/iWJTYTr.png)
+
+Düðümü baþlatýrken ve düðüm bir bootstrap / catchup durumundayken, blok yüksekliði 1 veya mevcut en iyi blok uzunluðundan birkaç yüz blok (ancak 1'den çok daha büyük) bir sayý gösterecektir. Yakalama sýrasýnda, yeni bloklarýn üretilmesi dýþýnda blok yüksekliði artýmlý olarak güncellenmeyecek ve yakalama tamamlandýðýnda doðru yüksekliðe atlayacaktýr. Bu yüzden sabýrlý ol; bu iþlemin tamamlanmasý birkaç saat sürebilir ve kullanýlan donanýma göre deðiþir.
+
+### Aðýn þu anki yüksekliðinde deðil 1 yüksekliðinde senkronize ettim
+
+Önemli olan, `mina client status` görüldüðü gibi mevcut blok zinciri uzunluðunuzun mevcut að yüksekliðine eþit olmasýdýr. Düðümünüz yanlýþ yükseklikte senkronize edildiðini bildiriyorsa, düðümü doðru yüksekliðe getirmek için sonunda yakalama aþamasýna girmelidir. Að, yakalamaya çalýþtýðý herhangi bir kýsa çatal görürse, zaman zaman yakalama ve eþitleme arasýnda geçiþ yapabilirsiniz.
+
+### Neden blok zinciri yüksekliðim 1000'den fazla yükseliyor ve sonra takýlýp kalýyor?
+
+Bloklar üretmek için blok zincirinin yalnýzca son `k` (290) bloðuna ihtiyacýmýz var. Öyleyse, önyükleme tamamlandýðýnda, geçiþ sýnýrýnýn kökü (esasen yerel blok deponuz) mevcut maksimum yükseklik eksi `k` (290) olmalýdýr. Eþitleme iþleminin önemli ölçüde zaman alan kýsmý, eksik `k` bloklarýný indirmektir, bu da **yakalama** rolüdür. Yakalama sýrasýnda, mevcut yüksekliðe sýçrayana ve senkronize edilene kadar blok yüksekliðinizin arttýðýný (aðda üretilen yeni bloklar dýþýnda) görmezsiniz. Bu zaman alýr, bu yüzden çalýþýr durumda býrakýn!
+
+### Senkronizasyon durumum çevrimdýþý
+
+Bu durum, son ~ 24 dakika içinde eþlerden hiç mesaj almadýðýnýzý gösterir. En son peers.txt dosyasýný kullandýðýnýzdan emin olun. Þu komutla çalýþan bir düðüme yeni eþler ekleyebilirsiniz:
+
+```
+cat peers.txt | xargs -I % mina advanced add-peers %
+```
+
+## Að oluþturma
+
+### Barýndýrma saðlayýcým beni uyarýyor: "Kötüye kullaným mesajý: Netscan algýlandý"
+
+Bazý barýndýrma saðlayýcýlarýnda bu uyarýyý tetikleyen p2p að modülümüzde bazý davranýþlar vardýr (özellikle bunun Hetzner ile olduðunu duyduk). Bunu azaltmak için güvenlik duvarýnýzý ssh, http, https'den gelen trafiðe izin verecek ve tüm özel ip adreslerine giden trafiði reddedecek þekilde yapýlandýrýn.
+
+Ýþte [ufw](https://help.ubuntu.com/community/UFW#UFW_-_Uncomplicated_Firewall) güvenlik duvarý aracýný kullanarak buna bir örnek. Bu kurallarý paylaþtýðý ve Hetzner'daki sorunlarý çözdüðünü onayladýðý için teþekkürler Ducca.
+
+SSH, HTTP, HTTPS baðlantýlarýna izin ver:
+
+```
+ufw allow 22
+ufw allow 80
+ufw allow 443
+ufw enable
+```
+
+Giden özel baðlantýyý engelle:
+
+```
+ufw deny out from any to 10.0.0.0/8
+ufw deny out from any to 172.16.0.0/12
+ufw deny out from any to 192.168.0.0/16
+ufw deny out from any to 100.64.0.0/10
+ufw deny out from any to 198.18.0.0/15
+ufw deny out from any to 169.254.0.0/16
+```
+
+Dafa fazlasý için bakýn [#7053](https://github.com/MinaProtocol/mina/issues/7053)
+
+### Hangi baðlantý noktalarýnýn açýlmasý gerekiyor?
+
+Daemon'ýn eþlerle iletiþim kurmasý için açýk olmasý gereken tek baðlantý noktasý `8302` numaralý TCP baðlantý noktasýdýr.
+
+Ýstemci portu `8301`. asla internete maruz kalmamalýdýr. Daha önce kullanýlan ancak artýk gerekli olmayan diðer baðlantý noktalarýna güncel olmayan baþvurular olabilir
+
+### Düðüm, "Herhangi bir eþ bulunamadý, bu bir çekirdek düðüm olmadýðý için kilitleniyor" ile baþarýsýz oldu
+
+Öncelikle, alýnan e-postadan en son eþler dosyasýný indirdiðinizden emin olun - URL deðiþmez, ancak eþler listesi çok sýk güncellenir.
+
+Ardýndan, düðümü baþlatmak için kullandýðýnýz yönteme baðlý olarak, bu dosyaya doðru yolu ilettiðinizden emin olun. Örneðin, systemd kullanýyorsanýz, ana dizininizde bir peers.txt dosyasý bulunmalýdýr.
+
+Bu hatanýn yeni bir güncellemeyle çözülmüþ olmasý gerekir, bu nedenle en son sürümde olduðunuzdan ve en son eþler dosyasýna sahip olduðunuzdan emin olun.
+
+### ''Ýnternetten IP'mizi belirleyemedik'' hatasý alýyorum?
+
+IP'mizi internetten belirleyemediðinizi görürseniz, -external-ip bayraðýný görüyorsanýz, o zaman daemon [bu servis saðlayýcýlarý](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11)'ndan kendi IP'sini belirlemede baþarýsýz oldu. Güvenlik duvarýnýz HTTP / S isteklerini engelliyor olabilir veya yanlýþ yapýlandýrýlmýþ bir að baðlantýnýz var.
+
+Bunu atlamak için Mina daemon'ý baþlatýrken `-external-ip <your-ip-address>` bayraðýný girin. Harici IP adresinizi almak için `curl ifconfig.me` 'yý çalýþtýrýn.
+
+### Port yönlendirmeyi manuel olarak yapýlandýrmam gerekir mi?
+
+Bunun yaygýn bir nedeni, düðümün baðlantý noktasý iletimini otomatik olarak yapýlandýrmasýna izin veren bir protokol olan UPnP'yi desteklemeyen yönlendiricilerdir. Bu tür bir sorunla karþýlaþýrsanýz, yönlendiricinizin modelini bulun ve `<model> port forwarding` yönlendirmesini arayýn ve yönlendiricinizden Mina düðümünü çalýþtýran cihazýnýza baðlantý noktalarýný iletmek için talimatlarý izleyin. Varsayýlan olarak 8302 numaralý TCP baðlantý noktasýný açmanýz gerekir.
+
+Not: Mina'yý bulutta çalýþtýrýrken, bunun yerine bulut saðlayýcýnýz için güvenlik gruplarý yapýlandýrmalýsýnýz.
+
+### "Genel baðlantýlarý kabul et" 'e izin vermem gerekir mi ?
+
+Aþaðýdakine benzer bir veya daha fazla uyarý görürseniz, "Ýzin ver" seçin:
+
+```
+Do you want the application "mina" to accept incoming network connections?
+```
+
+## Hesaplar ve Ýþlemler
+
+### Bir iþlem göndermek için hangi ücreti kullanmalýyým / iþlemim beklemede kaldý?
+
+Bloklara dahil olan iþlemler, iþlem ücretlerine göre önceliklendirilir. Beklemede olan birçok iþlem varsa, ilk olarak en yüksek ücretli iþlemler dahil edilecektir. Bu nedenle, iþleminizin dahil edilmesini saðlamanýn en iyi yolu ücretlerinizi artýrmaktýr. Ýþlem havuzunu çalýþan bir düðümde görüntülemek için aþaðýdaki komutu kullanabilirsiniz (aþaðýdaki komutun çýktýsýný biçimlendirmek için kullanýlan `jq,` yüklemeniz gerekir, örneðin, `sudo apt install jq`):
+
+```
+mina advanced pooled-user-commands | jq . | grep fee | sort | uniq -c | sort -n
+      1     "fee": "0.031",
+      5     "fee": "0.1",
+```
+
+Havuzda çok sayýda iþlem var ise ücretinizi artýrmanýz gerekebilir. Ýþlem ücretlerine görsel bir genel bakýþ için
+[buraya](https://minaexplorer.com/mempool) bakýn.
+
+Düþük bir ücret nedeniyle takýlý kalmýþ bir iþleminiz varsa, bu [bilinen sorun](https://github.com/MinaProtocol/mina/issues/6605)nedeniyle þu anda bir iþlemi iptal etmenin bir yolu olmadýðýndan, bir bloða dahil edilmesini veya iþlem havuzundan çýkarýlmasýný beklemeniz gerekecektir.
+
+### Bir bloða kaç iþlem dahil edilebilir ?
+
+Mevcut aðda, bu 128'dir ve ayný zamanda coinbase iþleminin yaný sýra snark iþçilerine ödeme yapmak için herhangi bir ücret transferini içerir.
+
+### Bir iþlemi iptal edebilir miyim ?
+
+Þu anda [bu hata](https://github.com/MinaProtocol/mina/issues/6605)nedeniyle deðil.
+
+### Bir iþlem gönderdim ama hiç bir bloða dahil olmadý
+
+[Bu cevapa](#what-fee-should-i-use-to-send-a-transaction--my-transaction-is-stuck-as-pending) bakýn.Ýþlem büyük olasýlýkla beklemede kalmýþtýr ve sonunda iþlem havuzundan çýkarýlmýþtýr. Tekrar göndermeyi deneyin.
+
+### Neden Coinbase 0 / bir bloða dahil hiçbir iþlem yok?
+
+Bazý durumlarda, satýn alýnabilecek herhangi bir snark iþ yoktur veya satýn alýnamayacak kadar pahalýdýr. Bu durumda, bir coinbase iþlemi dahil etmek mümkün olmayabilir ve bu nedenle blok için herhangi bir coinbase verilmeyebilir.
+
+Ýþlemler dahil edilmiyorsa, iþlem ücretleri muhtemelen iþlemler dahil olmak üzere mahsup için satýn alýnmasý gereken snark iþin maliyetini kapsamaz.
+
+### Ýþlem gönderme sýrasý önemli mi?
+
+Evet, iþlemler, iþlemle iliþkili olmamasýna göre sýrayla iþlenir. Dolayýsýyla, örneðin düþük bir ücretle sýkýþmýþ bir iþlem gönderirseniz, sonraki iþlemlerde kullanýlan ücretlere bakýlmaksýzýn sonraki tüm iþlemler de takýlý kalacaktýr. Ne yazýk ki, bilinen bir sorun nedeniyle þu anda bir iþlemi iptal etmenin bir yolu yoktur, bu nedenle iþlemin dahil edilmesini veya iþlem havuzundan çýkarýlmasýný beklemeniz gerekir.
+
+### Hesabým neden ''kilitli'' diyor ?
+
+`mina accounts list` çýktýsý hesabýnýzýn kilitli olduðunu gösteriyorsa, bu, iþlemleri göndermek için kullanmanýz için özel anahtar þifrenizi kullanarak kilidini açmanýz gerektiði anlamýna gelir. Kilidi açmak için `mina accounts unlock --public-key` komutunu kullanmanýz yeterlidir.
+
+Bir blok üreticisinin blok üretmek için hesabýn kilidinin açýlmasýna ihtiyacý yoktur.
+
+### Faucet ' ten parayý talep ettim,gelmedi
+
+Faucet ile ilgili herhangi bir sorun olup olmadýðýný görmek için faucet'in durumunu [buradan](https://status.minaprotocol.com/)kontrol et.
+
+Sizinkinin listelenip listelenmediðini veya yakýn zamanda herhangi bir faucet iþlemi olup olmadýðýný görmek için faucet'te bekleyen tüm iþlemleri görmek için bu[gezginide](https://minaexplorer.com/wallet/B62qpVjcU3bxjWdVGiXd7tUGNag3cgjSNWmYuZTpU5Eg8MHPqnHfVeL) kontrol edebilirsiniz.
+
+### Zamana baðlý hesaplar nedir / neden bazý hesaplar zamanlanmýþ ve diðerleri süresizdir?
+
+Dökümanlara [buradan](https://minaprotocol.com/docs/architecture/timelock) bakýn.
+
+### Senkronize edilmeden önce bir ödeme gönderebilir miyim ?
+
+Evet, ancak yalnýzca defterde zaten paranýz varsa. Faucet'ten veya baþka bir topluluk üyesinden para talep ettiyseniz, göndermek için kullanabileceðiniz bir bakiyeniz olmasý için eþitlenene kadar beklemeniz gerekir.
+
+### Hata: Belirtilen gönderen, defterde deðil veya bir iþlem gönderirken iþlem havuzunda bir iþlem gönderiyor
+
+[Bu yanýta](#can-I-send-a-payment-before-I-am-synced) bakýn, defterde mevcut bir bakiyeniz yoksa eþitlenene kadar beklemeniz gerekecek.
+
+### Bir blok üreticisi çalýþtýrýyorum, ancak mina hesaplarý listesinde hiçbir þey görmüyorum?
+
+`block-producer-key` bayraðýný geçerek daemon'ubaþlattýysanýz, bir iþlem göndermek için yine de hesabý daemon'a aktarmanýz gerekir. Bunu yapmak için, özel anahtar dosyasýnýn konumunu ileterek `mina accounts import -priv-key` komutunu kullanýn.
+
+## Blok üreticisi
+
+### Bir blok üreticisini nasýl çalýþtýrýrým ?
+
+[Dökümentasyonda](https://minaprotocol.com/docs/connecting) bir düðümü baþlatma yöntemleri varsayýlan olarak bir blok üreticisi çalýþtýracaktýr.
+
+### Blok üreticisi çalýþtýrýp çalýþtýrmadýðýmý nasýl anlarým ?
+
+Blok üreticinizin durumunu kontrol etmek için `mina client status` çalýþtýrýn ve çalýþan Blok üreticileri satýrlarýný arayýn. 1 deðerini ve ayrýca açýk anahtarýnýzý görmelisiniz.
+
+![Running a block producer](https://i.imgur.com/IsXZcXN.png)
+
+Sonraki bloðun üretileceði satýrý, bir sonraki blok oluþturmak için bir slot kazandýðýnýzda size haber verir. Dönem içinde daha fazla blok kazanmadýysanýz, "Bu dönem yok ..." mesajý görüntülenecek ve yalnýzca yeni bir dönem baþladýðýnda güncellenecektir.
+
+### Blok kazanma þansýmý nasýl arttýrabilirim ??
+
+Bir blok kazanma þansý, stake miktarýnýzla orantýlý bir blok kazanma þansý ile Doðrulanabilir Rastgele Ýþlev (VRF) tarafýndan belirlenir. VRF, kaç kez çalýþtýrýlýrsa çalýþtýrýlsýn her zaman ayný sonucu döndürecektir, bu nedenle bir blok kazanma þansýnýzý artýrmanýn bir yolu yoktur. Stake bakiyeniz dýþýnda, þansa baðlý.
+
+Açýk anahtarýnýzla iliþkilendirilen stake miktarý, bir dönemin baþlangýcýnda önceden belirlenir. Göz önünde bulundurulmasýnda bir gecikme var, bu nedenle fon almak, blok ödülleri, diðer fonlarý devretmek ve snark iþçi ödülleri bu dönemde blok kazanma þansýnýzý artýrmayacaktýr çünkü bu fonlar en azýndan baþka bir tam dönem (~ 2 hafta) staking defterinde dikkate alýnmayacaktýr.
+
+### Neden blok ödülü almadým?
+
+Blok üreticilerinin seçilme þekline baðlý olarak slot baþýna birden fazla blok üreticisi olabilir. Dolayýsýyla, ayný slot için iki (veya daha fazla) blok üretilirse, kýsa çatallanmaya neden olur ve yalnýzca biri seçilir - bu durumda kazanan, her blok üreticisinin VRF çýktýsýna göre rastgele olur. Sürekli olarak sahipsiz bloklar görüyorsanýz, yavaþ yavaþ blok üretiyor olabilirsiniz ve bu nedenle diðer blok üreticileri mevcut en uzun zincirin üzerine inþa etmeden önce bloðunuzu göremeyebilir.
+
+Yakalamada bir blok üretmek de mümkündür ve bu blok ayný zamanda doðru yükseklikte inþa edilmediði için hýzla sahipsiz kalacaktýr.
+
+### Bir blok oluþturmadým / bir yuvayý kaçýrdým
+
+Bir slot kaçýrmanýzýn / baþarýyla bir blok üretememenizin birkaç nedeni vardýr, örneðin, bir slot üretilirken düðümün yeniden baþlatýlmasý ve önyüklemede olmasý.
+
+Ayrýca, slot süresi içinde (3 dakika) bir blok oluþturmalýsýnýz. Daha az güçlü bir donaným kullanýyorsanýz veya daemon kaynaklar için rekabet ediyorsa, bloðu zamanýnda üretmeyebilir. Bu durumda, loglarýnýzda þunlarý bulmalýsýnýz:
+
+`Internally generated block $state_hash cannot be rebroadcast because it's not a valid time to do so ($timing)`
+
+Snark iþçisi kaynak yoðun olduðundan ve bloðun zamanýnda üretilmemesine yol açabileceðinden, bir blok oluþtururken ayný makinede bir snark iþçisini çalýþtýrmanýz önerilmez. Snark iþçisini blok üretimi sýrasýnda, örneðin [snark stopper script](https://github.com/c29r3/mina-snark-stopper) dosyasýný kullanarak devre dýþý býrakabilirsiniz.
+
+### Blok oraný neden bu kadar düþük / ne sýklýkla bir blok olmalý?
+
+Mevcut aðdaki bir yuva her 3 dakikada birdir, ancak tüm yuvalarýn üretilen bir bloðu olmamalýdýr, bu nedenle ortalama olarak her 4 dakikada bir blok beklemekteyiz. Bununla birlikte, stake miktarýnýn tamamý çevrimiçi ve blok üretiminde aktif deðildir ve bu nedenle tüm slotlarýn bir bloðu olmayacaktýr ve bazen bloklar arasýnda uzun gecikmeler olabilir. Daha fazla hissenin çevrimiçi olmasý ve stake olmasý nedeniyle bu durum iyileþir.
+
+### O(1) Labs neden bloklarýn çoðunu kazanýyor ?
+
+Aðý istikrarlý tutmak için, O (1) Labs hissenin% 30'una sahiptir, bu nedenle bir slot kazanma ve bir blok üretme olasýlýðý çok daha yüksektir. 66.000 mina bakiyesi verilen kullanýcýlarýn belirli bir slotu kazanma þansý yaklaþýk% 0.1'dir, bu nedenle her iki günde bir blok beklemelisiniz, ancak þans bir bloðu ne sýklýkta kazanacaðýnýz konusunda önemli bir faktördür.
+
+### Bir blok kazandýðýmý mý yoksa bir iþlemin mi gerçekleþtiðini nasýl anlarým?
+
+En kolay yol, bir [block explorer](https://minaexplorer.com/) kontrol etmektir. Son bloklar için bu bilgileri [GraphQL API](https://minaprotocol.com/docs/developers/graphql-api)aracýlýðýyla da alabilirsiniz.
+
+### Neden "Bu dönemi engelleyen blok yok" mesajý alýyorum?
+
+[Bu cevaba](#how-can-I-increase-my-chance-of-winning-a-block)bakýn.
+
+### Sahipsiz bloklar zorluklar için deðerlendiriliyor mu?
+
+Evet, bu test aðý sýrasýnda sahipsiz bloklar dikkate alýnacaktýr
+
+## Snark Ýþçileri
+
+### Snark iþim satýn alýnmýyor / bir snark iþçisi için ne kadar ücret kullanmalýyým?
+
+Bir snark iþçisi çalýþtýrýyorsanýz ve bloklara dahil edilen herhangi bir iþ görmüyorsanýz, o zaman büyük olasýlýkla diðerleri daha ucuz snark iþi üretiyordur. Birden fazla snark iþçisinin hepsi, blok üreticileri tarafýndan satýn alýnacak olan snark havuzuna dahil edilen her biri için en düþük ücret ile ayný snark iþi için rekabet ediyor.
+
+Bazen bloklara yüksek ücretler dahil edilecektir ve bu, snark iþçilerin hangi iþi tamamlayacaklarýný ve hangi iþi blok üreticisi tarafýndan satýn alýnmasý gerektiðini nasýl seçtiðinin bir iþlevidir.
+
+Varsayýlan olarak, bir snark iþçinin iþ seçimi rastgeledir. Bunu, mina daemon komutuna `-work-selection seq` bayraðýný ekleyerek deðiþtirebilirsiniz; bu, iþler üzerinde, tarama durumundan dahil edilmesi gereken sýrayla çalýþýr ve büyük olasýlýkla, potansiyel olarak uzun bir gecikme olmaksýzýn snark'larýn dahil edilmesiyle sonuçlanýr.
+
+Ücretleri seçmek için, satýn alýnan fiyatlarý belirlemek için geçmiþ bloklara bakabilir veya [burada](https://minaexplorer.com/snark-challenge)listelenen tabloya bakabilirsiniz.
+
+### Snark iþçisini nasýl devre dýþý býrakabilirim ?
+
+Snark worker'ý devre dýþý býrakmak için `mina client set-snark-worker` çalýþtýrýn. Tekrar etkinleþtirmek için, `mina client set-snark-worker -address <YOUR_PUBLIC_KEY>` açýk anahtarýnýzý iletin.
+
+### Bir snark iþçisi ile blok yapýmcýsýný ayný makinede çalýþtýrabilir miyim?
+
+Evet, yapabilirsiniz, ancak kaynaklar için rekabet etmemek ve bir blok üretmeyi kaçýrmamak için blok üretimi sýrasýnda snark iþçisini durdurmalýsýnýz. Snark iþçileri ayrýca genel olarak daha fazla kaynak tüketirler. Bunu otomatikleþtirmeye yardýmcý olmasý için [snark stopper script](https://github.com/c29r3/mina-snark-stopper) bakýn.
+
+## Logging
+
+### Loglarda tuhaf mesajlar/hatalar görüyorum
+
+Loglar gürültülüdür ve genellikle baðlanamama vb. Gibi "korkutucu" görünen mesajlar içerir. Genel bir kural olarak, mesaj önemli deðilse ve düðüm çökmezse, muhtemelen endiþelenecek bir þey deðildir. Aþaðýdaki mesajlarýn tümü "normal" kabul edilir:
+
+```
+"RPC #841 failed: \"internal RPC error error: unknown stream_idx\""
+"Peer $peer didn't have enough information to answer ledger_hash query. See error for more details: $error"
+"Timed out waiting for the parent of $cached_transition after 0 ms, signalling a catchup job"
+"Failed to reset stream (this means it was probably closed successfully): $error
+        error: {
+  "string":
+    "RPC #365 failed: \"internal RPC error error: unknown stream_idx\""
+}
+```
+
+### Loglarý bir hizmet olarak nasýl çalýþtýrabilirim?
+
+`journalctl --user -u mina -n 1000 -f`
+
+### Docker çalýþtýran loglarýmý nasýl edinebilirim?
+
+`docker logs --follow mina`
+
+### Loglarýn daemon'u manuel olarak çalýþtýrmasýný nasýl saðlayabilirim?
+
+`tail -f ~/.mina-config/mina.log`
+
+### Kaç log tutulur / loglar nerede bulunur ?
+
+The `~/.mina-config` directory contains the Mina logs. This directory contains the following:
+
+`~/.mina-config` dizini Mina loglarýný içerir. Bu dizin þunlarý içerir:
+
+- `mina.log` - Bu dosya daemon'un en son loglarýný içerir. Her log dosyasýnýn boyutu 10 MiB ile sýnýrlýdýr ve 50 log dosyasý arasýnda döner.Dönen log dosyalarý `mina.log.0` 'dan `mina.log.50` 'ya `mina.log.x` olarak adlandýrýlýr .
+- `mina-best-tip.log` - Bu, bir sert çatal için durumu belirlemek üzere gerekli loglarý düðümlerden toplamayý kolaylaþtýrmak için en iyi ipucu loglarýný yazmak için kullanýlýr.Her dosya 5 MÝB ile sýnýrlýdýr ve ` mina-best-tip.log.0` 'dan `mina-best-tip.log.5` 'ya en fazla 5 dosya gönderilir.
+- `mina-prover.log` - Bu, kanýtlayýcýnýn bellek kullanýmýný ve toplu iþ boyutunu günlüðe kaydeder ve 128 MiB ile sýnýrlýdýr ve tek bir log dosyasý aracýlýðýyla döner.
+- `mina-verifier.log` - Bu, doðrulayýcýnýn bellek kullanýmýný ve toplu iþ boyutunu loga kaydeder ve 128 MiB ile sýnýrlýdýr ve tek bir log dosyasý aracýlýðýyla döner.
+- `mina.version` - Bu dosya, daemon programýnýn Git SHA'sýný içerir.
+
+## Testnet Zorluklarý
+
+### Testnet için sunduðum özel anahtarýmýn þifresini mi kaybettim ?
+
+Özel anahtarýn parolasýný kaybettiyseniz, onu kurtarmak için yapýlabilecek hiçbir þey yoktur. Testnet için seçildiyseniz, defterin bu açýk anahtarla iliþkili bir bakiyesi olabilir ve bunu yeni bir anahtara taþýmak mümkün deðildir. Bununla birlikte, yeni bir anahtar çifti oluþturarak ve bir düðümü çalýþtýrýp senkronize ederek yine de katýlabilirsiniz. Anahtar üzerinde bir bakiyeniz olmayacak, bu nedenle herhangi bir blok kazanmayacaksýnýz, ancak bir düðüm çalýþtýrmaya ve bir snark iþçisi çalýþtýrmak gibi diðer topluluk zorluklarýna katýlabilirsiniz.
+
+Oluþturduðunuz özel anahtarýnýzýn bir kopyasýný (muhtemelen `keys` adlý bir klasörde `my-wallet` olarak adlandýrýlýr) ve ilgili parolayý saklayýn!
+
+### Bir zorluk tamamladým ve skor tablosu güncellenmedi mi?
+
+> Hala liderlik tablosu için bir düzeltme üzerinde çalýþýyoruz. Düþen hizmet için blok verilerini kurtardýk ve Liderlik Tablosu hizmetini geri yükleme sürecindeyiz. Yakýnda bazý güncellemeler görebilirisiniz.
+
+### Bekleme listesindeydim ve þimdi bakiyem 0 gösteriyor
+
+Özel anahtarýnýz için bir bakiyeniz yoksa, testnet'e kaydolmak için kullandýðýnýz anahtarý kullanýp kullanmadýðýnýzý kontrol edin.
+
+Tüm bekleme listesi katýlýmcýlarýnýn bir bakiyesi yoktur ve onlardan biriyseniz, yine de bir düðümü senkronize edebilir ve faucet'ten veya diðer topluluk üyelerinden para talep edebilirsiniz. faucet'ten veya topluluk üyelerinden gelen herhangi bir bakiye `mina accounts list` aracýlýðýyla görünmeden önce düðümünüzün senkronize edilmesi gerekecek. Senkronize edilmiþ bir düðümünüz olduðunu varsayarak, daha sonra ilave stake yeniden daðýtýmlarý olabilir.
+
+### 50 tx'i farklý adreslere / hangi adrese göndermem gerekiyor
+
+Ýþlemleri herhangi bir adrese gönderebilirsiniz. Kullandýðýnýz ücretler / tutarlar / adresler önemli deðil - açýk anahtarýnýzdan sadece 50 iþlem. Anahtar, Discord ID'nizle iliþkili olduðu için testnet için kayýtlý olan anahtar olmalýdýr.
+
+### Testnet görevlerini tamamlamaya yönelik bir rehber var mý?
+
+Topluluk üyesi @Ducca tarafýndan hazýrlanan [bu kýlavuza](https://icohigh.gitbook.io/mina-node-testnet/) .
+
+### Mevcut tüm testnet zorluklarýnýn bir listesini nerede bulabilirim??
+
+[Buradaki](https://forums.minaprotocol.com/t/testnet-release-4-1-challenges/597) gönderiye bakýn.

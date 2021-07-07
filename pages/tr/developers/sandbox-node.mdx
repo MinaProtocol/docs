@@ -1,0 +1,67 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Sandbox Node" });
+
+# Sandbox Düðümü
+
+Mina Sandbox Düðümü, protokolün temel özelliklerini test etmenize ve bunlara aþina olmanýza ve kararlý bir ortamda araçlar oluþturmanýza olanak tanýr - canlý testnet ayný yapýlandýrmayý kullanan tek düðümlü özel bir aðdýr. Bu sandbox , birden çok hesabý destekler, aralarýnda iþlem gönderebilir ve ayrýca SNARK çalýþmasý, delege etme ve stake etme iþlemlerini de destekler. Aslýnda, tek düðümlü bir að olduðu için, tüm blok ödüllerini alacaksýnýz!
+
+<Alert>
+
+Sandbox sizi canlý bir aða **BAÐLAMAZ**.
+
+</Alert>
+
+## Kurulum
+
+[Docker](https://www.docker.com) taþnabilir þekilde çalýþan bir araçtýr. Mina Sandbox Düðüm Docker ile paketlenmiþtir. Kurulumu kolaydýr--[Docker Desktop](https://www.docker.com/products/docker-desktop) öneriyoruz.
+
+Docker'ý kurduktan sonra Mina Sandbox'ý döndürmek için aþaðýdaki komutu çalýþtýrýn.
+
+```
+docker run \
+  --publish 3085:3085 \
+  -d \
+  --name mina \
+  minaprotocol/mina-demo:sandbox-32a.1
+```
+
+Bu komut, docker container içinde bir dameon baþlatacak ve istemciyle iletiþim için kullanýlan GraphQL portunu (3085) bilgisayarýnýza gösterecektir. Bu daemon bir blok üreticisi ve snark çalýþaný ile arka planda otomatik olarak çalýþacaktýr.
+
+Loglarý çalýþtýrarak görüntüleyebilirsiniz.
+
+```
+docker logs --follow mina
+```
+
+Ve çalýþtýrarak Mina'yý durdur
+
+```
+docker stop mina
+```
+
+Sandbox düðümüyle etkileþim kurmak için Mina CLI'yi kullanabilirsiniz. Aþaðýdaki komut, docker konteynerinin içinde mevcut <DocLink copy="mina komutlarýndan" url="/using-mina/cli-reference" /> herhangi birini çalýþtýrabileceðiniz bir kabuk açar.
+
+```
+docker exec -it mina bash
+```
+
+### Hesap detaylarý
+
+Kapsayýcý, bu açýk anahtara sahip bir hesaba sahiptir
+
+```
+B62qrPN5Y5yq8kGE3FbVKbGTdTAJNdtNtB5sNVpxyRwWGcDEhpMzc8g
+```
+
+Bu hesabýn parolasý boþ dizedir (parola yoktur - parola alanýný boþ býrakabilirsiniz).
+
+## Sandbox nasýl kullanýlýr
+
+Artýk çalýþtýrdýðýnýz için korumalý alanýnýzla yapabileceðiniz birkaç þey var:
+
+- Her zamanki gibi <DocLink copy="Mina'yý kurun" url="/getting-started#installation" />ve istemci komutlarýnýn çoðunu kullanýn. Daemon zaten kapsayýcýda çalýþtýðýndan, `mina daemon` 'ý çalýþtýrmanýza gerek yoktur!
+
+- Düðümünüze grafiksel bir arayüz kullanmak için the <DocLink copy="GUI Wallet" url="/gui-wallet" /> uygulamasýný yükleyin. Kurulum sýrasýnda düðümünüzün ana bilgisayarý olarak '127.0.0.1' girin.
+
+- Doðrudan GraphQL API ile oynamak için http://localhost:3085/graphql adresine gidin.

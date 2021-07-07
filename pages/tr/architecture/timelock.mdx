@@ -1,0 +1,72 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Time-locked Accounts" });
+
+# Zaman Kilitli Hesaplar
+
+Zamana kilitli bir hesap, blok yüksekliðine baðlý olarak bakiyeyi minimumun altýna indirecek ödemelere izin vermez.
+
+Bir zaman kilidi oluþturmak için, yeni bir hesap oluþtururken yapýlandýrmayý saðlamalýsýnýz. Bu, yalnýzca bir aðýn baþlangýcýndaki oluþum defterinde gerçekleþebilir. Bu bölümde, zaman kilitlerinin arkasýndaki mekanizmayý keþfedeceðiz ve zaman kilitli hesaplarla nasýl etkileþim kuracaðýmýzý göreceðiz.
+
+<Alert>
+
+Mevcut sürüm için, zaman kilitli hesaplarýn deðerleri, kaydolduðunuz sýraya göre atanmýþtýr.
+
+</Alert>
+
+## Zaman Kilitlerini Anlamak
+
+Bir zaman kilidi, aþaðýdaki alanlardan oluþur ;
+`initial_minimum_balance`, `cliff` zaman, a `vesting_period` zaman , ve a `vesting_increment`.
+
+Hesap yeterli bakiye tuttuðu sürece, zaman kilidi olan bir hesabý yine de kullanabilirsiniz.Zamana baðlý olan fon miktarý, aðýn baþlangýcýnda `initial_minimum_balance` olarak baþlar. Að`cliff` e eþit bir blok yüksekliðine ulaþtýðýnda, , zamana baðlý miktar her `vesting_period` için `vesting_increment` miktarý kadar azalmaya baþlar .
+
+Bu iþlemin daha teknik bir açýklamasý için lütfen daha derinlemesine bir genel bakýþa sahip olan
+[RFC-0025](https://github.com/MinaProtocol/mina/blob/master/rfcs/0025-time-locked-accounts.md) bakýn.
+
+### Supercharged Ödüller
+
+Zamana kilitli hesaplarýn yaný sýra, supercharged ödüller kavramýný da getirdik. Bir hesabýn zaman kilidi altýnda bir fonu olmadýðýnda (ya yeni bir hesap ya da `initial_minimum_balance` 'ýn tamamý verilmiþse) blok ödülleri 2 kat arttýrýlýr.
+
+### Likit Denge Detaylarý:
+
+Belirli bir zaman diliminde vesting hesaplarý için likit hesaplarýný açýða çýkarmak isterseniz, aþaðýdaki iþlev tarafýndan yönetilir(Not: Bu bir hesabýn kilitli kýsmýný hesaplar.):
+
+```
+(*
+ *  uint32 global_slot -- the "clock" it starts at 0 at the genesis block and ticks up every 3minutes.
+ *  uint32 cliff_time -- the slot where the cliff is (similar to startup equity vesting)
+ *  uint32 cliff_amount -- the amount that unlocks at the cliff
+ *  amount vesting_increment -- unlock this amount every "period"
+ *  uint32 vesting_period -- the period that we increment the unlocked amount
+ *  balance initial_minimum_balance -- the total locked amount until the cliff
+ *)
+let min_balance_at_slot ~global_slot ~cliff_time ~cliff_amount ~vesting_period
+    ~vesting_increment ~initial_minimum_balance =
+  let open Unsigned in
+  if Global_slot.(global_slot < cliff_time) then initial_minimum_balance
+  else
+    match Balance.(initial_minimum_balance - cliff_amount) with
+    | None ->
+        Balance.zero
+    | Some min_balance_past_cliff -> (
+        (* take advantage of fact that global slots are uint32's *)
+        let num_periods =
+          UInt32.(
+            Infix.((global_slot - cliff_time) / vesting_period)
+            |> to_int64 |> UInt64.of_int64)
+        in
+        let vesting_decrement =
+          UInt64.Infix.(num_periods * Amount.to_uint64 vesting_increment)
+          |> Amount.of_uint64
+        in
+        match Balance.(min_balance_past_cliff - vesting_decrement) with
+        | None ->
+            Balance.zero
+        | Some amt ->
+            amt )
+
+```
+
+## Zaman kilitli hesap oluþturma
+
+Mevcut sürümden itibaren, zaman kilitli bir hesap oluþturmanýn tek yolu oluþum defteridir. Gelecek sürümlerde, "mina client" ve GraphQL API'ye yeni bir zaman kilitli hesap oluþturmanýza olanak saðlayacak komutlar ekleyebiliriz.

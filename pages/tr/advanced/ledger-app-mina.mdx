@@ -1,0 +1,525 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Ledger App Mina" });
+
+# Ledger Soðuk Cüzdaný
+
+Mina özel anahtarlarýnýzý güvenli bir þekilde saklamak için [Ledger Nano S](https://www.ledger.com/) soðuk cüzdanýnýzý kullanabilirsiniz.
+
+[Ledger Nano X](https://www.ledger.com/)için destek üzerinde çalýþýyoruz, ancak henüz tamamlanmadý.
+
+Desteklenen iþlemler:
+
+- Anahtar çifti üretimi
+- Ödeme iþlemlerini imzalama
+- Delegasyon iþlemlerini imzalama
+
+Þu anda hiçbir güvenlik açýðý bulamayan baðýmsýz bir güvenlik denetimi sürecindeyiz, geliþtirme neredeyse tamamlandý. Önümüzdeki haftaya kadar, imzalarla ilgili bir sabit üzerinde deðiþiklik yapacaðýz, böylece iþlemler bir test aðýndan ana aða tekrar oynatýlamaz. Bunun anahtar oluþturmayý etkilemediðini unutmayýn.
+
+Uygulama henüz Ledger Live kullanýcý arayüzü üzerinden kurulamaz, ancak bir Nano S'niz varsa, aþaðýdaki talimatlarý izleyerek Ledger cihazýnýza sideload yükleyebilirsiniz.
+
+<Alert kind="warning">
+
+Kendi sorumluluðunuzda kullanýn. Ledger'inizin BIP39 gizli mnemonic phrase'inizin bir yedeðini aldýðýnýzdan veya bu uygulamayý test etmek için ayrý bir Ledger cihazý kullandýðýnýzdan emin olun.
+
+Ana aðda üzerindeki bir test aðýndan ayný anahtar çiftini asla tekrar kullanmayýn!
+
+</Alert>
+
+## Ýçindekiler
+
+- [Ubuntu'ya kurma](#installing-on-ubuntu)
+- [Mac'e kurma](#installing-on-mac)
+- [Windows'a kurma](#installing-on-windows)
+- [Anahtar çifti oluþturma](#generating-a-keypair)
+- [Özel anahtarýnýzý doðrulama](#validating-your-private-key)
+- [Çevrimdýþý Mod](#offline-mode)
+
+## Ubuntu'ya Yükleme
+
+Yüklemeden önce lütfen Ledger cihazýnýzýn en son aygýt yazýlýmýna güncellendiðinden ve tam olarak yapýlandýrýldýðýndan emin olun. Özellikle, Ledgerin udev kurallarýnýn kurulu olduðundan emin olun.
+
+Udev kurallarý kurulursa `/etc/udev/rules.d/20-hw1.rules` mevcut olacaktýr. Bu dosya yoksa, Ledger'in web sitesini ziyaret etmeniz ve [baðlantý sorunlarýný çözmek için Linux talimatlarýný](https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) izlemeniz gerekir veya ileri düzey kullanýcýlar için udev kurallarýný [LedgerHQ Github](https://github.com/LedgerHQ/udev-rules) 'da bulabilirsiniz.
+
+### 1) Python 3 Kur
+
+```
+$ sudo apt-get install python3
+```
+
+### 2) pip3 Kur
+
+```
+$ sudo apt-get install python3-pip
+```
+
+### 3) Önkoþul Kitaplýklarý Kur
+
+```
+sudo apt-get install libudev-dev libusb-1.0-0-dev python-dev virtualenv
+```
+
+### 4) Ledger Blue, Nano S ve Nano X için Pyhton Araçlarýný Kur
+
+```
+$ sudo pip3 install ledgerblue
+```
+
+### 5) ledger-app-mina indir
+
+Github'dan [Son Ledger Uygulamasý Mina Sürümü](https://github.com/jspada/ledger-app-mina/releases/latest)indir. Þu anda ,1.0.0-beta.4 sürümünü test ediyoruz.
+
+### 6) Checksum'ý doðrulayýn
+
+```
+sha256sum ledger-app-mina-1.0.2-0-g843e809c.tar.gz
+```
+
+Yukarýdaki komutun çýktýsýný sürüm indirme sayfasýndaki SHA256 hash'i ile karþýlaþtýrýn. Eþleþirlerse, sonraki adýma geçin.
+
+### 7) Arþivi Çýkarýn
+
+```
+$ tar xvzf ledger-app-mina-1.0.2-0-g843e809c.tar.gz
+ledger-app-mina-1.0.2-0-g843e809c/README
+ledger-app-mina-1.0.2-0-g843e809c/install.sh
+ledger-app-mina-1.0.2-0-g843e809c/uninstall.sh
+ledger-app-mina-1.0.2-0-g843e809c/mina_ledger_wallet
+ledger-app-mina-1.0.2-0-g843e809c/bin/app.hex
+```
+
+### 8) Kurulum Senaryosunu Baþlat
+
+Not: Önceki bir sürümü yüklediyseniz `uninstall.sh` aracýlýðýyla kaldýrabilirsiniz.
+
+```
+$ cd ledger-app-mina-1.0.2-0-g843e809c
+$ ./install.sh
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+Bu, uygulamanýn kurulumuna baþlayacaktýr (sonraki adýmlarda devam edecektir).
+
+Önemli: Adým (6) 'da checksum'u doðruladýysanýz, yukarýdaki açýk anahtarlarý ve sonraki adýmlarda "Uygulama tanýmlayýcý" ve "Uygulama tam hash" ný yok sayabilirsiniz. Bu uyarýlar, ledger-app-mina'nýn henüz onaylanmýþ bir Ledger uygulamasý olmadýðý içindir.
+
+### 9) "Güvenli olmayan yöneticiye" izin verin.
+
+Ledger cihazýnýz, kurulum senaryosunun güvenli olmayan bir yönetici olduðu konusunda sizi uyaracaktýr.
+
+```
+< X Deny unsafe manager >
+```
+
+Görene kadar sola týkla
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Bu seçeneðe týklayýn.
+
+### 10) Mina Uygulamasýný Kur
+
+Ledger cihazýnýz Mina uygulamasýný yüklemek isteyip istemediðinizi soracaktýr.
+
+```
+< M Install app Mina >
+```
+
+Görene kadar sola týkla.
+
+```
+< ✓ Perform installation >
+```
+
+Bu seçeneði seçin ve Ledger PIN kodunuzu girin.
+
+Kurulum baþarýlý olduysa, kurulum senaryosu baþarýyla sona erecek ve yüklü uygulamalar listenizde Mina logosunu göreceksiniz.
+
+### 11) Komut satýrý cüzdanýnýzý kurun
+
+```
+$ sudo cp ./mina_ledger_wallet /usr/local/bin/
+```
+
+## Mac'e Kurma
+
+Yüklemeden önce lütfen Ledger cihazýnýzýn en son aygýt yazýlýmýna güncellendiðinden ve tam olarak yapýlandýrýldýðýndan emin olun.
+
+### 1) Homebrew 'u Kur
+
+```
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Daha fazla bilgi için [Homebrew sitesini](https://brew.sh/)ziyaret edin.
+
+### 2) python3 'u Kur
+
+```
+brew install python3
+```
+
+### 3) Ledger Blue, Nano S ve Nano X için Python araçlarýný Kur
+
+```
+$ pip3 install ledgerblue
+```
+
+### 4) ledger-app-mina 'yý indir
+
+Github'dan [Son Uygulamasý Mina Sürümünü](https://github.com/jspada/ledger-app-mina/releases/latest) indir.
+
+### 5) Checksum 'ý doðrula
+
+```
+shasum -a 256 ledger-app-mina-1.0.2-0-g843e809c.tar.gz
+```
+
+Yukarýdaki komutun çýktýsýný sürüm indirme sayfasýndaki SHA256 hash ile karþýlaþtýrýn. Eþleþirlerse, sonraki adýma geçin.
+
+### 6) Arþivi çýkar
+
+```
+$ tar xvzf ledger-app-mina-1.0.2-0-g843e809c.tar.gz
+ledger-app-mina-1.0.2-0-g843e809c/README
+ledger-app-mina-1.0.2-0-g843e809c/install.sh
+ledger-app-mina-1.0.2-0-g843e809c/uninstall.sh
+ledger-app-mina-1.0.2-0-g843e809c/mina_ledger_wallet
+ledger-app-mina-1.0.2-0-g843e809c/bin/app.hex
+```
+
+### 7) Kurulum Senaryosunu Baþlat
+
+Not: Önceki bir sürümü yüklediyseniz, `uninstall.sh` aracýlýðýyla kaldýrabilirsiniz.
+
+```
+$ cd ledger-app-mina-1.0.2-0-g843e809c
+$ ./install.sh
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+Bu, uygulamanýn kurulumuna baþlayacaktýr (sonraki adýmlarda devam edecektir)
+
+Önemli: Adým (5) 'de checksum'ý doðruladýysanýz, yukarýdaki açýk anahtarlar ve sonraki adýmlarda "Uygulama tanýmlayýcý" ve "Uygulama tam hash" ile ilgili mesajlarý göz ardý edebilirsiniz. Bu uyarýlar, ledger-app-mina'nýn henüz onaylanmýþ bir Ledger uygulamasý olmadýðý içindir.
+
+### 8) "Güvenli olmayan yöneticiye" izin verin.
+
+Ledger cihazýnýz, yükleme komut dosyasýnýn güvenli olmayan bir yönetici olduðu konusunda sizi uyaracaktýr.
+
+```
+< X Deny unsafe manager >
+```
+
+Görene kadar sola týklayýn
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Bu seçeneði seçin
+
+### 9) Mina Uygulamasýný Kur
+
+Ledger cihazýnýz Mina uygulamasýný yüklemek isteyip istemediðinizi soracaktýr.
+
+```
+< M Install app Mina >
+```
+
+Görene kadar sola týklayýn
+
+```
+< ✓ Perform installation >
+```
+
+Bu seçeneði seçin ve Ledger PIN kodunuzu girin.
+
+Kurulum baþarýlý olduysa, kurulum senaryosu baþarýyla sona erecek ve yüklü uygulamalar listenizde Mina logosunu göreceksiniz.
+
+### 10) Komut satýrý cüzdanýnýzý kurun
+
+```
+$ sudo cp ./mina_ledger_wallet /usr/local/bin/
+```
+
+## Windows' da Kurma
+
+Yüklemeden önce lütfen Ledger cihazýnýzýn en son aygýt yazýlýmýna güncellendiðinden ve tam olarak yapýlandýrýldýðýndan emin olun.
+
+### 1) Python 3.9.1 Kur
+
+Python yükleyiciyi indirin ve çalýþtýrýn: (https://www.python.org/ftp/python/3.9.1/python-3.9.1-amd64.exe)
+
+### 2) Windows Powershell Açýn
+
+Çalýþtýr menüsünü açmak için Windows + R tuþlarýna basýn, 'powershell.exe' yazýn ve Powershell'i baþlatmak için Enter tuþuna basýn.
+
+### 3) Ledger Blue, Nano S ve Nano X için Python Araçlarýný Kur
+
+Powershell terminalinde aþaðýdaki komutu çalýþtýrýn:
+
+```
+$ pip3 install ledgerblue
+```
+
+### 4) ledger-app-mina indir
+
+Github'dan [Son Ledger Uygulamasý Mina Sürümünü](https://github.com/jspada/ledger-app-mina/releases/download/v1.0.0-beta.4/ledger-app-mina-1.0.2-0-g843e809c.zip) indirin.
+
+### 5) Checksum doðrulama
+
+Powershell terminalinde aþaðýdaki komutu çalýþtýrýn:
+
+```
+Get-FileHash -Path ledger-app-mina-1.0.2-0-g843e809c.zip
+```
+
+Yukarýdaki komutun çýktýsýný sürüm indirme sayfasýndaki SHA256 hash'i ile karþýlaþtýrýn. Eþleþirlerse, sonraki adýma geçin.
+
+### 6) Arþivi Çýkar
+
+Ýndirilenler klasörünüzdeki .zip dosyasýný sað týklayýn ve `` Tümünü Çýkart ... '' ý seçin. Ortaya çýkan pencerede arþivi açmak için "Çýkart" düðmesine basmanýz yeterlidir.
+
+### 7) Dizini,yeni çýkarýlan arþive deðiþtirin
+
+```
+PS > cd ledger-app-mina-1.0.2-0-g843e809c
+```
+
+### 8) (Opsiyonel) Daha önce mina uygulamasýný yüklediyseniz, aþaðýdaki komutla eski sürümü kaldýrarak baþlayýn:
+
+```
+PS ...\ledger-app-mina-1.0.2-0-g843e809c> python3 -m ledgerblue.deleteApp "--targetId" "0x31100004" "--appName" "Mina"
+```
+
+Ledger cihazýnýn kendisindeki tüm istemleri onayladýðýnýzdan emin olun.
+
+### 9) Yeni Sürümün Kurulumunu Baþlat
+
+```
+PS ...\ledger-app-mina-1.0.2-0-g843e809c> python3 -m ledgerblue.loadApp "--path" "44'/12586'" "--appFlags" "0x240" "--tlv" "--targetId" "0x31100004" "--targetVersion=1.6.0" "--delete" "--fileName" "bin/app.hex" "--appName" "Mina" "--appVersion" "1.0.0" "--dataSize" "64" "--icon" "010000000000ffffffffffffffffffeff7c7e393c9b3cdb3cdb3cdb3cdb3cd33cc799effffffffffff"
+
+Please unlock your Ledger device and exit any apps (press any key to continue)
+Generated random root public key : b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+Using test master key b'04e95715d4813ab98c92833da9b169d3ff6ee11a4f94a465503cc91e77aaea688d45a0449f41bfaa2a1a789730e72d0ace759ca7c2b8a12e82c94cda61530cc363'
+```
+
+Bu, uygulamanýn kurulumuna baþlayacaktýr (sonraki adýmlarda devam edecektir)
+
+Önemli: Adým (5) 'de checksum'ý doðruladýysanýz, yukarýdaki açýk anahtarlar ve sonraki adýmlarda "Uygulama tanýmlayýcý" ve "Uygulama tam hash" ile ilgili mesajlarý göz ardý edebilirsiniz. Bu uyarýlar, ledger-app-mina'nýn henüz onaylanmýþ bir Ledger uygulamasý olmadýðý içindir.
+
+### 10) "güvenli olmayan yöneticiye" izin verin
+
+Ledger cihazýnýz, yükleme komut dosyasýnýn güvenli olmayan bir yönetici olduðu konusunda sizi uyaracaktýr.
+
+```
+< X Deny unsafe manager >
+```
+
+Görene kadar sola týklayýn
+
+```
+< ✓ Allow unsafe manager >
+```
+
+Bu seçeneði seçin.
+
+### 11) Mina Uygulamasýný Kur
+
+Ledger cihazýnýz Mina uygulamasýný yüklemek isteyip istemediðinizi soracaktýr.
+
+```
+< M Install app Mina >
+```
+
+Görene kadar sola týkla
+
+```
+< ✓  Perform installation >
+```
+
+Bu seçeneði seçin ve Ledger PIN kodunuzu girin.
+
+Kurulum baþarýlý olduysa, kurulum senaryosu baþarýyla sona erecek ve yüklü uygulamalar listenizde Mina logosunu göreceksiniz.
+
+### 12) Komut satýrý cüzdanýný kullanma
+
+Bir komut daha sonra bu belgelerde `mina_ledger_wallet` ifadesine baþvurduðunda, komutlarý ayný powershell komut isteminden `./mina_ledger_wallet ...` olarak çalýþtýrýn.
+
+## Anahtar çifti Oluþturma
+
+Bir Ledger cihazýnda, bir anahtar çifti oluþturmanýn aslýnda hiçbir þey kaydetmediðini unutmayýn! Ledger, her çalýþtýðýnda anahtarý yeniden doðrular. Bu, bu uygulamayý kaldýrdýðýnýzda / yeniden yüklediðinizde anahtarýnýzý kaybetme konusunda endiþelenmenize gerek olmadýðý anlamýna gelir.
+
+Bir anahtar çifti türetmek ve iliþkili Mina adresini almak için, Ledger cihazýnýzda Mina uygulamasýný açýn ve ardýndan terminalinizde `mina_ledger_wallet` komutunu kullanýn.
+
+Örneðin, 42 soðuk cüzdan hesabýna (BIP44 account `44'/12586'/42'/0/0`) karþýlýk gelen Mina adresini almak için aþaðýdaki komutu vermeniz gerekir.
+
+```
+$ mina_ledger_wallet get-address 42
+```
+
+Onaylamanýz istenecektir.
+
+```
+Get address for account 42 (path 44'/12586'/42'/0/0)
+Continue? (y/N) y
+```
+
+Onaylandýðýnda göreceksiniz
+
+```
+Generating address (please confirm on Ledger device)...
+```
+
+Ledger cihazý terminalinizde görüntülenirken
+
+```
+👁  Get Address    >
+```
+
+Bu size ne tür bir iþlemin talep edildiðini söyler.
+
+Ledgerinizdeki sað tuþa basýp býrakarak ok göstergesini takip edin.
+
+Ledger artýk talep ettiðiniz adres için BIP44 yolunu görüntüleyecektir.
+
+```
+    Path (1/2)
+  44'/12586'/42'/0 >
+```
+
+Yukarýdaki yoldaki 42 ', hesap numarasýna karþýlýk gelir. Yolunuzun hesap numarasýnýn, `get-address` komutunuza saðladýðýnýz hesap numarasý baðýmsýz deðiþkeniyle eþleþip eþleþmediðini kontrol edin.
+
+Ledger görüntülenene kadar sað tuþa tekrar basýn.
+
+```
+        ✓
+<    Generate     >
+```
+
+Þimdi bu seçeneði seçmek ve adresi oluþturmak için hem sol hem de sað düðmelere ayný anda basýn.
+
+Ledger þimdi görüntülenecek.
+
+```
+Processing...
+```
+
+anahtar çiftini üretirken
+
+Mina, henüz soðukda desteklenmeyen yeni eliptik eðriler kullandýðýndan, bu iþlem 47 saniyeye kadar sürebilir.
+
+Tamamlandýðýnda, Ledger dikkatlice kontrol etmeniz ve onaylamanýz için adresi görüntüleyecektir.
+
+```
+  Address (1/4)
+B62qnh5DZeX6eYFv >
+```
+
+Onaylandýktan sonra `mina_ledger_wallet` komutu, kullanabileceðiniz sonucu çýkaracaktýr.
+
+```
+Received address: B62qnh5DZeX6eYFvtBn4nBTniXbN7R6cgKo6gYqQ7E2bKwLD3PTYZ4b
+```
+
+Adresiniz (42) yukarýdakinden farklý olacaktýr.
+
+<Alert kind="note">
+  Adres oluþtururken, mümkünse, hesap 0 ile baþlamalý ve her yeni adrese ihtiyaç
+  duyduðunuzda hesap numarasýný sýrayla artýrmalýsýnýz..
+</Alert>
+
+## Özel Anahtarýnýzý Geçerli Kýlmak
+
+Özel anahtarýnýzý geçerli kýlmak için `mina` damemon'un en son sürümüne güncellediðinizden emin olun. Kurulum talimatlarý [baðlantý](/docs/connecting) sayfasýnda bulunabilir.
+
+Artýk anahtarýnýzý oluþturduðunuza göre - çalýþtýðýný geçerli kýlmak isteyeceksiniz. Bu anahtar çifti için, Ledgerden çýkan imzalý iþlemlerin doðru bir þekilde ayrýþtýrýldýðýný ve imzanýn Mina'da doðrulandýðýný doðrulamak yeterlidir.
+
+Aþaðýdaki komutu çalýþtýrýn:
+
+```
+mina_ledger_wallet test-transaction --network mainnet 42 B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV | mina advanced validate-transaction
+```
+
+"B62q ..." yerine açýk anahtarýnýzý ve 42'yi BIP44 hesap numaranýzla deðiþtirin. Uyarý: Hesap*adresinizin, hesap* numarasýna karþýlýk gelen adres olduðundan emin olun!
+
+Ledgerinize gitmeniz, iþlem ayrýntýlarýný kontrol etmeniz ve "Kabul Et" veya "Reddet" seçeneðini belirlemeniz gerekir.
+
+Reddederseniz, hiçbir test iþlemi oluþturulmayacak ve bu komut bir hata ile çýkacaktýr.
+
+Kabul ederseniz, bir test iþlemi oluþturulur ve aþaðýdaki çýktýyý görmeniz gerekir:
+
+```
+Transaction was valid
+All transactions were valid
+```
+
+## Çevrimdýþý Mod
+
+Ýþlemleri göndermek için alternatif bir yöntem, muhasebe Ledgerin çevrimdýþý modunu kullanmaktýr. Bu mod, Ledger cihazýnýzý çalýþan daemon baðlamadan bir iþlemi imzalamanýzý saðlar. `mina_ledger_wallet` aracýyla herhangi bir komuta `--offline` bayraðýný ekleyebilirsiniz, ancak bir iþlem göndermek için çevrimdýþý modun nasýl kullanýlacaðýna dair bir örnek vereceðiz.
+
+### Çevrimdýþý bir iþlem imzalayýn
+
+Ýlk adým, Ledgerin çevrimdýþý modunu kullanarak bir iþlemi imzalamaktýr:
+
+1. Aþaðýdaki komutla imzalanmýþ bir iþlem oluþturun:
+
+```
+mina_ledger_wallet send-payment --offline
+```
+
+Çevrimdýþý modda `--nonce` ve `--fee` parametrelerini belirtmelisiniz. Testnet iþlemlerini imzalamak için `--network testnet` parametresini belirtmeniz gerekir (varsayýlan deðer mainnet'tir).
+
+<Alert kind="not">
+Ana aðda deðilseniz, `--network testnet` bayraðýný eklediðinizden emin olun, böylece Ledger testnet için iþlemi imzalayacaðýný bilir. Ana að için imzalanan iþlemler ana að üzerinde tekrar oynatýlabilir.
+
+</Alert>
+
+2. Bu komutun çýktýsýný kopyalayýn.
+
+Çýktý, bir sonraki bölüm için ihtiyaç duyacaðýnýz bir JSON blobu olacaktýr. Bunun gibi bir þeye benzemeli:
+
+```
+{
+  "signature": "389ac7d4077f3d485c1494782870979faa222cd906b25b2687333a92f41e40b925adb08705eddf2a7098e5ac9938498e8a0ce7c70b25ea392f4846b854086d43",
+  "payment": {
+    "to": "B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV",
+    "from": "B62qnzbXmRNo9q32n4SNu2mpB8e7FYYLH8NmaX6oFCBYjjQ8SbD7uzV",
+    "fee": "10000000",
+    "token": "1",
+    "nonce": "0",
+    "memo": null,
+    "amount": "1000000000",
+    "valid_until": "4294967295"
+  },
+  "stake_delegation": null,
+  "create_token": null,
+  "create_token_account": null,
+  "mint_tokens": null
+}
+```
+
+### Ýþlemi Gönder
+
+Bu adým þu anda aða baðlý çalýþan bir daemon gerektirir, ancak bu iþlemi herhangi bir üçüncü taraf að geçidine de gönderebilirsiniz.
+
+1. <DocLink copy="Devnet" url="/advanced/connecting-devnet" />
+   'de bir Daemon çalýþtýrýn.
+
+2. Aþaðýdaki `send-rosetta-transactions` komutunu çalýþtýrýn .
+
+```
+mina advanced send-rosetta-transactions
+```
+
+3.`mina_ledger_wallet` 'ýn çýktýsýný önceki bölüme yapýþtýrýn ve ardýndan iþlemi göndermek için Ctrl-D tuþlarýna basýn.
+
+Bu, aðdaki imzalanmýþ iþlemi gönderecektir. Ýþlem baþarýyla gönderildiyse aþaðýdaki çýktýyý görmelisiniz:
+
+```
+Dispatched command with TRANSACTION_ID 4Rs6xMHVyo1J1TTQDCzynYvWPdBr9QRY23fuqvnHFvQiM2B4YD14dtWY2sDccbgx7eh5FYAsPSNrZ2M3AqEPfXoXjNxuWTgiwkL3nwaTaGhSoPA7LcfqiWT6uN9oookDeR6ZSMfd2bs9QSPRit8gPt3FSrDo8i3qM383AEG6g5pEm2i1m1cTTwrUe7y4Z2eB6DdWKhFhoYnx5ndQRtZt3D3o7gojdwwdpRzrWZgT9KcJfbXdZNTfXxr3G1VCVqgqmNJ6iGzn4uTGqpqCmJf6zRn196SWUyZ4DYrphvGF8GhJZYyPTwA2BMTBkF9xWC9zzJP8ZrAeyV1qV8k94dZaiyVt7Fac3r6BcDaMonMcpvnGy8fHF9Q25L2tjzHzwKMePkJztB5r
+```

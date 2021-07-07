@@ -1,0 +1,180 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Archive Node" });
+
+# Arþiv Düðümleri
+
+Mina düðümleri varsayýlan olarak basittir, yani að, blok veya iþlemler hakkýnda geçmiþ bilgileri tutmalarý gerekmez. Bazý kullaným durumlarý için, bir Arþiv Düðümü çalýþtýrarak yapabileceðiniz bu geçmiþ verileri korumak faydalýdýr.
+
+Bir Arþiv Düðümü, çalýþan bir arþiv sürecine baðlý normal bir mina daemonudur. Daemon , düzenli olarak blok zinciri verilerini arþiv sürecine gönderecek ve bu verileri bir[Postgres](https://www.postgresql.org/) veritabanýnda depolayacaktýr.
+
+Bu nedenle bir arþiv düðümünü çalýþtýrmak, bir Postgres veritabaný örneðini yönetme konusunda biraz bilgi gerektirir. Bu bölümde, bir veritabaný kuracaðýz, Arþiv Düðümünü çalýþtýracaðýz, onu bir daemona baðlayacaðýz ve veriler üzerinde bazý sorgular deneyeceðiz. Ýhtiyacýmýz olaný kurarak baþlayalým.
+
+## Kurulum
+
+1. Mina'nýn en son sürümünü yükleyin. Daemon'un en son sürümüne yükseltme yapmadýysanýz son sürümünü almak için <DocLink copy="dökümanlara geri dönün" url="/getting-started" />. Kurulumun baþarýlý olup olmadýðýný kontrol etmek için `mina -help` komutunu çalýþtýrabilirsiniz. 2.[Postgres](https://www.postgresql.org/download/)yükleyin.
+2. Arþiv düðüm paketini yükleyin.
+
+   - Ubuntu/Debian:
+
+     ```
+     sudo apt-get install mina-archive=1.1.5-a42bdee
+     ```
+
+   - Docker:
+     ```
+     minaprotocol/mina-archive:1.1.5-a42bdee
+     ```
+
+## Setup
+
+Aþaðýda, yerel olarak çalýþan bir arþiv düðümünü almak için gereken her þeyin nasýl kurulacaðýna iliþkin bazý temel talimatlar verilmiþtir. Postgres bulut örneðine baðlanýyorsanýz, daðýtýmýnýz Docker kullanýyorsa veya bu iþlemleri farklý makinelerde çalýþtýrmak istiyorsanýz bunlar biraz farklý olacaktýr.
+
+<Alert>
+
+Not: Bu talimatlardan bazýlarý, iþletim sisteminizin postgres'i nasýl yüklediðine baðlý olabilir (ve ilk etapta kurulu olduðunu varsayabilir).
+
+</Alert>
+
+1. Yerel bir postgres sunucusu baþlatýn. Bu, sadece test için ön planda çalýþtýracaktýr, muhtemelen arka planda çalýþtýrmak veya sizin için çalýþtýrmak için iþletim sisteminizin servis yöneticisini (systemd gibi) kullanmak isteyeceksiniz. Alternatif olarak, bir bulut saðlayýcýsý tarafýndan barýndýrýlan bir postgres hizmetini kullanabilirsiniz.
+
+```
+postgres -p 5432 -D /usr/local/var/postgres
+```
+
+macOS için yerel bir postgres sunucusu baþlatmak için `brew services start postgres` çalýþtýrýn
+
+2. Sunucuda veritabaný(burada `archive` olarak adlandýrýlýr)oluþturun ve þemayý içine yükleyin. Bunun yalnýzca arþiv düðümü ilk kurulduðunda yapýlmasý gerekecektir.
+
+```
+createdb -h localhost -p 5432 -e archive
+
+psql -h localhost -p 5432 -d archive -f <(curl -Ls https://raw.githubusercontent.com/MinaProtocol/mina/master/src/app/archive/create_schema.sql)
+```
+
+3. 1. adýmda 5432 numaralý baðlantý noktasýnda baþlattýðýmýz postgres veritabanýna baðlanarak 3086 numaralý baðlantý noktasýnda arþivleme iþlemini baþlatýn.
+
+```
+coda-archive \
+  -postgres-uri postgres://localhost:5432/archive \
+  -server-port 3086
+```
+
+4. Daemonu baþlatýn, arka planý 3086 numaralý baðlantý noktasýnda baþlattýðýmýz arþiv sürecine baðlayarak baþlatýn. Baþka bir makinedeki bir arþiv sürecine baðlanmak istiyorsanýz, `localhost:3086` gibi bir ana bilgisayar adý da belirtebilirsiniz.
+
+```
+mina daemon \
+    .....
+  -archive-address 3086\
+```
+
+## Arþiv Düðümünü Kullanma
+
+Artýk arþiv düðümünü çalýþtýrdýðýmýza göre, veritabanýndaki tablolara bir göz atalým.
+
+Veritabanýndaki tablolarý listelemek için psql'deki `\dt` komutunu çalýþtýrabilirisiniz.
+Tablolarýn tam þemasýný [buradan](https://github.com/minaProtocol/mina/blob/master/src/app/archive/create_schema.sql)görüntüleyiniz.
+
+Aþaðýda, her tablo için bazý önemli alanlar bulunmaktadýr.
+
+### Tablo 1: kullanýcý_komutlarý
+
+#
+
+Bu tablo, að üzerinde yapýlan iþlemlerin kaydýný tutar.
+
+```
+...
+  user_command_type          Type of transaction being made
+                             Possible values: `'payment', 'delegation'
+                             To see a specific type of transaction, i.e. payments or creating a token, specify this field in your queries.
+  source_id                  public key of the sender
+  receiver_id                public key of the receiver
+  amount                     amount being sent from the sender to the receiver
+  token                      ID of a token **If you are querying for different type of token transactions, specify this field.**
+```
+
+### Tablo 2: dahili_komutlar
+
+Bu tablo, snark iþlerden veya blok yapýmýndan kazanýlan ödüllerin kaydýný tutar.
+
+```
+...
+  internal_command_type      represents whether the command is a `fee_transfer` from snark work or a `coinbase` reward from block producing.
+                             Use this field for information about block rewards and snark rewards (there is also an extra fee_transfer added to support sending all the transaction fees summed together to the block_creator)
+  receiver_id                public key ID of the receiver
+  fee                        amount being sent from the protocol to the receiver
+  token                      ID of a token **If you are querying for different type of token transactions, specify this field.**
+```
+
+### Tablo 3: bloklar
+
+```
+...
+  id
+  parent_id                  ID of the previous block in the blockchain
+                             Use this field for information about block rewards and snark rewards (there is also an extra fee_transfer added to support sending all the transaction fees summed together to the block_creator)
+  creator_id                 public key of the block creator
+```
+
+## Sorgu dene
+
+Þimdi verilerin yapýsýna baktýðýmýza göre, bir sorgu deneyelim.
+
+**Örnek 1:** Açýk anahtarýnýz tarafýndan oluþturulan tüm bloklarý bulun
+
+```
+SELECT *
+FROM blocks AS b
+INNER JOIN public_keys AS pk1 ON b.creator_id = pk1.id
+WHERE value = 'MY_PK'
+```
+
+**Example 2:** Açýk anahtarýnýz tarafýndan aldýðýnýz tüm ödemeleri bulun
+
+```
+SELECT *
+FROM user_commands AS uc
+JOIN blocks_user_commands AS buc ON uc.id = buc.user_command_id
+JOIN public_keys AS pk ON uc.receiver_id = pk.id
+WHERE value = 'MY_PK'
+AND type = 'payment'
+```
+
+**Örnek 3:** Kanonik zincir üzerinde 12 yüksekliðindeki bloðu bulun
+
+```
+WITH RECURSIVE chain AS (
+  (SELECT ... FROM blocks b WHERE height = (select MAX(height) from blocks)
+  ORDER BY timestamp ASC
+  LIMIT 1)
+
+  UNION ALL
+
+  SELECT ... FROM blocks b
+  INNER JOIN chain
+  ON b.id = chain.parent_id AND chain.id <> chain.parent_id
+) SELECT ..., pk.value as creator FROM chain c
+  INNER JOIN public_keys pk
+  ON pk.id = c.creator_id
+  WHERE c.height = 12
+```
+
+**Örnek 4:** Her bir açýk anahtar tarafýndan oluþturulan bloklarýn sayýsýný listeleyin ve bunlarý azalan sýrada sýralayýn
+
+```
+SELECT p.value, COUNT(*) FROM blocks
+INNER JOIN public_keys AS p ON creator_id = ip.id
+GROUP BY p.value
+ORDER BY count DESC;
+```
+
+**Örnek 5:** Her bir açýk anahtar tarafýndan oluþturulan uygulamalý ödemelerin sayýsýný listeleyin ve bunlarý azalan düzende sýralayýn
+
+```
+SELECT p.value, COUNT(*) FROM user_commands
+INNER JOIN public_keys AS p ON source_id = p.id
+WHERE status = 'applied'
+AND type = 'payment'
+GROUP BY p.value ORDER BY count DESC;
+```

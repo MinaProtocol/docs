@@ -1,0 +1,218 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Scan State" });
+
+# Tarama Durumu
+
+Tarama durumu, SNARK iþlemlerinin üretiminin blok üreticilerinden snark iþçilere ayrýlmasýna izin veren bir veri yapýsýdýr.
+
+Blok üreticilerinin artýk bu iþlem SNARK'larýný üretmesi gerekmediðinden, blok üretim süresi iþlem hacmine bakýlmaksýzýn sabit kalabilir. Ek olarak, tarama durumu veri yapýsý, SNARK provasý üretiminin paralel hale getirilmesine ve birden çok rakip <DocLink copy="snark iþçileri" url="/architecture/snark-workers" /> tarafýndan tamamlanmasýna izin verir.
+
+Tarama durumu, aðaçtaki her düðümün bir snark iþçisi tarafýndan tamamlanacak bir iþ olduðu [tam-ikili aðaç](https://en.wikipedia.org/wiki/Binary_tree) 'lardan oluþan bir ormandan oluþur. Tarama durumu, aðacýn tabanýndaki tüm iþlemlerin doðruluðunu kanýtlayan bir aðacýn tepesinden düzenli olarak tek bir kanýt döndürür.
+
+Blok üreticileri, hem zincirin mevcut durumunun geçerli olduðunu hem de gizli defterde yer alan tüm iþlemlerin geçerliliðini kanýtlayan, ürettikleri blok zinciri SNARK'a yayýlan defter kanýtý içerir.
+
+Sonuç olarak, blok süreleri iþlem hacmi ne olursa olsun sabit kalabilir ve tarama durumu istenen bir iþlem hacmine uyacak þekilde ayarlanabilir.
+
+<Alert>
+
+Sabit bir durumda, tüm slotlar doldurulduðunda ve gerekli tüm provalar tamamlandýðýnda, her blokta bir defter kanýtý yayýnlanýr.
+
+</Alert>
+
+### Ýþlemleri Dahil Etme
+
+Bir blok oluþtururken bir <DocLink copy="blok üreticisi" url="/architecture/block-producers" />, [tarama durumu sabitleri](#scan-state-constants)tarafýndan tanýmlanan maksimuma kadar iþlemleri içerebilir. Ýþlemleri dahil ederek, mevcut iþlem ücretlerini alabilir ve kendilerine bir coinbase ödülü ödeyebilirler. Ekledikleri her iþlem yeni temel iþlere dönüþtürülür ve tarama durumuna eklenir.
+
+Eklenen her iþlem için, bir blok üreticisi, tarama durumunda halihazýrda var olan bir dizi iþe karþýlýk gelen, eþdeðer miktarda tamamlanmýþ snark iþi içermelidir. Bu tamamlanan iþler, tarama durumuna eklendiðinde, kök düðüm için olduðu durumlar dýþýnda yeni birleþtirme iþleri oluþturur; bu durumda kanýt basitçe sonuç olarak döndürülür.
+
+Blok üreticisi, iþi kendi baþýna tamamlamak yerine, tamamlanmýþ iþi, havuzdaki mevcut tekliflerden herhangi bir iþçiden satýn alabilir.
+
+### Tarama Durumu Sabitleri
+
+Aþaðýdaki sabitler, tarama durumunun yapýsýný ve davranýþýný belirler::
+
+- iþlem_kapasite_log_2
+- iþ_gecikmesi
+
+Transaction_capacity_log_2 sabiti, bir bloða dahil edilebilecek maksimum iþlem sayýsýný tanýmlar:
+
+```
+max_no_of_transactions = 2^{transaction_capacity_log_2}
+```
+
+Ýþ gecikmesi, snark iþçileri tarafýndan snark iþinin tamamlanmasý için yeterli zaman olmasýný saðlar. Tamamlanmýþ kanýt yoksa, blok üreticisi herhangi bir iþlem ekleyemez. Ýþ gecikmesini kullanarak, tarama durumunda bulunabilecek maksimum aðaç sayýsý þu þekilde tanýmlanýr:
+
+```
+max_number_of_trees = (transaction_capacity_log_2 + 1) * (work_delay + 1) + 1
+```
+
+Blok baþýna dahil edilebilecek maksimum kanýt sayýsý þu þekilde tanýmlanýr:
+
+```
+max_number_of_proofs = 2^{transaction\_capacity_log_2 + 1} - 1
+```
+
+Bu tarama durumu kýsýtlamalarý, blok baþýna yalnýzca tek bir kanýtýn gönderilebilmesini ve alt öðelerine karþýlýk gelen kanýtlar eklendikten sonra güncellenecek birleþtirme düðümünün her zaman boþ olmasýný saðlar.
+
+Maksimum iþlem sayýsý sabitlenebilse de, bu, iþlem hacmine göre ayarlanacak þekilde dinamik olarak ayarlanabilir. Bu nedenle, tarama durumu, iþlem kanýtlama gecikmesini artýrma (logaritmik olarak) pahasýna da olsa, sýnýrsýz iþlem hacmini idare edebilir.
+
+### Example
+
+`max_no_of_transactions = 4`, ve `work_delay = 1` olan bir tarama durumunu düþünün. Buna göre, bu, tamamlanmasý gereken maksimum iþ miktarý 7'ye eþit ve maksimum 7 aðaç olabileceði anlamýna gelir. Baþlangýçta, tarama durumu boþtur.
+
+<img
+  alt="Block 0"
+  src="/static/img/docsImages/scan-state/ZJXLozR.png"
+  width="350"
+/>
+
+**Blok 1**: Bir blok üreticisi,`B1` etiketli tarama durumuna dört iþlem içerir. Bu iþlemler ilk aðacýn temelini doldurur.
+
+<img
+  alt="Block 1"
+  src="/static/img/docsImages/scan-state/mY4MzW0.png"
+  width="350"
+/>
+
+**Blok 2**: Ýkinci blokta, bir blok üreticisi dört iþlem daha ekler (`B2`).Bunlar ikinci bir aðaca eklenir ve bir kez daha tabaný doldurur. 1 bloðun iþ gecikmesi nedeniyle gerekli kanýt yoktur.
+
+<img
+  alt="Block 2"
+  src="/static/img/docsImages/scan-state/jzYrmZf.png"
+  width="700"
+/>
+
+**Blok 3**: Üçüncü blokta, bir blok üreticisi üçüncü aðaca dört `B3` iþlemi ekler, ancak ilk aðaç için dört kanýt içermelidir. Tamamlanan bu temel provalarýn dahil edilmesinin bir sonucu olarak, iki yeni `M3` birleþtirme iþi yaratýlýr.
+
+<img
+  alt="Block 3"
+  src="/static/img/docs-images/scan-state/tECFm3I.png"
+  width="100%"
+/>
+
+<Alert>
+
+`B` ve `M` , tarama durumuna eklenecek sýra sýrasýný belirten numara ile bir temel veya birleþtirme iþini belirtir.
+
+</Alert>
+
+**Blok 4**: Dördüncü blok için, bir blok üreticisi dördüncü aðacýn tabanýna baþka dört iþlem (`B4`)ekler. Blok 2'ye eklenen çalýþmaya karþýlýk gelen dört kanýt içermelidirler. Yine, sonuç olarak iki `M4` birleþtirme iþi oluþturulur.
+
+<img
+  alt="Block 4"
+  src="/static/img/docs-images/scan-state/76R2bpU.png"
+  width="100%"
+/>
+
+<Alert>
+
+Herhangi bir bekleyen iþ (turuncu renkte gösterilir), snark iþçilerin tamamlamasý gereken iþtir. Snark iþçileri, tamamlanmýþ iþleri snark havuzuna gönderir. Birden fazla snark iþçisi iþi tamamlayabilir, ancak blok üreticileri tarafýndan satýn alýnabilecek snark havuzunda yalnýzca en düþük ücret kalýr.
+
+</Alert>
+
+Beþinci blokta, beþinci aðacýn (`B5`) tabanýný doldurmak için dört iþlem daha dahil edilmiþtir ve altý kanýt dahil edilmelidir (`B3`ler and `M3`ler). `M3` birleþtirme iþleri, ilk aðaç (`M5`) için son bir bekleyen birleþtirme iþiyle sonuçlanýr.
+
+<img
+  alt="Block 5"
+  src="/static/img/docs-images/scan-state/QaqfbXG.png"
+  width="100%"
+/>
+
+**Blok 6**: Altýncý blokta, altýncý aðacýn tabanýný dolduran baþka dört iþlem (`B6`) eklenir. Altý kanýt eklenir (`B4` and `M4`) ve üç yeni birleþtirme iþi oluþturulur (`M6`).
+
+<img
+  alt="Block 6"
+  src="/static/img/docs-images/scan-state/y6dM2FT.png"
+  width="100%"
+/>
+
+**Blok 7**: Yedinci blokta, yedinci aðacýn tabanýný dolduran blok üreticisi tarafýndan dört iþlem (`B7`) daha eklenir. Yedi aðaç, belirtilen tarama durumu sabitlerine göre maksimum aðaç sayýsýdýr. Maksimum prova sayýsý (7) dahildir (`B5` and `M5`). Dahil edilen bu kanýtlar , üç yeni birleþtirme iþi (`M7`), oluþturur ve ek olarak, en iyi `M5` kanýtý tarama durumundan yayýnlanýr.
+
+<img
+  alt="Block 7"
+  src="/static/img/docs-images/scan-state/RY8umxW.png"
+  width="100%"
+/>
+
+Ýlk aðaçtan alýnan kanýt, blok 1'e eklenen iþlemlere karþýlýk gelen defter kanýtýdýr. Daha sonra, ek iþlemler için alan yaratmak için aðacýn içeriði kaldýrýlýr.
+
+<img
+  alt="Emit proof"
+  src="/static/img/docs-images/scan-state/hQvFVfp.png"
+  width="100%"
+/>
+
+**Blok 8**:Sekizinci blokta, blok üreticisi iki iþlem (`B8`) ekler ve 4 (`B6`) kanýt içerir. Bunlar dahil provalar, iki yeni birleþtirme iþi (`M8`) ile sonuçlanýr. Ýki iþlem eklemek için yalnýzca dört kanýt gerektiðini unutmayýn.
+
+<img
+  alt="Block 8"
+  src="/static/img/docs-images/scan-state/A3o18oN.png"
+  width="100%"
+/>
+
+<Alert>
+
+Snark çalýþmasý, bir aðacýn son kök kanýtý haricinde, tipik olarak iki _workIds_, içeren bir çalýþma paketinde toplanýr. Bir iþlem için orantýlý çalýþma iki kanýttýr, bu nedenle bu, dahil edilen iþlemlerin eþitliðini ve iþin satýn alýnmasýný saðlar.
+
+</Alert>
+
+**Blok 9**: Dokuzuncu blokta, blok üreticisi üç iþlem ekler(`B9`). Halihazýrda doldurulmamýþ aðaçtaki slotlarýn doldurulmasý için üç prova (`M6`)gereklidir. Önceki bloða dört kanýt eklendi ve bu nedenle yalnýzca üç tane daha yapýlmasý gerekiyor (maksimum iþ 7 olduðu için). Ýkinci aðaçtaki `M6` kanýtý , defter kanýtý olarak döndürülür. Üçüncü `B9` iþlemi artýk boþ olan aðaca gider ve iki `B7` kanýtý eklenir.
+
+<img
+  alt="Block 9"
+  src="/static/img/docs-images/scan-state/JGlawxh.png"
+  width="100%"
+/>
+
+**Blok 10**:Onuncu blokta, blok üreticisi dört iþlem ekler ve sonuç olarak yedi kanýt içerir (`B7`, `M7`, and two `B8`s).
+
+<img
+  alt="Block 10"
+  src="/static/img/docs-images/scan-state/kQASfTN.png"
+  width="100%"
+/>
+
+**Blok 11**:On birinci blokta, blok üreticisi üç iþlem (`B11`) ekler ve bu sýrayla beþ kanýt (`B9`, `B9`, `M8`, `M8`, `M9`) tamamlar. Ek olarak, `M9` defter kanýtý dördüncü aðaçtan döndürülür.
+
+<img
+  alt="Block 11"
+  src="/static/img/docs-images/scan-state/FaVTmWD.png"
+  width="100%"
+/>
+
+<Alert>
+
+`mina advanced snark-job-list` komutunu kullanarak tarama durumunun içeriðini görüntüleyin.
+
+</Alert>
+
+### Snark Havuzu ile Entegrasyon
+
+Tarama durumuna yeni eklenen iþler, snark iþçilerinin tamamlamasý için bekleyen iþlerdir. Snark iþçileri, tamamlanan iþleri için teklifleri göndererek gerekli SNARK iþlemlerini tamamlar. Bir düðüm tamamlanan çalýþmayý aldýðýnda ve doðruladýðýnda, eðer geçerliyse ve gerekli çalýþma için en düþük ücreti varsa yerel snark havuzuna ekler. Çalýþma, aðdaki diðer eþlerle de gossip yapýlacak.
+
+<Alert>
+
+Birden fazla snark iþçileri ayný iþi tamamlayabilirken, snark havuzuna yalnýzca en düþük ücret dahildir.
+
+</Alert>
+
+Bir blok üreticisi, ekledikleri herhangi bir iþlemi dengelemek için tamamlanmýþ kanýtlarý bir bloða dahil ettiðinde, ilgili iþi snark havuzundan satýn alabilir. Örneðin, yukarýdaki örneðe devam ederken bir sonraki bloðu (12) ele alalým. Blok üreticisi, bir coinbase, bir kullanýcý ödemesi ve snark iþçisine bir ücret transferinden oluþan üç iþlem eklemek istiyorsa, tamamlanmýþ üç snark iþi satýn almasý gerekir. Bu, her bir snark çalýþmasý iki t _çalýþma kimliði_ içerdiðinden, 6 `B9`, `B10`s, `M9`, and `M10` (yedinci aðaçtan) kanýtýna karþýlýk gelir.
+
+Blokun üretildiði süre boyunca, snark havuzu, gerekli iþler için en iyi tekliflere ek olarak tamamlanmýþ iþi (örnekte sýrasýyla 0.025, 0.165, 0.1 and 0.5) içerebilir.
+
+<img
+  alt="Submitted work"
+  src="/static/img/docs-images/scan-state/fDBZog9.png"
+  width="100%"
+/>
+
+Bir blok üreticisi, iþlemleri seçmeden önce mevcut iþin fiyatýný dikkate alacaktýr. Bir blok üreticisinin ekleyeceði ilk iþlem, coinbase ödülünün olduðu coinbase iþlemi olacaktýr. Ýþlem ücretleri, dahil edilmeleri için gerekli olan snark çalýþma ücretlerini karþýlamýyorsa, eklenmeyecektir. Bir blok üreticisi, ekonomik deðilse asla iþ satýn almayacaktýr.
+
+Ýstenilen sýrayla satýn alýnabilecek tamamlanmýþ bir snark iþinin olmamasý durumunda, ilgili iþlemler bir bloða dahil edilmeyecektir. Bu, boþ bir blokla sonuçlanabilir, ancak ayný zamanda hiçbir iþlemin eklenemediði durumda (bir token temelli iþlem dahil), blok üreticisi için herhangi bir ödül olmayacaktýr.
+
+<Alert>
+
+Mevcut snark havuzu, `mina advanced snark-pool` komutu <DocLink copy="GraphQL" url="/developers/graphql-api" />aracýlýðýyla veya CLI aracýlýðýyla görülebilir.
+
+</Alert>

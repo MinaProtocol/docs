@@ -1,0 +1,76 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Consensus Mechanism Abstraction" });
+
+# Konsensüs Mekanizmasý Soyutlamasý
+
+Konsensüs, aðýn hangi bilgilerin blok zincirinde tutulacaðýný belirlediði süreci ifade eder. Blok zinciri gibi bir sistemde, blok zincirini yeni bilgilerle geniþletme sorumluluðu, aðdaki katýlýmcý düðümler arasýnda daðýtýlýr.Bu düðümlerin að üzerinde "dürüst" düðümler olduðu varsayýlamaz ve bu nedenle, çeþitli düðümler tarafýndan önerilen hangi bilgilerin tutulacaðýný seçmek için aðýn "dürüst" katýlýmcýlarýnýn birlikte çalýþmasý gerekir. Konsensüs mekanizmalarý olarak adlandýrdýðýmýz daðýtýlmýþ konsensüsa ulaþmanýn birçok farklý yolu vardýr.Kod tabanýmýzda, bir konsensüs mekanizmasýnýn protokolün geri kalanýný bilgilendirdiði tek bir arayüz oluþturduk. Bu arayüz aracýlýðýyla, seçilen konsensüs mekanizmasýna baðlý olarak protokolün geri kalanýný yazmamýza izin vermek için derleme zamanýnda çeþitli konsensüs mekanizmalarý uygulamalarý deðiþtirilebilir. Bu nedenle, bir konsensüs mekanizmasý, tanýmlandýktan sonra protokolün geri kalanýnýn üzerine inþa edilebilecek bir þey olarak düþünülebilir.
+
+Bir konsensüs mekanizmasý, üzerine inþa edilen bir protokolün birçok yönünü kontrol eder. Bu tartýþmanýn amacý için, bir konsensüs mekanizmasýnýn hükümlerini iki kýsma ayýracaðýz: veriler (kullanýma sunulan veri yapýlarý ve bunlarla saðlanan etkileþimler) ve hook'lar (konsensüs mekanizamsý üzerine inþa edilen protokol tarafýndan çaðrýlan belirli üst düzey hook'lar) fikir birliði mekanizmasý). Konsensüs mekanizmasý tarafýndan saðlanan veri yapýlarý, onlarla etkileþimde bulunan dýþ sisteme soyut tutulur ve bunun yerine esas olarak konsensüs mekanizmasýnýn kancalarý tarafýndan tüketilir.
+
+!!! NOT
+Not Bu belge sadece Mina'daki genelleþtirilmiþ konsensüs mekanizmasý soyutlamasýný kapsamaktadýr. Mina'da Hisse Kanýtý uygulamasý hakkýnda bilgi için<DocLink copy="ilgili belgelere bakýn" url="/architecture/proof-of-stake" />.
+
+## Veri
+
+### Yerel_durum
+
+`Local_state` yalnýzca makinede yerel olarak depolanan, konsensüs ile ilgili durumdur. Protokol durumundaki nihai noktalar arasýnda yerel düðüm hakkýndaki bazý bilgileri izlemek için konsensüsa bir yer saðlar.Nasýl yapýlacaðý ile ilgili daha fazla ayrýntý için `frontier_root_transition` kancasýna bakýn.
+
+### Konsensüs_geçiþ_verisi
+
+`Consensus_transition_data` `Snark_transition` 'a dahil edilen bir durum parçasýdýr. Bir geçiþi kanýtlamak için snarka kanýtlanan ekstra bilgiyi eklemek için konsensüsa bir yer saðlar.`Consensus_state` 'den farklý olarak `Consensus_transition_data` ki bilgiler yalnýzca bir geçiþ oluþturan düðüm tarafýndan kullanýlýr ve diðer düðümler için eriþilebilir hale getirilmez.
+
+### Konsensüs_durumu
+
+`Consensus_state` protokolün `Protocol_state` 'ine dahildir. Konsensüs mekanizmasýna, protokolün her durumunda mevcut olan ve snarklarda kanýtlanabilen bilgileri depolamasý için bir yer saðlar. `Protocol_state` 'e dahil olduðundan, bu bilgi aðdaki diðer düðümler tarafýndan incelenebilir.
+
+### Prover_state
+
+**TODO**
+
+### Teklif_verileri
+
+**TODO**
+
+#### Diðer Anlýk Veriler
+
+- `Blockchain_state`
+- `Protocol_state`
+- `Snark_transition`
+
+## Hook'lar
+
+[hooks]: #hooks
+
+<!-- ![](res/consensus_hooks.dot.png) -->
+
+### generate_transition
+
+`generate_transition` hook blok zincirindeki önceki bir protokol durumunun bir uzantýsý olarak yeni bir protokol durumunu ve konsensüs geçiþ verilerini tamamen oluþturur. Yeni blok zinciri durumu, aþamalý defter farkýna dahil edilecek iþlemlerle ve ilgili teklif verileriyle birlikte bu iþleve saðlanýr.Bu hook `previous_protocol_state` olarak geçildiði sýrada sýnýrdaki en iyi ipucu ile teklif veren tarafýndan çaðrýlmak üzere tasarlanmýþtýr. Teklif eden, bu hook'un ne zaman çaðrýlmasý gerektiðini belirlemek için bir `next_proposal` hook ile etkileþime girmelidir.
+
+### next_state_checked
+
+`next_proposal` hook'u bir sonraki geçiþi oluþturmak ve önermek için geçerli olduðunda protokole bilgi verir. Bu hook ya bir geçiþ önermek için bir zaman ya da hook'u tekrar kontrol etmek için bir zaman döndürebilir. Bu, bir konsensüs mekanizmasýnýn teklifleri boþa çýkarmasýnýn yaný sýra protokoldeki diðer bilgilere dayalý olarak tekliflerin daha geliþmiþ zamanlamasýný kontrol etmesine olanak tanýr.
+
+<!-- <sup>_For more information on how the `next_proposal` hook interacts the `Proposer`, see the [`Proposer` documentation](proposer.md#proposal-scheduling)._</sup> -->
+
+### next_state_checked
+
+`next_state_checked` hook'u öncülün aktarýmýnda verilen bir blok zinciri sýrasýndaki bir sonraki konsensüs durumunu hesaplayan / kýsýtlayan kontrol edilmiþ bir hesaplama döndürür.Bu hook, blockchain snark kýsýtlama sistemini oluþturan kontrol edilen hesaplamaya dahil edilmiþtir. Bu nedenle, bu, konsensüs durumlarýnda doðrulamanýn gerçekleþtirildiði birincil iþlevdir.
+
+### select
+
+`select` hook'u, iki durum verildiðinde, hangi durumun konsensüs mekanizmasýnýn gözünde "daha iyi" olduðunu protokole bildirir. Bu hook, iki zincir arasýnda nelerin tutulmasý gerektiðini belirleyen birincil iþlem olduðundan, konsensüsa nasýl ulaþýlacaðý konusunda hayati bir rol oynar. Çaðrýldýðýnda, arayan kiþiye ya mevcut durumu `Keep` ya da aday durumu `Take` için bilgi verecektir.
+
+### received_at_valid_time
+
+`received_at_valid_time` hook'u belirli bir konsensüs durumunun belirli bir zamanda geçerli olup olmadýðýna iliþkin bir yüklemdir. Bu, konsensüs mekanizmasýnýn isteðe baðlý olarak, bir konsensüs durumunun oluþturulmasý için geçerli olduðu zamanýn zamansal özelliklerini kontrol etmesine izin verir, bant dýþýndan alýnmýþsa alýnan protokol durumunu reddeder. Protokolün uygulanmasý, aðdan bir geçiþ alýndýðýnda, geçiþi iþlemeden ve onu sýnýra eklemeden önce bu hook'u çaðýrmalýdýr.
+
+### frontier_root_transition
+
+`frontier_root_transition` hook'unun son noktasýnda bir geçiþ meydana geldiðinde çaðrýlmasý gerekir (mina'da bu, geçiþ sýnýrýnýn köküdür). Bu, konsensüs mekanizmasýnýn yerel durumunu aðýn nihai durumuna göre güncelleme þansý saðlar.
+
+### should_bootstrap
+
+`should_bootstrap` hook'u að üzerinden alýnan bir geçiþin düðümün durumunu mevcut að durumuna önyüklemeye baþlamasýný gerektirip gerektirmediðini protokole bildirir. Konsensüs mekanizmasý, durum sonlandýrýlmasýna kadar ne kadar zaman alacaðýný ve bir düðümün önyükleme yapýp yapmayacaðýný belirler ve bu konsepte de baðlýdýr. Bu hook, aðdan bir geçiþ alýndýðýnda ve ilk doðrulama baþarýyla gerçekleþtirildiðinde çaðrýlmalýdýr.

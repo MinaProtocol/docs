@@ -1,0 +1,138 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Troubleshooting" });
+
+# Keypair Oluşturma
+
+Mainnet için bir anahtar çifti oluşturmak veya bir Mina test ağına tam olarak katılmak için ilk adım, Genel Anahtar ve Özel Anahtardan oluşan bir Anahtar Çifti oluşturmaktır. Şu anda mina-generate-keypair ve ledger-app-mina anahtar çiftleri oluşturmak için desteklenen iki araç vardır. Özel anahtarınızın doğru şekilde oluşturulduğunu doğrulamak için bir aracımız da var.
+
+Birden fazla anahtar çifti oluşturmak isteyebileceğinizi unutmayın. Örneğin, bir blok üreticisini en güvenli şekilde çalıştırmak istiyorsanız, <DocLink copy="sıcak cüzdan / soğuk cüzdan blok üretim kurulumu isteyeceksiniz" url="/advanced/hot-cold-block-production" />.
+
+## Yöntemler
+
+### mina-keypair-oluşturma
+
+`mina-generate-keypair` adlı verdi?imiz basit bir komut satırı haz?rlad?k. Bu en basit yöntemdir ve talimatları aşağıda bulabilirsiniz.
+
+### Ledger Hardware Cüzdan
+
+Kendi [Ledger Nano S](https://www.ledger.com/) hardware cüzdanınızı Mina özel anahtarlarınızı güvenli bir şekilde saklamak için kullanabilirsiniz. Şu an bağımsız bir güvenlik denetim süreci üzerinde çal???yoruz ve ?imdiye kadar hiç bir sorun ile kar??la?mad?k. Geliştirme sürecimiz neredeyse tamamlanmak üzere. Bu araç üzerinden geli?tirmeye ba?lamak için <DocLink copy="ledger-app-mina dokümantasyonumuza" url="/advanced/ledger-app-mina" /> göz atabilirsiniz.
+
+### Client SDK
+
+Ayrıca, anahtar çiftleri oluşturabilen ve işlemleri imzalayabilen bir istemci SDK'sı da oluşturduk. Lütfen bu yöntemin tavsiye edilmediğini ve yalnızca deneyimli güvenlik uzmanları tarafından kullanılması gerektiğini unutmayın. Anahtar çiftleri oluşturmak yerine lütfen `mina-generate-keypair aracımızı kullanın. Daha fazla bilgi için [client SDK dokümantasyonumuza](/docs/keypair/client-sdk) bakabilirsiniz.
+
+<br />
+
+<Alert kind="warning">
+
+Özel anahtarınızı güvenli bir şekilde saklandıklarından emin olun ve hiç birzaman kimse ile payla?may?n. E?er özel anahtarınızı kaybederseniz yada bilinmeyen ki?iler taraf?ndan özel anahtarlarınızı giri? yap?ld???n? tepit ederseniz, hesabınıza eri?imizi ve hesab?n?zdaki varl?klar?n?z? kaybedebilece?inizi unutmay?n. Herzaman özel anahtar yerine açık anahtarınızı payla??n. Mina hiç bir zaman sizden özel anahtarlarınızı istemez.
+
+</Alert>
+
+<br />
+
+## mina-keypair-oluşturma
+
+Keypair oluşturma sürecini basitle?tirmek için `mina-keypair-oluşturma` ad?n? verdi?imiz basit bir komut satırı haz?rlad?k. `mina-keypair-oluşturma` arac?m?z kendi keypairinizi oluşturman?z ve Mina a??na kat?lman?z için kullanım? kolay bir yaz?l?md?r. Kendi sisteminize nas?l yükleyip çal??t?raca??n?z?n detaylar? için a?a??ya göz atabilirsiniz.
+
+## Yükleme
+
+`mina- keypair-oluşturma` yazılımdır için birden fazla i?letim sistemini destekliyoruz. Sisteminize yüklemek için aşağıdaki talimatları takip edebilirsiniz.
+
+### macOS
+
+E?erng macOS kullanıyorsanız lütfen Docker yükleyin ve aşağıdaki Docker tabanlı talimatları takip edin.
+
+### Ubuntu 18.04 / Debian 9
+
+Aşağıdaki komutu <DocLink copy="Mina repo yüklendikten" url="/getting-started#ubuntu-1804--debian-9" /> sonar kolayl?kla çalıştırabilirsiniz.
+
+```
+sudo apt-get install mina-generate-keypair=1.1.5-a42bdee
+```
+
+keygen yazılımdırn?n doğru bir şekilde yüklendi?inden `mina-generate-keypair -version`çal??t?rarak emin olabilirsiniz. Ç?kt? `Commit a42bdeef6b0c15ee34616e4df76c882b0c5c7c2a on branch master` okuyabilmelidir.
+
+### Windows / Diğer Platformlar
+
+Docker yükleyin ve altında 3b ad?m?ndaki Docker tabanlı talimatları takip edin.
+
+## Kullanım
+
+Keypair oluşturmak sadece birkaç kısa adımda olu?an basit bir süreçtir.
+
+1. ?lk olarak sisteminizde key dosyalar?n?z? yükleyebilece?iniz bir dosya olduğundan emin olun. `~/keys` dosyasın? kullanmanızı tavsiye ediyoruz.
+
+```
+mkdir ~/keys
+```
+
+2. Daha sonra, bu dosyada izinlerin eksiksiz bir şekilde verildi?inden emin olun çünkü bu buradaki dokumanlara istenmeyen işlemlerin yap?lmas?n? engelleyecektir.
+
+```
+chmod 700 ~/keys
+```
+
+3. 3a ad?m?ndaki Debian/Ubuntu yada 3b ad?m?ndaki Docker talimatların? takip ederek bir key olu?turabilirsiniz.
+
+<br />
+
+<Alert kind="warning">
+
+Aşağıdaki komutlar için yeni ve gübvenli bir ?ifre olu?turdu?unuzdan emin olun. Mina size bu ?ifrenizi hiç bir zaman sormayacakt?r ve sizde bu ?ifrenizi hiç kimse ile paylaşmamalısınız.
+
+</Alert>
+
+<br />
+
+3a. Ubuntu/Debian: anahtarlarınızı `mina-generate-keypair` komutunu kullanarak olu?turabilirsiniz. Bu anhatar?n?z?n güvenliğini için belirledi?iniz ?ifrenizi yaz?n?z. ?ifrenizi ayarlad???n?zda yaz?l?m CODA_PRIVKEY_PASS ortamondan ?ifrenizi otomatik olarak kullanacakt?r. <em>?ifrenizi hiçbir zaman UNUTMAYIN.</em>
+
+```
+mina-generate-keypair -privkey-path ~/keys/my-wallet
+```
+
+3b. Windows/MacOS/Linux üzerinde Docker: anahtarlarınızı `minaprotocol/generate-keypair` docker imaj?n? kullanarak oluşturun. Tamamland???nda bu anahtarın güvenliğini için belirledi?iniz ?ifrenizi girin. <em> ?ifrenizi hiçbir zaman UNUTMAYIN.</em>
+
+```
+cd ~
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
+```
+
+Bu sisteminizde iki adet dosya oluşturacaktır, `~/keys/my-wallet` encrypt edilmi? özel anahtar ve `~/keys/my-wallet.pub` düz metin olarak açık anahtar. Özel anahtar dosyan?z? ve ?ifrenizi güvenli bir şekilde ve ?ifre yöneticisi benzeri güvenli bir yerde saklay?n?z.
+
+<br />
+
+<Alert kind="warning">
+
+Özel anahtarınızı güvenli bir şekilde saklandıklarından emin olun ve hiç birzaman kimse ile payla?may?n. E?er özel anahtarınızı kaybederseniz yada bilinmeyen ki?iler taraf?ndan özel anahtarlarınızı giri? yap?ld???n? tepit ederseniz, hesabınıza eri?imizi ve hesab?n?zdaki varl?klar?n?z? kaybedebilece?inizi unutmay?n. Herzaman özel anahtar yerine açık anahtarınızı payla??n. Mina hiç bir zaman sizden özel anahtarlarınızı istemez.
+
+</Alert>
+
+<br />
+
+4. Son olarak özel anahtar dosyası için izinlerin doğru bir şekilde tan?mland???ndan emn olmal?s?n?z. Bu anahtarlarınızı eri?im konusunda istenmeyen giri?lere kar?? çok önemlidir.
+
+```
+chmod 600 ~/keys/my-wallet
+```
+
+## Özel anahtarınızı doğrulayın
+
+Anahtarınızı olu?turdu?una görre artık çal??t???ndan emin olmak için doğrulayabilirsiniz. Bu doğrulama için bir işlemi onaylayabildi?inizden emin olman?z yeterli. `mina-validate-keypair` kullanarak yapabilirsiniz.
+
+Linux'ta aşağıdaki komutu çalıştırın:
+
+```
+mina-validate-keypair -privkey-path <path-to-the-private-key-file>
+```
+
+E?er Docker kullanıyorsanız aşağıdaki komutu çalıştırın:
+
+```
+docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
+```
+
+## Sonraki Adımlar
+
+Keypairimizi olu?turdu?umuza göre artık <DocLink copy="ağa bağlan" url="/using-mina/connecting" /> yada açık anahtarınızı paylaşabiliriz.

@@ -1,0 +1,73 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Repository Structure" });
+
+# Yazýlým Havuzu Yapýsý
+
+Bu belge [Mina yazýlým havuzunun](https://github.com/minaprotocol/mina), dosya yapýsýný ve çeþitli dosyalarýn hangi rolleri oynadýðýný açýklamaktadýr:
+
+- `dockerfiles/`  
+   Docker ile ilgili senaryolarý içerir - TODO bunu daha iyi açýkla
+
+- `docs/`  
+   Katkýda bulunmak için kod ve süreçler için belgeler burada. Adým adým açýklamalý dokümanlarýn bulunduðu dokümantasyon web sitesi, `frontend/website/docs` 'da bulunur.
+
+- `frontend/`  
+   Mina frontend UIs ve ürünleriyle ilgili tüm kodlar.
+
+  - `wallet/`  
+     Mina cüzdaný için kaynak kod.
+
+  - `website/`  
+     https://minaprotocol.com için kodlar
+
+        - `docs/`
+
+    https://minaprotocol.com/docs adresinde bulunan Mina aðýna katýlým belgeleri ve talimatlarý
+
+        - `posts/`
+           Blog gönderileri için Markdown belgeleri
+
+        - `src/`
+           Websitesi için kaynak kod
+
+        - `static/`
+           Resimler vs gibi statik dosyalar
+
+- `rfcs/`  
+   Bu dizin, [RFC iþlemine](https://github.com/MinaProtocol/mina/blob/master/CONTRIBUTING.md#rfcs)göre yapýlmýþ tüm kabul edilen RFC'leri (veya "yorum isteklerini") içerir.
+
+- `scripts/`
+
+- `src/`  
+   Hem uygulama hem de kitaplýk kodu olmak üzere tüm protokol kaynak kodlarý bu dizinde bulunur.
+
+  - `*.opam`  
+     Bu belgeler`dune` kuruluþ sistemimiz için gereklidir. `lib` 'deki her kitaplýk için bir tane olmalýdýr.
+    . Kitaplýðýn adýný `foo_lib` olarak veren bir `dune` dosyasý içeren bir kitaplýk `lib/foo_lib` oluþturduðunuzda,`foo_lib.opam` dosyasý oluþturmalýsýnýz.
+  - `config/`  
+     Derleme zaman sabitlerini ve deðerlerini tanýmlamak için config - these .mlh files inþa et.
+  - `app/`  
+     Uygulamalar burada yer alýyor.
+
+    - `cli/`  
+       Bu mina istemcisi / daemon 'ýdýr. Ýþlem göndermek ve almak için bir staker, snarker veya basit bir müþteri çalýþtýrmak için kullandýðýnýz þeydir.
+
+    - `website/`  
+       Yakýnda web sitesi için kullanýmdan kaldýrýlacak dizini - kodlarýn çoðu `frontend/website/` taþýnmýþtýr
+
+    - `reformat/`  
+       Bu program, birkaç istisna dýþýnda, kaynak aðacýndaki dosyalarýn çoðunda`ocamlformat` çalýþtýrýr.
+
+    - `logproc/`  
+       Bu yardýmcý program `stdin`'den okunur ve mina daemon tarafýndan gönderilen log mesajlarýný filtreleyebilir ve yazdýrabilir.
+
+    - `libp2p_helper/`  
+       Bu program, Mina daemonlarýnýn ihtiyaç duyduðu eþler arasý tesisatý uygulamak için go-libp2p kullanýr.
+
+  - `external/`  
+     Bazý ayarlamalar yapmak zorunda olduðumuz harici kitaplýklarýn yerel kopyalarý.
+
+  - `lib/`  
+     Mina'ya güç veren kütüphaneler. Buradaki kütüphaneler temelde iki kategoriye ayrýlýr.
+    1. Genel amaçlý veri türleri ve iþlevsellik. Bu `snarky`, `fold_lib`, `vrf_lib`, `sgn`, ve diðerlerini içerir.
+    2. Bir kitaplýk olarak yapýlandýrýlmýþ uygulamaya özel iþlevsellik.Bu `syncable_ledger`, `staged_ledger`, `transaction_snark`, ve diðerlerini içerir..

@@ -1,0 +1,46 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Hard Fork" });
+
+# Sert Çatal
+
+Temel protokolde, aðdaki tüm düðümlerin en son yazýlýma güncellemesini gerektiren büyük deðiþiklikler olduðunda bir sert çatal oluþur.
+
+## Genel Bakýþ
+
+Bir blok zincirindeki çatal, hangi bloklarýn geçerli veya geçersiz olduðunu belirleyen kurallar deðiþtiðinde gerçekleþir. Ýki tür çatal vardýr: sert çatallar ve yumuþak çatallar.
+
+Yeni kurallar hala eski kurallarla uyumlu olduðunda yumuþak çatal oluþur. Bu, kullanýcýlarýn hala düðüm yazýlýmýnýn eski bir sürümünü çalýþtýrabileceði ve yine de aða baðlanabileceði anlamýna gelir.
+
+Sert çatal, eski zincirin yeni zincirle uyumsuz olduðu anlamýna gelir. Sert çatal'a bir örnek, orijinal Bitcoin blok zincirini kullanan ve ardýndan uyumsuz olan yeni bir aða zorla çatallanan Bitcoin Cash aðýdýr. Bu örnekte görüldüðü gibi, bir sert çataldan sonra iki zincirin var olmasý mümkündür. Zincirin bölünmesini önlemek için, aðdaki her düðümün en son yazýlýma güncelleme yapmasý önemlidir.
+
+## Süreç
+
+Sert çatala katýlmak inanýlmaz derecede basit. Sert çatal duyurulduðunda, ilk adým düðümünüzü en son yazýlýma güncellemektir. Ardýndan, düðümünüzü çalýþtýrmanýz ve yapýlandýrýlmýþ að baþlangýç zamanýna kadar beklemeniz gerekir. Planlanan að baþlangýç saatinden sonra, düðümünüz en son zincire senkronize olacak ve sonunda yeni bir blok üretilecek ve að her zamanki gibi devam edecektir.
+
+### Düðümünüzü güncelleme
+
+Sert çatal sürümü duyurulduðunda, önce çalýþtýrdýðýnýz tüm düðümleri kapatýn.
+
+Ardýndan, çatalýn sýfýrdan eþitlenmesi gerekeceðinden `.mina-config` klasörünüzü kaldýrýn.
+
+```
+rm -rf ~/.mina-config
+```
+
+Þimdi daemon'un en son sürümünü yüklemek için <DocLink copy="Aða Baðlanma" url="/using-mina/connecting" /> 'daki talimatlarý takip edebilirsiniz.
+
+Düðümünüz að ile senkronize olduðunda, artýk hazýrsýnýz. Sadece duyurulan að baþlangýç zamanýný bekleyin ve düðümünüz bir sert çatal 'a baþarýyla katýlmýþ olacaktýr!
+
+### Arþiv düðümünüzü taþýma
+
+Bir arþiv düðümü çalýþtýrýyorsanýz, postgres veritabanýný güncellemeniz gerekecektir. Tüm adýmlarý iþleyecek otomatik bir komut dosyasý ekledik.
+
+Öncelikle arþiv düðümünüzün çalýþmadýðýndan emin olun. Daha sonra [bu sql script](https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql) indirin ve arþiv veritabanýnda çalýþtýrýn.
+
+```
+wget -O https://github.com/MinaProtocol/mina/blob/develop-until-4.1-hardfork/scripts/archive/update_schema.sql ~/update_schema.sql
+psql -d archive -f ~/update_schema.sql
+```
+
+Artýk en son arþiv düðümünü güvenle baþlatabilirsiniz.

@@ -1,0 +1,199 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+import StatusBadge from "@reason/components/StatusBadge";
+export default Page({ title: "Connect to the Network" });
+
+# Aða Baðlan
+
+Bu bölümde `Mainnet` aðýna baðlanýp ilk iþlemimizi göndereceðiz. Önce düðümü baþlatalým, böylece komut vermeye baþlayabiliriz.
+
+## Yazýlýmý güncelle
+
+`Mainnet` 'e baðlanmanýn ilk adýmý, en son daemon sürümünü kurmaktýr. Ýþletim sisteminiz için aþaðýdaki talimatlarý izleyin.
+
+### Ubuntu 18.04 / Debian 9
+
+En son sürüme yükseltirken herhangi bir hatayý önlemek için önce daemon'ýn önceden yüklenmiþ herhangi bir sürümünü kaldýrýn. Ardýndan en son sürümü aþaðýdaki þekilde kurabilirsiniz:
+
+```
+sudo apt-get remove -y mina-testnet-postake-medium-curves
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+sudo apt-get update
+sudo apt-get install -y curl unzip mina-mainnet=1.1.5-a42bde
+```
+
+`mina version` 'ý çalýþtýrarak daemon'un doðru þekilde kurulup kurulmadýðýný kontrol edin.
+
+Çýktý `Commit a42bdeef6b0c15ee34616e4df76c882b0c5c7c2a on branch master` okunmalýdýr.
+
+## Bir düðüm baþlatýn
+
+Bu teknoloji hala nispeten yeni olduðu için, düðümünüzün bazý sorunlarla karþýlaþabileceði birkaç nadir durum vardýr. Düðümlerinizin kýrýlmasýný ve sizin fark etmemenizi istemiyoruz! Bu nedenle, sizin için resmi olarak desteklenen bazý otomatik yeniden baþlatma akýþlarý hazýrladýk. Gelecekteki sürümlerde bunlarý yineleyeceðiz.
+
+Ancak, önce otomatik yeniden baþlatma akýþlarýna baþlamadan önce her þeyin manuel olarak çalýþtýrýlarak çalýþtýðýndan emin olmak isteyeceðiz.
+
+Not: Hetzner barýndýrma saðlayýcýsýný kullanýyorsanýz, þu anda Hetzner'ýn yazýlýmýmýzýn kötü amaçlý olduðuna inandýðý bir sorun yaþýyoruz.
+
+Bir düðüme baþlamadan önce bunun nasýl azaltýlacaðýný öðrenmek için [Sorun giderme sayfasýnýn að bölümüne(/docs/troubleshooting#networking) bakýn.
+
+Bir Mina düðümü örneðini baþlatmak ve canlý aða baðlanmak için aþaðýdaki komutu çalýþtýrýn:
+
+```
+mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+```
+
+Stake anahtarýnýz varsa ve blok üretmek istiyorsanýz, ayrýca , `--block-producer-key` `~/keys/my-wallet`, varsayýlan deðilse özel anahtarýnýzýn yolunu `~/keys/my-wallet` ile deðiþtirin.
+
+Yukarýda belirtilen `-peer-list` argümaný çekirdek eþ adresini ifade eder - bu, aðda baðlanacaðýmýz ilk eþtir. Mina [eþler arasý](/docs/glossary#peer-to-peer) protokol olduðundan, güvendiðimiz tek bir merkezi sunucu yoktur.
+
+Bir düðümü ilk çalýþtýrýrken karþýlaþýlan genel sorunlar için buraya <DocLink copy="buraya" url="/troubleshooting" /> bakýn.
+
+Henüz bitirmedin! Artýk baðýmsýz süreci çalýþtýrarak her þeyin yolunda gittiðini onayladýðýnýza göre, Mina sonlandýðýnda kendini otomatik olarak yeniden baþlatacak bir þekilde baþlatmamýz önemlidir.
+
+Öncelikle mevcut `mina daemon` iþlemini `Ctrl-C` ile sonlandýrýn ve ardýndan okumaya devam edin:
+
+### Ubuntu 18.04 / Debian 9
+
+Kaydolduðunuz özel anahtarýnýzýn `~/keys/my-wallet` konumunda olduðundan emin olun.
+
+Aþaðýdakileri içeren bir dosya `~/.mina-env` ekleyin.
+
+```
+CODA_PRIVKEY_PASS="private key password"
+EXTRA_FLAGS=" --file-log-level Debug"
+```
+
+Daha sonra uygun gördüðünüz þekilde `EXTRA_FLAGS` fazladan iþaretler ekleyebilirsiniz.
+
+Mina, akranlarını `~/peers.txt` adlı bir dosyada arayacaktır, bu yüzden onu oluşturmak için aşağıdaki komutu çalıştırın:
+
+```
+curl https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt > ~/peers.txt
+```
+
+Ardýndan bir Mina düðümü örneði baþlatmak ve canlý aða baðlanmak için aþaðýdaki komutlarý çalýþtýrýn:
+
+```
+systemctl --user daemon-reload
+systemctl --user start mina
+systemctl --user enable mina
+sudo loginctl enable-linger
+```
+
+Bu komutlar, siz oturumu kapattýktan sonra düðümün çalýþmaya devam etmesine ve makine yeniden baþlatýldýðýnda otomatik olarak yeniden baþlamasýna izin verir.
+
+Varsayýlan olarak, düðüm aða varsayýlan 8302 harici baðlantý noktasýný kullanarak baðlanýr. Bu,`-external-port` flag kullanýlarak deðiþtirilebilir, sadece EXTRA_FLAGS'a ekleyin.
+
+Ayrýca arka planda çalýþan ve otomatik yeniden baþlatýlan mina iþleminin kendisine de bakabilirsiniz.
+
+Bu komut, `mina` 'nýn baþlarken herhangi bir sorun yaþayýp yaþamadýðýný size bildirecektir.
+
+```
+systemctl --user status mina
+```
+
+Mina'yý durdurabilir ve hizmeti otomatik olarak yeniden baþlatmayý durdurabilirsiniz:
+
+```
+systemctl --user stop mina
+```
+
+Manuel olarak yeniden baþlatýn:
+
+```
+systemctl --user restart mina
+```
+
+Loglara bakýn:
+
+```
+journalctl --user -u mina -n 1000 -f
+```
+
+Bazý durumlarda loglarý görüntülemek için bunun yerine aþaðýdaki komutu çalýþtýrmanýz gerekir:
+
+```
+journalctl --user-unit mina -n 1000 -f
+```
+
+Bu komut size son 1000 satýrý gösterecek ve oradan takip edecektir.
+
+### Docker
+
+Daemon'unuzu Docker kullanarak çalýþtýrýrken, önce özel anahtarýnýzýn doðru izinlere sahip olduðundan emin olun.
+
+```
+cd ~
+chmod 700 ~/keys
+chmod 600 ~/keys/my-wallet
+mkdir ~/.mina-config
+```
+
+Þimdi görüntüyü anahtarlarýnýzla ve ~ / .mina-config baðlayarak çalýþtýrýn:
+
+```
+docker run --name mina -d \
+-p 8302:8302 \
+--restart=always \
+--mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
+--mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
+-e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
+minaprotocol/mina-daemon-baked:1.1.5-a42bdee \
+daemon \
+--block-producer-key /keys/my-wallet \
+--insecure-rest-server \
+--file-log-level Debug \
+--log-level Info \
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+```
+
+Log takip etmek için `docker logs -f mina` çalýþtýrýn ve çökerse log çýktýsýný docker loglaerý `docker logs mina > mina-log.txt` ile bir dosyaya kaydedin ve çýktýyý # mentor-nodes kanalýna gönderin veya tam ~/.mina-config/mina.log bir github sorununa gönderin ve sorunu uyumsuz olarak baðlayýn.
+
+Aða baðlanabilirliði izlemek için `docker exec -it mina mina client status` çalýþtýrýn, hýzlý bir þekilde en az 10 eþ bulmalý ve blok yüksekliði / maksimum gözlemlenen blok yüksekliði týrmanýþýný izlemelisiniz.
+
+## Baðlantýyý Kontrol Etme
+
+Artýk bir düðüm baþlattýðýmýza ve Mina daemon çalýþtýrdýðýmýza göre, baþka bir kabuk açýn ve aþaðýdaki komutu çalýþtýrýn:
+
+    mina client status
+
+<Alert>
+
+Ýlk baþlatýldýðýnda `mina client status` daemona baðlanmasý bir dakika kadar sürebilir. Eðer `Error: daemon not running. See mina daemon` görürseniz , biraz bekleyin ve tekrar deneyin.
+
+<DocLink copy="Sandbox Node" url="/developers/sandbox-node" /> kullanýyorsanýz, mina
+
+istemci status komutu için iletiþim þeklimizdeki bir tuhaflýk nedeniyle, konteynerin
+
+içinde `mina client status` çalýþtýrmanýz gerekecektir:
+
+`docker exec -it mina bash`
+
+</Alert>
+
+Büyük olasýlýkla aþaðýdaki alanlarý içeren bir yanýt göreceðiz:
+
+    ...
+    Peers:                                         Total: 4 (...)
+    ...
+    Sync Status:                                   Bootstrap
+
+`Sync Status: Bootstrap` 'yi görürseniz, bu, düðümün önyükleme yaptýðý ve aðýn geri kalanýyla senkronize edilmesi gerektiði anlamýna gelir. Burada sabýrlý olmanýz gerekebilir çünkü bu adýmýn düðümün ihtiyaç duyduðu tüm verileri almasý biraz zaman alabilir.
+
+Bir süre sonra, düðümünüz daha fazla eþe baðlanmalý ve ardýndan `Sync Status: Catchup` 'ya geçmelidir; bu, en yeni bloklarý topladýðýmýz ve en yüksek bloðu yakalamaya çalýþtýðýmýz anlamýna gelir.
+
+Senkronizasyon durumu `Synced` 'ye ulaþtýðýnda ve düðüm 1 veya daha fazla eþe baðlandýðýnda, aða baþarýyla baðlanmýþ oluruz. Eþitleme yaptýðýmýzda karþýlýk gelen bir daemon logu göreceðiz: `[Info] Mina daemon is now synced`.
+
+`Bootstrap` durumu bir saatten fazla devam ederse, baðlantý noktasý yapýlandýrmanýzla ilgili bir sorun olabilir.
+
+## Oyununuzu geliþtirin
+
+Artık tamamen eşitlenmiş bir düğümümüz olduğuna göre, arka plan programının daha gelişmiş özelliklerinden bazıları hakkında bilgi edinebiliriz, örneğin: <DocLink copy="ödeme göndermek" url="/using-mina/send-payment" /> ve <DocLink copy="Staking ve Yetkilendirme" url="/using-mina/staking" />
+
+Daha fazla jeton kazanmak istiyorsanız, şuraya göz atın: <DocLink copy="Foundation Delegation Program" url="/advanced/foundation-delegation-program" />.
+
+<span id="disclaimer">
+
+\*_Testnet Puanlarý yalnýzca Testnet'e yapýlan katkýlarý izlemek için tasarlanmýþtýr ve Testnet Puanlarýnýn nakit veya baþka bir parasal deðeri yoktur. Testnet Puanlarý devredilemez ve herhangi bir kripto para birimi veya dijital varlýk için kullanýlamaz veya takas edilemez. Testnet Puanlarýný istediðimiz zaman deðiþtirebilir veya ortadan kaldýrabiliriz._
+
+</span>

@@ -1,0 +1,49 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Lifecycle of a Payment" });
+
+# Bir Ödemenin Yaþam Döngüsü
+
+Mina'da ödemeler, doðrulanmýþ ve tamamlanmýþ sayýlmadan önce birkaç adýmdan geçer. Bu belge, kullanýcýlarýn Mina ödemelerinin nasýl çalýþtýðýný biraz anlamalarýna yardýmcý olmak için basitleþtirilmiþ bir genel bakýþta tek bir ödemeye ne olduðunu anlatmak için hazýrlanmýþtýr. Bu, kapsamlý bir teknik genel bakýþ deðil, bunun yerine kullanýcýlar için basitleþtirilmiþ bir kýlavuzdur. Kod tabanýný anlamak isteyen geliþtiricilere yönelik daha ayrýntýlý bir teknik genel bakýþ için,[bir ödemenin teknik yaþam döngüsüne](lifecycle-payment-technical.md)göz atýn.
+
+!!! NOT:Mina, mesajlarýn aðýn diðer tüm üyelerine zamanýnda güvenilir bir þekilde iletilmesini saðlamak için bir Gossip protokolü kullanýr..
+
+## Ödemeler
+
+Ödeme, bir hesaptan baþka bir hesaba deðer transferini talep eden bir iþlem türüdür ve gönderenin ödemenin geçmesi için ödemeye razý olduðu iliþkili ücrettir.
+
+Hadi bir göndericinin, yani Bob'un, bir alýcýya ,yani Alice'e,biraz Mina göndermek istediði bir senaryoyu inceleyelim.
+
+### 1. Adým: Ödeme Oluþturma - Bob âgöndereâ týklar
+
+Aðýn herhangi bir üyesi bir ödeme oluþturabilir ve bunu Mina aðý ile paylaþabilir. Ödeme,gönderenin hesabýnýn doðrulanabilmesi için özel bir anahtarla kriptografik olarak imzalanýr.Daha sonra iþlenmek üzere aðdaki eþlere gönderilir. Bir eþ tarafýndan alýndýðýnda ödeme, eþin aðda duyduðu tüm iþlemlerin bellek içi deposu olan yerel`iþlem havuzunda` yer alacaktýr.
+
+### 2. Adým: Bir Blok Oluþturma - Bobâun ödemesi yapýlacaklar listesine eklenir.
+
+Aðda belirli bir zaman aralýðý için bir blok üretici düðümü seçilir. Þu anda aktif olan üretici, ödeme ücretlerine göre in-flight ödemeleri seçer ve bunlarý bir geçiþ bloðu adý verilen iþlenecek bir listeye yerleþtirir. Blok üreticileri bu bloklarý inþa ettikleri için mina kazanýr. Üretici, önceki bloða kýyasla geçiþ bloðunun yapýsýný tanýmlayan bir SNARK oluþturur (ancak bu yeni ödemeleri henüz doðrulamýyor). Üretici, bu yeni bilgiyi snark iþçilerin iþlemesi için iletir.
+
+### 3. Adým: Snark Kanýtlama Ýþlemleri - Bobâun ödemesi snark imzasý alýr
+
+Aðdaki snark iþçi düðümleri, yeni geçiþ bloðunun her adýmýnda snark hesaplamalarý yapmaya baþlar. Bunlar, her ödemenin ayrý ayrý kanýtlarýdýr ve ardýndan komþu ödemelerin kanýtlarýný birleþtirir. Sonunda tüm ödemeler doðrulanýr. Snark iþçileri bu kanýtlarý üreterek para kazanabilirler ve bu para blok üreticilerinin blok ödüllerinden ödenir. Bu kanýtlar að üzerinden iletilir.
+
+### 4. Adým: Ödeme Doðrulamasý - Alice ve Bobâun hesaplarý transferin sonucunu gösterir
+
+Tüm blok kanýtlandýktan sonra, blok üreticisi geçiþ bloðunun bir onayýný gönderecektir. Ardýndan aðdaki üye düðümler, bu deðiþiklikleri yansýtmak için deðiþiklikleri yerel hesap bakiyelerine uygular.
+
+### 5. Adým: Ödeme Güven Düzeyi - Alice, transferin tamamlandýðýndan emin
+
+Sonraki her blokta, bir alýcý, ödemenin gerçekte tamamlandýðýna ve aðýn bu blok hakkýnda konsensüsa sahip olduðuna dair daha yüksek bir güven derecesine sahiptir.
+
+## Arýza Senaryolarý
+
+### Ýþlem að tarafýndan kabul edilmiyor
+
+Eþ düðümlerle paylaþýlan bir iþlemin kabul edilmemesinin birkaç nedeni vardýr::
+
+- Ýþlem temelde geçerli deðildir. Bu, gönderenin hesabýnýn mevcut olmadýðý, yeterli bakiyenin olmadýðý, imzanýn hesapla eþleþmediði veya iþlemdeki nonce'nin artýrýlmadýðý anlamýna gelir.
+- Aðda, aðdaki belirli göndericilere hizmet vermeyi reddetmek için iþbirliði yapan düþman düðümler olabilir. Ancak, bu davranýþ oldukça caydýrýcýdýr ve bu sorunu önlemek için dürüst bir düðüm yeterlidir.
+
+### Ýþlem bir bloða dahil deðildir,
+
+Bir iþlem geçerliyse ve að güvenilirse, o zaman büyük olasýlýkla, bir iþlem onu bir blok haline getirecektir. Ancak, bir iþlemin bir iþlem havuzundan atýlabileceði bir durum vardýr:
+
+- Ýþlem havuzu kapasitesine veya`max_txpool_size`deðerine ulaþýrsa, havuzdaki en düþük ücrete sahip iþlemi kaldýrarak bellekten atýlmasýna neden olur. Böyle bir durumda, göndericinin o zamanki piyasa dinamiklerine göre iþlemi daha yüksek bir ücretle yeniden göndermesi gerekecektir.

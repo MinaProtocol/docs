@@ -1,0 +1,182 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Hardware Wallet" });
+
+# Donaným Cüzdaný
+
+Mina artýk protokolle etkileþim kurmak ve iþlemleri imzalamak için Ledger gibi donaným cüzdanlarýnýn kullanýmýný destekliyor.
+
+<Alert kind="uyarý">
+
+Sorumluluk Reddi: Ledger desteði deneyseldir. Herhangi bir deðerli hesapla iliþkili özel anahtarlarý iþleyen veya iþlemekte olan bir Ledger cihazýnda kullanmayýn.
+
+</Alert>
+
+## Gereklilikler
+
+**Yazýlým**: Linux (þu anda Debian 9 ve Ubuntu 18.04 LTS 'i destekliyor)
+
+Not: macOS ve Windows þu anda resmi olarak desteklenmiyor.
+
+**Donaným**: Þu anda sadece [Ledger Nano S](https://shop.ledger.com/products/ledger-nano-s) desteklenmektedir.
+
+## Kurulum
+
+**Sorumluluk Reddi**: Bu hala oldukça deneyseldir - bu talimatlar deðiþebileceðinden dikkatli kullanýn. Donaným cüzdaný uygulamasý [Ledger Live](https://www.ledger.com/ledger-live) 'da kullanýlabilir olduðunda, kurulum adýmlarý stabilize edilecektir.
+
+Linux'ta donaným cüzdanlarýný kullanmak için aþaðýdaki debian paketleri gereklidir:
+
+```
+sudo apt install libusb-1.0-0-dev libudev1 libudev-dev
+```
+
+### Bilgisayarýnýzýn Ledger cihazýný tanýdýðýndan emin olun
+
+- Ledger cihazýný takýn, þifrenizle kilidini açýn ve menüye gidin. Herhangi bir uygulamayý açmayýn,
+- `lsusb` 'i çalýþtýrýn ve aygýtýn listelenip listelenmediðine bakýn - `2c97:0001` kimliðine sahip olacaktýr.
+- Ledger cihazý listelenmemiþse,[buradaki] (https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) önerileri takip edin.
+
+### Python uygulama yükleyicisini yükleyin
+
+Ledger python yükleyicisi [burada](https://github.com/LedgerHQ/blue-loader-python) mevcuttur ve aþaðýdakilerle indirilebilir / kurulabilir:
+
+```
+sudo apt install -y libudev-dev libusb
+pip3 install ledgerblue
+```
+
+Kurulduktan sonra ,Linux 'da çalýþtýrýrken , aþaðýdaki kurallarýn unix kullanýcý adýnýzý `<UNIX username>` deðiþtirmeye `/etc/udev/rules.d/` (e.g. with `sudo vim /etc/udev/rules.d/20-hw1.rules`) eklendiðinden emin olun:
+
+```
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0000", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="<UNIX username>"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0001", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="<UNIX username>"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="2c97", ATTRS{idProduct}=="0004", MODE="0660", TAG+="uaccess", TAG+="udev-acl" OWNER="<UNIX username>"
+```
+
+### Mina Ledger uygulamasýný oluþturun / indirin
+
+Önceden derlenmiþ uygulama ikili dosyasýný [buradan](https://github.com/MinaProtocol/ledger-mina-app/releases/tag/v0.1.0) indirin veya bu belgenin sonundaki [uygulamayý kaynaktan derlemek için](/docs/hardware-wallet#building-from-source)talimatlarý takip edin.
+
+`ledger-precompile.zip` dosyasýný indirdikten sonra, önceden derlenmiþ uygulamayý Ledger cihazýna yüklemek için
+yukarýdaki baðlantýdan `ledger-precompile.zip` in bulunduðu dizine gidin ve aþaðýdakileri çalýþtýrýn:
+
+```
+unzip ledger-precompile.zip
+cd ledger-precompile
+./load.sh
+```
+
+Uygulamayý silmek için,çalýþtýrabilirsiniz
+
+```
+./delete.sh
+```
+
+# Donaným cüzdanýný kullanma:
+
+Mina donaným cüzdaný komut satýrý aracý, `mina-ledger-cli` adlý bir python paketidir.
+
+```
+python3 -mpip install mina-ledger-cli==0.0.5
+```
+
+Donaným cüzdanýnýzla baðlantý sorunlarý yaþýyorsanýz, lütfen þu adrese
+[the troubleshooting help on the Ledger support page](https://support.ledger.com/hc/en-us/articles/115005165269-Fix-connection-issues) göz atýn.
+
+Çoðu zaman, baðlantý sorunlarý udev kurallarý eklenerek çözülebilir. Kurallarý otomatik olarak eklemek ve udev'i yeniden yüklemek için aþaðýdaki komutu girin:
+
+```
+wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash
+```
+
+## Yeni bir hesap oluþturmak
+
+Donaným cüzdanýnda açýk ve özel bir anahtar çifti oluþturacak aþaðýdaki komutu çalýþtýrýn:
+
+    mina accounts create-hd HD-index
+
+HD-endeksi, açýk ve özel anahtar çiftinizi oluþturmak için donaným cüzdanýna verdiðiniz tohum gibi çalýþan bir sayýdýr. Ayný HD-endeksini ayný donaným cüzdaný ile iki kez kullanýrsanýz, üretilen açýk ve özel anahtar çifti aynýdýr. Ayný hesabý baþka bir makinede kullanmanýz gerekirse,
+sadece bu komutu ayný HD-indeksi ve ayný donaným cüzdaný ile kullanmanýz gerekir.
+
+Hesap oluþturma sýrasýnda, donaným cüzdanýnýz sizden iþlemi onaylamanýzý isteyebilir.
+
+Bu komutun cevabý þöyle görünecektir:
+
+    Anahtar çifti oluþturuldu
+    Açýk anahtar:  B62qrPN5Y5yq8kGE3FbVKbGTdTAJNdtNtB5sNVpxyRwWGcDEhpMzc8g
+
+Açýk anahtar oldukça uzun ve hatýrlanmasý zor olduðundan, bunu bir ortam deðiþkeni olarak kaydedelim:
+
+    export MINA_PUBLIC_KEY=<YOUR-PUBLIC-KEY>
+
+Þimdi buna her yerde `$MINA_PUBLIC_KEY` olarak eriþebiliriz.`echo $MINA_PUBLIC_KEY` 'i deneyerek düzgün kaydedilip kaydedilmediðini görün.
+
+## Ödeme yapmak
+
+[Dökümanlarda](/docs/my-first-transaction/) bulunan ödemeleri göndermek için ayný komutlarý kullanabilirsiniz.
+
+2 fark var:
+
+1. Ýþlemi göndermeden önce hesabýnýzýn kilidini açmanýza gerek yoktur çünkü hesabýnýz donaným cüzdanýnýz tarafýndan zaten korunmaktadýr.
+2. Donaným cüzdanýnýz, iþlemi imzalarken iþlemi onaylamanýzý isteyebilir.
+
+## Sorun giderme
+
+### Donaným cüzdanýmý kaybedersem ne olur ?
+
+Baþka bir `Ledger Nano S` satýn alabilir ve mevcut hesabýnýza eriþmek için ayný 24 kelimelik tohum baþlatabilirsiniz.
+
+### Ya hesabýmýn açýk anahtarýný unutursam?
+
+Hesabýnýzý oluþturmak için kullandýðýnýz HD-endeksini hatýrlýyorsanýz, public_key'i yeniden oluþturmak için ayný HD-endeksi ile `mina accounts create-hd HD-index` i kullanabilirsiniz.
+
+## Kaynaktan Derleme
+
+Ledger uygulamasýný kaynaktan derlemek, gcc ve clang sürümlerinin yüklenmesini gerektirir. Bu iki þekilde yapýlabilir: bunlarý `sudo apt install gcc clang` ile yükleyebilir veya hem clang hem de gcc'nin önceden derlenmiþ sürümlerini indirebilir ve sonra `PATH` 'inize ekleyebiliriniz.
+
+### Önceden derlenmiþ gcc ve clang 'ý indirme
+
+[Ledger Wiki](https://ledger.readthedocs.io/en/latest/userspace/getting_started.html) adresindeki talimatlarý takip edin :
+
+- Önceden derlenmiþ bir ikili dosyayý [buradan] (https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) indirerek(Mikrodenetleyici aygýt yazýlýmý ve güvenli aygýt baðlantýsý için) standart gcc'yi kurun (kayýt defteri baðlantýsýndan baðlantý?),
+- Kaynaktan derlemek veya önceden derlenmiþ bir ikili dosyayý indirmek için [buradaki] (https://clang.llvm.org/get_started.html) talimatlarý izleyerek ROPI desteðiyle (güvenli iþlemci uygulamalarý için) standart bir clang kurun.
+- Ýkili dosyalarý indirdikten sonra, bunlarý açýn ve yükleyin, örneðin
+
+  ```
+  cd Downloads
+  tar -xf clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+  bzip2 -dk gcc-arm-none-eabi-5_3-2016q1tar.bz2
+  ```
+
+  ve sonra bunlarý PATH'nize ekleyin
+
+  ```
+  # GCC
+  PATH=~/bolos-devenv/gcc-arm-none-eabi-5_3-2016q1/bin:$PATH
+  # Clang
+  PATH=~/bolos-devenv/clang+llvm-7.0.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH
+  ```
+
+Ardýndan, gereken çapraz derleme baþlýklarýný yüklemek için þunu kullanýn:
+
+```
+sudo apt install gcc-multilib g++-multilib
+```
+
+Ardýndan Nano SDK'yý ile yükleyin
+
+```
+git clone git@github.com:LedgerHQ/nanos-secure-sdk.git
+```
+
+ve `~/.bashrc` ya da `~/.profile` `export BOLOS_SDK=<PATH-TO-SDK>` ekleyin.
+
+### Mina Ledger uygulamasýný oluþturun ve yükleyin
+
+Aþaðýdakileri çalýþtýrmak Mina uygulamasýný Ledger cihazýnýza yükleyecektir:
+
+```
+git clone git@github.com:MinaProtocol/ledger-mina-app.git
+cd ledger-mina-app
+git checkout 4574d3c
+make load
+```

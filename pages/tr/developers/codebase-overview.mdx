@@ -1,0 +1,146 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Codebase Overview" });
+
+# Kaynak Koduna Genel Bakış
+
+Mina Protocol, statik yazılımlı ve fonksiyonel bir programlama dili olan OCaml ile yazılmıştır.
+
+OCalm’a yeni başlayanlar için [Gerçek Dünya OCaml](https://realworldocaml.org/) kısmına değinmek, bu yazılım dili ile tanışmak ve ilginizi çeken belirli konularda detaya inmek için faydalı olacaktır.
+Ocalm hakkında temel seviye bilgi sahibi olanlar için burada Mina Protocol ile nasıl kullanılacağına dair bilgiler paylaşıyoruz.
+
+## Kod Yapısı
+
+<DocLink copy="Yazılım yapısı sayfası" url="/developers/directory-structure" />
+
+## Derleme
+
+OCaml derleyici bayt kodları ve özgün derlemeyi hedefler. Kodumuz static olarak bazı kütüphanelerle linklidir ve bu sebeple bayt kodları sıralayıp derleyemez. Buna ilave olarak kodumuz REPL ile de uyumlu değildir. Kurulum sistemimiz Dune’dır. Dune’ın konsepti bir modülü temsil eden dosyalar ve modülleri temsil eden klasörlerden oluşurEğer klasörde aynı isimli bir dosya varsa bu düğüm içerisindeki `index.js` koda eşdeğerdir.
+
+OCaml’da ilgili modüle uygun imza ve yapıda `.mli` uzantılı arayüz dosyalarımız da bulunmaktadırYapılacak entegrasyon aynı dosya isminde fakat `.ml` uzantılı olmalıdır. Diğer modüllerde sadece arayüzde tanımlı olanlar bulunabilir. Ağer bir modül için arayüz dosyası bulunmuyorsa bir hata oluşmuştur. _Not: Sebep `.rei` ve `.re` uzantıları ile aynı kuralları takip eder._
+
+Linkleme adımı için, `dune` koruyucu altından `ldd` kullanır. Optimizasyon için `-O3` benzeri şeyler kullanabilirsiniz. Debug için OCaml yazılımının tam olarak desteklemediği ve fakat çalıştırılabilen `gdb` kullanılabilir. Yeni sürüm olarak gelecek OCaml (4.08) `gdb` ile tam uyumlu olacaktır.
+
+## Dökümantasyon
+
+OCalm öğrenmekle ilgili zorlayıcı olan konu kütüphaneler için gerekli dokumanları konumlandırarak okuyabilmektir. aşağıdaki yapıda olan bir kütüphane `Ana` kütüphanedir:
+
+```
+              Base
+               |
+            Core_kernel -> Async_kernel
+               |               |
+    Unix  <-  Core  ->       Async
+```
+
+`Temel` dökümantasyon için birçok kaynak bulunmaktadır. Doğru dökümantasyonu bulabilmek için ilk önce GitHub e gidin ve bunu doğru dökümantasyonu yerleştirmek için kullanınAradığınız modülü bulamazsanız to `Ana_kernel` ‘e gidin ve bu hata verirse `Baz`için bakın. Aynı zamanda bölümler açılmamış ise bu çalışmayacaktır.
+
+HTML dokümantasyonu kullanmak yerine type ipuçları sağlayan `merlin` gibi bir araç kullanan editör entegrasyonu kullanın. Eğer kodunuz derleme ise Merlin çalışmayacaktır. Bu aynı zamanda bize açıklamaya git gibi bir kod navigasyonu verir.
+
+OCalm’ın paket yöneticisi olan OPAM, dökümantasyonu kütüphaneler arasında taşır. Buna `merlin` üzerinden erişilebilir.
+
+## Uzantılar
+
+OCaml ppx olarak bilinen plugin leri kullanır. Bu sadece zaman kodu üretilmesi derlemesine imkan veren bir kancadır.
+
+Type imzadaki bir uzantı örneği aşağıdaki şekildedir:
+
+```
+    type t =
+      | A
+      | B [@ to_yojson f]
+
+    [@@ deriving yojson]
+```
+
+Yukarıdaki örnekteki tek bir `@` tek bir ifadenin uzantısını kapsar, `@@` ilgili bağlamı kapsayan uzantıyı simgeler.
+
+Bir yapı yada değer üzerindeki uzantı için aşağıdaki sintaks kullanılabilir.
+
+`%` değer/açıklama getirir
+
+`%%` ifadeyi ekler
+
+```
+    let x = [% ...]
+    [%% ...]
+    let y =
+      let%... z = ... in
+      match%... ... with
+      | ...
+      | ... in
+
+    [%% if x]
+      let x = y
+    [%% else]
+      let x = z
+    [%% endif]
+```
+
+**TL;DR** Bunlar `[@ ...]` `[@@ ...]` `[% ...]` `[%% ...]` dil uzantılarıdır.
+
+## Monads
+
+Fonksiyonel dizayn paterni işlemleri boilerplate kod ihtiyacını ortadan kaldırarak çok jenerik bir yolla yazmaya imkan veren şekilde imkan verir. Monads daha üst seviye işlemci için özetlemeye imkan verirken bizim yerimize tüm gluelar ile de ilgilenir. Diğer bir deyişle monadlarprogramlanabilen yarı kolonlardır
+
+Örnek olarak aşağıdaki zorunlu örneği gözden geçirelim:
+
+```
+    function example(x) {
+      if ( x == null ) return null;
+      x = x + 1;
+      if ( !isEven(x) ) return null;
+      return x;
+    }
+```
+
+Bunlar monad kullanılan fonksiyonel programlama ile benzer şekilde aşağıdaki alternative kullanılarak ifade edilebilir:
+
+```
+    type a' option =
+      | None
+      | Some of 'a
+
+    let return x = Some x
+
+    (* Bind infix operation, applies f to m *)
+    let (>>=) m f =
+      match m with
+      | Some x -> f x
+      | None   -> None
+
+    (**
+      Map infix operation
+      Essentially the same as bind, but the inner function unwraps the value.
+     **)
+    let (>>|) m f = m >>= (fun x -> return (f x))
+```
+
+Yukarıdaki zorunlu örnek bu primitifler kullanılarak aşağıdaki şekilde tekrar uygulanabilir.
+
+```
+    let add_one = ((+) 1)
+
+    let bind_even : int -> int option =
+      fun x -> if x mod 2 = 0 then Some x else None
+
+    let example x = x >>| add_one >>= bind_even;
+
+OCaml has a `ppx` that makes writing monads much easier to follow, using the let syntax.
+
+    let%bind x = y in
+      f x
+
+    (* This compiles down to the following *)
+    y >>= (fun x -> f x)
+```
+
+Esasen bu sintaks let ifadesinden değeri alır, bind infix çağrısının sol tarafına ekler ve görevi bir lambda içerine ekler.
+
+## Async
+
+Hernekadar Ivar’s primitive olsa da Async Monads kullanır. `a' Ivar.t` sadece bir kere doldurulabilecek bir mutexttir. Bir işlemin değeri bir kez geri döndüğünde hemen sonrasında Ivar doldurulur. Geri kalan söz dizimi Ivar’I alır `Deferred` monadlara doğru gönderir.
+
+Biraz garip davranışları olabildiğinden kullanımından kaçınsak ta, bir `yield` fonksiyonu bulunmaktadır. Bunun yerine `Deferred` bindingler içerisinde gerçekleşen grup değerler üzerinde çalışmayı daha çok tercih ediyoruz.
+
+Uyarı: Yedek zaman aralığı gibi çalışan `Async.Pipe` not edilmelidir.BUNU KULLANMAYINIZ. Bu güvenli değildir çünkü varsayılan olarak (hafıza aşımı) limitsiz yedek zaman aralıkları vardır ve hattın hangi ucunun ne yapması gerektiğine dair acaip davranışları vardır Bunun yerine `Strict_pipe` kullanılabilir. Bu hattı sarar fakat bize nasıl kullanılabileceğine dair belirli garantiler verir. Yazdığımız özel bir yardımcımız `Broadcast_pipe` her bir hattın birden fazla aşağı akışlı hatta dönüşmesini sağlar. Ayrıca biz henüz hatlarla ilgili riskleri tam olarak anlamamışken yazılmış olan `Linear_pipe` ta vardır. Bu şu an `Strict_hat` ve `Broadcast_hat`ile çok uyumlu değildir.

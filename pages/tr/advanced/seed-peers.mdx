@@ -1,0 +1,105 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Seed Peers" });
+
+# Tohum Eþleri
+
+Tohum eþleri geri kalanýmýzýn aða baðlanmasýný kolaylaþtýran yardýmcý müttefiklerimizdir..
+
+Çoðu düðüm temel düðümlerde açýkça çalýþtýrýlan tohum eþlerini kullanarak Mina aðýna baðlanýr. .
+
+## Bir Tohum Düðümü Çalýþtýrmak
+
+Tohum düðümleri ile ilgili iki önemli þey:
+
+1. Adresleri statik olmalý
+2. Yüksek çalýþma süresine ihtiyaç duyarlar ve birçok baðlantýyý destekleyebilirler - bu nedenle mümkün olduðunca "tohumlama" dýþýnda yapmaktan kaçýnmalýdýrlar.
+
+### Statik bir adresi zorunlu kýlmak ve yayýnlamak
+
+Statik bir adresi zorunlu kýlmak ve yayýnlamak
+Her þeyden önce, düðümünüzü çalýþtýracaðýnýz statik bir ana bilgisayara ihtiyacýnýz var. Tercihen, DNS kullanabilir ve tohum düðümünüzü þu konumda barýndýrabilirsiniz, örneðin: `seed.o1test.net`. Alternatif olarak, `82.230.217.200` gibi statik bir ipv4 adresi de ayarlayabilirsiniz.
+
+Ýkinci olarak, düðümünüzün üzerinde çalýþtýðý baðlantý noktasýný seçmeniz gerekir. Varsayýlan olarak, `8302`.
+
+Üçüncüsü, libp2p anahtar çiftinizi önceden oluþturmak isteyeceksiniz - bu sizi gossip aðýnda tanýmlamak için kullanýlýr. Böyle yaparak:
+
+```
+mina advanced generate-libp2p-keypair
+```
+
+Bu, makinenizde bir libp2p anahtar çifti oluþturacaktýr.
+Ve daemon'unuzu `--discovery-keypair` flag ile çalýþtýrýn:
+
+Son olarak, DNS adresinizi þöyle yayýnlarsýnýz:
+
+```
+/dns4/seed.o1test.net/tcp/8302/p2p/12D3KooWGDHtsPUS8dZk3x3FUgsXCWwpnSJ6W7EwkWZKBZXczkwC
+```
+
+Veya bu þekilde bir statik IP:
+
+```
+/ip4/82.230.217.200/tcp/8302/p2p/12D3KooWCE97fGwuDCicVNK3ZWF8fVzfNezp3uGjmSc8VrRFem6a
+```
+
+Bu adres dizesi, kiþilerin size baðlanmasý için kullanýlabilir.
+
+### Düðümünüzü uptime ve yüksek baðlantýlar için ayarlama
+
+Ýlk olarak, bu düðüm üzerinde blok üretimi veya snark çalýþtýrmayýn. Tam olarak durun. Bunlarýn hiçbirini yapmadýðýnýzda, bu düðümde mantýk yürütme için yüzey alaný büyük ölçüde azalýr.
+
+Daha büyük bir `--max-connection` flag ile çalýþtýrýlmasý tercih edilir.En az 100. Halen toplamda 100'den fazla düðümle tohumlama yapabileceksiniz, sadece tek seferde yalnýzca 100 ile baðlantý kurabileceksiniz.
+
+## Örnek daemon komutu
+
+Gerekli tüm yapýlandýrmayý bir araya getirdiðimizde, temel bir tohum düðüm yapýlandýrmasý aþaðýdaki örnekteki gibi görünebilir.
+
+```
+mina daemon \
+--seed \
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
+--file-log-level Info -log-level Info \
+--log-block-creation false \
+--log-snark-work-gossip false \
+--log-txn-pool-gossip false \
+--metrics-port 9100 \
+--discovery-keypair /keys/my-libp2p \
+--generate-genesis-proof true \
+--max-connection 100
+```
+
+Lütfen `--discovery-keypair` ögesinin libp2p anahtar çiftinizi önceki adýmlardan nerede sakladýðýnýza baðlý olarak deðiþebileceðini unutmayýn.
+
+`Mainnet` trafiðini iþlemek için `1.1.2` 'dan sonraki bir sürümde çalýþtýrdýðýnýzdan da emin olun.
+
+Docker kullanýyorsanýz, iþte benzer bir örnek.
+
+```
+docker run --name mina-seed-node -d \
+--restart always \
+-p 8302:8302 \
+-p 9100:9100 \
+-v $(pwd)/keys:/root/keys:ro \
+-v $(pwd)/.mina-config:/root/.mina-config \
+--env CODA_LIBP2P_PASS='PASS' \
+minaprotocol/mina-daemon-baked:1.1.2-0975867 daemon \
+--discovery-keypair /keys/libp2p-keys \
+--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
+--metrics-port 9100 \
+--seed \
+--max-connection 100 \
+--file-log-level Info \
+--log-level Info
+```
+
+Libp2p anahtar çifti için `--env CODA_LIBP2P_PASS=''` doðru parolanýzla deðiþtirdiðinizden emin olunuz.Ayrýca önceki örnekte olduðu gibi `--discovery-keypair` ile doðru deðeri ayarladýðýnýzdan emin olun.
+
+## Eþler Listesi
+
+Bir O (1) Labs düðümü ile barýndýrýlan bir eþler listesi ve O (1) ile baðlantýsý olmayan kiþilerden çok daha büyük bir adresi barýndýran bir eþler listesi olacaktýr.Bu liste, harika tohum eþleri olmasý gereken düðümler için hazýrlanmýþtýr. Ve listeyi güncel tutmak için ellerinden gelenin en iyisini yapacaklardýr.
+
+## Alternatif Eþ Listesi
+
+Ne de olsa merkezi olmayan bir aðýmýz var - topluluktaki diðer üyeleri tohum listelerine ev sahipliði yapmaya teþvik ediyoruz. Bir liste oluþturmak için lütfen güvendiðiniz kiþilerle konuþun ve adreslerini tohum eþleri olarak kullanýn.
+
+Bu tür alternatif listeleri kullanmak için ,`-peer-list-file` veya `-peer-list-url`parametresini baþka birini iþaret edecek þekilde deðiþtirebilirsiniz.

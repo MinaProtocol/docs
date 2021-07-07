@@ -2,37 +2,37 @@
   {
     "id": "sidenav.overview",
     "defaultMessage": "Overview",
-    "message": "Разработчики"
+    "message": "Genel bakış"
   },
   {
     "id": "sidenav.mina-overview",
     "defaultMessage": "Mina Overview",
-    "message": "Обзор Mina"
+    "message": "Mina'ya Genel Bakış"
   },
   {
     "id": "sidenav.getting-started",
     "defaultMessage": "Getting Started",
-    "message": "Начало работы"
+    "message": "Başlarken"
   },
   {
     "id": "sidenav.using-mina",
     "defaultMessage": "Using Mina",
-    "message": "Использование Мины"
+    "message": "Mina'yı kullanmak"
   },
   {
     "id": "sidenav.keypair-generation",
     "defaultMessage": "Keypair Generation",
-    "message": "Генерация Keypair"
+    "message": "Anahtar Çifti Oluşturma"
   },
   {
     "id": "sidenav.connect-to-network",
     "defaultMessage": "Connect To The Network",
-    "message": "Подключение к сети"
+    "message": "Ağa Bağlan"
   },
   {
     "id": "sidenav.sending-a-payment",
     "defaultMessage": "Sending a Payment",
-    "message": "Отправка платежа"
+    "message": "Ödeme Gönderme"
   },
   {
     "id": "sidenav.staking-snarking",
@@ -42,37 +42,37 @@
   {
     "id": "sidenav.cli-reference",
     "defaultMessage": "CLI Reference",
-    "message": "Справка по CLI"
+    "message": "CLI Referansı"
   },
   {
     "id": "sidenav.advanced",
     "defaultMessage": "Advanced",
-    "message": "Передовой"
+    "message": "Ileri"
   },
   {
     "id": "sidenav.archive-node",
     "defaultMessage": "Archive Node",
-    "message": "Архивная нода"
+    "message": "Arşiv Düğümü"
   },
   {
     "id": "sidenav.archive-redundancy",
     "defaultMessage": "Archive Redundancy",
-    "message": "Архивное резервирование"
+    "message": "Arşiv Yedekliliği"
   },
   {
     "id": "sidenav.data-querying",
     "defaultMessage": "Data Querying",
-    "message": "Запросы данных для операторов нод"
+    "message": "Veri Sorgulama"
   },
   {
     "id": "sidenav.bp-producer-sidecar",
     "defaultMessage": "Block Producer Sidecar",
-    "message": "Sidecar для блок-продюсера"
+    "message": "Blok Yapımcısı Sepet"
   },
   {
     "id": "sidenav.client-sdk",
     "defaultMessage": "Client SDK",
-    "message": "Клиентский SDK"
+    "message": "İstemci SDK'sı"
   },
   {
     "id": "sidenav.devnet",
@@ -82,67 +82,67 @@
   {
     "id": "sidenav.foundation-delegation",
     "defaultMessage": "Foundation Delegation",
-    "message": "Делегация Фонда"
+    "message": "Vakıf Heyeti"
   },
   {
     "id": "sidenav.hard-fork",
     "defaultMessage": "Hard Fork",
-    "message": "Хардфорк"
+    "message": "Sert Çatal"
   },
   {
     "id": "sidenav.hot-cold-wallets",
     "defaultMessage": "Hot/Cold Wallets",
-    "message": "Горячее / холодное создание блоков"
+    "message": "Sıcak/Soğuk Cüzdanlar"
   },
   {
     "id": "sidenav.ledger-hardware-wallet",
     "defaultMessage": "Ledger Hardware Wallet",
-    "message": "Аппатный кошелек Ledger"
+    "message": "Ledger Donanım Cüzdanı"
   },
   {
     "id": "sidenav.seed-peers",
     "defaultMessage": "Seed Peers",
-    "message": "Сид-пиры"
+    "message": "Tohum Akranları"
   },
   {
     "id": "sidenav.staking-service-guidelines",
     "defaultMessage": "Staking Service Guidelines",
-    "message": "Рекомендации по стейкингу"
+    "message": "Stake Hizmeti Yönergeleri"
   },
   {
     "id": "sidenav.developers",
     "defaultMessage": "Developers",
-    "message": "Разработчики"
+    "message": "Geliştiriciler"
   },
   {
     "id": "sidenav.codebase-overview",
     "defaultMessage": "Codebase Overview",
-    "message": "Обзор кодовой базы"
+    "message": "Kod Tabanına Genel Bakış"
   },
   {
     "id": "sidenav.repository-structure",
     "defaultMessage": "Repository Structure",
-    "message": "Структура репозитория"
+    "message": "Depo Yapısı"
   },
   {
     "id": "sidenav.BIP44-information",
     "defaultMessage": "BIP44 Information",
-    "message": "Информация о BIP44"
+    "message": "BIP44 Bilgileri"
   },
   {
     "id": "sidenav.code-reviews",
     "defaultMessage": "Code Reviews",
-    "message": "Руководящие принципы пересмотра кода"
+    "message": "Kod İncelemeleri"
   },
   {
     "id": "sidenav.style-guide",
     "defaultMessage": "Style Guide",
-    "message": "Руководство по стилю"
+    "message": "Stil Rehberi"
   },
   {
     "id": "sidenav.sandbox-node",
     "defaultMessage": "Sandbox Node",
-    "message": "Нода песочницы"
+    "message": "Korumalı Alan Düğümü"
   },
   {
     "id": "sidenav.graphql-api",
@@ -152,32 +152,32 @@
   {
     "id": "sidenav.logging",
     "defaultMessage": "Logging",
-    "message": "Логгинг"
+    "message": "Kerestecilik"
   },
   {
     "id": "sidenav.protocol-architecture",
     "defaultMessage": "Protocol Architecture",
-    "message": "Архитектура протокола"
+    "message": "Protokol Mimarisi"
   },
   {
     "id": "sidenav.lifecycle-of-a-payment",
     "defaultMessage": "Lifecycle of a Payment",
-    "message": "Жизненный цикл транзакций"
+    "message": "Bir Ödemenin Yaşam Döngüsü"
   },
   {
     "id": "sidenav.block-producers",
     "defaultMessage": "Block Producers",
-    "message": "Блок-продюсеры"
+    "message": "Blok Üreticileri"
   },
   {
     "id": "sidenav.whats-in-a-block",
     "defaultMessage": "What's in a Block",
-    "message": "Что в блоке"
+    "message": "Blokta Neler Var"
   },
   {
     "id": "sidenav.consensus",
     "defaultMessage": "Consensus",
-    "message": "Консенсус"
+    "message": "Uzlaşma"
   },
   {
     "id": "sidenav.proof-of-stake",
@@ -187,17 +187,17 @@
   {
     "id": "sidenav.snark-workers",
     "defaultMessage": "Snark Workers",
-    "message": "Введение"
+    "message": "Snark İşçileri"
   },
   {
     "id": "sidenav.scan-state",
     "defaultMessage": "Scan State",
-    "message": "Scan State"
+    "message": "Tarama Durumu"
   },
   {
     "id": "sidenav.time-locked-accounts",
     "defaultMessage": "Time-locked Accounts",
-    "message": "Временно заблокированные аккаунты"
+    "message": "Zaman Kilitli Hesaplar"
   },
   {
     "id": "sidenav.snapps",
@@ -207,7 +207,7 @@
   {
     "id": "sidenav.tokens",
     "defaultMessage": "Tokens",
-    "message": "Токены"
+    "message": "Jetonlar"
   },
   {
     "id": "sidenav.snarks",
@@ -217,32 +217,32 @@
   {
     "id": "sidenav.getting-starting-using-snarks",
     "defaultMessage": "Getting started using SNARKs",
-    "message": "Начало работы с SNARKs"
+    "message": "SNARK'ları Kullanmaya Başlama"
   },
   {
     "id": "sidenav.which-snark-right-for-me",
     "defaultMessage": "Which SNARK is right for me?",
-    "message": "Какой SNARK мне подходит?"
+    "message": "Hangi SNARK benim için uygun?"
   },
   {
     "id": "sidenav.snarkyjs-crypto-library",
     "defaultMessage": "The snarkyjs-crypto library",
-    "message": "Библиотека snarkyjs-crypto"
+    "message": "snarkyjs-kripto kitaplığı"
   },
   {
     "id": "sidenav.snarky-universe-library",
     "defaultMessage": "The snarky-universe library",
-    "message": "Библиотека вселенной snkary"
+    "message": "Snarky evren kütüphanesi"
   },
   {
     "id": "sidenav.troubleshooting",
     "defaultMessage": "Troubleshooting",
-    "message": "Поиск проблем"
+    "message": "Sorun giderme"
   },
   {
     "id": "sidenav.glossary",
     "defaultMessage": "Glossary",
-    "message": "Глоссарий"
+    "message": "Sözlük"
   },
   {
     "id": "sidenav.faq",
@@ -257,21 +257,21 @@
   {
     "id": "sidenav.documentation",
     "defaultMessage": "Documentation",
-    "message": "Документация"
+    "message": "Belgeler"
   },
   {
     "id": "sidenav.contributing-to-mina",
     "defaultMessage": "Contributing to Mina",
-    "message": "Участие в развитии Mina"
+    "message": "Mina'ya katkıda bulunmak"
   },
   {
     "id": "docs.suggest-changes",
     "defaultMessage": "Suggest Changes",
-    "message": "Предложить изменения"
+    "message": "Değişiklik Öner"
   },
   {
     "id": "sidenav.mina-documentation",
     "defaultMessage": "Mina Documentation",
-    "message": "Документация Mina"
+    "message": "Mina Dokümantasyonu"
   }
 ]

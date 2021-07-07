@@ -1,0 +1,119 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Daemon Logging" });
+
+# Logging
+
+Mina loglarý `~/.mina-config` konumunda bulunan yapýlandýrma dizininde bulunur. Bu dizin aþaðýdaki log dosyalarýný içerir:
+
+- `mina.log` - bu dosya daemon'un en son loglarýný içerir. Her log dosyasý, boyut olarak 10 Mebibayt (MiB) ile sýnýrlýdýr ve 50'den fazla log dosyasýný döndürür. Döndürülen log dosyalarý `mina.log.0` 'dan `mina.log.50` 'ya `mina.log.x` olarak adlandýrýlýr.
+- `mina-best-tip.log` - bu dosya daemon'un en iyi ipucu loglarýný içerir. Bu dosya, herhangi bir sert çatal için en iyi durumu belirlemek üzere gerekli loglarý düðümlerden toplamayý kolaylaþtýrýr. Bu dosyanýn boyutu 5 Mebibayt (MiB) ile sýnýrlýdýr ve tek bir log dosyasý `mina-best-tip.log.0` üzerinde döner.
+- `mina-prover.log` - bu dosya, kanýtlayanýn bellek kullanýmý ve toplu iþ boyutlarý için loglarý içerir. 128 Mebibayt (MiB) ile sýnýrlýdýr ve tek bir log dosyasý üzerinde döner.
+- `mina-verifier.log` - bu dosya, doðrulayýcýnýn bellek kullanýmý ve toplu iþ boyutlarý için loglarý içerir. 128 Mebibayt (MiB) ile sýnýrlýdýr ve tek bir log dosyasý üzerinde döner.
+
+Loglarý izlemek için, daemonu nasýl baþlattýðýnýza baðlý olarak aþaðýdaki komutlardan birini kullanýn:
+
+- Docker: `docker logs --follow mina`
+- Hizmet olarak çalýþtýrma: `journalctl --user -u mina -n 1000 -f`
+- Diðerleri: `tail -f ~/.mina-config/mina.log`
+
+### Log Seviyeleri:
+
+Öncelik sýrasýna göre sýrasýyla Mina daemon loglarý :
+
+- Spam
+- Ýzleme
+- Hata ayýklama
+- Bilgi
+- Uyarý
+- Hata
+- Fatal
+
+<Alert>
+
+Bir `log-level` of `Info` belirtilmesi, yalnýzca bu log düzeyinden ve üzerindeki iletileri görüntüler ve loglarýn ayrýntý düzeyini önemli ölçüde azaltýr.
+
+</Alert>
+
+### Log Formatý:
+
+Loglarýn formatý aþaðýdaki yapýyla tanýmlanýr::
+
+```
+{
+  "timestamp": timestamp,
+  "level": level,
+  "source": {
+    "module": string,
+    "location": string
+  },
+  "message": format_string,
+  "metadata": {{...}}
+}
+```
+
+Aþaðýda örnek bir hata mesajý gösterilmektedir:
+
+```
+{
+  "timestamp": "2020-12-23 21:25:04.616526Z",
+  "level": "Error",
+  "source": {
+    "module": "Transition_router",
+    "location": "File \"src/lib/transition_router/transition_router.ml\", line 231, characters 12-24"
+  },
+  "message": "Failed to find any peers during initialization (crashing because this is not a seed node)",
+  "metadata": {
+    "host": "48.241.118.000",
+    "peer_id": "12D3KooWGQSPgo7ypy9717D3Vgz2RHaqB2ndDRHEFcAfJDAv284q",
+    "pid": 12,
+    "port": 8302
+  }
+}
+```
+
+### Loglarý dýþa aktarma:
+
+Mina daemon, bir düðümdeki mevcut log dosyalarýný sýkýþtýrmak ve paketlemek için bir CLI yardýmcýsý saðlar.
+
+Çalýþan daemon için, tar arþivinin varsayýlan olarak geçerli tarih saatine ayarlý dosya adýný belirtmek için isteðe baðlý bir bayrak `-tarfile` gönderebileceðiniz `mina client export-logs` çalýþtýrýn. Bu komut, mevcut loglarý sýkýþtýrýr ve bunlarý `~/.mina-config`dizinindeki `exported_logs` dizinine aktarýr.
+
+<Alert>
+
+Loglar, `exportLogs` <DocLink copy="mutasyonu" url="/developers/graphql-api#mutations" /> kullanýlarak GraphQL aracýlýðýyla çalýþan bir düðümden dýþa aktarýlabilir.
+
+</Alert>
+
+Çalýþmayan bir düðümden log'larýný dýþa aktarmak için, kullanýlabilir yerel log dosyalarýný sýkýþtýrmak üzere `mina client export-local-logs` komutunu çalýþtýrýn. Tar arþivinin dosya adýný belirtmek için `tar dosyasý` seçeneðini iletin ve loglar sýkýþtýrýlacak ve `~/.mina-config` dizinindeki `exported_logs` dizinine aktarýlacaktýr.
+
+<Alert>
+
+GitHub'da bir sorun oluþtururken veya güncellerken, dýþa aktarýlan`tar.gz` dosyalarýný doðrudan [soruna](https://github.com/MinaProtocol/mina/issues)yükleyebilirsiniz.
+
+</Alert>
+
+### Logging Seçenekleri:
+
+Log'a kaydetme davranýþýný özelleþtirmek için daemon baþlatýlýrken aþaðýdaki seçenekler ayarlanabilir:
+
+- `-file-log-level` - log dosyalarý için log düzeyi(varsayýlan: Ýzleme)
+- `-log-level` - stdout aracýlýðýyla terminale çýkýþ için log seviyesi (varsayýlan: bilgi)
+- `-log-json` - log çýktýsýný JSON olarak yazdýr (varsayýlan: düz metin)
+- `-log-block-creation` - iþlemleri ve snark iþlerini bir blokta dahil etme adýmlarýný log'a kaydedin (varsayýlan: doðru)
+- `-log-received-blocks` - log blocks received from peers (default: yanlýþ)
+- `-log-snark-work-gossip` - eþlerden alýnan log bloklarý (varsayýlan: yanlýþ)
+- `-log-txn-pool-gossip` - log snark-pool eþlerden alýnan farklýlýklar (varsayýlan: yanlýþ)
+- `-log-precomputed-blocks` - loglara önceden hesaplanmýþ bloklarý dahil et (varsayýlan: yanlýþ)
+
+### Çökme Raporu:
+
+Daemon çökerse ve baþarabilirse, bir çökme raporu oluþturacaktýr. Yalnýzca en son çökme raporu saklanacak, dosya adý çökmenin tarih-saatini ve sýkýþtýrýlmýþ dosyanýn `~/.mina-config` dizinine aktarýlacaðýný belirtecek. Yeni sorunlarý belirlemek ve hata ayýklamaya yardýmcý olmak için bu çökme raporunu herhangi bir [GitHub issue](https://github.com/MinaProtocol/mina/issues) yükleyebilirsiniz.
+
+Çökme raporu, aþaðýdaki log dosyalarýnýn bir kýsmýný veya tamamýný içerecektir:
+
+- `crash_summary.json` - sistem bilgisi, sürüm bilgisi ve son log çýktýsý dahil olmak üzere çökmenin bir özetini içerir.
+- `mina_status.json` - daemon'un son durumunun bir özeti için `mina client status` komutunun bir çýktýsý.
+- `mina_short.log` - `mina.log` dosyasýnýn son 4MiB'sini içerir.
+- `registered_mask.dot` - son defter görselleþtirmesini içerir.
+- `frontier.dot` - son sýnýr görselleþtirmesini içerir.
+- `daemon.json` - daemon yapýlandýrma dosyasýnýn bir kopyasý.

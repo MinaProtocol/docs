@@ -1,0 +1,263 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Glossary" });
+
+# Sözlük
+
+#### Hesap
+
+Mina, her bir açýk anahtarýn durumunu izlemek için hesaplarý kullanýr. Bu, Bitcoin'in muhasebe durumunu koruma konusundaki UTXO modelinden farklýdýr.
+
+#### Arþiv Düðümü
+
+Mina düðümleri varsayýlan olarak kýsa ve özdür, yani að, blok veya iþlemler hakkýnda geçmiþ bilgileri tutmalarý gerekmez. Bir arþiv düðümü, geçmiþ zincir verilerini kalýcý bir veri kaynaðýnda depolar, böylece daha sonra geri alýnabilir.
+
+#### En iyi ipucu
+
+En iyi ipucu, daemon tarafýndan bilinen en yüksek [zincir gücüne](#chain-strength) sahip blok zincirinin en son bloðudur.
+
+#### Blok
+
+Aðýn durumunu geniþleten bir dizi iþlem ve konsensüs bilgisi.
+Aðýn mevcut durumunun tamamen geçerli olduðuna dair bir kanýt içerir.
+
+#### Blokzincir
+
+Aðdaki tüm hesaplarýn paylaþýlan durumunu korumak için bir kripto para biriminde kullanýlan veri yapýsý.
+
+#### Blok Onayý
+
+Referans bloðundan sonra eklenen blok sayýsý.Teyit sayýsý arttýkça, yeniden yapýlanma olasýlýðý azalýr, böylece referans bloktaki tüm iþlemlerin teyit edilme olasýlýðý artar.
+
+#### Blok Doluluk Oraný
+
+Bir blok içermesi gereken [yuvalarýn](#slot)oraný.Mesajlarýn gecikmesi durumunda aðýn "yakalayabilmesini" saðlamak için bazý slotlar kasýtlý olarak boþtur.
+
+#### Blok Üreticileri
+
+Hangi bloklarý üretmesine izin verildiðini belirlemek için bir sürece katýlan ve ardýndan aða yayýnlanabilen iþlemleri içeren bloklar üreten bir düðüm.
+
+#### Bootstrap
+
+Bootstrapping bir düðümün[senkronizasyon](#syncing) iþleminin bir parçasýdýr.Bootstrapping [geçiþ sýnýrýnýnýn](#transition-frontier)mevcut [kökünü](#root-of-transition-frontier)eþlerden alýr.[Yakalama](#catchup) sýrasýnda elde edilen ek [geçiþ](#transition) bu ilk kök durumundan uygulanýr.
+
+#### Breadcrumb
+
+Breadcrumb[geçiþ sýnýrýndaki](#transition-frontier)bir düðümdür. Breadcrumb, harici geçiþleri, aþamalý defter ve bekleyen coinbase'leri içerir ve iþlemi önceki duruma uygulayarak oluþturulur.
+
+#### Yakalama
+
+Yakalama[senkronisazyon](#syncing) iþleminin son aþamasýdýr.
+
+Yakalam sýrasýnda düðüm, iþlem sýnýrý [kökü](#root) ile mevcut en iyi ipucu arasýndaki tüm [geçiþleri](#transition)belirleyip indirerek mevcut [en iyi ipucunu](#best-tip) yakalamaya çalýþacaktýr.Ýlk olarak,bir düðüm eksik geçiþ hash'lerini ve iþlem zinciri kanýtýný ister.Bu kanýt, saðlanan yolun geçerli olduðunu, yani saðlanan geçiþ hash'lerinin kökten en iyi ipuca gittiðini kanýtlar.Düðüm tüm geçiþ hash'lerine sahip olduktan sonra, geçiþlerden her iþlem hash'i için tam harici geçiþi ister.
+
+Her harici geçiþ ile birlikte düðüm, bir[breadcrumb](#breadcrumb) oluþturmak için her birini önceki duruma uygulayarak geçiþ sýnýrýný oluþturur.Yakalama tamamlandýðýnda, düðümün yerel en iyi ipucu, aðýn en iyi ipucu ile aynýdýr ve geçiþ sýnýrý kökünden (en iyi ipucu - k) mevcut uca tüm geçiþler için breadcrumb oluþturulmuþ ve her biri doðrulanmýþtýr.Düðüm bu noktada [senkronize edilir](#synced).
+
+Herhangi bir zamanda, düðüm ayný yolda ayrýk bir geçiþ görürse ve bu da eksik iþlemler olduðunu gösterirse bir yakalama tetiklenebilir.
+
+#### Zincir Gücü
+
+Mina'da tam geçmiþ bulunmadýðýndan, aða yeni baðlanan bir düðüm, önceki tüm geçiþleri uygulayarak oluþumdan senkronizasyon yapamaz.Bir düðümün en güçlü zinciri belirlemesine izin vermek için, kayan bir zaman aralýðý için minimum zincir yoðunluðu saklanýr. Sonuç olarak, dürüst düðümler daha yüksek minimum yoðunluða veya zincir gücüne sahip blok zinciri seçebilir.
+
+#### Sýkýþtýrma
+
+Bir hesaplama çýktýsý için bir SNARK üretmek, kanýtlar sabit boyutta olduðundan, bu çýktýnýn "sýkýþtýrýlmasý" olarak düþünülebilir.Örneðin, Mina, bir blok zincirindeki tüm geçmiþ verileri bir zk-SNARK'a sýkýþtýrarak kýsa ve öz bir blok zincirini sürdürür. Bununla birlikte, bu, sayýsal olarak kayýplý sýkýþtýrmadan farklýdýr ve sýkýþtýrma terimi, gerekli veri boyutunu küçültme iþlemini daha mecazi bir þekilde açýklamak için kullanýlýr.
+
+#### Konsensüs
+
+Aðýn durumunu güncellemeye karar verirken Mina düðümlerinin hepsinin üzerinde anlaþtýðý bir algoritma veya kurallar dizisi. Kurallar, yeni bir bloðun hangi verileri içerebileceðini ve düðümlerin nasýl seçildiðini ve bir blok eklemek için ödüllendirildiðini içerebilir.Mina, uzlaþma mekanizmasý olarak Ouroboros Samisika'yý uygulamaktadýr.
+
+#### Konsensüs Düðümü
+
+Mina aðýnda konsensüs iþlevini yerine getiren bir katýlýmcý, yani bir [blok üreticisi](#block-producer). Bir düðümün konsensüsa katýlabilmesi için son durumu gerektirir.
+
+#### Kripto Para Birimi
+
+Finansal iþlemleri güvence altýna almak ve mülkiyeti herkese açýk-özel anahtar çiftleri aracýlýðýyla doðrulamak için kriptografik ilkeleri kullanan bir dijital varlýk veya para birimi.
+
+#### Daemon
+
+Mina daemon, Mina protokolünü uygulayan ve yerel olarak bir düðümde çalýþan bir arka plan sürecidir. Bu, yerel bir müþterinin veya cüzdanýn Mina aðýyla konuþmasýna izin verir. Örneðin, bir iþlem göndermek için veya bir komut vermek için bir CLI kullanýldýðýnda, bu talep Mina daemon'a yapýlýr ve daha sonra onu eþler arasý aða yayýnlar. Ayrýca yeni bloklar gibi olaylarý dinler ve bunu müþteriye bir [pub-sub](#pub-sub) modeli aracýlýðýyla iletir.
+
+#### Yetki Verme
+
+Mina stake etmek düðümlerin çevrimiçi olmasýný gerektirdiðinden, bazý düðümler mina'larýný bir staking hizmeti çalýþtýran baþka bir düðüme devretmek isteyebilir. Bu sürece bir hisseyi devretme adý verilir ve genellikle servis saðlayýcý veya stake havuzu operatörü bu hizmeti çalýþtýrmak için bir ücret talep edebilir ve bu ücret, delege eden kiþi blok üreticisi olarak seçildiðinde düþülür.
+
+#### Epoch
+
+Bir epoch, Mainnet'te 7140 slota eþit bir zaman birimidir. Bir epoch, her biri 3 dakikalýk [slot'lara](#slot) bölünmüþtür.
+
+#### Dýþ Port
+
+Bu, Mina daemon'ýn aðdaki diðer düðümlere baðlanmak için kullandýðý baðlantý noktasýdýr. Arka plan programý baþlatýlýrken`-external-port` kullanýlarak ayarlanabilir.
+
+#### Harici Geçiþler
+
+Bir [blok](#block) olarak da adlandýrýlan bir harici geçiþ, harici olarak, yani baþka bir blok üreticisi tarafýndan üretilen ve bir düðüme gossip edilen bir iþlemdir.
+
+#### Kesinlik
+
+Bir konsensüs sabiti, zincir [yeniden düzenlemelerinin](#reorganizations) artýk mümkün olmadýðý noktadýr.Bir blok, konsensüs sabitleri tarafýndan tanýmlanan k [blok onayýna](#block-confirmations)sahip olduðunda, nihai kabul edilir.
+
+#### Tam Düðüm
+
+Aðýn durumunu güvenle doðrulayabilen bir Mina düðümü. Mina'da, tüm düðümler zk-SNARK'larý alýp doðrulayabildiði için her düðüm tam bir düðümdür.
+
+#### Dahili Geçiþ
+
+Yerel olarak, yani bir blok üreticisi tarafýndan üretilen bir [geçiþ](#transition).Oluþturulan iþlem yerel olarak uygulanýr ve eþlere yayýnlanmadan önce [geçiþ sýnýrýna](#transition-frontier)eklenir.
+
+#### Kademlia
+
+Merkezi olmayan eþler arasý aðlar için daðýtýlmýþ bir hash tablo (DHT). Mina, eþ keþfi için Kademlia'yý kullanýr, böylece düðümler að durumu hakkýnda bilgi paylaþmak için komþu düðümleri bulabilir.
+
+#### Anahtar Çifti
+
+[Özel](#private-key) ve [açýk](#public-key) anahtarýn birleþimi. Anahtar çiftleri, çalýþan bir daemon aracýlýðýyla veya özel bir keygen aracý kullanýlarak oluþturulabilir.
+
+#### Mina
+
+- Büyük M ile "Mina", temel kripto para birimi protokolüne ve sistemin baðlý olduðu að altyapýsýna atýfta bulunur.
+- "mina", aðdaki katýlýmcý düðümler tarafýndan takas edilen kripto para birimidir
+
+#### Düðüm
+
+Düðüm, mina daemon'u çalýþtýran bir makinedir.
+
+#### Konsensüs Olmayan Düðüm
+
+Mina protokolünde, konsensüsa katýlmayan ancak yine de zincirin durumunu güvenmeden doðrulamak için sýfýr bilgi kanýtýný tam olarak doðrulayabilen [tam düðüm](#full-node). Mina'nýn boyutuna 22kb atýfta bulunulduðunda, bu konsensüs olmayan düðümlere atýfta bulunur.
+
+#### Nonce
+
+Aðda bir iþlemin tekrar oynatýlmasýný önlemek için kullanýlan bir iþleme eklenen artan sayý. Ýþlemler her zaman nonce'larýn sýralý sýrasýyla bloklara dahil edilir.
+
+#### Eþler Arasý
+
+Bilgileri birbirleri arasýnda daðýtmak için eþ düðümlere dayanan að sistemleri, eþler arasý aðlar olarak adlandýrýlýr. Bu aðlar genellikle doðasý gereði daðýtýlýr ve istemci-sunucu að oluþturma modellerinden farklý olarak, herhangi bir merkezi kaynak aracýsýna dayanmaz.
+
+#### Pickles SNARK
+
+Pickles yeni bir kanýtlama sistemi ve güvenilir bir kurulum olmadan yinelemeli kompozisyon yapabilen ilk SNARK'týr. Pickles, geliþtiricilerin Mina üzerinde özel, ölçeklenebilir akýllý sözleþmeler oluþturmalarý için temel oluþturuyor.
+[Dafa fazlasý için bakýnýz](https://medium.com/minaprotocol/meet-pickles-snark-enabling-smart-contract-on-coda-protocol-7ede3b54c250).
+
+#### Libp2p
+
+Mesaj yayýný ve dosya paylaþýmý gibi þeyler saðlayan eþler arasý bir að kitaplýðý. Mina bunu hood (bilgisayarýn iç yapýsý) altýnda kullanýyor.
+
+#### Özel Anahtar
+
+Açýk anahtar þifrelemesindeki diðer bileþen - özel anahtarlar gizli tutulurken, açýk anahtarlar herkese açýk olarak verilebilir. Yalnýzca bir açýk anahtarýn ilgili özel anahtarýnýn sahibi, açýk anahtarýn sahipliðini doðrulayabilir. Bu, herhangi bir açýk anahtarla iliþkili herhangi bir fonun dürüst sahibi olduðunuzu kanýtlamak için iþlemleri imzalamanýza olanak tanýr.
+
+#### Protokol Durumu
+
+Aðýn durumu. Protokol durumu, bloklarý birbirine baðlamak için önceki protokol durum hash'ini ve oluþum durumu hash'ini, blok zinciri durumunu, konsensüs durumunu ve konsensüs sabitlerini içeren bir gövdeyi içerir.
+
+#### Protokol Durum Hash'i
+
+Protokol durum hash'i, önceki durum ve [protokol durumu](#protocol-state) gövdesinin hash'lerinin hash'leridir. Bir blok için benzersiz bir tanýmlayýcý görevi görür.
+
+#### Hisse Kanýtý
+
+Mina'nýn uyguladýðý konsensüs algoritmasýnýn türü, düðümlerin aðýn durumu üzerinde anlaþmasýna izin verir. Hisse Kanýtý (PoS), düðümlerin bir sonraki blok üreticisi olarak seçilme þanslarýný artýrmak için aðda mina [stake](#staking)'lerine sahip olmalarýný saðlar.
+
+#### Açýk Anahtar
+
+Açýk anahtar þifrelemesinin bir bileþeni - açýk anahtarlar, dünya ile geniþ çapta paylaþýlabilir ve ilgili özel anahtarý elinde tutan kiþi için "adresler" veya tanýmlayýcýlar olarak düþünülebilir.
+
+#### Pub-sub
+
+Yayýn-abone (publish-subscribe) olmanýn kýsaltmasý olan pub-sub, mesaj gönderenlerin mesajlarý yayýnladýðý ve daha önce bu gönderenin mesajlarýna abone olan dinleyicilerin bilgilendirileceði bir mesajlaþma modelidir. Mina, örneðin zincire yeni bir blok eklendiðinde müþterileri bilgilendirmenin bir yolu olarak bu kalýbý kullanýr. Bu olay tüm dinleyiciler tarafýndan "duyulabilir" ve her dinleyicinin yeni verileri baðýmsýz olarak sorgulamasý gerekmez.
+
+#### Yeniden düzenleme
+
+Blok zincirinin rakip bir çatalýnýn uzunluðu ana ----- BRANCH göre arttýðýnda, blok zinciri, ana dal ----- MAÝN BRANCH olarak daha güçlü olan çatalý yansýtmak için yeniden yapýlanmaya tabi tutulur. Yeniden yapýlanmanýn ardýndan, býrakýlan BRANCH ----- þubedeki iþlemlerin artýk blok zincirine dahil edilmesi garanti edilmez ve en uzun daldaki yeni bloklara eklenmesi gerekecektir.
+
+#### Geçiþ Sýnýrýnýn Kökü
+
+[Geçiþ sýnýrýnýn](#transition-frontier) kökü, en iyi uçtan itibaren blok `k` bloklarýdýr. Kök, [bootstrap](#bootstrap) sýrasýnda eþlerden alýnýr. Yeni bir en iyi ipucu görüldüðünde, kök hareket ettirilir, bu nedenle sadece `k` blok kalýr. Kök, konsensüs nedeniyle bloðun [sonlandýrýldýðý](#finality) noktadýr.
+
+#### RPC
+
+Aðdaki düðümler arasýnda iletiþim kurmak ve [daemon](#daemon)programý ile etkileþim kurmak için bir uzaktan yordam çaðrýsý ([RPC])(https://en.wikipedia.org/wiki/Remote_procedure_call) kullanýlýr.
+
+#### Tarama Durumu
+
+<DocLink copy="Tarama Durumu" url="/architecture/scan-state" />, SNARK iþlem
+kanýtlarýný gerektiren iþlemleri sýraya koyan ve bu iþlem SNARKS'ýn [snark
+iþcileri](#snark-worker)tarafýndan paralel olarak iþlenmesine izin veren bir
+veri yapýsýdýr.
+
+#### Ýmzalar
+
+Dijital imzalarýn kýsaltmasý olan imzalar, dijital olarak imzalanmýþ mesajlarýn doðruluðunu veya sahipliðini saðlamanýn bir yoludur. Bu mümkündür, çünkü bir açýk-özel anahtar çifti verildiðinde, özel anahtarýn sahibi bir mesajý imzalayabilir ve bir imza oluþturabilir, bu daha sonra ilgili açýk anahtara sahip herhangi biri tarafýndan doðrulanabilir.
+
+#### Slot
+
+Mina'da bir slot, bir zaman birimidir. Mainnet lansmanýndan itibaren bir slot 3 dakika uzunluðundadýr. Bir [dönem](#epoch) , slot'lara bölünmüþtür. Blok üreticileri, bir slot sýrasýnda blok üretme þansýný kazanabilirler.
+
+#### SNARK Havuzu
+
+Snark havuzu, tarama durumunda gerekli iþler için [snark iþçileri](#snark-worker) tarafýndan tamamlanan iþleri içerir. Ayný zamanda "snarketplace" olarak da anýlan snark havuzu, her iþ paketi için yalnýzca snark iþçilerinin sunduðu en ucuz iþi içerir. Daha ucuz, geçerli iþ düðüm tarafýndan görülürse, havuzda zaten mevcut olanýn yerini alacaktýr.
+
+#### SNARK Ýþçileri
+
+SNARK iþleminin oluþturulmasýna katýlan aðdaki bir düðüm. SNARK iþçileri, çabalarýnýn karþýlýðý olarak mina aldýðýndan iþlemleri sýkýþtýrmaya yardýmcý olmak için teþvik edilir.
+
+#### Snarked Defteri
+
+Snarked defteri , yalnýzca iliþkili bir kanýtý olan iþlemleri içeren defterdir. Önceki [blok üreeticileri](#block-producers) tarafýndan eklenen iþlem aðacýnda yer alan tüm iþlemlere onay veren [tarama durumundan](#scan-state) bir kanýt yayýnlandýðýnda, snarked defteri güncellenir.
+
+#### Aþamalý Defter
+
+Aþamalý defter, cari hesap durumudur. Bekleyen bir hesap defteri ve ayrýca [tarama durumu](#scan-state)olarak bilinen SNARKed iþlemlerin bekleyen bir sýrayý içerir.
+
+#### Staking
+
+Stake mina, aðdaki düðümlerin konsensüs mekanizmasýna uygun olarak blok üreticisi olarak seçilme þanslarýný artýrmalarýna izin verir. Blok ölçeklerini kazanma þansý, yatýrýlan mina miktarýyla orantýlýdýr. Örneðin, bir düðüm aðdaki mevcut minanýn% 50'sine sahipse, teorik olarak gelecekteki bloklarý üretmek için seçilme þansý% 50'dir. Mina, stake etme ayrýntýlarýný uygulamak için Ouroboros Samisika Hisse Kanýtý'ný kullanýyor. Bir düðüm kendi Minalarý stake etmeyi seçerse, çevrimiçi olmasý ve Mina aðýna baðlý olmasý gerekir.
+
+#### Staking Defteri
+
+Staking defteri, bir slot için blok üreticilerini belirlemek için kullanýlan defterdir, çünkü bir slot kazanma olasýlýðý stake miktarýyla orantýlýdýr. Mevcut dönemin stake daðýlýmý, mevcut epoch'un son bloðunun - 2'nin [snarked defteridir](#snarked-ledger).
+
+#### Staking Havuzu
+
+Bir stake havuzu sahibi tarafýndan yönetilen, yetki verilmiþ fonlardan oluþan bir havuz. Diðer düðümler, çevrimiçi olma gerekliliðinden kaçýnmak için fonlarý bir stake havuzuna devretmeyi seçebilir.
+
+#### Senkronizasyon
+
+Mina blok zincirini geniþleten bir bloðu baþarýyla üretmek için bir düðüm mevcut durumu gerektirir. Bunu baþarmak için, bir düðüm eþlere baðlanmak, [bootstrap](#bootstrap) yapmak ve ardýndan bir [yakalama](#catchup) gerçekleþtirmek için baþlatýlacaktýr.
+
+Senkronizasyon süreci, geçiþ sýnýrýnýn [kökü](#root-of-transition-frontier) ile mevcut [en iyi ipucu](#best-tip)arasýndaki tüm geçiþler için [breadcrumbs](#breadcrumb) oluþturarak düðümün [geçiþ sýnýrýný](#transition-frontier)oluþturur. Tamamlandýðýnda düðüm senkronize edilir.
+
+#### Zaman Kilitli Hesaplar
+
+Bir dizi blok gibi belirli bir koþul yerine getirilene kadar taþýnamayan, kazanýlmamýþ miktarda token içeren bir hesap üretilir.
+
+#### Ýþlem Havuzu
+
+Bekleyen tüm iþlemlerin listesi - bazen "mempool" olarak da anýlýr. Her düðüm, düðüme gossip yapýlmýþ ve doðrulanmýþ iþlemleri içeren yerel bir iþlem havuzuna sahiptir. Ýþlem havuzunun dolmasý durumunda, havuzdaki iþlemler, en düþük olaný olmak üzere ücrete göre çýkarýlabilir.
+
+#### Geçiþ
+
+Mina'da bir geçiþ, bir[blokla](#block) eþ anlamlýdýr.
+
+#### Geçiþ Sýnýrý
+
+Aðýn son `k` bloðunu içeren yerel bir veri deposu. Aðacýn her "düðümü" birden fazla çatallara sahip olabileceðinden, aðaç tipi bir veri yapýsýdýr. Aðaçtaki her düðüme bir [breadcrumb](#breadcrumb)denir.
+
+#### Kullanýcý Ýþlemleri
+
+Bir kullanýcý tarafýndan verilen bir iþlem - bir ödeme veya bir yetki deðiþikliði.
+
+#### VRF
+
+Doðrulanabilir rastgele iþlevi (VRF), bir yuva için bir blok üreticisi seçmek için kullanýlýr. Bir açýk anahtara ve mevcut stake defterine ek olarak önceki çaðýn VRF çýktýlarýndan türetilen rastgele bir çekirdek girdi olarak alýr ve belirleyicidir, yani ne sýklýkla çalýþtýrýldýðýna bakýlmaksýzýn her zaman ayný çýktýyý döndürür.
+
+#### Sýfýr Bilgi Kanýtý
+
+Bir tarafýn (bir kanýtlayýcý) baþka bir tarafa (doðrulayýcýlar) bir þey hakkýnda bilgisi olduðunu - bu belirli bilgiyi vermeden - kanýtlayabileceði bir kanýt. Mina, blok zincirinin geçerliliðini doðrulayan bir kanýt oluþturmak ve aðdaki herhangi bir düðümün bunu hýzlý bir þekilde doðrulamasýna izin vermek için sýfýr bilgi kanýtlarýný ve özellikle zk-SNARK'larý kullanýr.
+
+#### zk-SNARK
+
+Bir tür sýfýr bilgi kanýtý - kýsaltmasý "sýfýr bilgi özlü, etkileþimli olmayan bilgi argümaný" anlamýna gelir. Mina'nýn SNARK'larý uygulamasýnda ilgi duyulan belirli özellikler, herhangi bir düðümün aðýn durumunu hýzlý bir þekilde doðrulamasýna izin veren kýsa ve etkileþimsizliktir.

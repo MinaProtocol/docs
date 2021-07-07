@@ -1,0 +1,254 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Style Guide" });
+
+# Stil Rehberi
+
+## Ocaml
+
+[ocaml]: #ocaml
+
+### Genel
+
+[ocaml-general]: #ocaml-general
+
+Stil yönergelerimiz, mevcut birkaç stil yönergesinin bir uzantýsýdýr. Ýlki ocamlformat'týr ve kodlama stilimizin çoðu için gerçeðin kaynaðý olarak hareket eder. Aslýnda, ocamlformat CI'da bir engelleyicidir, bu nedenle kodunuzun ana kod ile birleþtirilmesi için kendi yönergelerine göre biçimlendirilmesi gerekir. Ocamlformat, tüm önemli stil durumlarýný ele almaz, çünkü yalnýzca kodun nasýl aralýklý ve girintili olmasý gerektiðini tanýmlar ve uygular. Ocamlformat'ýn kapsamadýðý herhangi bir þey için,[Jane Street stil kýlavuzuna](https://opensource.janestreet.com/standards/) baþvurulmalýdýr. Burada tanýmladýðýmýz bu stil kýlavuzu, kod tabanýmýzda düzenli olarak kullandýðýmýz birkaç belirli yapýya iliþkin ayrýntýlara daha fazla dikkat ederek, janestreet stil kýlavuzunun bir uzantýsý olmayý amaçlamaktadýr.
+
+### Mli Dosyalarý
+
+[ocaml-mli]: #ocaml-mli
+
+`*.mli` dosyasýnýn otomatik olarak üretilen arabirimi farklýysa `*.ml` dosyasý için bir `*.ml` dosyasý eklenmemelidir. Kod tabanýmýzdaki birçok `*.ml` yalnýzca imzalardan ve funktör'den oluþur. Bu dosyalar söz konusu olduðunda, `*.mli` dosyasýný yeniden tanýmlamanýn amacý yoktur çünkü o dosyada yeni veya kýsýtlanmýþ bilgi yoktur. Bir `*.ml` dosyasý kök yapýsýnda uygulamalar içeriyorsa, büyük olasýlýkla bir `*.mli` dosyasý oluþturulmalýdýr.
+
+### Modüller
+
+[ocaml-modules]: #ocaml-modules
+
+#### Standartlaþtýrýlmýþ Kýsa Ýsimleri Tercih Edin
+
+`t`, `T`, ve `S` isimleri, belirli þeyleri belirtmek için modüllerde kullanýlan yaygýn kýsa isimlerdir. `t` adý, bir modülün kök türünü temsil etmek için kullanýlýr. Örneðin, hesaplarla ilgili türleri ve deðerleri içeren bir `Account` modülü varsa,`Account.t` bir hesabýn türüdür. `t` adý, modülün kök türünün yalnýzca bir deðeri olmasý amaçlanýyorsa, bir deðer olarak da kullanýlabilir. Örnek olarak, bir `Logger` modülünde tek bir global logger olmasýný istiyorsanýz, `Logger.t` tipi bir logger tipi olabilir ve `Logger.t` deðeri`Logger.t` tipinin global logger deðeri olabilir.
+
+Modül adý `T` , bir modülün kök türüne iliþkin kök türünü ve temel tanýmlarý kapsüllemek için kullanýlýr. Bir modülün kök türü için bazý funktörleri somutlaþtýrmak ve örneklemlerin modülün kendisinde görünmesini saðlamak istediðinizde yaygýn olarak kullanýlan bir uygulamadýr. Örneðin, karþýlaþtýrýlabilir bir türden çeþitli yardýmcý deðerleri / modülleri türetmek için `Comparable.Make` funktörünü çaðýrmak yaygýndýr. Bu durumda, tekrar bir `Account` modülümüz olsaydý ve the `Comparable.S` imzasýný türetmek isteseydik, kök türü `t` olan `Account` içersinde `T` modülü ve Comparable için gerekli iþlevler için `Comperable.Make` funktör argümanýný (bu durumda, `compare`) tanýmlamak gerekirdi. Bu `T` modulü ile , `include T` ve `Account` 'daki modülündeki `include Comparable.Make (T)` modüllerini, `Account.t` türü için ilgili tüm deðerleri/modülleri getirmek için kullanýlýr. Ýþte bunun tam bir örneði:
+
+```
+module Account = struct
+  module T = struct
+    type t = ... [@@deriving compare]
+  end
+
+  include T
+  include Comparable.Make (T)
+end
+```
+
+Modül türü adý `S` , modülün kök imzasýný tanýmlamak için kullanýlýr. Bu, genellikle bir funktör içeren modülünüz olduðunda kullanýlýr. Bu durumda, genellikle `Make` funktörünü çaðýrýrýz ve bu iki deðeri de ayný modüle koyarara funktörün `S` tipini döndürdüðünü bildiririz. Önceki örneðimize baktýðýmýzda,`Core_kernel`'s `Comparable` modülü þu kalýbý izler: `Comparable.Make` `Comparable.S` döndüren bir funktör'dür.
+
+#### Modül Baþýna Bir Tür Seçin
+
+[ocaml-modules-singleton-types]: #ocaml-modules-singleton-types
+
+Genel bir kural olarak, her modülün kapsamý tek bir türe ayarlanmalýdýr. Bu kalýp, endiþelerin izole edilmesine yardýmcý olur ve sonuç olarak, baðlama göre konumlandýrýldýklarýndan deðer adlarýnýn daha kýsa olmasýna izin verir. Örneðin, bir `Merkle_tree` modülünü ele alalým. Bu modül, tüm merkle aðacýný (veya onun bir düðümünü) temsil eden bir `Merkle_tree.t` türüne ihtiyaç duyacaktýr. Bir `Merkle_tree` de bir `path` tipine sahip olmak isteyecektir. Bu `path` türünün kendi iç içe modülüne (`Merkle_tree.path` yerine (`Merkle_tree.Path.t` ) yerleþtirilmesi tercih edilir. Bunun neden tercih edilebilir olduðunu anlamanýza yardýmcý olmak için `Merkle_tree.path` yol koyduðumuzu hayal edin. Þimdi, `Merkle_tree` yalnýzca merkle aðaç türünün kendisiyle deðil, ayný zamanda bir merkle aðacýnýn yoluyla da ilgili deðerleri (iþlevleri) içerir. Netlik saðlamak için, yolla ilgili tüm deðer adlarýnýn baþýna `path_` (`path_map`, `path_length`, etc...). eklemek doðal olacaktýr. `Path` kendi modülüne ayýrarak, deðerlerin baðlamýný net tutarken bu isimleri kýsaltabiliriz. Ek olarak, ileride seçersek, `Path` uygulama ayrýntýlarýný ona kýsýtlayýcý bir imza uygulayarak özetleyebiliriz, bu da derleyici yaptýrýmý yoluyla endiþelerin ayrýlmasýný daha net hale getirir.
+
+#### No Monkeypatching
+
+[ocaml-modules-monkeypatching]: #ocaml-modules-monkeypatching
+
+Modüllerin monkeypatching 'ee kod tabanýmýzda açýkça izin verilmemektedir. Monkeypatching, mevcut bir modülü alýp geniþletilmiþ veya deðiþtirilmiþ deðerlerle yeniden tanýmlama eylemi olarak tanýmlanýr. Daha basitçe, formdaki herhangi bir þey.
+
+```
+module A = struct
+  module M = struct
+    let x = ...
+  end
+end
+
+module M = struct
+  include A.M
+  let y = ...
+  (* or `let x = ...` *)
+end
+```
+
+Monkeypatching bazen kodu derlemek için en kolay yol olabilir, ancak genel olarak kod tabanýnda karýþýklýk ve / veya teknik yük yaratýr. Bir modülü monkeypatch yapmanýz gerekiyorsa, bunun nedeni için iyi bir nedeniniz olmalýdýr.
+
+#### Funktör Ýmza Eþitlikleri
+
+[ocaml-modules-functor-patterns]: #ocaml-modules-functor-patterns
+
+Funktör tarafýndan oluþturulan modüllerin imzalarý için `with` ifadesi içeren imzalar, mümkün olduðunda `S with module M1 = M2` formuyla sýnýrlandýrýlmalýdýr. Deðiþtirme eþitlikleri `:=` imzanýn bölümlerinin sýnýrlandýrýlmasý gereken ifadeleri içerecek þekilde sýnýrlandýrýlmalýdýr (örneðin, imzadaki iç içe geçmiþ bir modül mevcut yapý kapsamýnda zaten tanýmlandýðýnda). Bir funktör ile ilgili imzalar arasýndaki yaygýn baðýmlýlýklarýn sayýsý arttýkça zayýf bir þekilde ölçeklendiði için `S with type t = ...` formu da tercih edilmez. Bunun, janestreet stil kýlavuzu kuralýna daha fazla önem verdiðine dikkat edin "Standart imzayý el ile yazýlmýþ arayüzler için tercih et".
+"Prefer standard signature includes to hand-written interfaces".
+
+#### Funktör Arity -----
+
+[ocaml-modules-functor-arity]: #ocaml-modules-functor-arity
+
+Funktör, maksimum 3 deðerine sahip olabilir (arity, argümanlarýn sayýsýdýr; bu durumda, iç içe geçmiþ funktör sayýsý - funktör döndüren funktör sayýsýdýr). Bir funktör baðýmsýz deðiþken olarak 3'ten fazla modül gerektiriyorsa, gerekli modüllerin tümü tek bir modülde yuvalanmalýdýr. Bunun için standart model, funktör'ünüz için bir `Inputs_intf` imzasý tanýmlamaktýr, bu da funktör için modül argümanlarýný tanýmlayacaktýr. Basit bir örnek için aþaðýya bakýn.
+
+```
+module type Inputs_intf = sig
+  module A : A.S
+  module B : B.S
+  module C : C.S
+  module D : D.S
+end
+
+module type S = sig
+  include Inputs_intf
+
+  (* ... *)
+end
+
+module Make (Inputs : Inputs_intf)
+  : S
+    with module A = Inputs.A
+     and module B = Inputs.B
+     and module C = Inputs.C
+     and module D = Inputs.D =
+struct
+  open Inputs
+
+  (* ... *)
+end
+```
+
+# Kod Idiosyncrasies ------
+
+Belirli bir OCaml stili kullanýyoruz. Ýþte bazý önemli þeyler.
+
+## Parametreli Kayýtlar
+
+```ocaml
+type ('payload, 'pk, 'signature) t_ =
+  {payload: 'payload; sender: 'pk; signature: 'signature}
+[@@deriving eq, sexp, hash]
+
+type t = (Payload.t, Public_key.t, Signature.t) t_
+[@@deriving eq, sexp, hash]
+
+(* ... *)
+
+type var = (Payload.var, Public_key.var, Signature.var) t_
+```
+
+Her türlü kayýt alanýnýn deðiþken tipleri için temel tip olarak `t_` tanýmlarýz. Sonrasýnda bu deðiþken tiplerini kullanarak kayýtlarý tanýmlarýz. Son olarak, OCaml tipi olan `type t` ile kaydý baþlatýrýz. Buna ek olarak SNARK devreleri içinde `type var` deðerinin tipini kullanýlýr. Bunu daha sonra anlatacaðýz. SNARK devresi içerisinde herhangi bir þeyi programlanabilir yapmak istediðimizde, bu þekilde tanýmlarýz yani her iki tip için kayýt tanýmýný yeniden kullanabiliriz.
+
+OCalm obje tiplerine geçiþ ile ilgili bazý söylentiler var ve bu biz bu sayede bu tür tartýþmalarda pozisyon almamýza gerek kalmýyor. Belki ben (@bkase), bir noktada bu durum için bir RFC yazarým.
+
+### Ppx_deriving
+
+```ocaml
+type t = int [@@deriving sexp, eq]
+```
+
+Bu makroda ilk kez gördüðümüz birþey. Burada biz [ppx_jane](https://github.com/janestreet/ppx_jane) `sexp` ve `eq` [ppx_deriving](https://github.com/ocaml-ppx/ppx_deriving) kullanýrýz.
+
+### Stable.V1
+
+```ocaml
+module Stable : sig
+  module V1 : sig
+    type t = (* ... *)
+    [@@deriving bin_io, (*...*)]
+  end
+end
+```
+
+Bir tip serileþtirlebilir olduðunda, kararlý versiyonu yayýnladýktan sonra geriye dönük uyumluluðu sürdürebilmek bizim için önemlidir. Ýdeal olarak, `Stable.V1` dýþýnda hiçbir tip için `bin_io` tanýmlamazdýk. Veritabaný yapýsýný deðiþtirdiðimizde `Stable` altýnda `V2` oluþtururduk.
+
+### Mülkiyet Tabanlý Testler
+
+[Core](https://opensource.janestreet.com/core/), birim testlerinde kullandýðýmýz bir [QuickCheck](https://blog.janestreet.com/quickcheck-for-core/) uygulamasýna sahiptir. Ýþte bir "Quickcheck.Generator.t" ödemesi için imza örneði.
+
+```ocaml
+(* Generate a single payment between
+ * $a, b \in keys$
+ * for fee $\in [0,max_fee]$
+ * and an amount $\in [1,max_amount]$
+ *)
+
+val gen :
+     keys:Signature_keypair.t array
+  -> max_amount:int
+  -> max_fee:int
+  -> t Quickcheck.Generator.t
+```
+
+<a name="typesafe-invariants"></a>
+### Typesafe Sabitleri (bu bölümün baþlýðý için yardýmcý olabilirsiniz)
+
+Mina'da çoðu zaman belirli veri parçalarý üzerinde çok önemli kontroller yapmamýz gerekir. Örneðin, að üzerinden aldýðýmýz bir kullanýcý komutunda imzanýn geçerli olduðunu onaylamamýz gerekir. Bu tür kontroller pahalý olabilir, bu nedenle bir kez yapmalarýný isteriz ama yaptýklarýný da hatýrlamak isteriz.
+
+```ocaml
+(* inside user_command.mli *)
+
+module With_valid_signature : sig
+  type nonrec t = private t [@@deriving sexp, eq]
+
+  (*...*)
+end
+
+val check : t -> With_valid_signature.t option
+```
+
+Burada `type nonrec t = private t` kullanarak yukarý yönelimi saðlarken aþaðý yönelimi engellemek için `With_valid_signature` (kullanýmý: `User_command.With_valid_signature.t`) tanýmladýk.
+
+`User_command.t`'yi `User_command.With_valid_signature.t`'e dönüþtürmek için _tek_ yolu `check`'tir. Þimdi derleyici bütün hatalarýmýzý yakalayabilecektir.
+
+### Birim Testleri
+
+Birim testleri [ppx_inline_test](https://github.com/janestreet/ppx_inline_test) için kullanýyoruz. Tabi ki yapabildiðimizde bunu `QuickCheck` ile birleþtireceðiz.
+
+```ocaml
+let%test_unit =
+  Quickcheck.test ~sexp:[%sexp_of: Int.t] Int.quickcheck_generator
+    ~f:(fun x -> assert (Int.equal (f_inv (f x)) x))
+```
+
+### Funktörler
+
+Modül imzalama eþitliklerini kullanmaya geçiþ sürecindeyiz -- [yukarýda](#functor-signature-equalities) ve [the rfc for rationale](https://github.com/MinaProtocol/mina/blob/master/rfcs/0004-style-guidelines.md) bakýnýz. Fakat hala çok fazla tip ikameleri olan (`with type foo := bar`) kodlar kullanýyoruz.
+
+[signature_lib/checked.ml](https://github.com/MinaProtocol/mina/blob/master/src/lib/signature_lib/checked.ml) içerisinde tür ikamelerini kullanan bir taným örneðimiz var. Ýlk olarak, funktörün sonuç modül tipini tanýmladýk ve tüm türleri soyut olarak funktörize yapacaðýz.
+
+```ocaml
+module type S = sig
+  type boolean_var
+  type curve
+  type curve_var
+  (*...*)
+end
+```
+
+Sonrasýnda funktörü tanýmlayýn:
+
+```ocaml
+module Schnorr
+  (Impl : Snark_intf.S)
+  (Curve : sig (*...*) end)
+  (Message : Message_intf
+    with type boolean_var := Impl.Boolean.var
+    (*...*))
+: S with type boolean_var := Impl.Boolean.var
+     and type curve := Curve.t
+     and type curve_var := Curve.var
+     (*...*)
+= struct
+  (* here we implement the signature described in S *)
+end
+```
+
+### Özel SNARK Devre Mantýðý
+
+Burada ayný zamanda özel SNARK devre mantýðýný ilk kez görüyoruz. Kullandýðýmýz bir kalýp, bir SNARK içinde bir alt modül `module Checked` altýnda çalýþtýrmak istediðiniz tüm iþlemleri kapsamaktýr.
+
+Örneðin, [sgn.mli](https://github.com/MinaProtocol/mina/blob/master/src/lib/sgn/sgn.mli) içerisinde aþaðýdakini görebilirsiniz:
+
+```ocaml
+(* ... *)
+val negate : t -> t
+
+module Checked : sig
+  val negate : var -> var
+end
+```
+
+`negate` OCaml çalýþtýran fonksiyon versiyonudur ve `Checked.negate` ise SNARK devresi içerisinde çalýþandýr.

@@ -1,0 +1,64 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "SNARK Constructions" });
+
+# Hangi SNARK yapısını kullanmalıyım?
+
+Performans ve güvenlik özellikleri ile farklılaşan birçok farklı SNARK yapısı mevcuttur. Bu sayfa bir tasarıma karar verirken göz önünde bulundurulması gereken bazı önemli kriterler ile ilgili bilgiler sağlar.
+
+## Esnekliği Olmayan
+
+Birçok uygulama için SNARKların esnek olmaması önemlidir. Kanıtları göremek yeni beyanlar için kanıt üretmenize yardımcı olmuyorsa sezgisel olarak bir SNARK zaten esnek değildir.
+
+Biraz daha detay vermek gerekirse; eğer **x** girdisini onaylayan bir kanıtı **p** değiştirmek mümkün değil ise o SNARK yapısı \_esnek olmayan_dır. Biraz daha detaya girersek, **(p,x)**değerlerini bilmeden yapmanız durumunun haricinde, **x** girdisini **x’** girdisini onaylayan **p’** kanıtına çeviren **p** kanıtında değiştirme yapmak mümkün değil ise o SNARK esnek-olmayan yapıdadır
+
+Bu tip esnek olmama durumu için teknik terim olarak _simülasyon çıktısı_ kullanılabilir.
+
+### Ne zaman esnek olmayan bir yapıya ihtiyaç duyarım?
+
+Şahidin yada şahitlik edenlerin bir kısmının gizli kalması gereken uygulamalarda esnek olmama gerekli bir özellik olacaktır. Esnek bir SNARK kullanarakta aynı güvenlik seviyesini yakalamak mümkün olabilmektedir ama bu uzmanların karar vermesi gereken bir durumdur.
+
+Pratikte esnek olmayan bir SNARK kullanımının ihmal edilebilir bir performans düşüklüğü farklı olabileceği için bunun önemsiz olacağını düşünenler için ihtiyaç olmadığını düşünenler için bu tip bir SNARK kullanımında sorun olmayacaktır.
+
+## Kurulum Tipi
+
+Bir SNARK yapısı seçerken göz önünde bulundurulması gereken en önemli konulardan birisi kurulum tipidir. Bazı SNARKlar, SNARK içinanahtar oluşturmak üzere yazılım kullanan bir yada birden fazla güvenilir parti (güvenebiliceğiniz bir tanesi olan) içeren “kurulum” gerektirir. ZCash için yapılmış olan ve en çok duyulan “seremoni” de budur.
+
+İki tip kurulum vardır:
+
+1. **Evrensel.** Evrensel kurulumların sadece bir kez yapılması yeterlidir ve alınan anahtar tüm gelecek SNARK programları için tekrar kullanılabilmektedir.
+
+2. **Program başına.** Program başına kurulumlar her bir SNARK programı için bir kez çalıştırılmalıdır.
+
+Evrensel kurulumlar çok daha kullanışlıdır fakat program-başına SNARK yapılarının performansı daha iyidir.
+
+İlave olarak hiç bir kurulum gerektirmeyen SNARKlar vardır. Genel olarak bu SNARKların boyutları çok daha büyüktür: kurulumlu SNARKların 100 küsür bayt boyutuna karşılık, kurulum gerektirmeyenlerin 50-200kB seviyesine varan boyutları
+
+## Performans
+
+aşağıdaki verimlilik karakteristiklerini SNARK yapısı seçimi yaparken göz önünde bulundurmak önemlidir:
+
+- **Kanıtlama süresi.** Bir kanıt oluşturmak ne kadar sürer?
+- **Kanıt boyutu.** Bir kanıtın büyüklüğü ne kadardır?
+- **Onaylayıcı süresi.** Bir kanıtın kontrolü ne kadar sürer?
+
+Yinelemeli SNARK kullanmak isteyenler için ilgi çekici olabilecek farklı performans kriterleri de vardır. Fakat bu konu bu dökümanın kapsamı dışındadır.
+
+## Mimariye genel bakış
+
+Bizim kriterlerimize göre mevcut SNARK yapılarını değerlendirelim. Bazı parametrelerin performans açıklamaları tam anlamı ile uygulanmış ve adil yapılmış bir kıyaslama yapılmadığı sürece subjektif olacaktır. aşağıdaki tabloda birçok boşluk bulunmaktadır. Eğer çok ilginizi çekerse bunu paylaşmaktan çekinmeyin 
+
+<picture>
+  <source
+    media="(min-width:48rem)"
+    srcset="/static/img/docsImages/Documents_SNARKS_p3-01_Tablet 1.png"
+  />
+  <source media="(min-width:90rem)" srcset="/static/img/SnarksOverview.png" />
+  <img
+    src="/static/img/docsImages/Documents_SNARKS_p3-01_Mobile 1.png"
+    alt="Snark Workers"
+  ></img>
+</picture>
+
+## Dipnotlar
+
+Bu dökümanda “kurulum olmaksızın” derken, pratikte SHA256, blake2s, vb gibi bir hash fonksiyonu seçimi olan şeffaf bir kurulumdan bahsediyoruz.

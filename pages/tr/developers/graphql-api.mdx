@@ -1,0 +1,154 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "GraphQL API" });
+
+# GraphQL API
+
+<Alert kind="warning">
+
+- Mina API'leri hala yapým aþamasýndadýr, bu nedenle bu uç noktalar deðiþebilir.
+- Varsayýlan olarak, GraphQL baðlantý noktasý localhost'a baðlýdýr. GraphQL API'yi internete açmak, herkesin Mina'yý daemon tarafýndan bilinen hesaplardan göndermesine izin verir.
+
+</Alert>
+
+Mina daemon, çalýþan bir düðümden bilgi istemek ve komutlarý göndermek için kullanýlan bir [GraphQL API](https://graphql.org/) 'ý açýða çýkarýr.Varsayýlan olarak, bir HTTP sunucusu `3085`, numaralý baðlantý noktasýnda çalýþýr, ancak bu, daemon baþlatma komutuna `-rest-server` bayraðý iletilerek yapýlandýrýlabilir.
+
+GraphQL API'sini kullanmak için, GraphQL istemcinizi `http://localhost:3085/graphql` 'ya baðlayýn veya [GraphiQL IDE](https://github.com/graphql/graphiql) 'yi kullanmak için tarayýcýnýzda açýn.Varsayýlan olarak, güvenlik için yalnýzca `localhost` 'dan baðlantýlara izin verilir. Tüm arabirimleri dinlemek için, daemon baþlatma komutuna `-insecure-rest-server` bayraðýný ekleyin.
+
+Çalýþan düðüm hakkýndaki bilgilere ek olarak, GraphQL API, aðýn en son bloklarý hakkýndaki verileri de döndürebilir. Bununla birlikte, blok zincirinin tarihsel durumu Mina'da kalýcý olmadýðýndan, yalnýzca düðümün geçiþ sýnýrýndaki bloklar, yani son `k` bloklar iade edilecektir. Diðer geçmiþ veriler için, geçmiþ verileri saklamak ve almak için tasarlanmýþ arþiv düðümünü kullanmalýsýnýz.
+
+Tam Mina GraphQL þemasý[burada](https://minaprotocol.com/graphql-docs/index.html) mevcuttur.
+
+### Sorgularý:
+
+Mina GraphQL API, çalýþan bir düðümden veri çýkarmak için bir [sorguya](https://minaprotocol.com/graphql-docs/query.doc.html)sahiptir.[GraphQL sorgularý](https://graphql.org/learn/queries/) yanýtta döndürülecek verilerin belirlenmesine izin verir.Örneðin, daemon tarafýndan bilinen en son blok ve oluþturucu bilgilerini almak için:
+
+```
+query {
+  bestChain(maxLength: 1) {
+    creator
+    stateHash
+    protocolState {
+      consensusState {
+        blockHeight
+      }
+      previousStateHash
+    }
+    transactions {
+      coinbase
+    }
+  }
+}
+```
+
+Aþaðýdaki sorgu,[iþlem havuzunda](#) bekleyen tüm iþlemleri ücretleriyle birlikte talep eder. Bu sorgu, bir iþlem için önerilen bir ücretin tahminini oluþturmak için kullanýlabilir:
+
+```
+query {
+  pooledUserCommands {
+    id,
+    fee
+  }
+}
+```
+
+<Alert>
+
+Bu iþlem için döndürülen not alaný [Base58Check kodludur](https://en.bitcoin.it/wiki/Base58Check_encoding).
+
+</Alert>
+
+Birincil mina <DocLink copy="token" url="/architecture/tokens" />'ýna iliþkin bir hesabýn ayrýntýlarýný almak için:
+:
+
+```
+query {
+  account(publicKey: "<B62...>") {
+    balance {
+      total
+    }
+    delegate
+    nonce
+  }
+}
+```
+
+GraphQL isteklerini bir düðümün komut satýrýndan gönderebilirsiniz. Örneðin, düðümün bildiði son on blok oluþturucuyu almak için cURL'yi kullanmak için :
+
+```
+curl -d '{"query": "{
+  bestChain(maxLength: 10) {
+    creator
+  }
+}"}' -H 'Content-Type: application/json' http://localhost:3085/graphql
+```
+
+### Mutasyonlar:
+
+GraphQL mutasyonlarý, çalýþan düðümü bir þekilde deðiþtirir. Örneðin, bir ödeme göndermek, yeni bir hesap oluþturmak veya ek eþler eklemek için mutasyonlar kullanýlabilir.
+
+<Alert>
+
+Mevcut tüm mutasyonlar için [GraphQL þemasýna](https://minaprotocol.com/graphql-docs/mutation.doc.html) baþvurun.
+
+</Alert>
+
+Yeni bir eþ ekleme:
+
+```
+mutation {
+   addPeers(peers:{
+      libp2p_port:10511,
+      host:"34.73.68.198",
+      peer_id:"12D3KooWSJB2gZWi3ruVmtTF9JBCEBpCrJfuWCWzzRr8mMQWFQ9U"
+   })
+}
+```
+
+Bir snark iþçisini 0,1 mina ücret kullanacak þekilde güncelleyin:
+
+```
+mutation {
+  setSnarkWorkFee(input: {fee: "100000000"})
+}
+```
+
+### Abonelikler:
+
+GraphQL [abonelikleri](https://minaprotocol.com/graphql-docs/subscription.doc.html) bir GraphQL istemcisinin, bir olay meydana geldiðinde kendisine veri aktarýlmasýna izin verir. Mina'da þunlar için abonelikler vardýr:
+
+- _newSyncUpdate_ - düðümün senkronizasyon durumu deðiþtiðinde gerçekleþir.
+- _newBlock_ - yeni bir blok alýndýðýnda oluþur.
+- chainReorganisation - düðümün en iyi ucu önemsiz olmayan bir þekilde deðiþtiðinde oluþur.
+
+Örneðin, üretilen tüm yeni bloklara abone olmak için:
+
+```
+subscription {
+  newBlock {
+    creator
+    stateHash
+    protocolState {
+      consensusState {
+        blockHeight
+      }
+      previousStateHash
+    }
+  }
+}
+```
+
+Yeni blok aboneliði, ayný zamanda, yalnýzca `publicKey` argümanýna sahip tanýmlanmýþ bir açýk anahtar tarafýndan oluþturulan yeni bloklarý döndürmekle sýnýrlanabilir.
+
+### GraphQL Genel Proxy:
+
+GraphQL API'nin internete açýlmasý tavsiye edilmemekle birlikte, tehdit oluþturan sorgularý kaldýran ancak yine de düðüm verilerinin halka açýk bir uç noktadan sorgulanmasýna izin veren bir [GraphQL proxy](https://github.com/MinaProtocol/mina/tree/master/automation/services/graphql-public-proxy) uygulamasý mevcuttur.
+
+Genel proxy 'ye [buradan](http://graphql.o1test.net/graphql) ulaþýn.
+
+### Kaynaklar:
+
+- [Mina GraphQL API ile ilgili 5 dakikalýk tanýtým videosu](http://bit.ly/GraphQLAPIin5)
+- [Mina GraphQL API ile ilk Adýmlar](https://garethtdavies.com/crypto/first-steps-with-coda-graphql-api.html)
+- [GraphQL 'a Giriþ](https://graphql.org/learn/)
+- [Genel GraphQL proxy](http://graphql.o1test.net/graphql)

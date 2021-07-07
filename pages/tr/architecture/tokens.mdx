@@ -1,0 +1,123 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Tokens" });
+
+# Tokenlar
+
+Tokenlar kullanıcılara kendilerine ait tokenlar yaratmak ve mint etmek (basmak) için imkan sunar. Bu özel bir token hesabı gerektirir.
+
+<Alert kind="warning">
+
+`0.0.16-beta7` çıktıktan sonar bu özellik kullanılmamaktadır ve ancak bir bild-time flag kaldırılarak kullanılabilir. Gelecek versiyonlarda bu özelliği tekrar kullanıma sunmayı planlıyoruz.
+
+</Alert>
+
+Mina protocol üzerinde kullanıcılar mint edilebilen(yaratılan) ve özel token hesapları ile gönderilen kendi tokenlarını üretebilirler. Mina CLI (command-line arayüzü) Mina blkzinciri üzerindeki tokenlarla etkileşimin öncelikli yöntemidir. Yeni tokenlar oluşturmak, yeni token hesapları yaratmak, ve varsayılaların dışıda token mint etmek için gerekli fonsiyonları destekleyen client arayüzlerini sağlar. Token arayüzüne ilave olarak daha ileri seviye client ve arka plan komutları da bulunmaktadır. (see <DocLink copy="CLI Reference" url="/using-mina/cli-reference#cli-reference" />).
+
+## Token Üretmek
+
+CLI ile Mina üzerinde kendi tokenınızı üretebilirsiniz. Varsayılan tokenların dışındaki tokenlar Mina blokzinciri ile tanıtılan yeni bir token çeşididir. Bu yeni tip tokenların eşsiz bir belirleyicisi vardır ve bu şekilde blokzincirdeki diğer tokenlardan ayrışabilirler. Mina’nın kendi tokenından tamamen farklı olan bu yeni tip token kullanıcıların ilgili hesabından gönderilip alınabilir. Yeni bir token ürettikten sonraaynı zamanda kullanılmak üzere bu tokendan daha fazla mint edebilirsini. (aşağıda detayına bakın <DocLink copy="Minting Tokens" url="/architecture/tokens#minting-tokens" />).
+
+Yeni bir token üretirken, yeni token ID’si ve açık anahtarınız için bir token hesabı da üretilir.Bu token hesabı tokenın sahibidir ve bu tokendan daha fazla mint edebilir. Bu hesap aynı zamanda hesapları açıp kapatmak, ve bu token için yeni hesaplar yaratılıp yaratılmaması için yetki sahibidir.
+
+Yeni token üretmek mevcut işlem ücretlerine ilave ücrete tabidir. Bu ilave ücret yeni bir token hesabı yaratmak için ödenmesi gereken ücrettir. Kısaca normal işlem ücretlerine ilave olarak ödenmesi gereken bir hesap yaratma ücreti olduğunu lütfen not edin.
+
+### Yeni Bir Token Üretin
+
+```
+
+$ mina client create-token -sender <PUBLIC_KEY>
+
+```
+
+<Alert>
+
+Yeni bir token hesabı yaratmak için gerekli alan:
+
+- -**gönderen** : Transferi göndermek istediğiniz açık anahtar
+
+</Alert>
+
+Bu komutu nasıl kullanacağınızı öğrenmek için bakın.
+
+```
+
+$ mina client create-token -help
+
+```
+
+## Token Hesapları Yaratmak
+
+CLI ile, varolan okenlarınız için token hesabı oluşturabilirsiniz. Token hesapları normal hesaplar gibi olmakla beraber Mina protocol’de bulunan varsayılanların dışındaki tokenlarla etkileşime geçebilirler. Etkileşime geçmek istediğiniz her bir yeni token çeşidi için ayrı eşsiz bir token hesabı yaratmalısınız.
+
+<Alert kind="uyarı">
+
+Varolan bir tokenı göndermek ve almak için bu belirgin token için bir token hesabınız olması gereklidir. Eğer token ile uyumlu bir token hesabı yoksa transfer işlemi başarısız olacaktır.
+
+</Alert>
+
+### Yeni bir token hesabı yaratın
+
+```
+
+$ mina client create-token-account -token-owner <PUBLICKEY> -receiver <PUBLICKEY> -sender <KEY> -token <TOKEN_ID>
+
+```
+
+<Alert>
+
+Token sahibi verilmemişse CLI token sahibini bulmak için sorgu atar. Token sahibi bulunamazsa komut başarısız olur ve hata verir.
+
+Yeni bir token hesabı yaratmak için gerekli alanlar:
+
+- -**alıcı** : Yeni hesap yaratmak için açık anahtar, burada normal açık anahtarınızı tekrar kullanabilirsiniz.
+
+- -**gönderen** : Yaratmak istediğiniz hesap için açık anahtar
+
+- -**token** : The ID of the token from which you want to send the transaction
+
+</Alert>
+
+Bu komutu nasıl kullanacağınızı öğrenmek için bakın.
+
+```
+
+$ mina client create-token-account -help
+
+```
+
+## Token mint etmek
+
+CLI ile kendi tokenlarınızı mint edebilirsiniz. Sahip olduğunuz tokenları mint etmek en basit şekilde token arzını artırır. Varsayılan tokenların dışındaki tokenlar mint ederek üretilir ve bu tip tokenları üretmek için bunun dışında bir protocol etkinliği yada komut bulunmamaktadır. Bu komut sadece token sahibi tarafından yayınlanabilir fakat tokenlar kendilerine uygun varolan herhangi bir hesapta mint edilebilir.
+
+### Token mint edin
+
+```
+
+$ mina client mint-tokens -amount <VALUE> -sender <PUBLIC-KEY> -token <TOKEN_ID>
+
+```
+
+<Alert>
+
+Yeni bir token üretmek için gerekli alanlar:
+
+- -**miktar** : Üretilecek yeni token adedi
+
+- -**gönderen** : Transferi yapmak istediğiniz açık anahtar
+
+- -**token** : Mint edilecek token ID’si
+
+Yeni tokenların üretileceği hesabın açık anahtarın belirtilmesine imkan veren opsiyonel bir alan daha vardır:
+
+- -**alıcı** : Yeni tokenların üretileceği hesabın açık anahtarı
+
+</Alert>
+
+Bu komutu nasıl kullanacağınızı öğrenmek için bakın.
+
+```
+
+$ mina client mint-tokens -help
+
+```

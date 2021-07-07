@@ -1,0 +1,128 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Node Status Reporting" });
+
+# Düðüm Durum Raporlamasý
+
+Çeþitli hibelere ve Vakýf Delegasyon Programýna uygunluðu sürdürmek için, düðüm uptime'ýný bildirmek üzere daemon ile birlikte bir sidecar çalýþtýrmanýz gerekir.
+
+Bir hibe veya belirli bir program için düðümünüzü çevrimiçi tutmanýz gerekiyorsa, daemon'ýnýzýn uptime'ýný bildirecek küçük bir sidecar çalýþtýrmalýsýnýz. Bu eðitim, sidecar'ý kurma, yapýlandýrma ve çalýþtýrma sürecinde size yol gösterecektir.
+
+## Kurulum
+
+Sidecar , Debian / Ubuntu'ya yüklenebilen veya bir Docker çözümünün yanýnda çalýþtýrýlabilen ayrý bir pakettir.
+
+### Debian / Ubuntu
+
+Apt paket yöneticisini kullanarak sidecar paketini kurun.
+
+```
+sudo apt-get install -y mina-bp-stats-sidecar=1.1.3-48401e9
+```
+
+Bu, aþaðýdaki dosyalarý yükleyecektir:
+
+1. `/usr/local/bin/mina-bp-stats-sidecar` (mina sidecar program)
+2. `/etc/mina-sidecar.json` (mina sidecar için yapýlandýrma dosyasý)
+3. `/etc/systemd/system/mina-bp-stats-sidecar.service` (bir hizmet olarak çalýþtýrmak için systemd yapýlandýrmasý)
+
+Yapýlandýrma dosyasýný doðru parametrelerle güncellememiz gerekecek. Bu nedenle, tercih ettiðiniz düzenleyiciyi kullanarak `/etc/mina-sidecar.json` içeriðini aþaðýdakilerle deðiþtirin:
+
+```
+{
+  "uploadURL": "https://us-central1-mina-mainnet-303900.cloudfunctions.net/block-producer-stats-ingest/?token=72941420a9595e1f4006e2f3565881b5",
+  "nodeURL": "http://localhost:3095"
+}
+```
+
+### Docker
+
+Docker kullanýyorsanýz, bir sonraki bölümde çalýþtýracaðýmýz en son imajý kolayca çekebilirsiniz.
+
+```
+docker pull minaprotocol/mina-bp-stats-sidecar:latest
+```
+
+Daha sonra yapýlandýrma dosyasýný kurmamýz gerekecek, bu eðitim için Linux tabanlý bir ana sistemde olduðunuzu varsayacaðýz.
+
+```
+cd $HOME && touch ./mina-sidecar-config.json
+cat << EOF > ./mina-sidecar-config.json
+{
+  "uploadURL": "https://us-central1-mina-mainnet-303900.cloudfunctions.net/block-producer-stats-ingest/?token=72941420a9595e1f4006e2f3565881b5",
+  "nodeURL": "http://mina:3095"
+}
+EOF
+```
+
+Bir sonraki adýmda bu dosyayý Docker konteynerine aktaracaðýz.
+
+## Kullaným
+
+Bu sidecar'ýn çalýþan bir daemon ile iletiþim kurmasý gerekecek, bu nedenle önce daemon'ýnýzý baþlatmanýz gerekecek. sidecar'ýn daemon ile iletiþim kurabilmesi için daemon'ý `--limited-graphql-port 3095` bayraðýyla çalýþtýrmanýz gerekir. Ýleriki talimatlar [baðlantý sayfasýnda] (/docs/connect) bulunabilir.
+
+### Debian / Ubuntu
+
+Önce daemon'un ayný makinede `--limited-graphql-port 3095` bayraðýyla çalýþtýðýndan emin olun.
+
+Sidecar hizmetinin yeniden baþlatýldýðýnda çalýþmasýný saðlamak için (isteðe baðlý olarak) þunlarý kullanabilirsiniz:
+
+```
+sudo systemctl enable mina-bp-stats-sidecar
+```
+
+Ardýndan, sidecar hizmetini manuel olarak baþlatmak için þu komutu kullanýn:
+
+```
+sudo service mina-bp-stats-sidecar start
+```
+
+Oradan çalýþýp çalýþmadýðýný kontrol edebilir ve `service mina-bp-stats-sidecar status` ile en son loglarý görebilirsiniz.
+
+Sidecar hizmetinden log almak istiyorsanýz, `journalctl` kullanabilirsiniz:
+
+```
+journalctl -f -u mina-bp-stats-sidecar.service
+```
+
+### Docker
+
+Öncelikle daemon ve sidecar kapsayýcýlarý için bir að oluþturmanýz gerekir:
+
+```
+docker network create mina-network
+```
+
+Daha sonra, docker'a geçen `--network mina-network` ve bazý yeni bayraklar `--open-limited-graphql-port --limited-graphql-port 3095` ile daemon'u baþlatmanýz gerekecek.
+
+Sidecar kapsayýcýlarýný baþlatmak için aþaðýdaki komutu kullanmanýz yeterlidir:
+
+```
+docker run \
+--name mina-sidecar \
+--network mina-network \
+--restart=always -d \
+-v $(pwd)/mina-sidecar-config.json:/etc/mina-sidecar.json \
+minaprotocol/mina-bp-stats-sidecar:latest
+```
+
+`docker logs` komutunu kullanarak loglarý kontrol edebilirsiniz: :
+
+```
+docker logs -f mina-sidecar
+```
+
+## Sorun Bildirme
+
+Sidecar'ýnýzý çalýþtýrýrken, 400 hatasý alýrsanýz
+
+```
+INFO:root:Fetching block 2136...
+INFO:root:Got block data
+ERROR:root:HTTP Error 400: Bad Request
+
+-- TRACEBACK --
+
+ERROR:root:Sleeping for 30s and trying again
+```
+
+Bu, Mina düðümünüzde yapýlandýrýlmýþ herhangi bir blok üretici anahtarý olmadan verileri iþleme hattýna gönderdiðiniz anlamýna gelir - BP anahtarýnýz kimliðiniz olduðundan düðüm verilerini kimin gönderdiðini bilmediðimiz için kabul edemiyoruz!

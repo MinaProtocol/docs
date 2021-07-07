@@ -1,0 +1,29 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "BIP44 Information" });
+
+# BIP44 information
+
+| index | hexa       | sembol | coin                              |
+| :---- | :--------- | :----- | :-------------------------------- |
+| 12586 | 0x8000312a | MINA   | [Mina](https://minaprotocol.com/) |
+
+Mina 5. seviye [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) path formatı kullanır. Detayı burada verilmiştir [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
+
+```
+m / purpose' / coin_type' / account' / change / address_index
+```
+
+Keypairs (anahtar çiftleri) `change` ve `address_index` sıfır tutularak sadece `account` değiştirerek türetilir.
+
+# BIP32 path formatı
+
+```
+m / 44' / 12586' / account' / 0 / 0
+```
+
+# Örnekler
+
+| hesap | path                  |
+| :---- | :-------------------- |
+| 0     | m/44'/12586'/0'/0/0   |
+| 271   | m/44'/12586'/271'/0/0 |

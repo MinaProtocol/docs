@@ -1,0 +1,90 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Snark Workers for Node Operators" });
+
+## Giriþ
+
+Çoðu protokolde yalnýzca bir birincil düðüm operatörü grubu bulunurken (genellikle madenciler, doðrulayýcýlar veya blok üreticileri olarak adlandýrýlýr), Mina'nýn ikinci bir grubu vardýr â the **snark iþçileri**.
+
+Snark iþçileri, Mina aðýnýn saðlýðýnýn ayrýlmaz bir parçasýdýr, çünkü bu düðümler aðdaki iþlemlerin snarkinginden veya SNARK kanýtlarýnýn üretilmesinden sorumludur. Snark iþçileri, bu kanýtlarý üreterek Mina blok zincirinin özünü korumaya yardýmcý olur.
+
+Bu belgede, snark iþçilerine neden ihtiyaç duyulduðunu, ekonomik teþviklerin nasýl hizalandýðýný kýsaca ele alacaðýz ve snark iþlerin yapýlmasýna iliþkin operasyonel ayrýntýlarý saðlayacaðýz. Ýhtiyaçlarýnýzla en alakalý olan yukarýdaki bölümlerden herhangi birine týklamaktan çekinmeyin.
+
+Not: Bu belge esas olarak düðüm operatörlerini hedefler ve zk-SNARK'larýn teorisini kapsamaz. Bu bölümü okumak için SNARK'larla ilgili derin bilgiye sahip olmak gerekli deðildir, ancak SNARK'larýn nasýl çalýþtýðýný ve ne iþe yaradýðýný kabaca bilmek faydalý olacaktýr. Durum böyle deðilse, lütfen önce [SNARKs hakkýdaki bu el kitabýný](https://minaprotocol.com/blog/what-are-zk-snarks)kontrol edin.
+
+## Neden Snark Ýþçileri?
+
+Mina'nýn benzersiz özelliði kýsa ve öz blok zinciridir. Her blok üreticisi, aða yeni bir blok önerdiklerinde, bu blokla birlikte bir zk-SNARK da içermelidir. Bu, düðümlerin nihai hale getirilmiþ tüm geçmiþ verileri atmasýna ve yalnýzca SNARK'ý korumasýna olanak tanýr. Mina protokolüne aþina deðilseniz, [bu video iyi bir baþlangýçtýr](https://www.youtube.com/watch?v=eWVGATxEB6M).
+
+Bununla birlikte, sadece Mina'daki blok üreticilerinin bloklarýn SNARK provalarýný üretmesi yeterli deðildir. Ýþlemlerin de göz snark edilmesi gerekiyor. Bunun nedeni, SNARK blok zincirinin bloða dahil edilen iþlemlerin geçerliliðine iliþkin herhangi bir açýklama yapmamasýdýr.
+
+Örneðin, blok zincirinin þu anki baþýnýn bir durum hash'i `a6f8792226...`olduðunu ve durum hash'i `0ffdcf284f...` ile yeni bir blok aldýðýmýzý farz edelim.Bu blok, blok üreticisinin bu bloða dahil etmeyi seçtiði tüm iþlemleri ve iliþkili meta verileri içerecektir. Ayrýca beyaný doðrulayan bir SNARK alacaðýz:
+
+> "Durum hash'i 0ffdcf284f olan ve durum hash'i a6f8792226 ile blok zincirini bir önceki en iyi ipucu ile geniþleten bir blok var."
+
+Bu ifadenin yeni bloða dahil edilen iþlemlerin geçerliliði hakkýnda hiçbir þey söylemediðine dikkat edin. Bu SNARK'a inanýrsak ve baþka hiçbir þey yapmazsak, bu bloðu gönderen kötü niyetli bir blok üreticisi tarafýndan kandýrýlabiliriz. Neyse ki, raw bloðumuz var ve geçerli olduðundan emin olmak için her iþlemi kontrol edebiliriz. Ancak aðdaki, her bloðu doðrulamak yerine sadece kanýtý almak isteyebilecek düðümler ne olacak?
+
+## Snarking Ýþlemleri
+
+Düðümlerin Mina'ya güvenmeden çalýþabilmesini saðlamak için, her düðümün iþlemleri tekrar oynatmaya gerek kalmadan zincirin durumunu doðrulayabilmesi önemlidir. Bunun çalýþmasý için yukarýdaki blockchain SNARK yeterli deðildir. Ýþlemlerin de geçerli olduðunu bilmemiz gerekiyor. Pekala, SNARK'lar tam olarak bunun için iyi olduðundan,en mantýklý öneri, gelen her iþlem için bir SNARK oluþturmak ve sonra bunlarý birleþtirmek olabilir.
+
+Ancak, SNARK kanýtlarý oluþturmak hesaplama açýsýndan pahalýdýr â eðer her iþlem için SNARK'larý seri olarak hesaplamak zorunda kalýrsak, iþ hacmi çok düþük olur ve blok süreleri fýrlar. Dahasý, gerçek dünya ortamýndaki iþlemler eþzamansýz olarak gelir, bu nedenle bir sonraki iþ öðesinin ne zaman gerçekleþtirileceðini tahmin etmek çok zor olacaktýr.
+
+Þanslýyýz ki, SNARK'larla ilgili iki özelliðimizden yararlanabiliyoruz:
+
+1.ispatlar birleþtirilebilir - bir _birleþtirme kanýtý_ oluþturmak için iki kanýt birleþtirilebilir
+2.birleþtirmeler iliþkiseldir - birleþtirme provalarý, birleþtirilmiþ sýraya bakýlmaksýzýn aynýdýr
+
+<picture>
+  <source
+    media="(min-width:48rem)"
+    srcset="/static/img/docsImages/Documents_FAQFork_Tablet 1.jpg"
+  />
+  <source
+    media="(min-width:90rem)"
+    srcset="/static/img/docsImages/Documents_SNARKS_p3-01 1.jpg"
+  />
+  <img
+    src="/static/img/docsImages/Documents_FAQFork_Mobile 1.jpg"
+    alt="Snark Workers"
+  ></img>
+</picture>
+
+Bu iki özelliðin aslýnda yapmamýza izin verdiði þey, paralellikten yararlanmaktýr. Provalar birleþtirilebiliyorsa ve nasýl birleþtirildikleri önemli deðilse, SNARK kanýtlarý paralel olarak üretilebilir. Hangi kanýt önce biterse, daha sonra devam eden kanýtlarla birleþtirilebilir.
+
+Bu, alt satýrýn (yapraklar) ayrý iþlem provalarýndan ve her bir ana satýr, ilgili birleþtirme provalarý kümesinden oluþtuðu ikili bir aðaç olarak düþünülebilir.
+
+Bunlarý, tüm iþlemleri uygulayarak gerçekleþtirilen bir durum güncellemesini temsil eden köke kadar birleþtirebiliriz.
+
+Ek olarak, SNARK kanýtlarý birbirine baðlý olmadýðý ve paralellikten yararlanabildiðimiz için, bu herkesin iþi yapabileceði anlamýna gelir! Sonuç, daðýtýlmýþ iþ havuzunun izinsiz olmasýdýr. Spare compute'a sahip olan herkes aða snark iþçileri olarak katýlabilir, snark edilmesi gereken iþlemleri gözlemleyebilir ve hesaplamalarýna katkýda bulunabilir. Ve tabii ki, **the snarketplace** dediðimiz yerde yaptýklarý iþin karþýlýðýný alacaklar.
+
+Not: Bu snark iþ planýnýn nasýl geliþtiðine dair ayrýntýlar hakkýnda daha fazla bilgi edinmek için, bu videoyu izlemeniz önemle tavsiye edilir: Yavaþ Snarks ile Yüksek Verimlilik. [Yavaþ Snarks ile Yüksek Ýþ Hacmi](https://www.youtube.com/watch?v=NZmq1V-Te0E).Ýþlevsel programlama ve tarama durumunun ayrýntýlarý (yukarýda açýklanan aðaç yapýsý) ile ilgileniyorsanýz, teknik ayrýntýlarý kapsayan [bir blog gönderimiz](/blog/scanning-for-scans) veya bu biçimi tercih ederseniz [bir videomuz](https://www.youtube.com/watch?v=ztH_Z5TCe9I) var.
+
+## Snarketplace
+
+Snark çalýþmasý hakkýnda anlaþýlmasý gereken temel dinamik þudur:
+
+_Blok üreticileri, blok ödüllerini, snark iþçilerinden snark iþi satýn almak için kullanýr._
+
+Snark'larý fiyatlandýrmada herhangi bir protokol katýlýmý yoktur ve iþçilerinin snark üretmeleri için herhangi bir protokol düzeyinde ödül yoktur. Teþvikler tamamen eþler arasýdýr ve dinamik olarak halka açýk bir pazarda, diðer adýyla snarketplace'de oluþturulur.
+
+Bir blok üreticisinin neden SNARK satýn almasý gerektiðini sorabilirsiniz. Adil soru â nedeni daha önce bahsettiðimiz þeyden kaynaklanýyor. Mina blok zincirinin baþýndaki durumun geçerli olduðundan emin olmak için, iþlemlerin snark alýnmasý gerekir. Ancak, eþit hýzda snark etmeden daha fazla iþlem eklemeye devam edersek, zamanla bitmeyen iþleri biriktiririz. Kararlý bir durum dengesine ulaþmak için, iþin kabaca iþin eklendiði hýzda iþlenmesi gerekiyor.
+
+Blok üreticileri, bir bloktaki iþlemleri dahil etmekten (iþlem ücretleri ve coinbase iþlem yoluyla) kazanç saðladýklarý için, eþit sayýda tamamlanmýþ snark iþi satýn alarak iþlemleri dengelemekten sorumludurlar, böylece snark iþi için talep yaratýrlar. Bununla birlikte, onlarýn zorunluluðu, snarketplace'den en düþük fiyata snark iþi satýn almaktýr. Tersine, snark iþçileri, karlarýný en üst düzeye çýkarýrken, ayný zamanda snark iþlerini satabilmeyi isterler. Bu iki rol, piyasanýn iki yüzü olarak hareket eder ve zamanla snark iþ için bir piyasa fiyatýnda bir denge kurar.
+
+### Snark iþi naýl fiyatlandýrýlýr
+
+Snarketplace'in dinamik olarak yeniden dengelenmesini bekliyoruz â ör. basit [supply and demand](https://en.wikipedia.org/wiki/Supply_and_demand) yasalarýný takip edin. Daha geniþ bir perspektiften bakýldýðýnda, her bir snark iþ farklý bir iþlem için geçerliyken, snark iþ büyük ölçüde bir metadýr (yani hangi snark iþçinin malý ürettiði önemli deðildir â ayný olacaktýr). Bununla birlikte, bazý nüanslar vardýr, bu nedenle fiyatlandýrma stratejisi için bazý buluþsal yöntemlere sahip olmak yardýmcý olabilir:
+
+- eðer piyasa fiyatý X ise, iþletme giderlerinden sonra karlý olmasý koþuluyla, X'in altýndaki herhangi bir fiyattan (örneðin X - 1) snark bir iþ satmak muhtemelen etkilidir.
+- Blok üreticileri, bloða dahil etmeleri gereken yalnýzca bir _ücret transfer_ iþlemi olacaðý için, ayný snark iþçiden daha fazla snark iþi satýn almaya teþvik edilir.
+
+  - Temel olarak, bir blok üreticisinin bir snark iþçiye ödeme þekli, ücret transferi adý verilen özel bir iþlem türüdür. BP'nin teþviki, her biri bir bloða eklenmesi gereken (ve sonuç olarak daha fazla snark iþ ile dengelenmesi) ayrý bir iþlem olduðundan, ücret transferlerinin sayýsýný en aza indirmektir. Bu nedenle, en iyi durum senaryosu, ayný snark iþçiden bir grup snark iþi satýn almaktýr.
+
+- bir aðacýn hafýzasýný boþaltacaðýndan, bazý snark iþleri diðer iþlerden önce tamamlamak daha önemli olacaktýr (daha fazla ayrýntý için yukarýdaki videoya bakýn). Bu, farklý iþ seçim yöntemleriyle mümkün kýlýnmýþtýr. Þu anda, yerel olarak desteklenen iki yöntem sýralý ve rastgeledir. Ancak bunlarýn hiçbiri, Mina topluluðunun çözüm geliþtirebileceði bir iyileþtirme alaný olan dinamik pazarlardan yararlanamaz.
+
+Snark ve fiyatlar hakkýndaki tüm veriler kamuya açýk olduðundan, snarketplace'i incelemenin birkaç yolu vardýr. Bir örnek [GraphQL API kullanmaktýr](https://youtu.be/XQlfX-LnK_A) ve diðer seçenekler arasýnda CLI kullanýmý veya snark mempool'daki snarks'ý izleyen özel bir çözüm yer alýr.
+
+Snarketplace dinamikleri hakkýnda daha ayrýntýlý analiz için bizi izlemeye devam edin. Ayrýca, kýsa süre içinde daha fazla içerik saðlayacak bir ekonomik whitepaper yayýnlayacaðýz.
+
+Ayrýca bakýnýz: <DocLink copy="SNARKs ve Snark Workers FAQ" url="/faq#snarks-and-snark-workers" />

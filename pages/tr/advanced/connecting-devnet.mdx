@@ -1,0 +1,79 @@
+import Page from "@reason/pages/Docs";
+import StatusBadge from "@reason/components/StatusBadge";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Connect to Devnet" });
+
+# Devnet'e Baðlanýn
+
+Bu bölümde `Devnet` aðýna baðlanacaðýz. `Devnet` Mina protokolü üzerine inþa eden geliþtiricilere adanmýþ bir aðdýr. Geliþtiricilerin test edilmesi ve denenmesi için tasarlanmýþtýr ve gerçek bir deðeri yoktur. Kullanýcýlar, ön ödemeli bir hesap talep etmek isterlerse Discord üzerinden iletiþime geçebilirler.
+
+`Devnet` aðýný yalnýzca geliþtiriciyseniz ve Mina protokolünün üzerine inþa ediyorsanýz kullanýn. Bir düðüm çalýþtýrmakla ilgileniyorsanýz,lütfen <DocLink copy="Mainnet RC" url="/using-mina/connecting" />'ye baðlanýn.
+
+## Yazýlýmýnýzý Güncelleyin
+
+`Devnet` 'e baðlanmak için Mina istemcisinin belirli bir yapýsýnýn yaný sýra eþler listesinin belirli bir sürümü gerekir. `Devnet` derleme ve eþler listesini kullanmak `Zenith` için çalýþmaz.
+
+Aþaðýdaki iþletim sisteminiz için aþaðýdaki talimatlarý izleyin.
+
+### Ubuntu 18.04 / Debian 9
+
+En son sürüme yükseltirken herhangi bir hata oluþmasýný önlemek için öncelikle daemon'ýn önceden yüklenmiþ herhangi bir sürümünü kaldýrýn. Ardýndan en son sürümü aþaðýdaki þekilde kurabilirsiniz:
+
+```
+sudo apt-get remove -y mina-testnet-postake-medium-curves
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+sudo apt-get update
+sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-68200c7
+```
+
+`mina version` çalýþtýrarak daemon'un doðru kurulup kurulmadýðýný kontrol edin.
+Çýktý`Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD` þeklinde okunmalýdýr.
+
+## Bir Düðüm Baþlatýn
+
+<Alert kind="status">
+
+Aðýn ve ilgili hizmetlerin mevcut durumunu burada [status.minaprotocol.com](https://status.minaprotocol.com)bulabilirsiniz.
+
+Testnet Durumu: <StatusBadge service="Network" />
+
+</Alert>
+
+Bir Mina düðümü örneði baþlatmak ve `Devnet` aðýna baðlanmak için aþaðýdaki komutlarý çalýþtýrýn:
+
+```
+mina daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+```
+
+### Docker
+
+Daemon'unuzu Docker kullanarak çalýþtýrýrken, önce özel anahtarýnýzýn doðru izinlere sahip olduðundan emin olun.
+
+```
+cd ~
+chmod 700 ~/keys
+chmod 600 ~/keys/my-wallet
+mkdir ~/.mina-config
+```
+
+Þimdi görüntüyü anahtarlarýnýzla ve ~/.mina-config baðlayarak çalýþtýrýn:
+
+```
+docker run --name mina -d \
+-p 8302:8302 \
+--restart=always \
+--mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
+--mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
+-e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
+minaprotocol/mina-daemon-baked:1.0.5-68200c7 \
+daemon \
+--block-producer-key /keys/my-wallet \
+--insecure-rest-server \
+--file-log-level Debug \
+--log-level Info \
+--peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+```
+
+Loglarý takip etmek için `docker logs -f mina` çalýþtýrýn ve çökerse log çýktýsýný docker loglarýný `docker logs mina > mina-log.txt` olan bir dosyaya kaydedin.
+
+Aða olan baðlantýyý izlemek için `docker exec -it mina mina client status` çalýþtýrýn.

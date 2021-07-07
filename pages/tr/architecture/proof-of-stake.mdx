@@ -1,0 +1,36 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Proof of Stake" });
+
+# Hisse Kanýtý
+
+Mina'da uygulanan hisse konsensüs mekanizmasýnýn kanýtý, Ouroboros Praos [Ouroboros Praos](https://iohk.io/research/papers/#XJ6MHFXX) protokolünün bir sürümüdür, kýsa ve öz blok zincirimiz için biraz geniþletilmiþ ve deðiþtirilmiþtir.Bu belge, Ouroboros'un hisse senedi kanýtýnýn deðiþikliklerimiz ve eklemelerimizle ilgili ayrýntýlý bölümler ile birlikte nasýl çalýþtýðýna dair üst düzey bir genel bakýþ saðlayacaktýr.Ouroboros protokolünün tam açýklamasý için lütfen orijinal Ouroboros belgelerine bakýn:
+[orijinal](https://eprint.iacr.org/2016/889.pdf) and [Praos](https://eprint.iacr.org/2017/573.pdf).
+
+### Praos, Genesis ve Mina hakkýnda bir not
+
+Ouroboros uygulamamýz resmi olarak Praos'un bir uzantýsýdýr. Bununla birlikte, Praos'u geniþleten Ouroboros Genesis adýnda daha yeni bir makale var. Bu uzantý, uzun çatal saldýrýlarýný içeren bir güvenlik açýðýný düzeltir, ancak bu, bu makalede açýklandýðý gibi kýsa ve öz bir blok zinciri protokolünde uygulanamaz.
+
+Bunun yerine, bu[belgenin baþka bir bölümünde](#Uzun-Çatal-Saldýrý-Önleme) ayrýntýlý olarak açýklanan uzun çatal saldýrýlarýna karþý koruma için yeni ve kýsa bir yöntem sunuyoruz.
+
+## Paraso Eklemeler
+
+### Dönem Defteri Optimizasyonu
+
+Ouroboros'ta, düðümlerin VRF deðerlendirmeleri için önceki dönemin baþýnda bir defter tutmasý gerekir.Bunun nedeni, bir bloðun dürüstçe önerildiðini bilmek için sadece bir VRF çýktýsýna sahip olmak yeterli deðildir. Bir bloðun, onu öneren düðüm tarafýndan kazandýðýný bilmek için, VRF çýktýsý, defterdeki toplam para birimi ile orantýlý olarak, teklif verenin hissesi tarafýndan belirlenen bir eþiðin altýnda kalacak þekilde olmalýdýr. Mina gibi kýsa ve öz bir protokolde, geçmiþte böyle bir defteri gerçekleþtirmek / saklamak kolay bir iþ deðildir.Özlü olmayan bir blok zincirinin aksine, düðümler ilgilendikleri bilgileri yeniden yapýlandýrmak için geçmiþte zincirin parçalarýný keyfi olarak talep edemezler.Bu, bu özelliði saf bir þekilde uygulayacak olsaydýk, herhangi bir zamanda tüm defterin toplam 3 kopyasýný tutmamýz ve bu bilgilere eriþebilmemiz için en az 2 tam dönem boyunca çevrimiçi beklememiz gerektiði anlamýna gelir.Biraz düþünürsek çok daha iyisini yapabiliriz.
+
+Ouroboros'un blok kazananlarý nasýl kanýtladýðý ile Mina'nýn onlarý nasýl kanýtladýðý arasýnda büyük bir fark var. Ouroboros'ta, her düðümün, bir blok önericisinin blok teklifini aldýðýnda aslýnda bir blok kazandýðýný doðrulamasý gerekir, bu da VRF'yi deðerlendiren açýk anahtar için dengeye bakmalarý gerektiði anlamýna gelir.Bununla birlikte Mina'da, VRF deðerlendirmesinin doðruluðu SNARK'ta hesaplanabilir, bu nedenle diðer düðümlerin bloðun bir kazanan tarafýndan önerildiðini bilmek için yalnýzca SNARK'ý doðrulamasý gerekir. Bir teklif veren bunu kendisi kanýtladýðýndan, dönem defterleri hakkýnda saklamasý gereken bilgileri, teklif edebileceði herhangi bir hesabýn (kendisi ve tüm yetkilendirilmiþ hesaplarý) yalnýzca hesap kaydý ve merkle yolu ile sýnýrlayabilir.Dahasý, Ouroboros bize kesinlik noktasýna iki dönemden önce ulaþýlacaðýný garanti ettiðinden, teklif veren, bu bilgiyi sonlandýrmadan sonra yakalamak için bekleyebilir, bu da saklamasý gereken bilgileri daha da sýnýrlandýrabilir.Bu bilgi daha sonra SNARK'a aktarýlýr ve bu da þunu kanýtlar:
+
+1. VRF deðerlendirmesi, saðlanan açýk anahtar için doðrudur ve
+2. açýk anahtar için hesap, dönem defterinde, VRF çýktýsýndan daha büyük bir VRF eþiði oluþturan bir bakiye ile mevcuttur (dönem defterinin merkle kökünü hesaptan kanýtlamak için merkle yolunu kullanarak).Bu, bu gerekli bilgiyi depolamak için yeterince uzun süre çevrimiçi olmasý gereken bir teklif veren düðüm sorununu hemen ele almaz, ancak bu bilgiyi elde eden teklif verenin diðer yollarýný açar. Esas olarak, teklif veren, belirli bir dönem defterinde varlýðýný kanýtlayan bir hesap kaydý ve merkle yolu talep edebilir.Mevcut uygulamada, hiçbir düðüm bu bilgiyi saklamaz ve eriþim için hazýrlamaz, ancak gelecekte teklif verenlerin muhtemelen bir tür ücret karþýlýðýnda bu bilgileri saðlayarak daha hýzlý çevrimiçi ve aktif hale gelmesine izin verecek bir hizmetin oluþturulacaðý düþünülebilir.
+
+### Uzun Çatal Saldýrý Önleme
+
+**TODO**
+
+## Yapýlandýrma Sabit Deðiþiklikleri
+
+**TODO**
+
+## Uygulama Ayrýntýlarý
+
+**TODO**

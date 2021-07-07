@@ -1,0 +1,102 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Client SDK" });
+
+# Client SDK
+
+[Mina Client Javascript SDK’sı](https://www.npmjs.com/package/@o1labs/client-sdk) keypairleri üretmeyi, mesajları imzalamayı ve doğrulamayı, ve ağa yayılacak transfer işlemlerini imzalamayı sağlar.
+
+Proje Typescript and ReasonML yazımları içerir fakat düz NodeJS’den de faydalanılabilir. aşağıdaki yöntemler mevcuttur:
+
+- `genKeys` - açık ve özel anahtarları oluşturur.
+- `derivePublicKey` - özel anahtara ait açık anahtarı üretir.
+- `signMessage` - isteğe bağlı mesajı imzalar.
+- `verifyMessage` - bir imza ile mesajın eşleştiğini doğrular.
+- `signPayment` - özel anahtar kullanarak ödemeyi onaylar.
+- `signStakeDelegation` - özel anahtar kullanarak stake delegasyonunu imzalar.
+
+<Alert>
+
+Client SDK’sı özel anahtarı hiç bir zaman internete tanıtmayan aralıklı cihazlar üzerinde transfer işlemleri yaratma ve imzalamayı mümkün kılar.
+
+</Alert>
+
+## İndir
+
+```
+yarn add @o1labs/client-sdk
+# or with npm:
+npm install --save @o1labs/client-sdk
+```
+
+## Kullanım
+
+### Typescript
+
+```
+import * as MinaSDK from "@o1labs/client-sdk";
+
+let keys = MinaSDK.genKeys();
+let signed = MinaSDK.signMessage("hello", keys);
+if (MinaSDK.verifyMessage(signed)) {
+    console.log("Message was verified successfully")
+};
+
+let signedPayment = MinaSDK.signPayment({
+    to: keys.publicKey,
+    from: keys.publicKey,
+    amount: 1,
+    fee: 1,
+    nonce: 0
+  }, keys);
+```
+
+### NodeJS
+
+```
+const MinaSDK = require("@o1labs/client-sdk");
+
+let keys = MinaSDK.genKeys();
+let signed = MinaSDK.signMessage("hello", keys);
+if (MinaSDK.verifyMessage(signed)) {
+    console.log("Message was verified successfully")
+};
+
+let signedPayment = MinaSDK.signPayment({
+    to: keys.publicKey,
+    from: keys.publicKey,
+    amount: 1,
+    fee: 1,
+    nonce: 0
+  }, keys);
+```
+
+### ReasonML
+
+- gentype yükle: `yarn add -D gentype`
+- bs-platform yükle: `yarn add -D bs-platform`
+- destek dosyalarını kur: `yarn bsb -make-world`
+
+```
+module MinaSDK = O1labsClientSdk.CodaSDK;
+
+let keys = MinaSDK.genKeys();
+let signed = MinaSDK.signMessage(. "hello", keys);
+if (MinaSDK.verifyMessage(. signed)) {
+  Js.log("Message was verified successfully");
+};
+
+let signedPayment = MinaSDK.signPayment({
+    to_: keys.publicKey,
+    from: keys.publicKey,
+    amount: "1",
+    fee: "1",
+    nonce: "0"
+  }, keys);
+```
+
+<Alert>
+
+Transfer işlemlerini yaratırken hesaba ait nonce açıkça belirtilmelidir. Bu bir hesap için `mina advanced get-nonce -address <PUBLIC_KEY>` kullanan yada <DocLink copy="GraphQL" url="/developers/graphql-api" />kullanan CLI aracılığı ile mümkündür.
+
+</Alert>
