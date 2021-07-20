@@ -46,7 +46,7 @@ At the end of each epoch, do the following:
 
 1. Compute the total stake delegated to your account for the epoch
 2. Compute the share of stake from the token provider (from both accounts) by dividing the token provider delegation by the total stake. (i.e. `provider_share = provider_delegation / total_stake`). The resulting share should be between 0 and 1.
-3. For each block produced on the canonical chain calculate the payout by multiplying the non-supercharged coinbase reward (equal to 720 MINA at Mainnet launch) by the provider share calculated in the previous step minus a 5% percent fee. (i.e. `payout = (provider_share * 0.95) * coinbase`)
+3. For each block produced that has a non-zero block-reward on the canonical chain, calculate the payout by multiplying the non-supercharged coinbase reward (equal to 720 MINA at Mainnet launch) by the provider share calculated in the previous step minus a 5% percent fee. (i.e. `payout = (provider_share * 0.95) * coinbase`)
 4. Send a transaction to the token provider accounts with the appropriate payout -- please follow the rules in the "Payout Attribution" section with your transaction.
 
 The canonical chain will be calculated as 12 blocks behind any tip at slot 3,500 of the next epoch.
