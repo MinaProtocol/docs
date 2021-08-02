@@ -106,6 +106,8 @@ You can download a specific block using curl:
 curl https://mina_network_block_data.storage.googleapis.com/<filename.json>
 ```
 
+You can import this file using the mina archive blocks tool. The command for it is `mina-archive-blocks --precomputed --archive-uri <postgres uri> FILE`.
+
 ## How do I query for the canonical block at a certain height from the archive node
 
 This can be accomplished using a recursive query. See <DocLink copy="Example #3" url="/advanced/archive-node#try-a-query" /> in the Archive Node docs, for a full example.
