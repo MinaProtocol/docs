@@ -45,7 +45,7 @@ MINA_STATUS=$($MINA client status --json)
 HIGHESTBLOCK="$(echo $MINA_STATUS | jq .highest_block_length_received)"
 HIGHESTUNVALIDATEDBLOCK="$(echo $MINA_STATUS | jq .highest_unvalidated_block_length_received)"
 # Calculate difference between validated and unvalidated blocks.
-# If block height is more than 4 block behind, somthing is likely wrong.
+# If block height is more than 4 block behind, something is likely wrong.
 DELTAVALIDATED="$(($HIGHESTUNVALIDATEDBLOCK-$HIGHESTBLOCK))"
 if [[ "$DELTAVALIDATED" -gt 4 ]]; then
   $MINA client stop

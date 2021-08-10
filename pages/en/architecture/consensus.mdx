@@ -65,7 +65,7 @@ The `select` hook informs the protocol that, given two states, which state is "b
 
 ### received_at_valid_time
 
-The `received_at_valid_time` hook is a predicate on whether or not a given consensus state is valid at a given time. This lets the consensus mechanism optionally control temporal properties of when a consensus state was valid to generate, rejecting the received protocol state if it was recieved out of band. The implementation of the protocol should call this hook whenever a transition is received from the network, before processing the transition and adding it to the frontier.
+The `received_at_valid_time` hook is a predicate on whether or not a given consensus state is valid at a given time. This lets the consensus mechanism optionally control temporal properties of when a consensus state was valid to generate, rejecting the received protocol state if it was received out of band. The implementation of the protocol should call this hook whenever a transition is received from the network, before processing the transition and adding it to the frontier.
 
 ### frontier_root_transition
 
