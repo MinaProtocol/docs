@@ -88,7 +88,7 @@ A payment is valid if:
 
 1. The signature is valid w.r.t. the public key of the sender
 2. The sender has enough balance to pay out the fee and the amount
-3. The reciever has enough room for the amount s.t. there won't be an overflow
+3. The receiver has enough room for the amount s.t. there won't be an overflow
 4. The [account nonce](#account-nonce) matches the nonce inside the payment.
 
 When we apply a payment we also cons it onto the [receipt chain](#receipt-chain-hash), and increment the account nonce.
