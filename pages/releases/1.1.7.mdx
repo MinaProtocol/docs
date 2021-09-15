@@ -1,12 +1,34 @@
 import Page from "@reason/pages/Docs";
-export default Page({ title: "Release 1.1.7" });
+export default Page({ title: "Mainnet Stable Release 1.1.7" });
 
-# Release 1.1.7
+# Mainnet Stable Release 1.1.7
 
-## Installation
+While hard at work on the 1.2.0+ releases, the O(1) Labs team discovered an issue with the transaction inclusion logic. In an abundance of caution, we have provided a stable fix on top of the existing 1.1.5 codebase, tagged as 1.1.7 to avoid any confusion with the previous 1.1.6alpha naming convention.
+
+The changes have been thoroughly tested, and are limited to the minimal change to prevent future issues. Without this change, in rare circumstances any blocks or snark work your nodes produce may get rejected by the network. To run this same change on the 1.2.0 beta release channel, see [1.2.0beta6](/releases/1.2.0beta6).
+
+## Upgrading & Connecting
+
+### Daemon Release Artifacts:
+
+Docker Image:
+`gcr.io/o1labs-192920/mina-daemon:1.1.7-8b80d17-mainnet`
+
+Debian Package:
 
 ```bash
 curl -o mina-mainnet_1.1.7.deb https://s3.us-west-2.amazonaws.com/packages.o1test.net/pool/unstable/m/mi/mina-mainnet_1.1.5%2B-feature-tweak-d5ff5aa.deb
 
 sudo dpkg --install mina-mainnet_1.1.7.deb
+```
+
+### Step by Step Guide:
+
+Check out [our documentation](https://docs.minaprotocol.com/en/using-mina/connecting) for complete instructions on using this version to connect to Mainnet. Make sure to run with `--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt`.
+
+If you are running the correct version on the correct network, `mina client status` will show:
+
+```
+Chain id:     5f704cc0c82e0ed70e873f0893d7e06f148524e3f0bdae2afb02e7819a0c24d1
+Git SHA-1:    8b80d173a2a6f1efd935df7718d2a9a030d569fd
 ```
