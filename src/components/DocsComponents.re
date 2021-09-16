@@ -135,7 +135,7 @@ module A =
 
 module Strong =
   Wrap({
-    let element = <strong className={style([fontWeight(`num(500))])} />;
+    let element = <strong className={style([fontWeight(`num(600))])} />;
   });
 
 [@bs.scope ("navigator", "clipboard")] [@bs.val]

@@ -9,12 +9,10 @@ While working on stabilizing 1.2.0, the O(1) Labs team discovered an issue with 
 
 ### Daemon Release Artifacts:
 
-Docker Image:
+**Docker Image:**
 `gcr.io/o1labs-192920/mina-daemon:1.2.0beta6-bee023a-mainnet`
 
-Debian Package:
-_NOTE_: --peers-list-url flag is no long required when running with `systemctl --user ...`
-To allow for installation of mina `beta` builds:
+**Debian Package:** _NOTE_: --peers-list-url flag is no long required when running with `systemctl --user ...`
 
 ```
 curl -o mina-mainnet_1.2.0beta6.deb https://s3.us-west-2.amazonaws.com/packages.o1test.net/pool/stretch/m/mi/mina-mainnet_1.2.0beta5-feature-tweak2-bee023a.deb
@@ -30,5 +28,5 @@ If you are running the correct version on the correct network, `mina client stat
 
 ```
 Chain id:     5f704cc0c82e0ed70e873f0893d7e06f148524e3f0bdae2afb02e7819a0c24d1
-Git SHA-1:    b7787497485e1bb08dc4b0bd7e40ca8a421261de
+Git SHA-1:    bee023a25b8884813dc14a843c569dc297878c0a
 ```
