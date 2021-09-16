@@ -19,10 +19,10 @@ export default Page({ title: "Connect to the Network" });
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.3-48401e9
+sudo apt-get install -y curl unzip mina-mainnet=1.1.7-d5ff5aa
 ```
 
-Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit 48401e92d94948c066c03ca76326c065e5cbfc92 on branch master`.
+Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit d5ff5aa207e64bcd6862e1ae9a3b83910c1c7b1d on branch master`.
 
 ## Установка ноды
 
@@ -126,7 +126,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:1.1.3-48401e9 \
+minaprotocol/mina-daemon-baked:1.1.7-d5ff5aa-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \
