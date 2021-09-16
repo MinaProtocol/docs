@@ -25,10 +25,12 @@ export default Page({ title: "Mina Generate Keypair" });
 После <DocLink copy="добавления репозитория Mina" url="/getting-started#ubuntu-1804--debian-9" /> , вы можете просто выполнить следующую команду.
 
 ```
-sudo apt-get install mina-generate-keypair=1.1.5-a42bdee
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+sudo apt-get update
+sudo apt-get install mina-generate-keypair=1.1.7-d5ff5aa
 ```
 
-Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit a42bdeef6b0c15ee34616e4df76c882b0c5c7c2a on branch master` на выходе.
+Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit d5ff5aa207e64bcd6862e1ae9a3b83910c1c7b1d on branch master` на выходе.
 
 ### Windows / Другие платформы
 

@@ -2,21 +2,19 @@ import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Mina Generate Keypair" });
 
-
 # mina-generate-keypair
 
 To simplify the process of creating a keypair, we've created a simple command-line utility called `mina-generate-keypair`. The `mina-generate-keypair` tool has easy to use functionality to create your own Keypair to start participating in the Mina network. Please see below to see how to install and use on your local system.
 
-<br/>
+<br />
 
 <Alert kind="warning">
-Never reuse the same keypair from a testnet on mainnet!
+  Never reuse the same keypair from a testnet on mainnet!
 </Alert>
 
 ## Installation
 
 We support several different operating systems for the `mina-generate-keypair` tool. Follow the instructions below to install the tool onto your system.
-
 
 ### macOS
 
@@ -27,10 +25,12 @@ If you are using macOS please install Docker and follow the docker based instruc
 After <DocLink copy="adding the Mina repo" url="/getting-started#ubuntu-1804--debian-9" /> you can simply run the following command.
 
 ```
-sudo apt-get install mina-generate-keypair=1.1.5-a42bdee
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+sudo apt-get update
+sudo apt-get install mina-generate-keypair=1.1.7-d5ff5aa
 ```
 
-Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit 06f3c5cdeb635b2564fcb2edac4f10db85b93c36 on branch master`.
+Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit d5ff5aa207e64bcd6862e1ae9a3b83910c1c7b1d on branch master`.
 
 ### Windows / Other Platforms
 
@@ -63,7 +63,6 @@ Make sure to set a new and secure password for the following commands. Mina will
 </Alert>
 
 <br />
-
 
 3a. In Ubuntu/Debian: Generate your keys using the `mina-generate-keypair` command. When prompted, type in the password you intend to use to secure this key. If is set, the tool will use the password from the CODA_PRIVKEY_PASS environment variable instead of prompting you. <em>Do NOT forget this password.</em>
 
@@ -111,4 +110,3 @@ If you are using Docker run the following command:
 ```
 docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
 ```
-

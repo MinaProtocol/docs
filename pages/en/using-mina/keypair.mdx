@@ -50,11 +50,12 @@ If you are using macOS please install Docker and follow the docker based instruc
 After <DocLink copy="adding the Mina repo" url="/getting-started#ubuntu-1804--debian-9" /> you can simply run the following command.
 
 ```
-sudo apt-get install mina-generate-keypair=1.1.5-a42bdee
+echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+sudo apt-get update
+sudo apt-get install mina-generate-keypair=1.1.7-d5ff5aa
 ```
 
-Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit a42bdeef6b0c15ee34616e4df76c882b0c5c7c2a on branch master
-`.
+Check that keygen tool installed correctly by running `mina-generate-keypair -version`. The output should read `Commit d5ff5aa207e64bcd6862e1ae9a3b83910c1c7b1d on branch master `.
 
 ### Windows / Other Platforms
 
