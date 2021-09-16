@@ -1,0 +1,32 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "Mainnet Beta Release 1.2.0beta6" });
+
+# Mainnet Beta Release 1.2.0beta6
+
+While working on stabilizing 1.2.0, the O(1) Labs team discovered an issue with the transaction inclusion logic. In an abundance of caution, we have provided this 1.2.0beta6 update to prevent larger issues, and the new logic has been thoroughly tested. To instead run this same change on the latest 1.1.5 stable version, see [Release 1.1.7](/releases/1.1.7).
+
+## Upgrading & Connecting
+
+### Daemon Release Artifacts:
+
+**Docker Image:**
+`gcr.io/o1labs-192920/mina-daemon:1.2.0beta6-bee023a-mainnet`
+
+**Debian Package:** _NOTE_: --peers-list-url flag is no long required when running with `systemctl --user ...`
+
+```
+curl -o mina-mainnet_1.2.0beta6.deb https://s3.us-west-2.amazonaws.com/packages.o1test.net/pool/stretch/m/mi/mina-mainnet_1.2.0beta5-feature-tweak2-bee023a.deb
+
+sudo dpkg --install mina-mainnet_1.2.0beta6.deb
+```
+
+### Step by Step Guide:
+
+Check out [our documentation](https://docs.minaprotocol.com/en/using-mina/connecting) for complete instructions on using this version to connect to Mainnet. Make sure to run with `--peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt`.
+
+If you are running the correct version on the correct network, `mina client status` will show:
+
+```
+Chain id:     5f704cc0c82e0ed70e873f0893d7e06f148524e3f0bdae2afb02e7819a0c24d1
+Git SHA-1:    bee023a25b8884813dc14a843c569dc297878c0a
+```
