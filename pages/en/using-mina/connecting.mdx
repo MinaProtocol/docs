@@ -22,7 +22,7 @@ sudo apt-get update
 sudo apt-get install -y curl unzip mina-mainnet=1.1.5-a42bdee
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit a42bdeef6b0c15ee34616e4df76c882b0c5c7c2a on branch master`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit d5ff5aa207e64bcd6862e1ae9a3b83910c1c7b1d on branch master`.
 
 ## Start up a node
 
@@ -134,7 +134,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:1.1.5-a42bdee \
+minaprotocol/mina-daemon-baked:1.1.7-d5ff5aa-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \

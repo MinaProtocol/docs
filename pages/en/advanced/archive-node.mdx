@@ -1,6 +1,6 @@
-import Page from '@reason/pages/Docs';
+import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({title: "Archive Node"});
+export default Page({ title: "Archive Node" });
 
 # Archive Node
 
@@ -17,19 +17,20 @@ Let's get started by installing what we need.
 
 ## Installation
 
-1. Install the latest version of mina. If you haven't upgraded to the latest version of the daemon, head <DocLink copy="back to the docs" url="/getting-started" /> to get the latest version. You can run ```mina -help``` to check if the installation succeeded.
+1. Install the latest version of mina. If you haven't upgraded to the latest version of the daemon, head <DocLink copy="back to the docs" url="/getting-started" /> to get the latest version. You can run `mina -help` to check if the installation succeeded.
 2. Install [Postgres](https://www.postgresql.org/download/).
 3. Install the archive node package.
 
-    - Ubuntu/Debian:
-      ```
-      sudo apt-get install mina-archive=1.1.5-a42bdee
-      ```
+   - Ubuntu/Debian:
 
-    - Docker:
-      ```
-      minaprotocol/mina-archive:1.1.5-a42bdee
-      ```
+     ```
+     sudo apt-get install mina-archive=1.1.7-d5ff5aa
+     ```
+
+   - Docker:
+     ```
+     minaprotocol/mina-archive:1.1.7-d5ff5aa
+     ```
 
 ## Setup
 
@@ -47,9 +48,10 @@ Note: Some of these instructions may depend on how your operating system install
 postgres -p 5432 -D /usr/local/var/postgres
 ```
 
-For macOS, run ```brew services start postgres``` to start a local postgres server.
+For macOS, run `brew services start postgres` to start a local postgres server.
 
 2. Create database (here called `archive`) on server and load the schema into it. This will only need to be done the first time the archive node is set up.
+
 ```
 createdb -h localhost -p 5432 -e archive
 
@@ -57,6 +59,7 @@ psql -h localhost -p 5432 -d archive -f <(curl -Ls https://raw.githubusercontent
 ```
 
 3. Start archive process on port 3086, connecting to the postgres database we started on port 5432 in step 1.
+
 ```
 coda-archive run \
   -postgres-uri postgres://localhost:5432/archive \
@@ -64,6 +67,7 @@ coda-archive run \
 ```
 
 4. Start the daemon, connecting it to the archive process that we just started on port 3086. If you want to connect to an archive process on another machine, you can specify a hostname as well, like `localhost:3086`.
+
 ```
 mina daemon \
     .....
@@ -74,14 +78,17 @@ mina daemon \
 
 Now that we've got the archive node running, let's take a look at the tables in the database.
 
-To list the tables in the database, you can run the ``\dt`` command, in psql.
+To list the tables in the database, you can run the `\dt` command, in psql.
 View the full schema of the tables [here](https://github.com/minaProtocol/mina/blob/master/src/app/archive/create_schema.sql).
 
 Below are some notable fields in each table.
 
 ### Table 1: user_commands
+
 #
+
 This table keeps track of transactions made on the network.
+
 ```
 ...
   user_command_type          Type of transaction being made
@@ -96,6 +103,7 @@ This table keeps track of transactions made on the network.
 ### Table 2: internal_commands
 
 This table keeps track of rewards earned from snark work or block producing.
+
 ```
 ...
   internal_command_type      represents whether the command is a `fee_transfer` from snark work or a `coinbase` reward from block producing.
@@ -122,6 +130,7 @@ By linking the block table and command tables, these tables allow you to identif
 specific transactions within blocks.
 
 #### Join table 1: blocks_user_commands
+
 ```
 ...
 block_id                     ID of the block containing the user command
@@ -130,6 +139,7 @@ sequence_no                  0-based order of the user command among the block t
 ```
 
 #### Join table 2: blocks_internal_commands
+
 ```
 ...
 block_id                     ID of the block containing the internal command
