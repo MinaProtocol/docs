@@ -19,10 +19,10 @@ export default Page({ title: "Connect to the Network" });
 sudo apt-get remove -y mina-testnet-postake-medium-curves
 echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.7-d5ff5aa
+sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
 ```
 
-Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit d5ff5aa207e64bcd6862e1ae9a3b83910c1c7b1d on branch master`.
+Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master`.
 
 ## Установка ноды
 
