@@ -134,7 +134,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:1.1.7-d5ff5aa-mainnet \
+gcr.io/o1labs-192920/mina-daemon-baked:1.1.8-b10c0e3-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
 --insecure-rest-server \
