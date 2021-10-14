@@ -1,9 +1,8 @@
-import Page from '@reason/pages/Docs';
+import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({title: "Snarky DSL Guide"});
+export default Page({ title: "Snarky DSL Guide" });
 
 Here you can find documentation on how to use **snarky**, a DSL for using zk-SNARKS, as well as **snarkyjs-crypto** a companion JavaScript library providing a suite of cryptographic primitives suitable for use with **snarky**.
-
 
 ## The structure of a SNAPP
 
@@ -14,11 +13,12 @@ A SNAPP (or snarkified app) has two parts:
 2. The rest of the application, which calls into **snarky** to create and verify proofs.
    There are currently APIs for Node.js and OCaml/ReasonML for interacting with **snarky** programs in this way.
 
-    We'll use two Node.js libraries:
+   We'll use two Node.js libraries:
 
-    - <DocLink copy="snarkyjs-crypto" url="/snarks/snarkyjs-crypto" />, which gives us access
-      to cryptographic hashes, merkle-trees, and signatures that mirror those in snarky-universe
-    - [snarkyjs](https://www.npmjs.com/package/snarkyjs) which gives us methods for creating and verifying SNARK proofs.
+   - <DocLink copy="snarkyjs-crypto" url="/snarks/snarkyjs-crypto" />, which
+     gives us access to cryptographic hashes, merkle-trees, and signatures that
+     mirror those in snarky-universe
+   - [snarkyjs](https://www.npmjs.com/package/@o1labs/snarkyjs) which gives us methods for creating and verifying SNARK proofs.
 
 ## An example app
 
@@ -26,6 +26,7 @@ Let's build a simple app for proving we know a pre-image to a hash function.
 You can find the completed app [here](https://github.com/o1-labs/sfbw-workshop/tree/master/solutions/ex_preimage).
 
 ### Building the SNARK
+
 This first step in building our SNAPP is to define our SNARK. In this case, our SNARK
 will prove, given a hash value **h**
 
@@ -51,29 +52,36 @@ runMain(input, (module Witness), main);
 ```
 
 Let's break down this file bit by bit. The top 3 lines
+
 ```reasonml
 module Universe = (val Snarky_universe.default());
 open! Universe.Impl;
 open! Universe;
 ```
+
 are just a preamble which brings in scope all the functions we need. It uses the "default" SNARK construction backend,
 which is the Groth16 SNARK instantiated using the bn128 curve.
 
 The next line
+
 ```reasonml
 let input = InputSpec.[(module Hash)];
 ```
+
 declares that the public input to our SNARK will be a hash. The "public input" (or "statement") is the value that our
 SNARK is checked against.
 
 The next line
+
 ```reasonml
 module Witness = Field;
 ```
+
 states that our top-level "witness" (that is, the thing we're proving we know) will be a single field element,
 as described above.
 
 Next, we have the `main` function, which really defines our SNARK
+
 ```reasonml
 let main = (preimage: Witness.t, h, ()) =>
   Field.assertEqual(Hash.hash([|preimage|]), h);
@@ -89,12 +97,15 @@ The arguments to `main` must be
 3. A dummy `()` argument.
 
 The final line
+
 ```reasonml
 runMain(input, (module Witness), main);
 ```
+
 sets up our program to work with the Node.js API.
 
 ### Using the SNARK
+
 Now we're ready to use our SNARK. We're going to use the Node.js API.
 
 The API is fairly straightforward. We can create a "snarky" object which has 2 methods:
@@ -105,29 +116,36 @@ The API is fairly straightforward. We can create a "snarky" object which has 2 m
 Here is how it all comes together:
 
 ```javascript
-const { bn128 } = require('snarkyjs-crypto');
-const Snarky = require('snarkyjs');
+const { bn128 } = require("snarkyjs-crypto");
+const Snarky = require("snarkyjs");
 const snarky = new Snarky("./ex_preimage.exe");
 
 const preImage = bn128.Field.ofInt(5);
-const statement = bn128.Hash.hash([ preImage ]);
+const statement = bn128.Hash.hash([preImage]);
 
-snarky.prove({
-  statement: [ statement ],
-  witness: preImage
-}).then((proof) => {
-  console.log("Created proof:\n" + proof + "\n");
-  return snarky.verify({
-    "statement": [ statement ],
-    "proof": proof
-  });
-}, console.log).then((verified) => {
-  console.log("Was the proof verified? " + verified);
-  if (verified) {
-    process.exit(0);
-  } else {
-    process.exit(1);
-  }
-}, () => { process.exit(1); });
+snarky
+  .prove({
+    statement: [statement],
+    witness: preImage,
+  })
+  .then((proof) => {
+    console.log("Created proof:\n" + proof + "\n");
+    return snarky.verify({
+      statement: [statement],
+      proof: proof,
+    });
+  }, console.log)
+  .then(
+    (verified) => {
+      console.log("Was the proof verified? " + verified);
+      if (verified) {
+        process.exit(0);
+      } else {
+        process.exit(1);
+      }
+    },
+    () => {
+      process.exit(1);
+    }
+  );
 ```
-
