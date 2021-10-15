@@ -41,16 +41,6 @@ module Router = {
 
 module Config = {
   [@bs.val] [@bs.scope "process.env"] external node_env: string = "NODE_ENV";
-  [@bs.val] [@bs.scope "process.env"]
-  external contentful_token: string = "CONTENTFUL_TOKEN";
-  [@bs.val] [@bs.scope "process.env"]
-  external contentful_image_token: string = "CONTENTFUL_IMAGE_TOKEN";
-  [@bs.val] [@bs.scope "process.env"]
-  external contentful_space: string = "CONTENTFUL_SPACE";
-  [@bs.val] [@bs.scope "process.env"]
-  external contentful_host: string = "CONTENTFUL_HOST";
-  [@bs.val] [@bs.scope "process.env"]
-  external google_api_key: string = "GOOGLE_API_KEY";
 };
 
 module MDXProvider = {
