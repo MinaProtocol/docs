@@ -21,9 +21,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const GOOGLE_API_KEY =
-  process.env.GOOGLE_API_KEY || "AIzaSyDIFwMr7SPGCLl_o6e4UZKi1q9l8snkUZs";
-
 module.exports = withTM(
   withBundleAnalyzer(
     withMDX({
@@ -40,9 +37,6 @@ module.exports = withTM(
         );
         config.resolve.extensions.push(".bs.js");
         return config;
-      },
-      env: {
-        GOOGLE_API_KEY: GOOGLE_API_KEY,
       },
     })
   )
