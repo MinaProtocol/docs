@@ -25,12 +25,12 @@ export default Page({ title: "Mina Generate Keypair" });
 После <DocLink copy="добавления репозитория Mina" url="/getting-started#ubuntu-1804--debian-9" /> , вы можете просто выполнить следующую команду.
 
 ```
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install mina-generate-keypair=1.1.8-b10c0e3
+sudo apt-get install mina-generate-keypair=1.2.0-5b35b27
 ```
 
-Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master` на выходе.
+Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit 5b35b27df8e137ddbe88874b4efdcf4bb2cb4ae9 on branch master` на выходе.
 
 ### Windows / Другие платформы
 
@@ -64,7 +64,7 @@ chmod 700 ~/keys
 
 <br />
 
-3a. Для Ubuntu/Debian: Создайте ключи с помощью команды `mina-generate-keypair`. При появлении запроса введите пароль, который вы хотите использовать для защиты ключей. Если он уже установлен, инструмент будет использовать пароль из переменных среды CODA_PRIVKEY_PASS. <em>НЕ ЗАБУДЬТЕ этот пароль.</em>
+3a. Для Ubuntu/Debian: Создайте ключи с помощью команды `mina-generate-keypair`. При появлении запроса введите пароль, который вы хотите использовать для защиты ключей. Если он уже установлен, инструмент будет использовать пароль из переменных среды `MINA_PRIVKEY_PASS`. <em>НЕ ЗАБУДЬТЕ этот пароль.</em>
 
 ```
 mina-generate-keypair -privkey-path ~/keys/my-wallet

@@ -79,9 +79,9 @@ This is necessary because sometimes macOS doesn't resolve your hostname to your 
 
 Если вы используете `systemd` для управления daemon Mina, он не будет автоматически перезагружаться при перезагрузке машины. Вы можете запустить службу вручную с помощью `systemctl --user enable mina` или запустить `systemctl --user enable mina`, чтобы служба автоматически запускалась при загрузке.
 
-### Что мне необходимо добавить для CODA_PRIVKEY_PASS?
+### Что мне необходимо добавить для MINA_PRIVKEY_PASS?
 
-Когда вы сгенерировали keypair, вы создали пароль. Используйте пароль, который вы создали, для значения `CODA_PRIVKEY_PASS`.
+Когда вы сгенерировали keypair, вы создали пароль. Используйте пароль, который вы создали, для значения `MINA_PRIVKEY_PASS`.
 
 ### Я получаю сообщение c ошибкой об отсутствии ~/.mina-config/daemon.json
 
@@ -97,7 +97,7 @@ This is necessary because sometimes macOS doesn't resolve your hostname to your 
 
 ### Могу ли я создать свой пароль с помощью переменной среды?
 
-Да. Задайте в качестве пароля переменную среды `CODA_PRIVKEY_PASS`.
+Да. Задайте в качестве пароля переменную среды `MINA_PRIVKEY_PASS`.
 
 ### Пытаюсь совершить установку на Ubuntu 20.04 / Debian 10, и появляется ошибка зависимости
 

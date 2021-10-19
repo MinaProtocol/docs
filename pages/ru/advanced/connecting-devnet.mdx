@@ -9,7 +9,7 @@ export default Page({ title: "Connect to Devnet" });
 и экспериментов разработчиков и не имеет реальной ценности. Пользователи могут связаться с нами в Discord, чтобы запросить доступ к предварительно пополненной учетной записи.
 
 Используйте `Devnet`, только если вы являетесь разработчиком и работаете на протоколе Mina. Если вы заинтересованы в запуске собственной ноды, вместо этого подключитесь
-к [Mainnet RC](/connecting).
+к <DocLink copy="Mainnet RC" url="/using-mina/connecting" />.
 
 ## Обновите Ваше ПО
 
@@ -22,13 +22,12 @@ export default Page({ title: "Connect to Devnet" });
 Сначала удалите любую версию daemon, установленную ранее, чтобы избежать ошибок при обновлении. После этого вы можете установить последнюю версию следующим образом:
 
 ```
-sudo apt-get remove -y mina-testnet-postake-medium-curves
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-68200c7
+sudo apt-get install -y curl unzip mina-devnet=1.2.0-5b35b27
 ```
 
-Убедитесь, что daemon установлен правильно, запустив `mina version`. На выходе должно появиться сообщение `Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD`.
+Убедитесь, что daemon установлен правильно, запустив `mina version`. На выходе должно появиться сообщение `Commit 5b35b27df8e137ddbe88874b4efdcf4bb2cb4ae9 on branch master`.
 
 ## Запустите ноду
 
@@ -43,7 +42,7 @@ sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-6820
 Выполните следующие команды, чтобы запустить ноду Mina и подключиться к сети `Devnet`:
 
 ```
-mina daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+mina daemon --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 
 ### Docker
@@ -63,15 +62,9 @@ mkdir ~/.mina-config
 docker run --name mina -d \
 -p 8302:8302 \
 --restart=always \
---mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
--e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:1.0.5-68200c7 \
+minaprotocol/mina-daemon:1.2.0-5b35b27-mainnet \
 daemon \
---block-producer-key /keys/my-wallet \
---insecure-rest-server \
---file-log-level Debug \
---log-level Info \
 --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 

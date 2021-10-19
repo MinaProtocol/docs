@@ -16,13 +16,12 @@ export default Page({ title: "Connect to the Network" });
 Сначала удалите любую ранее установленную версию daemon, чтобы избежать ошибок при обновлении до последней версии. Затем вы можете установить последнюю версию следующим образом:
 
 ```
-sudo apt-get remove -y mina-testnet-postake-medium-curves
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
+sudo apt-get install -y curl unzip mina-mainnet=1.2.0-5b35b27
 ```
 
-Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master`.
+Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit 5b35b27df8e137ddbe88874b4efdcf4bb2cb4ae9 on branch master`.
 
 ## Установка ноды
 
@@ -35,7 +34,7 @@ sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
 Выполните следующую команду, чтобы запустить экземпляр ноды Mina и подключиться к действующей сети:
 
 ```
-mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+mina daemon --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
 Аргумент `-peer-list`, указанный выше, относится к адресу сид-пира - это начальный пир, который мы подключаем в сети. Поскольку Mina – <DocLink copy="p2p" url="/glossary#peer-to-peer" /> -протокол, не существует единого централизованного сервера, на который мы могли бы полагаться.
@@ -53,8 +52,10 @@ mina daemon --generate-genesis-proof true --peer-list-url https://storage.google
 Добавьте файл `~/.mina-env`, содержащий следующее:
 
 ```
-CODA_PRIVKEY_PASS="private key password"
-EXTRA_FLAGS=" --file-log-level Debug"
+MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password"
+LOG_LEVEL=Info
+FILE_LOG_LEVEL=Debug
+EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
 ```
 
 Позже, если необходимо, вы cможете добавить дополнительные флаги в `EXTRA_FLAGS`.
@@ -125,13 +126,10 @@ docker run --name mina -d \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
--e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-gcr.io/o1labs-192920/mina-daemon-baked:1.1.8-b10c0e3-mainnet \
+-e MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password" \
+minaprotocol/mina-daemon:1.2.0-5b35b27-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
---insecure-rest-server \
---file-log-level Debug \
---log-level Info \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 

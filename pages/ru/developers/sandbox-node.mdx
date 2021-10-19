@@ -23,7 +23,8 @@ docker run \
   --publish 3085:3085 \
   -d \
   --name mina \
-  minaprotocol/mina-demo:sandbox-32a.1
+  -e RUN_DEMO=true \
+  minaprotocol/mina-daemon:1.2.0-5b35b27-devnet
 ```
 
 Эта команда запустит daemon внутри контейнера докера и предоставит вашему компьютеру GraphQL-порт (3085), который используется для связи с клиентом. Daemon будет автоматически запущен в фоновом режиме с блок-продюсером и снарк-работником.
@@ -51,7 +52,7 @@ docker exec -it mina bash
 Контейнер имеет один аккаунт с этим публичным ключом:
 
 ```
-B62qrPN5Y5yq8kGE3FbVKbGTdTAJNdtNtB5sNVpxyRwWGcDEhpMzc8g
+B62qiZfzW27eavtPrnF6DeDSAKEjXuGFdkouC3T5STRa6rrYLiDUP2p
 ```
 
 Пароль для этой учетной записи - пустая строка (нет пароля -- можно оставить поле пустым).

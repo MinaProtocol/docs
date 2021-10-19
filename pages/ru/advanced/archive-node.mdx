@@ -22,12 +22,12 @@ export default Page({ title: "Archive Node" });
    - Ubuntu/Debian:
 
      ```
-     sudo apt-get install mina-archive=1.1.8-b10c0e3
+     sudo apt-get install mina-archive=1.2.0-5b35b27
      ```
 
    - Docker:
      ```
-     gcr.io/o1labs-192920/mina-archive:1.1.8-b10c0e3
+     minaprotocol/mina-archive:1.2.0-5b35b27
      ```
 
 ## Настройка
@@ -59,9 +59,9 @@ psql -h localhost -p 5432 -d archive -f <(curl -Ls https://raw.githubusercontent
 3. Запустите процесс архивации на порте 3086, подключившись к базе данных postgres, которую мы запустили на порте 5432 в шаге 1.
 
 ```
-coda-archive \
-  -postgres-uri postgres://localhost:5432/archive \
-  -server-port 3086
+mina-archive run \
+  --postgres-uri postgres://localhost:5432/archive \
+  --server-port 3086
 ```
 
 4. Запустите daemon, подключив его к процессу архивации, который мы только что начали, через порт 3086. Если вы хотите подключиться к процессу архивирования на другом устройстве, вы также можете указать имя хоста, например `localhost:3086`.
@@ -69,7 +69,7 @@ coda-archive \
 ```
 mina daemon \
     .....
-  -archive-address 3086\
+  --archive-address 3086\
 ```
 
 ## Использование архивной ноды

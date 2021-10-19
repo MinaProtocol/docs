@@ -46,23 +46,17 @@ O(1) Labs протестировали работу нод на нескольк
 
 Для загрузки требуется около 1 ГБ, поэтому установка может занять какое-то время.
 
-<Alert kind="warning">
-
-Если у вас установлена `mina` из предыдущего релиза, вам необходимо обновиться, чтобы не попасть в бан за использование более старой версии клиента. Смотрите ниже инструкции по обновлению сборок для macOS и Linux.
-
-</Alert>
-
 ### Ubuntu 18.04 / Debian 9
 
 Добавьте репозиторий Mina Debian и установите:
 
 ```
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
+sudo apt-get install -y curl unzip mina-mainnet=1.2.0-5b35b27
 ```
 
-После запуска `mina version`. убедитесь, что daemon установлен правильно. Должно появиться следующее: `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master`.
+После запуска `mina version`. убедитесь, что daemon установлен правильно. Должно появиться следующее: `Commit 5b35b27df8e137ddbe88874b4efdcf4bb2cb4ae9 on branch master`.
 
 ### Windows
 
