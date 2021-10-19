@@ -160,10 +160,6 @@ Now that we've started up a node and are running the Mina daemon, open up anothe
 
 It may take up to a minute before `mina client status` connects to the daemon when first starting up. So if you see `Error: daemon not running. See mina daemon`, just a wait a bit and try again.
 
-If you are using the <DocLink copy="GetSandbox Nodeing" url="/developers/sandbox-node" />, due to a quirk in the way we communicate for the mina client status command, you will need to run `mina client status` inside the container itself:
-
-`docker exec -it mina bash`
-
 </Alert>
 
 Most likely we will see a response that include the fields below:

@@ -14,7 +14,7 @@ The sandbox does **NOT** connect you to a live network.
 
 ## Installation
 
-[Docker](https://www.docker.com) is a tool for portably running applications. The Mina Sandbox Node is packaged with Docker. It’s easy to install--we suggest the [Docker Desktop](https://www.docker.com/products/docker-desktop).
+[Docker](https://www.docker.com) is a tool for portably running applications. The Mina Sandbox is packaged with Docker, and now built-in to our daemon containers. It’s easy to install--we suggest the [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 After you have Docker installed run the following command to spin up the Mina Sandbox.
 
@@ -23,7 +23,8 @@ docker run \
   --publish 3085:3085 \
   -d \
   --name mina \
-  minaprotocol/mina-demo:sandbox-32a.1
+  -e RUN_DEMO=true \
+  minaprotocol/mina-daemon:1.2.0-5b35b27-devnet
 ```
 
 This command will start a daemon inside the docker container and expose the GraphQL port (3085), which is used for communication with the client, to your computer. This daemon will automatically be running in the background with a block producer and snark worker.
@@ -51,7 +52,7 @@ docker exec -it mina bash
 The container has one account with this public key:
 
 ```
-B62qrPN5Y5yq8kGE3FbVKbGTdTAJNdtNtB5sNVpxyRwWGcDEhpMzc8g
+B62qiZfzW27eavtPrnF6DeDSAKEjXuGFdkouC3T5STRa6rrYLiDUP2p
 ```
 
 The password for this account is the empty string (there's no password -- you can leave the password field blank).
