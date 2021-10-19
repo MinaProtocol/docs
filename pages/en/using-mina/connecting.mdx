@@ -13,7 +13,9 @@ The first step in connecting to `Mainnet` is installing the latest daemon versio
 
 ### Ubuntu 18.04 / Debian 9
 
-First remove any previously installed version of the daemon to prevent any errors when upgrading to the latest version. Then you can install the latest version as follows:
+Follow along below to install the latest **Stable** [Mina Release 1.2.0](https://github.com/MinaProtocol/mina/releases/tag/1.2.0) or visit the [Github Releases Page](https://github.com/MinaProtocol/mina/releases) to discover and install pre-release (Beta) builds.
+
+You can set up the new debian `stretch stable` respository and install the latest version as follows:
 
 ```
 echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
@@ -52,7 +54,7 @@ First kill the existing `mina daemon` process with `Ctrl-C`, and then keep readi
 To produce blocks or otherwise customize the configuration for the mina daemon, create a file `~/.mina-env` containing the following:
 
 ```
-MINA_PRIVKEY_PASS="private key password"
+MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password"
 LOG_LEVEL=Info
 FILE_LOG_LEVEL=Debug
 EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
@@ -135,7 +137,6 @@ docker run --name mina -d \
 minaprotocol/mina-daemon:1.2.0-5b35b27-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
---log-level Info \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
