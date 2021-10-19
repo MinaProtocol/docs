@@ -133,7 +133,7 @@ docker run --name mina -d \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
--e MINA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
+-e MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password" \
 minaprotocol/mina-daemon:1.2.0-5b35b27-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
