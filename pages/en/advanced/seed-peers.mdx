@@ -63,7 +63,6 @@ mina daemon \
 --log-txn-pool-gossip false \
 --metrics-port 9100 \
 --discovery-keypair /keys/my-libp2p \
---generate-genesis-proof true \
 --max-connection 100
 ```
 
@@ -78,8 +77,8 @@ docker run --name mina-seed-node -d \
 -p 9100:9100 \
 -v $(pwd)/keys:/root/keys:ro \
 -v $(pwd)/.mina-config:/root/.mina-config \
---env CODA_LIBP2P_PASS='PASS' \
-minaprotocol/mina-daemon-baked:1.1.2-0975867 daemon \
+--env MINA_LIBP2P_PASS='PASS' \
+minaprotocol/mina-daemon:1.2.0-5b35b27 \
 --discovery-keypair /keys/libp2p-keys \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
 --metrics-port 9100 \
@@ -89,7 +88,7 @@ minaprotocol/mina-daemon-baked:1.1.2-0975867 daemon \
 --log-level Info
 ```
 
-Make sure to replace the `--env CODA_LIBP2P_PASS=''` with your correct password for the libp2p keypair. Also as with the previous example, ensure you set the correct value with `--discovery-keypair`.
+Make sure to replace the `--env MINA_LIBP2P_PASS=''` with your correct password for the libp2p keypair. Also as with the previous example, ensure you set the correct value with `--discovery-keypair`.
 
 ## Peers List
 

@@ -22,13 +22,12 @@ Follow the instructions below for your operating system below.
 First remove any previously installed version of the daemon to prevent any errors when upgrading to the latest version. Then you can install the latest version as follows:
 
 ```
-sudo apt-get remove -y mina-testnet-postake-medium-curves
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-testnet-postake-medium-curves=1.0.5-68200c7
+sudo apt-get install -y curl unzip mina-devnet=1.2.0-5b35b27
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit [DIRTY]68200c7b409e105d174f079c5c39f7926819784b on branch HEAD`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit 5b35b27df8e137ddbe88874b4efdcf4bb2cb4ae9 on branch master`.
 
 ## Start up a node
 
@@ -43,35 +42,27 @@ Testnet Status: <StatusBadge service="Network" />
 Run the following commands to start up a Mina node instance and connect to the `Devnet` network:
 
 ```
-mina daemon -generate-genesis-proof true --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+mina daemon --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 
 ### Docker
 
-When running your daemon using Docker, first ensure that your private key has the correct permissions.
+When running your daemon using Docker, first create a directory on the host machine to mount as a volume:
 
 ```
 cd ~
-chmod 700 ~/keys
-chmod 600 ~/keys/my-wallet
 mkdir ~/.mina-config
 ```
 
-Now simply run the image with your keys and ~/.mina-config mounted:
+Now simply run the image with your ~/.mina-config mounted:
 
 ```
 docker run --name mina -d \
 -p 8302:8302 \
 --restart=always \
---mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
--e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-minaprotocol/mina-daemon-baked:1.0.5-68200c7 \
+minaprotocol/mina-daemon:1.2.0-5b35b27-mainnet \
 daemon \
---block-producer-key /keys/my-wallet \
---insecure-rest-server \
---file-log-level Debug \
---log-level Info \
 --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 
