@@ -46,23 +46,19 @@ The newest binary releases can be found below. Instructions are provided for mac
 
 This is a large download, around 1GB, so the install might take some time.
 
-<Alert kind="warning">
-
-If you installed `mina` from a previous release, you'll need to upgrade it so that you won't get banned by the network for using an older client. See instructions below for upgrading both macOS and Linux builds.
-
-</Alert>
-
 ### Ubuntu 18.04 / Debian 9
+
+Follow along below to install the latest *Stable* Mina release or visit https://github.com/MinaProtocol/mina/releases to follow along and install pre-release builds.
 
 Add the Mina Debian repo and install:
 
 ```
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
+sudo apt-get install -y curl unzip mina-mainnet=1.2.0-5b35b27
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit 5b35b27df8e137ddbe88874b4efdcf4bb2cb4ae9 on branch master`.
 
 ### Windows
 

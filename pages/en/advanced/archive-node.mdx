@@ -24,12 +24,12 @@ Let's get started by installing what we need.
    - Ubuntu/Debian:
 
      ```
-     sudo apt-get install mina-archive=1.1.8-b10c0e3
+     sudo apt-get install mina-archive=1.2.0-5b35b27
      ```
 
    - Docker:
      ```
-     gcr.io/o1labs-192920/mina-archive:1.1.8-b10c0e3
+     minaprotocol/mina-archive:1.2.0-5b35b27
      ```
 
 ## Setup
@@ -61,9 +61,9 @@ psql -h localhost -p 5432 -d archive -f <(curl -Ls https://raw.githubusercontent
 3. Start archive process on port 3086, connecting to the postgres database we started on port 5432 in step 1.
 
 ```
-coda-archive run \
-  -postgres-uri postgres://localhost:5432/archive \
-  -server-port 3086
+mina-archive run \
+  --postgres-uri postgres://localhost:5432/archive \
+  --server-port 3086
 ```
 
 4. Start the daemon, connecting it to the archive process that we just started on port 3086. If you want to connect to an archive process on another machine, you can specify a hostname as well, like `localhost:3086`.
@@ -71,7 +71,7 @@ coda-archive run \
 ```
 mina daemon \
     .....
-  -archive-address 3086\
+  --archive-address 3086\
 ```
 
 ## Using the Archive Node

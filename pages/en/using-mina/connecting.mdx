@@ -16,10 +16,9 @@ The first step in connecting to `Mainnet` is installing the latest daemon versio
 First remove any previously installed version of the daemon to prevent any errors when upgrading to the latest version. Then you can install the latest version as follows:
 
 ```
-sudo apt-get remove -y mina-testnet-postake-medium-curves
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
+sudo apt-get install -y curl unzip mina-mainnet=1.2.0-5b35b27
 ```
 
 Check that daemon installed correctly by running `mina version`. The output should read `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master`.
@@ -35,12 +34,12 @@ Note: If you are using the Hetzner hosting provider, we are currently experienci
 Run the following command to start up a Mina node instance and connect to the live network:
 
 ```
-mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+mina daemon --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
 If you have a key with stake and would like to produce blocks, also provide `--block-producer-key ~/keys/my-wallet`, replacing `~/keys/my-wallet` with the path to your private key if not the default.
 
-The `-peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a <DocLink copy="peer-to-peer" url="/glossary#peer-to-peer" /> protocol, there is no single centralized server we rely on.
+The `--peer-list` argument specified above refer to the seed peer address - this is the initial peer we will connect to on the network. Since Mina is a <DocLink copy="peer-to-peer" url="/glossary#peer-to-peer" /> protocol, there is no single centralized server we rely on.
 
 See <DocLink copy="here" url="/troubleshooting" /> for common issues when first running a node.
 
@@ -50,24 +49,23 @@ First kill the existing `mina daemon` process with `Ctrl-C`, and then keep readi
 
 ### Ubuntu 18.04 / Debian 9
 
-Ensure your private-key that you've registered with is located at `~/keys/my-wallet`.
-
-Add a file `~/.mina-env` containing the following:
+To produce blocks or otherwise customize the configuration for the mina daemon, create a file `~/.mina-env` containing the following:
 
 ```
-CODA_PRIVKEY_PASS="private key password"
-EXTRA_FLAGS=" --file-log-level Debug"
+MINA_PRIVKEY_PASS="private key password"
+LOG_LEVEL=Info
+FILE_LOG_LEVEL=Debug
+EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
 ```
+Ensure to replace <BLOCK_PRODUCER_KEY_PATH> with the full path to your block producer private key, for example, `/home/ubuntu/keys/my-wallet`.
 
-You can add extra flags later to `EXTRA_FLAGS` as you see fit.
+If you do not intend to produce blocks then you can keep ~/.mina-env empty for now.
 
-Mina will be looking for its peers in a file called `~/peers.txt`, so run the following command to create it:
+To change how mina is configured, simply specify flags to the mina daemon process with space-separated arguments between the quotes in `EXTRA_FLAGS=""`.
 
-```
-curl https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt > ~/peers.txt
-```
+The mina systemd service no longer expects a peers.txt file, it just uses the PEERS_LIST_URL variable to determine where to fetch initial peers from, and the PEERS_LIST_URL for the mainnet package defaults to https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt .
 
-Then run the following commands to start up a Mina node instance and connect to the live network:
+Once your .mina-env is ready, run the following commands to start up a Mina node instance and connect to the live network:
 
 ```
 systemctl --user daemon-reload
@@ -133,12 +131,10 @@ docker run --name mina -d \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
--e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-gcr.io/o1labs-192920/mina-daemon-baked:1.1.8-b10c0e3-mainnet \
+-e MINA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
+minaprotocol/mina-daemon:1.2.0-5b35b27-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
---insecure-rest-server \
---file-log-level Debug \
 --log-level Info \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
@@ -149,7 +145,7 @@ Run `docker exec -it mina mina client status` to monitor connectivity to the net
 
 <Alert>
 
-If you encounter `[Warn] Shutdown before Coda instance was created, not saving a visualization` when attempting to run your Docker container, [increase the resources that the Docker container is allowed to use](https://docs.docker.com/config/containers/resource_constraints/).
+If you encounter `[Warn] Shutdown before Mina instance was created, not saving a visualization` when attempting to run your Docker container, [increase the resources that the Docker container is allowed to use](https://docs.docker.com/config/containers/resource_constraints/).
 
 </Alert>
 
@@ -187,9 +183,3 @@ If you the `Bootstrap` state persists for more than an hour, there may be an iss
 ## Stepping up your game
 
 Now that we have a fully synced node, we can learn about some of the more advanced features of the daemon such as <DocLink copy="Sending a payment" url="/using-mina/send-payment" /> and <DocLink copy="Staking & Delegating" url="/using-mina/staking" />. And if you want to earn more tokens, check out the <DocLink copy="Foundation Delegation Program" url="/advanced/foundation-delegation-program" />.
-
-<span id="disclaimer">
-
-\*_Testnet Points are designed solely to track contributions to the Testnet and Testnet Points have no cash or other monetary value. Testnet Points are not transferable and are not redeemable or exchangeable for any cryptocurrency or digital assets. We may at any time amend or eliminate Testnet Points._
-
-</span>
