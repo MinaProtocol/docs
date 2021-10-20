@@ -37,6 +37,7 @@ Client commands concerning account management
   unlock  Unlock a tracked account
   lock    Lock a tracked account
   help    explain a given subcommand (perhaps recursively)
+
 ```
 
 ### Mina Client
@@ -69,6 +70,7 @@ Lightweight client commands
   stop-daemon           Stop the daemon
   status                Get running daemon status
   help                  explain a given subcommand (perhaps recursively)
+
 ```
 
 ### Mina Daemon
@@ -78,10 +80,16 @@ $ mina daemon -help
 
 Mina daemon
 
-  mina.exe daemon
+  mina daemon
 
 === flags ===
 
+  [--all-peers-seen-metric true|false]                whether to track the set
+                                                      of all peers ever seen for
+                                                      the all_peers metric
+                                                      (default: false)
+                                                      (alias:
+                                                      -all-peers-seen-metric)
   [--archive-address HOST:PORT/LOCALHOST-PORT]        Daemon to archive process
                                                       communication. If HOST is
                                                       omitted, then localhost is
@@ -217,10 +225,12 @@ Mina daemon
                                                       (Spam|Trace|Debug|Info|Warn|Error|Faulty_peer|Fatal,
                                                       default: Trace)
                                                       (alias: -file-log-level)
-  [--generate-genesis-proof true|false]               Generate a new genesis
-                                                      proof for the current
-                                                      configuration if none is
-                                                      found (default: false)
+  [--gc-stat-interval INTERVAL]                       in mins for collecting GC
+                                                      stats for metrics
+                                                      (Default: 15.000000)
+                                                      (alias: -gc-stat-interval)
+  [--generate-genesis-proof true|false]               Deprecated. Passing this
+                                                      flag has no effect
                                                       (alias:
                                                       -generate-genesis-proof)
   [--genesis-ledger-dir DIR]                          Directory that contains
@@ -249,6 +259,10 @@ Mina daemon
                                                       libp2p-metrics-server)
                                                       (alias:
                                                       -libp2p-metrics-port)
+  [--limited-graphql-port PORT]                       GraphQL-server for limited
+                                                      daemon interaction
+                                                      (alias:
+                                                      -limited-graphql-port)
   [--log-block-creation true|false]                   Log the steps involved in
                                                       including transactions and
                                                       snark work in a block
@@ -292,8 +306,31 @@ Mina daemon
                                                       (default no
                                                       metrics-server)
                                                       (alias: -metrics-port)
+  [--minimum-block-reward AMOUNT]                     Minimum reward a block
+                                                      produced by the node
+                                                      should have. Empty blocks
+                                                      are created if the rewards
+                                                      are lower than the
+                                                      specified threshold
+                                                      (default: No threshold,
+                                                      transactions and coinbase
+                                                      will be included as long
+                                                      as the required snark work
+                                                      is available and can be
+                                                      paid for)
+                                                      (alias:
+                                                      -minimum-block-reward)
   [--no-super-catchup]                                Don't use super-catchup
                                                       (alias: -no-super-catchup)
+  [--open-limited-graphql-port]                       Have the limited GraphQL
+                                                      server listen on all
+                                                      addresses, not just
+                                                      localhost (this is
+                                                      INSECURE, make sure your
+                                                      firewall is configured
+                                                      correctly!)
+                                                      (alias:
+                                                      -open-limited-graphql-port)
   [--peer /ip4/IPADDR/tcp/PORT/p2p/PEERID]            initial "bootstrap" peers
                                                       for discovery
                                                       (alias: -peer)
@@ -346,6 +383,12 @@ Mina daemon
                                                       production.
                                                       (alias:
                                                       -snark-worker-parallelism)
+  [--stop-time UPTIME]                                in hours after which the
+                                                      daemon stops itself (only
+                                                      if there were no slots won
+                                                      within an hour after the
+                                                      stop time) (Default: 24)
+                                                      (alias: -stop-time)
   [--tracing]                                         Trace into
                                                       $config-directory/trace/$pid.trace
                                                       (alias: -tracing)
@@ -357,6 +400,28 @@ Mina daemon
                                                       GCLOUD_BLOCK_UPLOAD_BUCKET
                                                       (alias:
                                                       -upload-blocks-to-gcloud)
+  [--uptime-submitter-key KEYFILE]                    Private key file for the
+                                                      uptime submitter. You
+                                                      cannot provide both
+                                                      `uptime-submitter-key` and
+                                                      `uptime-submitter-pubkey`.
+                                                      (alias:
+                                                      -uptime-submitter-key)
+  [--uptime-submitter-pubkey PUBLICKEY]               Public key of the
+                                                      submitter to the Mina
+                                                      delegation program, for
+                                                      the associated private key
+                                                      that is being tracked by
+                                                      this daemon. You cannot
+                                                      provide both
+                                                      `uptime-submitter-key` and
+                                                      `uptime-submitter-pubkey`.
+                                                      (alias:
+                                                      -uptime-submitter-pubkey)
+  [--uptime-url URL]                                  URL of the uptime service
+                                                      of the Mina delegation
+                                                      program
+                                                      (alias: -uptime-url)
   [--validation-queue-size NN]                        size of the validation
                                                       queue in the p2p network
                                                       used to buffer messages
@@ -416,7 +481,8 @@ Advanced client commands
                               communicate with the archive node directly;
                               otherwise it will communicate through the daemon
                               over the rest-server
-  batch-send-payments         DEPRECATED Send multiple payments from a file
+  batch-send-payments         Send multiple payments from a file
+  chain-id-inputs             Print the inputs that yield the current chain id
   client-trustlist            Client trustlist management
   compile-time-constants      Print a JSON map of the compile-time consensus
                               parameters
@@ -433,9 +499,12 @@ Advanced client commands
   get-trust-status            Get the trust status associated with an IP address
   get-trust-status-all        Get trust statuses for all peers known to the
                               trust system
+  hash-transaction            Compute the hash of a transaction from its
+                              transaction ID
   next-available-token        The next token ID that has not been allocated.
                               Token IDs are allocated sequentially, so all lower
                               token IDs have been allocated
+  node-status                 Get node statuses for a set of peers
   object-lifetime-statistics  Dump internal object lifetime statistics to JSON
   pending-snark-work          List of snark works in JSON format that are not
                               available in the pool yet
@@ -443,6 +512,9 @@ Advanced client commands
                               inclusion
   reset-trust-status          Reset the trust status associated with an IP
                               address
+  send-rosetta-transactions   Dispatch one or more transactions, provided to
+                              stdin in rosetta format
+  set-coinbase-receiver       Set the coinbase receiver
   snark-job-list              List of snark jobs in JSON format that are yet to
                               be included in the blocks
   snark-pool-list             List of snark works in the snark pool in JSON
@@ -451,14 +523,15 @@ Advanced client commands
                               $config-directory/trace/$pid.trace
   status-clear-hist           Clear histograms reported in status
   stop-tracing                Stop async tracing
-  node-status                 Get node statuses for a set of peers
   time-offset                 Get the time offset in seconds used by the daemon
                               to convert real time into blockchain time
   validate-keypair            Validate a public, private keypair
   validate-transaction        Validate the signature on one or more
                               transactions, provided to stdin in rosetta format
   verify-receipt              Verify a receipt of a sent payment
-  visualization               Visualize data structures special to Coda
+  visualization               Visualize data structures special to Mina
+  vrf                         Commands for vrf evaluations
   wrap-key                    Wrap a private key into a private key file
   help                        explain a given subcommand (perhaps recursively)
+
 ```
