@@ -66,7 +66,7 @@ mina daemon \
 --max-connection 100
 ```
 
-Please note that `--discovery-keypair` could change in value depending on where you stored your libp2p keypair from the previous steps. Ensure also that you're running on a version later than `1.1.2` to handle `Mainnet` traffic.
+Please note that `--discovery-keypair` could change in value depending on where you stored your libp2p keypair from the previous steps. Ensure also that you're running on a version later than `1.2.0` to handle `Mainnet` traffic.
 
 If you're using Docker, then here is a similar example.
 
@@ -77,7 +77,7 @@ docker run --name mina-seed-node -d \
 -p 9100:9100 \
 -v $(pwd)/keys:/root/keys:ro \
 -v $(pwd)/.mina-config:/root/.mina-config \
---env MINA_LIBP2P_PASS='PASS' \
+--env CODA_LIBP2P_PASS='PASS' \
 minaprotocol/mina-daemon:1.2.0-5b35b27 \
 --discovery-keypair /keys/libp2p-keys \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
@@ -88,7 +88,7 @@ minaprotocol/mina-daemon:1.2.0-5b35b27 \
 --log-level Info
 ```
 
-Make sure to replace the `--env MINA_LIBP2P_PASS=''` with your correct password for the libp2p keypair. Also as with the previous example, ensure you set the correct value with `--discovery-keypair`.
+Make sure to replace the `--env CODA_LIBP2P_PASS=''` with your correct password for the libp2p keypair. Also as with the previous example, ensure you set the correct value with `--discovery-keypair`.
 
 ## Peers List
 

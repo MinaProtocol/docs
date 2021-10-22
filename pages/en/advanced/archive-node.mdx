@@ -74,6 +74,10 @@ mina daemon \
   --archive-address 3086\
 ```
 
+## Upgrading/Repairing the Archive Data
+
+Due to a bug in the originally released archive node version 1.1.5, some early transactions may not be represented properly in your database. See [here](https://gist.github.com/lk86/22b07d3b3f91c765f34e4e4398a84701) for complete instructions on migrating your archive database.
+
 ## Using the Archive Node
 
 Now that we've got the archive node running, let's take a look at the tables in the database.

@@ -79,9 +79,9 @@ See the requirements for the current network <DocLink copy="here" url="/getting-
 
 If you use `systemd` to manage the Mina daemon then it will not automatically restart on a reboot of the machine. You can manually run the service via `systemctl --user start mina` or run `systemctl --user enable mina` to have the service automatically start on boot.
 
-### What should I add for MINA_PRIVKEY_PASS?
+### What should I add for CODA_PRIVKEY_PASS?
 
-When you generated a keypair, you created a password. Use the password you created for the value of `MINA_PRIVKEY_PASS`.
+When you generated a keypair, you created a password. Use the password you created for the value of `CODA_PRIVKEY_PASS`.
 
 ### I get an error about ~/.mina-config/daemon.json missing?
 
@@ -97,7 +97,7 @@ This is a common issue - see this [issue](https://github.com/MinaProtocol/mina/i
 
 ### Can I provide my password using an environment variable?
 
-Yes. Set the `MINA_PRIVKEY_PASS` environment variable to be your password.
+Yes. Set the `CODA_PRIVKEY_PASS` environment variable to be your password.
 
 ### I am trying to install on Ubuntu 20.04 / Debian 10 and get dependency errors?
 

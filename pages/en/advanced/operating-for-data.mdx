@@ -14,7 +14,7 @@ In addition to <DocLink copy="installing the Mina daemon on your machine" url="/
 
 The best way to learn how to run a node is to follow the instructions on the <DocLink copy="Connecting page" url="/using-mina/connecting" /> of the docs.
 
-However, you should remove `MINA_PRIVKEY_PASS` and `-block-producer-key ...` flag as we do not wish this node to start as a block producer.
+However, you should remove `CODA_PRIVKEY_PASS` and `-block-producer-key ...` flag as we do not wish this node to start as a block producer.
 
 In order to expose recent information of the blockchain, we'll need to expose the GraphQL REST server. You may want to provide `-rest-server-port XXXX` if the default of 0xc0d or 3085 does not work for you. You may also want to provide `-insecure-rest-server` to make the REST server accessible from outside of `localhost`. However, if you do, make sure you set your firewall up properly. See <DocLink copy="GraphQL API page" url="/developers/graphql-api" /> for more.
 
