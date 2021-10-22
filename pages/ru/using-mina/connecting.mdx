@@ -174,7 +174,7 @@ daemon \
 
 Запустите следующую команду, чтобы импортировать <DocLink copy="ранее сгенерированный" url="/using-mina/keypair" /> файл keypair:
 
-    mina accounts import -privkey-path ~/keys/my-wallet
+    mina accounts import --privkey-path ~/keys/my-wallet
 
 Вам будет предложено ввести пароль, который вы указали при создании аккаунта.
 
@@ -211,7 +211,7 @@ daemon \
 
 Если вы запускаете ноду на облачной виртуальной машине, обязательно экспортируйте и сохраните файл ключа. Вы можете экспортировать ключ с помощью:
 
-    mina accounts export -public-key <PUBLIC-KEY> -privkey-path <EXPORT-PATH>
+    mina accounts export --public-key <PUBLIC-KEY> --privkey-path <EXPORT-PATH>
 
 Затем сохраните его на своем локальном компьютере, можете использовать [scp](https://linux.die.net/man/1/scp):
 
@@ -219,7 +219,7 @@ daemon \
 
 Позже при запуске новой виртуальной машины вы можете загрузить ключ, а затем импортировать его:
 
-    mina accounts import -privkey-path <PRIVATE-KEY-FILE>
+    mina accounts import --privkey-path <PRIVATE-KEY-FILE>
 
 </Alert>
 
@@ -242,7 +242,7 @@ daemon \
 
 Наконец, мы со всем справились и делаем нашу первую транзакцию! Перед отправкой платежа вам необходимо разблокировать свой аккаунт:
 
-    mina accounts unlock -public-key $MINA_PUBLIC_KEY
+    mina accounts unlock --public-key $MINA_PUBLIC_KEY
 
 С целью тестирования уже настроена эхо-служба, которая сразу же вернет вам платеж за вычетом комиссии за транзакцию. Вы можете использовать следующий публичный ключ для эхо-бота.
 
@@ -261,10 +261,10 @@ B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ
 Давайте отправим в этот сервис несколько mina, которые мы недавно получили, чтобы увидеть, как выглядит платеж:
 
     mina client send-payment \
-      -amount 0.5 \
-      -receiver B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ \
-      -fee 0.1 \
-      -sender $MINA_PUBLIC_KEY
+      --amount 0.5 \
+      --receiver B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ \
+      --fee 0.1 \
+      --sender $MINA_PUBLIC_KEY
 
 Если интересно, вот что мы передали верхним командам:
 

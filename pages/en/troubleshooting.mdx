@@ -190,7 +190,7 @@ This error should have been resolved by a recent update, so ensure you are on th
 
 ### I get an error couldn't determine our IP from the internet?
 
-If you see `couldn't determine our IP from the internet, use -external-ip` flag, then the daemon failed to determine its own IP from [these service providers](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11). Your firewall may be blocking HTTP/S requests, or you have a misconfigured network connection.
+If you see `couldn't determine our IP from the internet, use --external-ip` flag, then the daemon failed to determine its own IP from [these service providers](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11). Your firewall may be blocking HTTP/S requests, or you have a misconfigured network connection.
 
 To bypass this, pass in the flag `-external-ip <your-ip-address>` when starting the Mina daemon. To get your external IP address, run `curl ifconfig.me`.
 
@@ -276,7 +276,7 @@ See [this answer](#can-I-send-a-payment-before-I-am-synced), you will need to wa
 
 ### I am running a block producer, but I don't see anything in mina accounts list?
 
-If you started the daemon passing the `block-producer-key` flag, then you still need to import the account to the daemon in order to send a transaction. To do so, use the `mina accounts import -priv-key` command, passing in the location of the private key file.
+If you started the daemon passing the `block-producer-key` flag, then you still need to import the account to the daemon in order to send a transaction. To do so, use the `mina accounts import --privkey-path` command, passing in the location of the private key file.
 
 ## Block producer
 
@@ -344,7 +344,7 @@ For choosing fees, you can look at historical blocks to determine prices that ha
 
 ### How can I disable the snark worker?
 
-Run `mina client set-snark-worker` to disable the snark worker. To enable again, pass your public key `mina client set-snark-worker -address <YOUR_PUBLIC_KEY>`.
+Run `mina client set-snark-worker` to disable the snark worker. To enable again, pass your public key `mina client set-snark-worker --address <YOUR_PUBLIC_KEY>`.
 
 ### Can I run a snark worker and block producer on the same machine?
 
