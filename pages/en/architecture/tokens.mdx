@@ -25,7 +25,7 @@ Please note that creating new tokens requires an additional fee on top of the ev
 ### Create a new token
 
 ```
-$ mina client create-token --sender <PUBLIC_KEY>
+$ mina client create-token -sender <PUBLIC_KEY>
 ```
 
 <Alert>
@@ -57,7 +57,7 @@ To send or receive an existing token, you must have a token account with the spe
 ### Create a new token account
 
 ```
-$ mina client create-token-account --token-owner <PUBLICKEY> --receiver <PUBLICKEY> --sender <KEY> --token <TOKEN_ID>
+$ mina client create-token-account -token-owner <PUBLICKEY> -receiver <PUBLICKEY> -sender <KEY> -token <TOKEN_ID>
 ```
 
 <Alert>
@@ -89,7 +89,7 @@ With the CLI, you are able to mint your own tokens. Minting your own tokens simp
 ### Mint a token
 
 ```
-$ mina client mint-tokens --amount <VALUE> --sender <PUBLIC-KEY> --token <TOKEN_ID>
+$ mina client mint-tokens -amount <VALUE> -sender <PUBLIC-KEY> -token <TOKEN_ID>
 ```
 
 <Alert>

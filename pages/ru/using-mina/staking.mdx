@@ -20,7 +20,7 @@ export default Page({ title: "Staking & Snarking" });
 
 Для осуществления стейкинга лучше иметь больше средств, но поскольку мы уже выполнили <DocLink copy="предыдущий шаг" url="/using-mina/send-payment#make-a-payment" />, и у нас уже есть средства в кошельке, можно попробовать использовать их для стейкинга mina. Для этого выполните следующую команду:
 
-    mina client set-staking --public-key $MINA_PUBLIC_KEY
+    mina client set-staking -public-key $MINA_PUBLIC_KEY
 
 В качестве альтернативы вы можете перезапустить daemon с помощью флага `-block-producer-pubkey`:
 
@@ -74,14 +74,14 @@ Libp2p PeerID:              ...
 
 Сначала убедитесь, что вы разблокировали свой аккаунт:
 
-    mina account unlock --public-key $MINA_PUBLIC_KEY
+    mina account unlock -public-key $MINA_PUBLIC_KEY
 
 Затем запустите эту команду, чтобы делегировать свою долю:
 
     mina client delegate-stake \
-        --receiver <DELEGATE-PUBLIC-KEY> \
-        --sender $MINA_PUBLIC_KEY \
-        --fee 0.1
+        -receiver <DELEGATE-PUBLIC-KEY> \
+        -sender $MINA_PUBLIC_KEY \
+        -fee 0.1
 
 Поля в этой команде:
 
@@ -112,7 +112,7 @@ Libp2p PeerID:              ...
 Вы можете запустить snark-worker, используя следующие команды:
 
     mina client set-snark-work-fee <FEE>
-    mina client set-snark-worker --address $MINA_PUBLIC_KEY
+    mina client set-snark-worker -address $MINA_PUBLIC_KEY
 
 В качестве альтернативы вы можете перезапустить daemon с помощью следующих флагов:
 

@@ -25,7 +25,7 @@ export default Page({ title: "Tokens" });
 ### Создание нового токена
 
 ```
-$ mina client create-token --sender <PUBLIC_KEY>
+$ mina client create-token -sender <PUBLIC_KEY>
 ```
 
 <Alert>
@@ -57,7 +57,7 @@ $ mina client create-token -help
 ### Создание нового токен-аккаунта
 
 ```
-$ mina client create-token-account --token-owner <PUBLICKEY> --receiver <PUBLICKEY> --sender <KEY> --token <TOKEN_ID>
+$ mina client create-token-account -token-owner <PUBLICKEY> -receiver <PUBLICKEY> -sender <KEY> -token <TOKEN_ID>
 ```
 
 <Alert>
@@ -89,7 +89,7 @@ $ mina client create-token-account -help
 ### Минтинг токена
 
 ```
-$ mina client mint-tokens --amount <VALUE> --sender <PUBLIC-KEY> --token <TOKEN_ID>
+$ mina client mint-tokens -amount <VALUE> -sender <PUBLIC-KEY> -token <TOKEN_ID>
 ```
 
 <Alert>

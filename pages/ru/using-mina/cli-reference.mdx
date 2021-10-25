@@ -88,12 +88,16 @@ Mina daemon
                                                       assumed to be HOST.
                                                       (examples: 3086,
                                                       154.97.53.97:3086)
+                                                      (alias: -archive-address)
   [--archive-rocksdb]                                 Stores all the blocks
                                                       heard in RocksDB
+                                                      (alias: -archive-rocksdb)
   [--background]                                      Run process on the
                                                       background
+                                                      (alias: -background)
   [--bind-ip IP]                                      IP of network interface to
                                                       use for peer connections
+                                                      (alias: -bind-ip)
   [--block-producer-key KEYFILE]                      Private key file for the
                                                       block producer. You cannot
                                                       provide both
@@ -101,6 +105,8 @@ Mina daemon
                                                       `block-producer-pubkey`.
                                                       (default: don't produce
                                                       blocks)
+                                                      (alias:
+                                                      -block-producer-key)
   [--block-producer-password PASSWORD]                Password associated with
                                                       the block-producer key.
                                                       Setting this is equivalent
@@ -113,6 +119,8 @@ Mina daemon
                                                       history. Mainly to be used
                                                       from the daemon.json
                                                       config file
+                                                      (alias:
+                                                      -block-producer-password)
   [--block-producer-pubkey PUBLICKEY]                 Public key for the
                                                       associated private key
                                                       that is being tracked by
@@ -122,16 +130,22 @@ Mina daemon
                                                       `block-producer-pubkey`.
                                                       (default: don't produce
                                                       blocks)
+                                                      (alias:
+                                                      -block-producer-pubkey)
   [--client-port PORT]                                local RPC-server for
                                                       clients to interact with
                                                       the daemon (default: 8301)
+                                                      (alias: -client-port)
   [--coinbase-receiver PUBLICKEY]                     Address to send coinbase
                                                       rewards to (if this node
                                                       is producing blocks). If
                                                       not provided, coinbase
                                                       rewards will be sent to
                                                       the producer of a block.
+                                                      (alias:
+                                                      -coinbase-receiver)
   [--config-directory DIR]                            Configuration directory
+                                                      (alias: -config-directory)
   [--config-file PATH]                                path to a configuration
                                                       file (overrides
                                                       CODA_CONFIG_FILE, default:
@@ -139,22 +153,29 @@ Mina daemon
                                                       Pass multiple times to
                                                       override fields from
                                                       earlier config files
+                                                      (alias: -config-file)
   [--current-protocol-version NN.NN.NN]               Current protocol version,
                                                       only blocks with the same
                                                       version accepted
+                                                      (alias:
+                                                      -current-protocol-version)
   [--demo-mode]                                       Run the daemon in
                                                       demo-mode -- assume we're
                                                       "synced" to the network
                                                       instantly
+                                                      (alias: -demo-mode)
   [--direct-peer /ip4/IPADDR/tcp/PORT/p2p/PEERID]     Peers to always send new
                                                       messages to/from. These
                                                       peers should also have you
                                                       configured as a direct
                                                       peer, the relationship is
                                                       intended to be symmetric
+                                                      (alias: -direct-peer)
   [--disable-node-status]                             Disable reporting node
                                                       status to other nodes
                                                       (default: enabled)
+                                                      (alias:
+                                                      -disable-node-status)
   [--discovery-keypair KEYFILE]                       Keypair (generated from
                                                       `mina advanced
                                                       generate-libp2p-keypair`)
@@ -162,71 +183,100 @@ Mina daemon
                                                       discovery (default:
                                                       generate per-run temporary
                                                       keypair)
+                                                      (alias:
+                                                      -discovery-keypair)
   [--enable-flooding true|false]                      Publish our own
                                                       blocks/transactions to
                                                       every peer we can find
                                                       (default: false)
+                                                      (alias: -enable-flooding)
   [--enable-mina-peer-exchange true|false]            Help keep the mesh
                                                       connected when closing
                                                       connections (default:
                                                       true)
+                                                      (alias:
+                                                      -enable-mina-peer-exchange)
   [--enable-peer-exchange true|false]                 Help keep the mesh
                                                       connected when closing
                                                       connections (default:
                                                       false)
+                                                      (alias:
+                                                      -enable-peer-exchange)
   [--external-ip IP]                                  External IP address for
                                                       other nodes to connect to.
                                                       You only need to set this
                                                       if auto-discovery fails
                                                       for some reason.
+                                                      (alias: -external-ip)
   [--external-port PORT]                              Port to use for all libp2p
                                                       communications (gossip and
                                                       RPC) (default: 8302)
+                                                      (alias: -external-port)
   [--file-log-level LEVEL]                            Set log level for the log
                                                       file
                                                       (Spam|Trace|Debug|Info|Warn|Error|Faulty_peer|Fatal,
                                                       default: Trace)
+                                                      (alias: -file-log-level)
   [--generate-genesis-proof true|false]               Generate a new genesis
                                                       proof for the current
                                                       configuration if none is
                                                       found (default: false)
+                                                      (alias:
+                                                      -generate-genesis-proof)
   [--genesis-ledger-dir DIR]                          Directory that contains
                                                       the genesis ledger and the
                                                       genesis blockchain proof
                                                       (default: <config-dir>)
+                                                      (alias:
+                                                      -genesis-ledger-dir)
   [--insecure-rest-server]                            Have REST server listen on
                                                       all addresses, not just
                                                       localhost (this is
                                                       INSECURE, make sure your
                                                       firewall is configured
                                                       correctly!)
+                                                      (alias:
+                                                      -insecure-rest-server)
   [--isolate-network true|false]                      Only allow connections to
                                                       the peers passed on the
                                                       command line or configured
                                                       through GraphQL. (default:
                                                       false)
+                                                      (alias: -isolate-network)
   [--libp2p-metrics-port PORT]                        libp2p metrics server for
                                                       scraping via Prometheus
                                                       (default no
                                                       libp2p-metrics-server)
+                                                      (alias:
+                                                      -libp2p-metrics-port)
   [--log-block-creation true|false]                   Log the steps involved in
                                                       including transactions and
                                                       snark work in a block
                                                       (default: true)
+                                                      (alias:
+                                                      -log-block-creation)
   [--log-json]                                        Print log output as JSON
                                                       (default: plain text)
+                                                      (alias: -log-json)
   [--log-level LEVEL]                                 Set log level
                                                       (Spam|Trace|Debug|Info|Warn|Error|Faulty_peer|Fatal,
                                                       default: Info)
+                                                      (alias: -log-level)
   [--log-precomputed-blocks true|false]               Include precomputed blocks
                                                       in the log (default:
                                                       false)
+                                                      (alias:
+                                                      -log-precomputed-blocks)
   [--log-snark-work-gossip true|false]                Log snark-pool diff
                                                       received from peers
                                                       (default: false)
+                                                      (alias:
+                                                      -log-snark-work-gossip)
   [--log-txn-pool-gossip true|false]                  Log transaction-pool diff
                                                       received from peers
                                                       (default: false)
+                                                      (alias:
+                                                      -log-txn-pool-gossip)
   [--max-connections NN]                              max number of connections
                                                       that this peer will have
                                                       to neighbors in the gossip
@@ -236,55 +286,77 @@ Mina daemon
                                                       network in exchange for
                                                       using more RAM (default:
                                                       50)
+                                                      (alias: -max-connections)
   [--metrics-port PORT]                               metrics server for
                                                       scraping via Prometheus
                                                       (default no
                                                       metrics-server)
+                                                      (alias: -metrics-port)
   [--no-super-catchup]                                Don't use super-catchup
+                                                      (alias: -no-super-catchup)
   [--peer /ip4/IPADDR/tcp/PORT/p2p/PEERID]            initial "bootstrap" peers
                                                       for discovery
+                                                      (alias: -peer)
   [--peer-list-file /ip4/IPADDR/tcp/PORT/p2p/PEERID]  initial "bootstrap" peers
                                                       for discovery inside a
                                                       file delimited by
                                                       new-lines (\n)
+                                                      (alias: -peer-list-file)
   [--peer-list-url URL]                               URL of seed peer list
                                                       file. Will be polled
                                                       periodically.
+                                                      (alias: -peer-list-url)
   [--precomputed-blocks-file PATH]                    Path to write precomputed
                                                       blocks to, for replay or
                                                       archiving
+                                                      (alias:
+                                                      -precomputed-blocks-file)
   [--proof-level]                                     full|check|none
+                                                      (alias: -proof-level)
   [--proposed-protocol-version NN.NN.NN]              Proposed protocol version
                                                       to signal other nodes
+                                                      (alias:
+                                                      -proposed-protocol-version)
   [--rest-port PORT]                                  local REST-server for
                                                       daemon interaction
                                                       (default: 3085)
+                                                      (alias: -rest-port)
   [--run-snark-coordinator PUBLICKEY]                 Run a SNARK coordinator
                                                       with this public key
                                                       (ignored if the
                                                       run-snark-worker is set)
+                                                      (alias:
+                                                      -run-snark-coordinator)
   [--run-snark-worker PUBLICKEY]                      Run the SNARK worker with
                                                       this public key
+                                                      (alias: -run-snark-worker)
   [--seed]                                            Start the node as a seed
                                                       node
+                                                      (alias: -seed)
   [--snark-worker-fee FEE]                            Amount a worker wants to
                                                       get compensated for
                                                       generating a snark proof
                                                       (default: 100000000)
+                                                      (alias: -snark-worker-fee)
   [--snark-worker-parallelism NUM]                    Run the SNARK worker using
                                                       this many threads.
                                                       Equivalent to setting
                                                       OMP_NUM_THREADS, but
                                                       doesn't affect block
                                                       production.
+                                                      (alias:
+                                                      -snark-worker-parallelism)
   [--tracing]                                         Trace into
                                                       $config-directory/trace/$pid.trace
+                                                      (alias: -tracing)
   [--upload-blocks-to-gcloud true|false]              upload blocks to gcloud
                                                       storage. Requires the
                                                       environment variables
                                                       GCLOUD_KEYFILE,
                                                       NETWORK_NAME, and
                                                       GCLOUD_BLOCK_UPLOAD_BUCKET
+                                                      (alias:
+                                                      -upload-blocks-to-gcloud)
   [--validation-queue-size NN]                        size of the validation
                                                       queue in the p2p network
                                                       used to buffer messages
@@ -302,17 +374,23 @@ Mina daemon
                                                       too large, we are
                                                       susceptible to DoS attacks
                                                       on memory. (default: 150)
+                                                      (alias:
+                                                      -validation-queue-size)
   [--work-reassignment-wait WAIT-TIME]                in ms before a snark-work
                                                       is reassigned (default:
                                                       420000ms)
+                                                      (alias:
+                                                      -work-reassignment-wait)
   [--work-selection seq|rand]                         Choose work sequentially
                                                       (seq) or randomly (rand)
                                                       (default: rand)
+                                                      (alias: -work-selection)
   [--working-dir PATH]                                path to chdir into before
                                                       starting (useful for
                                                       background mode, defaults
                                                       to cwd, or / if
                                                       -background)
+                                                      (alias: -working-dir)
   [-help]                                             print this help text and
                                                       exit
                                                       (alias: -?)
