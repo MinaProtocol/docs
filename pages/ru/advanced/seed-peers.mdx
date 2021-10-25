@@ -1,5 +1,5 @@
 import Page from "@reason/pages/Docs";
-import DocLink from "@reason/components/DocLink"
+import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Seed Peers" });
 
 # Сид-пиры
@@ -15,7 +15,7 @@ export default Page({ title: "Seed Peers" });
 1. Их адрес должен быть статическим
 2. Они нуждаются в высоком уровне времени бесперебойной работы и могут поддерживать множество соединений -- поэтому им следует избегать других активностей в сети, кроме "раздачи".
 
-### Обеспечение и публикация статического адреса 
+### Обеспечение и публикация статического адреса
 
 Прежде всего, вам требуется статический хост, на котором будет развернута ваша нода. Предпочтительно использовать DNS и разместить свою сид-ноду, например, на: `seed.o1test.net`. В качестве альтернативы вы можете настроить статический ipv4-адрес, например `82.230.217.200`.
 
@@ -57,7 +57,7 @@ mina advanced generate-libp2p-keypair
 mina daemon \
 --seed \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
---file-log-level Info -log-level Info \
+--file-log-level Info --log-level Info \
 --log-block-creation false \
 --log-snark-work-gossip false \
 --log-txn-pool-gossip false \
@@ -78,8 +78,8 @@ docker run --name mina-seed-node -d \
 -p 9100:9100 \
 -v $(pwd)/keys:/root/keys:ro \
 -v $(pwd)/.mina-config:/root/.mina-config \
---env CODA_LIBP2P_PASS='PASS' \
-minaprotocol/mina-daemon-baked:1.1.2-0975867 daemon \
+--env MINA_LIBP2P_PASS='PASS' \
+minaprotocol/mina-daemon:1.2.0-fe51f1e \
 --discovery-keypair /keys/libp2p-keys \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
 --metrics-port 9100 \
@@ -89,7 +89,7 @@ minaprotocol/mina-daemon-baked:1.1.2-0975867 daemon \
 --log-level Info
 ```
 
-Обязательно замените `--env CODA_LIBP2P_PASS=''` своим правильным паролем для пары ключей libp2p. Как и в предыдущем примере убедитесь, что вы установили правильное значение с помощью `--discovery-keypair`.
+Обязательно замените `--env MINA_LIBP2P_PASS=''` своим правильным паролем для пары ключей libp2p. Как и в предыдущем примере убедитесь, что вы установили правильное значение с помощью `--discovery-keypair`.
 
 ## Список пиров
 

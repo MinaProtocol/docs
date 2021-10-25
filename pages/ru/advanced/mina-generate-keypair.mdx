@@ -25,12 +25,12 @@ export default Page({ title: "Mina Generate Keypair" });
 После <DocLink copy="добавления репозитория Mina" url="/getting-started#ubuntu-1804--debian-9" /> , вы можете просто выполнить следующую команду.
 
 ```
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install mina-generate-keypair=1.1.8-b10c0e3
+sudo apt-get install mina-generate-keypair=1.2.0-fe51f1e
 ```
 
-Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master` на выходе.
+Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit fe51f1ef5cfbcb4d5f559af39080963cf28ff1af on branch master` на выходе.
 
 ### Windows / Другие платформы
 
@@ -64,17 +64,17 @@ chmod 700 ~/keys
 
 <br />
 
-3a. Для Ubuntu/Debian: Создайте ключи с помощью команды `mina-generate-keypair`. При появлении запроса введите пароль, который вы хотите использовать для защиты ключей. Если он уже установлен, инструмент будет использовать пароль из переменных среды CODA_PRIVKEY_PASS. <em>НЕ ЗАБУДЬТЕ этот пароль.</em>
+3a. Для Ubuntu/Debian: Создайте ключи с помощью команды `mina-generate-keypair`. При появлении запроса введите пароль, который вы хотите использовать для защиты ключей. Если он уже установлен, инструмент будет использовать пароль из переменных среды `MINA_PRIVKEY_PASS`. <em>НЕ ЗАБУДЬТЕ этот пароль.</em>
 
 ```
-mina-generate-keypair -privkey-path ~/keys/my-wallet
+mina-generate-keypair --privkey-path ~/keys/my-wallet
 ```
 
 3b. В Docker на Windows/MacOS/Linux: сгенерируйте ключи, используя образ Docker `minaprotocol/generate-keypair`. При появлении запроса введите пароль, который вы хотите использовать для защиты ключей. <em>НЕ ЗАБУДЬТЕ этот пароль.</em>
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.0-fe51f1e --privkey-path /keys/my-wallet
 ```
 
 В вашей системе будут созданы два файла: `~/keys/my-wallet`, содержащий зашифрованный закрытый ключ, и `~/keys/my-wallet.pub`, который содержит открытый ключ в виде обычного текста. Пожалуйста, сохраните файл с закрытым ключом и пароль, который вы использовали, в надежном месте, например в менеджере паролей.
@@ -102,11 +102,11 @@ chmod 600 ~/keys/my-wallet
 На Linux выполните следующую команду:
 
 ```
-mina-validate-keypair -privkey-path <path-to-the-private-key-file>
+mina-validate-keypair --privkey-path <path-to-the-private-key-file>
 ```
 
 При использовании Docker выполните следующую команду:
 
 ```
-docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.0.2-06f3c5c -privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.0-fe51f1e --privkey-path /keys/my-wallet
 ```

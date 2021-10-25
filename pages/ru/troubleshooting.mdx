@@ -79,9 +79,9 @@ This is necessary because sometimes macOS doesn't resolve your hostname to your 
 
 Если вы используете `systemd` для управления daemon Mina, он не будет автоматически перезагружаться при перезагрузке машины. Вы можете запустить службу вручную с помощью `systemctl --user enable mina` или запустить `systemctl --user enable mina`, чтобы служба автоматически запускалась при загрузке.
 
-### Что мне необходимо добавить для CODA_PRIVKEY_PASS?
+### Что мне необходимо добавить для MINA_PRIVKEY_PASS?
 
-Когда вы сгенерировали keypair, вы создали пароль. Используйте пароль, который вы создали, для значения `CODA_PRIVKEY_PASS`.
+Когда вы сгенерировали keypair, вы создали пароль. Используйте пароль, который вы создали, для значения `MINA_PRIVKEY_PASS`.
 
 ### Я получаю сообщение c ошибкой об отсутствии ~/.mina-config/daemon.json
 
@@ -97,7 +97,7 @@ This is necessary because sometimes macOS doesn't resolve your hostname to your 
 
 ### Могу ли я создать свой пароль с помощью переменной среды?
 
-Да. Задайте в качестве пароля переменную среды `CODA_PRIVKEY_PASS`.
+Да. Задайте в качестве пароля переменную среды `MINA_PRIVKEY_PASS`.
 
 ### Пытаюсь совершить установку на Ubuntu 20.04 / Debian 10, и появляется ошибка зависимости
 
@@ -190,7 +190,7 @@ ufw deny out from any to 169.254.0.0/16
 
 ### Я получаю сообщение об ошибке о том, что мой IP-адрес не может быть определен в Интернете
 
-Если вы видите флаг `couldn't determine our IP from the internet, use -external-ip`, значит daemon не смог определить свой собственный IP-адрес с помощью [этих провайдеров](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11). Ваш фаервол может блокировать запросы HTTP/S, или у вас неправильно настроено сетевое соединение.
+Если вы видите флаг `couldn't determine our IP from the internet, use --external-ip`, значит daemon не смог определить свой собственный IP-адрес с помощью [этих провайдеров](https://github.com/MinaProtocol/mina/blob/056d0203722ddfec1c7ad216846434648cd7af5e/src/app/cli/src/find_ip.ml#L7-L11). Ваш фаервол может блокировать запросы HTTP/S, или у вас неправильно настроено сетевое соединение.
 
 Чтобы обойти это, передайте флаг `-external-ip <your-ip-address>` при запуске daemon Mina. Чтобы получить свой внешний IP-адрес, запустите `curl ifconfig.me`.
 
@@ -276,7 +276,7 @@ mina advanced pooled-user-commands | jq . | grep fee | sort | uniq -c | sort -n
 
 ### Я запустил блок-продюсера, но ничего не вижу в списке аккаунтов mina
 
-Если вы запустили daemon, передав флаг `block-producer-key`, вам все равно нужно импортировать учетную запись в daemon, чтобы отправить транзакцию. Для этого используйте команду `mina accounts import -priv-key`, передав расположение файла закрытого ключа.
+Если вы запустили daemon, передав флаг `block-producer-key`, вам все равно нужно импортировать учетную запись в daemon, чтобы отправить транзакцию. Для этого используйте команду `mina accounts import --privkey-path`, передав расположение файла закрытого ключа.
 
 ## Блок-продюсер
 
@@ -344,7 +344,7 @@ mina advanced pooled-user-commands | jq . | grep fee | sort | uniq -c | sort -n
 
 ### Как отключить snark worker?
 
-Запустите `mina client set-snark-worker`, чтобы отключить снарк-воркер. Чтобы его снова подключить, передайте свой открытый ключ `mina client set-snark-worker -address <YOUR_PUBLIC_KEY>`.
+Запустите `mina client set-snark-worker`, чтобы отключить снарк-воркер. Чтобы его снова подключить, передайте свой открытый ключ `mina client set-snark-worker --address <YOUR_PUBLIC_KEY>`.
 
 ### Могу ли я запустить снарк-воркера и блок-продюсера на одной машине?
 

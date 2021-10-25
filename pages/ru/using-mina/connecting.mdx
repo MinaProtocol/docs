@@ -16,13 +16,12 @@ export default Page({ title: "Connect to the Network" });
 Сначала удалите любую ранее установленную версию daemon, чтобы избежать ошибок при обновлении до последней версии. Затем вы можете установить последнюю версию следующим образом:
 
 ```
-sudo apt-get remove -y mina-testnet-postake-medium-curves
-echo "deb [trusted=yes] http://packages.o1test.net release main" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
+sudo apt-get install -y curl unzip mina-mainnet=1.2.0-fe51f1e
 ```
 
-Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit b10c0e3db9112a2a8aebc3eec7c6d2570fcc4044 on branch master`.
+Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit fe51f1ef5cfbcb4d5f559af39080963cf28ff1af on branch master`.
 
 ## Установка ноды
 
@@ -35,7 +34,7 @@ sudo apt-get install -y curl unzip mina-mainnet=1.1.8-b10c0e3
 Выполните следующую команду, чтобы запустить экземпляр ноды Mina и подключиться к действующей сети:
 
 ```
-mina daemon --generate-genesis-proof true --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+mina daemon --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
 Аргумент `-peer-list`, указанный выше, относится к адресу сид-пира - это начальный пир, который мы подключаем в сети. Поскольку Mina – <DocLink copy="p2p" url="/glossary#peer-to-peer" /> -протокол, не существует единого централизованного сервера, на который мы могли бы полагаться.
@@ -53,8 +52,10 @@ mina daemon --generate-genesis-proof true --peer-list-url https://storage.google
 Добавьте файл `~/.mina-env`, содержащий следующее:
 
 ```
-CODA_PRIVKEY_PASS="private key password"
-EXTRA_FLAGS=" --file-log-level Debug"
+MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password"
+LOG_LEVEL=Info
+FILE_LOG_LEVEL=Debug
+EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
 ```
 
 Позже, если необходимо, вы cможете добавить дополнительные флаги в `EXTRA_FLAGS`.
@@ -125,13 +126,10 @@ docker run --name mina -d \
 --restart=always \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
--e CODA_PRIVKEY_PASS="YOUR PASSWORD HERE" \
-gcr.io/o1labs-192920/mina-daemon-baked:1.1.8-b10c0e3-mainnet \
+-e MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password" \
+minaprotocol/mina-daemon:1.2.0-fe51f1e-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
---insecure-rest-server \
---file-log-level Debug \
---log-level Info \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
 
@@ -176,7 +174,7 @@ daemon \
 
 Запустите следующую команду, чтобы импортировать <DocLink copy="ранее сгенерированный" url="/using-mina/keypair" /> файл keypair:
 
-    mina accounts import -privkey-path ~/keys/my-wallet
+    mina accounts import --privkey-path ~/keys/my-wallet
 
 Вам будет предложено ввести пароль, который вы указали при создании аккаунта.
 
@@ -213,7 +211,7 @@ daemon \
 
 Если вы запускаете ноду на облачной виртуальной машине, обязательно экспортируйте и сохраните файл ключа. Вы можете экспортировать ключ с помощью:
 
-    mina accounts export -public-key <PUBLIC-KEY> -privkey-path <EXPORT-PATH>
+    mina accounts export --public-key <PUBLIC-KEY> --privkey-path <EXPORT-PATH>
 
 Затем сохраните его на своем локальном компьютере, можете использовать [scp](https://linux.die.net/man/1/scp):
 
@@ -221,7 +219,7 @@ daemon \
 
 Позже при запуске новой виртуальной машины вы можете загрузить ключ, а затем импортировать его:
 
-    mina accounts import -privkey-path <PRIVATE-KEY-FILE>
+    mina accounts import --privkey-path <PRIVATE-KEY-FILE>
 
 </Alert>
 
@@ -244,7 +242,7 @@ daemon \
 
 Наконец, мы со всем справились и делаем нашу первую транзакцию! Перед отправкой платежа вам необходимо разблокировать свой аккаунт:
 
-    mina accounts unlock -public-key $MINA_PUBLIC_KEY
+    mina accounts unlock --public-key $MINA_PUBLIC_KEY
 
 С целью тестирования уже настроена эхо-служба, которая сразу же вернет вам платеж за вычетом комиссии за транзакцию. Вы можете использовать следующий публичный ключ для эхо-бота.
 
@@ -263,10 +261,10 @@ B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ
 Давайте отправим в этот сервис несколько mina, которые мы недавно получили, чтобы увидеть, как выглядит платеж:
 
     mina client send-payment \
-      -amount 0.5 \
-      -receiver B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ \
-      -fee 0.1 \
-      -sender $MINA_PUBLIC_KEY
+      --amount 0.5 \
+      --receiver B62qndJi5mnRoBZ8SAYDM1oR2SgAk5WpZC8hGpJUZ4e64kDHGbFMeLJ \
+      --fee 0.1 \
+      --sender $MINA_PUBLIC_KEY
 
 Если интересно, вот что мы передали верхним командам:
 

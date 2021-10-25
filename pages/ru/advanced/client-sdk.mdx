@@ -93,7 +93,7 @@ chmod 600 ~/keys/my-wallet
 5. Используйте инструмент `mina advanced wrap-key`, чтобы перевести вашу пару ключей в формат, который может импортироваться клиентом Mina. Обратите внимание, что использование `mina advanced wrap-key` заставит вас сбросить пароль на вашем закрытом ключе.
 
 ```
-mina advanced wrap-key -privkey-path ~/keys/my-wallet
+mina advanced wrap-key --privkey-path ~/keys/my-wallet
 ```
 
 Вам будет предложено ввести новый пароль, как показано ниже.
@@ -120,7 +120,7 @@ chmod 600 ~/keys/my-wallet
 7. Наконец, мы можем импортировать учетную запись, созданную клиентским SDK, в клиент Mina.
 
 ```
-mina accounts import -privkey-path ~/keys/my-wallet
+mina accounts import --privkey-path ~/keys/my-wallet
 ```
 
 Вам будет предложено ввести пароль, который вы указали при создании учетной записи с помощью `mina advanced wrap-key`.
@@ -139,5 +139,5 @@ Public key: B62qjaA4N9843FKM5FZk1HmeuDiojG42cbCDyZeUDQVjycULte9PFkC
 Запустите следующую команду:
 
 ```
-mina-validate-keypair -privkey-path ~/keys/my-wallet
+mina-validate-keypair --privkey-path ~/keys/my-wallet
 ```

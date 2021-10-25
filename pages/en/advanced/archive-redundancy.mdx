@@ -17,7 +17,7 @@ For example, the server-port of an archive process is 3086, then the daemons can
 ```
 mina daemon \
     .....
-  -archive-address <Ip-address>:3086\
+  --archive-address <Ip-address>:3086\
 ```
 
 Similarly, it is possible to have multiple archive processes write to the same database. In this case the postgres uri passed to the archive process would be same across multiple archive processes.
