@@ -126,7 +126,7 @@ module DocsNavsTranslations = {
   let snarks = {id: "sidenav.snarks", defaultMessage: "SNARKs"};
   let gettingStartedUsingSnarks = {
     id: "sidenav.getting-starting-using-snarks",
-    defaultMessage: "Getting started using SNARKs",
+    defaultMessage: "How Snapps Work",
   };
   let whichSnarkRightForMe = {
     id: "sidenav.which-snark-right-for-me",
