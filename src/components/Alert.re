@@ -37,6 +37,7 @@ let make = (~kind="", ~children) => {
     | "danger" => ("danger", Theme.Colors.error)
     | "welcome" => ("welcome", Theme.Colors.purple)
     | "status" => ("status", Theme.Colors.status)
+    | "info" => ("info", Theme.Colors.lightGrayBox)
     | _ => ("note", Theme.Colors.purple)
     };
   <div className=Styles.main>
