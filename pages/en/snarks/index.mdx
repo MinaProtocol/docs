@@ -4,7 +4,10 @@ export default Page({ title: "SNARKs Guide" });
 
 # Overview 
 
-### What are Snapps? 
+<br />
+<img src="/static/img/docs-images/CLIs.png" width="600em" />
+
+### What are snapps? 
 
 <br />
 
@@ -16,15 +19,29 @@ Never give out your private key and make sure they are stored safely. If you los
 
 <br />
 
-SNARKs are a powerful cryptographic tool that enable applications
-that give users unprecedented levels of oversight and privacy.
-They are also a key-ingredient in building scalable decentralized systems like Mina.
+Snapps (“snark apps”) are Mina’s **zk-SNARK**-powered smart contracts. 
 
-For a high-level overview, check out [this blogpost](https://minaprotocol.com/blog/zero-knowledge-proofs-an-intuitive-explanation).
+Snapps use an off-chain execution and mostly off-chain state model. This allows for private computation and state that can be either private or public. 
 
-**snarky** is a domain specific language for using SNARKs.
-This section is intended to be a guide on how to get started using SNARKs in
-your programs with **snarky**.
+Using zk-SNARKs, snapps can perform arbitrarily complex computations off chain while incurring only a flat fee to send the resulting zero-knowledge proof to the chain, as opposed to other blockchains which use a gas-fee based model.
+
+
+You can learn more about [How Snapps Work]() on the next page
+
+### TypeScript
+
+Snapps are written in TypeScript 
+
+TypeScript provides an easy, familiar language (JavaScript), but with added type safety, making it easy to get started writing Snapps.
+
+You can learn more on the How to [Write a Snapp]() page.
+
+### Examples of snapps
+
+Play around with a few example snapps to see what’s possible:
+
+
+
 
 - <DocLink copy="Getting started with snarky" url="/snarks/snarky" />
 - <DocLink copy="Which construction should I use?" url="/snarks/constructions" />
