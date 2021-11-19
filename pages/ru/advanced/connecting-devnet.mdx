@@ -24,7 +24,7 @@ export default Page({ title: "Connect to Devnet" });
 ```
 echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-devnet=1.2.1-45440dc
+sudo apt-get install -y curl unzip mina-devnet=1.2.2-45440dc
 ```
 
 Убедитесь, что daemon установлен правильно, запустив `mina version`. На выходе должно появиться сообщение `Commit 45440dc7e4c5dac480dd075357c1d369b893fbe1 on branch master`.
@@ -63,7 +63,7 @@ docker run --name mina -d \
 -p 8302:8302 \
 --restart=always \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
-minaprotocol/mina-daemon:1.2.1-45440dc-mainnet \
+minaprotocol/mina-daemon:1.2.2-45440dc-mainnet \
 daemon \
 --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
