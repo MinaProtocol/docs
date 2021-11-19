@@ -52,10 +52,10 @@ export default Page({ title: "Generate a Keypair" });
 ```
 echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install mina-generate-keypair=1.2.2-45440dc
+sudo apt-get install mina-generate-keypair=1.2.2-feee67c
 ```
 
-Убедитесь, что инструмент генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. На выходе должно появиться сообщение `Commit 45440dc7e4c5dac480dd075357c1d369b893fbe1`.
+Убедитесь, что инструмент генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. На выходе должно появиться сообщение `Commit feee67cc2836bf12e792510a2440f28a0275740e`.
 
 ### Windows / Другие платформы
 
@@ -99,7 +99,7 @@ mina-generate-keypair --privkey-path ~/keys/my-wallet
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.2-45440dc --privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.2-feee67c --privkey-path /keys/my-wallet
 ```
 
 В вашей системе будет создано два файла: `~/keys/my-wallet`, который содержит зашифрованный приватный ключ, и `~/keys/my-wallet.pub`, который содержит публичный ключ в виде обычного текста. Пожалуйста, сохраните файл приватного ключа и пароль, которые вы использовали, в надежном месте, например в диспетчере паролей.
@@ -133,7 +133,7 @@ mina-validate-keypair --privkey-path <path-to-the-private-key-file>
 Если вы используете Docker, выполните следующую команду:
 
 ```
-docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.2-45440dc --privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.2-feee67c --privkey-path /keys/my-wallet
 ```
 
 ## Следующие шаги
