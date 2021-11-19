@@ -13,17 +13,17 @@ The first step in connecting to `Mainnet` is installing the latest daemon versio
 
 ### Ubuntu 18.04 / Debian 9
 
-Follow along below to install the latest **Stable** [Mina Release 1.2.0](https://github.com/MinaProtocol/mina/releases/tag/1.2.0) or visit the [Github Releases Page](https://github.com/MinaProtocol/mina/releases) to discover and install pre-release (Beta) builds.
+Follow along below to install the latest **Stable** [Mina Release 1.2.1](https://github.com/MinaProtocol/mina/releases/tag/1.2.1) or visit the [Github Releases Page](https://github.com/MinaProtocol/mina/releases) to discover and install pre-release (Beta) builds.
 
 You can set up the new debian `stretch stable` respository and install the latest version as follows:
 
 ```
 echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.2.0-fe51f1e
+sudo apt-get install -y curl unzip mina-mainnet=1.2.1-45440dc
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit fe51f1ef5cfbcb4d5f559af39080963cf28ff1af on branch master`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit 45440dc7e4c5dac480dd075357c1d369b893fbe1 on branch master`.
 
 ## Start up a node
 
@@ -134,7 +134,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e CODA_PRIVKEY_PASS="My_V3ry_S3cure_Password" \
-minaprotocol/mina-daemon:1.2.0-fe51f1e-mainnet \
+minaprotocol/mina-daemon:1.2.1-45440dc-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
