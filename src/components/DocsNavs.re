@@ -123,12 +123,15 @@ module DocsNavsTranslations = {
   };
   let snapps = {id: "sidenav.snapps", defaultMessage: "Snapps"};
   let tokens = {id: "sidenav.tokens", defaultMessage: "Tokens"};
-  let snarks = {id: "sidenav.snarks", defaultMessage: "SNARKs"};
   let gettingStartedUsingSnarks = {
-    id: "sidenav.getting-starting-using-snarks",
+    id: "sidenav.snarky",
     defaultMessage: "How Snapps Work",
   };
   let whichSnarkRightForMe = {
+    id: "sidenav.which-snark-right-for-me",
+    defaultMessage: "Which SNARK is right for me?",
+  };
+  let howSnappsWork = {
     id: "sidenav.which-snark-right-for-me",
     defaultMessage: "Which SNARK is right for me?",
   };
@@ -347,7 +350,7 @@ module SideNav = {
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(howSnappsWork)}
-            slug="snarky"
+            slug="snapps"
           />
           <Item
             title={intl->Intl.formatMessage(whichSnarkRightForMe)}
@@ -557,7 +560,7 @@ module Dropdown = {
           <Item title={intl->Intl.formatMessage(snapps)} slug="snapps" />
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
-        <Section title={intl->Intl.formatMessage(snarks)} slug={f("snarks")}>
+        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(gettingStartedUsingSnarks)}
