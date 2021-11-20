@@ -6,12 +6,12 @@ export default Page({ title: "Snarky DSL Guide" });
 
 <Alert kind="info">
 
-Snapps run in <a href="https://www.google.com/chrome/index.html">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.microsoft.com/edge">Edge</a>, and <a href="https://brave.com/">Brave</a> currently. We intend to add support for Safari in the future.
+Snapps run in the latest versions of <a href="https://www.google.com/chrome/index.html">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.microsoft.com/edge">Edge</a>, and <a href="https://brave.com/">Brave</a> currently. We intend to add support for Safari in the future.
 </Alert>
 
 <br />
 
-Snapps are written in TypeScript using the Snapp CLI. In the upcoming section, [How to Write a Snapp](), we’ll go into detail about writing your first snapp. For now, we’ll discuss how snapps work.
+Snapps are written in TypeScript using the Snapp CLI. In the upcoming section, <DocLink copy="How to write a snapp" url="/snarky" />, we’ll go into detail about writing your first snapp. For now, we’ll discuss how snapps work.
 
 A “snapp” consists of two parts: 1.) a smart contract and 2.) a UI (user interface) for users to interact with it. 
 
@@ -67,7 +67,7 @@ Whereas a regular Mina account can receive any transactions, a snapp account can
 
 <Alert kind="info">
 
-When you deploy to a new Mina address, the Mina Protocol will charge a 0.25 MINA fee for account creation. This is unrelated to Snapps and is to help prevent sybil or denial of service attacks.
+When you deploy to a new Mina address, the Mina Protocol will charge a 1 MINA fee for account creation. This is unrelated to Snapps and is to help prevent sybil or denial of service attacks.
 </Alert>
 
 ### Deploying a Snapp UI
@@ -99,18 +99,6 @@ Here you can find documentation on how to use **snarky**, a DSL for using zk-SNA
 ## The structure of a SNAPP
 
 A SNAPP (or snarkified app) has two parts:
-
-1. The definition of your zk-SNARK program. This part will be built using **snarky**
-   and specifically the <DocLink copy="snarky-universe" url="/snarks/snarky-universe" /> standard library.
-2. The rest of the application, which calls into **snarky** to create and verify proofs.
-   There are currently APIs for Node.js and OCaml/ReasonML for interacting with **snarky** programs in this way.
-
-   We'll use two Node.js libraries:
-
-   - <DocLink copy="snarkyjs-crypto" url="/snarks/snarkyjs-crypto" />, which
-     gives us access to cryptographic hashes, merkle-trees, and signatures that
-     mirror those in snarky-universe
-   - [snarkyjs](https://www.npmjs.com/package/@o1labs/snarkyjs) which gives us methods for creating and verifying SNARK proofs.
 
 ## An example app
 

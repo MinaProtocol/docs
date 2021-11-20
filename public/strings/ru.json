@@ -210,9 +210,9 @@
     "message": "Токены"
   },
   {
-    "id": "sidenav.snarks",
-    "defaultMessage": "SNARKs",
-    "message": "SNARKs"
+    "id": "sidenav.snapps",
+    "defaultMessage": "Snapps",
+    "message": "Snapps"
   },
   {
     "id": "sidenav.getting-starting-using-snarks",
@@ -223,16 +223,6 @@
     "id": "sidenav.which-snark-right-for-me",
     "defaultMessage": "Which SNARK is right for me?",
     "message": "Какой SNARK мне подходит?"
-  },
-  {
-    "id": "sidenav.snarkyjs-crypto-library",
-    "defaultMessage": "The snarkyjs-crypto library",
-    "message": "Библиотека snarkyjs-crypto"
-  },
-  {
-    "id": "sidenav.snarky-universe-library",
-    "defaultMessage": "The snarky-universe library",
-    "message": "Библиотека вселенной snkary"
   },
   {
     "id": "sidenav.troubleshooting",

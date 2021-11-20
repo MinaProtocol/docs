@@ -9,16 +9,10 @@ export default Page({ title: "Snarky DSL Guide" });
 SNAPP (или SNARK-приложение) состоит из двух частей:
 
 1. Определение вашей программы zk-SNARK. Эта часть будет построена с использованием **snarky**
-   и прежде всего стандартной библиотеки <DocLink copy="snarky-universe" url="/snarks/snarky-universe" />.
 2. Остальная часть приложения, которое вызывает **snarky** для создания и проверки доказательств.
    В настоящее время существуют API для Node.js и OCaml/ReasonML для взаимодействия с программами **snarky** таким образом.
 
    Мы используем две библиотеки Node.js:
-
-   - <DocLink copy="snarkyjs-crypto" url="/snarks/snarkyjs-crypto" />, что дает
-     нам доступ к криптографическим хэшам, деревьям Меркла и подписям, которые
-     зеркально отражают то, что есть в snarky-universe.
-   - [snarkyjs](https://www.npmjs.com/package/@o1labs/snarkyjs), который дает нам методы для создания и проверки SNARK-доказательств.
 
 ## Пример приложения
 
