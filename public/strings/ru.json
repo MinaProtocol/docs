@@ -220,11 +220,6 @@
     "message": "Начало работы с SNARKs"
   },
   {
-    "id": "sidenav.which-snark-right-for-me",
-    "defaultMessage": "Which SNARK is right for me?",
-    "message": "Какой SNARK мне подходит?"
-  },
-  {
     "id": "sidenav.troubleshooting",
     "defaultMessage": "Troubleshooting",
     "message": "Поиск проблем"
