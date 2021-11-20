@@ -132,14 +132,6 @@ module DocsNavsTranslations = {
     id: "sidenav.which-snark-right-for-me",
     defaultMessage: "Which SNARK is right for me?",
   };
-  let snarkyjsCryptoLibrary = {
-    id: "sidenav.snarkyjs-crypto-library",
-    defaultMessage: "The snarkyjs-crypto library",
-  };
-  let snarkyUniverseLibrary = {
-    id: "sidenav.snarky-universe-library",
-    defaultMessage: "The snarky-universe library",
-  };
   let troubleshooting = {
     id: "sidenav.troubleshooting",
     defaultMessage: "Troubleshooting",
@@ -351,23 +343,15 @@ module SideNav = {
           <Item title={intl->Intl.formatMessage(snapps)} slug="snapps" />
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
-        <Section title={intl->Intl.formatMessage(snarks)} slug={f("snarks")}>
+        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(gettingStartedUsingSnarks)}
+            title={intl->Intl.formatMessage(howSnappsWork)}
             slug="snarky"
           />
           <Item
             title={intl->Intl.formatMessage(whichSnarkRightForMe)}
             slug="constructions"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
-            slug="snarkyjs-crypto"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
-            slug="snarky-universe"
           />
         </Section>
         <Item
@@ -582,14 +566,6 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(whichSnarkRightForMe)}
             slug="constructions"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
-            slug="snarkyjs-crypto"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
-            slug="snarky-universe"
           />
         </Section>
         <Item

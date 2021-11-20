@@ -11,7 +11,7 @@
 /advanced/*                  /en/advanced/:splat
 /architecture/*              /en/architecture/:splat
 /developers/*                /en/developers/:spalt
-/snarks/*                    /en/snarks/:splat
+/snapps/*                    /en/snapps/:splat
 /using-mina/*                /en/using-mina/:splat
 
 /node-operator               /en/using-mina/staking
