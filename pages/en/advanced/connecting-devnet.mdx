@@ -19,17 +19,17 @@ Follow the instructions below for your operating system below.
 
 ### Ubuntu 18.04 / Debian 9
 
-Follow along below to install the latest **Stable** [Mina Release 1.2.0](https://github.com/MinaProtocol/mina/releases/tag/1.2.0) or visit the [Github Releases Page](https://github.com/MinaProtocol/mina/releases) to discover and install pre-release (Alpha/Beta) builds.
+Follow along below to install the latest **Stable** [Mina Release 1.2.2](https://github.com/MinaProtocol/mina/releases/tag/1.2.2) or visit the [Github Releases Page](https://github.com/MinaProtocol/mina/releases) to discover and install pre-release (Alpha/Beta) builds.
 
 You can set up the new debian `stretch stable` respository and install the latest version as follows:
 
 ```
 echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-devnet=1.2.0-fe51f1e
+sudo apt-get install -y curl unzip mina-devnet=1.2.2-feee67c
 ```
 
-Check that daemon installed correctly by running `mina version`. The output should read `Commit fe51f1ef5cfbcb4d5f559af39080963cf28ff1af on branch master`.
+Check that daemon installed correctly by running `mina version`. The output should read `Commit feee67cc2836bf12e792510a2440f28a0275740e on branch master`.
 
 ## Start up a node
 
@@ -63,7 +63,7 @@ docker run --name mina -d \
 -p 8302:8302 \
 --restart=always \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
-minaprotocol/mina-daemon:1.2.0-fe51f1e-mainnet \
+minaprotocol/mina-daemon:1.2.2-feee67c-mainnet \
 daemon \
 --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
