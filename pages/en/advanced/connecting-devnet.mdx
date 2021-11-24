@@ -63,7 +63,7 @@ docker run --name mina -d \
 -p 8302:8302 \
 --restart=always \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
-minaprotocol/mina-daemon:1.2.2-feee67c-mainnet \
+minaprotocol/mina-daemon:1.2.2-feee67c-devnet \
 daemon \
 --peer-list-url https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
