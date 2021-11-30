@@ -38,6 +38,7 @@ let make = (~kind="", ~children) => {
     | "welcome" => ("welcome", Theme.Colors.purple)
     | "status" => ("status", Theme.Colors.status)
     | "info" => ("info", Theme.Colors.lightGrayBox)
+    | "tip" => ("tip", Theme.Colors.mint)
     | _ => ("note", Theme.Colors.purple)
     };
   <div className=Styles.main>
