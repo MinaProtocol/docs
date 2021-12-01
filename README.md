@@ -1,6 +1,6 @@
 <img src="https://github.com/MinaProtocol/docs/blob/main/public/static/img/svg/mina-wordmark-redviolet.svg" width="350" alt="Mina logo">
 
-# Mina Documentation
+# Mina Docs
 
 To view this website, visit [docs.minaprotocol.com](https://docs.minaprotocol.com/).
 
@@ -12,7 +12,7 @@ Click the `Suggest changes` button at the top right of any page on [the docs web
 
 This website is built with NextJS & Contentful. Any commit to the `main` branch will be built and deployed automatically.
 
-To run locally, first make sure you have `git lfs` installed. 
+To run locally, first make sure you have `git lfs` installed.
 
 On Mac run:
 
@@ -21,6 +21,7 @@ brew install git-lfs
 ```
 
 After that you have to install `git-lfs` in the website directory and pull it.
+
 ```bash
 git lfs install
 git lfs pull
@@ -31,9 +32,6 @@ Install it and run:
 ```bash
 npm install
 npm run dev
-# or
-yarn
-yarn dev
 ```
 
 Build and run:
@@ -41,9 +39,6 @@ Build and run:
 ```bash
 npm run build
 npm run start
-# or
-yarn build
-yarn start
 ```
 
 ### Recommendation:
