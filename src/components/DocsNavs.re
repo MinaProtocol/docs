@@ -335,7 +335,6 @@ module SideNav = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
-          <Item title={intl->Intl.formatMessage(snapps)} slug="snapps" />
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
         <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
@@ -545,7 +544,6 @@ module Dropdown = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
-          <Item title={intl->Intl.formatMessage(snapps)} slug="snapps" />
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
         <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
