@@ -125,7 +125,7 @@ module DocsNavsTranslations = {
   let tokens = {id: "sidenav.tokens", defaultMessage: "Tokens"};
   let howSnappsWork = {
     id: "sidenav.how-snapps-work",
-    defaultMessage: "How snapps work",
+    defaultMessage: "How Snapps work",
   };
   let troubleshooting = {
     id: "sidenav.troubleshooting",
