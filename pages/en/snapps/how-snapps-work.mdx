@@ -115,4 +115,35 @@ When the prover function runs in a web browser, the smart contract outputs a pro
 
 The integrity of these events is ensured by passing a hash of these events as a public input to the smart contract. They must be present and unmodified for the verification function to pass successfully when it runs on Mina. In this way, the Mina network can confirm the integrity of both the proof and the associated events which describe how to update the snapp account’s state.
 
-(To be continued)
+### Snapp state
+
+Two different types of state exist on Mina: on-chain state and off-chain state. 
+
+On-chain state describes state that lives on the Mina blockchain. Off-chain state describes state stored anywhere else--such as [IPFS](https://ipfs.io/), etc. 
+
+
+### On-chain state
+
+Each snapp account provides 8 fields of 32 bytes each of arbitrary storage. You may store anything here as long as it fits in the size provided.
+
+If you anticipate your state to be larger than this, or if the state accumulates per user with your snapp, then you’ll want to use off-chain state instead.
+
+### Off-chain state
+
+<Alert kind="info">
+
+Support for off-chain state will be coming soon. 
+
+</Alert>
+
+
+For larger data, you may want to consider storing the root of a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) (or similar data structure) within your snapp’s on-chain storage that references additional off-chain state stored elsewhere, in a location of your choosing, such as [IPFS](https://ipfs.io/).
+
+When the snapp runs in a user’s web browser, it may insert state to an external storage, such as IPFS. When the transaction is sent to the Mina network, if it accepts this snapps transaction (i.e. this proof & state were valid so the updates are allowed), then the snapp transaction would update the root of the Merkle tree that is stored on chain.
+
+<img src="/static/img/docs-images/9_Snapps_Off-Chain_State.jpg" width="95%" />
+
+
+### Keep going
+
+On the next page, we’ll dive into How to write a snapp (*coming soon*)!
