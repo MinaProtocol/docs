@@ -2,9 +2,16 @@ import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
 export default Page({ title: "How Snapps work" });
 
+<Alert kind="info">
+
+Please note that snapps are not yet available on Mina. These docs are a preview
+of work that is currently in progress.
+
+</Alert>
+
 # How snapps work
 
-<Alert kind="info">
+<Alert kind="note">
 
 Snapps run in the latest versions of <a href="https://www.google.com/chrome/index.html">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.microsoft.com/edge">Edge</a>, and <a href="https://brave.com/">Brave</a> currently. We intend to add support for Safari in the future.
 </Alert>
@@ -29,11 +36,11 @@ We use the term <b>“snapp”</b> to refer to the UI + the smart contract.
 
 ### Zero-knowledge based smart contracts
 
-Because Snapps are based on **zero-knowledge proofs (zk-SNARKs)**, a snapp developer writes what is called a **“circuit”**, which is the method from which a **prover function** and a corresponding **verifier function** are derived during the build process.
+Because snapps are based on **zero-knowledge proofs (zk-SNARKs)**, a snapp developer writes what is called a **“circuit”**, which is the method from which a **prover function** and a corresponding **verifier function** are derived during the build process.
 
 The **prover function** is the function which executes a smart contract’s custom logic. 
 
-The **prover function** runs in a user’s web browser as part of the snapp. When interacting with a Snapp UI, users will enter any data (e.g. “buy ABC for y price”) required as input to the prover function, which will then generate a zero-knowledge proof.
+The **prover function** runs in a user’s web browser as part of the snapp. When interacting with a snapp's UI, users will enter any data (e.g. “buy ABC for y price”) required as input to the prover function, which will then generate a zero-knowledge proof.
 
 <img src="/static/img/docs-images/4_Snapps_Prover_Function.jpg" width="90%" />
 
@@ -55,7 +62,7 @@ The **prover function** runs in a user’s web browser.
 
 The **verification key** lives on chain for a given snapp account and is used by the Mina network to verify that a zero-knowledge proof has met all constraints defined in the prover. A verification key is required in order to create a snapp account. We will describe this more below.
 
-The next two sections will go into more detail about how the prover and verifier functions are used when a Snapp is deployed and when users interact with a Snapp.
+The next two sections will go into more detail about how the prover and verifier functions are used when a snapp is deployed and when users interact with a snapp.
 
 ### Deploying a smart contract
 
@@ -71,7 +78,7 @@ Whereas a regular Mina account can receive any transactions, a snapp account can
 When you deploy to a new Mina address, the Mina Protocol will charge a 1 MINA fee for account creation. This is unrelated to snapps and is to help prevent sybil or denial of service attacks.
 </Alert>
 
-### Deploying a Snapp UI
+### Deploying a snapp UI
 
 <img src="/static/img/docs-images/7_Snapps_DeploySnappUI.jpg" width="95%" />
 <br></br>
@@ -84,8 +91,7 @@ Your website needs to contain the `smart_contract.js` file that was generated wh
 
 <img src="/static/img/docs-images/8_Snapps_SubmitTransaction.jpg" width="95%" />
 
-### How users interact with the Snapp
-
+### How users interact with a snapp
 
 <Alert kind="info">
 
@@ -139,7 +145,7 @@ Support for off-chain state will be coming soon.
 
 For larger data, you may want to consider storing the root of a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) (or similar data structure) within your snapp’s on-chain storage that references additional off-chain state stored elsewhere, in a location of your choosing, such as [IPFS](https://ipfs.io/).
 
-When the snapp runs in a user’s web browser, it may insert state to an external storage, such as IPFS. When the transaction is sent to the Mina network, if it accepts this snapps transaction (i.e. this proof & state were valid so the updates are allowed), then the snapp transaction would update the root of the Merkle tree that is stored on chain.
+When the snapp runs in a user’s web browser, it may insert state to an external storage, such as IPFS. When the transaction is sent to the Mina network, if it accepts this snapp transaction (i.e. this proof & state were valid so the updates are allowed), then the snapp transaction would update the root of the Merkle tree that is stored on chain.
 
 <img src="/static/img/docs-images/9_Snapps_Off-Chain_State.jpg" width="95%" />
 
