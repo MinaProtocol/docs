@@ -246,6 +246,7 @@ module Blog = {
 
 let allComponents = () => {
   "Alert": Alert.make,
+  "Column": Column.make,
   "DaemonCommandExample": DaemonCommandExample.make,
   "h1": H1.make,
   "h2": H2.make,

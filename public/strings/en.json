@@ -210,28 +210,13 @@
     "message": ""
   },
   {
-    "id": "sidenav.snarks",
-    "defaultMessage": "SNARKs",
-    "message": ""
+    "id": "sidenav.snapps",
+    "defaultMessage": "Snapps",
+    "message": "Snapps"
   },
   {
     "id": "sidenav.getting-starting-using-snarks",
-    "defaultMessage": "Getting started using SNARKs",
-    "message": ""
-  },
-  {
-    "id": "sidenav.which-snark-right-for-me",
-    "defaultMessage": "Which SNARK is right for me?",
-    "message": ""
-  },
-  {
-    "id": "sidenav.snarkyjs-crypto-library",
-    "defaultMessage": "The snarkyjs-crypto library",
-    "message": ""
-  },
-  {
-    "id": "sidenav.snarky-universe-library",
-    "defaultMessage": "The snarky-universe library",
+    "defaultMessage": "How Snapps Work",
     "message": ""
   },
   {

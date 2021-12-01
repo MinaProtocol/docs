@@ -123,22 +123,9 @@ module DocsNavsTranslations = {
   };
   let snapps = {id: "sidenav.snapps", defaultMessage: "Snapps"};
   let tokens = {id: "sidenav.tokens", defaultMessage: "Tokens"};
-  let snarks = {id: "sidenav.snarks", defaultMessage: "SNARKs"};
-  let gettingStartedUsingSnarks = {
-    id: "sidenav.getting-starting-using-snarks",
-    defaultMessage: "Getting started using SNARKs",
-  };
-  let whichSnarkRightForMe = {
-    id: "sidenav.which-snark-right-for-me",
-    defaultMessage: "Which SNARK is right for me?",
-  };
-  let snarkyjsCryptoLibrary = {
-    id: "sidenav.snarkyjs-crypto-library",
-    defaultMessage: "The snarkyjs-crypto library",
-  };
-  let snarkyUniverseLibrary = {
-    id: "sidenav.snarky-universe-library",
-    defaultMessage: "The snarky-universe library",
+  let howSnappsWork = {
+    id: "sidenav.how-snapps-work",
+    defaultMessage: "How Snapps Work",
   };
   let troubleshooting = {
     id: "sidenav.troubleshooting",
@@ -348,26 +335,13 @@ module SideNav = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
-          <Item title={intl->Intl.formatMessage(snapps)} slug="snapps" />
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
-        <Section title={intl->Intl.formatMessage(snarks)} slug={f("snarks")}>
+        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(gettingStartedUsingSnarks)}
-            slug="snarky"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whichSnarkRightForMe)}
-            slug="constructions"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
-            slug="snarkyjs-crypto"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
-            slug="snarky-universe"
+            title={intl->Intl.formatMessage(howSnappsWork)}
+            slug="how-snapps-work"
           />
         </Section>
         <Item
@@ -570,26 +544,13 @@ module Dropdown = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
-          <Item title={intl->Intl.formatMessage(snapps)} slug="snapps" />
           <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
-        <Section title={intl->Intl.formatMessage(snarks)} slug={f("snarks")}>
+        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(gettingStartedUsingSnarks)}
-            slug="snarky"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whichSnarkRightForMe)}
-            slug="constructions"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyjsCryptoLibrary)}
-            slug="snarkyjs-crypto"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkyUniverseLibrary)}
-            slug="snarky-universe"
+            title={intl->Intl.formatMessage(howSnappsWork)}
+            slug="how-snapps-work"
           />
         </Section>
         <Item
