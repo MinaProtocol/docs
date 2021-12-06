@@ -127,8 +127,6 @@ module A =
   Wrap({
     let element =
       <a
-        target="_blank"
-        rel="noopener"
         className={merge([Styles.link, Theme.Type.link])}
       />;
   });

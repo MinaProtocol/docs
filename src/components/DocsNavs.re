@@ -127,6 +127,10 @@ module DocsNavsTranslations = {
     id: "sidenav.how-snapps-work",
     defaultMessage: "How Snapps Work",
   };
+  let snappsAPIReference= {
+    id: "sidenav.api-reference",
+    defaultMessage: "API Reference",
+  };
   let troubleshooting = {
     id: "sidenav.troubleshooting",
     defaultMessage: "Troubleshooting",
@@ -342,6 +346,10 @@ module SideNav = {
           <Item
             title={intl->Intl.formatMessage(howSnappsWork)}
             slug="how-snapps-work"
+          />
+           <Item
+            title={intl->Intl.formatMessage(snappsAPIReference)}
+            slug="api-reference"
           />
         </Section>
         <Item

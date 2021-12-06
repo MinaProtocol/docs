@@ -1,0 +1,7024 @@
+import Page from "@reason/pages/Docs";
+export default Page({ title: "SNARK Constructions" });
+
+# SnarkyJS
+
+To write a Snapp, we recommend using the [Snapp CLI](https://github.com/o1-labs/snapp-cli), which makes writing a Snapp easy by including SnarkyJS & providing project scaffolding, a test framework, and formatting.
+
+## Table of contents
+
+### Classes
+
+- [AccumulatorMembershipProof](#classesaccumulatormembershipproofmd)
+- [Bool](#classesboolmd)
+- [Circuit](#classescircuitmd)
+- [CircuitValue](#classescircuitvaluemd)
+- [Collection](#classescollectionmd)
+- [EndoScalar](#classesendoscalarmd)
+- [Field](#classesfieldmd)
+- [Group](#classesgroupmd)
+- [IndexBase](#classesindexbasemd)
+- [IndexedAccumulator](#classesindexedaccumulatormd)
+- [Keypair](#classeskeypairmd)
+- [Ledger](#classesledgermd)
+- [PrivateKey](#classesprivatekeymd)
+- [Proof](#classesproofmd)
+- [PublicKey](#classespublickeymd)
+- [Scalar](#classesscalarmd)
+- [Signature](#classessignaturemd)
+- [Tree](#classestreemd)
+- [VerificationKey](#classesverificationkeymd)
+
+### Interfaces
+
+- [Account](#interfacesaccountmd)
+- [AsFieldElements](#interfacesasfieldelementsmd)
+- [CircuitMain](#interfacescircuitmainmd)
+- [ClosedInterval](#interfacesclosedintervalmd)
+- [EpochDataPredicate](#interfacesepochdatapredicatemd)
+- [EpochLedgerPredicate](#interfacesepochledgerpredicatemd)
+- [FeePayerParty](#interfacesfeepayerpartymd)
+- [FullAccountPredicate](#interfacesfullaccountpredicatemd)
+- [Int64](#interfacesint64md)
+- [MerkleTree](#interfacesmerkletreemd)
+- [OrIgnore](#interfacesorignoremd)
+- [Parties](#interfacespartiesmd)
+- [Party](#interfacespartymd)
+- [PartyBody](#interfacespartybodymd)
+- [PartyUpdate](#interfacespartyupdatemd)
+- [ProtocolStatePredicate](#interfacesprotocolstatepredicatemd)
+- [SetOrKeep](#interfacessetorkeepmd)
+- [SnappAccount](#interfacessnappaccountmd)
+- [UInt32](#interfacesuint32md)
+- [UInt64](#interfacesuint64md)
+
+### Type aliases
+
+- [AccountPredicate](#accountpredicate)
+- [Index](#index)
+- [JSONValue](#jsonvalue)
+- [MerkleProof](#merkleproof)
+- [Tuple](#tuple)
+
+### Variables
+
+- [Index](#index)
+- [MerkleProof](#merkleproof)
+- [NumberAsField](#numberasfield)
+- [Poseidon](#poseidon)
+- [isReady](#isready)
+
+### Functions
+
+- [IndexFactory](#indexfactory)
+- [KeyedAccumulatorFactory](#keyedaccumulatorfactory)
+- [MerkleAccumulatorFactory](#merkleaccumulatorfactory)
+- [MerkleProofFactory](#merkleprooffactory)
+- [array](#array)
+- [asFieldElementsToConstant](#asfieldelementstoconstant)
+- [circuitMain](#circuitmain)
+- [ofFieldElements](#offieldelements)
+- [prop](#prop)
+- [public\_](#public_)
+- [shutdown](#shutdown)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toFieldElements](#tofieldelements)
+
+# Classes
+
+<a name="classesaccumulatormembershipproofmd"></a>
+
+## Class: AccumulatorMembershipProof
+
+### Hierarchy
+
+- [`CircuitValue`](#classescircuitvaluemd)
+
+  ↳ **`AccumulatorMembershipProof`**
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [index](#index)
+- [merkleProof](#merkleproof)
+
+#### Methods
+
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [verify](#verify)
+- [fromJSON](#fromjson)
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new AccumulatorMembershipProof**(`merkleProof`, `index`)
+
+##### Parameters
+
+| Name          | Type          |
+| :------------ | :------------ |
+| `merkleProof` | `MerkleProof` |
+| `index`       | `Index`       |
+
+##### Overrides
+
+[CircuitValue](#classescircuitvaluemd).[constructor](#constructor)
+
+##### Defined in
+
+[lib/merkle_proof.ts:19](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L19)
+
+### Properties
+
+#### index
+
+• **index**: `Index`
+
+##### Defined in
+
+[lib/merkle_proof.ts:17](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L17)
+
+---
+
+#### merkleProof
+
+• **merkleProof**: `MerkleProof`
+
+##### Defined in
+
+[lib/merkle_proof.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L16)
+
+### Methods
+
+#### assertEquals
+
+▸ **assertEquals**(`x`): `void`
+
+##### Parameters
+
+| Name | Type                                                                 |
+| :--- | :------------------------------------------------------------------- |
+| `x`  | [`AccumulatorMembershipProof`](#classesaccumulatormembershipproofmd) |
+
+##### Returns
+
+`void`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[assertEquals](#assertequals)
+
+##### Defined in
+
+[lib/circuit_value.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L48)
+
+---
+
+#### equals
+
+▸ **equals**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                                 |
+| :--- | :------------------------------------------------------------------- |
+| `x`  | [`AccumulatorMembershipProof`](#classesaccumulatormembershipproofmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[equals](#equals)
+
+##### Defined in
+
+[lib/circuit_value.ts:44](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L44)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:36](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L36)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L40)
+
+---
+
+#### verify
+
+▸ **verify**<`T`\>(`commitment`, `x`): [`Bool`](#classesboolmd)
+
+##### Type parameters
+
+| Name | Type                                                   |
+| :--- | :----------------------------------------------------- |
+| `T`  | extends [`CircuitValue`](#classescircuitvaluemd)<`T`\> |
+
+##### Parameters
+
+| Name         | Type                       |
+| :----------- | :------------------------- |
+| `commitment` | [`Field`](#classesfieldmd) |
+| `x`          | `T`                        |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:25](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L25)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**<`T`\>(`value`): `null` \| `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name    | Type                      |
+| :------ | :------------------------ |
+| `value` | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| `T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[fromJSON](#fromjson)
+
+##### Defined in
+
+[lib/circuit_value.ts:84](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L84)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**<`T`\>(`xs`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `xs` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[ofFieldElements](#offieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:52](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L52)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[sizeInFieldElements](#sizeinfieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L16)
+
+---
+
+#### toConstant
+
+▸ `Static` **toConstant**<`T`\>(`t`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `t`  | `T`  |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toConstant](#toconstant)
+
+##### Defined in
+
+[lib/circuit_value.ts:68](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L68)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`T`\>(`v`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:21](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L21)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**<`T`\>(`v`): [`JSONValue`](#jsonvalue)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:73](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L73)
+
+<a name="classesboolmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Bool
+
+## Class: Bool
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [Unsafe](#unsafe)
+
+#### Methods
+
+- [and](#and)
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [isFalse](#isfalse)
+- [isTrue](#istrue)
+- [not](#not)
+- [or](#or)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toBoolean](#toboolean)
+- [toField](#tofield)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [toString](#tostring)
+- [and](#and)
+- [assertEqual](#assertequal)
+- [count](#count)
+- [equal](#equal)
+- [fromJSON](#fromjson)
+- [isFalse](#isfalse)
+- [isTrue](#istrue)
+- [not](#not)
+- [ofFieldElements](#offieldelements)
+- [or](#or)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toField](#tofield)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new Bool**(`x`)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Defined in
+
+[snarky.d.ts:219](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L219)
+
+### Properties
+
+#### Unsafe
+
+▪ `Static` **Unsafe**: `Object`
+
+##### Type declaration
+
+| Name      | Type                                                                                               |
+| :-------- | :------------------------------------------------------------------------------------------------- |
+| `ofField` | (`x`: `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd)) => [`Bool`](#classesboolmd) |
+
+##### Defined in
+
+[snarky.d.ts:245](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L245)
+
+### Methods
+
+#### and
+
+▸ **and**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:224](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L224)
+
+---
+
+#### assertEquals
+
+▸ **assertEquals**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:227](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L227)
+
+---
+
+#### equals
+
+▸ **equals**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:229](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L229)
+
+---
+
+#### isFalse
+
+▸ **isFalse**(): [`Bool`](#classesboolmd)
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:231](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L231)
+
+---
+
+#### isTrue
+
+▸ **isTrue**(): [`Bool`](#classesboolmd)
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:230](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L230)
+
+---
+
+#### not
+
+▸ **not**(): [`Bool`](#classesboolmd)
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:223](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L223)
+
+---
+
+#### or
+
+▸ **or**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:225](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L225)
+
+---
+
+#### sizeInFieldElements
+
+▸ **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:233](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L233)
+
+---
+
+#### toBoolean
+
+▸ **toBoolean**(): `boolean`
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:240](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L240)
+
+---
+
+#### toField
+
+▸ **toField**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:221](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L221)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:234](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L234)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:237](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L237)
+
+---
+
+#### toString
+
+▸ **toString**(): `string`
+
+##### Returns
+
+`string`
+
+##### Defined in
+
+[snarky.d.ts:236](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L236)
+
+---
+
+#### and
+
+▸ `Static` **and**(`x`, `y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:250](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L250)
+
+---
+
+#### assertEqual
+
+▸ `Static` **assertEqual**(`x`, `y`): `void`
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:253](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L253)
+
+---
+
+#### count
+
+▸ `Static` **count**(`x`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name | Type                                    |
+| :--- | :-------------------------------------- |
+| `x`  | [`Bool`](#classesboolmd) \| `boolean`[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:259](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L259)
+
+---
+
+#### equal
+
+▸ `Static` **equal**(`x`, `y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:255](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L255)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**(`x`): `null` \| [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                      |
+| :--- | :------------------------ |
+| `x`  | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| [`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:266](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L266)
+
+---
+
+#### isFalse
+
+▸ `Static` **isFalse**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:257](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L257)
+
+---
+
+#### isTrue
+
+▸ `Static` **isTrue**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:256](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L256)
+
+---
+
+#### not
+
+▸ `Static` **not**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:249](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L249)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**(`fields`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name     | Type                         |
+| :------- | :--------------------------- |
+| `fields` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:263](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L263)
+
+---
+
+#### or
+
+▸ `Static` **or**(`x`, `y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+| `y`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:251](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L251)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:261](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L261)
+
+---
+
+#### toField
+
+▸ `Static` **toField**(`x`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:243](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L243)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**(`x`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `x`  | `boolean` \| [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:262](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L262)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**(`x`): [`JSONValue`](#jsonvalue)
+
+##### Parameters
+
+| Name | Type                     |
+| :--- | :----------------------- |
+| `x`  | [`Bool`](#classesboolmd) |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:265](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L265)
+
+<a name="classescircuitmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Circuit
+
+## Class: Circuit
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [addConstraint](#addconstraint)
+- [array](#array)
+- [asProver](#asprover)
+- [assertEqual](#assertequal)
+- [equal](#equal)
+- [generateKeypair](#generatekeypair)
+- [if](#if)
+- [inCheckedComputation](#incheckedcomputation)
+- [inProver](#inprover)
+- [newVariable](#newvariable)
+- [prove](#prove)
+- [runAndCheck](#runandcheck)
+- [toFieldElements](#tofieldelements)
+- [verify](#verify)
+- [witness](#witness)
+
+### Constructors
+
+#### constructor
+
+• **new Circuit**()
+
+### Methods
+
+#### addConstraint
+
+▸ `Static` **addConstraint**(`kind`, `x`, `y`, `z`): `void`
+
+##### Parameters
+
+| Name   | Type                       |
+| :----- | :------------------------- |
+| `kind` | `"multiply"`               |
+| `x`    | [`Field`](#classesfieldmd) |
+| `y`    | [`Field`](#classesfieldmd) |
+| `z`    | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:282](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L282)
+
+▸ `Static` **addConstraint**(`kind`, `x`, `y`, `z`): `void`
+
+##### Parameters
+
+| Name   | Type                       |
+| :----- | :------------------------- |
+| `kind` | `"add"`                    |
+| `x`    | [`Field`](#classesfieldmd) |
+| `y`    | [`Field`](#classesfieldmd) |
+| `z`    | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:289](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L289)
+
+▸ `Static` **addConstraint**(`kind`, `x`, `y`, `z`): `void`
+
+##### Parameters
+
+| Name   | Type                       |
+| :----- | :------------------------- |
+| `kind` | `"equal"`                  |
+| `x`    | [`Field`](#classesfieldmd) |
+| `y`    | [`Field`](#classesfieldmd) |
+| `z`    | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:296](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L296)
+
+▸ `Static` **addConstraint**(`kind`, `x`, `y`, `z`): `void`
+
+##### Parameters
+
+| Name   | Type                       |
+| :----- | :------------------------- |
+| `kind` | `"boolean"`                |
+| `x`    | [`Field`](#classesfieldmd) |
+| `y`    | [`Field`](#classesfieldmd) |
+| `z`    | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:303](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L303)
+
+---
+
+#### array
+
+▸ `Static` **array**<`T`\>(`ctor`, `length`): [`AsFieldElements`](#interfacesasfieldelementsmd)<`T`[]\>
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name     | Type                                                    |
+| :------- | :------------------------------------------------------ |
+| `ctor`   | [`AsFieldElements`](#interfacesasfieldelementsmd)<`T`\> |
+| `length` | `number`                                                |
+
+##### Returns
+
+[`AsFieldElements`](#interfacesasfieldelementsmd)<`T`[]\>
+
+##### Defined in
+
+[snarky.d.ts:326](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L326)
+
+---
+
+#### asProver
+
+▸ `Static` **asProver**(`f`): `void`
+
+##### Parameters
+
+| Name | Type         |
+| :--- | :----------- |
+| `f`  | () => `void` |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:322](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L322)
+
+---
+
+#### assertEqual
+
+▸ `Static` **assertEqual**<`T`\>(`ctor`, `x`, `y`): `void`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name                   | Type                                       |
+| :--------------------- | :----------------------------------------- |
+| `ctor`                 | `Object`                                   |
+| `ctor.toFieldElements` | (`x`: `T`) => [`Field`](#classesfieldmd)[] |
+| `x`                    | `T`                                        |
+| `y`                    | `T`                                        |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:331](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L331)
+
+▸ `Static` **assertEqual**<`T`\>(`x`, `y`): `void`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `x`  | `T`  |
+| `y`  | `T`  |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:337](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L337)
+
+---
+
+#### equal
+
+▸ `Static` **equal**<`T`\>(`ctor`, `x`, `y`): [`Bool`](#classesboolmd)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name                   | Type                                       |
+| :--------------------- | :----------------------------------------- |
+| `ctor`                 | `Object`                                   |
+| `ctor.toFieldElements` | (`x`: `T`) => [`Field`](#classesfieldmd)[] |
+| `x`                    | `T`                                        |
+| `y`                    | `T`                                        |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:339](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L339)
+
+▸ `Static` **equal**(`x`, `y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type  |
+| :--- | :---- |
+| `x`  | `any` |
+| `y`  | `any` |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:341](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L341)
+
+---
+
+#### generateKeypair
+
+▸ `Static` **generateKeypair**(): [`Keypair`](#classeskeypairmd)
+
+##### Returns
+
+[`Keypair`](#classeskeypairmd)
+
+##### Defined in
+
+[snarky.d.ts:347](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L347)
+
+---
+
+#### if
+
+▸ `Static` **if**<`T`\>(`b`, `ctor`, `x`, `y`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name   | Type                                                    |
+| :----- | :------------------------------------------------------ |
+| `b`    | `boolean` \| [`Bool`](#classesboolmd)                   |
+| `ctor` | [`AsFieldElements`](#interfacesasfieldelementsmd)<`T`\> |
+| `x`    | `T`                                                     |
+| `y`    | `T`                                                     |
+
+##### Returns
+
+`T`
+
+##### Defined in
+
+[snarky.d.ts:343](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L343)
+
+▸ `Static` **if**<`T`\>(`b`, `x`, `y`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                                  |
+| :--- | :------------------------------------ |
+| `b`  | `boolean` \| [`Bool`](#classesboolmd) |
+| `x`  | `T`                                   |
+| `y`  | `T`                                   |
+
+##### Returns
+
+`T`
+
+##### Defined in
+
+[snarky.d.ts:345](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L345)
+
+---
+
+#### inCheckedComputation
+
+▸ `Static` **inCheckedComputation**(): `boolean`
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:357](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L357)
+
+---
+
+#### inProver
+
+▸ `Static` **inProver**(): `boolean`
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:355](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L355)
+
+---
+
+#### newVariable
+
+▸ `Static` **newVariable**(`f`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name | Type                                                                  |
+| :--- | :-------------------------------------------------------------------- |
+| `f`  | () => `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:311](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L311)
+
+---
+
+#### prove
+
+▸ `Static` **prove**(`privateInput`, `publicInput`, `kp`): [`Proof`](#classesproofmd)
+
+##### Parameters
+
+| Name           | Type                           |
+| :------------- | :----------------------------- |
+| `privateInput` | `any`[]                        |
+| `publicInput`  | `any`[]                        |
+| `kp`           | [`Keypair`](#classeskeypairmd) |
+
+##### Returns
+
+[`Proof`](#classesproofmd)
+
+##### Defined in
+
+[snarky.d.ts:349](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L349)
+
+---
+
+#### runAndCheck
+
+▸ `Static` **runAndCheck**<`T`\>(`f`): `Promise`<`T`\>
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                        |
+| :--- | :-------------------------- |
+| `f`  | () => `Promise`<() => `T`\> |
+
+##### Returns
+
+`Promise`<`T`\>
+
+##### Defined in
+
+[snarky.d.ts:324](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L324)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`A`\>(`A`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+##### Parameters
+
+| Name | Type  |
+| :--- | :---- |
+| `A`  | `any` |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:353](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L353)
+
+---
+
+#### verify
+
+▸ `Static` **verify**(`publicInput`, `vk`, `pi`): `boolean`
+
+##### Parameters
+
+| Name          | Type                                           |
+| :------------ | :--------------------------------------------- |
+| `publicInput` | `any`[]                                        |
+| `vk`          | [`VerificationKey`](#classesverificationkeymd) |
+| `pi`          | [`Proof`](#classesproofmd)                     |
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:351](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L351)
+
+---
+
+#### witness
+
+▸ `Static` **witness**<`T`\>(`ctor`, `f`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name                       | Type                                       |
+| :------------------------- | :----------------------------------------- |
+| `ctor`                     | `Object`                                   |
+| `ctor.ofFieldElements`     | (`x`: [`Field`](#classesfieldmd)[]) => `T` |
+| `ctor.sizeInFieldElements` | () => `number`                             |
+| `ctor.toFieldElements`     | (`x`: `T`) => [`Field`](#classesfieldmd)[] |
+| `f`                        | () => `T`                                  |
+
+##### Returns
+
+`T`
+
+##### Defined in
+
+[snarky.d.ts:313](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L313)
+
+<a name="classescircuitvaluemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / CircuitValue
+
+## Class: CircuitValue
+
+### Hierarchy
+
+- **`CircuitValue`**
+
+  ↳ [`PrivateKey`](#classesprivatekeymd)
+
+  ↳ [`PublicKey`](#classespublickeymd)
+
+  ↳ [`Signature`](#classessignaturemd)
+
+  ↳ [`AccumulatorMembershipProof`](#classesaccumulatormembershipproofmd)
+
+  ↳ [`IndexedAccumulator`](#classesindexedaccumulatormd)
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [fromJSON](#fromjson)
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new CircuitValue**()
+
+### Methods
+
+#### assertEquals
+
+▸ **assertEquals**(`x`): `void`
+
+##### Parameters
+
+| Name | Type                                     |
+| :--- | :--------------------------------------- |
+| `x`  | [`CircuitValue`](#classescircuitvaluemd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[lib/circuit_value.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L48)
+
+---
+
+#### equals
+
+▸ **equals**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                     |
+| :--- | :--------------------------------------- |
+| `x`  | [`CircuitValue`](#classescircuitvaluemd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[lib/circuit_value.ts:44](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L44)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[lib/circuit_value.ts:36](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L36)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[lib/circuit_value.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L40)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**<`T`\>(`value`): `null` \| `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name    | Type                      |
+| :------ | :------------------------ |
+| `value` | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| `T`
+
+##### Defined in
+
+[lib/circuit_value.ts:84](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L84)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**<`T`\>(`xs`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `xs` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Defined in
+
+[lib/circuit_value.ts:52](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L52)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[lib/circuit_value.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L16)
+
+---
+
+#### toConstant
+
+▸ `Static` **toConstant**<`T`\>(`t`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `t`  | `T`  |
+
+##### Returns
+
+`T`
+
+##### Defined in
+
+[lib/circuit_value.ts:68](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L68)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`T`\>(`v`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[lib/circuit_value.ts:21](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L21)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**<`T`\>(`v`): [`JSONValue`](#jsonvalue)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[lib/circuit_value.ts:73](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L73)
+
+<a name="classescollectionmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Collection
+
+## Class: Collection<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [cachedPaths](#cachedpaths)
+- [cachedValues](#cachedvalues)
+- [eltTyp](#elttyp)
+- [root](#root)
+- [values](#values)
+
+#### Methods
+
+- [get](#get)
+- [getRoot](#getroot)
+- [getValues](#getvalues)
+- [set](#set)
+
+### Constructors
+
+#### constructor
+
+• **new Collection**<`A`\>(`eltTyp`, `f`, `root?`)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+##### Parameters
+
+| Name     | Type                                                    |
+| :------- | :------------------------------------------------------ |
+| `eltTyp` | [`AsFieldElements`](#interfacesasfieldelementsmd)<`A`\> |
+| `f`      | () => [`Tree`](#classestreemd)<`A`\>                    |
+| `root?`  | [`Field`](#classesfieldmd)                              |
+
+##### Defined in
+
+[lib/merkle_proof.ts:793](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L793)
+
+### Properties
+
+#### cachedPaths
+
+• **cachedPaths**: `Map`<`number`, [`Field`](#classesfieldmd)[]\>
+
+##### Defined in
+
+[lib/merkle_proof.ts:782](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L782)
+
+---
+
+#### cachedValues
+
+• **cachedValues**: `Map`<`number`, { `hash`: [`Field`](#classesfieldmd) ; `value`: `A` }\>
+
+##### Defined in
+
+[lib/merkle_proof.ts:783](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L783)
+
+---
+
+#### eltTyp
+
+• **eltTyp**: [`AsFieldElements`](#interfacesasfieldelementsmd)<`A`\>
+
+##### Defined in
+
+[lib/merkle_proof.ts:775](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L775)
+
+---
+
+#### root
+
+• **root**: `null` \| [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:784](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L784)
+
+---
+
+#### values
+
+• **values**: { `computed`: `true` ; `value`: [`MerkleTree`](#interfacesmerkletreemd)<`A`\> } \| { `computed`: `false` ; `f`: () => [`MerkleTree`](#interfacesmerkletreemd)<`A`\> }
+
+##### Defined in
+
+[lib/merkle_proof.ts:776](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L776)
+
+### Methods
+
+#### get
+
+▸ **get**(`i`): `A`
+
+##### Parameters
+
+| Name | Type    |
+| :--- | :------ |
+| `i`  | `Index` |
+
+##### Returns
+
+`A`
+
+##### Defined in
+
+[lib/merkle_proof.ts:853](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L853)
+
+---
+
+#### getRoot
+
+▸ **getRoot**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:786](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L786)
+
+---
+
+#### getValues
+
+▸ `Private` **getValues**(): [`MerkleTree`](#interfacesmerkletreemd)<`A`\>
+
+##### Returns
+
+[`MerkleTree`](#interfacesmerkletreemd)<`A`\>
+
+##### Defined in
+
+[lib/merkle_proof.ts:801](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L801)
+
+---
+
+#### set
+
+▸ **set**(`i`, `x`): `void`
+
+##### Parameters
+
+| Name | Type    |
+| :--- | :------ |
+| `i`  | `Index` |
+| `x`  | `A`     |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[lib/merkle_proof.ts:811](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L811)
+
+<a name="classesendoscalarmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / EndoScalar
+
+## Class: EndoScalar
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toFieldElements](#tofieldelements)
+
+### Constructors
+
+#### constructor
+
+• **new EndoScalar**()
+
+### Methods
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**(`fields`): [`Scalar`](#classesscalarmd)
+
+##### Parameters
+
+| Name     | Type                         |
+| :------- | :--------------------------- |
+| `fields` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:407](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L407)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:408](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L408)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**(`x`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `x`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:406](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L406)
+
+<a name="classesfieldmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Field
+
+## Class: Field
+
+TODO: Pull from docs
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [one](#one)
+- [zero](#zero)
+
+#### Methods
+
+- [add](#add)
+- [assertBoolean](#assertboolean)
+- [assertEquals](#assertequals)
+- [assertGt](#assertgt)
+- [assertGte](#assertgte)
+- [assertLt](#assertlt)
+- [assertLte](#assertlte)
+- [div](#div)
+- [equals](#equals)
+- [gt](#gt)
+- [gte](#gte)
+- [inv](#inv)
+- [isConstant](#isconstant)
+- [isZero](#iszero)
+- [lt](#lt)
+- [lte](#lte)
+- [mul](#mul)
+- [neg](#neg)
+- [ofFieldElements](#offieldelements)
+- [rangeCheckHelper](#rangecheckhelper)
+- [seal](#seal)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [sqrt](#sqrt)
+- [square](#square)
+- [sub](#sub)
+- [toBits](#tobits)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [toString](#tostring)
+- [fromJSON](#fromjson)
+- [ofBits](#ofbits)
+- [ofFieldElements](#offieldelements)
+- [random](#random)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toFieldElements](#tofieldelements)
+
+### Constructors
+
+#### constructor
+
+• **new Field**(`x`)
+
+Coerces anything field-like to a [[Field]].
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `x`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Defined in
+
+[snarky.d.ts:37](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L37)
+
+### Properties
+
+#### one
+
+▪ `Static` **one**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:147](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L147)
+
+---
+
+#### zero
+
+▪ `Static` **zero**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:148](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L148)
+
+### Methods
+
+#### add
+
+▸ **add**(`y`): [`Field`](#classesfieldmd)
+
+Adds this [[Field]] element to another coercible to a field.
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:65](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L65)
+
+---
+
+#### assertBoolean
+
+▸ **assertBoolean**(): `void`
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:120](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L120)
+
+---
+
+#### assertEquals
+
+▸ **assertEquals**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:119](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L119)
+
+---
+
+#### assertGt
+
+▸ **assertGt**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:116](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L116)
+
+---
+
+#### assertGte
+
+▸ **assertGte**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:117](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L117)
+
+---
+
+#### assertLt
+
+▸ **assertLt**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:114](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L114)
+
+---
+
+#### assertLte
+
+▸ **assertLte**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:115](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L115)
+
+---
+
+#### div
+
+▸ **div**(`y`): [`Field`](#classesfieldmd)
+
+Divides this [[Field]] element to another coercible to a field.
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:80](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L80)
+
+---
+
+#### equals
+
+▸ **equals**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:134](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L134)
+
+---
+
+#### gt
+
+▸ **gt**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:111](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L111)
+
+---
+
+#### gte
+
+▸ **gte**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:112](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L112)
+
+---
+
+#### inv
+
+▸ **inv**(): [`Field`](#classesfieldmd)
+
+Inverts this [[Field]] element.
+
+```typescript
+const invX = x.inv();
+invX.assertEquals(Field.one.div(x));
+```
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+A field element that is equivalent to one divided by this element.
+
+##### Defined in
+
+[snarky.d.ts:60](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L60)
+
+---
+
+#### isConstant
+
+▸ **isConstant**(): `boolean`
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:141](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L141)
+
+---
+
+#### isZero
+
+▸ **isZero**(): [`Bool`](#classesboolmd)
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:121](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L121)
+
+---
+
+#### lt
+
+▸ **lt**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:109](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L109)
+
+---
+
+#### lte
+
+▸ **lte**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:110](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L110)
+
+---
+
+#### mul
+
+▸ **mul**(`y`): [`Field`](#classesfieldmd)
+
+Multiplies this [[Field]] element to another coercible to a field.
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:75](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L75)
+
+---
+
+#### neg
+
+▸ **neg**(): [`Field`](#classesfieldmd)
+
+Negates this [[Field]]. This is equivalent to multiplying the [[Field]]
+by -1.
+
+```typescript
+const negOne = Field.one.neg();
+negOne.assertEquals(-1);
+```
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L48)
+
+---
+
+#### ofFieldElements
+
+▸ **ofFieldElements**(`fields`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name     | Type                         |
+| :------- | :--------------------------- |
+| `fields` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:179](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L179)
+
+---
+
+#### rangeCheckHelper
+
+▸ **rangeCheckHelper**(`numBits`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name      | Type     |
+| :-------- | :------- |
+| `numBits` | `number` |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:139](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L139)
+
+---
+
+#### seal
+
+▸ **seal**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:137](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L137)
+
+---
+
+#### sizeInFieldElements
+
+▸ **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:105](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L105)
+
+---
+
+#### sqrt
+
+▸ **sqrt**(): [`Field`](#classesfieldmd)
+
+Square roots this [[Field]] element.
+
+```typescript
+x.square().sqrt().assertEquals(x);
+```
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:99](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L99)
+
+---
+
+#### square
+
+▸ **square**(): [`Field`](#classesfieldmd)
+
+Squares this [[Field]] element.
+
+```typescript
+const x2 = x.square();
+x2.assertEquals(x.mul(x));
+```
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:90](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L90)
+
+---
+
+#### sub
+
+▸ **sub**(`y`): [`Field`](#classesfieldmd)
+
+Subtracts this [[Field]] element to another coercible to a field.
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:70](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L70)
+
+---
+
+#### toBits
+
+▸ **toBits**(): [`Bool`](#classesboolmd)[]
+
+Little endian binary representation of the field element.
+
+##### Returns
+
+[`Bool`](#classesboolmd)[]
+
+##### Defined in
+
+[snarky.d.ts:126](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L126)
+
+▸ **toBits**(`length`): [`Bool`](#classesboolmd)[]
+
+Little endian binary representation of the field element.
+Fails if the field element cannot fit in `length` bits.
+
+##### Parameters
+
+| Name     | Type     |
+| :------- | :------- |
+| `length` | `number` |
+
+##### Returns
+
+[`Bool`](#classesboolmd)[]
+
+##### Defined in
+
+[snarky.d.ts:132](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L132)
+
+---
+
+#### toConstant
+
+▸ **toConstant**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:142](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L142)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:107](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L107)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:102](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L102)
+
+---
+
+#### toString
+
+▸ **toString**(): `string`
+
+##### Returns
+
+`string`
+
+##### Defined in
+
+[snarky.d.ts:101](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L101)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**(`x`): `null` \| [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name | Type                      |
+| :--- | :------------------------ |
+| `x`  | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:215](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L215)
+
+---
+
+#### ofBits
+
+▸ `Static` **ofBits**(`x`): [`Field`](#classesfieldmd)
+
+Converts a bit array into a field element (little endian)
+Fails if the field element cannot fit given too many bits.
+
+TODO: Rename to fromBits
+
+##### Parameters
+
+| Name | Type                                      |
+| :--- | :---------------------------------------- |
+| `x`  | (`boolean` \| [`Bool`](#classesboolmd))[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:201](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L201)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**(`fields`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name     | Type                         |
+| :------- | :--------------------------- |
+| `fields` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:182](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L182)
+
+---
+
+#### random
+
+▸ `Static` **random**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:149](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L149)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:183](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L183)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**(`x`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:184](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L184)
+
+<a name="classesgroupmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Group
+
+## Class: Group
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [x](#x)
+- [y](#y)
+- [generator](#generator)
+
+#### Methods
+
+- [add](#add)
+- [assertEquals](#assertequals)
+- [endoScale](#endoscale)
+- [equals](#equals)
+- [neg](#neg)
+- [scale](#scale)
+- [sub](#sub)
+- [toJSON](#tojson)
+- [add](#add)
+- [assertEqual](#assertequal)
+- [endoScale](#endoscale)
+- [equal](#equal)
+- [fromJSON](#fromjson)
+- [neg](#neg)
+- [ofFieldElements](#offieldelements)
+- [scale](#scale)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [sub](#sub)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new Group**(`args`)
+
+##### Parameters
+
+| Name     | Type                                                            |
+| :------- | :-------------------------------------------------------------- |
+| `args`   | `Object`                                                        |
+| `args.x` | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+| `args.y` | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Defined in
+
+[snarky.d.ts:426](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L426)
+
+• **new Group**(`x`, `y`)
+
+##### Parameters
+
+| Name | Type                                                            |
+| :--- | :-------------------------------------------------------------- |
+| `x`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+| `y`  | `string` \| `number` \| `boolean` \| [`Field`](#classesfieldmd) |
+
+##### Defined in
+
+[snarky.d.ts:430](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L430)
+
+### Properties
+
+#### x
+
+• **x**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:412](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L412)
+
+---
+
+#### y
+
+• **y**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:413](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L413)
+
+---
+
+#### generator
+
+▪ `Static` **generator**: [`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:435](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L435)
+
+### Methods
+
+#### add
+
+▸ **add**(`y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:415](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L415)
+
+---
+
+#### assertEquals
+
+▸ **assertEquals**(`y`): `void`
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:421](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L421)
+
+---
+
+#### endoScale
+
+▸ **endoScale**(`y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                                 |
+| :--- | :----------------------------------- |
+| `y`  | [`EndoScalar`](#classesendoscalarmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:419](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L419)
+
+---
+
+#### equals
+
+▸ **equals**(`y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:422](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L422)
+
+---
+
+#### neg
+
+▸ **neg**(): [`Group`](#classesgroupmd)
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:417](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L417)
+
+---
+
+#### scale
+
+▸ **scale**(`y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `y`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:418](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L418)
+
+---
+
+#### sub
+
+▸ **sub**(`y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:416](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L416)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:424](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L424)
+
+---
+
+#### add
+
+▸ `Static` **add**(`x`, `y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:436](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L436)
+
+---
+
+#### assertEqual
+
+▸ `Static` **assertEqual**(`x`, `y`): `void`
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:442](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L442)
+
+---
+
+#### endoScale
+
+▸ `Static` **endoScale**(`x`, `y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                                 |
+| :--- | :----------------------------------- |
+| `x`  | [`Group`](#classesgroupmd)           |
+| `y`  | [`EndoScalar`](#classesendoscalarmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:440](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L440)
+
+---
+
+#### equal
+
+▸ `Static` **equal**(`x`, `y`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:443](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L443)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**(`x`): `null` \| [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                      |
+| :--- | :------------------------ |
+| `x`  | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| [`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:450](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L450)
+
+---
+
+#### neg
+
+▸ `Static` **neg**(`x`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:438](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L438)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**(`fields`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name     | Type                         |
+| :------- | :--------------------------- |
+| `fields` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:446](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L446)
+
+---
+
+#### scale
+
+▸ `Static` **scale**(`x`, `y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `x`  | [`Group`](#classesgroupmd)   |
+| `y`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:439](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L439)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:447](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L447)
+
+---
+
+#### sub
+
+▸ `Static` **sub**(`x`, `y`): [`Group`](#classesgroupmd)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+| `y`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Group`](#classesgroupmd)
+
+##### Defined in
+
+[snarky.d.ts:437](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L437)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**(`x`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:445](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L445)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**(`x`): [`JSONValue`](#jsonvalue)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `x`  | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:449](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L449)
+
+<a name="classesindexbasemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / IndexBase
+
+## Class: IndexBase
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [id](#id)
+- [value](#value)
+
+### Constructors
+
+#### constructor
+
+• **new IndexBase**(`value`)
+
+##### Parameters
+
+| Name    | Type                       |
+| :------ | :------------------------- |
+| `value` | [`Bool`](#classesboolmd)[] |
+
+##### Defined in
+
+[lib/merkle_proof.ts:443](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L443)
+
+### Properties
+
+#### id
+
+• **id**: `number`
+
+##### Defined in
+
+[lib/merkle_proof.ts:440](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L440)
+
+---
+
+#### value
+
+• **value**: [`Bool`](#classesboolmd)[]
+
+##### Defined in
+
+[lib/merkle_proof.ts:441](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L441)
+
+<a name="classesindexedaccumulatormd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / IndexedAccumulator
+
+## Class: IndexedAccumulator<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Hierarchy
+
+- [`CircuitValue`](#classescircuitvaluemd)
+
+  ↳ **`IndexedAccumulator`**
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [commitment](#commitment)
+
+#### Methods
+
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [get](#get)
+- [set](#set)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [fromJSON](#fromjson)
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new IndexedAccumulator**<`A`\>(`commitment`)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+##### Parameters
+
+| Name         | Type                       |
+| :----------- | :------------------------- |
+| `commitment` | [`Field`](#classesfieldmd) |
+
+##### Overrides
+
+[CircuitValue](#classescircuitvaluemd).[constructor](#constructor)
+
+##### Defined in
+
+[lib/merkle_proof.ts:277](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L277)
+
+### Properties
+
+#### commitment
+
+• **commitment**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:275](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L275)
+
+### Methods
+
+#### assertEquals
+
+▸ **assertEquals**(`x`): `void`
+
+##### Parameters
+
+| Name | Type                                                       |
+| :--- | :--------------------------------------------------------- |
+| `x`  | [`IndexedAccumulator`](#classesindexedaccumulatormd)<`A`\> |
+
+##### Returns
+
+`void`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[assertEquals](#assertequals)
+
+##### Defined in
+
+[lib/circuit_value.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L48)
+
+---
+
+#### equals
+
+▸ **equals**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                                       |
+| :--- | :--------------------------------------------------------- |
+| `x`  | [`IndexedAccumulator`](#classesindexedaccumulatormd)<`A`\> |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[equals](#equals)
+
+##### Defined in
+
+[lib/circuit_value.ts:44](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L44)
+
+---
+
+#### get
+
+▸ `Abstract` **get**(`index`): `A`
+
+##### Parameters
+
+| Name    | Type    |
+| :------ | :------ |
+| `index` | `Index` |
+
+##### Returns
+
+`A`
+
+##### Defined in
+
+[lib/merkle_proof.ts:284](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L284)
+
+---
+
+#### set
+
+▸ `Abstract` **set**(`index`, `a`): `void`
+
+##### Parameters
+
+| Name    | Type    |
+| :------ | :------ |
+| `index` | `Index` |
+| `a`     | `A`     |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[lib/merkle_proof.ts:282](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L282)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:36](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L36)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L40)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**<`T`\>(`value`): `null` \| `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name    | Type                      |
+| :------ | :------------------------ |
+| `value` | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| `T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[fromJSON](#fromjson)
+
+##### Defined in
+
+[lib/circuit_value.ts:84](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L84)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**<`T`\>(`xs`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `xs` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[ofFieldElements](#offieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:52](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L52)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[sizeInFieldElements](#sizeinfieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L16)
+
+---
+
+#### toConstant
+
+▸ `Static` **toConstant**<`T`\>(`t`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `t`  | `T`  |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toConstant](#toconstant)
+
+##### Defined in
+
+[lib/circuit_value.ts:68](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L68)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`T`\>(`v`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:21](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L21)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**<`T`\>(`v`): [`JSONValue`](#jsonvalue)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:73](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L73)
+
+<a name="classeskeypairmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Keypair
+
+## Class: Keypair
+
+Contains a proving key and [[VerificationKey]] which can be used to verify proofs.
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [verificationKey](#verificationkey)
+
+### Constructors
+
+#### constructor
+
+• **new Keypair**()
+
+### Methods
+
+#### verificationKey
+
+▸ **verificationKey**(): [`VerificationKey`](#classesverificationkeymd)
+
+##### Returns
+
+[`VerificationKey`](#classesverificationkeymd)
+
+##### Defined in
+
+[snarky.d.ts:20](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L20)
+
+<a name="classesledgermd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Ledger
+
+## Class: Ledger
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [addAccount](#addaccount)
+- [applyPartiesTransaction](#applypartiestransaction)
+- [getAccount](#getaccount)
+- [create](#create)
+
+### Constructors
+
+#### constructor
+
+• **new Ledger**()
+
+### Methods
+
+#### addAccount
+
+▸ **addAccount**(`publicKey`, `balance`): `void`
+
+##### Parameters
+
+| Name          | Type                       |
+| :------------ | :------------------------- |
+| `publicKey`   | `Object`                   |
+| `publicKey.g` | [`Group`](#classesgroupmd) |
+| `balance`     | `number`                   |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:578](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L578)
+
+---
+
+#### applyPartiesTransaction
+
+▸ **applyPartiesTransaction**(`parties`): `void`
+
+##### Parameters
+
+| Name      | Type                              |
+| :-------- | :-------------------------------- |
+| `parties` | [`Parties`](#interfacespartiesmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:580](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L580)
+
+---
+
+#### getAccount
+
+▸ **getAccount**(`publicKey`): `null` \| [`Account`](#interfacesaccountmd)
+
+##### Parameters
+
+| Name          | Type                       |
+| :------------ | :------------------------- |
+| `publicKey`   | `Object`                   |
+| `publicKey.g` | [`Group`](#classesgroupmd) |
+
+##### Returns
+
+`null` \| [`Account`](#interfacesaccountmd)
+
+##### Defined in
+
+[snarky.d.ts:582](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L582)
+
+---
+
+#### create
+
+▸ `Static` **create**(`genesisAccounts`): [`Ledger`](#classesledgermd)
+
+##### Parameters
+
+| Name              | Type                                                                         |
+| :---------------- | :--------------------------------------------------------------------------- |
+| `genesisAccounts` | { `balance`: `number` ; `publicKey`: { `g`: [`Group`](#classesgroupmd) } }[] |
+
+##### Returns
+
+[`Ledger`](#classesledgermd)
+
+##### Defined in
+
+[snarky.d.ts:574](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L574)
+
+<a name="classesprivatekeymd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / PrivateKey
+
+## Class: PrivateKey
+
+A signing key. You can generate one via [random](#random).
+
+### Hierarchy
+
+- [`CircuitValue`](#classescircuitvaluemd)
+
+  ↳ **`PrivateKey`**
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [s](#s)
+
+#### Methods
+
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [toPublicKey](#topublickey)
+- [fromJSON](#fromjson)
+- [ofBits](#ofbits)
+- [ofFieldElements](#offieldelements)
+- [random](#random)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new PrivateKey**(`s`)
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `s`  | [`Scalar`](#classesscalarmd) |
+
+##### Overrides
+
+[CircuitValue](#classescircuitvaluemd).[constructor](#constructor)
+
+##### Defined in
+
+[lib/signature.ts:11](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L11)
+
+### Properties
+
+#### s
+
+• **s**: [`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[lib/signature.ts:9](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L9)
+
+### Methods
+
+#### assertEquals
+
+▸ **assertEquals**(`x`): `void`
+
+##### Parameters
+
+| Name | Type                                 |
+| :--- | :----------------------------------- |
+| `x`  | [`PrivateKey`](#classesprivatekeymd) |
+
+##### Returns
+
+`void`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[assertEquals](#assertequals)
+
+##### Defined in
+
+[lib/circuit_value.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L48)
+
+---
+
+#### equals
+
+▸ **equals**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                                 |
+| :--- | :----------------------------------- |
+| `x`  | [`PrivateKey`](#classesprivatekeymd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[equals](#equals)
+
+##### Defined in
+
+[lib/circuit_value.ts:44](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L44)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:36](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L36)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L40)
+
+---
+
+#### toPublicKey
+
+▸ **toPublicKey**(): [`PublicKey`](#classespublickeymd)
+
+Derives the associated public key.
+
+##### Returns
+
+[`PublicKey`](#classespublickeymd)
+
+a [PublicKey](#classespublickeymd).
+
+##### Defined in
+
+[lib/signature.ts:42](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L42)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**<`T`\>(`value`): `null` \| `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name    | Type                      |
+| :------ | :------------------------ |
+| `value` | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| `T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[fromJSON](#fromjson)
+
+##### Defined in
+
+[lib/circuit_value.ts:84](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L84)
+
+---
+
+#### ofBits
+
+▸ `Static` **ofBits**(`bs`): [`PrivateKey`](#classesprivatekeymd)
+
+Deserializes a list of bits into a [PrivateKey](#classesprivatekeymd).
+
+##### Parameters
+
+| Name | Type                       | Description                        |
+| :--- | :------------------------- | :--------------------------------- |
+| `bs` | [`Bool`](#classesboolmd)[] | a list of [Bool](#classesboolmd)s. |
+
+##### Returns
+
+[`PrivateKey`](#classesprivatekeymd)
+
+a [PrivateKey](#classesprivatekeymd).
+
+##### Defined in
+
+[lib/signature.ts:33](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L33)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**<`T`\>(`xs`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `xs` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[ofFieldElements](#offieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:52](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L52)
+
+---
+
+#### random
+
+▸ `Static` **random**(): [`PrivateKey`](#classesprivatekeymd)
+
+You can use this method to generate a private key. You can then obtain
+the associated public key via [toPublicKey](#topublickey). And generate signatures
+via [Signature.create](#create).
+
+##### Returns
+
+[`PrivateKey`](#classesprivatekeymd)
+
+a new [PrivateKey](#classesprivatekeymd).
+
+##### Defined in
+
+[lib/signature.ts:23](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L23)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[sizeInFieldElements](#sizeinfieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L16)
+
+---
+
+#### toConstant
+
+▸ `Static` **toConstant**<`T`\>(`t`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `t`  | `T`  |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toConstant](#toconstant)
+
+##### Defined in
+
+[lib/circuit_value.ts:68](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L68)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`T`\>(`v`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:21](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L21)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**<`T`\>(`v`): [`JSONValue`](#jsonvalue)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:73](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L73)
+
+<a name="classesproofmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Proof
+
+## Class: Proof
+
+Proofs can be verified using a [[VerificationKey]] and the public input.
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [verify](#verify)
+
+### Constructors
+
+#### constructor
+
+• **new Proof**()
+
+### Methods
+
+#### verify
+
+▸ **verify**(`verificationKey`, `publicInput`): `boolean`
+
+##### Parameters
+
+| Name              | Type                                           |
+| :---------------- | :--------------------------------------------- |
+| `verificationKey` | [`VerificationKey`](#classesverificationkeymd) |
+| `publicInput`     | `any`[]                                        |
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:27](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L27)
+
+<a name="classespublickeymd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / PublicKey
+
+## Class: PublicKey
+
+### Hierarchy
+
+- [`CircuitValue`](#classescircuitvaluemd)
+
+  ↳ **`PublicKey`**
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [g](#g)
+
+#### Methods
+
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [fromJSON](#fromjson)
+- [fromPrivateKey](#fromprivatekey)
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new PublicKey**(`g`)
+
+##### Parameters
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `g`  | [`Group`](#classesgroupmd) |
+
+##### Overrides
+
+[CircuitValue](#classescircuitvaluemd).[constructor](#constructor)
+
+##### Defined in
+
+[lib/signature.ts:50](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L50)
+
+### Properties
+
+#### g
+
+• **g**: [`Group`](#classesgroupmd)
+
+##### Defined in
+
+[lib/signature.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L48)
+
+### Methods
+
+#### assertEquals
+
+▸ **assertEquals**(`x`): `void`
+
+##### Parameters
+
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `x`  | [`PublicKey`](#classespublickeymd) |
+
+##### Returns
+
+`void`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[assertEquals](#assertequals)
+
+##### Defined in
+
+[lib/circuit_value.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L48)
+
+---
+
+#### equals
+
+▸ **equals**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `x`  | [`PublicKey`](#classespublickeymd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[equals](#equals)
+
+##### Defined in
+
+[lib/circuit_value.ts:44](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L44)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:36](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L36)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L40)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**<`T`\>(`value`): `null` \| `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name    | Type                      |
+| :------ | :------------------------ |
+| `value` | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| `T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[fromJSON](#fromjson)
+
+##### Defined in
+
+[lib/circuit_value.ts:84](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L84)
+
+---
+
+#### fromPrivateKey
+
+▸ `Static` **fromPrivateKey**(`p`): [`PublicKey`](#classespublickeymd)
+
+##### Parameters
+
+| Name | Type                                 |
+| :--- | :----------------------------------- |
+| `p`  | [`PrivateKey`](#classesprivatekeymd) |
+
+##### Returns
+
+[`PublicKey`](#classespublickeymd)
+
+##### Defined in
+
+[lib/signature.ts:55](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L55)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**<`T`\>(`xs`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `xs` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[ofFieldElements](#offieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:52](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L52)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[sizeInFieldElements](#sizeinfieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L16)
+
+---
+
+#### toConstant
+
+▸ `Static` **toConstant**<`T`\>(`t`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `t`  | `T`  |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toConstant](#toconstant)
+
+##### Defined in
+
+[lib/circuit_value.ts:68](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L68)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`T`\>(`v`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:21](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L21)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**<`T`\>(`v`): [`JSONValue`](#jsonvalue)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:73](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L73)
+
+<a name="classesscalarmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Scalar
+
+## Class: Scalar
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [add](#add)
+- [div](#div)
+- [mul](#mul)
+- [neg](#neg)
+- [sub](#sub)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [fromJSON](#fromjson)
+- [ofBits](#ofbits)
+- [ofFieldElements](#offieldelements)
+- [random](#random)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new Scalar**()
+
+### Methods
+
+#### add
+
+▸ **add**(`y`): [`Scalar`](#classesscalarmd)
+
+Add scalar field elements.
+Can only be called outside of circuit execution
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `y`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:373](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L373)
+
+---
+
+#### div
+
+▸ **div**(`y`): [`Scalar`](#classesscalarmd)
+
+Divide scalar field elements.
+Can only be called outside of circuit execution
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `y`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:391](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L391)
+
+---
+
+#### mul
+
+▸ **mul**(`y`): [`Scalar`](#classesscalarmd)
+
+Multiply scalar field elements.
+Can only be called outside of circuit execution
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `y`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:385](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L385)
+
+---
+
+#### neg
+
+▸ **neg**(): [`Scalar`](#classesscalarmd)
+
+Negate a scalar field element.
+Can only be called outside of circuit execution
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:367](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L367)
+
+---
+
+#### sub
+
+▸ **sub**(`y`): [`Scalar`](#classesscalarmd)
+
+Subtract scalar field elements.
+Can only be called outside of circuit execution
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `y`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:379](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L379)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:361](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L361)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:393](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L393)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**(`x`): `null` \| [`Scalar`](#classesscalarmd)
+
+##### Parameters
+
+| Name | Type                      |
+| :--- | :------------------------ |
+| `x`  | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| [`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:402](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L402)
+
+---
+
+#### ofBits
+
+▸ `Static` **ofBits**(`bits`): [`Scalar`](#classesscalarmd)
+
+##### Parameters
+
+| Name   | Type                       |
+| :----- | :------------------------- |
+| `bits` | [`Bool`](#classesboolmd)[] |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:398](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L398)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**(`fields`): [`Scalar`](#classesscalarmd)
+
+##### Parameters
+
+| Name     | Type                         |
+| :------- | :--------------------------- |
+| `fields` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:396](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L396)
+
+---
+
+#### random
+
+▸ `Static` **random**(): [`Scalar`](#classesscalarmd)
+
+##### Returns
+
+[`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[snarky.d.ts:399](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L399)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:397](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L397)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**(`x`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `x`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:395](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L395)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**(`x`): [`JSONValue`](#jsonvalue)
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `x`  | [`Scalar`](#classesscalarmd) |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Defined in
+
+[snarky.d.ts:401](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L401)
+
+<a name="classessignaturemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Signature
+
+## Class: Signature
+
+### Hierarchy
+
+- [`CircuitValue`](#classescircuitvaluemd)
+
+  ↳ **`Signature`**
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [r](#r)
+- [s](#s)
+
+#### Methods
+
+- [assertEquals](#assertequals)
+- [equals](#equals)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+- [verify](#verify)
+- [create](#create)
+- [fromJSON](#fromjson)
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toConstant](#toconstant)
+- [toFieldElements](#tofieldelements)
+- [toJSON](#tojson)
+
+### Constructors
+
+#### constructor
+
+• **new Signature**(`r`, `s`)
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `r`  | [`Field`](#classesfieldmd)   |
+| `s`  | [`Scalar`](#classesscalarmd) |
+
+##### Overrides
+
+[CircuitValue](#classescircuitvaluemd).[constructor](#constructor)
+
+##### Defined in
+
+[lib/signature.ts:64](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L64)
+
+### Properties
+
+#### r
+
+• **r**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/signature.ts:61](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L61)
+
+---
+
+#### s
+
+• **s**: [`Scalar`](#classesscalarmd)
+
+##### Defined in
+
+[lib/signature.ts:62](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L62)
+
+### Methods
+
+#### assertEquals
+
+▸ **assertEquals**(`x`): `void`
+
+##### Parameters
+
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `x`  | [`Signature`](#classessignaturemd) |
+
+##### Returns
+
+`void`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[assertEquals](#assertequals)
+
+##### Defined in
+
+[lib/circuit_value.ts:48](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L48)
+
+---
+
+#### equals
+
+▸ **equals**(`x`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name | Type                               |
+| :--- | :--------------------------------- |
+| `x`  | [`Signature`](#classessignaturemd) |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[equals](#equals)
+
+##### Defined in
+
+[lib/circuit_value.ts:44](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L44)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(): [`Field`](#classesfieldmd)[]
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:36](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L36)
+
+---
+
+#### toJSON
+
+▸ **toJSON**(): [`JSONValue`](#jsonvalue)
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L40)
+
+---
+
+#### verify
+
+▸ **verify**(`publicKey`, `msg`): [`Bool`](#classesboolmd)
+
+##### Parameters
+
+| Name        | Type                               |
+| :---------- | :--------------------------------- |
+| `publicKey` | [`PublicKey`](#classespublickeymd) |
+| `msg`       | [`Field`](#classesfieldmd)[]       |
+
+##### Returns
+
+[`Bool`](#classesboolmd)
+
+##### Defined in
+
+[lib/signature.ts:83](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L83)
+
+---
+
+#### create
+
+▸ `Static` **create**(`privKey`, `msg`): [`Signature`](#classessignaturemd)
+
+##### Parameters
+
+| Name      | Type                                 |
+| :-------- | :----------------------------------- |
+| `privKey` | [`PrivateKey`](#classesprivatekeymd) |
+| `msg`     | [`Field`](#classesfieldmd)[]         |
+
+##### Returns
+
+[`Signature`](#classessignaturemd)
+
+##### Defined in
+
+[lib/signature.ts:70](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/signature.ts#L70)
+
+---
+
+#### fromJSON
+
+▸ `Static` **fromJSON**<`T`\>(`value`): `null` \| `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name    | Type                      |
+| :------ | :------------------------ |
+| `value` | [`JSONValue`](#jsonvalue) |
+
+##### Returns
+
+`null` \| `T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[fromJSON](#fromjson)
+
+##### Defined in
+
+[lib/circuit_value.ts:84](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L84)
+
+---
+
+#### ofFieldElements
+
+▸ `Static` **ofFieldElements**<`T`\>(`xs`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `xs` | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[ofFieldElements](#offieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:52](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L52)
+
+---
+
+#### sizeInFieldElements
+
+▸ `Static` **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[sizeInFieldElements](#sizeinfieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:16](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L16)
+
+---
+
+#### toConstant
+
+▸ `Static` **toConstant**<`T`\>(`t`): `T`
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `t`  | `T`  |
+
+##### Returns
+
+`T`
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toConstant](#toconstant)
+
+##### Defined in
+
+[lib/circuit_value.ts:68](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L68)
+
+---
+
+#### toFieldElements
+
+▸ `Static` **toFieldElements**<`T`\>(`v`): [`Field`](#classesfieldmd)[]
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toFieldElements](#tofieldelements)
+
+##### Defined in
+
+[lib/circuit_value.ts:21](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L21)
+
+---
+
+#### toJSON
+
+▸ `Static` **toJSON**<`T`\>(`v`): [`JSONValue`](#jsonvalue)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `v`  | `T`  |
+
+##### Returns
+
+[`JSONValue`](#jsonvalue)
+
+##### Inherited from
+
+[CircuitValue](#classescircuitvaluemd).[toJSON](#tojson)
+
+##### Defined in
+
+[lib/circuit_value.ts:73](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L73)
+
+<a name="classestreemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Tree
+
+## Class: Tree<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Properties
+
+- [value](#value)
+
+#### Methods
+
+- [get](#get)
+- [getElementHash](#getelementhash)
+- [getMerklePath](#getmerklepath)
+- [getValue](#getvalue)
+- [root](#root)
+- [setValue](#setvalue)
+
+### Constructors
+
+#### constructor
+
+• **new Tree**<`A`\>(`depth`, `hashElement`, `values`)
+
+##### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+##### Parameters
+
+| Name          | Type                                     |
+| :------------ | :--------------------------------------- |
+| `depth`       | `number`                                 |
+| `hashElement` | (`a`: `A`) => [`Field`](#classesfieldmd) |
+| `values`      | `A`[]                                    |
+
+##### Defined in
+
+[lib/merkle_proof.ts:639](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L639)
+
+### Properties
+
+#### value
+
+• **value**: `BinTree`<`A`\>
+
+##### Defined in
+
+[lib/merkle_proof.ts:637](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L637)
+
+### Methods
+
+#### get
+
+▸ **get**(`index`): `Object`
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+`Object`
+
+| Name    | Type                       |
+| :------ | :------------------------- |
+| `hash`  | [`Field`](#classesfieldmd) |
+| `value` | `null` \| `A`              |
+
+##### Defined in
+
+[lib/merkle_proof.ts:698](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L698)
+
+---
+
+#### getElementHash
+
+▸ **getElementHash**(`index`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:726](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L726)
+
+---
+
+#### getMerklePath
+
+▸ **getMerklePath**(`index`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[lib/merkle_proof.ts:730](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L730)
+
+---
+
+#### getValue
+
+▸ **getValue**(`index`): `null` \| `A`
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+`null` \| `A`
+
+##### Defined in
+
+[lib/merkle_proof.ts:722](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L722)
+
+---
+
+#### root
+
+▸ **root**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:643](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L643)
+
+---
+
+#### setValue
+
+▸ **setValue**(`index`, `x`, `eltHash`): `void`
+
+##### Parameters
+
+| Name      | Type                       |
+| :-------- | :------------------------- |
+| `index`   | `boolean`[]                |
+| `x`       | `A`                        |
+| `eltHash` | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[lib/merkle_proof.ts:647](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L647)
+
+<a name="classesverificationkeymd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / VerificationKey
+
+## Class: VerificationKey
+
+Part of the circuit [[Keypair]]. A verification key can be used to verify a [[Proof]] when you provide the correct public input.
+
+### Table of contents
+
+#### Constructors
+
+- [constructor](#constructor)
+
+#### Methods
+
+- [verify](#verify)
+
+### Constructors
+
+#### constructor
+
+• **new VerificationKey**()
+
+### Methods
+
+#### verify
+
+▸ **verify**(`publicInput`, `proof`): `boolean`
+
+##### Parameters
+
+| Name          | Type                       |
+| :------------ | :------------------------- |
+| `publicInput` | `any`[]                    |
+| `proof`       | [`Proof`](#classesproofmd) |
+
+##### Returns
+
+`boolean`
+
+##### Defined in
+
+[snarky.d.ts:13](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L13)
+
+# Interfaces
+
+<a name="interfacesaccountmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Account
+
+## Interface: Account
+
+### Table of contents
+
+#### Properties
+
+- [balance](#balance)
+- [nonce](#nonce)
+- [snapp](#snapp)
+
+### Properties
+
+#### balance
+
+• **balance**: [`UInt64`](#interfacesuint64md)
+
+##### Defined in
+
+[snarky.d.ts:568](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L568)
+
+---
+
+#### nonce
+
+• **nonce**: [`UInt32`](#interfacesuint32md)
+
+##### Defined in
+
+[snarky.d.ts:569](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L569)
+
+---
+
+#### snapp
+
+• **snapp**: [`SnappAccount`](#interfacessnappaccountmd)
+
+##### Defined in
+
+[snarky.d.ts:570](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L570)
+
+<a name="interfacesasfieldelementsmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / AsFieldElements
+
+## Interface: AsFieldElements<T\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+### Table of contents
+
+#### Methods
+
+- [ofFieldElements](#offieldelements)
+- [sizeInFieldElements](#sizeinfieldelements)
+- [toFieldElements](#tofieldelements)
+
+### Methods
+
+#### ofFieldElements
+
+▸ **ofFieldElements**(`x`): `T`
+
+##### Parameters
+
+| Name | Type                         |
+| :--- | :--------------------------- |
+| `x`  | [`Field`](#classesfieldmd)[] |
+
+##### Returns
+
+`T`
+
+##### Defined in
+
+[snarky.d.ts:271](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L271)
+
+---
+
+#### sizeInFieldElements
+
+▸ **sizeInFieldElements**(): `number`
+
+##### Returns
+
+`number`
+
+##### Defined in
+
+[snarky.d.ts:272](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L272)
+
+---
+
+#### toFieldElements
+
+▸ **toFieldElements**(`x`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name | Type |
+| :--- | :--- |
+| `x`  | `T`  |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:270](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L270)
+
+<a name="interfacescircuitmainmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / CircuitMain
+
+## Interface: CircuitMain<W, P\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `W`  |
+| `P`  |
+
+### Table of contents
+
+#### Properties
+
+- [snarkyPublicTyp](#snarkypublictyp)
+- [snarkyWitnessTyp](#snarkywitnesstyp)
+
+#### Methods
+
+- [snarkyMain](#snarkymain)
+
+### Properties
+
+#### snarkyPublicTyp
+
+• **snarkyPublicTyp**: [`AsFieldElements`](#interfacesasfieldelementsmd)<`P`\>
+
+##### Defined in
+
+[snarky.d.ts:277](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L277)
+
+---
+
+#### snarkyWitnessTyp
+
+• **snarkyWitnessTyp**: [`AsFieldElements`](#interfacesasfieldelementsmd)<`W`\>
+
+##### Defined in
+
+[snarky.d.ts:276](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L276)
+
+### Methods
+
+#### snarkyMain
+
+▸ **snarkyMain**(`W`, `P`): `void`
+
+##### Parameters
+
+| Name | Type  |
+| :--- | :---- |
+| `W`  | `any` |
+| `P`  | `any` |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[snarky.d.ts:278](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L278)
+
+<a name="interfacesclosedintervalmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / ClosedInterval
+
+## Interface: ClosedInterval<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Table of contents
+
+#### Properties
+
+- [lower](#lower)
+- [upper](#upper)
+
+### Properties
+
+#### lower
+
+• **lower**: `A`
+
+##### Defined in
+
+[snarky.d.ts:475](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L475)
+
+---
+
+#### upper
+
+• **upper**: `A`
+
+##### Defined in
+
+[snarky.d.ts:476](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L476)
+
+<a name="interfacesepochdatapredicatemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / EpochDataPredicate
+
+## Interface: EpochDataPredicate
+
+### Table of contents
+
+#### Properties
+
+- [epochLength](#epochlength)
+- [ledger](#ledger)
+- [lockCheckpoint](#lockcheckpoint)
+- [seed](#seed)
+- [startCheckpoint](#startcheckpoint)
+
+### Properties
+
+#### epochLength
+
+• **epochLength**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt32`](#interfacesuint32md)\>
+
+##### Defined in
+
+[snarky.d.ts:489](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L489)
+
+---
+
+#### ledger
+
+• **ledger**: [`EpochLedgerPredicate`](#interfacesepochledgerpredicatemd)
+
+##### Defined in
+
+[snarky.d.ts:485](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L485)
+
+---
+
+#### lockCheckpoint
+
+• **lockCheckpoint**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:488](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L488)
+
+---
+
+#### seed
+
+• **seed**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:486](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L486)
+
+---
+
+#### startCheckpoint
+
+• **startCheckpoint**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:487](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L487)
+
+<a name="interfacesepochledgerpredicatemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / EpochLedgerPredicate
+
+## Interface: EpochLedgerPredicate
+
+### Table of contents
+
+#### Properties
+
+- [hash](#hash)
+- [totalCurrency](#totalcurrency)
+
+### Properties
+
+#### hash
+
+• **hash**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:480](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L480)
+
+---
+
+#### totalCurrency
+
+• **totalCurrency**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt64`](#interfacesuint64md)\>
+
+##### Defined in
+
+[snarky.d.ts:481](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L481)
+
+<a name="interfacesfeepayerpartymd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / FeePayerParty
+
+## Interface: FeePayerParty
+
+### Table of contents
+
+#### Properties
+
+- [body](#body)
+- [predicate](#predicate)
+
+### Properties
+
+#### body
+
+• **body**: [`PartyBody`](#interfacespartybodymd)
+
+##### Defined in
+
+[snarky.d.ts:553](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L553)
+
+---
+
+#### predicate
+
+• **predicate**: [`UInt32`](#interfacesuint32md)
+
+##### Defined in
+
+[snarky.d.ts:554](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L554)
+
+<a name="interfacesfullaccountpredicatemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / FullAccountPredicate
+
+## Interface: FullAccountPredicate
+
+### Table of contents
+
+#### Properties
+
+- [balance](#balance)
+- [delegate](#delegate)
+- [nonce](#nonce)
+- [provedState](#provedstate)
+- [publicKey](#publickey)
+- [receiptChainHash](#receiptchainhash)
+- [sequenceState](#sequencestate)
+- [state](#state)
+
+### Properties
+
+#### balance
+
+• **balance**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt64`](#interfacesuint64md)\>
+
+##### Defined in
+
+[snarky.d.ts:532](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L532)
+
+---
+
+#### delegate
+
+• **delegate**: [`OrIgnore`](#interfacesorignoremd)<{ `g`: [`Group`](#classesgroupmd) }\>
+
+##### Defined in
+
+[snarky.d.ts:536](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L536)
+
+---
+
+#### nonce
+
+• **nonce**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt32`](#interfacesuint32md)\>
+
+##### Defined in
+
+[snarky.d.ts:533](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L533)
+
+---
+
+#### provedState
+
+• **provedState**: [`OrIgnore`](#interfacesorignoremd)<[`Bool`](#classesboolmd)\>
+
+##### Defined in
+
+[snarky.d.ts:539](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L539)
+
+---
+
+#### publicKey
+
+• **publicKey**: [`OrIgnore`](#interfacesorignoremd)<{ `g`: [`Group`](#classesgroupmd) }\>
+
+##### Defined in
+
+[snarky.d.ts:535](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L535)
+
+---
+
+#### receiptChainHash
+
+• **receiptChainHash**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:534](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L534)
+
+---
+
+#### sequenceState
+
+• **sequenceState**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:538](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L538)
+
+---
+
+#### state
+
+• **state**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>[]
+
+##### Defined in
+
+[snarky.d.ts:537](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L537)
+
+<a name="interfacesint64md"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Int64
+
+## Interface: Int64
+
+### Table of contents
+
+#### Methods
+
+- [uint64Value](#uint64value)
+
+### Methods
+
+#### uint64Value
+
+▸ **uint64Value**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:507](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L507)
+
+<a name="interfacesmerkletreemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / MerkleTree
+
+## Interface: MerkleTree<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Table of contents
+
+#### Methods
+
+- [getElementHash](#getelementhash)
+- [getMerklePath](#getmerklepath)
+- [getValue](#getvalue)
+- [root](#root)
+- [setValue](#setvalue)
+
+### Methods
+
+#### getElementHash
+
+▸ **getElementHash**(`index`): [`Field`](#classesfieldmd)
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:764](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L764)
+
+---
+
+#### getMerklePath
+
+▸ **getMerklePath**(`index`): [`Field`](#classesfieldmd)[]
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+[`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[lib/merkle_proof.ts:765](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L765)
+
+---
+
+#### getValue
+
+▸ **getValue**(`index`): `null` \| `A`
+
+##### Parameters
+
+| Name    | Type        |
+| :------ | :---------- |
+| `index` | `boolean`[] |
+
+##### Returns
+
+`null` \| `A`
+
+##### Defined in
+
+[lib/merkle_proof.ts:763](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L763)
+
+---
+
+#### root
+
+▸ **root**(): [`Field`](#classesfieldmd)
+
+##### Returns
+
+[`Field`](#classesfieldmd)
+
+##### Defined in
+
+[lib/merkle_proof.ts:766](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L766)
+
+---
+
+#### setValue
+
+▸ **setValue**(`index`, `x`, `eltHash`): `void`
+
+##### Parameters
+
+| Name      | Type                       |
+| :-------- | :------------------------- |
+| `index`   | `boolean`[]                |
+| `x`       | `A`                        |
+| `eltHash` | [`Field`](#classesfieldmd) |
+
+##### Returns
+
+`void`
+
+##### Defined in
+
+[lib/merkle_proof.ts:762](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L762)
+
+<a name="interfacesorignoremd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / OrIgnore
+
+## Interface: OrIgnore<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Table of contents
+
+#### Properties
+
+- [check](#check)
+- [value](#value)
+
+### Properties
+
+#### check
+
+• **check**: [`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:465](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L465)
+
+---
+
+#### value
+
+• **value**: `A`
+
+##### Defined in
+
+[snarky.d.ts:466](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L466)
+
+<a name="interfacespartiesmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Parties
+
+## Interface: Parties
+
+### Table of contents
+
+#### Properties
+
+- [feePayer](#feepayer)
+- [otherParties](#otherparties)
+- [protocolState](#protocolstate)
+
+### Properties
+
+#### feePayer
+
+• **feePayer**: [`FeePayerParty`](#interfacesfeepayerpartymd)
+
+##### Defined in
+
+[snarky.d.ts:558](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L558)
+
+---
+
+#### otherParties
+
+• **otherParties**: [`Party`](#interfacespartymd)[]
+
+##### Defined in
+
+[snarky.d.ts:559](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L559)
+
+---
+
+#### protocolState
+
+• **protocolState**: [`ProtocolStatePredicate`](#interfacesprotocolstatepredicatemd)
+
+##### Defined in
+
+[snarky.d.ts:560](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L560)
+
+<a name="interfacespartymd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / Party
+
+## Interface: Party
+
+### Table of contents
+
+#### Properties
+
+- [body](#body)
+- [predicate](#predicate)
+
+### Properties
+
+#### body
+
+• **body**: [`PartyBody`](#interfacespartybodymd)
+
+##### Defined in
+
+[snarky.d.ts:548](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L548)
+
+---
+
+#### predicate
+
+• **predicate**: [`AccountPredicate`](#accountpredicate)
+
+##### Defined in
+
+[snarky.d.ts:549](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L549)
+
+<a name="interfacespartybodymd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / PartyBody
+
+## Interface: PartyBody
+
+### Table of contents
+
+#### Properties
+
+- [callData](#calldata)
+- [delta](#delta)
+- [depth](#depth)
+- [events](#events)
+- [publicKey](#publickey)
+- [sequenceEvents](#sequenceevents)
+- [tokenId](#tokenid)
+- [update](#update)
+
+### Properties
+
+#### callData
+
+• **callData**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:527](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L527)
+
+---
+
+#### delta
+
+• **delta**: [`Int64`](#interfacesint64md)
+
+##### Defined in
+
+[snarky.d.ts:524](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L524)
+
+---
+
+#### depth
+
+• **depth**: `number`
+
+##### Defined in
+
+[snarky.d.ts:528](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L528)
+
+---
+
+#### events
+
+• **events**: [`Field`](#classesfieldmd)[][]
+
+##### Defined in
+
+[snarky.d.ts:525](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L525)
+
+---
+
+#### publicKey
+
+• **publicKey**: `Object`
+
+##### Type declaration
+
+| Name | Type                       |
+| :--- | :------------------------- |
+| `g`  | [`Group`](#classesgroupmd) |
+
+##### Defined in
+
+[snarky.d.ts:521](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L521)
+
+---
+
+#### sequenceEvents
+
+• **sequenceEvents**: [`Field`](#classesfieldmd)[][]
+
+##### Defined in
+
+[snarky.d.ts:526](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L526)
+
+---
+
+#### tokenId
+
+• **tokenId**: [`UInt32`](#interfacesuint32md)
+
+##### Defined in
+
+[snarky.d.ts:523](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L523)
+
+---
+
+#### update
+
+• **update**: [`PartyUpdate`](#interfacespartyupdatemd)
+
+##### Defined in
+
+[snarky.d.ts:522](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L522)
+
+<a name="interfacespartyupdatemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / PartyUpdate
+
+## Interface: PartyUpdate
+
+### Table of contents
+
+#### Properties
+
+- [appState](#appstate)
+- [delegate](#delegate)
+
+### Properties
+
+#### appState
+
+• **appState**: [`SetOrKeep`](#interfacessetorkeepmd)<[`Field`](#classesfieldmd)\>[]
+
+##### Defined in
+
+[snarky.d.ts:511](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L511)
+
+---
+
+#### delegate
+
+• **delegate**: [`SetOrKeep`](#interfacessetorkeepmd)<{ `g`: [`Group`](#classesgroupmd) }\>
+
+##### Defined in
+
+[snarky.d.ts:512](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L512)
+
+<a name="interfacesprotocolstatepredicatemd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / ProtocolStatePredicate
+
+## Interface: ProtocolStatePredicate
+
+### Table of contents
+
+#### Properties
+
+- [blockchainLength](#blockchainlength)
+- [globalSlotSinceGenesis](#globalslotsincegenesis)
+- [globalSlotSinceHardFork](#globalslotsincehardfork)
+- [lastVrfOutput](#lastvrfoutput)
+- [minWindowDensity](#minwindowdensity)
+- [nextEpochData](#nextepochdata)
+- [snarkedLedgerHash](#snarkedledgerhash)
+- [snarkedNextAvailableToken](#snarkednextavailabletoken)
+- [stakingEpochData](#stakingepochdata)
+- [timestamp](#timestamp)
+- [totalCurrency](#totalcurrency)
+
+### Properties
+
+#### blockchainLength
+
+• **blockchainLength**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt32`](#interfacesuint32md)\>
+
+##### Defined in
+
+[snarky.d.ts:496](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L496)
+
+---
+
+#### globalSlotSinceGenesis
+
+• **globalSlotSinceGenesis**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt32`](#interfacesuint32md)\>
+
+##### Defined in
+
+[snarky.d.ts:501](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L501)
+
+---
+
+#### globalSlotSinceHardFork
+
+• **globalSlotSinceHardFork**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt32`](#interfacesuint32md)\>
+
+##### Defined in
+
+[snarky.d.ts:500](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L500)
+
+---
+
+#### lastVrfOutput
+
+• **lastVrfOutput**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:498](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L498)
+
+---
+
+#### minWindowDensity
+
+• **minWindowDensity**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt32`](#interfacesuint32md)\>
+
+##### Defined in
+
+[snarky.d.ts:497](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L497)
+
+---
+
+#### nextEpochData
+
+• **nextEpochData**: [`EpochDataPredicate`](#interfacesepochdatapredicatemd)
+
+##### Defined in
+
+[snarky.d.ts:503](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L503)
+
+---
+
+#### snarkedLedgerHash
+
+• **snarkedLedgerHash**: [`OrIgnore`](#interfacesorignoremd)<[`Field`](#classesfieldmd)\>
+
+##### Defined in
+
+[snarky.d.ts:493](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L493)
+
+---
+
+#### snarkedNextAvailableToken
+
+• **snarkedNextAvailableToken**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt64`](#interfacesuint64md)\>
+
+##### Defined in
+
+[snarky.d.ts:494](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L494)
+
+---
+
+#### stakingEpochData
+
+• **stakingEpochData**: [`EpochDataPredicate`](#interfacesepochdatapredicatemd)
+
+##### Defined in
+
+[snarky.d.ts:502](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L502)
+
+---
+
+#### timestamp
+
+• **timestamp**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt64`](#interfacesuint64md)\>
+
+##### Defined in
+
+[snarky.d.ts:495](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L495)
+
+---
+
+#### totalCurrency
+
+• **totalCurrency**: [`ClosedInterval`](#interfacesclosedintervalmd)<[`UInt64`](#interfacesuint64md)\>
+
+##### Defined in
+
+[snarky.d.ts:499](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L499)
+
+<a name="interfacessetorkeepmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / SetOrKeep
+
+## Interface: SetOrKeep<A\>
+
+### Type parameters
+
+| Name |
+| :--- |
+| `A`  |
+
+### Table of contents
+
+#### Properties
+
+- [set](#set)
+- [value](#value)
+
+### Properties
+
+#### set
+
+• **set**: [`Bool`](#classesboolmd)
+
+##### Defined in
+
+[snarky.d.ts:470](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L470)
+
+---
+
+#### value
+
+• **value**: `A`
+
+##### Defined in
+
+[snarky.d.ts:471](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L471)
+
+<a name="interfacessnappaccountmd"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / SnappAccount
+
+## Interface: SnappAccount
+
+### Table of contents
+
+#### Properties
+
+- [appState](#appstate)
+
+### Properties
+
+#### appState
+
+• **appState**: [`Field`](#classesfieldmd)[]
+
+##### Defined in
+
+[snarky.d.ts:564](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L564)
+
+<a name="interfacesuint32md"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / UInt32
+
+## Interface: UInt32
+
+### Table of contents
+
+#### Properties
+
+- [value](#value)
+
+### Properties
+
+#### value
+
+• **value**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:458](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L458)
+
+<a name="interfacesuint64md"></a>
+
+[@o1labs/snarkyjs](#readmemd) / [Exports](#modulesmd) / UInt64
+
+## Interface: UInt64
+
+### Table of contents
+
+#### Properties
+
+- [value](#value)
+
+### Properties
+
+#### value
+
+• **value**: [`Field`](#classesfieldmd)
+
+##### Defined in
+
+[snarky.d.ts:461](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L461)
+
+## Type aliases
+
+### AccountPredicate
+
+Ƭ **AccountPredicate**: { `type`: `"accept"` } \| { `type`: `"nonce"` ; `value`: [`UInt32`](#interfacesuint32md) } \| { `type`: `"full"` ; `value`: [`FullAccountPredicate`](#interfacesfullaccountpredicatemd) }
+
+#### Defined in
+
+[snarky.d.ts:542](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L542)
+
+---
+
+### Index
+
+Ƭ **Index**: `InstanceType`<typeof [`Index`](#index)[``0``]\>
+
+#### Defined in
+
+[lib/merkle_proof.ts:542](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L542)
+
+---
+
+### JSONValue
+
+Ƭ **JSONValue**: `number` \| `string` \| `boolean` \| `null` \| `JSON`[] \| { [key: string]: [`JSONValue`](#jsonvalue); }
+
+#### Defined in
+
+[snarky.d.ts:1](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L1)
+
+---
+
+### MerkleProof
+
+Ƭ **MerkleProof**: `InstanceType`<typeof [`MerkleProof`](#merkleproof)[``0``]\>
+
+#### Defined in
+
+[lib/merkle_proof.ts:541](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L541)
+
+---
+
+### Tuple
+
+Ƭ **Tuple**<`A`, `_N`\>: `A`[]
+
+#### Type parameters
+
+| Name | Type             |
+| :--- | :--------------- |
+| `A`  | `A`              |
+| `_N` | extends `number` |
+
+#### Defined in
+
+[lib/circuit_value.ts:6](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L6)
+
+## Variables
+
+### Index
+
+• **Index**: typeof `Index`[]
+
+#### Defined in
+
+[lib/merkle_proof.ts:540](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L540)
+
+---
+
+### MerkleProof
+
+• **MerkleProof**: typeof `MerkleProof`[]
+
+#### Defined in
+
+[lib/merkle_proof.ts:539](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L539)
+
+---
+
+### NumberAsField
+
+• **NumberAsField**: [`AsFieldElements`](#interfacesasfieldelementsmd)<`Number`\>
+
+#### Defined in
+
+[snarky.d.ts:590](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L590)
+
+---
+
+### Poseidon
+
+• **Poseidon**: `Object`
+
+#### Type declaration
+
+| Name   | Type                                                               |
+| :----- | :----------------------------------------------------------------- |
+| `hash` | (`xs`: [`Field`](#classesfieldmd)[]) => [`Field`](#classesfieldmd) |
+
+#### Defined in
+
+[snarky.d.ts:453](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L453)
+
+---
+
+### isReady
+
+• **isReady**: `Promise`<`undefined`\>
+
+#### Defined in
+
+[snarky.d.ts:602](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L602)
+
+## Functions
+
+### IndexFactory
+
+▸ **IndexFactory**(`depth`): typeof `Index`
+
+#### Parameters
+
+| Name    | Type     |
+| :------ | :------- |
+| `depth` | `number` |
+
+#### Returns
+
+typeof `Index`
+
+#### Defined in
+
+[lib/merkle_proof.ts:490](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L490)
+
+---
+
+### KeyedAccumulatorFactory
+
+▸ **KeyedAccumulatorFactory**<`K`, `V`\>(`depth`): typeof `KeyedAccumulator`
+
+#### Type parameters
+
+| Name | Type                                                   |
+| :--- | :----------------------------------------------------- |
+| `K`  | extends [`CircuitValue`](#classescircuitvaluemd)<`K`\> |
+| `V`  | extends [`CircuitValue`](#classescircuitvaluemd)<`V`\> |
+
+#### Parameters
+
+| Name    | Type     |
+| :------ | :------- |
+| `depth` | `number` |
+
+#### Returns
+
+typeof `KeyedAccumulator`
+
+#### Defined in
+
+[lib/merkle_proof.ts:287](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L287)
+
+---
+
+### MerkleAccumulatorFactory
+
+▸ **MerkleAccumulatorFactory**<`A`\>(`depth`): typeof `MerkleAccumulator`
+
+#### Type parameters
+
+| Name | Type                                                   |
+| :--- | :----------------------------------------------------- |
+| `A`  | extends [`CircuitValue`](#classescircuitvaluemd)<`A`\> |
+
+#### Parameters
+
+| Name    | Type     |
+| :------ | :------- |
+| `depth` | `number` |
+
+#### Returns
+
+typeof `MerkleAccumulator`
+
+#### Defined in
+
+[lib/merkle_proof.ts:40](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L40)
+
+---
+
+### MerkleProofFactory
+
+▸ **MerkleProofFactory**(`depth`): typeof `MerkleProof`
+
+#### Parameters
+
+| Name    | Type     |
+| :------ | :------- |
+| `depth` | `number` |
+
+#### Returns
+
+typeof `MerkleProof`
+
+#### Defined in
+
+[lib/merkle_proof.ts:465](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/merkle_proof.ts#L465)
+
+---
+
+### array
+
+▸ `Const` **array**<`T`\>(`x`, `length`): [`AsFieldElements`](#interfacesasfieldelementsmd)<`T`[]\>
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name     | Type                                                    |
+| :------- | :------------------------------------------------------ |
+| `x`      | [`AsFieldElements`](#interfacesasfieldelementsmd)<`T`\> |
+| `length` | `number`                                                |
+
+#### Returns
+
+[`AsFieldElements`](#interfacesasfieldelementsmd)<`T`[]\>
+
+#### Defined in
+
+[snarky.d.ts:592](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L592)
+
+---
+
+### asFieldElementsToConstant
+
+▸ **asFieldElementsToConstant**<`T`\>(`typ`, `t`): `T`
+
+#### Type parameters
+
+| Name |
+| :--- |
+| `T`  |
+
+#### Parameters
+
+| Name  | Type                    |
+| :---- | :---------------------- |
+| `typ` | `AsFieldElements`<`T`\> |
+| `t`   | `T`                     |
+
+#### Returns
+
+`T`
+
+#### Defined in
+
+[lib/circuit_value.ts:8](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L8)
+
+---
+
+### circuitMain
+
+▸ **circuitMain**(`target`, `propertyName`, `_descriptor?`): `any`
+
+#### Parameters
+
+| Name           | Type                 |
+| :------------- | :------------------- |
+| `target`       | `any`                |
+| `propertyName` | `string`             |
+| `_descriptor?` | `PropertyDescriptor` |
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+[lib/circuit_value.ts:191](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L191)
+
+---
+
+### ofFieldElements
+
+▸ `Const` **ofFieldElements**(`x`, `y`): `any`[]
+
+#### Parameters
+
+| Name | Type    |
+| :--- | :------ |
+| `x`  | `any`[] |
+| `y`  | `any`[] |
+
+#### Returns
+
+`any`[]
+
+#### Defined in
+
+[snarky.d.ts:586](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L586)
+
+---
+
+### prop
+
+▸ **prop**(`target`, `key`): `void`
+
+#### Parameters
+
+| Name     | Type     |
+| :------- | :------- |
+| `target` | `any`    |
+| `key`    | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[lib/circuit_value.ts:128](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L128)
+
+---
+
+### public\_
+
+▸ **public\_**(`target`, `_key`, `index`): `void`
+
+#### Parameters
+
+| Name     | Type                 |
+| :------- | :------------------- |
+| `target` | `any`                |
+| `_key`   | `string` \| `symbol` |
+| `index`  | `number`             |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[lib/circuit_value.ts:145](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/lib/circuit_value.ts#L145)
+
+---
+
+### shutdown
+
+▸ `Const` **shutdown**(): `Promise`<`undefined`\>
+
+#### Returns
+
+`Promise`<`undefined`\>
+
+#### Defined in
+
+[snarky.d.ts:600](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L600)
+
+---
+
+### sizeInFieldElements
+
+▸ `Const` **sizeInFieldElements**(`x`): `number`
+
+#### Parameters
+
+| Name | Type    |
+| :--- | :------ |
+| `x`  | `any`[] |
+
+#### Returns
+
+`number`
+
+#### Defined in
+
+[snarky.d.ts:588](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L588)
+
+---
+
+### toFieldElements
+
+▸ `Const` **toFieldElements**(`x`, `y`): `any`[]
+
+#### Parameters
+
+| Name | Type    |
+| :--- | :------ |
+| `x`  | `any`[] |
+| `y`  | `any`[] |
+
+#### Returns
+
+`any`[]
+
+#### Defined in
+
+[snarky.d.ts:587](https://github.com/o1-labs/snarkyjs/blob/953cc60/src/snarky.d.ts#L587)
