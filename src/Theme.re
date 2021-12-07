@@ -116,11 +116,10 @@ module Type = {
    */
   let h4 =
     style([
-      Typeface.monumentGroteskMono,
+      Typeface.monumentGrotesk,
       fontSize(`rem(1.125)),
       fontWeight(`normal),
       lineHeight(`rem(1.7)),
-      textTransform(`uppercase),
       letterSpacing(`em(0.02)),
       color(Colors.digitalBlack),
       media(
