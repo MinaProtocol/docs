@@ -129,7 +129,7 @@ module DocsNavsTranslations = {
   };
   let snappsAPIReference= {
     id: "sidenav.api-reference",
-    defaultMessage: "API Reference",
+    defaultMessage: "SnarkyJS API Reference",
   };
   let troubleshooting = {
     id: "sidenav.troubleshooting",
@@ -349,7 +349,7 @@ module SideNav = {
           />
            <Item
             title={intl->Intl.formatMessage(snappsAPIReference)}
-            slug="api-reference"
+            slug="snarkyjs-reference"
           />
         </Section>
         <Item
