@@ -115,6 +115,12 @@ module H4 =
       <h4 className={merge([Styles.headerSpacing, Theme.Type.h4])} />;
   });
 
+module H5 =
+  WrapHeader({
+    let element =
+      <h5 className={merge([Styles.headerSpacing, Theme.Type.h5])} />;
+  });
+
 module P =
   Wrap({
     let element =
@@ -217,6 +223,16 @@ module Rule =
     let element = <div className=Styles.ruleSpacing> <Rule /> </div>;
   });
 
+module TH =
+  Wrap({
+    let element = <th className={merge([Styles.paragraphSpacing, Theme.Type.paragraph])} />;
+  });
+
+module TD =
+  Wrap({
+    let element = <td className={merge([Styles.paragraphSpacing, Theme.Type.paragraph])} />;
+  });
+
 module DaemonCommandExample = {
   let defaultArgs = ["mina daemon", "-peer-list ~/peers.txt"];
   [@react.component]
@@ -250,6 +266,7 @@ let allComponents = () => {
   "h2": H2.make,
   "h3": H3.make,
   "h4": H4.make,
+  "h5": H5.make,
   "p": P.make,
   "a": A.make,
   "strong": Strong.make,
@@ -259,6 +276,8 @@ let allComponents = () => {
   "ul": Ul.make,
   "ol": Ol.make,
   "img": Img.make,
+  "th": TH.make,
+  "td": TD.make,
   "Rule": Rule.make,
   "Footnote": Footnote.make,
 };
