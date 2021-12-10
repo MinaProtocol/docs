@@ -1,0 +1,238 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "How to write a snapp" });
+
+<Alert kind="info">
+
+Please note that snapps programmability is not yet available on Mina. These docs
+are a preview of work that is currently in progress.
+
+</Alert>
+
+# How to write a snapp
+
+A Snapp consists of a smart contract and a UI to interact with it. First, we’ll install the Snapp CLI and write a smart contract.
+
+## Write a smart contract
+Your smart contract will be written using <a href="https://github.com/o1-labs/snapp-cli/">Snapp CLI</a>. 
+
+Snapp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (Jest), code auto-formatting (Prettier), linting (ES Lint), & more. 
+
+### Install Snapp CLI
+
+#### Dependencies:
+- NodeJS 16+ (or 14 using `node --experimental-wasm-threads`)
+- NPM 6+ 
+- Git 2+ 
+
+<Alert kind="tip">
+
+If you have an older version installed, we suggest installing a newer version using the package manager for your system: <a href="https://brew.sh/">Homebrew</a> (Mac), <a href="https://chocolatey.org/">Chocolatey</a> (Windows), or apt/yum/etc (Linux). On Linux, you may need to install a recent NodeJS version via NodeSource (<a href="https://github.com/nodesource/distributions#debinstall">deb</a> or <a href="https://github.com/nodesource/distributions#rpminstall">rpm</a>), as recommended by the NodeJS Project.
+
+</Alert>
+
+### Start a Project
+
+Now that you have Snapp CLI installed, you can start with an example or start your own project.
+
+#### Option A: Start with an example (recommended)
+
+Examples are based on the standard project structure, but with additional files in the `/src` directory as the only difference.
+
+1. **Install:** Run `snapp example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
+2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
+3. **Build the example:** Run `npm run build`. This will compile your TypeScript into JavaScript inside the project’s `/build` directory.
+4. **Deploy example on Testnet:** (Coming soon.) 
+
+You can view a list of <a href="https://github.com/o1-labs/snapp-cli/tree/main/examples/">all available examples here</a>. 
+
+#### Option B: Start your own project 
+
+1. **Install:** Run `snapp project <myproj>`. Type `ls` and hit enter to see the newly created project structure.
+2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
+3. **Build:** Run `npm run build`. This will compile your TypeScript code into JavaScript inside the project’s `/build`. 
+4. **Deploy to Testnet:** (Coming soon.)
+5. **Deploy to Mainnet:** (Coming soon.)
+
+### Writing your smart contract’s custom logic
+
+The goal of this section is to explain the concepts that you will need to understand to write a zero-knowledge-based smart contract.
+
+If you haven’t yet read the <DocLink copy="how snapps work" url="/snapps/how-snapps-work" /> section, please read it first so that this section makes sense.
+
+##### SnarkyJS
+
+Snapps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Snapp CLI. 
+
+To view the full SnarkyJS reference, please see <DocLink copy="here" url="/snapps/snarkyjs-reference" />.
+
+##### Concepts
+
+Field elements are the basic unit of data in zero-knowledge proof programming. Each field element can store a number up to almost 256 bits in size. You can think of it as a uint256 in Solidity. 
+
+<Alert kind="note">
+
+For the cryptography inclined, the exact max value that a field can store is: 28,948,022,309,329,048,855,892,746,252,171,976,963,363,056,481,941,560,715,954,676,764,349,967,630,336  
+
+</Alert>
+
+For example, in typical programming, you might use:
+
+ `const sum = 1 + 3`.
+
+In SnarkyJS, you would write this as: 
+
+`const sum = new Field(1).add(new Field(3))`
+
+This can be simplified as:
+
+`const sum = new Field(1).add(3)`
+
+Note that the 3 is auto-promoted to a field type to make this cleaner.
+
+##### Primitive data types
+
+A couple common data types you may use are:
+
+```
+new Bool();     // accepts true or false
+new Field();    // accepts an integer, or a numeric string if you want to represent a number greater than JavaScript can represent but within the max value that a field can store.
+```
+
+<Alert kind="info">
+
+Support for strings within SnarkyJS will be available soon.
+</Alert>
+
+##### Conditionals
+
+Traditional conditional statements are not yet supported by SnarkyJS:
+
+```ts
+// this will NOT work
+if (foo) {
+  x.assertEquals(y);
+}
+```
+
+Instead, use SnarkyJS’ built-in `Circuit.if()` method.
+
+const x = Circuit.if(new Bool(foo)).then(a).else(b);
+
+##### Functions
+
+Functions work as you would expect in TypeScript. For example:
+
+```ts
+function addOneAndDouble(x: Field): Field {
+  return x.add(1).mul(2);
+}
+```
+
+##### Common methods
+
+Some common methods you will use often are:
+
+```ts
+let x = new Field(4); // x = 4
+x = x.add(3);            // x = 7
+x = x.sub(1);            // x = 6
+x = x.mul(3);            // x = 18
+x = x.div(2);             // x = 9
+x = x.square();        // x = 81
+x = x.sqrt();             // x = 9
+```
+
+For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyjs-reference" />.
+
+##### Smart Contract
+
+Let’s put this all together and create a basic smart contract. The smart contract is where you define your custom logic. 
+
+For example: *(Gregor will update this section)*
+
+When writing a smart contract, you describe both your custom logic (to be used by the prover) and your assertions (to be used by the verifier) that will prove a given zero-knowledge proof is valid.
+
+In the above example, the computation is `x.mul(x).mul(x)`, the assertion is x3.assertEquals(result), and `expected` is a public input. We’ll discuss these more in a bit.
+
+Notice that our class extends `SmartContract`.  However, your class can contain various other helper methods if desired.
+
+When you build your smart contract (`npm run build`), a file called `smart_contract.js` will be created, which will contain both the **prover function** and the **verifier function** for your circuit.
+
+##### Private Inputs & Public Inputs
+
+**Private inputs** and **public inputs** are data required by either the prover function or verifier function.
+
+**Private inputs** must be provided to the **prover function** when it runs in a user’s web browser. Because this data is provided by the user and remains local on their computer, this remains fully private. It will never exist on chain.
+
+**Public inputs** must be provided to both the **prover function** and the **verifier function** (i.e. the Mina network) when it is verifying a zero-knowledge proof. 
+
+By default, all inputs are private unless you add `@pub` before the parameter.
+
+In the earlier example, the `expected` parameter is public because we marked it with `@pub`, whereas the first input `x` is private by default. Thus, if a user provides a result of `27` with their proof, they prove that they know the cube root of `3`.
+
+##### Prover function 
+
+When the prover function runs, it executes your custom logic to generate a zero-knowledge proof. In the earlier example, `const x3 = x.mul(x).mul(x);` is our custom logic.
+
+##### Assertions
+
+When the verifier function runs on the Mina network, it will execute your smart contract’s assertions to determine if a proof is valid.
+
+Common assertions you may use are:
+
+```ts
+x.assertEquals();
+x.assertBoolean(); 
+x.assertLt();          // less than
+x.assertLte();        // less than or equal to
+x.assertGt();         // greater than
+x.assertGte();       // greater than or equal to
+```
+
+For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyjs-reference" />.
+
+### Managing State
+
+##### Updating on-chain state
+
+The 8 fields of 32 bytes of arbitrary on-chain state can be accessed via `this.state[n]`, where n is 0-7. 
+
+To update the on-chain state of your smart contract, you must use the `.set` method that is defined for every state property. Here, we define a `update` method marked with the `@method` decorator to indicate that this method is callable on the instance of our smart contract. Inside the `update` method, the `num` state property is read into `currentState` by using the `.get` method. To update the `num` state property, the `.set` method is called with its input parameter specifying an add operation with a Field value of 2. Using the `.set` method is how the on-chain state is updated for the Add smart contract.
+
+##### Updating off-chain state
+
+<Alert kind="info">
+
+Off-chain state is not yet available.
+</Alert>
+
+### Testing your smart contract
+
+Testing is critical when writing smart contracts.
+
+The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the Snapp CLI via `snapp project <name>`. We recommend Jest, but any testing framework can be used.
+
+To run all test files within your project, run `npm run test` or `npm run testw` (for watch mode) from your project’s root directory.
+
+To generate a test coverage report for your project, run `npm run coverage`. Coverage reports show the % of your code that is tested. The result will be output in your terminal. This can be helpful to ensure your code is well tested.
+
+
+##### Learn more
+
+Please see the <a href="https://jestjs.io/docs/getting-started">Jest docs</a> for further information on how to use Jest. 
+
+We will be adding blockchain-specific testing functionality in the future. Keep an eye on this section for updates. 
+
+## Writing a UI for your smart contract
+
+To allow users to interact with your smart contract, you’ll typically want to build a website UI. 
+
+This UI can be written with any framework (e.g. React, Vue, Svelte, etc.) or plain HTML and JavaScript.
+
+<Alert kind="info">
+
+This is not yet production ready, but is work in progress.
+</Alert>
+
+*(Gregor will update this section)*
