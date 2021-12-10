@@ -58,8 +58,6 @@ The memo field returned for a transaction is [Base58Check encoded](https://en.bi
 
 </Alert>
 
-To retrieve the details of an account for the primary mina <DocLink copy="token" url="/architecture/tokens" />:
-
 ```
 query {
   account(publicKey: "<B62...>") {
@@ -116,9 +114,9 @@ mutation {
 
 A GraphQL [subscription](https://docs.minaprotocol.com/graphql-docs/subscription.doc.html) allows a GraphQL client to have data pushed to it when an event occurs. In Mina, there are subscriptions for:
 
-* _newSyncUpdate_ - occurs when the sync status of the node changes.
-* _newBlock_ - occurs when a new block is received.
-* chainReorganisation - occurs when the best tip of the node changes in a non-trivial way.
+- _newSyncUpdate_ - occurs when the sync status of the node changes.
+- _newBlock_ - occurs when a new block is received.
+- chainReorganisation - occurs when the best tip of the node changes in a non-trivial way.
 
 For example, to subscribe to all new blocks produced:
 
