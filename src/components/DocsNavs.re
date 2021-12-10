@@ -122,7 +122,6 @@ module DocsNavsTranslations = {
     defaultMessage: "Time-locked Accounts",
   };
   let snapps = {id: "sidenav.snapps", defaultMessage: "Snapps"};
-  let tokens = {id: "sidenav.tokens", defaultMessage: "Tokens"};
   let howSnappsWork = {
     id: "sidenav.how-snapps-work",
     defaultMessage: "How Snapps Work",
@@ -343,7 +342,6 @@ module SideNav = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
-          <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
         <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
@@ -560,7 +558,6 @@ module Dropdown = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
-          <Item title={intl->Intl.formatMessage(tokens)} slug="tokens" />
         </Section>
         <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
