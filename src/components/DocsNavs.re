@@ -127,6 +127,10 @@ module DocsNavsTranslations = {
     id: "sidenav.how-snapps-work",
     defaultMessage: "How Snapps Work",
   };
+  let howWriteSnapp = {
+    id: "sidenav.how-to-write-a-snapp",
+    defaultMessage: "How To Write A Snapp",
+  };
   let snappsAPIReference= {
     id: "sidenav.api-reference",
     defaultMessage: "SnarkyJS API Reference",
@@ -347,6 +351,10 @@ module SideNav = {
             title={intl->Intl.formatMessage(howSnappsWork)}
             slug="how-snapps-work"
           />
+          <Item
+          title={intl->Intl.formatMessage(howWriteSnapp)}
+          slug="how-to-write-a-snapp"
+        />
            <Item
             title={intl->Intl.formatMessage(snappsAPIReference)}
             slug="snarkyjs-reference"
@@ -560,6 +568,10 @@ module Dropdown = {
             title={intl->Intl.formatMessage(howSnappsWork)}
             slug="how-snapps-work"
           />
+          <Item
+          title={intl->Intl.formatMessage(howWriteSnapp)}
+          slug="how-to-write-a-snapp"
+        />
         </Section>
         <Item
           title={intl->Intl.formatMessage(troubleshooting)}
