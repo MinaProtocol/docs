@@ -17,7 +17,8 @@ A snapp consists of a smart contract and a UI to interact with it. First, we’l
 
 Your smart contract will be written using <a href="https://github.com/o1-labs/snapp-cli/">Snapp CLI</a>.
 
-Snapp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (Jest), code auto-formatting (Prettier), linting (ES Lint), & more.
+Snapp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (<a href="https://jestjs.io/">Jest</a>), code auto-formatting (<a href="https://prettier.io/
+">Prettier</a>), linting (<a href="https://eslint.org/">ES Lint</a>), & more.
 
 ### Install Snapp CLI
 
@@ -196,7 +197,7 @@ class HelloWorld extends SmartContract {
 ```
 
 Here, `x` is of type `Field`. Only types built out of Field can be used for state variables.
-In the current design, the state can consist of at most 8 Fields.
+In the current design, the state can consist of at most 8 Fields of 32 bytes each.
 
 ##### Initialization
 
@@ -219,7 +220,7 @@ The constructor needs two default parameters:
 - The account address
 - The initial balance of the snapp account
 
-The first two lines above are mandatory:
+The first two lines below are mandatory:
 
 ```ts
 super(address);
@@ -228,12 +229,15 @@ this.balance.addInPlace(initialBalance);
 
 You are free to add additional parameters, like the initial values of your state.
 
-All state variables have to be initialized and wrapped with `State.init()`.
+All state variables must be initialized within the constructor using `State.init()` --e.g.:
+
+```ts
+this.x = State.init(x);
+```
 
 ##### Methods and state updates
 
-To update your snapp state and trigger token transfers, a smart contract needs custom methods.
-SnarkyJS allows you to call one or more methods within one transaction.
+To update your snapp state or to send MINA, your smart contract will need one or more custom methods.
 
 You declare methods using the `@method` decorator:
 
@@ -245,14 +249,13 @@ class HelloWorld extends SmartContract {
 
   @method async increment() {
     const x = await this.x.get();
-    console.log("Current state", x);
     this.x.set(x.add(1));
   }
 }
 ```
 
 The `increment()` method in our example is async because it calls `this.x.get()`.
-This is how you can fetch the current state of a snapp account from the chain.
+This is how you can fetch the current state of the snapp account from the chain.
 
 The method then logs the current state, and sets the new state to `x + 1` using `this.x.set()`.
 
@@ -260,7 +263,7 @@ The methods `.get()` and `.set()` are defined on every state property.
 
 ##### Assertions
 
-Let's modify the `increment()` method to take in a parameter:
+Let's modify the `increment()` method to accept a parameter:
 
 ```ts
 class HelloWorld extends SmartContract {
@@ -278,7 +281,7 @@ class HelloWorld extends SmartContract {
 
 Here, after obtaining the current state `x`, we make an _assertion_: `x.add(1).assertEquals(xPlus1);`.
 
-If the assertion fails, SnarkyJS will throw an error and not submit the transaction containing the method call.
+If the assertion fails, SnarkyJS will throw an error and not submit the transaction.
 On the other hand, if it succeeds, it will become a part of the proof that is sent to the chain and that is verified on-chain.
 
 Because of this, our new version of `increment()` is guaranteed to behave like the previous version: It can only ever
@@ -338,7 +341,7 @@ However, the secret itself remains private, because it can't be deduced from it'
 
 ##### Updating on-chain state
 
-As we saw before, on-chain state can be managed inside smart contract methods with `.get()` and `.set()`.
+As we saw before, on-chain state can be managed inside smart contract methods using `.get()` and `.set()`.
 
 <!-- To access on-chain state from outside a `SmartContract`, you can use `Mina.getAccount`:
 
@@ -384,4 +387,3 @@ This is not yet production ready, but is work in progress.
 
 </Alert>
 
-<!-- _(Gregor will update this section)_ -->
