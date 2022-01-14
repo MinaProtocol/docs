@@ -401,6 +401,8 @@ module Dropdown = {
     let language = toISOCode(currentLanguage);
     let f = url => {j|/$(language)/$(url)|j};
 
+    /* Below is the mobile navigation for mobile and tablets */
+
     <div className=Styles.dropdown>
       <DropdownNav
         currentSlug defaultValue={intl->Intl.formatMessage(minaOverview)}>
@@ -569,6 +571,10 @@ module Dropdown = {
           title={intl->Intl.formatMessage(howWriteSnapp)}
           slug="how-to-write-a-snapp"
         />
+        <Item
+        title={intl->Intl.formatMessage(snappsAPIReference)}
+        slug="snarkyjs-reference"
+      />
         </Section>
         <Item
           title={intl->Intl.formatMessage(troubleshooting)}
