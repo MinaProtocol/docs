@@ -192,48 +192,57 @@ on the class with the `@state` decorator:
 
 ```ts
 class HelloWorld extends SmartContract {
-  @state(Field) x: State<Field>;
+  @state(Field) x = State<Field>();
 }
 ```
 
 Here, `x` is of type `Field`. Only types built out of Field can be used for state variables.
 In the current design, the state can consist of at most 8 Fields of 32 bytes each.
+States are initialized with the `State()` function.
 
-##### Initialization
+The `constructor` of a `SmartContract` is inherited from the base class and should not be overriden.
+It takes the snapp account address (a public key) as its only argument:
 
-The `constructor` of a smart contract describes how it will be initialized when deployed:
+```ts
+let snappKey = PrivateKey.random();
+let snappAddress = PublicKey.fromPrivateKey(snappKey);
+
+let snapp = new SmartContract(snappAddress);
+```
+
+##### Deployment
+
+There is one method that every smart contract needs: `deploy`. It describes how the snapp account
+will be initialized when the snapp is deployed:
 
 ```ts
 class HelloWorld extends SmartContract {
-  @state(Field) x: State<Field>;
+  @state(Field) x = State<Field>();
 
-  constructor(address: PublicKey, initialBalance: UInt64, x: Field) {
-    super(address);
+  deploy(initialBalance: UInt64, x: Field) {
+    super.deploy();
     this.balance.addInPlace(initialBalance);
-    this.x = State.init(x);
+    this.x.set(x);
   }
 }
 ```
 
-The constructor needs two default parameters:
-
-- The account address
-- The initial balance of the snapp account
-
+The deploy method needs one default parameter, the initial balance of the snapp account.
 The first two lines below are mandatory:
 
 ```ts
-super(address);
+super.deploy();
 this.balance.addInPlace(initialBalance);
 ```
 
 You are free to add additional parameters, like the initial values of your state.
-
-All state variables must be initialized within the constructor using `State.init()` --e.g.:
+State variables can be initialized during deployment using the `.set` method on `State`:
 
 ```ts
-this.x = State.init(x);
+this.x.set(x);
 ```
+
+Uninitialized values will be zero.
 
 ##### Methods and state updates
 
@@ -243,7 +252,7 @@ You declare methods using the `@method` decorator:
 
 ```ts
 class HelloWorld extends SmartContract {
-  @state(Field) x: State<Field>;
+  @state(Field) x = State<Field>();
 
   // ...
 
@@ -257,7 +266,7 @@ class HelloWorld extends SmartContract {
 The `increment()` method in our example is async because it calls `this.x.get()`.
 This is how you can fetch the current state of the snapp account from the chain.
 
-The method then logs the current state, and sets the new state to `x + 1` using `this.x.set()`.
+The method then and sets the new state to `x + 1` using `this.x.set()`.
 
 The methods `.get()` and `.set()` are defined on every state property.
 
@@ -267,7 +276,7 @@ Let's modify the `increment()` method to accept a parameter:
 
 ```ts
 class HelloWorld extends SmartContract {
-  @state(Field) x: State<Field>;
+  @state(Field) x = State<Field>();
 
   // ...
 
@@ -305,9 +314,9 @@ For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyj
 
 While the state of a snapp is **public**, method parameters are **private**.
 
-When a smart contract method is called, its code will execute on the client and generate a proof, which is then sent to the network to update the chain.
-The proof uses zero-knowledge to hide inputs and details of the computation
-.
+When a smart contract method is called, its code will execute on the client and generate a proof,
+which is then sent to the network to update the chain.
+The proof uses zero-knowledge to hide inputs and details of the computation.
 
 <!-- The proof has _public inputs_ that block producers need to see -- for example, any state updates triggered by our method. -->
 
@@ -318,7 +327,7 @@ Let's show an example where this is not the case, by defining a new method calle
 
 ```ts
 class HelloWorld extends SmartContract {
-  @state(Field) x: State<Field>;
+  @state(Field) x = State<Field>();
 
   // ...
 
@@ -386,4 +395,3 @@ This UI can be written with any framework (e.g. React, Vue, Svelte, etc.) or pla
 This is not yet production ready, but is work in progress.
 
 </Alert>
-
