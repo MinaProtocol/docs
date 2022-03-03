@@ -40,13 +40,13 @@ module Style = {
     ]);
 };
 
-type metadata = {title: string};
+type metadata = {title: string, description: string};
 
 [@react.component]
 let make = (~metadata, ~children) => {
   let router = Next.Router.useRouter();
 
-  <Page title={metadata.title}>
+  <Page title={metadata.title} description={metadata.description}>
     <Next.Head>
       <link rel="stylesheet" href="/static/css/a11y-light.css" />
       Markdown.katexStylesheet
