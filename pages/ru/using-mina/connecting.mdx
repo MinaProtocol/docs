@@ -18,10 +18,10 @@ export default Page({ title: "Connect to the Network" });
 ```
 echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install -y curl unzip mina-mainnet=1.2.2-feee67c
+sudo apt-get install -y curl unzip mina-mainnet=1.3.0-c278209
 ```
 
-Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit feee67cc2836bf12e792510a2440f28a0275740e on branch master`.
+Запустите `mina version`, чтобы убедиться, что daemon установлен правильно. На выходе должно быть: `Commit c27820915d358366f027f025030e2d2d158c4d53 on branch master`.
 
 ## Установка ноды
 
@@ -52,7 +52,7 @@ mina daemon --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainn
 Добавьте файл `~/.mina-env`, содержащий следующее:
 
 ```
-CODA_PRIVKEY_PASS="My_V3ry_S3cure_Password"
+MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password"
 LOG_LEVEL=Info
 FILE_LOG_LEVEL=Debug
 EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
@@ -127,7 +127,7 @@ docker run --name mina -d \
 --mount "type=bind,source=`pwd`/keys,dst=/keys,readonly" \
 --mount "type=bind,source=`pwd`/.mina-config,dst=/root/.mina-config" \
 -e MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password" \
-minaprotocol/mina-daemon:1.2.2-feee67c-mainnet \
+minaprotocol/mina-daemon:1.3.0-c278209-bullseye-mainnet \
 daemon \
 --block-producer-key /keys/my-wallet \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt

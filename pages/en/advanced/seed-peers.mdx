@@ -49,46 +49,41 @@ Firstly, don't run block production or snark working on this node. Full stop. By
 
 It would be preferable to run with a larger `--max-connection` flag. At least 100. You'll still be able to seed with more than 100 nodes in total, it's just that you'll only be able to maintain connections with 100 at once.
 
-## Example daemon command
+## Example Configuration
 
-When we put together all the needed configuration, a basic seed node configuration could look like the following example.
+### ~/.mina-env
 
-```
-mina daemon \
---seed \
---peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
---file-log-level Info --log-level Info \
---log-block-creation false \
---log-snark-work-gossip false \
---log-txn-pool-gossip false \
---metrics-port 9100 \
---discovery-keypair /keys/my-libp2p \
---max-connection 100
-```
-
-Please note that `--discovery-keypair` could change in value depending on where you stored your libp2p keypair from the previous steps. Ensure also that you're running on a version later than `1.2.2` to handle `Mainnet` traffic.
-
-If you're using Docker, then here is a similar example.
+Create a file called ~/.mina-env to store your private configuration, passwords, etc.
 
 ```
+MINA_LIBP2P_PASS="My_V3ry_S3cure_Password"
+LOG_LEVEL=Info
+FILE_LOG_LEVEL=Debug
+EXTRA_FLAGS=" --discovery-keypair <PATH_TO_LIBP2P_KEY> --seed --max-connection 100"
+PEERS_LIST_URL=https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
+```
+
+Please note that `<PATH_TO_LIBP2P_KEY>` could change in value depending on where you stored your libp2p keypair from the previous steps. In docker, the keypath will always be `/keys/filename` due to where volumes are mounted.
+
+Then follow along as normal with systemctl to start the mina service.
+
+### Docker
+
+If you're using Docker, then here is a similar example:
+
+```
+cd ~
 docker run --name mina-seed-node -d \
 --restart always \
 -p 8302:8302 \
--p 9100:9100 \
--v $(pwd)/keys:/root/keys:ro \
--v $(pwd)/.mina-config:/root/.mina-config \
---env CODA_LIBP2P_PASS='PASS' \
-minaprotocol/mina-daemon:1.2.2-feee67c-mainnet \
---discovery-keypair /keys/libp2p-keys \
---peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
---metrics-port 9100 \
---seed \
---max-connection 100 \
---file-log-level Info \
---log-level Info
+-v "$(pwd)/keys:/root/keys:ro" \
+-v "$(pwd)/.mina-config:/root/.mina-config" \
+-v "$(pwd)/.mina-env:/entrypoint.d/mina-env:ro" \
+minaprotocol/mina-daemon:1.3.0-c278209-bullseye-mainnet \
+daemon
 ```
 
-Make sure to replace the `--env CODA_LIBP2P_PASS=''` with your correct password for the libp2p keypair. Also as with the previous example, ensure you set the correct value with `--discovery-keypair`.
+Make sure to create ~/.mina-env as described above so that it can be mounted into the docker container.
 
 ## Peers List
 
@@ -98,4 +93,4 @@ There will be a peers list hosted with a handful of O(1) Labs nodes and another 
 
 We have a decentralized network after all -- we encourage other members in the community to host seed lists. To create a list, please talk to those you trust and use their addresses as seed peers.
 
-To consume such alternate lists, you can swap the parameter `-peer-list-file` or `-peer-list-url` to point to another one.
+To consume such alternate lists, you can swap the parameter `--peer-list-file` or `--peer-list-url` to point to another one.
