@@ -25,12 +25,12 @@ export default Page({ title: "Mina Generate Keypair" });
 После <DocLink copy="добавления репозитория Mina" url="/getting-started#ubuntu-1804--debian-9" /> , вы можете просто выполнить следующую команду.
 
 ```
-echo "deb [trusted=yes] http://packages.o1test.net stretch stable" | sudo tee /etc/apt/sources.list.d/mina.list
+echo "deb [trusted=yes] http://packages.o1test.net $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/mina.list
 sudo apt-get update
-sudo apt-get install mina-generate-keypair=1.2.2-feee67c
+sudo apt-get install mina-generate-keypair=1.3.0-9b0369c
 ```
 
-Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit feee67cc2836bf12e792510a2440f28a0275740e on branch master` на выходе.
+Убедитесь, что инструмент для генерации ключей установлен правильно, запустив `mina-generate-keypair -version`. Вы должны получить `Commit 9b0369c27bb85c8ab2f8725c6e977eb27b53b826 on branch master` на выходе.
 
 ### Windows / Другие платформы
 
@@ -74,7 +74,7 @@ mina-generate-keypair --privkey-path ~/keys/my-wallet
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.2-feee67c --privkey-path /keys/my-wallet
+docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.3.0-9b0369c --privkey-path /keys/my-wallet
 ```
 
 В вашей системе будут созданы два файла: `~/keys/my-wallet`, содержащий зашифрованный закрытый ключ, и `~/keys/my-wallet.pub`, который содержит открытый ключ в виде обычного текста. Пожалуйста, сохраните файл с закрытым ключом и пароль, который вы использовали, в надежном месте, например в менеджере паролей.
@@ -108,5 +108,5 @@ mina-validate-keypair --privkey-path <path-to-the-private-key-file>
 При использовании Docker выполните следующую команду:
 
 ```
-docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.2.2-feee67c --privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/generate-keypair:1.3.0-9b0369c --privkey-path /keys/my-wallet
 ```

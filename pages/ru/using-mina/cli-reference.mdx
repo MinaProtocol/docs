@@ -28,11 +28,11 @@ Client commands concerning account management
   list    List all owned accounts
   create  Create new account
   import  Import a password protected private key to be tracked by the daemon.
-          Set CODA_PRIVKEY_PASS environment variable to use non-interactively
+          Set MINA_PRIVKEY_PASS environment variable to use non-interactively
           (key will be imported using the same password).
   export  Export a tracked account so that it can be saved or transferred
           between machines.
-          Set CODA_PRIVKEY_PASS environment variable to use non-interactively
+          Set MINA_PRIVKEY_PASS environment variable to use non-interactively
           (key will be exported using the same password).
   unlock  Unlock a tracked account
   lock    Lock a tracked account
@@ -105,7 +105,7 @@ Mina daemon
                                                       the block-producer key.
                                                       Setting this is equivalent
                                                       to setting the
-                                                      CODA_PRIVKEY_PASS
+                                                      MINA_PRIVKEY_PASS
                                                       environment variable. Be
                                                       careful when setting it in
                                                       the commandline as it will
@@ -134,7 +134,7 @@ Mina daemon
   [--config-directory DIR]                            Configuration directory
   [--config-file PATH]                                path to a configuration
                                                       file (overrides
-                                                      CODA_CONFIG_FILE, default:
+                                                      MINA_CONFIG_FILE, default:
                                                       <config_dir>/daemon.json).
                                                       Pass multiple times to
                                                       override fields from
