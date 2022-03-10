@@ -63,11 +63,11 @@ MINA_PRIVKEY_PASS="My_V3ry_S3cure_Password"
 LOG_LEVEL=Info
 FILE_LOG_LEVEL=Debug
 EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
-PEERS_LIST_URL=https://storage.googleapis.com/seed-lists/devnet_seeds.txt
+PEER_LIST_URL=https://storage.googleapis.com/seed-lists/devnet_seeds.txt
 ```
 Ensure to replace <BLOCK_PRODUCER_KEY_PATH> with the full path to your block producer private key, for example, `/home/ubuntu/keys/my-wallet`.
 
-If you do not intend to produce blocks then you can keep ~/.mina-env empty except for the PEERS_LIST_URL.
+If you do not intend to produce blocks then you can keep ~/.mina-env empty except for the PEER_LIST_URL.
 
 Now simply run the image with your ~/.mina-config and .mina-env mounted:
 
