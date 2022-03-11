@@ -201,7 +201,7 @@
   },
   {
     "id": "sidenav.snapps",
-    "defaultMessage": "Snapps",
+    "defaultMessage": "zkApps",
     "message": ""
   },
   {
@@ -211,8 +211,8 @@
   },
   {
     "id": "sidenav.snapps",
-    "defaultMessage": "Snapps",
-    "message": "Snapps"
+    "defaultMessage": "zkApps",
+    "message": "zkApps"
   },
   {
     "id": "sidenav.getting-starting-using-snarks",

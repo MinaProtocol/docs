@@ -4,7 +4,7 @@ export default Page({ title: "How zkApps work" });
 
 <Alert kind="info">
 
-Please note that zkapps programmability is not yet available on Mina. These docs
+Please note that zkApp programmability is not yet available on Mina. These docs
 are a preview of work that is currently in progress.
 
 </Alert>
@@ -13,16 +13,16 @@ are a preview of work that is currently in progress.
 
 <Alert kind="note">
 
-ZkApps run in the latest versions of <a href="https://www.google.com/chrome/index.html">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.microsoft.com/edge">Edge</a>, and <a href="https://brave.com/">Brave</a> currently. We intend to add support for Safari in the future.
+zkApps run in the latest versions of <a href="https://www.google.com/chrome/index.html">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.microsoft.com/edge">Edge</a>, and <a href="https://brave.com/">Brave</a> currently. We intend to add support for Safari in the future.
 </Alert>
 
 <br />
 
-Snapps are written in TypeScript using the Mina zkApp CLI. In the upcoming section, <DocLink copy="how to write a zkApp" url="/snapps/how-to-write-a-zkApp" />, we’ll go into detail about writing your first zkApp. For now, we’ll discuss how zkapps work.
+zkApps are written in TypeScript using the Mina zkApp CLI. In the upcoming section <DocLink copy="How to write a zkApp" url="/snapps/how-to-write-a-zkApp" />, we’ll go into detail about writing your first zkApp. For now, we’ll discuss how zkApps work.
 
-A “snapp” consists of two parts: 1.) a smart contract and 2.) an UI (user interface) for users to interact with it. 
+A “zkApp” consists of two parts: 1) a smart contract and 2) an UI (user interface) for users to interact with it. 
 
-<img src="/static/img/docs-images/3_Snapps_Structure.jpg" width="100%"/>
+<img src="/static/img/docs-images/3_zkapps_Structure.jpg" width="100%"/>
 
 <br />
 
@@ -30,13 +30,13 @@ A “snapp” consists of two parts: 1.) a smart contract and 2.) an UI (user in
 
 We use the term <b>“smart contract”</b> to refer to the code written with SnarkyJS (which will be introduced below).
 
-We use the term <b>“snapp”</b> to refer to the UI + the smart contract.
+We use the term <b>“zkApp”</b> to refer to the UI + the smart contract.
 </Alert>
 
 
 ### Zero-knowledge based smart contracts
 
-Because zkapps are based on **zero-knowledge proofs (zk-SNARKs)**, a zkApp developer writes what is called a **“circuit”**, which is the method from which a **prover function** and a corresponding **verifier function** are derived during the build process.
+Because zkApps are based on **zero-knowledge proofs (zk-SNARKs)**, a zkApp developer writes what is called a **“circuit”**, which is the method from which a **prover function** and a corresponding **verifier function** are derived during the build process.
 
 The **prover function** is the function which executes a smart contract’s custom logic. 
 
@@ -80,7 +80,7 @@ When you deploy to a new Mina address, the Mina Protocol will charge a 1 MINA fe
 
 ### Deploying a zkApp UI
 
-<img src="/static/img/docs-images/7_Snapps_DeploySnappUI.jpg" width="95%" />
+<img src="/static/img/docs-images/7_zkapps_DeploysnappUI.jpg" width="95%" />
 <br></br>
 
 Developers usually build a UI to allow users to interact with the smart contract.
@@ -103,13 +103,13 @@ To use a zkApp, users must <a href="https://www.aurowallet.com/">install Auro wa
 
 Auro is the only wallet that supports zkApp transactions currently. However, we plan to expand support for zkapps to other types of wallets (such as mobile wallets and desktop wallets) in the future.
 
-After a zkApp is deployed to a host (e.g.  mycoolsnapp.com), users can interact with it:
+After a zkApp is deployed to a host (e.g.  mycoolzkapp.com), users can interact with it:
 
-1. User visits mycoolsnapp.com.
+1. User visits mycoolzkapp.com.
 2. User interacts with the zkApp and enters any data as required. (For example, if this were an automated market maker, the user might specify to “buy x amount of ABC at y price”.)
 3. The prover function in the zkApp will now generate a zero-knowledge proof locally given the data entered by the user. This data can be either private (which will never be seen by the blockchain) or public (which will be stored either on chain or off chain), depending on what the developer specified, as needed for a given use case. Additionally, a list of state updates to be created by this transaction is generated and is associated with this proof. (We refer to these as “events” and we’ll describe them in more detail further below.) 
 4. User clicks “submit to chain” in the zkApp UI and their wallet (such as a browser extension wallet) will prompt them to confirm sending the transaction. The wallet signs the transaction containing the proof and associated description of state to update and sends it to the Mina blockchain. 
-5. When the Mina network receives this transaction, it will verify that the proof successfully passes the verifier method listed on the zkApp account. If the network accepts this transaction, this indicates that this proof and the requested state changes are valid and, as such, are allowed to update the snapp’s state.  
+5. When the Mina network receives this transaction, it will verify that the proof successfully passes the verifier method listed on the zkApp account. If the network accepts this transaction, this indicates that this proof and the requested state changes are valid and, as such, are allowed to update the zkApp’s state.  
 	
 Because the user’s interaction occurs *locally* within their web browser (using JavaScript on the client), the user’s privacy can be maintained.
 
@@ -143,11 +143,11 @@ Support for off-chain state will be coming soon.
 </Alert>
 
 
-For larger data, you may want to consider storing the root of a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) (or similar data structure) within your snapp’s on-chain storage that references additional off-chain state stored elsewhere, in a location of your choosing, such as [IPFS](https://ipfs.io/).
+For larger data, you may want to consider storing the root of a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) (or similar data structure) within your zkApp’s on-chain storage that references additional off-chain state stored elsewhere, in a location of your choosing, such as [IPFS](https://ipfs.io/).
 
 When the zkApp runs in a user’s web browser, it may insert state to an external storage, such as IPFS. When the transaction is sent to the Mina network, if it accepts this zkApp transaction (i.e. this proof & state were valid so the updates are allowed), then the zkApp transaction would update the root of the Merkle tree that is stored on chain.
 
-<img src="/static/img/docs-images/9_Snapps_Off-Chain_State.jpg" width="95%" />
+<img src="/static/img/docs-images/9_zkapps_Off-Chain_State.jpg" width="95%" />
 
 
 ### Keep going

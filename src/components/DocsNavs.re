@@ -121,14 +121,14 @@ module DocsNavsTranslations = {
     id: "sidenav.time-locked-accounts",
     defaultMessage: "Time-locked Accounts",
   };
-  let snapps = {id: "sidenav.snapps", defaultMessage: "Snapps"};
+  let snapps = {id: "sidenav.snapps", defaultMessage: "zkApps"};
   let howSnappsWork = {
-    id: "sidenav.how-snapps-work",
+    id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
   };
   let howWriteSnapp = {
-    id: "sidenav.how-to-write-a-snapp",
-    defaultMessage: "How To Write A Snapp",
+    id: "sidenav.how-to-write-a-zkapp",
+    defaultMessage: "How To Write A zkApp",
   };
   let snappsAPIReference= {
     id: "sidenav.api-reference",
@@ -347,11 +347,11 @@ module SideNav = {
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(howSnappsWork)}
-            slug="how-snapps-work"
+            slug="how-zkapps-work"
           />
           <Item
           title={intl->Intl.formatMessage(howWriteSnapp)}
-          slug="how-to-write-a-snapp"
+          slug="how-to-write-a-zkapp"
         />
            <Item
             title={intl->Intl.formatMessage(snappsAPIReference)}
@@ -565,11 +565,11 @@ module Dropdown = {
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(howSnappsWork)}
-            slug="how-snapps-work"
+            slug="how-zkapps-work"
           />
           <Item
           title={intl->Intl.formatMessage(howWriteSnapp)}
-          slug="how-to-write-a-snapp"
+          slug="how-to-write-a-zkapp"
         />
         <Item
         title={intl->Intl.formatMessage(snappsAPIReference)}
