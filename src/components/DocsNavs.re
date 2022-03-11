@@ -121,16 +121,16 @@ module DocsNavsTranslations = {
     id: "sidenav.time-locked-accounts",
     defaultMessage: "Time-locked Accounts",
   };
-  let snapps = {id: "sidenav.snapps", defaultMessage: "Snapps"};
-  let howSnappsWork = {
-    id: "sidenav.how-snapps-work",
-    defaultMessage: "How Snapps Work",
+  let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps"};
+  let howZkAppsWork = {
+    id: "sidenav.how-zkapps-work",
+    defaultMessage: "How zkApps Work",
   };
-  let howWriteSnapp = {
-    id: "sidenav.how-to-write-a-snapp",
-    defaultMessage: "How To Write A Snapp",
+  let howWriteZkApp = {
+    id: "sidenav.how-to-write-a-zkapp",
+    defaultMessage: "How To Write A zkApp",
   };
-  let snappsAPIReference= {
+  let zkAppsAPIReference= {
     id: "sidenav.api-reference",
     defaultMessage: "SnarkyJS API Reference",
   };
@@ -343,18 +343,18 @@ module SideNav = {
             slug="timelock"
           />
         </Section>
-        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
+        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(howSnappsWork)}
-            slug="how-snapps-work"
+            title={intl->Intl.formatMessage(howZkAppsWork)}
+            slug="how-zkapps-work"
           />
           <Item
-          title={intl->Intl.formatMessage(howWriteSnapp)}
-          slug="how-to-write-a-snapp"
+          title={intl->Intl.formatMessage(howWriteZkApp)}
+          slug="how-to-write-a-zkapp"
         />
            <Item
-            title={intl->Intl.formatMessage(snappsAPIReference)}
+            title={intl->Intl.formatMessage(zkAppsAPIReference)}
             slug="snarkyjs-reference"
           />
         </Section>
@@ -561,18 +561,18 @@ module Dropdown = {
             slug="timelock"
           />
         </Section>
-        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
+        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(howSnappsWork)}
-            slug="how-snapps-work"
+            title={intl->Intl.formatMessage(howZkAppsWork)}
+            slug="how-zkapps-work"
           />
           <Item
-          title={intl->Intl.formatMessage(howWriteSnapp)}
-          slug="how-to-write-a-snapp"
+          title={intl->Intl.formatMessage(howWriteZkApp)}
+          slug="how-to-write-a-zkapp"
         />
         <Item
-        title={intl->Intl.formatMessage(snappsAPIReference)}
+        title={intl->Intl.formatMessage(zkAppsAPIReference)}
         slug="snarkyjs-reference"
       />
         </Section>

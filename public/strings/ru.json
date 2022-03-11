@@ -200,9 +200,9 @@
     "message": "Временно заблокированные аккаунты"
   },
   {
-    "id": "sidenav.snapps",
-    "defaultMessage": "Snapps",
-    "message": "Snapps"
+    "id": "sidenav.zkapps",
+    "defaultMessage": "zkApps",
+    "message": "zkApps"
   },
   {
     "id": "sidenav.tokens",
@@ -210,13 +210,13 @@
     "message": "Токены"
   },
   {
-    "id": "sidenav.snapps",
-    "defaultMessage": "Snapps",
-    "message": "Snapps"
+    "id": "sidenav.zkapps",
+    "defaultMessage": "zkApps",
+    "message": "zkApps"
   },
   {
     "id": "sidenav.getting-starting-using-snarks",
-    "defaultMessage": "How Snapps Work",
+    "defaultMessage": "How zkApps Work",
     "message": "Начало работы с SNARKs"
   },
   {

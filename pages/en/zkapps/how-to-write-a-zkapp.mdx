@@ -1,26 +1,26 @@
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({ title: "How to write a snapp" });
+export default Page({ title: "How to write a zkApp" });
 
 <Alert kind="info">
 
-Please note that snapps programmability is not yet available on Mina. These docs
+Please note that zkApp programmability is not yet available on Mina. These docs
 are a preview of work that is currently in progress.
 
 </Alert>
 
-# How to write a snapp
+# How to write a zkApp
 
-A snapp consists of a smart contract and a UI to interact with it. First, we’ll install the Snapp CLI and write a smart contract.
+A zkApp consists of a smart contract and a UI to interact with it. First, we’ll install the Mina zkApp CLI and write a smart contract.
 
 ## Write a smart contract
 
-Your smart contract will be written using <a href="https://github.com/o1-labs/snapp-cli/">Snapp CLI</a>.
+Your smart contract will be written using <a href="https://github.com/o1-labs/zkapp-cli/">Mina zkApp CLI</a>.
 
-Snapp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (<a href="https://jestjs.io/">Jest</a>), code auto-formatting (<a href="https://prettier.io/
+Mina zkApp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (<a href="https://jestjs.io/">Jest</a>), code auto-formatting (<a href="https://prettier.io/
 ">Prettier</a>), linting (<a href="https://eslint.org/">ES Lint</a>), & more.
 
-### Install Snapp CLI
+### Install Mina zkApp CLI
 
 #### Dependencies:
 
@@ -36,22 +36,22 @@ If you have an older version installed, we suggest installing a newer version us
 
 ### Start a project
 
-Now that you have Snapp CLI installed, you can start with an example or start your own project.
+Now that you have Mina zkApp CLI installed, you can start with an example or start your own project.
 
 #### Option A: Start with an example (recommended)
 
 Examples are based on the standard project structure, but with additional files in the `/src` directory as the only difference.
 
-1. **Install:** Run `snapp example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
+1. **Install:** Run `zk example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
 2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
 3. **Build the example:** Run `npm run build`. This will compile your TypeScript into JavaScript inside the project’s `/build` directory.
 4. **Deploy example on Testnet:** (Coming soon.)
 
-You can view a list of <a href="https://github.com/o1-labs/snapp-cli/tree/main/examples/">all available examples here</a>.
+You can view a list of <a href="https://github.com/o1-labs/zkapp-cli/tree/main/examples/">all available examples here</a>.
 
 #### Option B: Start your own project
 
-1. **Install:** Run `snapp project <myproj>`. Type `ls` and hit enter to see the newly created project structure.
+1. **Install:** Run `zk project <myproj>`. Type `ls` and hit enter to see the newly created project structure.
 2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
 3. **Build:** Run `npm run build`. This will compile your TypeScript code into JavaScript inside the project’s `/build`.
 4. **Deploy to Testnet:** (Coming soon.)
@@ -61,13 +61,13 @@ You can view a list of <a href="https://github.com/o1-labs/snapp-cli/tree/main/e
 
 The goal of this section is to explain the concepts that you will need to understand to write a zero-knowledge-based smart contract.
 
-If you haven’t yet read the <DocLink copy="how snapps work" url="/snapps/how-snapps-work" /> section, please read it first so that this section makes sense.
+If you haven’t yet read the <DocLink copy="how zkApps work" url="/zkapps/how-zkapps-work" /> section, please read it first so that this section makes sense.
 
 ##### SnarkyJS
 
-Snapps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Snapp CLI.
+zkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Mina zkApp CLI.
 
-To view the full SnarkyJS reference, please see <DocLink copy="here" url="/snapps/snarkyjs-reference" />.
+To view the full SnarkyJS reference, please see <DocLink copy="here" url="/zkapps/snarkyjs-reference" />.
 
 ##### Concepts
 
@@ -175,7 +175,7 @@ let sig = Signature.create(privKey, msg); // sign a message
 sig.verify(pubKey, msg); // Bool(true)
 ```
 
-For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyjs-reference" />.
+For a full list, see the <DocLink copy="SnarkyJS reference" url="/zkapps/snarkyjs-reference" />.
 
 #### Smart Contract
 
@@ -201,19 +201,19 @@ In the current design, the state can consist of at most 8 Fields of 32 bytes eac
 States are initialized with the `State()` function.
 
 The `constructor` of a `SmartContract` is inherited from the base class and should not be overriden.
-It takes the snapp account address (a public key) as its only argument:
+It takes the zkApp account address (a public key) as its only argument:
 
 ```ts
-let snappKey = PrivateKey.random();
-let snappAddress = PublicKey.fromPrivateKey(snappKey);
+let zkAppKey = PrivateKey.random();
+let zkAppAddress = PublicKey.fromPrivateKey(zkAppKey);
 
-let snapp = new SmartContract(snappAddress);
+let zkApp = new SmartContract(zkAppAddress);
 ```
 
 ##### Deployment
 
-There is one method that every smart contract needs: `deploy`. It describes how the snapp account
-will be initialized when the snapp is deployed:
+There is one method that every smart contract needs: `deploy`. It describes how the zkApp account
+will be initialized when the zkApp is deployed:
 
 ```ts
 class HelloWorld extends SmartContract {
@@ -227,7 +227,7 @@ class HelloWorld extends SmartContract {
 }
 ```
 
-The deploy method needs one default parameter, the initial balance of the snapp account.
+The deploy method needs one default parameter, the initial balance of the zkApp account.
 The first two lines below are mandatory:
 
 ```ts
@@ -246,7 +246,7 @@ Uninitialized values will be zero.
 
 ##### Methods and state updates
 
-To update your snapp state or to send MINA, your smart contract will need one or more custom methods.
+To update your zkApp state or to send MINA, your smart contract will need one or more custom methods.
 
 You declare methods using the `@method` decorator:
 
@@ -264,7 +264,7 @@ class HelloWorld extends SmartContract {
 ```
 
 The `increment()` method in our example is async because it calls `this.x.get()`.
-This is how you can fetch the current state of the snapp account from the chain.
+This is how you can fetch the current state of the zkApp account from the chain.
 
 The method then sets the new state to `x + 1` using `this.x.set()`.
 
@@ -308,11 +308,11 @@ x.assertGt(y);     // x > y
 x.assertGte(y);    // x >= y
 ```
 
-For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyjs-reference" />.
+For a full list, see the <DocLink copy="SnarkyJS reference" url="/zkapps/snarkyjs-reference" />.
 
 ##### Public and private inputs
 
-While the state of a snapp is **public**, method parameters are **private**.
+While the state of a zkApp is **public**, method parameters are **private**.
 
 When a smart contract method is called, its code will execute on the client and generate a proof,
 which is then sent to the network to update the chain.
@@ -372,7 +372,7 @@ Off-chain state is not yet available.
 
 Testing is critical when writing smart contracts.
 
-The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the Snapp CLI via `snapp project <name>`. We recommend Jest, but any testing framework can be used.
+The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the Mina zkApp CLI via `zk project <name>`. We recommend Jest, but any testing framework can be used.
 
 To run all test files within your project, run `npm run test` or `npm run testw` (for watch mode) from your project’s root directory.
 

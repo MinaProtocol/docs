@@ -1,0 +1,52 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "zkApps" });
+
+<Alert kind="info">
+
+Please note that zkApp programmability is not yet available on Mina. These docs
+are a preview of work that is currently in progress.
+
+</Alert>
+
+# Overview
+
+<br />
+<img src="/static/img/docs-images/snapp-credit/zkcodesnippet.png" width="50%" />
+
+### What are zkApps?
+
+zkApps (“snark apps”) are Mina’s **zk-SNARK**-powered smart contracts.
+
+zkApps use an **off-chain execution** and mostly **off-chain state** model. This allows for private computation and state that can be either private or public.
+
+Using zk-SNARKs, zkApps can perform arbitrarily complex computations off chain while incurring only a flat fee to send the resulting zero-knowledge proof to the chain, as opposed to other blockchains which use a gas-fee based model.
+
+<img
+  src="/static/img/docs-images/1_zkapps_Off-Chain_Performance.jpg"
+  width="90%"
+/>
+<br />
+<br />
+
+You can learn more on the <DocLink copy="how zkApps work" url="/zkapps/how-zkapps-work" /> page.
+
+### TypeScript
+
+zkApps are written in TypeScript.
+
+TypeScript provides an easy, familiar language (JavaScript), but with added type safety, making it easy to get started writing zkApps.
+
+You can learn more on the <DocLink copy="how to write a zkApp" url="/zkapps/how-to-write-a-zkapp" /> page.
+
+### Examples of zkApps
+
+Play around with a few example zkApps to see what’s possible:
+
+<img src="/static/img/docs-images/2_zkApps_Examples.jpg" width="85%" />{" "}
+
+### Learn more
+
+Join the [#zkapps-general](https://discord.gg/R25r5Zha) channel on Discord.
+
+On the upcoming pages, you can read about <DocLink copy="how zkApps work" url="/zkapps/how-zkapps-work" />, <DocLink copy="how to write a zkApp" url="/zkapps/how-to-write-a-zkapp" />, and see our zkApp for Ethereum devs (_coming soon_) page.
