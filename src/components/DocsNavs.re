@@ -124,7 +124,7 @@ module DocsNavsTranslations = {
   let snapps = {id: "sidenav.snapps", defaultMessage: "Snapps"};
   let howSnappsWork = {
     id: "sidenav.how-snapps-work",
-    defaultMessage: "How Snapps Work",
+    defaultMessage: "How zkApps Work",
   };
   let howWriteSnapp = {
     id: "sidenav.how-to-write-a-snapp",
