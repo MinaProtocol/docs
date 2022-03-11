@@ -3,14 +3,14 @@ export default Page({ title: "SnarkyJS API Reference" });
 
 <Alert kind="info">
 
-Please note that snapps programmability is not yet available on Mina. These docs
+Please note that zkApp programmability is not yet available on Mina. These docs
 are a preview of work that is currently in progress.
 
 </Alert>
 
 # SnarkyJS API Reference
 
-To write a Snapp, we recommend using the [Snapp CLI](https://github.com/o1-labs/snapp-cli), which makes writing a Snapp easy by including SnarkyJS & providing project scaffolding, a test framework, and formatting.
+To write a zkApp, we recommend using the [Mina zkApp CLI](https://github.com/o1-labs/snapp-cli), which makes writing a zkApp easy by including SnarkyJS & providing project scaffolding, a test framework, and formatting.
 
 ## Table of contents
 
@@ -4379,7 +4379,7 @@ ___
 
 One specific permission value.
 
-A [[ Perm ]] tells one specific permission for our snapp how it should behave
+A [[ Perm ]] tells one specific permission for our zkApp how it should behave
 when presented with requested modifications.
 
 Use static factory methods on this class to use a specific behavior. See
@@ -4493,7 +4493,7 @@ ___
 
 ▸ `Static` **proof**(): [`Perm`](#classespermmd)
 
-Modification is permitted by proofs within the Snapp only
+Modification is permitted by proofs within the zkApp only
 
 ##### Returns
 
@@ -4561,7 +4561,7 @@ TODO: Is this accurate?
 
 ## Class: Permissions
 
-Permissions specify how specific aspects of the Snapp account are allowed to
+Permissions specify how specific aspects of the zkApp account are allowed to
 be modified. Most fields are denominated by a [[ Perm ]].
 
 ### Table of contents
@@ -4702,7 +4702,7 @@ ___
 
 • **setSnappUri**: [`Perm`](#classespermmd)
 
-The [[ Perm ]] corresponding to the ability to set the snapp uri typically
+The [[ Perm ]] corresponding to the ability to set the zkApp uri typically
 pointing to the source code of the smart contract. Usually this should be
 changed whenever the [[ Permissions.setVerificationKey ]] is changed.
 Effectively "upgradability" of the smart contract.
@@ -6622,7 +6622,7 @@ ___
 
 ## Class: SmartContract
 
-The main snapp class. To write a snapp, extend this class as such:
+The main zkApp class. To write a zkApp, extend this class as such:
 
 ```
 class YourSmartContract extends SmartContract {
@@ -8493,7 +8493,7 @@ ___
 
 ___
 
-#### snapp
+#### zkApp
 
 • **snapp**: [`SnappAccount`](#interfacessnappaccountmd)
 
