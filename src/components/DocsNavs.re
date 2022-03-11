@@ -121,7 +121,7 @@ module DocsNavsTranslations = {
     id: "sidenav.time-locked-accounts",
     defaultMessage: "Time-locked Accounts",
   };
-  let snapps = {id: "sidenav.snapps", defaultMessage: "zkApps"};
+  let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps"};
   let howSnappsWork = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
@@ -343,7 +343,7 @@ module SideNav = {
             slug="timelock"
           />
         </Section>
-        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
+        <Section title={intl->Intl.formatMessage(snapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(howSnappsWork)}

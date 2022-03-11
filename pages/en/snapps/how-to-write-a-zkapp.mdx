@@ -4,7 +4,7 @@ export default Page({ title: "How to write a zkApp" });
 
 <Alert kind="info">
 
-Please note that zkApps programmability is not yet available on Mina. These docs
+Please note that zkApp programmability is not yet available on Mina. These docs
 are a preview of work that is currently in progress.
 
 </Alert>
@@ -15,7 +15,7 @@ A zkApp consists of a smart contract and a UI to interact with it. First, we’l
 
 ## Write a smart contract
 
-Your smart contract will be written using <a href="https://github.com/o1-labs/zkapp-cli/">Mina zkApp CLI</a>.
+Your smart contract will be written using <a href="https://github.com/o1-labs/snapp-cli/">Mina zkApp CLI</a>.
 
 Mina zkApp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (<a href="https://jestjs.io/">Jest</a>), code auto-formatting (<a href="https://prettier.io/
 ">Prettier</a>), linting (<a href="https://eslint.org/">ES Lint</a>), & more.
@@ -42,12 +42,12 @@ Now that you have Mina zkApp CLI installed, you can start with an example or sta
 
 Examples are based on the standard project structure, but with additional files in the `/src` directory as the only difference.
 
-1. **Install:** Run `zkapp example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
+1. **Install:** Run `zk example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
 2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
 3. **Build the example:** Run `npm run build`. This will compile your TypeScript into JavaScript inside the project’s `/build` directory.
 4. **Deploy example on Testnet:** (Coming soon.)
 
-You can view a list of <a href="https://github.com/o1-labs/zkapp-cli/tree/main/examples/">all available examples here</a>.
+You can view a list of <a href="https://github.com/o1-labs/snapp-cli/tree/main/examples/">all available examples here</a>.
 
 #### Option B: Start your own project
 
@@ -65,7 +65,7 @@ If you haven’t yet read the <DocLink copy="how zkApps work" url="/snapps/how-z
 
 ##### SnarkyJS
 
-ZkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Mina zkApp CLI.
+zkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Mina zkApp CLI.
 
 To view the full SnarkyJS reference, please see <DocLink copy="here" url="/snapps/snarkyjs-reference" />.
 
@@ -204,10 +204,10 @@ The `constructor` of a `SmartContract` is inherited from the base class and shou
 It takes the zkApp account address (a public key) as its only argument:
 
 ```ts
-let zkKey = PrivateKey.random();
-let zkAddress = PublicKey.fromPrivateKey(zkKey);
+let zkAppKey = PrivateKey.random();
+let zkAppAddress = PublicKey.fromPrivateKey(zkAppKey);
 
-let zk = new SmartContract(zkAddress);
+let zkApp = new SmartContract(zkAppAddress);
 ```
 
 ##### Deployment
