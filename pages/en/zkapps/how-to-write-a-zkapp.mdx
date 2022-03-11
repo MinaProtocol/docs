@@ -61,13 +61,13 @@ You can view a list of <a href="https://github.com/o1-labs/zkapp-cli/tree/main/e
 
 The goal of this section is to explain the concepts that you will need to understand to write a zero-knowledge-based smart contract.
 
-If you haven’t yet read the <DocLink copy="how zkApps work" url="/snapps/how-zkapps-work" /> section, please read it first so that this section makes sense.
+If you haven’t yet read the <DocLink copy="how zkApps work" url="/zkapps/how-zkapps-work" /> section, please read it first so that this section makes sense.
 
 ##### SnarkyJS
 
 zkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Mina zkApp CLI.
 
-To view the full SnarkyJS reference, please see <DocLink copy="here" url="/snapps/snarkyjs-reference" />.
+To view the full SnarkyJS reference, please see <DocLink copy="here" url="/zkapps/snarkyjs-reference" />.
 
 ##### Concepts
 
@@ -175,7 +175,7 @@ let sig = Signature.create(privKey, msg); // sign a message
 sig.verify(pubKey, msg); // Bool(true)
 ```
 
-For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyjs-reference" />.
+For a full list, see the <DocLink copy="SnarkyJS reference" url="/zkapps/snarkyjs-reference" />.
 
 #### Smart Contract
 
@@ -308,7 +308,7 @@ x.assertGt(y);     // x > y
 x.assertGte(y);    // x >= y
 ```
 
-For a full list, see the <DocLink copy="SnarkyJS reference" url="/snapps/snarkyjs-reference" />.
+For a full list, see the <DocLink copy="SnarkyJS reference" url="/zkapps/snarkyjs-reference" />.
 
 ##### Public and private inputs
 

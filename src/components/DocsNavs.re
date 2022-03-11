@@ -122,15 +122,15 @@ module DocsNavsTranslations = {
     defaultMessage: "Time-locked Accounts",
   };
   let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps"};
-  let howSnappsWork = {
+  let howZkAppsWork = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
   };
-  let howWriteSnapp = {
+  let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
     defaultMessage: "How To Write A zkApp",
   };
-  let snappsAPIReference= {
+  let zkAppsAPIReference= {
     id: "sidenav.api-reference",
     defaultMessage: "SnarkyJS API Reference",
   };
@@ -343,18 +343,18 @@ module SideNav = {
             slug="timelock"
           />
         </Section>
-        <Section title={intl->Intl.formatMessage(snapps)} slug={f("zkapps")}>
+        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(howSnappsWork)}
+            title={intl->Intl.formatMessage(howZkAppsWork)}
             slug="how-zkapps-work"
           />
           <Item
-          title={intl->Intl.formatMessage(howWriteSnapp)}
+          title={intl->Intl.formatMessage(howWriteZkApp)}
           slug="how-to-write-a-zkapp"
         />
            <Item
-            title={intl->Intl.formatMessage(snappsAPIReference)}
+            title={intl->Intl.formatMessage(zkAppsAPIReference)}
             slug="snarkyjs-reference"
           />
         </Section>
@@ -561,18 +561,18 @@ module Dropdown = {
             slug="timelock"
           />
         </Section>
-        <Section title={intl->Intl.formatMessage(snapps)} slug={f("snapps")}>
+        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(howSnappsWork)}
+            title={intl->Intl.formatMessage(howZkAppsWork)}
             slug="how-zkapps-work"
           />
           <Item
-          title={intl->Intl.formatMessage(howWriteSnapp)}
+          title={intl->Intl.formatMessage(howWriteZkApp)}
           slug="how-to-write-a-zkapp"
         />
         <Item
-        title={intl->Intl.formatMessage(snappsAPIReference)}
+        title={intl->Intl.formatMessage(zkAppsAPIReference)}
         slug="snarkyjs-reference"
       />
         </Section>
