@@ -65,9 +65,8 @@ module Styles = {
 
   let figureCaption =
     style([
-      textAlign(`left),
       fontSize(`em(0.8)),
-      marginTop(`rem(0.875)),
+      marginTop(`em(0.875)),
       marginLeft(`rem(2.))
     ]);
 
