@@ -56,6 +56,21 @@ module Styles = {
       ),
     ]);
 
+  let figure =
+    style([
+      marginBottom(`rem(2.)),
+      display(`flex),
+      flexDirection(`column)
+    ]);
+
+  let figureCaption =
+    style([
+      textAlign(`left),
+      fontSize(`em(0.8)),
+      marginTop(`rem(0.875)),
+      marginLeft(`rem(2.))
+    ]);
+
   let link = style([textDecoration(`none)]);
 };
 
@@ -233,6 +248,16 @@ module TD =
     let element = <td className={merge([Styles.paragraphSpacing, Theme.Type.paragraph])} />;
   });
 
+module Figure =
+  Wrap({
+    let element = <figure className=Styles.figure />;
+  });
+
+module FigureCaption =
+  Wrap({
+    let element = <figurecaption className=Styles.figureCaption />;
+  });
+
 module DaemonCommandExample = {
   let defaultArgs = ["mina daemon", "-peer-list ~/peers.txt"];
   [@react.component]
@@ -278,6 +303,8 @@ let allComponents = () => {
   "img": Img.make,
   "th": TH.make,
   "td": TD.make,
+  "figure": Figure.make,
+  "figcaption": FigureCaption.make,
   "Rule": Rule.make,
   "Footnote": Footnote.make,
 };
