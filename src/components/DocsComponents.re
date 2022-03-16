@@ -65,7 +65,7 @@ module Styles = {
 
   let figureCaption =
     style([
-      fontSize(`em(0.8)),
+      fontSize(`rem(0.9)),
       marginTop(`em(0.875)),
       marginLeft(`rem(2.))
     ]);
@@ -254,7 +254,7 @@ module Figure =
 
 module FigureCaption =
   Wrap({
-    let element = <figurecaption className=Styles.figureCaption />;
+    let element = <figcaption className=Styles.figureCaption />;
   });
 
 module DaemonCommandExample = {
