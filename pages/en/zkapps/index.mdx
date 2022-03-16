@@ -1,6 +1,10 @@
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({ title: "zkApps" });
+export default Page({
+  title: "What are zkApps? | Mina Protocol",
+  description:
+    "zkApps(“zero-knowledge apps”) are Mina’s zk-SNARK-powered smart contracts that use an off-chain execution and mostly off-chain state model.",
+});
 
 <Alert kind="info">
 
@@ -12,7 +16,17 @@ are a preview of work that is currently in progress.
 # Overview
 
 <br />
-<img src="/static/img/docs-images/snapp-credit/zkcodesnippet.png" width="50%" />
+<figure>
+  <img
+    src="/static/img/docs-images/CLIs.png"
+    alt="Terminal screenshot of Mina’s snapps from a command-line interface."
+    width="50%"
+  />
+  <figcaption>
+    Mina’s zkApps are zk-SNARK-powered smart contracts that use an off-chain
+    execution and mostly off-chain state model.
+  </figcaption>
+</figure>
 
 ### What are zkApps?
 
@@ -22,12 +36,18 @@ zkApps use an **off-chain execution** and mostly **off-chain state** model. This
 
 zkApps can perform arbitrarily-complex computations off chain while incurring only a flat fee to send the resulting zero-knowledge proof to the chain for verification of this computation, as opposed to other blockchains that run computations on chain and use a variable gas-fee based model.
 
-<img
-  src="/static/img/docs-images/1_zkapps_Off-Chain_Performance.jpg"
-  width="90%"
-/>
-<br />
-<br />
+<figure>
+  <img
+    src="/static/img/docs-images/1_Snapps_Off-Chain_Performance.jpg"
+    alt="How zkApps work"
+    width="90%"
+  />
+  <figcaption>
+    Snapps can perform arbitrarily complex computations off chain while
+    incurring only a flat fee to send the resulting zero-knowledge proof to the
+    chain Other blockchains use a gas-fee based model.
+  </figcaption>
+</figure>
 
 You can learn more on the <DocLink copy="how zkApps work" url="/zkapps/how-zkapps-work" /> page.
 
@@ -43,7 +63,21 @@ You can learn more on the <DocLink copy="how to write a zkApp" url="/zkapps/how-
 
 Play around with a few example zkApps to see what’s possible:
 
-<img src="/static/img/docs-images/2_zkApps_Examples.jpg" width="85%" />{" "}
+<figure>
+  <img
+    src="/static/img/docs-images/2_zkApps_Examples.jpg"
+    alt="Examples of applications that could use snapps."
+    width="85%"
+  />
+  <figcaption>
+    Snapps are a great fit for applications that require proof that you have a
+    secret without revealing it to anyone (
+    <a href="https://minaprotocol.com/blog/zero-knowledge-proofs-an-intuitive-explanation">
+      zero knowledge proofs
+    </a>
+    ).
+  </figcaption>
+</figure>
 
 ### Learn more
 
