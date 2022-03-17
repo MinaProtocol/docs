@@ -1,6 +1,13 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { extractCritical } from "emotion-server";
 
+const globalStyles = {
+  scrollPaddingTop: "6rem",
+  fontFamily: "Monument Grotesk, serif",
+  fontSize: "16px",
+  lineHeight: "29px",
+};
+
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const page = renderPage();
@@ -18,7 +25,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html style={globalStyles}>
         <Head>
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>
