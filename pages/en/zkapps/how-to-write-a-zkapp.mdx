@@ -390,8 +390,91 @@ To allow users to interact with your smart contract, you’ll typically want to 
 
 This UI can be written with any framework (e.g. React, Vue, Svelte, etc.) or plain HTML and JavaScript.
 
+### Integrating your smart contract into your zkApp UI
+
 <Alert kind="info">
 
-This is not yet production ready, but is work in progress.
+Documentation coming soon.
 
 </Alert>
+
+### Connecting your zkApp with a user's wallet
+
+<Alert kind="info">
+
+Currently, only Auro Wallet's Chrome extension supports zkApp transactions. We
+anticipate other wallets to add support over time, which they can do by using
+the <a
+href="https://www.npmjs.com/package/auro-web3-provider">`auro-web3-provider`</a>
+from NPM within their browser-extension wallet.
+
+</Alert>
+
+1. Install <a
+   href="https://chrome.google.com/webstore/detail/auro-walletmina-protocol/cnmamaachppnkjgnildpdmkaakejnhae">Auro
+   Wallet for Chrome</a>. Users of your zkApp will need to have this wallet
+   installed in order to interact with your zkApp. Once installed, `window.mina`
+   will automatically become available in the user's browser environment. Your
+   zkApp will use then this object to interact with the wallet.
+
+After installing Auro wallet, you can verify this is available in your
+environment by opening Chrome browser's developer console and typing
+`window.mina` to see that it is defined.
+
+2. Get accounts - To fetch a user's list of Mina accounts, you can use the
+   `getAccounts()` method.
+
+```ts
+let accounts;
+try {
+  // accounts is an array of string Mina addresses
+  accounts = await window.mina.requestAccounts();
+} catch (err) {
+  // If the user has a wallet installed but has not created an account, an
+  // exception will be thrown. Consider showing "not connected" in your UI.
+  console.log(err.message);
+}
+```
+
+This can be useful to indicate that the user's wallet is successfully
+connected to your zkApp.
+
+// TODO Yoni: Retina Screenshot (`abc123...vxyz <dot>`)
+
+```ts
+// Show first 6 and last 4 characters of user's Mina account.
+const display = `${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`;
+```
+
+3. Sending a transaction - After your user interacts with your zkApp, you can
+   sign and send the transaction using `sendTransaction()`.
+
+```ts
+// TODO DISCUSS: Maybe show one line calling smart contract prover method if
+// it's short, to show how things connect.
+try {
+  const { txId } = await window.mina.sendTransaction({
+    // fee: 1, // ?
+    to: "B62qm3V7qSQ975tgo2MXv4Bpof2cVezZyP1VZJ8DfrVNy9yfqKZxLQf",
+    memo: "", // optional
+  });
+  console.log(txId);
+} catch (err) {
+  console.log(err.message);
+}
+```
+
+If an error occurs when sending the transaction, you may to show the error
+message in your UI to the user.
+
+</Alert>
+
+You will receive a transaction ID as soon as the Mina network has received the
+proposed transaction. But keep in mind that this does not guarantee that
+the network will accept the transaction into an upcoming block.
+
+<Alert kind="info">
+
+For additional details about the Mina Provider, see the full <a
+href="https://docs.aurowallet.com/general/reference/api-reference/mina-provider-api
+">reference docs<a>.
