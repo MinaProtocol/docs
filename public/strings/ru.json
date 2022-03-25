@@ -7,7 +7,7 @@
   {
     "id": "sidenav.mina-overview",
     "defaultMessage": "Mina Overview",
-    "message": "Обзор Mina0"
+    "message": "Обзор Mina"
   },
   {
     "id": "sidenav.getting-started",
@@ -17,7 +17,7 @@
   {
     "id": "sidenav.using-mina",
     "defaultMessage": "Using Mina",
-    "message": "Использование Мины"
+    "message": "Использование Mina"
   },
   {
     "id": "sidenav.keypair-generation",
@@ -47,7 +47,7 @@
   {
     "id": "sidenav.advanced",
     "defaultMessage": "Advanced",
-    "message": "Передовой"
+    "message": "Дополнительно"
   },
   {
     "id": "sidenav.archive-node",
@@ -92,7 +92,7 @@
   {
     "id": "sidenav.hot-cold-wallets",
     "defaultMessage": "Hot/Cold Wallets",
-    "message": "Горячее / холодное создание блоков"
+    "message": "Горячие/холодные кошельки"
   },
   {
     "id": "sidenav.ledger-hardware-wallet",
@@ -132,7 +132,7 @@
   {
     "id": "sidenav.code-reviews",
     "defaultMessage": "Code Reviews",
-    "message": "Руководящие принципы пересмотра кода"
+    "message": "Принципы проверки кода"
   },
   {
     "id": "sidenav.style-guide",
@@ -142,7 +142,7 @@
   {
     "id": "sidenav.sandbox-node",
     "defaultMessage": "Sandbox Node",
-    "message": "Нода песочницы"
+    "message": "Песочница ноды"
   },
   {
     "id": "sidenav.graphql-api",
@@ -172,7 +172,7 @@
   {
     "id": "sidenav.whats-in-a-block",
     "defaultMessage": "What's in a Block",
-    "message": "Что в блоке"
+    "message": "Что содержится в блоке"
   },
   {
     "id": "sidenav.consensus",
@@ -187,7 +187,7 @@
   {
     "id": "sidenav.snark-workers",
     "defaultMessage": "Snark Workers",
-    "message": "Введение"
+    "message": "Snark Workers"
   },
   {
     "id": "sidenav.scan-state",
@@ -217,12 +217,12 @@
   {
     "id": "sidenav.getting-starting-using-snarks",
     "defaultMessage": "How zkApps Work",
-    "message": "Начало работы с SNARKs"
+    "message": "Как работают zkApps"
   },
   {
     "id": "sidenav.troubleshooting",
     "defaultMessage": "Troubleshooting",
-    "message": "Поиск проблем"
+    "message": "Устранение проблем"
   },
   {
     "id": "sidenav.glossary",
@@ -232,12 +232,12 @@
   {
     "id": "sidenav.faq",
     "defaultMessage": "FAQ",
-    "message": "FAQ"
+    "message": "ЧаВо"
   },
   {
     "id": "sidenav.exchange-faq",
     "defaultMessage": "Exchange FAQ",
-    "message": "Exchange FAQ"
+    "message": "Exchange ЧаВо"
   },
   {
     "id": "sidenav.documentation",
