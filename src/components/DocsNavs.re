@@ -140,7 +140,7 @@ module DocsNavsTranslations = {
   };
   let glossary = {id: "sidenav.glossary", defaultMessage: "Glossary"};
   let faq = {id: "sidenav.faq", defaultMessage: "FAQ"};
-  let exchangeFaq = {id: "sidenav.exchange-faq", defaultMessage: "Exchange FAQ"};
+  let exchangeFaq = {id: "sidenav.exchange-faq", defaultMessage: "Exchange Operators"};
   let contributingToMina = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
