@@ -1,6 +1,6 @@
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({ title: "Consensus Mechanism Abstraction" });
+export default Page({ title: "Blockchain Consensus Mechanism | Mina Protocol", description: "Consensus refers to the process by which the network determines which information will be retained in the blockchain."  });
 
 # Consensus Mechanism Abstraction
 
@@ -9,7 +9,7 @@ Consensus refers to the process by which the network determines which informatio
 A consensus mechanism controls many aspects in a protocol which is built on top of it. For the purpose of this discussion, we will separate the provisions of a consensus mechanism into two parts: the data (data structures made available and the interactions available with them) and hooks (specific top level hooks called by the protocol built on top of the consensus mechanism). Data structures provided by the consensus mechanism are kept abstract to the outside system interacting with them and are instead primarily consumed by the consensus mechanism's hooks.
 
 !!! note
-This document only covers the generalized consensus mechanism abstraction in Mina. For information on the implementation of Proof of Stake in Mina, <DocLink copy="see the relevant documentation" url="/architecture/proof-of-stake" />.
+This document only covers the generalized consensus mechanism abstraction in Mina. See the <DocLink copy="Proof of Stake" url="/architecture/proof-of-stake" /> on Mina page for information on implementation.
 
 ## Data
 
