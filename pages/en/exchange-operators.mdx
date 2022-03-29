@@ -8,12 +8,6 @@ Frequently asked questions about listing Mina
 
 If you are an exchange operator looking to custody MINA on behalf of users, we recommend reviewing the following frequently asked questions (FAQ) from exchanges.
 
-<Alert kind="tip">
-
-<p>We <b>highly recommend</b> using Mina’s implementation of Rosetta API to integrate Mina blockchain with your exchange. Learn how to access Rosetta API endpoints on Mina Devnet and Mainnet here (coming soon).</p>
-
-</Alert>
-
 ## Basics
 
 ### Where can I find third-party audit reports for Mina? 
@@ -82,6 +76,7 @@ To avoid this above issue, we recommend that exchanges <u>do NOT require a memo<
 The table here describes how many blocks you will need to wait: [https://docs.minaprotocol.com/en/architecture/lifecycle-payment](https://docs.minaprotocol.com/en/architecture/lifecycle-payment)
 
 ### How should we calculate transaction fees?
+
 You can use this tool to calculate your transaction fees: [https://fees.mina.tools](https://fees.mina.tools/)
 
 ## Running a node
@@ -117,7 +112,7 @@ Archive node operators often choose to run redundant archive nodes to store bloc
 
 For convenience, O(1) Labs makes data from its archive node available [here](https://console.cloud.google.com/storage/browser/mina_network_block_data) to help others in the community backfill any missing information.
 
-This bucket contains blocks from various Mina networks — e.g. Mainnet & the most recent Devnet devnet2. Filter the file names to find those for the network you desire. (Note that this bucket contains blocks for various other networks too, such as QAnet, which we recommend against using for your testing. QAnet is used by O(1) Labs during their iterative development.)
+This bucket contains blocks from various Mina networks — e.g. Mainnet & the most recent Devnet named devnet2. Filter the file names to find those for the network you desire. (Note that this bucket contains blocks for various other networks too, such as QAnet, which we recommend against using for your testing. QAnet is used by O(1) Labs during their iterative development.)
 
 File names contain the network name, block height, and state hash of the block. Block height was added to the filename more recently, so blocks older than height 25,705 can include only the network name and state hash in the filename.
 
@@ -143,9 +138,10 @@ mina-archive-blocks --precomputed --archive-uri <postgres uri> FILE.
 
 ### How do I query for the canonical block at a certain height from the archive node
 
-This can be accomplished using a recursive query. See Example #3 in the Archive Node docs, for a full example.
+This can be accomplished using a recursive query. See Example #3 in the <DocLink copy="Archive Node docs" url="/advanced/archive-node" />, for a full example.
 
 ### Why am I getting this error message: "Not able to connect to the network"? 
+
 This error message usually occurs due to a chain ID mismatch from running a Devnet build on Mainnet, or vice versa.
 
 To check whether you are running a Devenet or Mainnet build, run `Mina client status`. Next, compare the output’s chain ID of your node to the expected chain ID below for the network you are trying to connect to:
@@ -166,24 +162,33 @@ No, there are no official broadcast nodes at this time, but it is possible to br
 
 ## Staking
 
-### When is the next staking snapshot?
-
-The timing of the next staking snapshot varies.
-
-For purposes of ensuring consensus, there is a delay between when delegations are sent on the blockchain and when they take effect with respect to staking on the network. This delay is based on a combination of consensus timing (epochs) and snarketplace throughput. As such, it is difficult to determine exactly how long this delay can be, but a conservative estimate is that delegations sent 3 days before the epoch transition can take effect in the upcoming epoch. This means that, for any given delegation, there is an average of a 18-29 day delay before this delegation updates block production.
-
 ### Should we be staking our funds?
 
 Since Mina is a Proof of Stake (PoS) consensus network without lockup for staked tokens, we recommend staking these funds since not staking can hurt the chain quality of the Mina network. Additionally, by not staking, you are missing out on staking rewards that you can otherwise be receiving from the Mina blockchain.
 
-You can look into staking this wallet, either by running your own block production node, or just by delegating your funds to a staking pool on the network. Out of these two options, the latter is simpler to set up (though it does incur about a one-month delay before you can begin getting rewards).
-
+You can look into staking this wallet, either by running your own block production node, or just by delegating your funds to a staking pool on the network. Out of these two options, the latter is simpler to set up (though it does incur about a delay between 18 to 29 days before you can begin getting rewards, as explained below).
 
 <Alert kind="note">
 
-Staking incurs about a one-month delay before you can start getting rewards.
+Staking will incur a delay between 18 to 29 days before you will start receiving rewards.
 
 </Alert>
+
+### Why is there a delay for staking to take effect?
+
+For purposes of ensuring consensus, there is a delay between when delegations are sent on the blockchain and when they take effect with respect to staking on the network. In other words, the staking ledger will always operate between 18 to 29 days behind the live ledger.
+
+### In that case, how long is the delay and when is the next staking snapshot?
+
+The timing of the next staking snapshot varies.
+
+Since the timing is based on a combination of consensus timing (epochs) and snarketplace throughput, it is difficult to determine exactly how long this delay can be. 
+
+A conservative estimate is that delegations sent 3 days before the epoch transition can take effect in the upcoming epoch. This means that, for any given delegation, there is an average of 18 to 29 days delay before this delegation updates block production.
+
+You can use this Delegation Calculator tool built by Carbonara, which tells you when the next staking ledger cutoff occurs:
+[https://epoch.mina.tools](https://epoch.mina.tools/).
+
 
 ## Testing
 
