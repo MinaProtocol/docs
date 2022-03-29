@@ -235,9 +235,9 @@
     "message": "FAQ"
   },
   {
-    "id": "sidenav.exchange-faq",
-    "defaultMessage": "Exchange FAQ",
-    "message": "Exchange FAQ"
+    "id": "sidenav.exchange-operators",
+    "defaultMessage": "Exchange Operators",
+    "message": "Exchange Operators"
   },
   {
     "id": "sidenav.documentation",
