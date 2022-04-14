@@ -17,7 +17,7 @@ The project contains Typescript typings but can be used from plain NodeJS as wel
 
 <Alert>
 
-The Mina Signer enables the ability to generate and sign transactions on an air-gapped device that never exposes a private key to the internet.
+Mina Signer enables the ability to generate and sign transactions on an air-gapped device that never exposes a private key to the internet.
 
 </Alert>
 
@@ -36,10 +36,10 @@ npm install --save mina-signer
 ```typescript
 import Client from "mina-signer";
 const client = new Client({ network: "mainnet" });
-// can specify a testnet by `new Client({ network: "testnet" })`
+// Or specify 'testnet' if using a network other than Mainnet: `new Client({ network: "testnet" })`
 
-let keys = client.genKeys();
-let signed = client.signMessage("hello", keypair);
+const keys = client.genKeys();
+const signed = client.signMessage("hello", keypair);
 if (client.verifyMessage(signed)) {
   console.log("Message was verified successfully");
 }
@@ -65,10 +65,10 @@ if (client.verifyPayment(signedPayment)) {
 ```typescript
 const Client = require("mina-signer").default;
 const client = new Client({ network: "mainnet" });
-// can specify a testnet by `new Client({ network: "testnet" })`
+// Or specify 'testnet' if using a network other than Mainnet: `new Client({ network: "testnet" })`
 
-let keys = client.genKeys();
-let signed = client.signMessage("hello", keypair);
+const keys = client.genKeys();
+const signed = client.signMessage("hello", keypair);
 if (client.verifyMessage(signed)) {
   console.log("Message was verified successfully");
 }

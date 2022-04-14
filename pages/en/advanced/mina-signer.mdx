@@ -4,8 +4,8 @@ export default Page({ title: "Mina Signer" });
 
 # Mina Signer
 
-This is a NodeJS SDK that allows you to generate Mina key pairs and sign transactions and strings using Mina's key pairs.
-The project contains Typescript but can be used from plain NodeJS as well.
+This is a NodeJS package that allows you to generate Mina key pairs and sign transactions and strings using Mina's key pairs.
+The project contains TypeScript but can be used from non-TypeScript NodeJS projects as well.
 
 <br />
 
@@ -18,11 +18,11 @@ Never reuse the same keypair from a testnet on mainnet!
 
 </Alert>
 
+The source code for Mina Signer is open source and be seen [here](https://github.com/MinaProtocol/mina/tree/develop/frontend/mina-signer).
+
 ## Installation
 
-The source code for our SDK is open source and be seen [here](https://github.com/MinaProtocol/mina/tree/develop/frontend/mina-signer).
-
-To get the SDK installed, you will need NodeJS on your system. Make sure it is available on your machine and then use either yarn or npm to install the Mina Signer.
+To get Mina Signer installed, you will need NodeJS on your system. Make sure it is available on your machine and then use either yarn or npm to install Mina Signer.
 
 ```bash
 # yarn:
@@ -32,18 +32,18 @@ yarn add mina-signer
 npm install --save mina-signer
 ```
 
-## Usage
+## Create a key pair
 
-Creating a key pair is simple with the Mina Signer. See the snippet below to see how to get create a key pair.
+Creating a key pair is simple with Mina Signer. See the snippet below to see how to get create a key pair.
 
 ### NodeJS:
 
 ```javascript
 import Client from "mina-signer";
 const client = new Client({ network: "mainnet" });
-// can specify a testnet by `new Client({ network: "testnet" })`
+// Or specify 'testnet' if using a network other than Mainnet: `new Client({ network: "testnet" })`
 
-let keys = client.genKeys();
+const keys = client.genKeys();
 console.log(`Public key: ${keys.publicKey}`);
 console.log(`Private key: ${keys.privateKey}`);
 ```
@@ -62,10 +62,10 @@ Never give out your private key and make sure they are stored safely. If you los
 
 <br />
 
-## Import your account generated from the Mina Signer
+## Import your account generated from Mina Signer
 
-Please note that there are differences in key pair format between what the Mina client expects and what the Mina Signer generates.
-When the Mina Signer is used to generate a key pair, the key pair output returned are strings that aren't directly importable into our Mina client.
+Please note that there are differences in key pair format between what the Mina client expects and what Mina Signer generates.
+When Mina Signer is used to generate a key pair, the key pair output returned are strings that aren't directly importable into our Mina client.
 For this, we will have to use the `mina advanced wrap-key` tool to format our key pair strings into a format that is directly importable to our client.
 
 Accomplishing this takes only a few short steps.
@@ -121,7 +121,7 @@ my-wallet  my-wallet.pub
 chmod 600 ~/keys/my-wallet
 ```
 
-7. Finally, we can import the account created by the Mina Signer into the client.
+7. Finally, we can import the account created by Mina Signer into the client.
 
 ```
 mina accounts import --privkey-path ~/keys/my-wallet

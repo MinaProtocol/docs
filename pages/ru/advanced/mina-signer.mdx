@@ -40,9 +40,9 @@ npm install --save mina-signer
 ```javascript
 import Client from "mina-signer";
 const client = new Client({ network: "mainnet" });
-// can specify a testnet by `new Client({ network: "testnet" })`
+// Or specify 'testnet' if using a network other than Mainnet: `new Client({ network: "testnet" })`
 
-let keys = client.genKeys();
+const keys = client.genKeys();
 console.log(`Public key: ${keys.publicKey}`);
 console.log(`Private key: ${keys.privateKey}`);
 ```

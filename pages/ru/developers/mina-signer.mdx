@@ -1,10 +1,10 @@
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({ title: "Client SDK" });
+export default Page({ title: "Mina Signer" });
 
 # Клиент SDK
 
-[Mina Client Javascript SDK](https://www.npmjs.com/package/@o1labs/клиент-sdk) позволяет генерировать пары ключей, подписывать и проверять сообщения, а также подписывать транзакции, которые могут транслироваться в сеть.
+[Mina Signer Javascript SDK](https://www.npmjs.com/package/mina-signer) позволяет генерировать пары ключей, подписывать и проверять сообщения, а также подписывать транзакции, которые могут транслироваться в сеть.
 
 Проект содержит типы Typescript, но может быть использован и из обычного NodeJS. Доступны следующие методы:
 
@@ -36,16 +36,16 @@ npm install --save mina-signer
 ```typescript
 import Client from "mina-signer";
 const client = new Client({ network: "mainnet" });
-// can specify a testnet by `new Client({ network: "testnet" })`
+// Or specify 'testnet' if using a network other than Mainnet: `new Client({ network: "testnet" })`
 
-let keys = client.genKeys();
-let signed = client.signMessage("hello", keypair);
+const keys = client.genKeys();
+const signed = client.signMessage("hello", keypair);
 if (client.verifyMessage(signed)) {
   console.log("Message was verified successfully");
 }
 
 // Sign and verify a payment
-let signedPayment = client.signPayment(
+const signedPayment = client.signPayment(
   {
     to: keypair.publicKey,
     from: keypair.publicKey,
@@ -65,16 +65,16 @@ if (client.verifyPayment(signedPayment)) {
 ```typescript
 const Client = require("mina-signer").default;
 const client = new Client({ network: "mainnet" });
-// can specify a testnet by `new Client({ network: "testnet" })`
+// Or specify 'testnet' if using a network other than Mainnet: `new Client({ network: "testnet" })`
 
-let keys = client.genKeys();
-let signed = client.signMessage("hello", keypair);
+const keys = client.genKeys();
+const signed = client.signMessage("hello", keypair);
 if (client.verifyMessage(signed)) {
   console.log("Message was verified successfully");
 }
 
 // Sign and verify a payment
-let signedPayment = client.signPayment(
+const signedPayment = client.signPayment(
   {
     to: keypair.publicKey,
     from: keypair.publicKey,
