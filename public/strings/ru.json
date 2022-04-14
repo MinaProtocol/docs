@@ -70,8 +70,8 @@
     "message": "Sidecar для блок-продюсера"
   },
   {
-    "id": "sidenav.client-sdk",
-    "defaultMessage": "Client SDK",
+    "id": "sidenav.mina-signer",
+    "defaultMessage": "Mina Signer",
     "message": "Клиентский SDK"
   },
   {

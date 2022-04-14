@@ -1,11 +1,11 @@
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({ title: "Mina Client SDK Keypair" });
+export default Page({ title: "Mina Signer" });
 
-# Client SDK
+# Mina Signer
 
-This is a NodeJS client SDK that allows you to generate Mina key pairs and sign transactions and strings using Mina's key pairs.
-The project contains Typescript and ReasonML typings but can be used from plain NodeJS as well.
+This is a NodeJS SDK that allows you to generate Mina key pairs and sign transactions and strings using Mina's key pairs.
+The project contains Typescript but can be used from plain NodeJS as well.
 
 <br />
 
@@ -20,35 +20,37 @@ Never reuse the same keypair from a testnet on mainnet!
 
 ## Installation
 
-The source code for our client SDK is open source and be seen [here](https://github.com/MinaProtocol/mina/tree/develop/frontend/client_sdk).
+The source code for our SDK is open source and be seen [here](https://github.com/MinaProtocol/mina/tree/develop/frontend/mina-signer).
 
-To get the client SDK installed, you will need NodeJS on your system. Make sure it is available on your machine and then use either yarn or npm to install the client SDK.
+To get the SDK installed, you will need NodeJS on your system. Make sure it is available on your machine and then use either yarn or npm to install the Mina Signer.
 
 ```bash
 # yarn:
-yarn add @o1labs/client-sdk
+yarn add mina-signer
 
 # npm:
-npm install --save @o1labs/client-sdk
+npm install --save mina-signer
 ```
 
 ## Usage
 
-Creating a key pair is simple with our client SDK. See the snippet below to see how to get create a key pair.
+Creating a key pair is simple with the Mina Signer. See the snippet below to see how to get create a key pair.
 
 ### NodeJS:
 
 ```javascript
-const MinaSDK = require("@o1labs/client-sdk");
+import Client from "mina-signer";
+const client = new Client({ network: "mainnet" });
+// can specify a testnet by `new Client({ network: "testnet" })`
 
-let keys = MinaSDK.genKeys();
+let keys = client.genKeys();
 console.log(`Public key: ${keys.publicKey}`);
 console.log(`Private key: ${keys.privateKey}`);
 ```
 
 This will print your private key so make sure you are in a secure environment when using this method.
 
-Please see the [client SDK readme](https://github.com/MinaProtocol/mina/blob/develop/frontend/client_sdk/README.md) for more information on how to use our SDK.
+Please see the [Mina Signer README](https://github.com/MinaProtocol/mina/blob/develop/frontend/mina-signer/README.md) for more information.
 
 <br />
 
@@ -60,10 +62,10 @@ Never give out your private key and make sure they are stored safely. If you los
 
 <br />
 
-## Import your account generated from the SDK
+## Import your account generated from the Mina Signer
 
-Please note that there are differences in key pair format between what the Mina client expects and what the client SDK generates.
-When the client SDK is used to generate a key pair, the key pair output returned are strings that aren't directly importable into our Mina client.
+Please note that there are differences in key pair format between what the Mina client expects and what the Mina Signer generates.
+When the Mina Signer is used to generate a key pair, the key pair output returned are strings that aren't directly importable into our Mina client.
 For this, we will have to use the `mina advanced wrap-key` tool to format our key pair strings into a format that is directly importable to our client.
 
 Accomplishing this takes only a few short steps.
@@ -119,7 +121,7 @@ my-wallet  my-wallet.pub
 chmod 600 ~/keys/my-wallet
 ```
 
-7. Finally, we can import the account created by the client SDK into the client.
+7. Finally, we can import the account created by the Mina Signer into the client.
 
 ```
 mina accounts import --privkey-path ~/keys/my-wallet

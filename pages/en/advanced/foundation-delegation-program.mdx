@@ -1,28 +1,43 @@
-import Page from '@reason/pages/Docs';
+import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({title: "Foundation Delegation Program"});
+export default Page({ title: "Foundation Delegation Program" });
 
 # Guidelines for Participation in Foundation Delegation Program
 
 <br></br>
 
 <Alert kind="info">
-<p>
-<b>IMPORTANT UPDATE:</b> This will affect the submission of uptime data and the Performance Score results for receiving a delegation.
-</p>
-<br></br>
-<p>
-The current sidecar tracking system will be phased out after the current cycle (Cycle 6) and be replaced by the SNARK-work-based uptime tracking system. Until further notice, while transitioning to the new system, <b>continue running the <u>sidecar</u> AND <u>SNARK-based tracking system</u> on the SAME node.</b> 
-</p>
-<br></br>
-<p>
-Please follow the instructions in <a href="https://discord.com/channels/484437221055922177/808895957978447882/958384520464330812">this post here</a> and ask any questions in the <a href="https://discord.gg/mXXKHMDU">#delegation-program channel on Discord</a> while following along for the latest updates.
-</p>
+  <p>
+    <b>IMPORTANT UPDATE:</b> This will affect the submission of uptime data and
+    the Performance Score results for receiving a delegation.
+  </p>
+  <br></br>
+  <p>
+    The current sidecar tracking system will be phased out after the current
+    cycle (Cycle 6) and be replaced by the SNARK-work-based uptime tracking
+    system. Until further notice, while transitioning to the new system,{" "}
+    <b>
+      continue running the <u>sidecar</u> AND <u>SNARK-based tracking system</u>{" "}
+      on the SAME node.
+    </b>
+  </p>
+  <br></br>
+  <p>
+    Please follow the instructions in{" "}
+    <a href="https://discord.com/channels/484437221055922177/808895957978447882/958384520464330812">
+      this post here
+    </a>{" "}
+    and ask any questions in the{" "}
+    <a href="https://discord.gg/mXXKHMDU">
+      #delegation-program channel on Discord
+    </a>{" "}
+    while following along for the latest updates.
+  </p>
 </Alert>
 
 <br></br>
 
-Check out the [Foundation delegation policy](https://minaprotocol.com/blog/mina-foundation-delegation-policy).  This document has details on exactly what you need to do to pay back rewards if you are receiving a delegation and how to send your uptime data so you can become or remain eligible for recieiving these rewards.
+Check out the [Foundation delegation policy](https://minaprotocol.com/blog/mina-foundation-delegation-policy). This document has details on exactly what you need to do to pay back rewards if you are receiving a delegation and how to send your uptime data so you can become or remain eligible for recieiving these rewards.
 
 Fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSduM5EIpwZtf5ohkVepKzs3q0v0--FDEaDfbP2VD4V6GcBepA/viewform) if you want to be eligible for future delegation .
 
@@ -69,7 +84,7 @@ At the end of each epoch, do the following:
 
 The canonical chain will be calculated as 12 blocks behind any tip at slot 3,500 of the next epoch.
 
-The block producer can keep all of the transaction fees or divide them equally amongst the other members of the pool. Note also, the token provider, Foundation or O(1), only expects to receive the pro-rated share of the coinbase *as if it were not super-charged*. If the block created was super charged, the extra coinbase can be distributed among the rest of the pool as you see fit. See <DocLink copy="https://docs.minaprotocol.com/advanced/staking-service-guidelines" url="/advanced/staking-service-guidelines" /> for details on the tooling and the terms used here for this approach.
+The block producer can keep all of the transaction fees or divide them equally amongst the other members of the pool. Note also, the token provider, Foundation or O(1), only expects to receive the pro-rated share of the coinbase _as if it were not super-charged_. If the block created was super charged, the extra coinbase can be distributed among the rest of the pool as you see fit. See <DocLink copy="https://docs.minaprotocol.com/advanced/staking-service-guidelines" url="/advanced/staking-service-guidelines" /> for details on the tooling and the terms used here for this approach.
 
 ### Example Reward Payout
 
@@ -79,7 +94,7 @@ Consider the following:
 - Account B and C are controlled by the Mina Foundation and have 3 million **locked** MINA each. Both accounts are delegating to Account A.
 - Account D is a controlled by a third party and has 2 million MINA fully **unlocked**. This account also delegates to Account A.
 
-In this example, the total amount of stake for Account A is 10 million calculated by adding up the balances from all the accounts. Note that since Account D has all its tokens unlocked, any block rewards won when `winnerAccount` equals Account D will be super-charged. 
+In this example, the total amount of stake for Account A is 10 million calculated by adding up the balances from all the accounts. Note that since Account D has all its tokens unlocked, any block rewards won when `winnerAccount` equals Account D will be super-charged.
 
 Now let's consider Epoch 5. The share of the stake from the Foundation is `6 million MINA / 10 million MINA = 0.6` or 60%. Three blocks are produced this epoch that end up on the canonical chain.
 
@@ -101,8 +116,6 @@ Example2: If the Foundation share is 2 million MINA and the total stake is 3 mil
 
 ## Addresses for token providers
 
-* [Mina Foundation](/static/Mina_Foundation_Addresses.csv)
+- [Mina Foundation](/static/Mina_Foundation_Addresses.csv)
 
-* [O(1) Labs](/static/O1_Labs_addresses.csv)
-
-
+- [O(1) Labs](/static/O1_Labs_addresses.csv)

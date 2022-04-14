@@ -1,0 +1,96 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Mina Signer" });
+
+# Mina Signer
+
+The [Mina Signer SDK](https://github.com/MinaProtocol/mina/tree/develop/frontend/mina-signer) allows generating keypairs, signing and verifying messages, and signing transactions that can be broadcast to the network.
+
+The project contains Typescript typings but can be used from plain NodeJS as well. The following methods are available:
+
+- `genKeys` - generates a public/private keypair.
+- `derivePublicKey` - derives the public key of the corresponding private key.
+- `signMessage` - signs an arbitrary message.
+- `verifyMessage` - verifies that a signature matches a message.
+- `signPayment` - signs a payment using a private key.
+- `signStakeDelegation` - signs a stake delegation using a private key.
+
+<Alert>
+
+The Mina Signer enables the ability to generate and sign transactions on an air-gapped device that never exposes a private key to the internet.
+
+</Alert>
+
+## Install
+
+```
+yarn add mina-signer
+# or with npm:
+npm install --save mina-signer
+```
+
+## Usage
+
+### Typescript
+
+```typescript
+import Client from "mina-signer";
+const client = new Client({ network: "mainnet" });
+// can specify a testnet by `new Client({ network: "testnet" })`
+
+let keys = client.genKeys();
+let signed = client.signMessage("hello", keypair);
+if (client.verifyMessage(signed)) {
+  console.log("Message was verified successfully");
+}
+
+// Sign and verify a payment
+let signedPayment = client.signPayment(
+  {
+    to: keypair.publicKey,
+    from: keypair.publicKey,
+    amount: 1,
+    fee: 1,
+    nonce: 0,
+  },
+  keypair.privateKey
+);
+if (client.verifyPayment(signedPayment)) {
+  console.log("Payment was verified successfully");
+}
+```
+
+### NodeJS
+
+```typescript
+const Client = require("mina-signer").default;
+const client = new Client({ network: "mainnet" });
+// can specify a testnet by `new Client({ network: "testnet" })`
+
+let keys = client.genKeys();
+let signed = client.signMessage("hello", keypair);
+if (client.verifyMessage(signed)) {
+  console.log("Message was verified successfully");
+}
+
+// Sign and verify a payment
+let signedPayment = client.signPayment(
+  {
+    to: keypair.publicKey,
+    from: keypair.publicKey,
+    amount: 1,
+    fee: 1,
+    nonce: 0,
+  },
+  keypair.privateKey
+);
+if (client.verifyPayment(signedPayment)) {
+  console.log("Payment was verified successfully");
+}
+```
+
+<Alert>
+
+When generating transactions, you will need to specify the account nonce. This is available for an account via the CLI using `mina advanced get-nonce --address <PUBLIC_KEY>` or using <DocLink copy="GraphQL" url="/developers/graphql-api" />.
+
+</Alert>

@@ -42,7 +42,7 @@ module DocsNavsTranslations = {
     id: "sidenav.bp-producer-sidecar",
     defaultMessage: "Block Producer Sidecar",
   };
-  let clientSDK = {id: "sidenav.client-sdk", defaultMessage: "Client SDK"};
+  let minaSigner = {id: "sidenav.mina-signer", defaultMessage: "Mina Signer"};
   let dataQuerying = {
     id: "sidenav.data-querying",
     defaultMessage: "Data Querying",
@@ -231,8 +231,8 @@ module SideNav = {
             slug="bp-sidecar"
           />
           <Item
-            title={intl->Intl.formatMessage(clientSDK)}
-            slug="client-sdk"
+            title={intl->Intl.formatMessage(minaSigner)}
+            slug="mina-signer"
           />
           <Item
             title={intl->Intl.formatMessage(dataQuerying)}
@@ -297,8 +297,8 @@ module SideNav = {
             slug="graphql-api"
           />
           <Item
-            title={intl->Intl.formatMessage(clientSDK)}
-            slug="client-sdk"
+            title={intl->Intl.formatMessage(minaSigner)}
+            slug="mina-signer"
           />
           <Item title={intl->Intl.formatMessage(logging)} slug="logging" />
           <Item
@@ -449,8 +449,8 @@ module Dropdown = {
             slug="bp-sidecar"
           />
           <Item
-            title={intl->Intl.formatMessage(clientSDK)}
-            slug="client-sdk"
+            title={intl->Intl.formatMessage(minaSigner)}
+            slug="mina-signer"
           />
           <Item
             title={intl->Intl.formatMessage(dataQuerying)}
@@ -515,8 +515,8 @@ module Dropdown = {
             slug="graphql-api"
           />
           <Item
-            title={intl->Intl.formatMessage(clientSDK)}
-            slug="client-sdk"
+            title={intl->Intl.formatMessage(minaSigner)}
+            slug="mina-signer"
           />
           <Item title={intl->Intl.formatMessage(logging)} slug="logging" />
           <Item
