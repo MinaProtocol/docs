@@ -9,17 +9,17 @@ are a preview of work that is currently in progress.
 
 </Alert>
 
-# How to write a snapp
+# How to write a zkApp
 
-A Snapp consists of a smart contract and a UI to interact with it. First, we’ll install the Snapp CLI and write a smart contract.
+A zkApp consists of a smart contract and a UI to interact with it. First, we’ll install the zkApp CLI and write a smart contract.
 
 ## Write a smart contract
 
-Your smart contract will be written using <a href="https://github.com/o1-labs/snapp-cli/">Snapp CLI</a>.
+Your smart contract will be written using <a href="https://github.com/o1-labs/zkapp-cli/">CLI</a>.
 
-Snapp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (Jest), code auto-formatting (Prettier), linting (ES Lint), & more.
+zkApp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (Jest), code auto-formatting (Prettier), linting (ES Lint), & more.
 
-### Install Snapp CLI
+### Install zkApp CLI
 
 #### Dependencies:
 
@@ -35,22 +35,22 @@ If you have an older version installed, we suggest installing a newer version us
 
 ### Start a Project
 
-Now that you have Snapp CLI installed, you can start with an example or start your own project.
+Now that you have zkApp CLI installed, you can start with an example or start your own project.
 
 #### Option A: Start with an example (recommended)
 
 Examples are based on the standard project structure, but with additional files in the `/src` directory as the only difference.
 
-1. **Install:** Run `snapp example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
+1. **Install:** Run `zkApp example sudoku`. This creates a new project and includes the example files (i.e. the smart contract) inside the project’s `src/` directory. Type `ls` & hit enter to see the files that were created or open the directory in a code editor such as VS Code.
 2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
 3. **Build the example:** Run `npm run build`. This will compile your TypeScript into JavaScript inside the project’s `/build` directory.
 4. **Deploy example on Testnet:** (Coming soon.)
 
-You can view a list of <a href="https://github.com/o1-labs/snapp-cli/tree/main/examples/">all available examples here</a>.
+You can view a list of <a href="https://github.com/o1-labs/zkApp-cli/tree/main/examples/">all available examples here</a>.
 
 #### Option B: Start your own project
 
-1. **Install:** Run `snapp project <myproj>`. Type `ls` and hit enter to see the newly created project structure.
+1. **Install:** Run `zkApp project <myproj>`. Type `ls` and hit enter to see the newly created project structure.
 2. **Run tests:** Run `npm run test`. Tests are written using <a href="https://jestjs.io/">Jest</a>. After running this command, you should see all tests pass. You can also run `npm run testw` to run tests in watch mode, so it will automatically re-run tests when saving changes to your code.
 3. **Build:** Run `npm run build`. This will compile your TypeScript code into JavaScript inside the project’s `/build`.
 4. **Deploy to Testnet:** (Coming soon.)
@@ -64,7 +64,7 @@ If you haven’t yet read the <DocLink copy="how zkApps work" url="/zkapps/how-z
 
 ##### SnarkyJS
 
-zkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Snapp CLI.
+zkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the zkApp CLI.
 
 To view the full SnarkyJS reference, please see <DocLink copy="here" url="/zkapps/snarkyjs-reference" />.
 
@@ -213,7 +213,7 @@ Off-chain state is not yet available.
 
 Testing is critical when writing smart contracts.
 
-The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the Snapp CLI via `snapp project <name>`. We recommend Jest, but any testing framework can be used.
+The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the zkApp CLI via `zkApp project <name>`. We recommend Jest, but any testing framework can be used.
 
 To run all test files within your project, run `npm run test` or `npm run testw` (for watch mode) from your project’s root directory.
 

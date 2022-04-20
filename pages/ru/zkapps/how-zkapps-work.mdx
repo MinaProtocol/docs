@@ -19,7 +19,7 @@ zkApps in the latest versions of <a href="https://www.google.com/chrome/index.ht
 
 <br />
 
-zkApps are written in TypeScript using the Snapp CLI. In the upcoming section, How to write a snapp (_coming soon_), we’ll go into detail about writing your first snapp. For now, we’ll discuss how zkApps work.
+zkApps are written in TypeScript using the zkApp CLI. In the upcoming section, How to write a snapp (_coming soon_), we’ll go into detail about writing your first snapp. For now, we’ll discuss how zkApps work.
 
 A “snapp” consists of two parts: 1.) a smart contract and 2.) an UI (user interface) for users to interact with it.
 
@@ -72,7 +72,7 @@ The next two sections will go into more detail about how the prover and verifier
   width="75%"
 />
 
-To deploy a smart contract, means to put it on Mina network. To do this, the developer uses Snapp CLI. The deployment process sends a transaction containing the verification key to an address on the Mina blockchain.
+To deploy a smart contract, means to put it on Mina network. To do this, the developer uses zkApp CLI. The deployment process sends a transaction containing the verification key to an address on the Mina blockchain.
 
 When a Mina address contains a verification key, it acts as a **snapp account**.
 Whereas a regular Mina account can receive any transactions, a snapp account can only successfully receive transactions containing a proof that satisfies the verifier function. Any transactions that do not pass the verifier function will be rejected by the Mina network.
