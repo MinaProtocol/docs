@@ -350,17 +350,17 @@ module SideNav = {
         <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
             title={intl->Intl.formatMessage(howZkAppsWork)}
             slug="how-zkapps-work"
           />
           <Item
-          title={intl->Intl.formatMessage(howWriteZkApp)}
-          slug="how-to-write-a-zkapp"
-        />
+            title={intl->Intl.formatMessage(howWriteZkApp)}
+            slug="how-to-write-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
            <Item
             title={intl->Intl.formatMessage(zkAppsAPIReference)}
             slug="snarkyjs-reference"
@@ -572,17 +572,17 @@ module Dropdown = {
         <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
             title={intl->Intl.formatMessage(howZkAppsWork)}
             slug="how-zkapps-work"
           />
           <Item
-          title={intl->Intl.formatMessage(howWriteZkApp)}
-          slug="how-to-write-a-zkapp"
-        />
+            title={intl->Intl.formatMessage(howWriteZkApp)}
+            slug="how-to-write-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
         <Item
         title={intl->Intl.formatMessage(zkAppsAPIReference)}
         slug="snarkyjs-reference"
