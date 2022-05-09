@@ -122,6 +122,10 @@ module DocsNavsTranslations = {
     defaultMessage: "Time-locked Accounts",
   };
   let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps"};
+  let zkAppsForEthereumDevelopers= {
+    id: "sidenav.zkapps-for-ethereum-developers",
+    defaultMessage: "zkApps for Ethereum Developers",
+  };
   let howZkAppsWork = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
@@ -346,6 +350,10 @@ module SideNav = {
         <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
+          <Item
             title={intl->Intl.formatMessage(howZkAppsWork)}
             slug="how-zkapps-work"
           />
@@ -563,6 +571,10 @@ module Dropdown = {
         </Section>
         <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
           <Item
             title={intl->Intl.formatMessage(howZkAppsWork)}
             slug="how-zkapps-work"
