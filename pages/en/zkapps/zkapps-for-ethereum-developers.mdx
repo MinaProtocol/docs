@@ -21,49 +21,49 @@ should be public or private, depending on the requirements of their application.
 
 ## At a Glance
 
-<table>
+<table style={{borderSpacing: '0px'}}>
 <thead>
   <tr>
-    <th></th>
-    <th>Ethereum Smart Contracts</th>
-    <th>Mina zkApps</th>
+    <th style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}></th>
+    <th style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px', fontSize: 'larger'}}>Ethereum Smart Contracts</th>
+    <th style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px', fontSize: 'larger'}}>Mina zkApps</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>Language</td>
-    <td>Smart contracts are written in <span style={{color: '#7d4bbd'}}>Solidity</span></td>
-    <td>zkApp smart contracts are written using <span style={{color: '#7d4bbd'}}>SnarkyJS</span> (a <span style={{color: '#7d4bbd'}}>TypeScript</span> library)</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Language</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Smart contracts are written in <span style={{color: '#7d4bbd'}}>Solidity</span></td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>zkApp smart contracts are written using <span style={{color: '#7d4bbd'}}>SnarkyJS</span> (a <span style={{color: '#7d4bbd'}}>TypeScript</span> library)</td>
   </tr>
   <tr>
-    <td>Execution Environment</td>
-    <td>Smart contracts run on <span style={{color: '#7d4bbd'}}>every Ethereum node</span></td>
-    <td>zkApps run <span style={{color: '#7d4bbd'}}>client side</span> in a user’s web browser and publish only a small validity proof which is verified by the Mina nodes</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Execution Environment</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Smart contracts run on <span style={{color: '#7d4bbd'}}>every Ethereum node</span></td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>zkApps run <span style={{color: '#7d4bbd'}}>client side</span> in a user’s web browser and publish only a small validity proof which is verified by the Mina nodes</td>
   </tr>
   <tr>
-    <td>Transaction Cost</td>
-    <td>Execution costs are variable and determined using a <span style={{color: '#7d4bbd'}}>gas model</span></td>
-    <td>Execution costs are <span style={{color: '#7d4bbd'}}>small and constant</span> because the Mina nodes are verifying the same size proof regardless of the amount of client-side computation</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Transaction Cost</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Execution costs are variable and determined using a <span style={{color: '#7d4bbd'}}>gas model</span></td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Execution costs are <span style={{color: '#7d4bbd'}}>small and constant</span> because the Mina nodes are verifying the same size proof regardless of the amount of client-side computation</td>
   </tr>
   <tr>
-    <td>Application Storage</td>
-    <td>Ethereum is designed around the idea that storage and computation are inherently coupled; <span style={{color: '#7d4bbd'}}>all state must live on every Ethereum node</span></td>
-    <td>Mina’s design allows state and computation to be decoupled so that <span style={{color: '#7d4bbd'}}>application state can live anywhere</span>; developers can choose a solution that fits their cost/security requirements best</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Application Storage</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Ethereum is designed around the idea that storage and computation are inherently coupled; <span style={{color: '#7d4bbd'}}>all state must live on every Ethereum node</span></td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Mina’s design allows state and computation to be decoupled so that <span style={{color: '#7d4bbd'}}>application state can live anywhere</span>; developers can choose a solution that fits their cost/security requirements best</td>
   </tr>
   <tr>
-    <td>Developer Tooling</td>
-    <td>New developer tools with unusual patterns like <span style={{color: '#7d4bbd'}}>Hardhat</span> and <span style={{color: '#7d4bbd'}}>Truffle</span> are needed in order to manage the deployment of Ethereum smart contracts</td>
-    <td><span style={{color: '#7d4bbd'}}>The Mina zkApp CLI</span> manages scaffolding, linting, testing, and deployment using common JavaScript/TypeScript tools you are already familiar with</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Developer Tooling</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>New developer tools with unusual patterns like <span style={{color: '#7d4bbd'}}>Hardhat</span> and <span style={{color: '#7d4bbd'}}>Truffle</span> are needed in order to manage the deployment of Ethereum smart contracts</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}><span style={{color: '#7d4bbd'}}>The Mina zkApp CLI</span> manages scaffolding, linting, testing, and deployment using common JavaScript/TypeScript tools you are already familiar with</td>
   </tr>
   <tr>
-    <td>Scaling</td>
-    <td>Ethereum nodes must execute every transaction directly making <span style={{color: '#7d4bbd'}}>horizontal scaling hard</span></td>
-    <td>Mina’s recursive zero-knowledge proofs allow snark-workers to compress the blockchain and developers to compress transactions using <span style={{color: '#7d4bbd'}}>native rollups</span> for <span style={{color: '#7d4bbd'}}>exponential scaling</span></td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Scaling</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Ethereum nodes must execute every transaction directly making <span style={{color: '#7d4bbd'}}>horizontal scaling hard</span></td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Mina’s recursive zero-knowledge proofs allow snark-workers to compress the blockchain and developers to compress transactions using <span style={{color: '#7d4bbd'}}>native rollups</span> for <span style={{color: '#7d4bbd'}}>exponential scaling</span></td>
   </tr>
   <tr>
-    <td>Consensus</td>
-    <td>Ethereum nodes must download the entire block history (<span style={{color: '#7d4bbd'}}>~700GB</span>) in order to verify the current finalized chain state </td>
-    <td>Mina clients can verify the current finalized state using a single <span style={{color: '#7d4bbd'}}>22KB</span> recursive zero-knowledge proof</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Consensus</td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Ethereum nodes must download the entire block history (<span style={{color: '#7d4bbd'}}>~700GB</span>) in order to verify the current finalized chain state </td>
+    <td style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid', padding: '10px'}}>Mina clients can verify the current finalized state using a single <span style={{color: '#7d4bbd'}}>22KB</span> recursive zero-knowledge proof</td>
   </tr>
 </tbody>
 </table>
