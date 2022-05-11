@@ -395,3 +395,52 @@ This UI can be written with any framework (e.g. React, Vue, Svelte, etc.) or pla
 This is not yet production ready, but is work in progress.
 
 </Alert>
+
+### Adding your smart contract as a dependency of the UI
+
+<Alert kind="info">
+
+You can integrate your smart contract by publishing it to npm and adding it as a  
+ dependency of your UI.
+
+</Alert>
+
+##### Publish to npm
+
+1. **Create an npm account:** Create one <a href="https://www.npmjs.com/signup">here</a> if you don't have one yet.
+2. **Login:** To sign in, enter `npm login` on the command line. You will be prompted to enter your username, password, and email address.
+3. **Publish:** To publish your package, enter `npm publish` on the command line at the root of your smart contract project directory. If the package name already exists on npm, you will get an error. You can change the package name by changing the name property in your `package.json`.
+
+<Alert kind="tip">
+
+You can check if a package name already exists on npm using the <a href="https://docs.npmjs.com/cli/v7/commands/npm-search">npm search</a>
+terminal command. To avoid naming collisions, npm allows to publish scoped packages:
+`@your-username/your-package-name`. For additional details about publishing packages including scoped packages, see the full npm <a href="https://docs.npmjs.com/packages-and-modules/introduction-to-packages-and-modules">reference docs</a>.
+
+</Alert>
+
+##### Consuming your smart contract in your UI
+
+Once you have published your smart contract to npm, you can easily add it to any UI framework of your choosing by importing the package.
+
+1. **Install your smart contract package:** To install your package, run the following npm command: `npm install your-package-name` from the root of your UI project directory. Or if you published a scoped npm package, run `npm install @your-username/your-project-name`.
+2. **Import your smart contract package into the UI using:** `import { YourSmartContract } from ‘your-smart-contract’;` , where `YourSmartContract` is the named export that you chose in your smart contract.
+
+<Alert kind="tip">
+
+For a more performant UI, you may want to render your UI before importing and loading your smart contract. This allows the SnarkyJS wasm workers to perform initialization without blocking the UI.
+
+For example, if your UI is built using React, loading the smart contract in a `useEffect`,
+instead of a top level import, will give the UI time to render its components before
+loading SnarkyJS.
+
+</Alert>
+
+```ts
+useEffect(() => {
+  async function loadSmartContract() {
+    const { YourSmartContract } = await import("your-smart-contract");
+  }
+  loadSmartContract();
+}, []);
+```
