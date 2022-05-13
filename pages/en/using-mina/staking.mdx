@@ -16,15 +16,15 @@ To properly remain synced to the network and participate in consensus, it is imp
 
 </Alert>
 
-### Staking MINA
+### Producing our own Blocks (Staking MINA)
 
-We can try out staking with our MINA by issuing the following command:
+We can try out staking with our MINA by restarting your mina daemon with the `-block-producer-pubkey` flag:
 
-    mina client set-staking --public-key $MINA_PUBLIC_KEY
+<DaemonCommandExample args={["--block-producer-pubkey $MINA_PUBLIC_KEY"]} />
 
-Alternatively, you can restart the daemon with the `-block-producer-pubkey` flag:
+Or in a .mina-env file:
 
-<DaemonCommandExample args={["-block-producer-pubkey $MINA_PUBLIC_KEY"]} />
+<DaemonCommandExample args={["EXTRA_FLAGS=" --block-producer-pubkey $MINA_PUBLIC_KEY" "]} />
 
 We can always check which accounts we're currently staking with, by using the `mina client status` command:
 

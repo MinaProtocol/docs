@@ -20,11 +20,9 @@ export default Page({ title: "Staking & Snarking" });
 
 Для осуществления стейкинга лучше иметь больше средств, но поскольку мы уже выполнили <DocLink copy="предыдущий шаг" url="/using-mina/send-payment#make-a-payment" />, и у нас уже есть средства в кошельке, можно попробовать использовать их для стейкинга mina. Для этого выполните следующую команду:
 
-    mina client set-staking --public-key $MINA_PUBLIC_KEY
-
 В качестве альтернативы вы можете перезапустить daemon с помощью флага `-block-producer-pubkey`:
 
-<DaemonCommandExample args={["-block-producer-pubkey $MINA_PUBLIC_KEY"]} />
+<DaemonCommandExample args={["--block-producer-pubkey $MINA_PUBLIC_KEY"]} />
 
 Мы всегда можем проверить, в какие аккаунты мы осуществляем стейкинг, используя команду `mina client status`:
 
