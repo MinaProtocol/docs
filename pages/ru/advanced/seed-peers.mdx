@@ -79,7 +79,7 @@ docker run --name mina-seed-node -d \
 -v $(pwd)/keys:/root/keys:ro \
 -v $(pwd)/.mina-config:/root/.mina-config \
 --env MINA_LIBP2P_PASS='PASS' \
-minaprotocol/mina-daemon:1.3.0-9b0369c-bullseye-mainnet \
+minaprotocol/mina-daemon:1.3.1-3e3abec-bullseye-mainnet \
 --discovery-keypair /keys/libp2p-keys \
 --peer-list-url https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt \
 --metrics-port 9100 \
