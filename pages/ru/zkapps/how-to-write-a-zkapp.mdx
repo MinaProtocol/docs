@@ -213,7 +213,7 @@ Off-chain state is not yet available.
 
 Testing is critical when writing smart contracts.
 
-The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the zkApp CLI via `zkApp project <name>`. We recommend Jest, but any testing framework can be used.
+The <a href="https://jestjs.io/">Jest testing framework</a> is included in all projects created by the Mina zkApp CLI via `zk project <name>`. We recommend Jest, but any testing framework can be used.
 
 To run all test files within your project, run `npm run test` or `npm run testw` (for watch mode) from your project’s root directory.
 
@@ -224,6 +224,105 @@ To generate a test coverage report for your project, run `npm run coverage`. Cov
 Please see the <a href="https://jestjs.io/docs/getting-started">Jest docs</a> for further information on how to use Jest.
 
 We will be adding blockchain-specific testing functionality in the future. Keep an eye on this section for updates.
+
+## Deployment
+
+### Add a network alias to config.json
+
+Before deploying, we must first define which network that we will deploy to and
+give it a name. We do this by creating a network alias within your project's
+`config.json`.
+
+First, change into the directory containing your project and then run the
+following command:
+
+```sh
+$ zk config
+```
+
+It will ask you to specify a name (can be anything), URL to deploy to, & fee (in
+MINA) used when sending your deploy transaction. The URL is the Mina GraphQL API
+that will receive your deploy transaction and broadcast it to the Mina network.
+Note that this URL is important because it also determines which network you're
+be deploying to (e.g. QANet, Testnet, Mainnet, etc).
+
+For Berkeley QANet, let's use the following values:
+
+> **Network Name**: `berkeley` > **URL**: `https://proxy.berkeley.minaexplorer.com/graphql` > **Fee**: `0.1`
+
+<Alert kind="info">
+  If your project contains multiple smart contracts (e.g. `Foo` and `Bar`) that
+  you intend to deploy to the same network, we recommend following a naming
+  pattern such as `berkeley-foo` and `berkeley-bar` for your network alias
+  names.
+</Alert>
+
+You will see the following output:
+
+```sh
+$ zk config
+
+Add a new network:
+✔ Choose a name (can be anything): · berkeley
+✔ Set URL to deploy to: · https://proxy.berkeley.minaexplorer.com/graphql
+✔ Set transaction fee to use when deploying (in MINA): · 0.1
+✔ Create key pair at keys/berkeley.json
+✔ Add network to config.json
+
+Success!
+
+Next steps:
+
+- If this is a testnet, request tMINA at:
+  https://faucet.minaprotocol.com/qanets?address=<YOUR-ADDRESS>
+- To deploy, run: `zk deploy berkeley`
+```
+
+### Request funds from the faucet
+
+To deploy your zkApp, you will need some funds to pay for transaction fees.
+
+To get funds on the Berkeley network, use the URL that was shown from the CLI output. Visit `https://faucet.minaprotocol.com/qanets?address=<YOUR-ADDRESS>` and click **Request**.
+
+You will have to wait a few minutes for the next block to include your transaction, so you'll have tMINA before proceeding to the next step.
+
+### Deploying your smart contract
+
+To deploy your smart contract to the network, run the following command:
+
+```sh
+$ zk deploy berkeley
+```
+
+When running the deploy command, the zkApp CLI will compute a verification key for your zkApp CLI. Computing the verification key can take 1-2 minutes so please be patient. The zkApp CLI will show you the details of the transaction such as the network name, the URL, and the smart contract that will be deployed..
+
+Finally, enter `yes` or `y` when prompted, to confirm and send the transaction.
+
+You will see the following output:
+
+```sh
+$ zk deploy berkeley
+✔ Build project
+✔ Generate build.json
+✔ Choose smart contract
+  Only one smart contract exists in the project: Add
+  Your config.json was updated to always use this
+  smart contract when deploying to this network.
+✔ Generate verification key (takes 1-2 min)
+✔ Build transaction
+✔ Confirm to send transaction
+  Are you sure you want to send (yes/no)? · y
+✔ Send to network
+
+Success! Deploy transaction sent.
+
+Next step:
+  Your smart contract will be live (or updated)
+  as soon as the transaction is included in a block:
+  https://berkeley.minaexplorer.com/transaction/<txn-hash>
+```
+
+After a few minutes, the transaction will be included in the next block. To see your changes, search for the address that you used on [berkeley.minaexplorer.com](https://berkeley.minaexplorer.com).
 
 ## Writing a UI for your smart contract
 
@@ -236,3 +335,52 @@ This UI can be written with any framework (e.g. React, Vue, Svelte, etc.) or pla
 This is not yet production ready, but is work in progress.
 
 </Alert>
+
+### Adding your smart contract as a dependency of the UI
+
+<Alert kind="info">
+
+You can integrate your smart contract by publishing it to npm and adding it as a
+dependency of your UI.
+
+</Alert>
+
+##### Publish to npm
+
+1. **Create an npm account:** Create one <a href="https://www.npmjs.com/signup">here</a> if you don't have one yet.
+2. **Login:** To sign in, enter `npm login` on the command line. You will be prompted to enter your username, password, and email address.
+3. **Publish:** To publish your package, enter `npm publish` on the command line at the root of your smart contract project directory. If the package name already exists on npm, you will get an error. You can change the package name by changing the name property in your `package.json`.
+
+<Alert kind="tip">
+
+You can check if a package name already exists on npm using the <a href="https://docs.npmjs.com/cli/v7/commands/npm-search">npm search</a>
+terminal command. To avoid naming collisions, npm allows to publish scoped packages:
+`@your-username/your-package-name`. For additional details about publishing packages including scoped packages, see the full npm <a href="https://docs.npmjs.com/packages-and-modules/introduction-to-packages-and-modules">reference docs</a>.
+
+</Alert>
+
+##### Consuming your smart contract in your UI
+
+Once you have published your smart contract to npm, you can easily add it to any UI framework of your choosing by importing the package.
+
+1. **Install your smart contract package:** To install your package, run the following npm command: `npm install your-package-name` from the root of your UI project directory. Or if you published a scoped npm package, run `npm install @your-username/your-project-name`.
+2. **Import your smart contract package into the UI using:** `import { YourSmartContract } from ‘your-smart-contract’;` , where `YourSmartContract` is the named export that you chose in your smart contract.
+
+<Alert kind="tip">
+
+For a more performant UI, you may want to render your UI before importing and loading your smart contract. This allows the SnarkyJS wasm workers to perform initialization without blocking the UI.
+
+For example, if your UI is built using React, loading the smart contract in a `useEffect`,
+instead of a top level import, will give the UI time to render its components before
+loading SnarkyJS.
+
+</Alert>
+
+```ts
+useEffect(() => {
+  async function loadSmartContract() {
+    const { YourSmartContract } = await import("your-smart-contract");
+  }
+  loadSmartContract();
+}, []);
+```
