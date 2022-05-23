@@ -130,6 +130,10 @@ module DocsNavsTranslations = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
   };
+  let onlineCommunities = {
+    id: "sidenav.online-communities",
+    defaultMessage: "Online Communities",
+  };
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
     defaultMessage: "How To Write A zkApp",
@@ -145,6 +149,7 @@ module DocsNavsTranslations = {
   let glossary = {id: "sidenav.glossary", defaultMessage: "Glossary"};
   let faq = {id: "sidenav.faq", defaultMessage: "FAQ"};
   let exchangeFaq = {id: "sidenav.exchange-operators", defaultMessage: "Exchange Operators"};
+  let participate = {id: "sidenav.participate", defaultMessage: "Participate"};
   let contributingToMina = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
@@ -376,6 +381,12 @@ module SideNav = {
         />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
+        <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
+        <Item
+          title={intl->Intl.formatMessage(onlineCommunities)}
+          slug="online-communities"
+        />
+      </Section>
       </SideNav>
     </div>;
   };
@@ -598,6 +609,13 @@ module Dropdown = {
         />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
+
+        <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
+          <Item
+            title={intl->Intl.formatMessage(onlineCommunities)}
+            slug="online-communities"
+          />
+        </Section>
       </DropdownNav>
     </div>;
   };
