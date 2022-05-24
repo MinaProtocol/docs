@@ -134,6 +134,10 @@ module DocsNavsTranslations = {
     id: "sidenav.online-communities",
     defaultMessage: "Online Communities",
   };
+  let careers = {
+    id: "sidenav.careers",
+    defaultMessage: "Careers",
+  };
   let reporting = {
     id: "sidenav.reporting",
     defaultMessage: "Reporting Issues, Bugs, & Feature Requests",
@@ -395,6 +399,10 @@ module SideNav = {
           slug="online-communities"
         />
         <Item
+        title={intl->Intl.formatMessage(careers)}
+        slug="careers"
+        />
+        <Item
         title={intl->Intl.formatMessage(github)}
         slug="github"
       />
@@ -630,6 +638,10 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(onlineCommunities)}
             slug="online-communities"
+          />
+          <Item
+          title={intl->Intl.formatMessage(careers)}
+          slug="careers"
           />
           <Item
           title={intl->Intl.formatMessage(github)}
