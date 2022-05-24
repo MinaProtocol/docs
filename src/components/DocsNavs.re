@@ -138,6 +138,10 @@ module DocsNavsTranslations = {
     id: "sidenav.careers",
     defaultMessage: "Careers",
   };
+  let grants = {
+    id: "sidenav.grants",
+    defaultMessage: "Grants & Programs",
+  };
   let reporting = {
     id: "sidenav.reporting",
     defaultMessage: "Reporting Issues, Bugs, & Feature Requests",
@@ -403,6 +407,10 @@ module SideNav = {
         slug="careers"
         />
         <Item
+        title={intl->Intl.formatMessage(grants)}
+        slug="grants"
+        />
+        <Item
         title={intl->Intl.formatMessage(github)}
         slug="github"
       />
@@ -642,6 +650,10 @@ module Dropdown = {
           <Item
           title={intl->Intl.formatMessage(careers)}
           slug="careers"
+          />
+          <Item
+          title={intl->Intl.formatMessage(grants)}
+          slug="grants"
           />
           <Item
           title={intl->Intl.formatMessage(github)}
