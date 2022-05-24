@@ -134,6 +134,10 @@ module DocsNavsTranslations = {
     id: "sidenav.online-communities",
     defaultMessage: "Online Communities",
   };
+  let reporting = {
+    id: "sidenav.reporting",
+    defaultMessage: "Reporting Issues, Bugs, & Feature Requests",
+  };
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
     defaultMessage: "How To Write A zkApp",
@@ -386,6 +390,10 @@ module SideNav = {
           title={intl->Intl.formatMessage(onlineCommunities)}
           slug="online-communities"
         />
+        <Item
+        title={intl->Intl.formatMessage(reporting)}
+        slug="reporting"
+      />
       </Section>
       </SideNav>
     </div>;
@@ -615,6 +623,10 @@ module Dropdown = {
             title={intl->Intl.formatMessage(onlineCommunities)}
             slug="online-communities"
           />
+          <Item
+          title={intl->Intl.formatMessage(reporting)}
+          slug="reporting"
+        />
         </Section>
       </DropdownNav>
     </div>;
