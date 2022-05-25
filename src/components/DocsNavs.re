@@ -38,6 +38,10 @@ module DocsNavsTranslations = {
     id: "sidenav.archive-redundancy",
     defaultMessage: "Archive Redundancy",
   };
+  let uptime = {
+    id: "sidenav.uptime-system",
+    defaultMessage: "SNARK-based Uptime System",
+  };
   let blockProducerSidecar = {
     id: "sidenav.bp-producer-sidecar",
     defaultMessage: "Block Producer Sidecar",
@@ -178,6 +182,10 @@ module DocsNavsTranslations = {
     id: "sidenav.grantoverview",
     defaultMessage: "Overview",
   };
+  let delegation = {
+    id: "sidenav.delegation",
+    defaultMessage: "Foundation Delegation Program",
+  };
   let edit = {id: "sidenav.edit", defaultMessage: "Documentation"};
   let overview = {id: "sidenav.overview", defaultMessage: "Overview"};
   let documentation = {id: "sidenav.documentation", defaultMessage: "Edit"};
@@ -263,6 +271,10 @@ module SideNav = {
             title={intl->Intl.formatMessage(blockProducerSidecar)}
             slug="bp-sidecar"
           />
+          <Item
+          title={intl->Intl.formatMessage(uptime)}
+          slug="uptime-system"
+        />
           <Item
             title={intl->Intl.formatMessage(clientSDK)}
             slug="client-sdk"
@@ -426,14 +438,17 @@ module SideNav = {
         title={intl->Intl.formatMessage(reporting)}
         slug="reporting"
       />
-              <Section
+        <Section
         title={intl->Intl.formatMessage(grants)}
         slug={f("grants")}>
-
-        <Item
-        title={intl->Intl.formatMessage(grantoverview)}
-        slug="grantoverview"
-        />
+          <Item
+          title={intl->Intl.formatMessage(grantoverview)}
+          slug="grantoverview"
+          />
+          <Item
+          title={intl->Intl.formatMessage(delegation)}
+          slug="delegation"
+          />
         </Section>
       </Section>
       </SideNav>
@@ -516,6 +531,10 @@ module Dropdown = {
             title={intl->Intl.formatMessage(blockProducerSidecar)}
             slug="bp-sidecar"
           />
+          <Item
+          title={intl->Intl.formatMessage(uptime)}
+          slug="uptime-system"
+        />
           <Item
             title={intl->Intl.formatMessage(clientSDK)}
             slug="client-sdk"
@@ -676,10 +695,14 @@ module Dropdown = {
           title={intl->Intl.formatMessage(grants)}
           slug={f("grants")}>
   
-          <Item
-          title={intl->Intl.formatMessage(grantoverview)}
-          slug="grantoverview"
-          />
+            <Item
+            title={intl->Intl.formatMessage(grantoverview)}
+            slug="grantoverview"
+            />
+            <Item
+            title={intl->Intl.formatMessage(delegation)}
+            slug="delegation"
+            />
           </Section>
           <Item
           title={intl->Intl.formatMessage(github)}
