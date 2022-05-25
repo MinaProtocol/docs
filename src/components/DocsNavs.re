@@ -170,6 +170,10 @@ module DocsNavsTranslations = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
   };
+  let grantoverview = {
+    id: "sidenav.grantoverview",
+    defaultMessage: "Overview",
+  };
   let edit = {id: "sidenav.edit", defaultMessage: "Documentation"};
   let overview = {id: "sidenav.overview", defaultMessage: "Overview"};
   let documentation = {id: "sidenav.documentation", defaultMessage: "Edit"};
@@ -407,10 +411,6 @@ module SideNav = {
         slug="careers"
         />
         <Item
-        title={intl->Intl.formatMessage(grants)}
-        slug="grants"
-        />
-        <Item
         title={intl->Intl.formatMessage(github)}
         slug="github"
       />
@@ -418,6 +418,15 @@ module SideNav = {
         title={intl->Intl.formatMessage(reporting)}
         slug="reporting"
       />
+              <Section
+        title={intl->Intl.formatMessage(grants)}
+        slug={f("grants")}>
+
+        <Item
+        title={intl->Intl.formatMessage(grantoverview)}
+        slug="grantoverview"
+        />
+        </Section>
       </Section>
       </SideNav>
     </div>;
@@ -651,10 +660,15 @@ module Dropdown = {
           title={intl->Intl.formatMessage(careers)}
           slug="careers"
           />
-          <Item
+          <Section
           title={intl->Intl.formatMessage(grants)}
-          slug="grants"
+          slug={f("grants")}>
+  
+          <Item
+          title={intl->Intl.formatMessage(grantoverview)}
+          slug="grantoverview"
           />
+          </Section>
           <Item
           title={intl->Intl.formatMessage(github)}
           slug="github"
