@@ -558,6 +558,8 @@ loading SnarkyJS.
 
 </Alert>
 
+**Loading your contract with React**
+
 ```ts
 useEffect(() => {
   async function loadSmartContract() {
@@ -565,4 +567,12 @@ useEffect(() => {
   }
   loadSmartContract();
 }, []);
+```
+
+**Loading your contract with Svelte**
+
+```ts
+onMount(async () => {
+  const { YourSmartContract } = await import("your-smart-contract");
+});
 ```
