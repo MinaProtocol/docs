@@ -576,3 +576,47 @@ onMount(async () => {
   const { YourSmartContract } = await import("your-smart-contract");
 });
 ```
+
+##### Enabling the COOP and COEP headers
+
+To successfully load any SnarkyJS code in your UI, you must set the [COOP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)
+and [COEP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy) headers to set up a cross-origin isolated
+environment that enables the use of [SharedArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer).
+SnarkyJS relies on the use of `SharedArrayBuffer` to enable important WebAssembly features.
+
+There are many alternatives available to enable these headers. For example, if you deploy your UI to products like [Vercel](https://vercel.com/) or [Cloudflare Pages](https://pages.cloudflare.com/), you can set these headers in a custom configuration file. Otherwise, you can set these headers in the server framework of your choice (e.g., Express for JavaScript).
+
+<Alert kind="tip">
+
+COOP must be set to `same-origin`.
+
+COEP must be set to `require-corp`.
+
+</Alert>
+
+**Setting COOP and COEP in your Vercel configuration**:
+
+To see more details on deploying to Vercel, [see their documentation on `vercel.json`](https://vercel.com/docs/project-configuration).
+
+```json
+{
+  "headers": [
+    {
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" }
+        { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" },
+      ]
+    }
+  ]
+}
+```
+
+**Setting COOP and COEP in your Cloudflare Pages configuration**:
+
+To see more details on deploying to Cloudflare Pages, [see their documentation on `_headers`](https://developers.cloudflare.com/pages/platform/headers/).
+
+```
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+```
