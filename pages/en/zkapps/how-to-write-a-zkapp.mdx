@@ -577,6 +577,14 @@ onMount(async () => {
 });
 ```
 
+**Loading your contract with Vue**
+
+```ts
+onMounted(async () => {
+  const { YourSmartContract } = await import("your-smart-contract");
+});
+```
+
 ##### Enabling the COOP and COEP headers
 
 To successfully load any SnarkyJS code in your UI, you must set the [COOP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy)
