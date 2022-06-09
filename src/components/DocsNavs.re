@@ -126,6 +126,10 @@ module DocsNavsTranslations = {
     id: "sidenav.zkapps-for-ethereum-developers",
     defaultMessage: "zkApps for Ethereum Developers",
   };
+    let simpleAnonymousMessageBoardTutorial= {
+    id: "sidenav.simple-anonymous-message-board-tutorial",
+    defaultMessage: "Simple Anonymous Message Board Tutorial",
+  };
   let howZkAppsWork = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
@@ -386,6 +390,10 @@ module SideNav = {
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
           />
+          <Item
+            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
+            slug="simple-anonymous-message-board-tutorial"
+          />
            <Item
             title={intl->Intl.formatMessage(zkAppsAPIReference)}
             slug="snarkyjs-reference"
@@ -634,6 +642,10 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
+            slug="simple-anonymous-message-board-tutorial"
           />
         <Item
         title={intl->Intl.formatMessage(zkAppsAPIReference)}
