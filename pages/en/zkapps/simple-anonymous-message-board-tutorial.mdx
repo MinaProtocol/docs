@@ -11,7 +11,13 @@ currently in progress.
 </Alert>
 
 # Simple Anonymous Message Board Tutorial
-<DocLink copy="How to write a zkApp" url="/zkapps/how-to-write-a-zkapp" /> provides a high-level overview of everything you need to know to build applications on Mina. This tutorial will put these ideas into practice as we walk through the design and implementation of a semi-anonymous messaging protocol.
+
+<DocLink
+  copy="How to write a zkApp"
+  url="/zkapps/how-to-write-a-zkapp"
+/> provides a high-level overview of everything you need to know to build applications
+on Mina. This tutorial will put these ideas into practice as we walk through the
+design and implementation of a semi-anonymous messaging protocol.
 
 ## Overview
 
@@ -19,7 +25,7 @@ We’ll build a smart contract that allows users to publish messages semi-anonym
 
 ## Setup
 
-First, install the [Mina zkApp CLI](https://github.com/o1-labs/zkapp-cli) if you haven’t already done so
+First, install the [Mina zkApp CLI](https://github.com/o1-labs/zkapp-cli) if you haven’t already done so.
 
 #### Dependencies
 
@@ -52,7 +58,7 @@ zk --help
 ##### Create a new project
 
 ```sh
-zk project my-proj  # or path/to/my-proj
+zk project message-board  # or path/to/message-board
 
 ✔ Fetch project template
 ✔ Initialize Git repo
@@ -63,7 +69,7 @@ zk project my-proj  # or path/to/my-proj
 Success!
 
 Next steps:
-  cd my-proj
+  cd message-board
   git remote add origin <your-repo-url>
   git push -u origin main
 ```
@@ -92,13 +98,15 @@ This command creates a directory containing a new project template, fully set up
 
 Now that your project is set up, you can open it in your IDE or `cd zk-message` if you work from the command line.
 
-There should be an example smart contract in `./src` called `Add.ts` and test for it in `Add.test.ts`. Let’s create a new contract by running:
+There should be an example smart contract in `./src` called `Add.ts` and tests for it in `Add.test.ts`. These are just example code, and you can delete them if they bother you.
+
+Let’s create a new contract by running:
 
 ```sh
 zk file Message
 ```
 
-Now open it up and paste in the following:
+Now open it (`Message.ts`) up and paste in the following:
 
 ```ts
 import {
@@ -114,7 +122,7 @@ import {
   isReady,
   Poseidon,
   Encoding,
-} from 'snarkyjs';
+} from "snarkyjs";
 
 export { isReady, Field, Encoding };
 
@@ -130,16 +138,16 @@ await isReady;
 
 export const users = {
   Bob: PrivateKey.fromBase58(
-    'EKFAdBGSSXrBbaCVqy4YjwWHoGEnsqYRQTqz227Eb5bzMx2bWu3F'
+    "EKFAdBGSSXrBbaCVqy4YjwWHoGEnsqYRQTqz227Eb5bzMx2bWu3F"
   ),
   SuperBob: PrivateKey.fromBase58(
-    'EKEitxmNYYMCyumtKr8xi1yPpY3Bq6RZTEQsozu2gGf44cNxowmg'
+    "EKEitxmNYYMCyumtKr8xi1yPpY3Bq6RZTEQsozu2gGf44cNxowmg"
   ),
   MegaBob: PrivateKey.fromBase58(
-    'EKE9qUDcfqf6Gx9z6CNuuDYPe4XQQPzFBCfduck2X4PeFQJkhXtt'
+    "EKE9qUDcfqf6Gx9z6CNuuDYPe4XQQPzFBCfduck2X4PeFQJkhXtt"
   ), // This one says duck in it :)
   Jack: PrivateKey.fromBase58(
-    'EKFS9v8wxyrrEGfec4HXycCC2nH7xf79PtQorLXXsut9WUrav4Nw'
+    "EKFS9v8wxyrrEGfec4HXycCC2nH7xf79PtQorLXXsut9WUrav4Nw"
   ),
 };
 
@@ -167,13 +175,14 @@ This will serve as the scaffolding for the rest of the tutorial and contains a s
 
 ### Defining On-Chain Storage
 
-Every Mina smart contract includes eight on-chain state variables that each store almost 256 bits of information. In more complex smart contracts, these can store commitments (i.e., the hash of a file, the root of a Merkle tree, etc.) to off-chain storage, but in this case, we’ll store everything on-chain for the sake of simplicity. 
+Every Mina smart contract includes eight on-chain state variables that each store almost 256 bits of information. In more complex smart contracts, these can store commitments (i.e., the hash of a file, the root of a Merkle tree, etc.) to off-chain storage, but in this case, we’ll store everything on-chain for the sake of simplicity.
 
 <Alert kind="note">
-General purpose off-chain storage libraries are planned, but you can always roll your own solution if desired.
+  General purpose off-chain storage libraries are planned, but you can always
+  roll your own solution if desired.
 </Alert>
 
-In this smart contract, one state variable will store the last message. Another will store the hash of all the previous messages (so a frontend can validate message history), and three more will store user public keys (we could store even more by Merkelizing them, but we’ll keep it to three here for the sake of brevity).
+In this smart contract, one state variable will store the last message. Another will store the hash of all the previous messages (so a frontend can validate message history), and three more will store user public keys (we could store additional public keys by Merkelizing them, but we’ll keep it to three here for the sake of brevity).
 
 ```ts
 export class Add extends SmartContract {
@@ -183,28 +192,28 @@ export class Add extends SmartContract {
   @state(PublicKey) user1 = State<PublicKey>();
   @state(PublicKey) user2 = State<PublicKey>();
   @state(PublicKey) user3 = State<PublicKey>();
-  ```
+```
 
-  The `@state(Field)` decorator tells SnarkyJS that the variable should be stored on-chain as a `Field` type.
+The `@state(Field)` decorator tells SnarkyJS that the variable should be stored on-chain as a `Field` type.
 
-  For practical purposes, the `Field` type is similar to the `uint256` type in Solidity. It can store large integers, and addition, subtraction, and multiplication all work as expected. The only caveats are division and what happens in the event of an overflow. You can learn a little more about them [here](https://en.wikipedia.org/wiki/Finite_field_arithmetic), but it’s not necessary to understand exactly how field arithmetic works for this tutorial. SnarkyJS also provides `UInt32`, `UInt64`, and `Int64` types, but under the hood, all SnarkyJS types are composed of the Field type (including `PublicKey`, as you see above).
+For practical purposes, the `Field` type is similar to the `uint256` type in Solidity. It can store large integers, and addition, subtraction, and multiplication all work as expected. The only caveats are division and what happens in the event of an overflow. You can learn a little more about finite fields [here](https://en.wikipedia.org/wiki/Finite_field_arithmetic), but it’s not necessary to understand exactly how field arithmetic works for this tutorial. SnarkyJS also provides `UInt32`, `UInt64`, and `Int64` types, but under the hood, all SnarkyJS types are composed of the Field type (including `PublicKey`, as you see above).
 
 ### Defining the `init()` method
 
-  The `init` method is similar to the `constructor` in Solidity. It’s a place for you to define any setup that needs to happen before users begin interacting with the contract. In this case, we’ll set the public keys of users who can post, and initialize `message` and `messageHistoryHash` as zero (our front end will interpret the zero value to mean that no messages have been posted yet).
+The `init` method is similar to the `constructor` in Solidity. It’s a place for you to define any setup that needs to happen before users begin interacting with the contract. In this case, we’ll set the public keys of users who can post, and initialize `message` and `messageHistoryHash` as zero (our front end will interpret the zero value to mean that no messages have been posted yet).
 
-  ```ts
-    @method init() {
-    // Define initial values of on-chain variables
-    this.user1.set(users['Bob'].toPublicKey());
-    this.user2.set(users['SuperBob'].toPublicKey());
-    this.user3.set(users['MegaBob'].toPublicKey());
-    this.message.set(Field.zero);
-    this.messageHistoryHash.set(Field.zero);
-  }
-  ```
+```ts
+  @method init() {
+  // Define initial values of on-chain variables
+  this.user1.set(users['Bob'].toPublicKey());
+  this.user2.set(users['SuperBob'].toPublicKey());
+  this.user3.set(users['MegaBob'].toPublicKey());
+  this.message.set(Field.zero);
+  this.messageHistoryHash.set(Field.zero);
+}
+```
 
-  ### Defining `publishMessage()`
+### Defining `publishMessage()`
 
 The `publishMessage` method will allow an approved user to publish a message. Note the `@method` decorator mentioned earlier. It makes this method callable by users so that they can interact with the smart contract.
 
@@ -212,6 +221,13 @@ For our example, we’ll pass in `message` and `signerPrivateKey` arguments to c
 
 ```ts
   @method publishMessage(message: Field, signerPrivateKey: PrivateKey) {
+    // Compute signerPublicKey from signerPrivateKey argument
+    // Get approved public keys
+    // Assert that signerPublicKey is one of the approved public keys
+    // Update on-chain message variable
+    // Computer new messageHistoryHash
+    // Update on-chain messageHistoryHash
+  }
 ```
 
 Note that all inputs are private by default and will only exist on the user’s local machine when the smart contract runs; the Mina network will never see them. Our smart contract will only send values that are stored as state to the Mina blockchain. This means that even though the value of the `message` argument will eventually be public, the value of `signerPrivateKey` will never leave the user's machine (as a result of interacting with the smart contract).
@@ -221,18 +237,17 @@ Note that all inputs are private by default and will only exist on the user’s 
 Now that we have the user’s private key, we’ll need to derive the associated public key to check it against the list of approved publishers. Luckily the `PrivateKey` type in SnarkyJS includes a `toPublicKey()` method.
 
 ```ts
-    // Compute signerPublicKey from signerPrivateKey argument
-    const signerPublicKey = signerPrivateKey.toPublicKey();
+// Compute signerPublicKey from signerPrivateKey argument
+const signerPublicKey = signerPrivateKey.toPublicKey();
 ```
 
 We’ll have to check if this public key matches one of the ones stored on-chain. So let’s grab those as well.
 
-
 ```ts
-    // Get approved public keys
-    const user1 = this.user1.get();
-    const user2 = this.user2.get();
-    const user3 = this.user3.get();
+// Get approved public keys
+const user1 = this.user1.get();
+const user2 = this.user2.get();
+const user3 = this.user3.get();
 ```
 
 Calling the `get()` method tells SnarkyJS to retrieve these values from the zkApp account’s on-chain state. (Note that SnarkyJS uses a single network request to retrieve all on-chain state values simultaneously.)
@@ -240,12 +255,12 @@ Calling the `get()` method tells SnarkyJS to retrieve these values from the zkAp
 Finally, we check if `signerPublicKey` is equal to one of the allowed public keys contained in our `user` variables.
 
 ```ts
-    // Assert that signerPublicKey is one of the approved public keys
-    signerPublicKey
-      .equals(user1)
-      .or(signerPublicKey.equals(user2))
-      .or(signerPublicKey.equals(user3))
-      .assertEquals(true);
+// Assert that signerPublicKey is one of the approved public keys
+signerPublicKey
+  .equals(user1)
+  .or(signerPublicKey.equals(user2))
+  .or(signerPublicKey.equals(user3))
+  .assertEquals(true);
 ```
 
 Notice that we call the SnarkyJS `equals()` and `or()` methods instead of using the JavaScript operators (`===`, and `||`). The built-in SnarkyJS methods have the same effect, but they work with SnarkyJS types, and their execution can be verified using a zero-knowledge proof.
@@ -254,30 +269,29 @@ Notice that we call the SnarkyJS `equals()` and `or()` methods instead of using 
 
 ### Updating `message`
 
-Until now, we have worked to ensure that only approved users can call `publishMessage()`. When they do, the contract should update the on-chain message variable to their new message.
+Until now, we have worked to ensure that only approved users can call `publishMessage()`. When they do, the contract should update the on-chain `message` variable to their new message.
 
 ```ts
-    // Update on-chain message variable
-    this.message.set(message);
+// Update on-chain message variable
+this.message.set(message);
 ```
 
-The `set()` method will ask the Mina nodes to update the values of their on-chain message variables, but only if the associated proof is valid.
+The `set()` method will ask the Mina nodes to update the value of an on-chain variable, but only if the associated proof is valid.
 
 ### Updating `messageHistoryHash`
 
 There’s one more thing we should do. If we want users to be able to keep track of what has been said, then we need to store a commitment to the message history on-chain. There are a few ways to do this, but the simplest is to store a hash of our new `message` and our old `messageHistoryHash` every time we call `publishMessage`.
 
 ```ts
-    // Computer new messageHistoryHash
-    const oldHash = this.messageHistoryHash.get();
-    const newHash = Poseidon.hash([oldHash, message]);
+// Computer new messageHistoryHash
+const oldHash = this.messageHistoryHash.get();
+const newHash = Poseidon.hash([message, oldHash]);
 
-    // Update on-chain messageHistoryHash
-    this.messageHistoryHash.set(newHash);
+// Update on-chain messageHistoryHash
+this.messageHistoryHash.set(newHash);
 ```
 
 That’s it! Save the file, and let’s make sure everything compiles.
-
 
 ```sh
 npm run build
@@ -323,11 +337,9 @@ What would you like to say? (should only work if you are one of the Bobs): Hello
 
 ## Wrapping up
 
-Hopefully you enjoyed this tutorial, and it gave you a sense of what's possible with SnarkyJS. The messaging protocol we built is quite simple but also very powerful. This basic pattern could be used to create a whistleblower system, an anonymous NFT project, or even anonymous DAO voting. SnarkyJS makes it easy for developers to build things that don’t intuitively seem possible, and this is really the point. Zero-knowledge proofs open the door to an entirely different way of thinking about the internet, and we are so excited to see what people like you will build. Make sure to join the [#zkapps-developers](https://placeholder.com) channel on our Discord, and apply for the [zkApp Builders Program](https://placeholder.com) if you are interested in building something more complex with the help of our team at O(1) Labs. More tutorials are on the way ([suggest ideas](https://placeholder.com)), but these are some logical next steps if you are interested in extending this project.
+Hopefully you enjoyed this tutorial, and it gave you a sense of what's possible with SnarkyJS. The messaging protocol we built is quite simple but also very powerful. This basic pattern could be used to create a whistleblower system, an anonymous NFT project, or even anonymous DAO voting. SnarkyJS makes it easy for developers to build things that don’t intuitively seem possible, and this is really the point. Zero-knowledge proofs open the door to an entirely different way of thinking about the internet, and we are so excited to see what people like you will build. Make sure to join the #zkapps-developers channel on [our Discord](https://bit.ly/MinaDiscord), and apply for the [zkApp Builders Program](https://share.hsforms.com/1KUeCPxJzQC6PIZ-LLdZe1g4xuul) if you are interested in building something more complex with the help of our team at O(1) Labs. More tutorials are on the way ([suggest ideas](https://docs.google.com/forms/d/e/1FAIpQLSctM8rq5B7teYhGl8hi2mk8NoSs6YiCDqjOnUfzpAAymU6Uug/viewform?usp=sf_link)), but these are some logical next steps if you are interested in extending this project.
 
-1. Allow users to pass signers into the publishMessage method directly so that many different organizations can use a single contract. (Hint: You’ll have to store a commitment to the signers on-chain.)
-2. Allow users to pass an arbitrarily large number of signers into the publishMessage method.
-3. Store the message history in a Merkle tree so a user interface can check a subset of the messages quickly without evaluating the entire history.
+1. Allow users to pass signers into the `publishMessage()` method directly so that many different organizations can use a single contract. (Hint: You’ll have to store a commitment to the signers on-chain.)
+2. Allow users to pass an arbitrarily large number of signers into the `publishMessage()` method.
+3. Store the message history in a Merkle tree so a user interface can quickly check a subset of the messages without evaluating the entire history.
 4. Build a shiny front end!
-
-
