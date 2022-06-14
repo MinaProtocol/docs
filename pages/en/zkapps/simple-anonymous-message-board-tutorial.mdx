@@ -152,10 +152,10 @@ export const users = {
 };
 
 export class Add extends SmartContract {
-  // On-chain variable definitions
+  // On-chain state definitions
 
   @method init() {
-    // Define initial values of on-chain variables
+    // Define initial values of on-chain state
   }
 
   @method publishMessage(message: Field, signerPrivateKey: PrivateKey) {
@@ -173,9 +173,9 @@ This will serve as the scaffolding for the rest of the tutorial and contains a s
 
 ## Wrting the Smart Contract
 
-### Defining On-Chain Storage
+### Defining On-Chain State
 
-Every Mina smart contract includes eight on-chain state variables that each store almost 256 bits of information. In more complex smart contracts, these can store commitments (i.e., the hash of a file, the root of a Merkle tree, etc.) to off-chain storage, but in this case, we’ll store everything on-chain for the sake of simplicity.
+Every Mina smart contract includes eight on-chain state variables that each store almost 256 bits of information. In more complex smart contracts, these can store commitments (i.e. the hash of a file, the root of a Merkle tree, etc.) to off-chain storage, but in this case, we’ll store everything on-chain for the sake of simplicity.
 
 <Alert kind="note">
   General purpose off-chain storage libraries are planned, but you can always
@@ -186,7 +186,7 @@ In this smart contract, one state variable will store the last message. Another 
 
 ```ts
 export class Add extends SmartContract {
-  // On-chain variable definitions
+  // On-chain state definitions
   @state(Field) message = State<Field>();
   @state(Field) messageHistoryHash = State<Field>();
   @state(PublicKey) user1 = State<PublicKey>();
@@ -204,7 +204,7 @@ The `init` method is similar to the `constructor` in Solidity. It’s a place fo
 
 ```ts
   @method init() {
-  // Define initial values of on-chain variables
+  // Define initial values of on-chain state
   this.user1.set(users['Bob'].toPublicKey());
   this.user2.set(users['SuperBob'].toPublicKey());
   this.user3.set(users['MegaBob'].toPublicKey());
@@ -272,22 +272,22 @@ Notice that we call the SnarkyJS `equals()` and `or()` methods instead of using 
 Until now, we have worked to ensure that only approved users can call `publishMessage()`. When they do, the contract should update the on-chain `message` variable to their new message.
 
 ```ts
-// Update on-chain message variable
+// Update on-chain message state
 this.message.set(message);
 ```
 
-The `set()` method will ask the Mina nodes to update the value of an on-chain variable, but only if the associated proof is valid.
+The `set()` method will ask the Mina nodes to update the value of their on-chain state, but only if the associated proof is valid.
 
 ### Updating `messageHistoryHash`
 
 There’s one more thing we should do. If we want users to be able to keep track of what has been said, then we need to store a commitment to the message history on-chain. There are a few ways to do this, but the simplest is to store a hash of our new `message` and our old `messageHistoryHash` every time we call `publishMessage`.
 
 ```ts
-// Computer new messageHistoryHash
+// Compute new messageHistoryHash
 const oldHash = this.messageHistoryHash.get();
 const newHash = Poseidon.hash([message, oldHash]);
 
-// Update on-chain messageHistoryHash
+// Update on-chain state
 this.messageHistoryHash.set(newHash);
 ```
 
@@ -299,11 +299,12 @@ npm run build
 
 If everything is correct, you should see a new `./build` directory. This is where the compiled version of your project lives that you can import into a user interface.
 
-## Integrating with a User Interface
+## Integrating with a User Interface (Coming Soon)
 
-One of the benefits of writing smart contracts in TypeScript is that they are usually straightforward to <DocLink copy="integrate with UI components" url="/zkapps/how-to-write-a-zkapp" />.
+<!--
+One of the benefits of writing smart contracts in TypeScript, is that the compiled JavaScript and WASM smart contract is easy to <DocLink copy="integrate into your website UI" url="/zkapps/how-to-write-a-zkapp" />.
 
-We won’t make you write a UI for this tutorial, but we have created a simple command-line interface so you can interact with your smart contract as a user, get a sense of how it works, and experiment with what you have just built. You can clone it from [this](https://github.com/) repository.
+We won’t make you write a UI for this tutorial, but we have created a simple command-line interface so you can interact with your smart contract as a user to get a sense of how it works, and experiment with what you have just built. You can clone it from [this](https://github.com/) repository.
 
 ```sh
 git clone https://placeholder.com
@@ -334,10 +335,13 @@ What would you like to say? (should only work if you are one of the Bobs): Hello
 
 ** GNARLY ERROR **
 ```
+-->
 
 ## Wrapping up
 
-Hopefully you enjoyed this tutorial, and it gave you a sense of what's possible with SnarkyJS. The messaging protocol we built is quite simple but also very powerful. This basic pattern could be used to create a whistleblower system, an anonymous NFT project, or even anonymous DAO voting. SnarkyJS makes it easy for developers to build things that don’t intuitively seem possible, and this is really the point. Zero-knowledge proofs open the door to an entirely different way of thinking about the internet, and we are so excited to see what people like you will build. Make sure to join the #zkapps-developers channel on [our Discord](https://bit.ly/MinaDiscord), and apply for the [zkApp Builders Program](https://share.hsforms.com/1KUeCPxJzQC6PIZ-LLdZe1g4xuul) if you are interested in building something more complex with the help of our team at O(1) Labs. More tutorials are on the way ([suggest ideas](https://docs.google.com/forms/d/e/1FAIpQLSctM8rq5B7teYhGl8hi2mk8NoSs6YiCDqjOnUfzpAAymU6Uug/viewform?usp=sf_link)), but these are some logical next steps if you are interested in extending this project.
+Hopefully you enjoyed this tutorial, and it gave you a sense of what's possible with SnarkyJS. The messaging protocol we built is quite simple but also very powerful. This basic pattern could be used to create a whistleblower system, an anonymous NFT project, or even anonymous DAO voting. SnarkyJS makes it easy for developers to build things that don’t intuitively seem possible, and this is really the point.
+
+Zero-knowledge proofs open the door to an entirely different way of thinking about the internet, and we are so excited to see what people like you will build. Make sure to join the [#zkapps-developers](https://discord.com/channels/484437221055922177/915745847692636181) channel on [our Discord](https://bit.ly/MinaDiscord), and apply for the [zkApp Builders Program](https://share.hsforms.com/1KUeCPxJzQC6PIZ-LLdZe1g4xuul) if you are interested in building something more complex with the guidance of our team at O(1) Labs. More tutorials are on the way ([suggest ideas](https://docs.google.com/forms/d/e/1FAIpQLSctM8rq5B7teYhGl8hi2mk8NoSs6YiCDqjOnUfzpAAymU6Uug/viewform?usp=sf_link)), but these are some logical next steps if you are interested in extending this project.
 
 1. Allow users to pass signers into the `publishMessage()` method directly so that many different organizations can use a single contract. (Hint: You’ll have to store a commitment to the signers on-chain.)
 2. Allow users to pass an arbitrarily large number of signers into the `publishMessage()` method.
