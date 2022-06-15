@@ -450,15 +450,20 @@ const display = `${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`;
    sign and send the transaction using `sendTransaction()`.
 
 ```ts
-// TODO DISCUSS: Maybe show one line calling smart contract prover method if
-// it's short, to show how things connect.
 try {
-  const { txId } = await window.mina.sendTransaction({
-    // fee: 1, // ?
-    to: "B62qm3V7qSQ975tgo2MXv4Bpof2cVezZyP1VZJ8DfrVNy9yfqKZxLQf",
-    memo: "", // optional
+  const tx = await Mina.transaction(YourSmartContract.contractMethod());
+
+  await tx.prove();
+
+  const { hash } = await window.mina.sendTransaction({
+    transaction: tx.toJSON(),
+    feePayer: {
+      fee: 0.1,
+      memo: "zk",
+    },
   });
-  console.log(txId);
+
+  console.log(hash);
 } catch (err) {
   console.log(err.message);
 }
