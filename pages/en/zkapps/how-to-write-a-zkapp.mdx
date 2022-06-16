@@ -451,7 +451,9 @@ const display = `${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`;
 
 ```ts
 try {
-  const tx = await Mina.transaction(YourSmartContract.contractMethod());
+  const tx = await Mina.transaction(() => {
+    new YourSmartContract(zkAppAddress).foo();
+  });
 
   await tx.prove();
 
