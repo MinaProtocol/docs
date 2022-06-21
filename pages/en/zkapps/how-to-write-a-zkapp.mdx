@@ -545,7 +545,7 @@ You can integrate your smart contract by publishing it to npm and adding it as a
 
 ##### Publish to npm
 
-The `index.ts` file is the entry point of your project. This file only imports all smart contract classes you want access to and exports them. This structure allows you to easily publish your smart contracts to npm.
+The `index.ts` file is the entry point of your project. This file only imports all smart contract classes you want access to, and exports them. This pattern allows you to specify which smart contracts are available to import when consuming your project from npm within your UI.
 
 ```ts
 import { YourSmartContract } from './YourSmartContract.js';
