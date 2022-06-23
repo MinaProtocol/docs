@@ -7,17 +7,17 @@ export default Page({ title: "Block Producer Sidecar" });
 <br></br>
 
 <Alert kind="info">
-<p>
-<b>IMPORTANT UPDATE:</b> This will affect the submission of uptime data and the Performance Score results for receiving a delegation.
-</p>
+
+**PLEASE READ:** This affects the submission of uptime data and the Performance Score results for receiving a delegation.
 <br></br>
-<p>
-The current sidecar tracking system will be phased out after the current cycle (Cycle 6) and be replaced by the SNARK-work-based uptime tracking system. Until further notice, while transitioning to the new system, <b>continue running the <u>sidecar</u> AND <u>SNARK-based tracking system</u> on the SAME node.</b> 
-</p>
-<br></br>
-<p>
-Please follow the instructions in <a href="https://discord.com/channels/484437221055922177/808895957978447882/958384520464330812">this post here</a> and ask any questions in the <a href="https://discord.gg/mXXKHMDU">#delegation-program channel on Discord</a> while following along for the latest updates.
-</p>
+
+The current sidecar tracking system is being phased out to be replaced by the SNARK-work-based uptime tracking system. Until further notice, <u>please continue running the sidecar AND SNARK-based tracking system on the SAME node.</u>
+
+- <DocLink copy="Instructions for the sidecar tracking system" url="/advanced/bp-sidecar" />
+- <DocLink copy="Instructions for the SNARK-work-based uptime system" url="/advanced/uptime-system" />
+
+Please follow the latest updates and post questions in the [#delegation-program channel](https://discord.gg/ywDzwmGABT) on Discord.
+
 </Alert>
 
 <br></br>
@@ -144,3 +144,15 @@ ERROR:root:Sleeping for 30s and trying again
 ```
 
 It likely means you're shipping off data to the ingest pipeline without any block producer key configured on your Mina node - since your BP key is your identity we can't accept node data since we don't know who is submitting it!
+
+
+### Relevant Links
+
+- [Latest Release Notes for Mina Protocol](https://github.com/MinaProtocol/mina/releases)
+- [Mina Foundation Delegation Policy](https://minaprotocol.com/blog/mina-foundation-delegation-policy)
+- [O(1) Labs Delegation Policy](https://blog.o1labs.org/o-1-labs-delegation-policy-786bf96f9fdd)
+- <DocLink copy="Mina Docs: Foundation Delegation Program" url="/advanced/delegation"/>
+- <DocLink copy="Mina Docs: SNARK-based Uptime System" url="/advanced/uptime-system"/>
+
+#### Need any help? Post your questions in the [#Delegation-Program](https://discord.gg/ywDzwmGABT) channel on Discord.
+
