@@ -183,6 +183,10 @@ module DocsNavsTranslations = {
     id: "sidenav.delegation",
     defaultMessage: "Foundation Delegation Program",
   };
+  let rosetta = {
+    id: "sidenav.rosetta",
+    defaultMessage: "Rosetta",
+  };
   let edit = {id: "sidenav.edit", defaultMessage: "Documentation"};
   let overview = {id: "sidenav.overview", defaultMessage: "Overview"};
   let documentation = {id: "sidenav.documentation", defaultMessage: "Edit"};
@@ -298,6 +302,10 @@ module SideNav = {
             title={intl->Intl.formatMessage(ledgerHardWallet)}
             slug="ledger-app-mina"
           />
+          <Item
+          title={intl->Intl.formatMessage(rosetta)}
+          slug="rosetta"
+        />
           <Item
             title={intl->Intl.formatMessage(seedPeers)}
             slug="seed-peers"
@@ -550,6 +558,10 @@ module Dropdown = {
             title={intl->Intl.formatMessage(ledgerHardWallet)}
             slug="ledger-app-mina"
           />
+          <Item
+          title={intl->Intl.formatMessage(rosetta)}
+          slug="rosetta"
+        />
           <Item
             title={intl->Intl.formatMessage(seedPeers)}
             slug="seed-peers"
