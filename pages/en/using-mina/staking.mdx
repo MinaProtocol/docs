@@ -18,11 +18,7 @@ To properly remain synced to the network and participate in consensus, it is imp
 
 ### Staking MINA
 
-We can try out staking with our MINA by issuing the following command:
-
-    mina client set-staking --public-key $MINA_PUBLIC_KEY
-
-Alternatively, you can restart the daemon with the `-block-producer-pubkey` flag:
+A fresh account is staking to itself by default. To allow it producing blocks, you can restart the daemon with the `-block-producer-pubkey` flag:
 
 <DaemonCommandExample args={["-block-producer-pubkey $MINA_PUBLIC_KEY"]} />
 
