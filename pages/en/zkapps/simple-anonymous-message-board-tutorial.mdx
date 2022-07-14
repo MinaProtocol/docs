@@ -103,10 +103,10 @@ There should be an example smart contract in `./src` called `Add.ts` and tests f
 Let’s create a new contract by running:
 
 ```sh
-zk file Message
+zk file message
 ```
 
-Now open it (`Message.ts`) up and paste in the following:
+Now open it (`message.ts`) up and paste in the following:
 
 ```ts
 import {
@@ -171,7 +171,7 @@ export class Add extends SmartContract {
 
 This will serve as the scaffolding for the rest of the tutorial and contains a smart contract called `Message` with two methods: `init()` and `publishMessage()`. The `init()` method is similar to the `constructor` in Solidity. It’s a place for you to define any setup that needs to happen before users begin interacting with the contract. `publishMessage()` is the method that users will invoke when they want to create a new message. The `@method` decorator tells SnarkyJS that users should be allowed to call this method and that it should generate a zero-knowledge proof of its execution.
 
-## Wrting the Smart Contract
+## Writing the Smart Contract
 
 ### Defining On-Chain State
 
@@ -203,7 +203,7 @@ For practical purposes, the `Field` type is similar to the `uint256` type in Sol
 The `init` method is similar to the `constructor` in Solidity. It’s a place for you to define any setup that needs to happen before users begin interacting with the contract. In this case, we’ll set the public keys of users who can post, and initialize `message` and `messageHistoryHash` as zero (our front end will interpret the zero value to mean that no messages have been posted yet).
 
 ```ts
-  @method init() {
+@method init() {
   // Define initial values of on-chain state
   this.user1.set(users['Bob'].toPublicKey());
   this.user2.set(users['SuperBob'].toPublicKey());
