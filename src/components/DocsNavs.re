@@ -132,7 +132,7 @@ module DocsNavsTranslations = {
   };
     let simpleAnonymousMessageBoardTutorial= {
     id: "sidenav.simple-anonymous-message-board-tutorial",
-    defaultMessage: "Simple Anonymous Message Board Tutorial",
+    defaultMessage: "Tutorial: Simple Anonymous Message Board",
   };
   let howZkAppsWork = {
     id: "sidenav.how-zkapps-work",
