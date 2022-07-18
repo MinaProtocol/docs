@@ -132,7 +132,7 @@ module DocsNavsTranslations = {
   };
     let simpleAnonymousMessageBoardTutorial= {
     id: "sidenav.simple-anonymous-message-board-tutorial",
-    defaultMessage: "Simple Anonymous Message Board Tutorial",
+    defaultMessage: "Tutorial: Simple Anonymous Message Board",
   };
   let howZkAppsWork = {
     id: "sidenav.how-zkapps-work",
@@ -158,6 +158,10 @@ module DocsNavsTranslations = {
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
     defaultMessage: "How To Write A zkApp",
+  };
+  let howTestZkApp = {
+    id: "sidenav.how-to-test-a-zkapp",
+    defaultMessage: "How To Test A zkApp",
   };
   let zkAppsAPIReference= {
     id: "sidenav.api-reference",
@@ -403,6 +407,10 @@ module SideNav = {
           <Item
             title={intl->Intl.formatMessage(howWriteZkApp)}
             slug="how-to-write-a-zkapp"
+          />
+          <Item
+          title={intl->Intl.formatMessage(howTestZkApp)}
+          slug="how-to-test-a-zkapp"
           />
           <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
@@ -659,6 +667,10 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(howWriteZkApp)}
             slug="how-to-write-a-zkapp"
+          />
+          <Item
+          title={intl->Intl.formatMessage(howTestZkApp)}
+          slug="how-to-test-a-zkapp"
           />
           <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
