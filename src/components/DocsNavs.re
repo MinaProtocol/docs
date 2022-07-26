@@ -134,10 +134,6 @@ module DocsNavsTranslations = {
     id: "sidenav.simple-anonymous-message-board-tutorial",
     defaultMessage: "Tutorial: Simple Anonymous Message Board",
   };
-  let howZkAppsWork = {
-    id: "sidenav.how-zkapps-work",
-    defaultMessage: "How zkApps Work",
-  };
   let onlineCommunities = {
     id: "sidenav.online-communities",
     defaultMessage: "Online Communities",
@@ -155,13 +151,21 @@ module DocsNavsTranslations = {
     id: "sidenav.github",
     defaultMessage: "Github",
   };
+  let howZkAppsWork = {
+    id: "sidenav.how-zkapps-work",
+    defaultMessage: "How zkApps Work",
+  };
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
-    defaultMessage: "How To Write A zkApp",
+    defaultMessage: "How To Write a zkApp",
   };
   let howTestZkApp = {
     id: "sidenav.how-to-test-a-zkapp",
-    defaultMessage: "How To Test A zkApp",
+    defaultMessage: "How To Test a zkApp",
+  };
+  let   howDeployZkApp = {
+    id: "sidenav.how-to-deploy-a-zkapp",
+    defaultMessage: "How To Deploy a zkApp",
   };
   let zkAppsAPIReference= {
     id: "sidenav.api-reference",
@@ -217,6 +221,14 @@ module SideNav = {
         ),
       ]);
   };
+
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
+    /* Below is the navigation for web */
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
 
   [@react.component]
   let make = (~currentSlug) => {
@@ -398,6 +410,9 @@ module SideNav = {
             slug="timelock"
           />
         </Section>
+
+        /* ----------------------- zkApps Section (web) ---------------------------- */
+
         <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
@@ -407,6 +422,10 @@ module SideNav = {
           <Item
             title={intl->Intl.formatMessage(howWriteZkApp)}
             slug="how-to-write-a-zkapp"
+          />
+          <Item
+          title={intl->Intl.formatMessage(howDeployZkApp)}
+          slug="how-to-deploy-a-zkapp"
           />
           <Item
           title={intl->Intl.formatMessage(howTestZkApp)}
@@ -490,7 +509,13 @@ module Dropdown = {
     let language = toISOCode(currentLanguage);
     let f = url => {j|/$(language)/$(url)|j};
 
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
     /* Below is the mobile navigation for mobile and tablets */
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
+    /* ------------------------------------------------------------- */
 
     <div className=Styles.dropdown>
       <DropdownNav
@@ -658,6 +683,9 @@ module Dropdown = {
             slug="timelock"
           />
         </Section>
+      
+        /* ----------------------- zkApps Section (mobile) ---------------------------- */
+
         <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
@@ -667,6 +695,10 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(howWriteZkApp)}
             slug="how-to-write-a-zkapp"
+          />
+          <Item
+          title={intl->Intl.formatMessage(howDeployZkApp)}
+          slug="how-to-deploy-a-zkapp"
           />
           <Item
           title={intl->Intl.formatMessage(howTestZkApp)}
