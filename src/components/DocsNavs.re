@@ -167,6 +167,10 @@ module DocsNavsTranslations = {
     id: "sidenav.how-to-deploy-a-zkapp",
     defaultMessage: "How To Deploy a zkApp",
   };
+  let   howZkAppUI = {
+    id: "sidenav.how-to-write-a-zkapp-ui",
+    defaultMessage: "How To Write a zkApp UI",
+  };
   let zkAppsAPIReference= {
     id: "sidenav.api-reference",
     defaultMessage: "SnarkyJS API Reference",
@@ -424,12 +428,16 @@ module SideNav = {
             slug="how-to-write-a-zkapp"
           />
           <Item
+          title={intl->Intl.formatMessage(howTestZkApp)}
+          slug="how-to-test-a-zkapp"
+          />
+          <Item
           title={intl->Intl.formatMessage(howDeployZkApp)}
           slug="how-to-deploy-a-zkapp"
           />
           <Item
-          title={intl->Intl.formatMessage(howTestZkApp)}
-          slug="how-to-test-a-zkapp"
+          title={intl->Intl.formatMessage(howZkAppUI)}
+          slug="how-to-write-a-zkapp-ui"
           />
           <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
@@ -697,12 +705,16 @@ module Dropdown = {
             slug="how-to-write-a-zkapp"
           />
           <Item
+          title={intl->Intl.formatMessage(howTestZkApp)}
+          slug="how-to-test-a-zkapp"
+          />
+          <Item
           title={intl->Intl.formatMessage(howDeployZkApp)}
           slug="how-to-deploy-a-zkapp"
           />
           <Item
-          title={intl->Intl.formatMessage(howTestZkApp)}
-          slug="how-to-test-a-zkapp"
+          title={intl->Intl.formatMessage(howZkAppUI)}
+          slug="how-to-write-a-zkapp-ui"
           />
           <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
