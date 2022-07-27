@@ -15,7 +15,7 @@ First, change into the directory containing your smart contract and then run the
 following command:
 
 ```sh
-$ zk config
+zk config
 ```
 
 It will ask you to specify a name (can be anything), URL to deploy to, & fee (in
@@ -30,7 +30,7 @@ For Berkeley QANet, let's use the following values:
 - **URL**: `https://proxy.berkeley.minaexplorer.com/graphql`
 - **Fee**: `0.1`
 
-<Alert kind="info">
+<Alert kind="tip">
   If your project contains multiple smart contracts (e.g. `Foo` and `Bar`) that
   you intend to deploy to the same network, we recommend following a naming
   pattern such as `berkeley-foo` and `berkeley-bar` when naming your deploy
@@ -71,7 +71,7 @@ You will have to wait a few minutes for the next block to include your transacti
 To deploy your smart contract to the network, run the following command:
 
 ```sh
-$ zk deploy berkeley
+zk deploy berkeley
 ```
 
 When running the deploy command, the zkApp CLI will compute a verification key for your zkApp CLI. Computing the verification key can take 1-2 minutes, so please be patient. The zkApp CLI will show you the details of the transaction such as the network name, the URL, and the smart contract that will be deployed..
