@@ -40,6 +40,16 @@ Mina.setActiveInstance(Local);
 
 #### Deploying a contract locally
 
+The mock Mina local blockchain contains test accounts that can be used to deploy the contract and pay transaction fees.
+
+```ts
+// test accounts that pays all the fees, and puts additional funds into the zkapp.
+let feePayer = Local.testAccounts[0].privateKey;
+```
+
+
+
+
 #### Writing integration tests
 
 ### Learn more
