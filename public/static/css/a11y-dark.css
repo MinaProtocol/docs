@@ -1,11 +1,19 @@
-/* a11y-light theme */
-/* Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css */
-/* @author: ericwbailey */
+/*!
+  Theme: a11y-dark
+  Author: @ericwbailey
+  Maintainer: @ericwbailey
+  Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css
+*/
+
+.hljs {
+  background: #2b2b2b;
+  color: #f8f8f2;
+}
 
 /* Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #696969;
+  color: #d4d0ab;
 }
 
 /* Red */
@@ -17,24 +25,23 @@
 .hljs-selector-class,
 .hljs-regexp,
 .hljs-deletion {
-  color: #d91e18;
+  color: #ffa07a;
 }
 
 /* Orange */
 .hljs-number,
 .hljs-built_in,
-.hljs-builtin-name,
 .hljs-literal,
 .hljs-type,
 .hljs-params,
 .hljs-meta,
 .hljs-link {
-  color: #aa5d00;
+  color: #f5ab35;
 }
 
 /* Yellow */
 .hljs-attribute {
-  color: #aa5d00;
+  color: #ffd700;
 }
 
 /* Green */
@@ -42,31 +49,23 @@
 .hljs-symbol,
 .hljs-bullet,
 .hljs-addition {
-  color: #008000;
+  color: #abe338;
 }
 
 /* Blue */
 .hljs-title,
 .hljs-section {
-  color: #007faa;
+  color: #00e0e0;
 }
 
 /* Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #7928a1;
-}
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  /* background: #fefefe; */
-  color: #545454;
-  padding: 0.5em;
+  color: #dcc6e0;
 }
 
 .hljs-emphasis {
-  /* font-style: italic; */
+  font-style: italic;
 }
 
 .hljs-strong {
@@ -77,7 +76,6 @@
   .hljs-addition,
   .hljs-attribute,
   .hljs-built_in,
-  .hljs-builtin-name,
   .hljs-bullet,
   .hljs-comment,
   .hljs-link,
