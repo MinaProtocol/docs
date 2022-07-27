@@ -31,6 +31,13 @@ For examples of existing tests, we recommend creating a template example using t
 
 #### Creating a local blockchain
 
+The `Mina.LocalBlockchain()` method specifies a mock Mina ledger of accounts that runs locally. It contains logic for updating the ledger that can be used to test your smart contract locally.
+
+```ts
+let Local = Mina.LocalBlockchain();
+Mina.setActiveInstance(Local);
+```
+
 #### Deploying a contract locally
 
 #### Writing integration tests
