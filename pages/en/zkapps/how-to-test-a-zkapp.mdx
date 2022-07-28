@@ -71,7 +71,52 @@ txn.send();
 While Jest can be used to write both unit and integration tests, It is reccomended to create linear scripts for smart contract integration tests. The scripting worflow is easier to reason about when creating large interconnected tests. It also makes debugging easier and provides good error tracing. 
 
 
- A well written script tests the flow of your smart contracts expected behavior, and verifies correctness of state updates. After you test the expected behavior, it's benifical to verify the preconditions of your methods and test edge cases of your smart contract. Below is an example integration test script.
+ A well written script tests the flow of your smart contracts expected behavior, and verifies correctness of state updates. After you test the expected behavior, it's benifical to verify the preconditions of your methods and test edge cases of your smart contract. Below is an example of a basic integration test script.
+
+```ts
+await isReady;
+// setup local blockchain
+let Local = Mina.LocalBlockchain();
+Mina.setActiveInstance(Local);
+
+// test accounts that pays all the fees, and puts additional funds into the zkapp.
+let feePayer = Local.testAccounts[0].privateKey;
+
+// zkapp account
+let zkAppPrivateKey = PrivateKey.random();
+let zkAppAddress = zkAppPrivateKey.toPublicKey();
+let zkAppInstance = new Add(zkAppAddress);
+
+// deploy zkapp
+console.log('Deploying Add smart contract ...');
+let tx = await Mina.transaction(feePayer, () => {
+  Party.fundNewAccount(feePayer);
+  zkAppInstance.deploy({ zkappKey: zkAppPrivateKey });
+  zkAppInstance.init();
+});
+
+tx.send();
+
+let currentState = zkAppInstance.num.get().toString();
+console.log(`Initial state: ${currentState}`);
+
+console.log('Updating state ...');
+tx = await Mina.transaction(feePayer, () => {
+  zkAppInstance.update();
+  zkAppInstance.sign(zkAppPrivateKey);
+});
+
+tx.send();
+
+currentState = zkAppInstance.num.get().toString();
+
+if (currentState !== '3') {
+  throw Error(`'State incorrectly updated to ${currentState}`);
+}
+console.log(`Current State: ${currentState}`);
+
+shutdown();
+``` 
 
 ### Learn more
 
