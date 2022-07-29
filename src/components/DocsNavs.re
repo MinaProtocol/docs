@@ -147,6 +147,7 @@ module DocsNavsTranslations = {
     id: "sidenav.careers",
     defaultMessage: "Careers",
   };
+  let faq = {id: "sidenav.faq", defaultMessage: "FAQ"};
 
   let reporting = {
     id: "sidenav.reporting",
@@ -185,7 +186,7 @@ module DocsNavsTranslations = {
     defaultMessage: "Troubleshooting",
   };
   let glossary = {id: "sidenav.glossary", defaultMessage: "Glossary"};
-  let faq = {id: "sidenav.faq", defaultMessage: "FAQ"};
+
   let exchangeFaq = {id: "sidenav.exchange-operators", defaultMessage: "Exchange Operators"};
   let participate = {id: "sidenav.participate", defaultMessage: "Participate"};
   let contributingToMina = {
@@ -260,8 +261,7 @@ module SideNav = {
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
-          slug={f("getting-started")}
-          />
+          slug="getting-started" />
           <Item
             title={intl->Intl.formatMessage(keypairGeneration)}
             slug="keypair"
@@ -339,7 +339,7 @@ module SideNav = {
             title={intl->Intl.formatMessage(stakingServiceGuidelines)}
             slug="staking-service-guidelines"
           />
-          <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
         </Section>
         <Section
           title={intl->Intl.formatMessage(developers)}
@@ -537,8 +537,7 @@ module Dropdown = {
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
-          slug={f("getting-started")}
-        />
+          slug="getting-started" />
           <Item
             title={intl->Intl.formatMessage(keypairGeneration)}
             slug="keypair"
