@@ -13,7 +13,7 @@
 /* Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #d4d0ab;
+  color: #919191;
 }
 
 /* Red */
@@ -61,7 +61,7 @@
 /* Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #dcc6e0;
+  color: #edadf9;
 }
 
 .hljs-emphasis {
