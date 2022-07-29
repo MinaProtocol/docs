@@ -8,7 +8,7 @@
 /getting-started             /en/getting-started
 /snapp-credit                /en/snapp-credit
 /troubleshooting             /en/troubleshooting
-/advanced/*                  /en/advanced/:splat
+/node-operators/*                  /en/node-operators/:splat
 /architecture/*              /en/architecture/:splat
 /developers/*                /en/developers/:spalt
 /zkapps/*                    /en/zkapps/:splat
