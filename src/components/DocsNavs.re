@@ -126,7 +126,11 @@ module DocsNavsTranslations = {
     id: "sidenav.time-locked-accounts",
     defaultMessage: "Time-locked Accounts",
   };
-  let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps"};
+  let zkapps = {
+    id: "sidenav.zkapps",
+    defaultMessage: "zkApps Developers",
+  };
+
   let zkAppsForEthereumDevelopers= {
     id: "sidenav.zkapps-for-ethereum-developers",
     defaultMessage: "zkApps for Ethereum Developers",
