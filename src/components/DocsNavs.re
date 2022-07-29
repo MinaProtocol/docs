@@ -456,10 +456,6 @@ module SideNav = {
           title={intl->Intl.formatMessage(troubleshooting)}
           slug={f("troubleshooting")}
         />
-        <Item
-          title={intl->Intl.formatMessage(glossary)}
-          slug={f("glossary")}
-        />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
         <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
@@ -484,6 +480,10 @@ module SideNav = {
           slug="reporting"
           />
       </Section>
+      <Item
+      title={intl->Intl.formatMessage(glossary)}
+      slug={f("glossary")}
+    />
       </SideNav>
     </div>;
   };
@@ -733,10 +733,6 @@ module Dropdown = {
           title={intl->Intl.formatMessage(troubleshooting)}
           slug={f("troubleshooting")}
         />
-        <Item
-          title={intl->Intl.formatMessage(glossary)}
-          slug={f("glossary")}
-        />
         <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
 
@@ -762,6 +758,10 @@ module Dropdown = {
           slug="reporting"
           />
         </Section>
+        <Item
+        title={intl->Intl.formatMessage(glossary)}
+        slug={f("glossary")}
+      />
       </DropdownNav>
     </div>;
   };
