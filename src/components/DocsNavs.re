@@ -29,7 +29,8 @@ module DocsNavsTranslations = {
     id: "sidenav.cli-reference",
     defaultMessage: "CLI Reference",
   };
-  let advanced = {id: "sidenav.advanced", defaultMessage: "Advanced"};
+  let nodeOperators = {id: "sidenav.node-operators", defaultMessage: "Node Operators"};
+
   let archiveNode = {
     id: "sidenav.archive-node",
     defaultMessage: "Archive Node",
@@ -251,12 +252,12 @@ module SideNav = {
     <div className=Styles.container>
       <SideNav currentSlug>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
-        <Item
-          title={intl->Intl.formatMessage(gettingStarted)}
-          slug={f("getting-started")}
-        />
         <Section
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          <Item
+          title={intl->Intl.formatMessage(gettingStarted)}
+          slug={f("getting-started")}
+          />
           <Item
             title={intl->Intl.formatMessage(keypairGeneration)}
             slug="keypair"
@@ -279,7 +280,7 @@ module SideNav = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(advanced)} slug={f("advanced")}>
+          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
             title={intl->Intl.formatMessage(archiveNode)}
             slug="archive-node"
@@ -528,12 +529,12 @@ module Dropdown = {
       <DropdownNav
         currentSlug defaultValue={intl->Intl.formatMessage(minaOverview)}>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
-        <Item
+        <Section
+          title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          <Item
           title={intl->Intl.formatMessage(gettingStarted)}
           slug={f("getting-started")}
         />
-        <Section
-          title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
           <Item
             title={intl->Intl.formatMessage(keypairGeneration)}
             slug="keypair"
@@ -556,7 +557,7 @@ module Dropdown = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(advanced)} slug={f("advanced")}>
+          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
             title={intl->Intl.formatMessage(archiveNode)}
             slug="archive-node"
