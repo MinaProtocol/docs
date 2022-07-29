@@ -334,6 +334,7 @@ module SideNav = {
             title={intl->Intl.formatMessage(stakingServiceGuidelines)}
             slug="staking-service-guidelines"
           />
+          <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         </Section>
         <Section
           title={intl->Intl.formatMessage(developers)}
@@ -456,8 +457,6 @@ module SideNav = {
           title={intl->Intl.formatMessage(troubleshooting)}
           slug={f("troubleshooting")}
         />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
-        <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
         <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
           <Item
             title={intl->Intl.formatMessage(onlineCommunities)}
@@ -611,6 +610,7 @@ module Dropdown = {
             title={intl->Intl.formatMessage(stakingServiceGuidelines)}
             slug="staking-service-guidelines"
           />
+          <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         </Section>
         <Section
           title={intl->Intl.formatMessage(developers)}
