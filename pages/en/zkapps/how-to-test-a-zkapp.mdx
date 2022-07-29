@@ -51,7 +51,7 @@ We generate a zkApp account and a new instance of the smart contract to deploy l
 
 ```ts
 // zkapp account
-let zkAppKey = PrivateKey.random();
+let zkAppPrivateKey = PrivateKey.random();
 let zkAppAddress = zkAppPrivateKey.toPublicKey();
 let zkAppInstance = new Add(zkAppAddress);
 ```
@@ -61,7 +61,7 @@ Use the test account and zkApp keys to construct a transaction to pay account cr
 ```ts
 let txn = await Mina.transaction(feePayer, () => {
   Party.fundNewAccount(feePayer);
-  zkAppInstance.deploy({ zkappKey });
+  zkAppInstance.deploy({ zkappKey: zkAppPrivateKey});
 });
 txn.send();
 ```
