@@ -342,6 +342,10 @@ module SideNav = {
             title={intl->Intl.formatMessage(stakingServiceGuidelines)}
             slug="staking-service-guidelines"
           />
+          <Item
+          title={intl->Intl.formatMessage(troubleshooting)}
+          slug="troubleshooting"
+          />
           <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
         </Section>
         <Section
@@ -461,10 +465,7 @@ module SideNav = {
             slug="snarkyjs-reference"
           />
         </Section>
-        <Item
-          title={intl->Intl.formatMessage(troubleshooting)}
-          slug={f("troubleshooting")}
-        />
+
 
         <Section title={intl->Intl.formatMessage(exchange)} slug={f("exchange")}>
           <Item title={intl->Intl.formatMessage(exchangeFaq)} slug="FAQ" />
@@ -622,6 +623,10 @@ module Dropdown = {
             title={intl->Intl.formatMessage(stakingServiceGuidelines)}
             slug="staking-service-guidelines"
           />
+          <Item
+          title={intl->Intl.formatMessage(troubleshooting)}
+          slug="troubleshooting"
+        />
           <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         </Section>
         <Section
@@ -741,10 +746,6 @@ module Dropdown = {
         slug="snarkyjs-reference"
       />
         </Section>
-        <Item
-          title={intl->Intl.formatMessage(troubleshooting)}
-          slug={f("troubleshooting")}
-        />
 
         <Section title={intl->Intl.formatMessage(exchange)} slug={f("exchange")}>
           <Item title={intl->Intl.formatMessage(exchangeFaq)} slug="FAQ" />
