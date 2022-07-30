@@ -96,9 +96,9 @@ module DocsNavsTranslations = {
   };
   let graphqlAPI = {id: "sidenav.graphql-api", defaultMessage: "GraphQL API"};
   let logging = {id: "sidenav.logging", defaultMessage: "Logging"};
-  let protocolArchitecture = {
-    id: "sidenav.protocol-architecture",
-    defaultMessage: "Protocol Architecture",
+  let aboutMina = {
+    id: "sidenav.about-mina",
+    defaultMessage: "About Mina",
   };
   let lifecycleOfPayment = {
     id: "sidenav.lifecycle-of-a-payment",
@@ -261,6 +261,43 @@ module SideNav = {
       <SideNav currentSlug>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
         <Section
+        title={intl->Intl.formatMessage(aboutMina)}
+        slug={f("about-mina")}>
+        <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
+        <Item
+          title={intl->Intl.formatMessage(lifecycleOfPayment)}
+          slug="lifecycle-payment"
+        />
+        <Item
+          title={intl->Intl.formatMessage(blockProducers)}
+          slug="block-producers"
+        />
+        <Item
+          title={intl->Intl.formatMessage(whatsInABlock)}
+          slug="whats-in-a-block"
+        />
+        <Item
+          title={intl->Intl.formatMessage(consensus)}
+          slug="consensus"
+        />
+        <Item
+          title={intl->Intl.formatMessage(proofOfStake)}
+          slug="proof-of-stake"
+        />
+        <Item
+          title={intl->Intl.formatMessage(snarkWorkers)}
+          slug="snark-workers"
+        />
+        <Item
+          title={intl->Intl.formatMessage(scanState)}
+          slug="scan-state"
+        />
+        <Item
+          title={intl->Intl.formatMessage(timeLockedAccounts)}
+          slug="timelock"
+        />
+      </Section>
+        <Section
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
@@ -390,43 +427,6 @@ module SideNav = {
             slug="contributing"
           />
         </Section>
-        <Section
-          title={intl->Intl.formatMessage(protocolArchitecture)}
-          slug={f("architecture")}>
-          <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
-          <Item
-            title={intl->Intl.formatMessage(lifecycleOfPayment)}
-            slug="lifecycle-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducers)}
-            slug="block-producers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whatsInABlock)}
-            slug="whats-in-a-block"
-          />
-          <Item
-            title={intl->Intl.formatMessage(consensus)}
-            slug="consensus"
-          />
-          <Item
-            title={intl->Intl.formatMessage(proofOfStake)}
-            slug="proof-of-stake"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkWorkers)}
-            slug="snark-workers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(scanState)}
-            slug="scan-state"
-          />
-          <Item
-            title={intl->Intl.formatMessage(timeLockedAccounts)}
-            slug="timelock"
-          />
-        </Section>
 
         /* ----------------------- zkApps Section (web) ---------------------------- */
 
@@ -542,6 +542,43 @@ module Dropdown = {
       <DropdownNav
         currentSlug defaultValue={intl->Intl.formatMessage(minaOverview)}>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
+        <Section
+          title={intl->Intl.formatMessage(aboutMina)}
+          slug={f("about-mina")}>
+          <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
+          <Item
+            title={intl->Intl.formatMessage(lifecycleOfPayment)}
+            slug="lifecycle-payment"
+          />
+          <Item
+            title={intl->Intl.formatMessage(blockProducers)}
+            slug="block-producers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(whatsInABlock)}
+            slug="whats-in-a-block"
+          />
+          <Item
+            title={intl->Intl.formatMessage(consensus)}
+            slug="consensus"
+          />
+          <Item
+            title={intl->Intl.formatMessage(proofOfStake)}
+            slug="proof-of-stake"
+          />
+          <Item
+            title={intl->Intl.formatMessage(snarkWorkers)}
+            slug="snark-workers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(scanState)}
+            slug="scan-state"
+          />
+          <Item
+            title={intl->Intl.formatMessage(timeLockedAccounts)}
+            slug="timelock"
+          />
+        </Section>
         <Section
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
           <Item
@@ -669,43 +706,6 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(contributingToMina)}
             slug="contributing"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(protocolArchitecture)}
-          slug={f("architecture")}>
-          <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
-          <Item
-            title={intl->Intl.formatMessage(lifecycleOfPayment)}
-            slug="lifecycle-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducers)}
-            slug="block-producers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whatsInABlock)}
-            slug="whats-in-a-block"
-          />
-          <Item
-            title={intl->Intl.formatMessage(consensus)}
-            slug="consensus"
-          />
-          <Item
-            title={intl->Intl.formatMessage(proofOfStake)}
-            slug="proof-of-stake"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkWorkers)}
-            slug="snark-workers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(scanState)}
-            slug="scan-state"
-          />
-          <Item
-            title={intl->Intl.formatMessage(timeLockedAccounts)}
-            slug="timelock"
           />
         </Section>
       
