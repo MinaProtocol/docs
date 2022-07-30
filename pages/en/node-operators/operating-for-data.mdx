@@ -22,13 +22,13 @@ The best way to learn how to run a node is to follow the instructions on the <Do
 
 However, you should remove `MINA_PRIVKEY_PASS` and `-block-producer-key ...` flag as we do not wish this node to start as a block producer.
 
-In order to expose recent information of the blockchain, we'll need to expose the GraphQL REST server. You may want to provide `-rest-server-port XXXX` if the default of 0xc0d or 3085 does not work for you. You may also want to provide `-insecure-rest-server` to make the REST server accessible from outside of `localhost`. However, if you do, make sure you set your firewall up properly. See <DocLink copy="GraphQL API page" url="/developers/graphql-api" /> for more.
+In order to expose recent information of the blockchain, we'll need to expose the GraphQL REST server. You may want to provide `-rest-server-port XXXX` if the default of 0xc0d or 3085 does not work for you. You may also want to provide `-insecure-rest-server` to make the REST server accessible from outside of `localhost`. However, if you do, make sure you set your firewall up properly. See <DocLink copy="GraphQL API page" url="/node-developers/graphql-api" /> for more.
 
 ## Querying information
 
 Presented here are examples about querying for _recent_ information on the chain -- in practice exposed is ~10 hours of recent activity in the remaining testnets and the first version of Mainnet. As Mina is a succinct blockchain, for historical information can be accessed using <DocLink copy="some sort of archival process" url="/node-operators/archive-redundancy" />
 
-The best way to explore all the specific details available for each of the GraphQL objects is to visit your favorite web browser pointing to the REST server running from within a Mina daemon that hosts a GraphQL sandbox. Visit the <DocLink copy="GraphQL API page" url="/developers/graphql-api" /> to learn more. Documentation is also present on most of the individual fields, you can learn more about each field by hovering over the entries in the sandbox or by visiting the <DocLink copy="hosted schema" url="/graphql-docs/index.html" />.
+The best way to explore all the specific details available for each of the GraphQL objects is to visit your favorite web browser pointing to the REST server running from within a Mina daemon that hosts a GraphQL sandbox. Visit the <DocLink copy="GraphQL API page" url="/node-developers/graphql-api" /> to learn more. Documentation is also present on most of the individual fields, you can learn more about each field by hovering over the entries in the sandbox or by visiting the <DocLink copy="hosted schema" url="/graphql-docs/index.html" />.
 
 ### Block data
 

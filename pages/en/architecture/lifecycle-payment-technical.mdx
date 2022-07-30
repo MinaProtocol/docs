@@ -49,12 +49,12 @@ In [payment.mli](https://github.com/minaprotocol/mina/tree/master/src/lib/mina_b
 
 For more see:
 
-- <DocLink copy="Parameterized records" url="/developers/style-guide/#parameterized-records" />
-- <DocLink copy="Ppx deriving" url="/developers/style-guide/#ppx_deriving" />
-- <DocLink copy="Stable.V1" url="/developers/style-guide/#stable-v1" />
-- <DocLink copy="Property based tests" url="/developers/style-guide/#quickcheck-gen" />
-- <DocLink copy="Typesafe Invariants" url="/developers/style-guide/#typesafe-invariants" />
-- <DocLink copy="Unit Tests" url="/developers/style-guide/#unit-tests" />
+- <DocLink copy="Parameterized records" url="/node-developers/style-guide/#parameterized-records" />
+- <DocLink copy="Ppx deriving" url="/node-developers/style-guide/#ppx_deriving" />
+- <DocLink copy="Stable.V1" url="/node-developers/style-guide/#stable-v1" />
+- <DocLink copy="Property based tests" url="/node-developers/style-guide/#quickcheck-gen" />
+- <DocLink copy="Typesafe Invariants" url="/node-developers/style-guide/#typesafe-invariants" />
+- <DocLink copy="Unit Tests" url="/node-developers/style-guide/#unit-tests" />
 
 Let's dig into the payment payload:
 
@@ -68,7 +68,7 @@ Check out [payment_payload.mli](https://github.com/minaprotocol/mina/tree/master
 
 We use [Schnorr signatures](https://en.wikipedia.org/wiki/Schnorr_signature). A [Schnorr signature](https://en.wikipedia.org/wiki/Schnorr_signature) is an element in a [group](https://en.wikipedia.org/wiki/Group_(mathematics). Our group is a point on an [elliptic curve](https://en.wikipedia.org/wiki/Elliptic_curve). So what is a signature? Open up [signature lib's checked.ml](https://github.com/minaprotocol/mina/tree/master/src/lib/signature_lib/checked.ml) and scroll to `module Signature` within `module type S`. It's a non-zero point on a curve, aka a pair of two `curve_scalar` values. To sign we give a [private key](#private-key) and a message, we can verify a signature on a message with a [public key](#public-key).
 
-This is the first time we see heavily functored code, so see <DocLink copy="functors" url="/developers/style-guide/#functors" /> if you're confused. This is also the first time we see custom SNARK circuit logic, see <DocLink copy="custom SNARK circuit logic" url="/developers/style-guide/#snark-checked" /> for more.
+This is the first time we see heavily functored code, so see <DocLink copy="functors" url="/node-developers/style-guide/#functors" /> if you're confused. This is also the first time we see custom SNARK circuit logic, see <DocLink copy="custom SNARK circuit logic" url="/node-developers/style-guide/#snark-checked" /> for more.
 
 ## Private key
 

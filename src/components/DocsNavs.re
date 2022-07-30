@@ -72,7 +72,7 @@ module DocsNavsTranslations = {
     id: "sidenav.staking-service-guidelines",
     defaultMessage: "Staking Service Guidelines",
   };
-  let developers = {id: "sidenav.developers", defaultMessage: "Developers"};
+  let nodeDevelopers = {id: "sidenav.node-developers", defaultMessage: "Node Developers"};
   let codebaseOverview = {
     id: "sidenav.codebase-overview",
     defaultMessage: "Codebase Overview",
@@ -345,8 +345,8 @@ module SideNav = {
           <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(developers)}
-          slug={f("developers")}>
+          title={intl->Intl.formatMessage(nodeDevelopers)}
+          slug={f("node-developers")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(codebaseOverview)}
@@ -625,8 +625,8 @@ module Dropdown = {
           <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(developers)}
-          slug={f("developers")}>
+          title={intl->Intl.formatMessage(nodeDevelopers)}
+          slug={f("node-developers")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(codebaseOverview)}
