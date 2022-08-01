@@ -2,11 +2,15 @@ module DocsNavsTranslations = {
   open ReactIntl;
   let minaOverview = {
     id: "sidenav.mina-overview",
-    defaultMessage: "Mina Overview",
+    defaultMessage: "Welcome",
   };
   let gettingStarted = {
     id: "sidenav.getting-started",
     defaultMessage: "Getting Started",
+  };
+  let protocolArchitecture = {
+    id: "sidenav.protocol-architecture",
+    defaultMessage: "Protocol Architecture",
   };
   let usingMina = {id: "sidenav.using-mina", defaultMessage: "Using Mina"};
   let keypairGeneration = {
@@ -263,7 +267,7 @@ module SideNav = {
         <Section
         title={intl->Intl.formatMessage(aboutMina)}
         slug={f("about-mina")}>
-        <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
+        <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
         <Item
           title={intl->Intl.formatMessage(lifecycleOfPayment)}
           slug="lifecycle-payment"
@@ -545,7 +549,7 @@ module Dropdown = {
         <Section
           title={intl->Intl.formatMessage(aboutMina)}
           slug={f("about-mina")}>
-          <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
+          <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
           <Item
             title={intl->Intl.formatMessage(lifecycleOfPayment)}
             slug="lifecycle-payment"
