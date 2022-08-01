@@ -186,8 +186,8 @@ module DocsNavsTranslations = {
   };
   let glossary = {id: "sidenav.glossary", defaultMessage: "Glossary"};
 
-  let exchange = {id: "sidenav.exchange", defaultMessage: "Exchange"};
-  let exchangeFaq = {id: "sidenav.faq", defaultMessage: "FAQ"};
+  let exchange = {id: "sidenav.exchange-operators", defaultMessage: "Exchange Operators"};
+  let exchangeFaq = {id: "sidenav.faq-exchange", defaultMessage: "FAQ"};
 
   let faq = {id: "sidenav.FAQ", defaultMessage: "FAQ"};
 
@@ -467,8 +467,8 @@ module SideNav = {
         </Section>
 
 
-        <Section title={intl->Intl.formatMessage(exchange)} slug={f("exchange")}>
-          <Item title={intl->Intl.formatMessage(exchangeFaq)} slug="FAQ" />
+        <Section title={intl->Intl.formatMessage(exchange)} slug={f("exchange-operators")}>
+          <Item title={intl->Intl.formatMessage(exchangeFaq)} slug="faq-exchange" />
         </Section>
 
         <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
@@ -747,8 +747,8 @@ module Dropdown = {
       />
         </Section>
 
-        <Section title={intl->Intl.formatMessage(exchange)} slug={f("exchange")}>
-          <Item title={intl->Intl.formatMessage(exchangeFaq)} slug="FAQ" />
+        <Section title={intl->Intl.formatMessage(exchange)} slug={f("exchange-operators")}>
+          <Item title={intl->Intl.formatMessage(exchangeFaq)} slug="faq-exchange" />
         </Section>
   
 
