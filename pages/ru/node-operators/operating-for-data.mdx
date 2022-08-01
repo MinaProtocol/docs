@@ -1,0 +1,156 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Data Querying for Node Operators" });
+
+# Запросы данных для операторов нод
+
+Некоторые операторы нод не желают участвовать в производстве блоков или быть снарк-воркерами, а хотят просто находиться в сети и пассивно собирать информацию для запросов или отправки подписанных транзакций. Для этих нод не требуется наличие пары ключей аккаунта для успешной работы.
+
+## Подготовка
+
+В дополнение к <DocLink copy="установке Mina daemon на ваш компьютер" url="/getting-started" />, вам также может понадобиться настроить систему для архивирования данных на вашем компьютере. Для этого вы можете настроить <DocLink copy="архивную ноду" url="/node-operators/archive-node" /> и/или архивировать данные, используя <DocLink copy="другие способы" url="/node-operators/archive-redundancy" />.
+
+## Запуск ноды
+
+Лучший способ научиться разворачивать ноду - следовать инструкциям в документации на <DocLink copy="странице подключения" url="/connecting" />.
+
+Тем не менее вы должны удалить флаги `MINA_PRIVKEY_PASS` и `-block-producer-key ...`, поскольку мы не хотим, чтобы эта нода была блок-продюсером.
+
+Чтобы предоставить последнюю информацию о блокчейне, нам нужно использовать GraphQL REST сервер. Вы можете предоставить `-rest-server-port XXXX`, если используемые по умолчанию 0xc0d или 3085 вам не подходят. Вы также можете предоставить `-insecure-rest-server`, чтобы сделать REST сервер доступным вне` localhost`. Однако, если вы это сделаете, убедитесь в правильности настроек вашего брандмауэра. Смотрите <DocLink copy="страницу GraphQL API" url="/node-developers/graphql-api" /> для получения дополнительной информации.
+
+## Запрос данных
+
+Здесь представлены примеры запросов _свежей_ информации о цепи -- на практике показано ~10 часов недавней активности в остальных тестовых сетях и первой версии Mainnet. Поскольку Mina является сжатым блокчейном, доступ к исторической информации можно получить с помощью <DocLink copy="некоторого архивного процесса" url="/node-operators/archive-redundancy" />
+
+Лучший способ изучить все конкретные детали, доступные для каждого из объектов GraphQL, - через предпочитаемый вами веб-браузер посетить REST сервер, запущенный из Mina daemon, на котором размещается GraphQL sandbox. Посетите <DocLink copy="страницу GraphQL API" url="/node-developers/graphql-api" />, чтобы узнать больше. Информация также представлена для большинства отдельных полей, вы можете узнать больше о каждом поле, наведя курсор на записи в sandbox или посетив <DocLink copy="размещенную схему" url="/node-developers/graphql-api" />.
+
+### Информация о блоке
+
+```javascript
+query BlockData {
+  bestChain(maxLength: 10) {
+    stateHash
+    creatorAccount {
+      balance {
+        total
+      }
+    }
+  }
+}
+```
+
+Вскоре мы добавим поддержку запроса `block`, который может запрашивать данные определенных блоков в рамках bestChain или любых форков, которые хранит наша нода. Смотрите [#7404](https://github.com/MinaProtocol/mina/issues/7404) чтобы узнать больше.
+
+### Текущий баланс
+
+Ниже показан запрос для доступа к текущему балансу открытого ключа. Обратите внимание, что вы также можете запросить blockHeight и stateHash блока, в котором происходит проверка этого баланса.
+
+```javascript
+query CurrentBalance {
+  account(publicKey: "B62qmyjqEtUEZrsBpUaiz18DCkwh1ovCrJboiHbDhpvH8JEoaag5fUP") {
+    balance {
+      blockHeight
+      total
+      stateHash
+    }
+  }
+}
+```
+
+### Информация о стейкинге
+
+Аккаунты в Mina либо находятся в стейкинге, либо полностью делегируются. Другого состояния не существует. Ниже приведен способ запроса этой информации.
+
+```javascript
+query StakingInfo {
+  account(publicKey: "B62qmyjqEtUEZrsBpUaiz18DCkwh1ovCrJboiHbDhpvH8JEoaag5fUP") {
+    balance {
+      blockHeight
+      total
+      stateHash
+    }
+    delegateAccount {
+      publicKey
+    }
+  }
+}
+```
+
+Если delegateAccount.publicKey имеет значение null, тогда этот аккаунт "стейкает напрямую", и этот закрытый ключ должен использоваться непосредственно для производства блоков.
+
+Обратите внимание, что прямой стейкинг и делегирование в текущей "эпохе" берутся из "реестра стейкинга". В настоящее время мы реализуем механизм для прямого доступа к этому реестру, но на данный момент вам нужно будет периодически запрашивать эту информацию и хранить ее локально, обращаясь к ней, когда это необходимо. При смене эпох выбирается новый реестр стейкинга путем продвижения подтвержденного реестра последнего блока двумя эпохами ранее. На практике это занимает от 2 до 4 недель.
+
+### Получение деталей транзакции
+
+С помощью GraphQL вы можете искать транзакции в блоках на bestChain следующим образом:
+
+```javascript
+query TransactionDetails {
+  bestChain(maxLength: 10) {
+    stateHash
+    creatorAccount {
+      balance {
+        total
+      }
+    }
+    transactions {
+      coinbase
+      userCommands {
+        amount
+        fee
+        feePayer {
+          publicKey
+        }
+        hash
+        isDelegation
+        kind
+        memo
+        nonce
+        receiver {
+          publicKey
+        }
+        source {
+          publicKey
+        }
+      }
+    }
+  }
+}
+```
+
+## Отправить подписанную транзакцию
+
+Вы можете отправить подписанную транзакцию, используя следующую GraphQL-мутацию. Вы можете получить информацию о возвращенном вам платеже в качестве проверки работоспособности.
+
+```javascript
+mutation SubmitSignedTransaction {
+  __typename
+  sendPayment(input: {
+    fee: "3000000",
+    amount: "42",
+    to: "B62qrcFstkpqXww1EkSGrqMCwCNho86kuqBd4FrAAUsPxNKdiPzAUsy",
+    from: "B62qiy32p8kAKnny8ZFwoMhYpBppM1DWVCqAPBYNcXnsAHhnfAAuXgg",
+    nonce: "0",
+    memo: "This is a memo",
+    validUntil: "50000"
+  }, signature: {
+      field: "26393275544831950408026742662950427846842308902199169146789849923161392179806",
+      scalar: "28530962508461835801829592060779431956054746814505059654319465133050504973404"
+   }) {
+    payment {
+      amount
+      fee
+      kind
+      memo
+      nonce
+      source {
+        publicKey
+      }
+      receiver {
+        publicKey
+      }
+      isDelegation
+    }
+  }
+}
+```

@@ -8,16 +8,16 @@
 /getting-started             /en/getting-started
 /snapp-credit                /en/snapp-credit
 /troubleshooting             /en/troubleshooting
-/advanced/*                  /en/advanced/:splat
+/node-operators/*                  /en/node-operators/:splat
 /architecture/*              /en/architecture/:splat
-/developers/*                /en/developers/:spalt
+/node-developers/*                /en/node-developers/:spalt
 /zkapps/*                    /en/zkapps/:splat
 /snapps/*										 /en/zkapps/:splat
 /en/snapps/*								 /en/zkapps/:splat
 /using-mina/*                /en/using-mina/:splat
 
 /node-operator               /en/using-mina/staking
-/contributing                /en/developers/contributing
+/contributing                /en/node-developers/contributing
 /keypair                     /en/using-mina/keypair
 /connecting                  /en/using-mina/connecting
 /staking                     /en/using-mina/staking
