@@ -32,7 +32,7 @@ docker run \
   -e RUN_DEMO=true \
   -e MINA_PRIVKEY_PASS='' \
   minaprotocol/mina-daemon:1.3.0-9b0369c-bullseye-devnet
-  
+
 ```
 
 This command will start a daemon inside the docker container and expose the GraphQL port (3085), which is used for communication with the client, to your computer. This daemon will automatically be running in the background with a block producer and snark worker.
@@ -69,7 +69,7 @@ The password for this account is the empty string (there's no password -- you ca
 
 There are a few things you can do with your sandbox now that you have it running:
 
-- <DocLink copy="Install Mina" url="/getting-started#installation" /> as usual and use many of the client commands. Since the daemon is already running in the container, you don't need to run `mina daemon`!
+- <DocLink copy="Install Mina" url="/using-mina/getting-started#installation" /> as usual and use many of the client commands. Since the daemon is already running in the container, you don't need to run `mina daemon`!
 
 - Install the <DocLink copy="GUI Wallet" url="/gui-wallet" /> app to use a graphical interface to your node. Enter '127.0.0.1' as the host of your node during setup.
 
