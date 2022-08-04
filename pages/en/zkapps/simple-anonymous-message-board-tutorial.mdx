@@ -188,9 +188,9 @@ export class Add extends SmartContract {
   // On-chain state definitions
   @state(Field) message = State<Field>();
   @state(Field) messageHistoryHash = State<Field>();
-  @state(PublicKey) user1 = State<PublicKey>();
-  @state(PublicKey) user2 = State<PublicKey>();
-  @state(PublicKey) user3 = State<PublicKey>();
+  @state(Group) user1 = State<PublicKey>();
+  @state(Group) user2 = State<PublicKey>();
+  @state(Group) user3 = State<PublicKey>();
 ```
 
 The `@state(Field)` decorator tells SnarkyJS that the variable should be stored on-chain as a `Field` type.
