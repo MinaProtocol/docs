@@ -48,14 +48,16 @@ Mina.setActiveInstance(Local);
 
 #### Deploying a contract locally
 
-The mock Mina local blockchain contains test accounts that can be used to deploy the contract and pay transaction fees.
+The mock Mina local blockchain contains test accounts that can be used to deploy smart contracts and pay transaction fees.
+
+First, access a test account provided by the local blockchain.
 
 ```ts
 // Local.testAccounts is an array of 10 test accounts that have been pre-filled with Mina
 let feePayer = Local.testAccounts[0].privateKey;
 ```
 
-We generate a zkApp account and a new instance of the smart contract to deploy locally for testing.
+Next, generate a zkApp account and a new instance of the smart contract to deploy locally for testing.
 
 ```ts
 // zkapp account
@@ -64,7 +66,7 @@ let zkAppAddress = zkAppPrivateKey.toPublicKey();
 let zkAppInstance = new Add(zkAppAddress);
 ```
 
-Use the test account and zkApp keys to construct a transaction to pay account creation fees and deploy your smart contract. This transaction is sent to the local blockchain. 
+Then, use the test account and zkApp keys to construct a transaction to pay account creation fees and deploy your smart contract. This transaction is sent to the local blockchain. 
 
 ```ts
 let txn = await Mina.transaction(feePayer, () => {
