@@ -755,7 +755,7 @@ module Dropdown = {
           />
           <Item
           title={intl->Intl.formatMessage(advancedConcepts)}
-          slug="advanced-concepts"
+          slug="advancedConcepts"
         />
           <Item
         title={intl->Intl.formatMessage(zkAppsAPIReference)}
