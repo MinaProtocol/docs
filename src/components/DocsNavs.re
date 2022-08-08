@@ -676,7 +676,7 @@ module Dropdown = {
           title={intl->Intl.formatMessage(troubleshooting)}
           slug="troubleshooting"
         />
-          <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
         </Section>
         <Section
           title={intl->Intl.formatMessage(nodeDevelopers)}
