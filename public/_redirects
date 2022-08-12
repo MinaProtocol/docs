@@ -14,11 +14,11 @@
 /zkapps/*                    /en/zkapps/:splat
 /snapps/*										 /en/zkapps/:splat
 /en/snapps/*								 /en/zkapps/:splat
-/using-mina/*                /en/using-mina/:splat
+/node-operators/*                /en/node-operators/:splat
 
-/node-operator               /en/using-mina/staking
+/node-operator               /en/node-operators/staking
 /contributing                /en/node-developers/contributing
-/keypair                     /en/using-mina/keypair
-/connecting                  /en/using-mina/connecting
-/staking                     /en/using-mina/staking
-/cli-reference               /en/using-mina-cli-reference
+/keypair                     /en/node-operators/keypair
+/connecting                  /en/node-operators/connecting
+/staking                     /en/node-operators/staking
+/cli-reference               /en/node-operators-cli-reference

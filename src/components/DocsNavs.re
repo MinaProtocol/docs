@@ -12,7 +12,6 @@ module DocsNavsTranslations = {
     id: "sidenav.protocol-architecture",
     defaultMessage: "Protocol Architecture",
   };
-  let usingMina = {id: "sidenav.using-mina", defaultMessage: "Using Mina"};
   let keypairGeneration = {
     id: "sidenav.keypair-generation",
     defaultMessage: "Keypair Generation",
