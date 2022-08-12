@@ -1,4 +1,3 @@
-
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
 export default Page({ title: "How to write a zkApp UI" });
@@ -26,19 +25,12 @@ This page is a work in progress.
 
 ## Adding your smart contract as a dependency of the UI
 
-<Alert kind="info">
-
-You can integrate your smart contract by publishing it to npm and adding it as a  
- dependency of your UI.
-
-</Alert>
-
 #### Publish to npm
 
 The `index.ts` file is the entry point of your project. This file only imports all smart contract classes you want access to, and exports them. This pattern allows you to specify which smart contracts are available to import when consuming your project from npm within your UI.
 
 ```ts
-import { YourSmartContract } from './YourSmartContract.js';
+import { YourSmartContract } from "./YourSmartContract.js";
 
 export { YourSmartContract };
 ```
