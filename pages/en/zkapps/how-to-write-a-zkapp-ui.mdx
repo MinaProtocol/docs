@@ -68,7 +68,7 @@ terminal command. To avoid naming collisions, npm allows to publish scoped packa
 Once you have published your smart contract to npm, you can easily add it to any UI framework of your choosing by importing the package.
 
 1. **Install your smart contract package:** To install your package, run the following npm command: `npm install your-package-name` from the root of your UI project directory. Or if you published a scoped npm package, run `npm install @your-username/your-project-name`.
-2. **Import your smart contract package into the UI using:** `import { YourSmartContract } from ‘your-smart-contract’;` , where `YourSmartContract` is the named export that you chose in your smart contract.
+2. **Import your smart contract package into the UI using:** `import { YourSmartContract } from ‘your-package-name’;` , where `YourSmartContract` is the named export that you chose in your smart contract.
 
 <Alert kind="tip">
 
