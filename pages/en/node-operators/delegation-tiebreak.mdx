@@ -9,14 +9,17 @@ export default Page({
 # Delegation Program Tiebreak System
 How it works and verification instructions
 
-At the end of every delegation cycle the [Delegation Program Uptime Tracker](https://uptime.minaprotocol.com/) determines  up to 240 external validators who have received the highest Performance Scores. In cases where a tiebreak is needed, a random tiebreak process will be implemented to ensure fairness and transparency. This system is outlined below and, if you wish, you can follow the process described below to verify the results.
+At the end of every delegation cycle the [Delegation Program Uptime Tracker](https://uptime.minaprotocol.com/) determines up to 240 external validators who have received the highest Performance Scores. In cases where a tiebreak is needed, a random tiebreak process will be implemented to ensure fairness and transparency. This system is outlined below and, if you wish, you can follow the process described below to verify the results.
 
 ## How the Delegation Program Tiebreak System Works
 
-1. Block Producer keys eligible to receive a Mina Foundation delegation (see: [Mina Foundation Delegation Policy](https://minaprotocol.com/blog/mina-foundation-delegation-policy)) with tied Performance Scores that straddle the 240th place in the uptime snapshot are determined
-2. This list of tied keys is sorted alphanumerically using the [canonical ascii representation](http://support.ecisolutions.com/doc-ddms/help/reportsmenu/ascii_sort_order_chart.htm)
-3. The sorted list is randomized using [Random.org’s List Randomizer](https://www.random.org/lists/?mode=advanced);
-a. The [VRF seed](https://docs.minaprotocol.com/en/glossary) from the last epoch of the previous cycle is used as the “persistent identifier”
+1.&nbsp; Block Producer keys eligible to receive a Mina Foundation delegation (see: [Mina Foundation Delegation Policy](https://minaprotocol.com/blog/mina-foundation-delegation-policy)) with tied Performance Scores that straddle the 240th place in the uptime snapshot are determined
+
+2.&nbsp; This list of tied keys is sorted alphanumerically using the [canonical ascii representation](http://support.ecisolutions.com/doc-ddms/help/reportsmenu/ascii_sort_order_chart.htm)
+
+3.&nbsp; The sorted list is randomized using [Random.org’s List Randomizer](https://www.random.org/lists/?mode=advanced);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a.&nbsp; The [VRF seed](https://docs.minaprotocol.com/en/glossary) from the last epoch of the previous cycle is used as the “persistent identifier”
 
 ## Verifying the Delegation Program Random Tiebreak
 
@@ -36,7 +39,7 @@ a. &nbsp; The VRF seed will be posted with the list of the Top 240 eligible dele
 
 b. &nbsp; If you like you can obtain the VRF seed yourself by:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i. Query [https://graphql.minaexplorer.com/](https://graphql.minaexplorer.com), using last epoch of the previous cycle,  with the following:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.&nbsp; Query [https://graphql.minaexplorer.com/](https://graphql.minaexplorer.com), using last epoch of the previous cycle,  with the following:
 
 ```
 query epochSeed {
@@ -61,11 +64,11 @@ with the results of the above sample query for `Epoch 33` returning the seed:
 #### **Step 2:** Sort the tied wallet addresses alphanumerically using the canonical ascii representation
 a.&nbsp; This can be done using a tool like [Sort Strings](https://onlinestringtools.com/sort-strings)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i. Uncheck “Sort strings numerically”
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.&nbsp; Uncheck “Sort strings numerically”
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ii. Enter the tied addresses in “input strings” with <u>no extra spaces or line breaks</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ii.&nbsp; Enter the tied addresses in “input strings” with <u>no extra spaces or line breaks</u>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iii. Copy the sorted wallet addresses from “sorted strings” 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iii.&nbsp; Copy the sorted wallet addresses from “sorted strings” 
 
 <figure>
     <img
