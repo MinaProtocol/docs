@@ -27,8 +27,6 @@ This page is a work in progress.
 
 #### Setup
 
-#### Publish to npm
-
 The `index.ts` file is the entry point of your project. This file only imports all smart contract classes you want access to, and exports them. This pattern allows you to specify which smart contracts are available to import when consuming your project from npm within your UI.
 
 ```ts
@@ -36,6 +34,8 @@ import { YourSmartContract } from "./YourSmartContract.js";
 
 export { YourSmartContract };
 ```
+
+#### Publish to npm
 
 1. **Create an npm account:** Create one <a href="https://www.npmjs.com/signup">here</a> if you don't have one yet.
 2. **Login:** To sign in, enter `npm login` on the command line. You will be prompted to enter your username, password, and email address.
