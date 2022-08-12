@@ -34,15 +34,15 @@ this.network.timestamp.assertEquals(timestamp);
 this.network.timestamp.assertBetween(lower, upper);
 ```
 
-With two of them you are already familiar: On-chain state has the same `get` and `assertEquals` methods. `assertBetween` gives you even more power: it allows you to make assert that the timestamp is between `lower` and `upper` (inclusive).
+With two of them you are already familiar: On-chain state has the same `get()` and `assertEquals()` methods. `assertBetween()` gives you even more power: it allows you to make assert that the timestamp is between `lower` and `upper` (inclusive).
 
 ### Example: restricting timestamps
 
-Let's see how `assertBetween` can be used in the voting example mentioned earlier. Assume we want to allow voting throughout September 2022. Timestamps are represented as a `UInt64` and counted in epoch milliseconds; the JS `Date` object makes it easy for us to convert to this representation. In the simplest case, our zkApp could just hard-code the dates:
+Let's see how `assertBetween()` can be used in the voting example mentioned earlier. Assume we want to allow voting throughout September 2022. Timestamps are represented as a `UInt64` in milliseconds since the [UNIX epoch](https://en.wikipedia.org/wiki/Unix_time). We can use the JS `Date` object to easily convert to this representation. In the simplest case, our zkApp could just hard-code the dates:
 
 ```ts
-let startDate = UInt64.from(Date.UTC(2022, 9, 1));
-let endDate = UInt64.from(Date.UTC(2022, 10, 1));
+const startDate = UInt64.from(Date.UTC(2022, 9, 1));
+const endDate = UInt64.from(Date.UTC(2022, 10, 1));
 
 class VotingApp extends SmartContract {
   // ...
@@ -56,24 +56,24 @@ class VotingApp extends SmartContract {
 
 A more refined example could store the current start date in an on-chain state variable, which can be reset by some process which is also encoded by the zkApp.
 
-In addition to using a predefined range, you can also construct a range that depends on another variable, such as the current time. For example, a DEX with an order book could support orders that expire after an hour. So, the range should be `[now, now + 1h]`. This works just as you'd expect:
+In addition to using a predefined range, you can also construct a range that depends on another variable, such as the current time. For example, a DEX with an order book could support orders that expire after an hour. So, the range should be `[now, now + 1h]`, such as below:
 
 ```ts
-let now = this.network.timestamp.get();
+const now = this.network.timestamp.get();
 this.network.timestamp.assertBetween(now, now.add(60 * 60 * 1000));
 ```
 
 ### Network reference
 
-For completenes, below is the full list of network states you can use and make assertions about in your zkApp.
+For completeness, below is the full list of network states you can use and make assertions about in your zkApp.
 
-All of those fields have a `get` and an `assertEquals` method, and the subset that represent
-"ordered values" also have `assertBetween` (they are the ones that are `UInt32` or `UInt64`).
+All of those fields have a `get()` and an `assertEquals()` method, and the subset that represent
+"ordered values" (those that are `UInt32` or `UInt64`), also have `assertBetween()`.
 
-Of course, there's no need to remember this -- just type "this.network." and let IntelliSense guide you!
+Of course, there's no need to remember this -- just type `this.network.` and let IntelliSense guide you!
 
 ```ts
-// current time, as measured by the block producer
+// current UNIX time in milliseconds, as measured by the block producer
 this.network.timestamp.get(): UInt64;
 // length of the blockchain, also known as block height
 this.network.blockchainLength.get(): UInt32;
@@ -104,8 +104,8 @@ this.network.nextEpochData.startCheckpoint.get(): Field;
 
 ### Account reference
 
-Here's the full list of values you can access on the zkApp account. Like the network states, these have `get` and `assertEquals`.
-Balance and nonce also have `assertBetween`.
+Here's the full list of values you can access on the zkApp account. Like the network states, these have `get()` and `assertEquals()`.
+Balance and nonce also have `assertBetween()`.
 
 ```ts
 // the account balance; this might be nanoMINA or a custom token
@@ -125,11 +125,16 @@ this.account.receiptChainHash.get(): Field;
 
 ### Bailing out
 
-In some rare cases, you might, for whatever reason, want to `get` an on-chain value _without_ constraining it to any value.
-If you try this, you'll see that SnarkyJS throws a helpful error pointing you to `assertEquals` and `asserBetween`.
-As an escape hatch, if you want to `get` a value and are really sure you want to not constrain the on-chain value in any way,
-there's `assertNothing` on all of these fields (including on-chain state).
-**Use at your own risk.**
+In some rare cases, you might, for whatever reason, want to `get()` an on-chain value _without_ constraining it to any value.
+If you try this, you'll see that SnarkyJS throws a helpful error reminding you to use `assertEquals()` and `asserBetween()`.
+As an escape hatch, if you want to `get()` a value and are really sure you want to not constrain the on-chain value in any way,
+there's `assertNothing()` on all of these fields (including on-chain state). **Use at your own risk.**
+
+<Alert kind="danger">
+
+`assertNothing()` should be rarely used and could cause security issues through unexpected behavior if used improperly. Be certain you know what you're doing before using this.
+
+</Alert>
 
 ## Events
 
