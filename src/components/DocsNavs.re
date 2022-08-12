@@ -8,6 +8,10 @@ module DocsNavsTranslations = {
     id: "sidenav.getting-started",
     defaultMessage: "Getting Started",
   };
+  let whatAreZKSnarks = {
+    id: "sidenav.what-are-zksnarks",
+    defaultMessage: "What are zk-SNARKs?"
+  }
   let protocolArchitecture = {
     id: "sidenav.protocol-architecture",
     defaultMessage: "Protocol Architecture",
@@ -274,6 +278,10 @@ module SideNav = {
         <Section
         title={intl->Intl.formatMessage(aboutMina)}
         slug={f("about-mina")}>
+        <Item 
+          title={intl->Intl.formatMessage(whatAreZKSnarks)}
+          slug="what-are-zksnarks"      
+        />
         <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
         <Item
           title={intl->Intl.formatMessage(lifecycleOfPayment)}
@@ -561,6 +569,10 @@ module Dropdown = {
         <Section
           title={intl->Intl.formatMessage(aboutMina)}
           slug={f("about-mina")}>
+        <Item 
+          title={intl->Intl.formatMessage(whatAreZKSnarks)}
+          slug="what-are-zksnarks"      
+        />
           <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
           <Item
             title={intl->Intl.formatMessage(lifecycleOfPayment)}
