@@ -212,6 +212,10 @@ module DocsNavsTranslations = {
     id: "sidenav.delegation",
     defaultMessage: "Foundation Delegation Program",
   };
+  let delegationTiebreak = {
+    id: "sidenav.delegation-tiebreak",
+    defaultMessage: "Delegation Program Tiebreak System",
+  };
   let rosetta = {
     id: "sidenav.rosetta",
     defaultMessage: "Rosetta",
@@ -344,6 +348,10 @@ module SideNav = {
           <Item
           title={intl->Intl.formatMessage(delegation)}
           slug="delegation"
+          />
+          <Item
+          title={intl->Intl.formatMessage(delegationTiebreak)}
+          slug="delegation-tiebreak"
           />
           <Item
             title={intl->Intl.formatMessage(blockProducerSidecar)}
@@ -630,6 +638,10 @@ module Dropdown = {
           <Item
           title={intl->Intl.formatMessage(delegation)}
           slug="delegation"
+          />
+          <Item
+          title={intl->Intl.formatMessage(delegationTiebreak)}
+          slug="delegation-tiebreak"
           />
           <Item
             title={intl->Intl.formatMessage(blockProducerSidecar)}
