@@ -37,7 +37,106 @@ Because we are using Jest, it's helpful to break down all functionality of your 
 
 For examples of existing tests, we recommend creating a template example using the Mina zkApp CLI via `zk project <name>` and examining the test file there. [You will see a basic example of a few tests](https://github.com/o1-labs/zkapp-cli/blob/main/templates/project-ts/src/Add.test.ts) that deploy and update the state on a smart contract using Jest.
 
+#### Creating a local blockchain
+
+It's helpful to run your smart contract locally on a mock blockchain to quickly test it. 
+The `Mina.LocalBlockchain()` method specifies a mock Mina ledger of accounts that runs locally on your machine. It contains logic for updating the ledger that can be used to test your smart contract.
+
+```ts
+let Local = Mina.LocalBlockchain();
+Mina.setActiveInstance(Local);
+```
+
+#### Deploying a contract locally
+
+The mock Mina local blockchain contains test accounts that can be used to deploy smart contracts and pay transaction fees.
+
+First, access a test account provided by the local blockchain.
+
+```ts
+// Local.testAccounts is an array of 10 test accounts that have been pre-filled with Mina
+let feePayer = Local.testAccounts[0].privateKey;
+```
+
+Next, generate a zkApp account and a new instance of the smart contract to deploy locally for testing.
+
+```ts
+// zkapp account
+let zkAppPrivateKey = PrivateKey.random();
+let zkAppAddress = zkAppPrivateKey.toPublicKey();
+let zkAppInstance = new Add(zkAppAddress);
+```
+
+Then, use the test account and zkApp keys to construct a transaction to pay account creation fees and deploy your smart contract. This transaction is sent to the local blockchain. 
+
+```ts
+let txn = await Mina.transaction(feePayer, () => {
+  Party.fundNewAccount(feePayer);
+  zkAppInstance.deploy({ zkappKey: zkAppPrivateKey});
+});
+txn.send();
+```
+
+#### Writing integration tests
+
+Jest can be used to write both unit and integration tests. A well written integration test tests the flow of your smart contracts expected behavior, and verifies correctness of state updates. After you test the expected behavior, it's benifical to verify the preconditions of your methods and test edge cases of your smart contract. Below is an example of a basic integration test script.
+
+```ts
+  describe('Add smart contract integration test', () => {
+  let feePayer: PrivateKey,
+    zkAppAddress: PublicKey,
+    zkAppPrivateKey: PrivateKey,
+    zkAppInstance: Add,
+    currentState: Field,
+    txn;
+  
+  beforeAll(async () => {
+    await isReady;
+    // setup local blockchain
+    let Local = Mina.LocalBlockchain();
+    Mina.setActiveInstance(Local);
+
+    // Local.testAccounts is an array of 10 test accounts that have been pre-filled with Mina
+    feePayer = Local.testAccounts[0].privateKey;
+
+    // zkapp account
+    zkAppPrivateKey = PrivateKey.random();
+    zkAppAddress = zkAppPrivateKey.toPublicKey();
+    zkAppInstance = new Add(zkAppAddress);
+
+    // deploy zkapp
+    txn = await Mina.transaction(feePayer, () => {
+      Party.fundNewAccount(feePayer);
+      zkAppInstance.deploy({ zkappKey: zkAppPrivateKey });
+      zkAppInstance.init();
+    });
+    await txn.send();
+  });
+
+  afterAll(async () => {
+    setTimeout(shutdown, 0);
+  });
+
+  it('sets intitial state of num to 1', async () => {
+    currentState = zkAppInstance.num.get();
+    expect(currentState).toEqual(Field.one);
+  });
+
+  it('correctly updates num from intial state to 3', async () => {
+    txn = await Mina.transaction(feePayer, () => {
+      zkAppInstance.update();
+      zkAppInstance.sign(zkAppPrivateKey);
+    });
+    txn.send();
+
+    currentState = zkAppInstance.num.get();
+    expect(currentState).toEqual(Field(3));
+  });
+});
+``` 
+
 ## Learn more
+
 
 Please see the <a href="https://jestjs.io/docs/getting-started">Jest docs</a> for further information on how to use Jest.
 
