@@ -85,7 +85,7 @@ loading SnarkyJS.
 ```ts
 useEffect(() => {
   (async () => {
-    const { YourSmartContract } = await import("your-smart-contract");
+    const { YourSmartContract } = await import("your-package-name");
   })();
 }, []);
 ```
@@ -94,7 +94,7 @@ useEffect(() => {
 
 ```ts
 onMount(async () => {
-  const { YourSmartContract } = await import("your-smart-contract");
+  const { YourSmartContract } = await import("your-package-name");
 });
 ```
 
@@ -102,7 +102,7 @@ onMount(async () => {
 
 ```ts
 onMounted(async () => {
-  const { YourSmartContract } = await import("your-smart-contract");
+  const { YourSmartContract } = await import("your-package-name");
 });
 ```
 
