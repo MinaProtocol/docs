@@ -24,11 +24,9 @@ Mina zkApp CLI makes it easy to follow recommended best practices by providing p
 
 ### Install Mina zkApp CLI
 
-
 ```sh
 npm install -g zkapp-cli
 ```
-
 
 #### Dependencies:
 
@@ -85,13 +83,13 @@ You can view a list of <a href="https://github.com/o1-labs/zkapp-cli/tree/main/e
    url="/zkapps/how-to-deploy-a-zkapp" /> page for further details.
 5. **Deploy to Mainnet:** (Coming soon.)
 
-### Writing your smart contract’s custom logic
+### Writing your smart contract
 
 The goal of this section is to explain the concepts that you will need to understand to write a zero-knowledge-based smart contract.
 
 If you haven’t yet read the <DocLink copy="how zkApps work" url="/zkapps/how-zkapps-work" /> pages, please read it first so that this section makes sense.
 
-##### SnarkyJS
+#### SnarkyJS
 
 zkApps are written in TypeScript using SnarkyJS. SnarkyJS is a TypeScript library for writing smart contracts based on zero-knowledge proofs for the Mina Protocol. It is included automatically when creating a new project using the Mina zkApp CLI.
 
@@ -207,26 +205,21 @@ For a full list, see the <DocLink copy="SnarkyJS reference" url="/zkapps/snarkyj
 
 #### Smart Contract
 
-Let’s put this all together and create a basic smart contract. This where you define your custom logic.
+<!-- TODOs
+  IMO, needs to be fleshed out a bit more before sending users to "test your zkApp" or "advanced topics".
+  Basics that are missing:
+  * payments
+  * Mina.transaction / at least hinting at the basic mechanics of how to compile / prove
+  * permissions? (maybe an advanced topic)
+ -->
+
+Now that we have covered the basics of writing SnarkyJS programs, let's see how to create a smart contract.
 
 Smart contracts are written by extending the base class `SmartContract`:
 
 ```ts
 class HelloWorld extends SmartContract {}
 ```
-
-A smart contract can contain **on-chain state**, which is declared as a property
-on the class with the `@state` decorator:
-
-```ts
-class HelloWorld extends SmartContract {
-  @state(Field) x = State<Field>();
-}
-```
-
-Here, `x` is of type `Field`. Only types built out of Field can be used for state variables.
-In the current design, the state can consist of at most 8 Fields of 32 bytes each.
-States are initialized with the `State()` function.
 
 The `constructor` of a `SmartContract` is inherited from the base class and should not be overriden.
 It takes the zkApp account address (a public key) as its only argument:
@@ -235,70 +228,141 @@ It takes the zkApp account address (a public key) as its only argument:
 let zkAppKey = PrivateKey.random();
 let zkAppAddress = PublicKey.fromPrivateKey(zkAppKey);
 
-let zkApp = new SmartContract(zkAppAddress);
+let zkApp = new HelloWorld(zkAppAddress);
 ```
 
-##### SnarkyJS Deployment Method
+Later, we show you how you can _deploy_ a smart contract to an on-chain account.
 
-There is one method that every smart contract needs: `deploy`. It describes how the zkApp account
-will be initialized when the zkApp is deployed:
+<Alert kind="note">
+  On Mina, there is no strong distinction between normal "user accounts" and
+  "zkApp accounts". A zkApp account is just a normal account that has a smart
+  contract deployed to it -- which essentially just means there's a verification
+  key stored on the account, which can verify off-chain execution proofs.
+</Alert>
+
+##### Methods
+
+Interaction with a smart contract happens by calling on or more of its _methods_. You declare methods using the `@method` decorator:
 
 ```ts
 class HelloWorld extends SmartContract {
-  @state(Field) x = State<Field>();
-
-  deploy(initialBalance: UInt64, x: Field) {
-    super.deploy();
-    this.balance.addInPlace(initialBalance);
-    this.x.set(x);
+  @method myMethod(x: Field) {
+    x.mul(2).assertEquals(5);
   }
 }
 ```
 
-The deploy method needs one default parameter, the initial balance of the zkApp account.
-The first two lines below are mandatory:
+In a method, you can use SnarkyJS commands like `Field.mul` and `Field.assertEquals` to define your custom logic.
+
+Later, we'll show how you can...
+
+- run a method off-chain
+- create a proof that it executed successfully
+- send that proof to the Mina network, to trigger actions like a state change or payment
+
+To get an idea what "successful execution" means, look at this line in our example above:
 
 ```ts
-super.deploy();
-this.balance.addInPlace(initialBalance);
+x.mul(2).assertEquals(5);
 ```
 
-You are free to add additional parameters, like the initial values of your state.
-State variables can be initialized during deployment using the `.set` method on `State`:
+Creating a proof for this method will only be possible if the input `x` satisfies the equation `x * 2 === 5`. This is what we call a "constraint".
+Magically, the proof can be checked without seeing `x` -- it's a _private input_.
+So, you can use `myMethod()` to prove that you understand modular arithmetic 😉 <!-- TODO: is this stupid? -->
 
-```ts
-this.x.set(x);
-```
+Jokes aside, the method above is not very meaningful yet. To make it more interesting, we need a way to interact with accounts, and record state on-chain.
+Check out the next section for more on that!
 
-Uninitialized values will be zero.
+One more note about private inputs: The method above has one input parameter, `x` of type `Field`. In general, arguments can be any of the built-in SnarkyJS type that you saw: `Bool`, `UInt64`, `PrivateKey`, etc. From now on, we will refer to those types as _circuit values_. <!-- TODO: we need a dedicated section about this, also introducing CircuitValue! -->
 
-##### Methods and state updates
+<Alert kind="info">
+<!-- TODO -- too much? too early? I think little "deep dives" like this can be useful to answer questions that more advanced users often have after reading our docs,
+     and spread more understanding of Mina to the internet 
+-->
 
-To update your zkApp state or to send MINA, your smart contract will need one or more custom methods.
+Under the hood, every `@method` defines a zkSNARK circuit. From the cryptography standpoint, a smart contract is a collection of circuits, all of which are compiled into a single prover / verifier key. The proof says something to the effect of "I ran one of these methods, with some private input, and it produced this particular set of account updates". In SNARK terms, the account updates are the _public input_. The proof will only be accepted on the network if it verifies against the verifier key stored in the account. This ensures that indeed, the same code that the zkApp developer wrote also ran on the user's device -- thus, the account updates conform to the smart contract's rules.
 
-You declare methods using the `@method` decorator:
+</Alert>
+
+##### On-chain state
+
+A smart contract can contain **on-chain state**, which is declared as a property
+on the class with the `@state` decorator:
 
 ```ts
 class HelloWorld extends SmartContract {
   @state(Field) x = State<Field>();
 
   // ...
+}
+```
 
-  @method async increment() {
-    const x = await this.x.get();
+Here, `x` is of type `Field`. Like with method inputs, only SnarkyJS circuit values can be used for state variables.
+In the current design, the state can consist of at most 8 Fields of 31 bytes each. These states are stored on the
+Some circuit values take up more than one Field: for example, a `PublicKey` needs 2 of the 8 Fields.
+States are initialized with the `State()` function.
+
+A method can modify on-chain state by using `this.<state>.set()`:
+
+```ts
+class HelloWorld extends SmartContract {
+  @state(Field) x = State<Field>();
+
+  @method setX(x: Field) {
+    this.x.set(x);
+  }
+}
+```
+
+As a zkApp developer, if you add this method to your smart contract, you are saying: "Anyone can call this method, to set `x` on the account to any value they want."
+
+##### Reading state
+
+Often, we also want to _read_ state -- check out this example:
+
+```ts
+class HelloWorld extends SmartContract {
+  @state(Field) x = State<Field>();
+
+  @method increment() {
+    // read state
+    const x = this.x.get();
+    this.x.assertEquals(x);
+
+    // write state
     this.x.set(x.add(1));
   }
 }
 ```
 
-The `increment()` method in our example is async because it calls `this.x.get()`.
-This is how you can fetch the current state of the zkApp account from the chain.
+The `increment()` method fetches the current on-chain state `x` with `this.x.get()`.
+Later, it sets the new state to `x + 1` using `this.x.set()`. Simple!
 
-The method then sets the new state to `x + 1` using `this.x.set()`.
+There's another line though, which looks weird at first:
 
-The methods `.get()` and `.set()` are defined on every state property.
+```ts
+this.x.assertEquals(x);
+```
+
+To understand it, we have to take a step back, and understand what it means to "use an on-chain value" during off-chain execution.
+
+For sure, when we use an on-chain value, we have to _prove_ that this is the on-chain value. Verification has to fail if it's a different value! Otherwise, a malicious user could modify SnarkyJS and make it just use any other value than the current on-chain state -- breaking our zkApp.
+
+To prevent that, we link "`x` at proving time" to be the same as "`x` at verification time". We call this a _precondition_ -- a condition that is checked by the verifier (a Mina node) when it receives the proof in a transaction. This is what `this.x.assertEquals(x)` does: it adds the precondition that `this.x` -- the on-chain state at verification time -- has to equal `x` -- the value we fetched from the chain on the client-side. In zkSNARK language, `x` becomes part of the public input.
+
+Side note: `this.<state>.assertEquals` is more flexible than equating with the current value. For example, `this.x.assertEquals(10)` fixes the on-chain `x` to the number `10`.
+
+<Alert kind="note">
+
+Why didn't we just make `this.x.get()` add the precondition, automatically, so that you didn't have to write `this.x.assertEquals(x)`?
+Well, we like to keep things explicit. The assertion reminds us that we add logic which can make the proof fail: If `x` isn't the same at verification time, the transaction will be rejected. So, reading on-chain values has to be done with care if many users are supposed to read and update state concurrently. It is applicable in some situations, but might cause races, and call for workarounds, in other situations.
+One such workaround is the use of actions -- see <DocLink copy="Actions and Reducer" url="/zkapps/advanced-concepts/#actions-and-reducer" />
+
+</Alert>
 
 ##### Assertions
+
+<!-- TODO: this is _slightly_ misplaced now, because I already had assertEquals earlier -->
 
 Let's modify the `increment()` method to accept a parameter:
 
@@ -306,22 +370,27 @@ Let's modify the `increment()` method to accept a parameter:
 class HelloWorld extends SmartContract {
   @state(Field) x = State<Field>();
 
-  // ...
+  @method increment(xPlus1: Field) {
+    const x = this.x.get();
+    this.x.assertEquals(x);
 
-  @method async increment(xPlus1: Field) {
-    const x = await this.x.get();
     x.add(1).assertEquals(xPlus1);
+
     this.x.set(xPlus1);
   }
 }
 ```
 
-Here, after obtaining the current state `x`, we make an _assertion_: `x.add(1).assertEquals(xPlus1);`.
+Here, after obtaining the current state `x` and fixing it to the on-chain value, we make another assertion:
+
+```ts
+x.add(1).assertEquals(xPlus1);
+```
 
 If the assertion fails, SnarkyJS will throw an error and not submit the transaction.
-On the other hand, if it succeeds, it will become a part of the proof that is sent to the chain and that is verified on-chain.
+On the other hand, if it succeeds, it becomes part of the proof that is verified on-chain.
 
-Because of this, our new version of `increment()` is guaranteed to behave like the previous version: It can only ever
+Because of this, our new version of `increment()` is _guaranteed_ to behave like the previous version: It can only ever
 update the state `x` to `x + 1`.
 
 Assertions can be incredibly useful to constrain state updates. Common assertions you may use are:
@@ -340,11 +409,11 @@ For a full list, see the <DocLink copy="SnarkyJS reference" url="/zkapps/snarkyj
 
 ##### Public and private inputs
 
+We touched on this already, but it's good to cover it in more depth:
+
 While the state of a zkApp is **public**, method parameters are **private**.
 
-When a smart contract method is called, its code will execute on the client and generate a proof,
-which is then sent to the network to update the chain.
-The proof uses zero-knowledge to hide inputs and details of the computation.
+When a smart contract method is called, the proof it produces uses zero-knowledge to hide inputs and details of the computation.
 
 <!-- The proof has _public inputs_ that block producers need to see -- for example, any state updates triggered by our method. -->
 
@@ -359,8 +428,10 @@ class HelloWorld extends SmartContract {
 
   // ...
 
-  @method async incrementSecret(secret: Field) {
-    const x = await this.x.get();
+  @method incrementSecret(secret: Field) {
+    const x = this.x.get();
+    this.x.assertEquals(x);
+
     Poseidon.hash(secret).assertEquals(x);
     this.x.set(Poseidon.hash(secret.add(1)));
   }
@@ -374,28 +445,36 @@ When running this successfully, it just proves that the code was run with _some_
 and that the new `x` will be set to `hash(secret + 1)`.
 However, the secret itself remains private, because it can't be deduced from it's hash.
 
-### Managing State
+##### Initializing state
 
-##### Updating on-chain state
+We didn't cover how to initialize on-chain state yet. This can be done in the `deploy` method.
 
-As we saw before, on-chain state can be managed inside smart contract methods using `.get()` and `.set()`.
-
-<!-- To access on-chain state from outside a `SmartContract`, you can use `Mina.getAccount`:
+Like the constructor, `deploy` is predefined on the base `SmartContract` class.
+It will be called when you deploy your zkApp with the zkApp CLI.
+You can override this method to add initialization of your on-chain state:
 
 ```ts
-import { Mina } from "snarkyjs";
+let initialState = Field(10);
 
-let snappState = (await Mina.getAccount(snappAddress)).snapp.appState;
-``` -->
+class HelloWorld extends SmartContract {
+  @state(Field) x = State<Field>();
 
-##### Updating off-chain state
+  deploy(args: DeployArgs) {
+    super.deploy(args);
+    this.x.set(initialState);
+  }
+}
+```
 
-<Alert kind="info">
+Note that we have to pass the arguments on to `super.deploy`, which runs the default deploy logic. So, this line is required:
 
-Off-chain state is not yet available.
+```ts
+super.deploy(args);
+```
 
-</Alert>
+If you add nothing else to `deploy`, you don't need to override it, just leave it out.
+In the example above however, we are setting our state `x` to `initialState`. Uninitialized values will be zero.
 
 ## Next Steps
 
-Now that you've learn how to write a smart contract, you can now learn <DocLink copy="how to test your zkApp" url="/zkapps/how-to-test-a-zkapp" />.
+Now that you've learned how to write a basic smart contract, you can learn <DocLink copy="how to test your zkApp" url="/zkapps/how-to-test-a-zkapp" />.
