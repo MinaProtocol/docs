@@ -310,33 +310,10 @@ module SideNav = {
         />
       </Section>
         <Section
-          title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
           slug="getting-started" />
-          <Item
-            title={intl->Intl.formatMessage(keypairGeneration)}
-            slug="keypair"
-          />
-          <Item
-            title={intl->Intl.formatMessage(connectToNetwork)}
-            slug="connecting"
-          />
-          <Item
-            title={intl->Intl.formatMessage(sendPayment)}
-            slug="send-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(stakingSnarking)}
-            slug="staking"
-          />
-          <Item
-            title={intl->Intl.formatMessage(cliReference)}
-            slug="cli-reference"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
             title={intl->Intl.formatMessage(archiveNode)}
             slug="archive-node"
@@ -400,6 +377,26 @@ module SideNav = {
           slug="troubleshooting"
           />
           <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          <Item
+            title={intl->Intl.formatMessage(keypairGeneration)}
+            slug="keypair"
+          />
+          <Item
+            title={intl->Intl.formatMessage(connectToNetwork)}
+            slug="connecting"
+          />
+          <Item
+            title={intl->Intl.formatMessage(sendPayment)}
+            slug="send-payment"
+          />
+          <Item
+            title={intl->Intl.formatMessage(stakingSnarking)}
+            slug="staking"
+          />
+          <Item
+            title={intl->Intl.formatMessage(cliReference)}
+            slug="cli-reference"
+          />
         </Section>
         <Section
           title={intl->Intl.formatMessage(nodeDevelopers)}
@@ -600,33 +597,10 @@ module Dropdown = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
           slug="getting-started" />
-          <Item
-            title={intl->Intl.formatMessage(keypairGeneration)}
-            slug="keypair"
-          />
-          <Item
-            title={intl->Intl.formatMessage(connectToNetwork)}
-            slug="connecting"
-          />
-          <Item
-            title={intl->Intl.formatMessage(sendPayment)}
-            slug="send-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(stakingSnarking)}
-            slug="staking"
-          />
-          <Item
-            title={intl->Intl.formatMessage(cliReference)}
-            slug="cli-reference"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
             title={intl->Intl.formatMessage(archiveNode)}
             slug="archive-node"
@@ -689,6 +663,26 @@ module Dropdown = {
           slug="troubleshooting"
         />
           <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          <Item
+            title={intl->Intl.formatMessage(keypairGeneration)}
+            slug="keypair"
+          />
+          <Item
+            title={intl->Intl.formatMessage(connectToNetwork)}
+            slug="connecting"
+          />
+          <Item
+            title={intl->Intl.formatMessage(sendPayment)}
+            slug="send-payment"
+          />
+          <Item
+            title={intl->Intl.formatMessage(stakingSnarking)}
+            slug="staking"
+          />
+          <Item
+            title={intl->Intl.formatMessage(cliReference)}
+            slug="cli-reference"
+          />
         </Section>
         <Section
           title={intl->Intl.formatMessage(nodeDevelopers)}
