@@ -1,4 +1,3 @@
-
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
 export default Page({ title: "How to write a zkApp UI" });
@@ -26,22 +25,33 @@ This page is a work in progress.
 
 ## Adding your smart contract as a dependency of the UI
 
-<Alert kind="info">
-
-You can integrate your smart contract by publishing it to npm and adding it as a  
- dependency of your UI.
-
-</Alert>
-
-#### Publish to npm
+#### Setup
 
 The `index.ts` file is the entry point of your project. This file only imports all smart contract classes you want access to, and exports them. This pattern allows you to specify which smart contracts are available to import when consuming your project from npm within your UI.
 
 ```ts
-import { YourSmartContract } from './YourSmartContract.js';
+import { YourSmartContract } from "./YourSmartContract.js";
 
 export { YourSmartContract };
 ```
+
+#### Local development
+
+The `npm link` command allows to connect your smart contract to your UI during local development without having to publish it npm.
+
+1. **Link your smart contract:** To link your smart contract package, enter `npm link` on the command line at the root of your smart contract project directory.
+2. **Add the smart contract link to your UI project:** To add the smart contract to your UI, enter `npm link your-package-name` on the command line at the root of your UI project directory. `your-package-name` is the same as the `name` property in the`package.json` of the smart contract project.
+3. Import the linked smart contract package into your UI using: `import { YourSmartContract } from ‘your-package-name’;` , where YourSmartContract is the named export that you chose in your smart contract.
+
+Remember to run `npm run build` in your smart contract directory after making any changes in order for changes to be reflected in the smart contract consumed by your UI project.
+
+<Alert kind="tip">
+
+For additional details about `npm link`, see the full npm <a href="https://docs.npmjs.com/cli/v8/commands/npm-link">reference docs</a>.
+
+</Alert>
+
+#### Publish to npm for production
 
 1. **Create an npm account:** Create one <a href="https://www.npmjs.com/signup">here</a> if you don't have one yet.
 2. **Login:** To sign in, enter `npm login` on the command line. You will be prompted to enter your username, password, and email address.
@@ -60,7 +70,7 @@ terminal command. To avoid naming collisions, npm allows to publish scoped packa
 Once you have published your smart contract to npm, you can easily add it to any UI framework of your choosing by importing the package.
 
 1. **Install your smart contract package:** To install your package, run the following npm command: `npm install your-package-name` from the root of your UI project directory. Or if you published a scoped npm package, run `npm install @your-username/your-project-name`.
-2. **Import your smart contract package into the UI using:** `import { YourSmartContract } from ‘your-smart-contract’;` , where `YourSmartContract` is the named export that you chose in your smart contract.
+2. **Import your smart contract package into the UI using:** `import { YourSmartContract } from ‘your-package-name’;` , where `YourSmartContract` is the named export that you chose in your smart contract.
 
 <Alert kind="tip">
 
@@ -77,7 +87,7 @@ loading SnarkyJS.
 ```ts
 useEffect(() => {
   (async () => {
-    const { YourSmartContract } = await import("your-smart-contract");
+    const { YourSmartContract } = await import("your-package-name");
   })();
 }, []);
 ```
@@ -86,7 +96,7 @@ useEffect(() => {
 
 ```ts
 onMount(async () => {
-  const { YourSmartContract } = await import("your-smart-contract");
+  const { YourSmartContract } = await import("your-package-name");
 });
 ```
 
@@ -94,7 +104,7 @@ onMount(async () => {
 
 ```ts
 onMounted(async () => {
-  const { YourSmartContract } = await import("your-smart-contract");
+  const { YourSmartContract } = await import("your-package-name");
 });
 ```
 
