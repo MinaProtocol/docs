@@ -274,10 +274,10 @@ Check out the next section for more on that!
 
 One more note about private inputs: The method above has one input parameter, `x` of type `Field`. In general, arguments can be any of the built-in SnarkyJS type that you saw: `Bool`, `UInt64`, `PrivateKey`, etc. From now on, we will refer to those types as _circuit values_. <!-- TODO: we need a dedicated section about this, also introducing CircuitValue! -->
 
-<Alert kind="info">
-<!-- TODO -- too much? too early? I think little "deep dives" like this can be useful to answer questions that more advanced users often have after reading our docs,
-     and spread more understanding of Mina to the internet 
+<!-- TODO Gregor's note on the below alert box: too much? too early? I think little "deep dives" like this can be useful to answer questions that more advanced users often have after reading our docs, and spread more understanding of Mina to the internet
 -->
+
+<Alert kind="info">
 
 Under the hood, every `@method` defines a zk-SNARK circuit. From the cryptography standpoint, a smart contract is a collection of circuits, all of which are compiled into a single prover & verification key. The proof says something to the effect of "I ran one of these methods, with some private input, and it produced this particular set of account updates". In ZKP terms, the account updates are the _public input_. The proof will only be accepted on the network if it verifies against the verification key stored in the account. This ensures that indeed, the same code that the zkApp developer wrote also ran on the user's device -- thus, the account updates conform to the smart contract's rules.
 
