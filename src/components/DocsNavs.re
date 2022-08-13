@@ -8,11 +8,14 @@ module DocsNavsTranslations = {
     id: "sidenav.getting-started",
     defaultMessage: "Getting Started",
   };
+  let whatAreZKSnarks = {
+    id: "sidenav.what-are-zksnarks",
+    defaultMessage: "What are zk-SNARKs?"
+  }
   let protocolArchitecture = {
     id: "sidenav.protocol-architecture",
     defaultMessage: "Protocol Architecture",
   };
-  let usingMina = {id: "sidenav.using-mina", defaultMessage: "Using Mina"};
   let keypairGeneration = {
     id: "sidenav.keypair-generation",
     defaultMessage: "Keypair Generation",
@@ -275,6 +278,10 @@ module SideNav = {
         <Section
         title={intl->Intl.formatMessage(aboutMina)}
         slug={f("about-mina")}>
+        <Item 
+          title={intl->Intl.formatMessage(whatAreZKSnarks)}
+          slug="what-are-zksnarks"      
+        />
         <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
         <Item
           title={intl->Intl.formatMessage(lifecycleOfPayment)}
@@ -310,33 +317,10 @@ module SideNav = {
         />
       </Section>
         <Section
-          title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
           slug="getting-started" />
-          <Item
-            title={intl->Intl.formatMessage(keypairGeneration)}
-            slug="keypair"
-          />
-          <Item
-            title={intl->Intl.formatMessage(connectToNetwork)}
-            slug="connecting"
-          />
-          <Item
-            title={intl->Intl.formatMessage(sendPayment)}
-            slug="send-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(stakingSnarking)}
-            slug="staking"
-          />
-          <Item
-            title={intl->Intl.formatMessage(cliReference)}
-            slug="cli-reference"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
             title={intl->Intl.formatMessage(archiveNode)}
             slug="archive-node"
@@ -400,6 +384,26 @@ module SideNav = {
           slug="troubleshooting"
           />
           <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          <Item
+            title={intl->Intl.formatMessage(keypairGeneration)}
+            slug="keypair"
+          />
+          <Item
+            title={intl->Intl.formatMessage(connectToNetwork)}
+            slug="connecting"
+          />
+          <Item
+            title={intl->Intl.formatMessage(sendPayment)}
+            slug="send-payment"
+          />
+          <Item
+            title={intl->Intl.formatMessage(stakingSnarking)}
+            slug="staking"
+          />
+          <Item
+            title={intl->Intl.formatMessage(cliReference)}
+            slug="cli-reference"
+          />
         </Section>
         <Section
           title={intl->Intl.formatMessage(nodeDevelopers)}
@@ -565,6 +569,10 @@ module Dropdown = {
         <Section
           title={intl->Intl.formatMessage(aboutMina)}
           slug={f("about-mina")}>
+        <Item 
+          title={intl->Intl.formatMessage(whatAreZKSnarks)}
+          slug="what-are-zksnarks"      
+        />
           <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
           <Item
             title={intl->Intl.formatMessage(lifecycleOfPayment)}
@@ -600,33 +608,10 @@ module Dropdown = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
           title={intl->Intl.formatMessage(gettingStarted)}
           slug="getting-started" />
-          <Item
-            title={intl->Intl.formatMessage(keypairGeneration)}
-            slug="keypair"
-          />
-          <Item
-            title={intl->Intl.formatMessage(connectToNetwork)}
-            slug="connecting"
-          />
-          <Item
-            title={intl->Intl.formatMessage(sendPayment)}
-            slug="send-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(stakingSnarking)}
-            slug="staking"
-          />
-          <Item
-            title={intl->Intl.formatMessage(cliReference)}
-            slug="cli-reference"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
             title={intl->Intl.formatMessage(archiveNode)}
             slug="archive-node"
@@ -689,6 +674,26 @@ module Dropdown = {
           slug="troubleshooting"
         />
           <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          <Item
+            title={intl->Intl.formatMessage(keypairGeneration)}
+            slug="keypair"
+          />
+          <Item
+            title={intl->Intl.formatMessage(connectToNetwork)}
+            slug="connecting"
+          />
+          <Item
+            title={intl->Intl.formatMessage(sendPayment)}
+            slug="send-payment"
+          />
+          <Item
+            title={intl->Intl.formatMessage(stakingSnarking)}
+            slug="staking"
+          />
+          <Item
+            title={intl->Intl.formatMessage(cliReference)}
+            slug="cli-reference"
+          />
         </Section>
         <Section
           title={intl->Intl.formatMessage(nodeDevelopers)}
