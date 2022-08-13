@@ -144,11 +144,11 @@ module DocsNavsTranslations = {
   };
     let simpleAnonymousMessageBoardTutorial= {
     id: "sidenav.simple-anonymous-message-board-tutorial",
-    defaultMessage: "Tutorial: Simple Anonymous Message Board",
+    defaultMessage: "Step-by-Step Tutorial: Anonymous Message Board",
   };
   let advancedConcepts = {
     id: "sidenav.advanced-concepts",
-    defaultMessage: "Advanced Concepts"
+    defaultMessage: "Advanced SnarkyJS"
   };
   let onlineCommunities = {
     id: "sidenav.online-communities",
@@ -173,19 +173,19 @@ module DocsNavsTranslations = {
   };
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
-    defaultMessage: "How To Write a zkApp",
+    defaultMessage: "How to Write a zkApp",
   };
   let howTestZkApp = {
     id: "sidenav.how-to-test-a-zkapp",
-    defaultMessage: "How To Test a zkApp",
+    defaultMessage: "How to Test a zkApp",
   };
   let   howDeployZkApp = {
     id: "sidenav.how-to-deploy-a-zkapp",
-    defaultMessage: "How To Deploy a zkApp",
+    defaultMessage: "How to Deploy a zkApp",
   };
   let   howZkAppUI = {
     id: "sidenav.how-to-write-a-zkapp-ui",
-    defaultMessage: "How To Write a zkApp UI",
+    defaultMessage: "How to Write a zkApp UI",
   };
   let zkAppsAPIReference= {
     id: "sidenav.api-reference",
@@ -473,17 +473,17 @@ module SideNav = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
-            slug="simple-anonymous-message-board-tutorial"
-          />
-          <Item
           title={intl->Intl.formatMessage(advancedConcepts)}
           slug="advanced-concepts"
         />
+          <Item
+          title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
+          slug="simple-anonymous-message-board-tutorial"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
            <Item
             title={intl->Intl.formatMessage(zkAppsAPIReference)}
             slug="snarkyjs-reference"
@@ -763,17 +763,17 @@ module Dropdown = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
+          title={intl->Intl.formatMessage(advancedConcepts)}
+          slug="advanced-concepts"
+          />
+          <Item
+          title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
+          slug="simple-anonymous-message-board-tutorial"
+        />
+          <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
           />
-          <Item
-            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
-            slug="simple-anonymous-message-board-tutorial"
-          />
-          <Item
-          title={intl->Intl.formatMessage(advancedConcepts)}
-          slug="advanced-concepts"
-        />
           <Item
         title={intl->Intl.formatMessage(zkAppsAPIReference)}
         slug="snarkyjs-reference"
