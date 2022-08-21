@@ -146,8 +146,8 @@ module DocsNavsTranslations = {
     id: "sidenav.simple-anonymous-message-board-tutorial",
     defaultMessage: "Step-by-Step Tutorial: Anonymous Message Board",
   };
-  let advancedConcepts = {
-    id: "sidenav.advanced-concepts",
+  let advancedSnarkyJS = {
+    id: "sidenav.advanced-snarkyjs",
     defaultMessage: "Advanced SnarkyJS"
   };
   let onlineCommunities = {
@@ -473,8 +473,8 @@ module SideNav = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
-          title={intl->Intl.formatMessage(advancedConcepts)}
-          slug="advanced-concepts"
+          title={intl->Intl.formatMessage(advancedSnarkyJS)}
+          slug="advanced-snarkyjs"
         />
           <Item
           title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
@@ -763,8 +763,8 @@ module Dropdown = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
-          title={intl->Intl.formatMessage(advancedConcepts)}
-          slug="advanced-concepts"
+          title={intl->Intl.formatMessage(advancedSnarkyJS)}
+          slug="advanced-snarkyjs"
           />
           <Item
           title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
