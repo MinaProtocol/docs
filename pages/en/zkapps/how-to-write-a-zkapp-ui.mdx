@@ -35,13 +35,14 @@ import { YourSmartContract } from "./YourSmartContract.js";
 export { YourSmartContract };
 ```
 
+
 #### Local development
 
-The `npm link` command allows to connect your smart contract to your UI during local development without having to publish it npm.
+The `npm link` command allows to use your smart contract within your UI project during local development without needing to publish it npm. This allows for rapid development.
 
-1. **Link your smart contract:** To link your smart contract package, enter `npm link` on the command line at the root of your smart contract project directory.
-2. **Add the smart contract link to your UI project:** To add the smart contract to your UI, enter `npm link your-package-name` on the command line at the root of your UI project directory. `your-package-name` is the same as the `name` property in the`package.json` of the smart contract project.
-3. Import the linked smart contract package into your UI using: `import { YourSmartContract } from ‘your-package-name’;` , where YourSmartContract is the named export that you chose in your smart contract.
+1. Using a command line, change into your smart contract project directory using `cd <your-project>`, type `npm link`, and hit enter.
+2. Using a command line, change into your UI project directory using `cd <your-ui-project>`, type `npm link <your-package-name>`, and hit enter. `your-package-name` is the `name` property used within your _smart contract's_ `package.json`.
+3. Import into your UI project like normal, using `import { YourSmartContract } from ‘your-package-name’;`.
 
 Remember to run `npm run build` in your smart contract directory after making any changes in order for changes to be reflected in the smart contract consumed by your UI project.
 
