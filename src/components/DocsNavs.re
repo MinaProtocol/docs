@@ -37,7 +37,12 @@ module DocsNavsTranslations = {
     defaultMessage: "CLI Reference",
   };
   let nodeOperators = {id: "sidenav.node-operators", defaultMessage: "Node Operators"};
+  let usingMina = {id: "sidenav.using-mina", defaultMessage: "Using Mina"};
 
+let installWallet = {
+  id: "sidenav.install-a-wallet",
+  defaultMessage: "Install a Wallet",
+};
   let archiveNode = {
     id: "sidenav.archive-node",
     defaultMessage: "Archive Node",
@@ -316,6 +321,14 @@ module SideNav = {
           slug="timelock"
         />
       </Section>
+
+      <Section
+      title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+        <Item
+        title={intl->Intl.formatMessage(installWallet)}
+        slug="install-a-wallet" />
+      </Section>
+
         <Section
           title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
           <Item
@@ -606,6 +619,12 @@ module Dropdown = {
             title={intl->Intl.formatMessage(timeLockedAccounts)}
             slug="timelock"
           />
+        </Section>
+        <Section
+        title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          <Item
+          title={intl->Intl.formatMessage(installWallet)}
+          slug="install-a-wallet" />
         </Section>
         <Section
           title={intl->Intl.formatMessage(nodeOperators)} slug={f("node-operators")}>
