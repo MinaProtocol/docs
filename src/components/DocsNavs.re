@@ -144,7 +144,7 @@ module DocsNavsTranslations = {
   };
     let simpleAnonymousMessageBoardTutorial= {
     id: "sidenav.simple-anonymous-message-board-tutorial",
-    defaultMessage: "Tutorial: Simple Anonymous Message Board",
+    defaultMessage: "Step-by-step Tutorial: Anonymous Message Board",
   };
   let advancedConcepts = {
     id: "sidenav.advanced-concepts",
@@ -473,12 +473,12 @@ module SideNav = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
+          title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
+          slug="simple-anonymous-message-board-tutorial"
+        />
+          <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
-            slug="simple-anonymous-message-board-tutorial"
           />
           <Item
           title={intl->Intl.formatMessage(advancedConcepts)}
@@ -763,12 +763,12 @@ module Dropdown = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
+          title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
+          slug="simple-anonymous-message-board-tutorial"
+        />
+          <Item
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
-            slug="simple-anonymous-message-board-tutorial"
           />
           <Item
           title={intl->Intl.formatMessage(advancedConcepts)}
