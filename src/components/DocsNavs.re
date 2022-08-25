@@ -173,7 +173,7 @@ module DocsNavsTranslations = {
   };
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
-    defaultMessage: "How To Write a zkApp",
+    defaultMessage: "How to Write a zkApp",
   };
   let howTestZkApp = {
     id: "sidenav.how-to-test-a-zkapp",
