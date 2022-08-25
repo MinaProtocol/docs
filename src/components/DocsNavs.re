@@ -177,15 +177,15 @@ module DocsNavsTranslations = {
   };
   let howTestZkApp = {
     id: "sidenav.how-to-test-a-zkapp",
-    defaultMessage: "How To Test a zkApp",
+    defaultMessage: "How to Test a zkApp",
   };
   let   howDeployZkApp = {
     id: "sidenav.how-to-deploy-a-zkapp",
-    defaultMessage: "How To Deploy a zkApp",
+    defaultMessage: "How to Deploy a zkApp",
   };
   let   howZkAppUI = {
     id: "sidenav.how-to-write-a-zkapp-ui",
-    defaultMessage: "How To Write a zkApp UI",
+    defaultMessage: "How to Write a zkApp UI",
   };
   let zkAppsAPIReference= {
     id: "sidenav.api-reference",
