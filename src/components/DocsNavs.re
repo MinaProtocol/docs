@@ -146,9 +146,9 @@ module DocsNavsTranslations = {
     id: "sidenav.simple-anonymous-message-board-tutorial",
     defaultMessage: "Step-by-step Tutorial: Anonymous Message Board",
   };
-  let advancedConcepts = {
-    id: "sidenav.advanced-concepts",
-    defaultMessage: "Advanced Concepts"
+  let advancedSnarkyJS = {
+    id: "sidenav.advanced-snarkyjs",
+    defaultMessage: "Advanced SnarkyJS"
   };
   let onlineCommunities = {
     id: "sidenav.online-communities",
@@ -481,8 +481,8 @@ module SideNav = {
             slug="zkapps-for-ethereum-developers"
           />
           <Item
-          title={intl->Intl.formatMessage(advancedConcepts)}
-          slug="advanced-concepts"
+          title={intl->Intl.formatMessage(advancedSnarkyJS)}
+          slug="advanced-snarkyjs"
         />
            <Item
             title={intl->Intl.formatMessage(zkAppsAPIReference)}
@@ -771,8 +771,8 @@ module Dropdown = {
             slug="zkapps-for-ethereum-developers"
           />
           <Item
-          title={intl->Intl.formatMessage(advancedConcepts)}
-          slug="advanced-concepts"
+          title={intl->Intl.formatMessage(advancedSnarkyJS)}
+          slug="advanced-snarkyjs"
         />
           <Item
         title={intl->Intl.formatMessage(zkAppsAPIReference)}
