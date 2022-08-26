@@ -12,9 +12,9 @@ module DocsNavsTranslations = {
     id: "sidenav.getting-started",
     defaultMessage: "Getting Started",
   };
-  let whatAreZKSnarks = {
-    id: "sidenav.what-are-zksnarks",
-    defaultMessage: "What are zk-SNARKs?"
+  let whatAreZeroKnowledgeProofs = {
+    id: "sidenav.what-are-zero-knowledge-proofs",
+    defaultMessage: "What are Zero-Knowledge Proofs?"
   }
   let protocolArchitecture = {
     id: "sidenav.protocol-architecture",
@@ -292,8 +292,8 @@ module SideNav = {
           slug="overview"      
         />
         <Item 
-          title={intl->Intl.formatMessage(whatAreZKSnarks)}
-          slug="what-are-zksnarks"      
+          title={intl->Intl.formatMessage(whatAreZeroKnowledgeProofs)}
+          slug="what-are-zero-knowledge-proofs"      
         />
         <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
         <Item
@@ -595,8 +595,8 @@ module Dropdown = {
           slug="overview"      
         />
         <Item 
-          title={intl->Intl.formatMessage(whatAreZKSnarks)}
-          slug="what-are-zksnarks"      
+          title={intl->Intl.formatMessage(whatAreZeroKnowledgeProofs)}
+          slug="what-are-zero-knowledge-proofs"      
         />
           <Item title={intl->Intl.formatMessage(protocolArchitecture)} slug="protocol-architecture" />
           <Item
