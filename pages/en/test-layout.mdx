@@ -1,0 +1,51 @@
+import Page from "@reason/pages/Docs";
+import DocsGridLayout from "@reason/components/DocsGridLayout";
+import DocsGridEntry from "@reason/components/DocsGridEntry";
+export default Page({ title: "Test Layout" });
+
+<DocsGridLayout>
+  <DocsGridEntry
+    imgSrc="https://via.placeholder.com/300x250.png"
+    title={"Build your first zkApp"}
+    description={"Learn to write zkSNARK-powered dAPPs"}
+    buttonText={"Learn More"}
+    buttonLink={"/"}
+    isRow={true}
+  />
+  <DocsGridEntry
+    imgSrc="https://via.placeholder.com/300x250.png"
+    title={"Mina's Tech"}
+    description={
+      "An overview of the protocol, zkSNARKS and zkApps (smart contracts on Mina)"
+    }
+    buttonText={"Learn More"}
+    buttonLink={"/"}
+  />
+  <DocsGridEntry
+    imgSrc="https://via.placeholder.com/300x250.png"
+    title={"Get Started Using Mina"}
+    description={
+      "An overview of the protocol, zk-SNARKs and zkApps (smart contracts on Mina)"
+    }
+    buttonText={"Learn More"}
+    buttonLink={"/"}
+  />
+  <DocsGridEntry
+    imgSrc="https://via.placeholder.com/300x250.png"
+    title={"Run a Node"}
+    description={
+      "An overview of the protocol, zk-SNARKs and zkApps (smart contracts on Mina)"
+    }
+    buttonText={"Learn More"}
+    buttonLink={"/"}
+  />
+  <DocsGridEntry
+    imgSrc="https://via.placeholder.com/300x250.png"
+    title={"Mina Use Cases"}
+    description={
+      "An overview of the protocol, zk-SNARKs, and zkApps (smart contracts on Mina)"
+    }
+    buttonText={"Learn More"}
+    buttonLink={"/"}
+  />
+</DocsGridLayout>
