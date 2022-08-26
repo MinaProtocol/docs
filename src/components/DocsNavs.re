@@ -4,6 +4,10 @@ module DocsNavsTranslations = {
     id: "sidenav.mina-overview",
     defaultMessage: "Welcome",
   };
+  let aboutOverview = {
+    id: "sidenav.Overview",
+    defaultMessage: "Overview",
+  };
   let gettingStarted = {
     id: "sidenav.getting-started",
     defaultMessage: "Getting Started",
@@ -282,7 +286,11 @@ module SideNav = {
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
         <Section
         title={intl->Intl.formatMessage(aboutMina)}
-        slug={f("about-mina")}>
+        slug={f("about-mina")}> 
+        <Item 
+          title={intl->Intl.formatMessage(aboutOverview)}
+          slug="overview"      
+        />
         <Item 
           title={intl->Intl.formatMessage(whatAreZKSnarks)}
           slug="what-are-zksnarks"      
@@ -582,6 +590,10 @@ module Dropdown = {
         <Section
           title={intl->Intl.formatMessage(aboutMina)}
           slug={f("about-mina")}>
+          <Item 
+          title={intl->Intl.formatMessage(aboutOverview)}
+          slug="overview"      
+        />
         <Item 
           title={intl->Intl.formatMessage(whatAreZKSnarks)}
           slug="what-are-zksnarks"      
