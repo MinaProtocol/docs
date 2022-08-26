@@ -210,6 +210,7 @@ let installWallet = {
   let exchangeFaq = {id: "sidenav.faq-exchange", defaultMessage: "FAQ"};
 
   let faq = {id: "sidenav.FAQ", defaultMessage: "FAQ"};
+  let aboutFaq = {id: "sidenave.faq", defaultMessage: "FAQ"};
 
   let participate = {id: "sidenav.participate", defaultMessage: "Participate"};
   let contributingToMina = {
@@ -300,6 +301,7 @@ module SideNav = {
           title={intl->Intl.formatMessage(consensus)}
           slug="consensus"
         />
+        <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
       </Section>
 
       <Section
@@ -603,6 +605,7 @@ module Dropdown = {
             title={intl->Intl.formatMessage(consensus)}
             slug="consensus"
           />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
         </Section>
         <Section
         title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
