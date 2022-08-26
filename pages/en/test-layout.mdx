@@ -3,47 +3,51 @@ import DocsGridLayout from "@reason/components/DocsGridLayout";
 import DocsGridEntry from "@reason/components/DocsGridEntry";
 export default Page({ title: "Test Layout" });
 
+# Welcome
+
+Mina is a layer-1 blockchain with a 22KB blockhain & zero-knowledge smart contracts written in TypeScript (“zkApps”).
+
 <DocsGridLayout>
   <DocsGridEntry
     imgSrc="https://via.placeholder.com/300x250.png"
     title={"Build your first zkApp"}
-    description={"Learn to write zkSNARK-powered dAPPs"}
-    buttonText={"Learn More"}
-    buttonLink={"/"}
+    description={
+      'Learn how zero-knowledge smart contracts ("zkApps") work and how to write your own using TypeScript.'
+    }
+    buttonText={"zkApp Developers"}
+    buttonLink={"/zkapps"}
     isRow={true}
   />
   <DocsGridEntry
     imgSrc="https://via.placeholder.com/300x250.png"
-    title={"Mina's Tech"}
+    title={"About Mina"}
     description={
-      "An overview of the protocol, zkSNARKS and zkApps (smart contracts on Mina)"
+      "Learn about zero-knowledge proofs, how Mina works, use cases, & read the Mina whitepaper."
     }
-    buttonText={"Learn More"}
+    buttonText={"About Mina"}
     buttonLink={"/"}
   />
   <DocsGridEntry
     imgSrc="https://via.placeholder.com/300x250.png"
-    title={"Get Started Using Mina"}
-    description={
-      "An overview of the protocol, zk-SNARKs and zkApps (smart contracts on Mina)"
-    }
-    buttonText={"Learn More"}
+    title={"Using Mina"}
+    description={"Where to get MINA, download a wallet, & more."}
+    buttonText={"Using Mina"}
     buttonLink={"/"}
   />
   <DocsGridEntry
     imgSrc="https://via.placeholder.com/300x250.png"
     title={"Run a Node"}
     description={
-      "An overview of the protocol, zk-SNARKs and zkApps (smart contracts on Mina)"
+      "Learn how to run a Mina node as a block producer or snarker worker to participate in consensus."
     }
-    buttonText={"Learn More"}
+    buttonText={"Node Operators"}
     buttonLink={"/"}
   />
   <DocsGridEntry
     imgSrc="https://via.placeholder.com/300x250.png"
-    title={"Mina Use Cases"}
+    title={"Participate"}
     description={
-      "An overview of the protocol, zk-SNARKs, and zkApps (smart contracts on Mina)"
+      "Join the community, apply for grants & the zkApps Builders Program, become a code contributor, & more."
     }
     buttonText={"Learn More"}
     buttonLink={"/"}
