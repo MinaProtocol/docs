@@ -496,6 +496,10 @@ module SideNav = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
+          title={intl->Intl.formatMessage(advancedSnarkyJS)}
+          slug="advanced-snarkyjs"
+        />
+          <Item
           title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
           slug="simple-anonymous-message-board-tutorial"
         />
@@ -503,10 +507,6 @@ module SideNav = {
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
           />
-          <Item
-          title={intl->Intl.formatMessage(advancedSnarkyJS)}
-          slug="advanced-snarkyjs"
-        />
            <Item
             title={intl->Intl.formatMessage(zkAppsAPIReference)}
             slug="snarkyjs-reference"
@@ -797,6 +797,10 @@ module Dropdown = {
           slug="how-to-write-a-zkapp-ui"
           />
           <Item
+          title={intl->Intl.formatMessage(advancedSnarkyJS)}
+          slug="advanced-snarkyjs"
+        />
+          <Item
           title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
           slug="simple-anonymous-message-board-tutorial"
         />
@@ -804,10 +808,6 @@ module Dropdown = {
             title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
             slug="zkapps-for-ethereum-developers"
           />
-          <Item
-          title={intl->Intl.formatMessage(advancedSnarkyJS)}
-          slug="advanced-snarkyjs"
-        />
           <Item
         title={intl->Intl.formatMessage(zkAppsAPIReference)}
         slug="snarkyjs-reference"
