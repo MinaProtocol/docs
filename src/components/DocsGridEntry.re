@@ -9,7 +9,7 @@ module Styles = {
       media(
         Theme.MediaQuery.tablet,
         [
-          Css.unsafe("gap", "20%"),
+          Css.unsafe("gap", "10%"),
           flexDirection(`row),
           justifyContent(`spaceBetween),
           alignItems(`center),
@@ -36,6 +36,7 @@ module Styles = {
       flexDirection(`column),
       justifyContent(`spaceBetween),
       height(`percent(80.)),
+      width(`percent(100.)),
     ]);
 
   let columnContainer =
