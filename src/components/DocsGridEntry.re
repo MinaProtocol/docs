@@ -82,6 +82,9 @@ let make =
       ~altText="",
       ~isRow=false,
     ) => {
+  let languageContext = Context.LanguageContext.useLanguageContext();
+  let href =
+    "/" ++ Locale.toISOCode(languageContext.currentLanguage) ++ buttonLink;
   isRow
     ? <div className=Styles.rowContainer>
         <div className=Styles.rowContainerText>
@@ -90,7 +93,7 @@ let make =
           {ReactExt.fromOpt(buttonText, ~f=s =>
              <Button
                width={`rem(13.)}
-               href={`Internal(buttonLink)}
+               href={`Internal(href)}
                bgColor=Theme.Colors.digitalBlack>
                {React.string(s)}
                <Icon kind=Icon.ArrowRightMedium />
@@ -114,7 +117,7 @@ let make =
         {ReactExt.fromOpt(buttonText, ~f=s =>
            <Button
              width={`rem(13.)}
-             href={`Internal(buttonLink)}
+             href={`Internal(href)}
              bgColor=Theme.Colors.digitalBlack>
              {React.string(s)}
              <Icon kind=Icon.ArrowRightMedium />
