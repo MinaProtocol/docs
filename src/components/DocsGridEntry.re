@@ -9,7 +9,6 @@ module Styles = {
       media(
         Theme.MediaQuery.tablet,
         [
-          // width(`percent(80.)),
           Css.unsafe("gap", "20%"),
           flexDirection(`row),
           justifyContent(`spaceBetween),

@@ -6,8 +6,8 @@ module Styles = {
       width(`percent(100.)),
       display(`grid),
       gridTemplateColumns([`repeat((`num(1), `fr(1.)))]),
-      gridColumnGap(px(10)),
-      gridRowGap(px(50)),
+      gridColumnGap(`rem(3.125)),
+      gridRowGap(`rem(3.125)),
       selector("* > img", [width(`percent(100.))]),
       media(
         Theme.MediaQuery.tablet,
@@ -22,7 +22,7 @@ module Styles = {
           ),
           gridTemplateColumns([`repeat((`num(2), `fr(1.)))]),
           gridColumnGap(`percent(25.)),
-          gridRowGap(`rem(8.)),
+          gridRowGap(`rem(4.)),
         ],
       ),
     ]);
