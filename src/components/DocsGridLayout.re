@@ -9,15 +9,12 @@ module Styles = {
       gridTemplateColumns([`repeat((`num(1), `fr(1.)))]),
       gridColumnGap(`rem(3.125)),
       gridRowGap(`rem(3.125)),
+      selector("* > img", [width(`percent(100.))]),
       media(
         Theme.MediaQuery.tablet,
         [
-          selector(
-            "> :first-child",
-            [
-              gridColumn(1, -1),
-            ],
-          ),
+          selector("* > img", [width(`auto)]),
+          selector("> :first-child", [gridColumn(1, -1)]),
           gridTemplateColumns([`repeat((`num(2), `fr(1.)))]),
           gridColumnGap(`percent(25.)),
           gridRowGap(`rem(4.)),
