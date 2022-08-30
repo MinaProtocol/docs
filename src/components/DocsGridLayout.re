@@ -4,11 +4,12 @@ module Styles = {
   let gridContainer =
     style([
       width(`percent(100.)),
-      marginTop(`rem(6.)),
+      paddingTop(`rem(12.5)),
       display(`grid),
       gridTemplateColumns([`repeat((`num(1), `fr(1.)))]),
+      gridTemplateRows([`repeat((`num(1), `rem(20.)))]),
       gridColumnGap(`rem(3.125)),
-      gridRowGap(`rem(3.125)),
+      gridRowGap(`rem(1.)),
       selector("* > img", [width(`percent(100.))]),
       media(
         Theme.MediaQuery.tablet,
@@ -16,8 +17,9 @@ module Styles = {
           selector("* > img", [width(`auto)]),
           selector("> :first-child", [gridColumn(1, -1)]),
           gridTemplateColumns([`repeat((`num(2), `fr(1.)))]),
-          gridColumnGap(`percent(25.)),
+          gridColumnGap(`percent(20.)),
           gridRowGap(`rem(4.)),
+          paddingTop(`rem(3.)),
         ],
       ),
     ]);

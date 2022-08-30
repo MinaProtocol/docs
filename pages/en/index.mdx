@@ -1,6 +1,8 @@
 import Page from "@reason/pages/Docs";
 import DocsGridLayout from "@reason/components/DocsGridLayout";
 import DocsGridEntry from "@reason/components/DocsGridEntry";
+import Link from "next/link";
+import * as Theme from "@reason/Theme";
 export default Page({
   title: "Mina Blockchain Documentation | Mina Protocol",
   description:
@@ -16,9 +18,9 @@ Mina is a layer-1 blockchain with a 22KB blockhain & zero-knowledge smart contra
     imgSrc="/static/img/docs-images/home/zkapp-developers.png"
     imgWidth={18}
     imgHeight={16}
-    title={"Deploy your first zkApp"}
+    title={<h2 className={Theme.Type.h3}>Deploy your first zkApp</h2>}
     description={
-      'Learn how zero-knowledge smart contracts work and how to write your own using TypeScript.'
+      <p>Learn how zero-knowledge smart contracts work and how to write your own using TypeScript.</p>
     }
     buttonText={"zkApp Developers"}
     buttonLink={"/zkapps"}
@@ -28,9 +30,9 @@ Mina is a layer-1 blockchain with a 22KB blockhain & zero-knowledge smart contra
     imgSrc="/static/img/docs-images/home/about-mina.svg"
     imgWidth={18}
     imgHeight={15}
-    title={"About Mina"}
+    title={<h2 className={Theme.Type.h3}>About Mina</h2>}
     description={
-      "Learn about Mina, zero-knowledge proofs, use cases, & read the Mina whitepaper."
+      <p>Learn about Mina, zero-knowledge proofs, use cases, & read the <Link href="/static/pdf/economicsWhitepaper.pdf"><span className={Theme.Type.link}>Mina whitepaper.</span></Link></p>
     }
     buttonText={"About Mina"}
     buttonLink={"/about-mina/overview"}
@@ -39,8 +41,8 @@ Mina is a layer-1 blockchain with a 22KB blockhain & zero-knowledge smart contra
     imgSrc="/static/img/docs-images/home/using-mina.svg"
     imgWidth={18}
     imgHeight={15}
-    title={"Using Mina"}
-    description={"Where to get MINA, download a wallet, & more."}
+    title={<h2 className={Theme.Type.h3}>Using Mina</h2>}
+    description={<p>Where to get MINA, download a wallet, & more.</p>}
     buttonText={"Using Mina"}
     buttonLink={"/using-mina/install-a-wallet"}
   />
@@ -48,23 +50,23 @@ Mina is a layer-1 blockchain with a 22KB blockhain & zero-knowledge smart contra
     imgSrc="/static/img/docs-images/home/node-operators.svg"
     imgWidth={18}
     imgHeight={15}
-    title={"Run a Node"}
+    title={<h2 className={Theme.Type.h3}>Run a Node</h2>}
     description={
-      "Learn how to run a Mina node as a block producer or snarker worker to participate in consensus."
+      <p>Learn how to run a Mina node as a block producer or snarker worker to participate in consensus.</p>
     }
     buttonText={"Node Operators"}
     buttonLink={"/node-operators/getting-started"}
     />
-
   <DocsGridEntry
     imgSrc="/static/img/docs-images/home/using-mina.svg"
     imgWidth={18}
     imgHeight={15}
-    title={"Participate"}
+    title={<h2 className={Theme.Type.h3}>Participate</h2>}
     description={
-      "Join the community, apply for grants & the zkApps Builders Program, become a code contributor, & more."
+      <p>Join the community, apply for grants & the zkApps Builders Program, become a code contributor, & more.</p>
     }
     buttonText={"Learn More"}
     buttonLink={"/participate/online-communities"}
-  />
+/>
+
 </DocsGridLayout>

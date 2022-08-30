@@ -4,39 +4,51 @@ module Styles = {
     style([
       Css.unsafe("gap", "0%"),
       display(`flex),
+      height(`percent(100.)),
       flexDirection(`columnReverse),
-      justifyContent(`spaceAround),
-      media(
-        Theme.MediaQuery.tablet,
+      justifyContent(`spaceBetween),
+      selector(
+        "* > h2",
         [
-          Css.unsafe("gap", "10%"),
-          flexDirection(`row),
-          justifyContent(`spaceBetween),
-          alignItems(`center),
+          marginTop(`rem(1.)),
+          marginBottom(`rem(0.5)),
+          media(
+            Theme.MediaQuery.tablet,
+            [marginTop(`rem(0.)), marginBottom(`rem(0.))],
+          ),
+        ],
+      ),
+      selector(
+        "* > p",
+        [
+          marginBottom(`rem(1.)),
+          media(Theme.MediaQuery.tablet, [marginBottom(`rem(0.))]),
         ],
       ),
       selector(
         "* > img",
+        [media(Theme.MediaQuery.tablet, [marginBottom(`rem(1.5))])],
+      ),
+      media(
+        Theme.MediaQuery.tablet,
         [
-          marginTop(`rem(2.5)),
-          marginBottom(`rem(1.5)),
-          media(
-            Theme.MediaQuery.tablet,
-            [marginTop(`rem(0.)), marginBottom(`rem(1.5))],
-          ),
+          Css.unsafe("gap", "5%"),
+          flexDirection(`row),
+          justifyContent(`center),
+          alignItems(`center),
         ],
       ),
-      selector("* > h2", [marginBottom(`rem(0.5))]),
-      selector("* > p", [marginBottom(`rem(1.))]),
     ]);
 
   let rowContainerText =
     style([
       display(`flex),
       flexDirection(`column),
-      justifyContent(`spaceBetween),
+      justifyContent(`spaceAround),
       height(`percent(80.)),
       width(`percent(100.)),
+      marginBottom(`rem(3.)),
+      media(Theme.MediaQuery.tablet, [marginBottom(`rem(0.))]),
     ]);
 
   let columnContainer =
@@ -88,8 +100,8 @@ let make =
   isRow
     ? <div className=Styles.rowContainer>
         <div className=Styles.rowContainerText>
-          {ReactExt.fromOpt(title, ~f=s => <h2> {React.string(s)} </h2>)}
-          {ReactExt.fromOpt(description, ~f=s => <p> {React.string(s)} </p>)}
+          title
+          description
           {ReactExt.fromOpt(buttonText, ~f=s =>
              <Button
                width={`rem(13.)}
@@ -112,8 +124,8 @@ let make =
           src=imgSrc
           className={Styles.imgStyles(imgWidth, imgHeight)}
         />
-        {ReactExt.fromOpt(title, ~f=s => <h2> {React.string(s)} </h2>)}
-        {ReactExt.fromOpt(description, ~f=s => <p> {React.string(s)} </p>)}
+        title
+        description
         {ReactExt.fromOpt(buttonText, ~f=s =>
            <Button
              width={`rem(13.)}
