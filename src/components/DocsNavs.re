@@ -295,6 +295,7 @@ module SideNav = {
             title={intl->Intl.formatMessage(consensus)}
             slug="consensus"
           />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
           <Item
             title={intl->Intl.formatMessage(whitepaper)}
             slug=""
@@ -303,8 +304,7 @@ module SideNav = {
                 "https://docs.minaprotocol.com/static/pdf/technicalWhitepaper.pdf",
               )
             }
-          />
-          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          />    
         </Section>
         <Section
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
