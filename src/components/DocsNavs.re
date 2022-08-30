@@ -167,7 +167,6 @@ module DocsNavsTranslations = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
   };
-  let testLayout = {id: "sidenav.test-layout", defaultMessage: "Test Layout"};
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
     defaultMessage: "How to Write a zkApp",
@@ -525,10 +524,6 @@ module SideNav = {
         <Item
           title={intl->Intl.formatMessage(glossary)}
           slug={f("glossary")}
-        />
-        <Item
-          title={intl->Intl.formatMessage(testLayout)}
-          slug={f("test-layout")}
         />
       </SideNav>
     </div>;

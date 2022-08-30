@@ -1,23 +1,70 @@
 import Page from "@reason/pages/Docs";
-import DocLink from "@reason/components/DocLink";
-export default Page({ title: "Mina Blockchain Documentation | Mina Protocol", description: "Find all the documentation for the whole process of getting up and running with the Mina blockchain." });
+import DocsGridLayout from "@reason/components/DocsGridLayout";
+import DocsGridEntry from "@reason/components/DocsGridEntry";
+export default Page({
+  title: "Mina Blockchain Documentation | Mina Protocol",
+  description:
+    "Find all the documentation for the whole process of getting up and running with the Mina blockchain.",
+});
 
-# Overview
+# Welcome
 
 Mina is a layer-1 blockchain with a 22KB blockhain & zero-knowledge smart contracts written in TypeScript (“zkApps”).
 
-## What is Mina?
+<DocsGridLayout>
+  <DocsGridEntry
+    imgSrc="/static/img/docs-images/home/zkapp-developers.png"
+    imgWidth={18}
+    imgHeight={16}
+    title={"Deploy your first zkApp"}
+    description={
+      'Learn how zero-knowledge smart contracts work and how to write your own using TypeScript.'
+    }
+    buttonText={"zkApp Developers"}
+    buttonLink={"/zkapps"}
+    isRow={true}
+  />
+  <DocsGridEntry
+    imgSrc="/static/img/docs-images/home/about-mina.svg"
+    imgWidth={18}
+    imgHeight={15}
+    title={"About Mina"}
+    description={
+      "Learn about Mina, zero-knowledge proofs, use cases, & read the Mina whitepaper."
+    }
+    buttonText={"About Mina"}
+    buttonLink={"/about-mina/overview"}
+  />
+  <DocsGridEntry
+    imgSrc="/static/img/docs-images/home/using-mina.svg"
+    imgWidth={18}
+    imgHeight={15}
+    title={"Using Mina"}
+    description={"Where to get MINA, download a wallet, & more."}
+    buttonText={"Using Mina"}
+    buttonLink={"/using-mina/install-a-wallet"}
+  />
+  <DocsGridEntry
+    imgSrc="/static/img/docs-images/home/node-operators.svg"
+    imgWidth={18}
+    imgHeight={15}
+    title={"Run a Node"}
+    description={
+      "Learn how to run a Mina node as a block producer or snarker worker to participate in consensus."
+    }
+    buttonText={"Node Operators"}
+    buttonLink={"/node-operators/getting-started"}
+    />
 
-Mina is the first cryptocurrency protocol with a succinct blockchain. Current cryptocurrencies like Bitcoin and Ethereum store hundreds of gigabytes of data, and as time goes on, their blockchains will only increase in size. With Mina however, no matter how much the usage grows, the blockchain always stays the same size - about 22kb<Footnote refNumber="1" link="/blog/22kb-sized-blockchain-a-technical-reference" /> (the size of a few tweets). This means participants can quickly sync and verify the network.
-
-This breakthrough is made possible due to zk-SNARKs - a type of succinct cryptographic <a href="https://minaprotocol.com/blog/zero-knowledge-proofs-an-intuitive-explanation">zero-knowledge proof</a>. Each time a Mina node produces a new block, it also generates a SNARK proof verifying that the block was valid. All nodes can then store the small proof, as opposed to the entire chain. By not having to worry about block size, the Mina protocol enables a blockchain that is decentralized at scale.
-
-## How does Mina work?
-
-How does a ‘succinct blockchain’ work? Read our [technical white paper](https://docs.minaprotocol.com/static/pdf/technicalWhitepaper.pdf) to learn more about our cryptographic preliminaries and the succinct blockchain construction used in Mina.
-
-Check out our [economics white paper](https://docs.minaprotocol.com/static/pdf/economicsWhitepaper.pdf) to learn about the roles within Mina Protocol, the incentive design and the monetary policy.
-
-## Try Mina
-
-If you're ready to install Mina and begin running a node, head over to the <DocLink copy="Getting Started page." url="/node-operators/getting-started" />
+  <DocsGridEntry
+    imgSrc="/static/img/docs-images/home/using-mina.svg"
+    imgWidth={18}
+    imgHeight={15}
+    title={"Participate"}
+    description={
+      "Join the community, apply for grants & the zkApps Builders Program, become a code contributor, & more."
+    }
+    buttonText={"Learn More"}
+    buttonLink={"/participate/online-communities"}
+  />
+</DocsGridLayout>
