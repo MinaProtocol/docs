@@ -63,8 +63,6 @@ module Styles = {
         [
           marginTop(`rem(2.5)),
           marginBottom(`rem(1.5)),
-          marginLeft(`auto),
-          marginRight(`auto),
           media(
             Theme.MediaQuery.tablet,
             [marginTop(`rem(0.)), marginBottom(`rem(1.5))],
@@ -77,7 +75,8 @@ module Styles = {
 
   let imgStyles = (imgWidth, imgHeight) =>
     style([
-      marginLeft(`auto),
+      marginLeft(`rem(0.)),
+      marginRight(`auto),
       width(`rem(imgWidth)),
       height(`rem(imgHeight)),
     ]);
