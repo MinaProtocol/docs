@@ -67,7 +67,7 @@ module Styles = {
           marginRight(`auto),
           media(
             Theme.MediaQuery.tablet,
-            [marginTop(`rem(0)), marginBottom(`rem(1.5))],
+            [marginTop(`rem(0.)), marginBottom(`rem(1.5))],
           ),
         ],
       ),
