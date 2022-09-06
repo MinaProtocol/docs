@@ -10,7 +10,6 @@ module Styles = {
       gridTemplateRows([`repeat((`num(1), `rem(20.)))]),
       gridColumnGap(`rem(3.125)),
       gridRowGap(`rem(1.)),
-      selector("* > img", [width(`percent(100.))]),
       media(
         Theme.MediaQuery.tablet,
         [
