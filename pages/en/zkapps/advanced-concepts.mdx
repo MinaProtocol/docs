@@ -126,6 +126,18 @@ let { state, actionsHash } = this.reducer.reduce(
 
 What we called `acc` above is now called `state`; we also have to pass in the state's type as a parameter. In addition, we have to pass in an `actionsHash` which refers to one particular point in the actions history. Like `Array.reduce`, `Reducer.reduce` takes a callback which has the signature `(state: S, action: A) => S`, where `S` is the `stateType` and `A` is the `actionType`. It returns the result of applying all the actions, in order, to the initial `state`. In this example, the returned `state` will be `Bool(true)`, because one of the actions in the list is `Field(1000)`. Reduce also returns the new actionsHash -- so you can store it and for using it when you reduce the next batch of actions. One last difference to JS reduce is that this takes a _list of lists_ of actions instead of a flat list. Each of the sublists are the actions that were dispatched in one account update (e.g., while running one smart contract method).
 
+An astute reader may have noticed that this is eerily similar to a standard "Elm architecture" -- this is because we have an instance of a scan over an implicit infinite stream of actions (though here that are aggregated in chunks) -- this is very similar to the problem that came up when processing transactions within the [Mina Protocol L1 with Snark Workers](https://minaprotocol.com/blog/fast-accumulation-on-streams). This may sound scary, but it should be familiar to web developers through its instantiation via the Redux library or more recently via the `useReducer` hook in React!
+
+There is one interesting nuance here when compared to traditional Elm Architecture/Redux/useReducer instantiations: Because we're handling multiple actions concurrently in an undefined order, it is important that actions [commute](https://en.wikipedia.org/wiki/Commutative_property) against any possible state to prevent race conditions in your zkApp.
+
+More formally, you want to ensure that your state updates obey the following commutattivity law (given a left-associative update $\circ$):
+
+$$\begin{eqnarray}
+\forall a,a' &\in& \texttt{action}  \nonumber \\
+\forall s &\in& \texttt{state}  \nonumber \\
+s \circ a \circ a' &=& s \circ a' \circ a \nonumber \\
+\end{eqnarray}$$
+
 ### Reducer - API reference
 
 ```ts
