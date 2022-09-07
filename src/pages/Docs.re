@@ -48,7 +48,7 @@ let make = (~metadata, ~children) => {
 
   <Page title={metadata.title} description={metadata.description}>
     <Next.Head>
-      <link rel="stylesheet" href="/static/css/a11y-light.css" />
+      <link rel="stylesheet" href="/static/css/a11y-dark.css" />
       Markdown.katexStylesheet
     </Next.Head>
     <div className=Style.docsBackground>

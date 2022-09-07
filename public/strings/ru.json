@@ -15,7 +15,7 @@
     "message": "Начало работы"
   },
   {
-    "id": "sidenav.using-mina",
+    "id": "sidenav.node-operators",
     "defaultMessage": "Using Mina",
     "message": "Использование Mina"
   },
@@ -201,7 +201,7 @@
   },
   {
     "id": "sidenav.zkapps",
-    "defaultMessage": "zkApps",
+    "defaultMessage": "zkApp Developers",
     "message": "zkApps"
   },
   {
@@ -235,9 +235,9 @@
     "message": "ЧаВо"
   },
   {
-    "id": "sidenav.exchange-faq",
-    "defaultMessage": "Exchange FAQ",
-    "message": "Exchange ЧаВо"
+    "id": "sidenav.exchange-operators",
+    "defaultMessage": "Exchange Operators",
+    "message": "Exchange Operators"
   },
   {
     "id": "sidenav.documentation",

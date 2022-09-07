@@ -2,7 +2,7 @@ import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
 export default Page({ title: "Troubleshooting" });
 
-# Поиск проблем
+# Устранение Nроблем
 
 Здесь собраны распространенные проблемы, с которыми вы можете столкнуться при установке daemon Mina. Если вы не можете найти свою проблему здесь, обратитесь за помощью в [Discord](https://bit.ly/MinaDiscord) или в [Github](https://github.com/MinaProtocol/mina/issues/new).
 
@@ -25,8 +25,8 @@ export default Page({ title: "Troubleshooting" });
 Если вы запустили daemon mina на переднем плане, то как только вы отключитесь от него, он также отключится (с сигналом SIGINT). Чтобы запустить процесс в фоновом режиме для того, чтобы вы смогли отключиться, используйте любую опцию:
 
 - Запустите daemon с `-background`.
-- Запуститесь, используя службу systemd (смотрите <DocLink copy="документацию" url="/using-mina/connecting#ubuntu-1804--debian-9-1" />).
-- Запуститесь с Docker (смотрите <DocLink copy="документацию" url="/using-mina/connecting#docker" />).
+- Запуститесь, используя службу systemd (смотрите <DocLink copy="документацию" url="/node-operators/connecting#ubuntu-1804--debian-9-1" />).
+- Запуститесь с Docker (смотрите <DocLink copy="документацию" url="/node-operators/connecting#docker" />).
 - Запустите daemon в терминальном мультиплексоре, таком как screen или [tmux](https://icohigh.gitbook.io/mina-node-testnet/english/setting-up-tmux), от которых вы сможете отключиться, чтобы процесс продолжился.
 
 Рекомендуется запуск с использованием службы/через Docker, так как они имеют преимущество в виде автоматического перезапуска в случае сбоя вашей ноды.
@@ -73,7 +73,7 @@ This is necessary because sometimes macOS doesn't resolve your hostname to your 
 
 ### Какое оборудование мне нужно?
 
-Смотрите требования для работы в текущей сети <DocLink copy="здесь" url="/getting-started" />. При использовании некоторых VPS-провайдеров более низкого уровня может возникнуть проблема при создании блоков во время слота. Если вы продолжаете сталкиваться с проблемой пропущенных блоков, вы можете попробовать использовать более мощное оборудование.
+Смотрите требования для работы в текущей сети <DocLink copy="здесь" url="/node-operators/getting-started" />. При использовании некоторых VPS-провайдеров более низкого уровня может возникнуть проблема при создании блоков во время слота. Если вы продолжаете сталкиваться с проблемой пропущенных блоков, вы можете попробовать использовать более мощное оборудование.
 
 ### Я бы хотел, чтобы служба mina запускалась во время загрузки
 
@@ -282,7 +282,7 @@ mina advanced pooled-user-commands | jq . | grep fee | sort | uniq -c | sort -n
 
 ### Как запустить блок-продюсера?
 
-Способы запуска ноды доступны <DocLink copy="в документации" url="/using-mina/connecting" />. С их помощью вы сможете запустить блок-продюсера по умолчанию.
+Способы запуска ноды доступны <DocLink copy="в документации" url="/node-operators/connecting" />. С их помощью вы сможете запустить блок-продюсера по умолчанию.
 
 ### Как я узнаю, запущен ли мой блок-продюсер?
 
@@ -324,7 +324,7 @@ mina advanced pooled-user-commands | jq . | grep fee | sort | uniq -c | sort -n
 
 ### Как мне узнать, выиграл ли я блок, или прошла ли транзакция?
 
-Самый простой способ - проверить [блок-эксплорер](https://minaexplorer.com/). Вы также можете получить эту информацию для последних блоков через <DocLink copy="GraphQL API" url="/developers/graphql-api" />.
+Самый простой способ - проверить [блок-эксплорер](https://minaexplorer.com/). Вы также можете получить эту информацию для последних блоков через <DocLink copy="GraphQL API" url="/node-developers/graphql-api" />.
 
 ### Почему у меня появляется сообщение "No blocks won this this epoch"?
 

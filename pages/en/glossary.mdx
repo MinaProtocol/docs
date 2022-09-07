@@ -1,6 +1,6 @@
 import Page from "@reason/pages/Docs";
 import DocLink from "@reason/components/DocLink";
-export default Page({ title: "Glossary" });
+export default Page({ title: "Glossary | Mina Protocol" });
 
 # Glossary
 
@@ -10,7 +10,7 @@ Mina uses accounts to track each public key's state. This is distinct from Bitco
 
 #### Archive Node
 
-Mina nodes are succinct by default, meaning they don't need to maintain historical information about the network, block, or transactions. An <DocLink copy="archive node" url="/advanced/archive-node" /> stores the historical chain data to a persistent data source so it can later be retrieved.
+Mina nodes are succinct by default, meaning they don't need to maintain historical information about the network, block, or transactions. An <DocLink copy="archive node" url="/node-operators/archive-node" /> stores the historical chain data to a persistent data source so it can later be retrieved.
 
 #### Best Tip
 
@@ -78,11 +78,11 @@ The Mina daemon is a background process that implements the Mina protocol and ru
 
 #### Delegating
 
-Because staking mina requires nodes to be online, some nodes may desire to delegate their mina to another node that runs a staking service. This process is called delegating a stake, and often the service provider or staking pool operator may charge a fee for running this service, which will be deducted any time the delegator gets selected to be a block producer.
+Because staking MINA requires nodes to be online, some nodes may desire to delegate their MINA to another node that runs a staking service. This process is called delegating a stake, and often the service provider or staking pool operator may charge a fee for running this service, which will be deducted any time the delegator gets selected to be a block producer.
 
 #### Epoch
 
-An epoch is a unit of time equal to 7140 slots at Mainnet. An epoch is divided into [slots](#slot) of 3minutes each.
+An epoch is a unit of time equal to 7140 slots at Mainnet. An epoch is divided into [slots](#slot) of 3 minutes each.
 
 #### External Port
 
@@ -115,11 +115,11 @@ A combination of a [private](#private-key) and [public](#public-key) key. Keypai
 #### Mina
 
 - "Mina" with a capital M references the underlying cryptocurrency protocol and the network infrastructure that the system depends upon
-- "mina" is the unit of the cryptocurrency that is exchanged by participating nodes on the network
+- "MINA" is the unit of the cryptocurrency that is exchanged by participating nodes on the network
 
 #### Node
 
-A node is a machine running the mina daemon.
+A node is a machine running the Mina daemon.
 
 #### Non-consensus Node
 
@@ -155,7 +155,7 @@ The protocol state hash is the hash of hashes of the previous state and [protoco
 
 #### Proof-of-Stake
 
-The type of consensus algorithm Mina implements allowing nodes to agree upon the state of the network. Proof-of-Stake (PoS) allows nodes to [stake](#staking) mina on the network to increase their chance of being selected as the next block producer.
+The type of consensus algorithm Mina implements allowing nodes to agree upon the state of the network. Proof-of-Stake (PoS) allows nodes to [stake](#staking) MINA on the network to increase their chance of being selected as the next block producer.
 
 #### Public Key
 
@@ -175,7 +175,7 @@ The root of the [transition frontier](#transition-frontier) is the block `k` blo
 
 #### RPC
 
-A remote procedure call [(RPC)] (https://en.wikipedia.org/wiki/Remote_procedure_call) is used to communicate between nodes on the network and to interact with the running [daemon](#daemon).
+A remote procedure call [RPC](https://en.wikipedia.org/wiki/Remote_procedure_call) is used to communicate between nodes on the network and to interact with the running [daemon](#daemon).
 
 #### Scan State
 
@@ -187,7 +187,7 @@ Short for digital signatures, signatures are a way to establish authenticity or 
 
 #### Slot
 
-A slot in Mina is a unit of time. As of Mainnet launch, a slot is 3minutes long. An [epoch](#epoch) is divided into slots. Block producers can win the chance to produce a block during a slot.
+A slot in Mina is a unit of time. As of Mainnet launch, a slot is 3 minutes long. An [epoch](#epoch) is divided into slots. Block producers can win the chance to produce a block during a slot.
 
 #### SNARK Pool
 
@@ -195,7 +195,7 @@ The snark pool contains work completed by [snark workers](#snark-worker) for req
 
 #### SNARK Worker
 
-A node on the network that is participating in transaction SNARK generation. The SNARK worker is incentivized to help compress transactions because they receive mina as compensation for their efforts.
+A node on the network that is participating in transaction SNARK generation. The SNARK worker is incentivized to help compress transactions because they receive MINA as compensation for their efforts.
 
 #### Snarked Ledger
 
@@ -207,7 +207,7 @@ The staged ledger is the current account state. It contains a pending accounts l
 
 #### Staking
 
-Staking mina allows nodes on the network to increase their chances of being selected as a block producer in accordance with the consensus mechanism. The chance of winning the block scales in proportion to the amount of mina staked. For example, if one node stakes 50% of the available mina in the network, they theoretically have a 50% chance of being selected to produce future blocks. Mina uses Ouroboros Samisika Proof-of-Stake to implement the details of staking. If a node chooses to stake its mina, it is required to be online and connected to the Mina network.
+Staking MINA allows nodes on the network to increase their chances of being selected as a block producer in accordance with the consensus mechanism. The chance of winning the block scales in proportion to the amount of MINA staked. For example, if one node stakes 50% of the available MINA in the network, they theoretically have a 50% chance of being selected to produce future blocks. Mina uses Ouroboros Samisika Proof-of-Stake to implement the details of staking. If a node chooses to stake its MINA, it is required to be online and connected to the Mina network.
 
 #### Staking Ledger
 
@@ -247,10 +247,16 @@ A transaction issued by a user - either a payment or a delegation change
 
 The verifiable random function (VRF) is used to select a block producer for a slot. It takes as input a random seed, derived from the previous epoch's VRF outputs, in addition to a public key and the current staking ledger and is deterministic, i.e., it will always return the same output regardless of how often it is run.
 
+#### zkApps
+
+zkApps ("zero-knowledge apps") are Mina Protocol’s smart contracts powered by zero-knowledge proofs, specifically using zk-SNARKs. zkApps can perform arbitrarily-complex computations off chain while incurring only a flat fee to send the resulting zero-knowledge proof to the chain for verification of this computation, as opposed to other blockchains that run computations on chain and use a variable gas-fee based model.
+
+
+
 #### Zero-Knowledge Proof
 
-A proof by which one party (a prover) can prove to another party (verifiers) that they have knowledge of something - without giving away that specific knowledge. Mina uses zero-knowledge proofs, and specifically, zk-SNARKs, to generate a proof attesting to the blockchain's validity and allowing any node on the network to verify this quickly.
+A proof by which one party (a prover) can prove to another party (verifiers) that they have knowledge of something - without giving away that specific knowledge. Mina uses <a href="https://minaprotocol.com/blog/zero-knowledge-proofs-an-intuitive-explanation">zero-knowledge proofs</a>, and specifically, zk-SNARKs, to generate a proof attesting to the blockchain's validity and allowing any node on the network to verify this quickly.
 
 #### zk-SNARK
 
-A type of zero-knowledge proof - the acronym stands for "zero-knowledge succinct non-interactive argument of knowledge". The specific properties of interest in Mina's implementation of SNARKs are succinctness and non-interactivity, which allow for any node to quickly verify the state of the network.
+A type of zero-knowledge proof - the acronym stands for "zero-knowledge succinct non-interactive argument of knowledge" (<a href="https://minaprotocol.com/blog/what-are-zk-snarks">zk-SNARK</a>). The specific properties of interest in Mina's implementation of SNARKs are succinctness and non-interactivity, which allow for any node to quickly verify the state of the network.

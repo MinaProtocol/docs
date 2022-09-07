@@ -74,14 +74,19 @@ let slugConcat = (n1, n2) => {
 
 module Item = {
   [@react.component]
-  let make = (~title, ~slug) => {
+  let make = (~title, ~slug, ~externalSlug=None) => {
     let folderSlug = React.useContext(SectionSlugProvider.context);
     let toggleMenu = React.useContext(ToggleMenuProvider.context);
     let currentValue = React.useContext(CurrentValueProvider.context);
-    let href =
+    let fullSlug =
       switch (folderSlug) {
       | Some(fs) => slugConcat(fs, slug)
       | None => slug
+      };
+    let href =
+      switch (externalSlug) {
+      | Some(externalSlug) => externalSlug
+      | None => fullSlug
       };
 
     // Don't render the item if it's currently selected

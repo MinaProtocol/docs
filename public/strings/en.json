@@ -6,7 +6,7 @@
   },
   {
     "id": "sidenav.mina-overview",
-    "defaultMessage": "Mina Overview",
+    "defaultMessage": "Welcome",
     "message": ""
   },
   {
@@ -15,8 +15,8 @@
     "message": ""
   },
   {
-    "id": "sidenav.using-mina",
-    "defaultMessage": "Using Mina",
+    "id": "sidenav.node-operators",
+    "defaultMessage": "Node Operators",
     "message": ""
   },
   {
@@ -110,8 +110,8 @@
     "message": ""
   },
   {
-    "id": "sidenav.developers",
-    "defaultMessage": "Developers",
+    "id": "sidenav.node-developers",
+    "defaultMessage": "Node Developers",
     "message": ""
   },
   {
@@ -212,7 +212,7 @@
   {
     "id": "sidenav.zkapps",
     "defaultMessage": "zkApps",
-    "message": "zkApps"
+    "message": "zkApp Developers"
   },
   {
     "id": "sidenav.getting-starting-using-snarks",
@@ -235,8 +235,8 @@
     "message": ""
   },
   {
-    "id": "sidenav.exchange-faq",
-    "defaultMessage": "Exchange FAQ",
+    "id": "sidenav.exchange-operators",
+    "defaultMessage": "Exchange Operators",
     "message": ""
   },
   {
