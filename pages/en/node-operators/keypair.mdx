@@ -105,7 +105,7 @@ mina-generate-keypair --privkey-path ~/keys/my-wallet
 
 ```
 cd ~
-docker run  --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/mina-generate-keypair:1.3.0-9b0369c --privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/mina-generate-keypair:1.3.0-9b0369c --privkey-path /keys/my-wallet
 ```
 
 This will create two files on your system, `~/keys/my-wallet` which contains the encrypted private key and `~/keys/my-wallet.pub` which contains the public key in plain text. Please store the private key file and password you used in a secure place, such as a password manager.
@@ -139,7 +139,7 @@ mina-validate-keypair --privkey-path <path-to-the-private-key-file>
 If you are using Docker run the following command:
 
 ```
-docker run --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/mina-generate-keypair:1.3.0-9b0369c --privkey-path /keys/my-wallet
+docker run --interactive --tty --rm --entrypoint=mina-validate-keypair --volume $(pwd)/keys:/keys minaprotocol/mina-generate-keypair:1.3.0-9b0369c --privkey-path /keys/my-wallet
 ```
 
 ## Next steps
