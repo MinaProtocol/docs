@@ -313,6 +313,48 @@ module SideNav = {
             slug="install-a-wallet"
           />
         </Section>
+                /* ----------------------- zkApps Section (web) ---------------------------- */
+                <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
+                <Item title={intl->Intl.formatMessage(overview)} slug="" />
+                <Item
+                  title={intl->Intl.formatMessage(howZkAppsWork)}
+                  slug="how-zkapps-work"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howWriteZkApp)}
+                  slug="how-to-write-a-zkapp"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howTestZkApp)}
+                  slug="how-to-test-a-zkapp"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howDeployZkApp)}
+                  slug="how-to-deploy-a-zkapp"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howZkAppUI)}
+                  slug="how-to-write-a-zkapp-ui"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(advancedSnarkyJS)}
+                  slug="advanced-snarkyjs"
+                />
+                <Item
+                  title={
+                    intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)
+                  }
+                  slug="simple-anonymous-message-board-tutorial"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+                  slug="zkapps-for-ethereum-developers"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(zkAppsAPIReference)}
+                  slug="snarkyjs-reference"
+                />
+              </Section>
         <Section
           title={intl->Intl.formatMessage(nodeOperators)}
           slug={f("node-operators")}>
@@ -470,48 +512,6 @@ module SideNav = {
             slug="contributing"
           />
         </Section>
-        /* ----------------------- zkApps Section (web) ---------------------------- */
-        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
-          <Item title={intl->Intl.formatMessage(overview)} slug="" />
-          <Item
-            title={intl->Intl.formatMessage(howZkAppsWork)}
-            slug="how-zkapps-work"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howWriteZkApp)}
-            slug="how-to-write-a-zkapp"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howTestZkApp)}
-            slug="how-to-test-a-zkapp"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howDeployZkApp)}
-            slug="how-to-deploy-a-zkapp"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howZkAppUI)}
-            slug="how-to-write-a-zkapp-ui"
-          />
-          <Item
-            title={intl->Intl.formatMessage(advancedSnarkyJS)}
-            slug="advanced-snarkyjs"
-          />
-          <Item
-            title={
-              intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)
-            }
-            slug="simple-anonymous-message-board-tutorial"
-          />
-          <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(zkAppsAPIReference)}
-            slug="snarkyjs-reference"
-          />
-        </Section>
         <Section
           title={intl->Intl.formatMessage(exchange)}
           slug={f("exchange-operators")}>
@@ -621,6 +621,47 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(installWallet)}
             slug="install-a-wallet"
+          />
+        </Section>
+        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
+          <Item title={intl->Intl.formatMessage(overview)} slug="" />
+          <Item
+            title={intl->Intl.formatMessage(howZkAppsWork)}
+            slug="how-zkapps-work"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howWriteZkApp)}
+            slug="how-to-write-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howTestZkApp)}
+            slug="how-to-test-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howDeployZkApp)}
+            slug="how-to-deploy-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howZkAppUI)}
+            slug="how-to-write-a-zkapp-ui"
+          />
+          <Item
+            title={intl->Intl.formatMessage(advancedSnarkyJS)}
+            slug="advanced-snarkyjs"
+          />
+          <Item
+            title={
+              intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)
+            }
+            slug="simple-anonymous-message-board-tutorial"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsAPIReference)}
+            slug="snarkyjs-reference"
           />
         </Section>
         <Section
@@ -750,48 +791,6 @@ module Dropdown = {
           <Item
             title={intl->Intl.formatMessage(contributingToMina)}
             slug="contributing"
-          />
-        </Section>
-        /* ----------------------- zkApps Section (mobile) ---------------------------- */
-        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
-          <Item title={intl->Intl.formatMessage(overview)} slug="" />
-          <Item
-            title={intl->Intl.formatMessage(howZkAppsWork)}
-            slug="how-zkapps-work"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howWriteZkApp)}
-            slug="how-to-write-a-zkapp"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howTestZkApp)}
-            slug="how-to-test-a-zkapp"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howDeployZkApp)}
-            slug="how-to-deploy-a-zkapp"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howZkAppUI)}
-            slug="how-to-write-a-zkapp-ui"
-          />
-          <Item
-            title={intl->Intl.formatMessage(advancedSnarkyJS)}
-            slug="advanced-snarkyjs"
-          />
-          <Item
-            title={
-              intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)
-            }
-            slug="simple-anonymous-message-board-tutorial"
-          />
-          <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(zkAppsAPIReference)}
-            slug="snarkyjs-reference"
           />
         </Section>
         <Section
