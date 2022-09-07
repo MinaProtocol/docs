@@ -677,34 +677,6 @@ module Dropdown = {
           />
           <Item title={intl->Intl.formatMessage(rosetta)} slug="rosetta" />
           <Item
-            title={intl->Intl.formatMessage(proofOfStake)}
-            slug="proof-of-stake"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkWorkers)}
-            slug="snark-workers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(scanState)}
-            slug="scan-state"
-          />
-          <Item
-            title={intl->Intl.formatMessage(timeLockedAccounts)}
-            slug="timelock"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducers)}
-            slug="block-producers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whatsInABlock)}
-            slug="whats-in-a-block"
-          />
-          <Item
-            title={intl->Intl.formatMessage(lifecycleOfPayment)}
-            slug="lifecycle-payment"
-          />
-          <Item
             title={intl->Intl.formatMessage(seedPeers)}
             slug="seed-peers"
           />

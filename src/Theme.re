@@ -219,7 +219,9 @@ module Type = {
       hover([
         padding2(~h=`rem(0.8), ~v=`rem(0.5)),
         color(white),
-        backgroundImage(`url("/static/img/component-images/ButtonHoverLight.png")),
+        backgroundImage(
+          `url("/static/img/component-images/ButtonHoverLight.png"),
+        ),
       ]),
     ]);
 
@@ -242,6 +244,18 @@ module Type = {
       cursor(`pointer),
       color(Colors.orange),
       hover([textDecoration(`underline)]),
+    ]);
+
+  let link2 =
+    style([
+      Typeface.monumentGrotesk,
+      fontSize(`rem(1.125)),
+      lineHeight(`rem(1.7)),
+      Css.unsafe("text-decoration", "underline dotted #555"),
+      Css.unsafe("text-decoration-thickness", "1px"),
+      Css.unsafe("text-underline-offset", "3px"),
+      cursor(`pointer),
+      hover([color(Colors.orange), textDecoration(`underline)]),
     ]);
 
   let navLink =
@@ -298,15 +312,9 @@ module Type = {
       lineHeight(`rem(1.5)),
     ]);
 
-  let reward =
-    style([
-      Typeface.monumentGrotesk,
-  ]);
+  let reward = style([Typeface.monumentGrotesk]);
 
-  let testworld = 
-    style([
-      Typeface.monumentGrotesk,
-    ])
+  let testworld = style([Typeface.monumentGrotesk]);
 
   let errorMessage =
     style([
