@@ -198,7 +198,7 @@ module DocsNavsTranslations = {
     id: "sidenav.exchange-operators",
     defaultMessage: "Exchange Operators",
   };
-  let exchangeFaq = {id: "sidenav.faq-exchange", defaultMessage: "FAQ"};
+  let exchangeFaq = {id: "sidenav.faq", defaultMessage: "FAQ"};
 
   let whitepaper = {id: "sidenav.whitepaper", defaultMessage: "Whitepaper"};
   let faq = {id: "sidenav.FAQ", defaultMessage: "FAQ"};
@@ -517,7 +517,7 @@ module SideNav = {
           slug={f("exchange-operators")}>
           <Item
             title={intl->Intl.formatMessage(exchangeFaq)}
-            slug="faq-exchange"
+            slug="faq"
           />
         </Section>
         <Section
@@ -798,7 +798,7 @@ module Dropdown = {
           slug={f("exchange-operators")}>
           <Item
             title={intl->Intl.formatMessage(exchangeFaq)}
-            slug="faq-exchange"
+            slug="faq"
           />
         </Section>
         <Section
