@@ -212,8 +212,8 @@ module DocsNavsTranslations = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
   };
-  let grantoverview = {
-    id: "sidenav.grantoverview",
+  let grantsAndPrograms = {
+    id: "sidenav.grants-and-programs",
     defaultMessage: "Grants & Programs",
   };
   let delegation = {
@@ -528,8 +528,8 @@ module SideNav = {
             slug="online-communities"
           />
           <Item
-            title={intl->Intl.formatMessage(grantoverview)}
-            slug="grantoverview"
+            title={intl->Intl.formatMessage(grantsAndPrograms)}
+            slug="grants-and-programs"
           />
           <Item title={intl->Intl.formatMessage(careers)} slug="careers" />
           <Item title={intl->Intl.formatMessage(github)} slug="github" />
@@ -810,8 +810,8 @@ module Dropdown = {
           />
           <Item title={intl->Intl.formatMessage(careers)} slug="careers" />
           <Item
-            title={intl->Intl.formatMessage(grantoverview)}
-            slug="grantoverview"
+            title={intl->Intl.formatMessage(grantsAndPrograms)}
+            slug="grants-and-programs"
           />
           <Item title={intl->Intl.formatMessage(github)} slug="github" />
           <Item
