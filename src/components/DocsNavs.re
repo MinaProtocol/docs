@@ -198,7 +198,7 @@ module DocsNavsTranslations = {
     id: "sidenav.exchange-operators",
     defaultMessage: "Exchange Operators",
   };
-  let exchangeFaq = {id: "sidenav.faq-exchange", defaultMessage: "FAQ"};
+  let exchangeFaq = {id: "sidenav.faq", defaultMessage: "FAQ"};
 
   let whitepaper = {id: "sidenav.whitepaper", defaultMessage: "Whitepaper"};
   let faq = {id: "sidenav.FAQ", defaultMessage: "FAQ"};
@@ -212,8 +212,8 @@ module DocsNavsTranslations = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
   };
-  let grantoverview = {
-    id: "sidenav.grantoverview",
+  let grantsAndPrograms = {
+    id: "sidenav.grants-and-programs",
     defaultMessage: "Grants & Programs",
   };
   let delegation = {
@@ -517,7 +517,7 @@ module SideNav = {
           slug={f("exchange-operators")}>
           <Item
             title={intl->Intl.formatMessage(exchangeFaq)}
-            slug="faq-exchange"
+            slug="faq"
           />
         </Section>
         <Section
@@ -528,8 +528,8 @@ module SideNav = {
             slug="online-communities"
           />
           <Item
-            title={intl->Intl.formatMessage(grantoverview)}
-            slug="grantoverview"
+            title={intl->Intl.formatMessage(grantsAndPrograms)}
+            slug="grants-and-programs"
           />
           <Item title={intl->Intl.formatMessage(careers)} slug="careers" />
           <Item title={intl->Intl.formatMessage(github)} slug="github" />
@@ -798,7 +798,7 @@ module Dropdown = {
           slug={f("exchange-operators")}>
           <Item
             title={intl->Intl.formatMessage(exchangeFaq)}
-            slug="faq-exchange"
+            slug="faq"
           />
         </Section>
         <Section
@@ -810,8 +810,8 @@ module Dropdown = {
           />
           <Item title={intl->Intl.formatMessage(careers)} slug="careers" />
           <Item
-            title={intl->Intl.formatMessage(grantoverview)}
-            slug="grantoverview"
+            title={intl->Intl.formatMessage(grantsAndPrograms)}
+            slug="grants-and-programs"
           />
           <Item title={intl->Intl.formatMessage(github)} slug="github" />
           <Item
