@@ -1,0 +1,92 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page({ title: "Lifecycle of a zkApp" });
+
+# The Lifecycle of a zkApp
+
+In many ways, the lifecycle of a zkApp transaction follows the same
+general arc as a payment in the Mina protocol (see <DocLink copy="The Lifecycle of a Payment" url="/node-operators/lifecycle-payment"> for details).
+Like payments, zkApps are added to a node's transaction pool, if they
+are valid, and then gossiped to other nodes on the Mina network.
+zkApps are counted against the transaction pool size limit, and so may
+be evicted if the limit is exceeded. SNARK workers create proofs for
+zkApp transactions, just as they do for payments. Along with payments,
+zkApps are added to blocks, which have their own SNARK proofs. Block
+producers are rewarded for creating blocks.
+
+## Validating a zkApp
+---------------------
+
+The basics of zkApp functionality are described at <DocLink copy="How
+zkApps Work" url="/zkapps/how-zkapps-work">. zkApps have a richer
+functionality than payments, so validating them is correspondingly
+more complex.
+
+While payments always involve one sender account and one
+receiver account, zkApps may involve many accounts. While they may
+change account balances, like a payment, zkApps can also affect other
+features of accounts.
+
+Every zkApp has a fee payer that pays a transaction fee.
+For payments, the fee payer is the same as the sender. In a
+zkApp, the fee payer's account may also be involved in the other
+account updates of the zkApp. The fee payer can sign the zkApp,
+or provide a SNARK proof of the validity of the transaction (TODO: the proof
+feature is not implemented). A zkApp also contains account updates that
+indicate how other accounts can change when the transaction is processed.
+
+For a zkApp to succeed, a number of preconditions need
+to be met. For payments, we need to make sure the
+the fee is sufficent, the sender's account exists, and
+contains a balance to cover the payment. Likewise, for zkApps,
+the fee is also checked, and that transfers are from
+an existing account with an adequate balance. Across all
+account updates in a zkApp (not include the fee payer's debited
+fee), the net sum of balance changes must be zero.
+
+In addition to these basic checks, zkApps can specify that other
+preconditions be met. The zkApp author specifies what those
+preconditions are.  The preconditions are of two types, those specific
+to the account updates in the zkApp, and those related to the state of
+the network. **Account preconditions** may include nonces, whether an account
+is new, and the account's application state. **Network preconditions** include a
+slot number, the total currency in the ledger, and the length of the
+blockchain. Network preconditions are often a range of values, since
+the exact value when the transaction runs may not be predictable.
+
+If preconditions are not met, or a needed permission is not set,
+a zkApp will fail. See <DocLink copy="zkApp Failures"" url="/node-operators/zkapp-failures">
+for a description of failure modes.
+
+## Special features of zkApps
+
+A zkApp can create new accounts, just as payments do, by sending funds
+to an address not in the Mina ledger. By default, new accounts are
+denominated in the MINA token. Using a zkApp, new tokens can be
+minted, creating accounts denominated in those tokens. Every new token
+has a token owner, and, after their minting, any transfer of new tokens
+must be initiated in the zkApp by the token owner.  A zkApp will fail
+if that ownership discipline is not kept.
+
+New accounts created by a zkApp may also have timing restrictions
+which limit how much of an account balance can be sent at a given
+slot. The restriction on how much can be sent is gradually lifted over
+time, according to a vesting schedule, until all the funds are
+available to send. When zkApps are processed, transfers from accounts
+with time-locked features are checked to make sure the accounts
+balances do not fall below a calculated minimum. The Mina protocol has
+always had such "time-locked" accounts, but those were created in the
+genesis ledger, before zkApps were introduced.  With the advent of
+zkApps, such accounts can be created at any time.
+
+## Archiving zkApps
+
+A node operator may run an archive process alongside the daemon
+process. The archive process saves blocks to a Postgresql database,
+including the details of zkApp transactions, as well as payments and
+delegation transactions in blocks, and "internal" transactions (fees
+and coinbase rewards). The archive database allows a node to
+store the blockchain transaction history, even though the blockchain
+itself is succinct. When the daemon process accepts a new gossiped block,
+it transmits the block to the archive process, which saves the block
+to the database.
