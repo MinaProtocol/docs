@@ -141,7 +141,7 @@ FILE_LOG_LEVEL=Debug
 EXTRA_FLAGS=" --block-producer-key <BLOCK_PRODUCER_KEY_PATH>"
 PEER_LIST_URL=https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 ```
-Ensure to replace <BLOCK_PRODUCER_KEY_PATH> with the full path to your block producer private key, for example, `/home/ubuntu/keys/my-wallet`.
+Ensure to replace <BLOCK_PRODUCER_KEY_PATH> with the full path to your block producer private key in the scope of the container, for example, `/keys/my-wallet`.
 
 If you do not intend to produce blocks then you can keep ~/.mina-env empty except for the PEER_LIST_URL.
 
