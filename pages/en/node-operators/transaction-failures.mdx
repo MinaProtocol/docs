@@ -1,0 +1,53 @@
+import Page from "@reason/pages/Docs";
+import DocLink from "@reason/components/DocLink";
+export default Page ({ title: "Transaction failures" });
+
+# Transaction failures
+
+If a transaction fails to be applied, usually it would trigger 1 or more failures. There's 3 kind of transactions: payments, delegations, or zkApp transactions. There're several different kinds of failure in mina system. Some of the failures are specific to some kind of transactions. Let me explain them one by one below.
+
+## Source_not_present
+For payment, this means the mina node can not find the sender's account in the ledger.
+For delegation, this means the mina node can not find the delegator's account in the ledger.
+
+## Receiver_not_present
+This kind of failure only happens when a user tries to delegates to an non-exist account. If a user tries to send a payment to a new account, then this account would be created by this payment transaction.
+
+## Amount_insufficient_to_create_account
+For payment, this means the user tries to create a new account in this payment transaction, but the amount in the transaction is not enough for covering the account creation fee.
+For zkApp transaction, this means the smart contract tries to create 1 or more new accounts, but the amount in the smart contract is not enough for covering the account creation fee(s).
+
+## Source_insufficient_balance
+For payment, this means the sender does not have enough balance to cover the amount in the transaction.
+
+## Source_minimum_balance_violation
+For payment, this means the sender is a time-locked accounts and the unlocked funds is not enough to cover the amount in the transaction.
+
+For zkApp trasaction, this means 1 or more accounts in the zkApps are time-locked accounts and they violated the minimum balance requirement (trying to use more funds than unlocked at the moment).
+
+## Token_owner_not_caller
+This failure is unique to zkApps. You can think of zkApp transactions as a smart contract that update several different accounts, then it's possible to have updates to accounts with non-default tokens (tokens that owned by some specific accounts). Those are usually called token transfers/transactions by engineers. The token transactions must be directly called by token owners; or any immediate calls must 'delegate' the call's ownership to the token owner. This failure would be triggered if the above conditions are not satisfied.
+
+## Overflow
+The resulting balance of the transaction is too large to store.
+
+## Global_excess_overflow / Local_excess_overflow
+These 2 failures are unique to zkApps. They mean overflow happens when computing the balance changes for accounts that are involved in the zkApp.
+
+## Update_not_permitted_(balance/timing_existing_account/delegate/app_state/verification_key/sequence_state/zkapp_uri/token_symbol/permissions/nonce/voting/for)
+Those failures are unique to zkApps. They mean the updates to those fields are not authorized.
+
+## Fee_payer_nonce_must_increase
+This failure is unique to zkApps. It happens when fee payer does not increment the nonce.
+
+## Fee_payer_must_be_signed
+This failure is unique to zkApps. It happens when fee payer does not use signature as its authorization.
+
+## Account_(balance/nonce/receipt_chain_hash/delegate/sequence_state/app_state/proved_state/is_new)_precondition_unsatisfied
+Those failures are unique to zkApps. ZkApp transactions could set some preconditions for the accounts. If those preconditions are not satisfied then this failure would be triggered.
+
+## Protocol_state_precondition_unsatisfied
+This failure is unique to zkApps. ZkApp transactions could set some preconditions for the network (for example, the length of the chain or the slot, etc.) If those preconditions are not satisfied then this failure would be triggered.
+
+## Invalid_fee_excess
+This failure is unique to zkApp. It means the balance change in zkApp transaction does not add up.
