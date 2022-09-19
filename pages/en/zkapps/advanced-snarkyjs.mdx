@@ -379,7 +379,9 @@ If you are writing your zkApp to interact with custom tokens, you should underst
 
 ##### Token Id
 
-Token Ids are unique identifiers that are used to distinguish between different types of custom tokens. Custom token identifiers are globally unique across the entire network, meaning no two custom tokens can have the same token id.
+Token Ids are unique identifiers that are used to distinguish between different types of custom tokens. Custom token identifiers are globally unique across the entire network, meaning no two custom tokens can have the same token identifier.
+
+Token Ids themeselves are derived from a zkApp. To check the token id of a zkApp, you can use the `this.experimental.token.id` property.
 
 ##### Token Accounts
 
