@@ -88,7 +88,7 @@ let slugConcat = (n1, n2) => {
 
 module Item = {
   [@react.component]
-  let make = (~title, ~slug) => {
+  let make = (~title, ~slug, ~externalSlug=None) => {
     let folderSlug = Context.SectionSlugContext.useSection();
     let currentItem = Context.SideNavCurrentItemContext.useCurrentItem();
 
@@ -98,7 +98,12 @@ module Item = {
       | SlugNotAvailable => (slug, `Top)
       };
     let isCurrentItem = currentItem == title;
-    let href = fullSlug;
+    let href =
+      switch (externalSlug) {
+      | Some(externalSlug) => externalSlug
+      | None => fullSlug
+      };
+
     <li
       className={
         switch (placement) {

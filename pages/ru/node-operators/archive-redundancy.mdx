@@ -1,0 +1,103 @@
+import Page from '@reason/pages/Docs';
+import DocLink from "@reason/components/DocLink";
+export default Page({title: "Archive Redundancy"});
+
+# Архивное резервирование
+
+Ниже представлены три потока для доступа к информации о блоках и истории транзакциий.
+
+Представленные здесь пути отсортированы от "самых необработанных" до "наиболее обработанных".
+
+O(1) labs будут разворачивать все три потока в своей инфраструктуре (с большой избыточностью), чтобы они могли предоставить недостающую информацию для пользователей потоков (A), (B) или (C), если их ноды отключатся по любой причине и упустят информацию.
+
+## A. Логирование необработанных блоков
+
+У нас есть механизм для логирования высокоточного машиночитаемого образа блоков, включая некоторую дополнительную внутреннюю информацию, с помощью JSON. Мы используем эти логи для того, чтобы быстро найти нужные блоки и перейти к определенным состояниям цепи для устранения ошибок. Этой информации достаточно, чтобы воссоздавать точные состояния сети.
+
+Некоторые внутренние данные выглядят так:
+
+```json
+{"data":["Signed_command",{"payload":{"common":{"fee":"100","fee_token":"1","fee_payer_pk":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","nonce":"340","valid_until":"4294967295","memo":"E4YM2vTHhWEg66xpj52JErHUBU4pZ1yageL4TVDDpTTSsv8mK6YaH"},"body":["Payment",{"source_pk":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","receiver_pk":"B62qm2GCuGCEK79mEjeyaeiFoukThuZLJCHGe9HAzuAnfbtS5FHtPnP","token_id":"1","amount":"100000000"}]},"signer":"B62qixbmBBmCmv1xH5SeF1hw6EqwSNVPi9B28epa3phqVMSyuZk9EoH","signature":"7mXGz8Df1gu92HVWGue24wcrGxDWkgQrDK59xQGXc627PKFQvVAPSzZn7JMkHtfdBUXavDHcgLBZy4iR4UmA5seRCPMkFDci"}],"status":["Applied",{"fee_payer_account_creation_fee_paid":null,"receiver_account_creation_fee_paid":null,"created_token":null},{"fee_payer_balance":"31866000100000","source_balance":"31866000100000","receiver_balance":"34099000000"}]}],"coinbase":["One",null],"internal_command_balances":[["Coinbase",{"coinbase_receiver_balance":"75477804514901","fee_transfer_receiver_balance":null}],["Fee_transfer",{"receiver1_balance":"65266376010003","receiver2_balance":"78601129170700"}],["Fee_transfer",{"receiver1_balance":"66001820000000","receiver2_balance":"76870784414900"}],["Fee_transfer",{"receiver1_balance":"71158365898775","receiver2_balance":"59264207944722"}],["Fee_transfer",{"receiver1_balance":"68546088449962","receiver2_balance":"66721919100000"}],["Fee_transfer",{"receiver1_balance":"67700798001000","receiver2_balance":"66372760000000"}],["Fee_transfer",{"receiver1_balance":"85383891400000","receiver2_balance":"107174952265469"}],["Fee_transfer",{"receiver1_balance":"65879310000000","receiver2_balance":"66282230000000"}]]}]},"delta_transition_chain_proof":["jxLZWooV57gKCmanzCHHt1CDbHfUpMu6MkynUdqN9ZkBUJi7B1W",[]]}
+```
+
+JSON будет развиваться по мере изменения формата блока и роста нагрузки на сеть. Однако мы не ожидаем большого оттока пользователей до запуска mainnet.
+
+Эта информация отображается в логах и передается на поток stdout. Мы можем предоставить инструменты фильтрации и получения только этих данных для их безопасного и постоянного хранения.
+
+## B. JSON-cнапшоты GraphQL
+
+GraphQL сервер daemon Mina размещен на порте `0xc0d` или 3085 (по умолчанию, настраивается с помощью файла конфигурации или флага --rest-server-port) на вашем устройстве (вы можете открыть его для 0.0.0.0 с помощью --insecure-rest-server). Открытие этого порта для общего доступа в Интернет небезопасно.
+
+Мы предоставляем запрос `bestChain`, который по-прежнему сможет получить *по крайней мере* последние несколько блоков (хотя и не все). Смотрите подробную документацию, которая содержит всю необходимую информацию в формате JSON, здесь: [https://minaprotocol.com/graphql-docs/query. doc.html] (https://minaprotocol.com/graphql-docs/query.doc.html). Если вы производите запросы быстрее, чем каждые 3 минуты, вы будете получать информацию о каждом блоке. Вы также можете получать эту информацию с помощью подписки, отправленной вам через [https://minaprotocol.com/graphql-docs/subscription.doc.html] ](https://minaprotocol.com/graphql-docs/subscription.doc.html). 
+
+В настоящее время в тестовых сетях существует множество приложений, которые используют эту информацию. O(1) labs полагается на этот источник данных в нескольких местах, и, вероятно всего, в основной сети будут новые пользователи этих данных.
+
+## C. Официальная Архивная Нода PostgreSQL
+
+O(1) labs будет поддерживать восстановление данных из резервных копий (B) или (A).
+
+Преимущество архивной ноды состоит в том, что в сети уже есть пользователи, которые используют запросы вида: «какой блок находится на высоте N в канонической цепи». Смотрите <DocLink copy="https://docs.minaprotocol.com/node-operators/archive-node" url="/node-operators/archive-node" /> для получения дополнительной информации.
+
+```
+WITH RECURSIVE chain AS (
+  (SELECT ... FROM blocks b WHERE height = (select MAX(height) from blocks)
+  ORDER BY timestamp ASC
+  LIMIT 1)
+
+  UNION ALL
+
+  SELECT ... FROM blocks b
+  INNER JOIN chain
+  ON b.id = chain.parent_id AND chain.id <> chain.parent_id
+) SELECT ..., pk.value as creator FROM chain c
+  INNER JOIN public_keys pk
+  ON pk.id = c.creator_id
+  WHERE c.height = ?
+
+```
+
+Настройка позволяет получить информацию о блоках в одном окне или о транзакциях в определенном срезе блоков.
+
+===
+
+## Детали ликвидного баланса:
+
+Потоки (A), (B), (C) содержат достаточно информации для расчета ликвидных балансов на вестинговых счетах.
+
+Если вы хотите увидеть ликвидные остатки на вестинговых счетах в определенный период времени, это можно сделать с помощью следующей функции (Примечание: функция вычисляет заблокированную часть счета):
+
+```
+(*  
+ *  uint32 global_slot -- the "clock" it starts at 0 at the genesis block and ticks up every 3minutes.
+ *  uint32 cliff_time -- the slot where the cliff is (similar to startup equity vesting)
+ *  uint32 cliff_amount -- the amount that unlocks at the cliff
+ *  amount vesting_increment -- unlock this amount every "period"
+ *  uint32 vesting_period -- the period that we increment the unlocked amount
+ *  balance initial_minimum_balance -- the total locked amount until the cliff
+ *)
+let min_balance_at_slot ~global_slot ~cliff_time ~cliff_amount ~vesting_period
+    ~vesting_increment ~initial_minimum_balance =
+  let open Unsigned in
+  if Global_slot.(global_slot < cliff_time) then initial_minimum_balance
+  else
+    match Balance.(initial_minimum_balance - cliff_amount) with
+    | None ->
+        Balance.zero
+    | Some min_balance_past_cliff -> (
+        (* take advantage of fact that global slots are uint32's *)
+        let num_periods =
+          UInt32.(
+            Infix.((global_slot - cliff_time) / vesting_period)
+            |> to_int64 |> UInt64.of_int64)
+        in
+        let vesting_decrement =
+          UInt64.Infix.(num_periods * Amount.to_uint64 vesting_increment)
+          |> Amount.of_uint64
+        in
+        match Balance.(min_balance_past_cliff - vesting_decrement) with
+        | None ->
+            Balance.zero
+        | Some amt ->
+            amt )
+
+```

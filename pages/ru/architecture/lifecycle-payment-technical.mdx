@@ -45,19 +45,19 @@ $ mina client send-payment \
 
 - <DocLink
     copy="Параметризованные отчеты"
-    url="/developers/style-guide/#parameterized-records"
+    url="/node-developers/style-guide/#parameterized-records"
   />
-- <DocLink copy="Ppx deriving" url="/developers/style-guide/#ppx_deriving" />
-- <DocLink copy="Stable.V1" url="/developers/style-guide/#stable-v1" />
+- <DocLink copy="Ppx deriving" url="/node-developers/style-guide/#ppx_deriving" />
+- <DocLink copy="Stable.V1" url="/node-developers/style-guide/#stable-v1" />
 - <DocLink
     copy="Property based тесты"
-    url="/developers/style-guide/#quickcheck-gen"
+    url="/node-developers/style-guide/#quickcheck-gen"
   />
 - <DocLink
     copy="Typesafe Invariants"
-    url="/developers/style-guide/#typesafe-invariants"
+    url="/node-developers/style-guide/#typesafe-invariants"
   />
-- <DocLink copy="Unit Тесты" url="/developers/style-guide/#unit-tests" />
+- <DocLink copy="Unit Тесты" url="/node-developers/style-guide/#unit-tests" />
 
 Давайте разберемся с платежной нагрузкой:
 
@@ -71,7 +71,7 @@ $ mina client send-payment \
 
 Мы используем [подписи Шнорра](https://en.wikipedia.org/wiki/Schnorr_signature). [Подпись Шнорра](https://en.wikipedia.org/wiki/Schnorr_signature) является элементом в [группе](https://en.wikipedia.org/wiki/Group_(mathematics). Наша группа - это точка на [эллиптической кривой](https://en.wikipedia.org/wiki/Elliptic_curve). Так что же такое подпись? Откройте [библиотеки подписи checked.ml](https://github.com/minaprotocol/mina/tree/master/src/lib/signature_lib/checked.ml) и прокрутите до `module Signature` внутри `module type S`. Это ненулевая точка на кривой, также известная как пара двух значений `curve_scalar`. Для подписи мы даем [закрытый ключ](#private-key) и сообщение. Проверить подпись в сообщении можно с помощью [открытого ключа](#public-key).
 
-Это первый раз, когда мы видим тяжело функторированный код, поэтому смотрите <DocLink copy="функторы" url="/developers/style-guide/#functors" />, если запутаетесь. Это также первый раз, когда мы видим пользовательскую схему SNARK. Для более подробной информации зайдите в раздел <DocLink copy="пользовательская схема SNARK" url="/developers/style-guide/#snark-checked" />.
+Это первый раз, когда мы видим тяжело функторированный код, поэтому смотрите <DocLink copy="функторы" url="/node-developers/style-guide/#functors" />, если запутаетесь. Это также первый раз, когда мы видим пользовательскую схему SNARK. Для более подробной информации зайдите в раздел <DocLink copy="пользовательская схема SNARK" url="/node-developers/style-guide/#snark-checked" />.
 
 ## Приватный ключ
 

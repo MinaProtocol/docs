@@ -1,14 +1,19 @@
 module DocsNavsTranslations = {
   open ReactIntl;
-  let minaOverview = {
-    id: "sidenav.mina-overview",
-    defaultMessage: "Mina Overview",
-  };
+  let minaOverview = {id: "sidenav.mina-overview", defaultMessage: "Welcome"};
+  let aboutOverview = {id: "sidenav.Overview", defaultMessage: "Overview"};
   let gettingStarted = {
     id: "sidenav.getting-started",
     defaultMessage: "Getting Started",
   };
-  let usingMina = {id: "sidenav.using-mina", defaultMessage: "Using Mina"};
+  let whatAreZeroKnowledgeProofs = {
+    id: "sidenav.what-are-zero-knowledge-proofs",
+    defaultMessage: "What are Zero-Knowledge Proofs?",
+  };
+  let protocolArchitecture = {
+    id: "sidenav.protocol-architecture",
+    defaultMessage: "Protocol Architecture",
+  };
   let keypairGeneration = {
     id: "sidenav.keypair-generation",
     defaultMessage: "Keypair Generation",
@@ -29,7 +34,16 @@ module DocsNavsTranslations = {
     id: "sidenav.cli-reference",
     defaultMessage: "CLI Reference",
   };
-  let advanced = {id: "sidenav.advanced", defaultMessage: "Advanced"};
+  let nodeOperators = {
+    id: "sidenav.node-operators",
+    defaultMessage: "Node Operators",
+  };
+  let usingMina = {id: "sidenav.using-mina", defaultMessage: "Using Mina"};
+
+  let installWallet = {
+    id: "sidenav.install-a-wallet",
+    defaultMessage: "Install a Wallet",
+  };
   let archiveNode = {
     id: "sidenav.archive-node",
     defaultMessage: "Archive Node",
@@ -71,7 +85,10 @@ module DocsNavsTranslations = {
     id: "sidenav.staking-service-guidelines",
     defaultMessage: "Staking Service Guidelines",
   };
-  let developers = {id: "sidenav.developers", defaultMessage: "Developers"};
+  let nodeDevelopers = {
+    id: "sidenav.node-developers",
+    defaultMessage: "Node Developers",
+  };
   let codebaseOverview = {
     id: "sidenav.codebase-overview",
     defaultMessage: "Codebase Overview",
@@ -95,10 +112,7 @@ module DocsNavsTranslations = {
   };
   let graphqlAPI = {id: "sidenav.graphql-api", defaultMessage: "GraphQL API"};
   let logging = {id: "sidenav.logging", defaultMessage: "Logging"};
-  let protocolArchitecture = {
-    id: "sidenav.protocol-architecture",
-    defaultMessage: "Protocol Architecture",
-  };
+  let aboutMina = {id: "sidenav.about-mina", defaultMessage: "About Mina"};
   let lifecycleOfPayment = {
     id: "sidenav.lifecycle-of-a-payment",
     defaultMessage: "Lifecycle of a Payment",
@@ -125,53 +139,52 @@ module DocsNavsTranslations = {
     id: "sidenav.time-locked-accounts",
     defaultMessage: "Time-locked Accounts",
   };
-  let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps"};
-  let zkAppsForEthereumDevelopers= {
+  let zkapps = {id: "sidenav.zkapps", defaultMessage: "zkApps Developers"};
+
+  let zkAppsForEthereumDevelopers = {
     id: "sidenav.zkapps-for-ethereum-developers",
     defaultMessage: "zkApps for Ethereum Developers",
   };
-    let simpleAnonymousMessageBoardTutorial= {
+  let simpleAnonymousMessageBoardTutorial = {
     id: "sidenav.simple-anonymous-message-board-tutorial",
-    defaultMessage: "Tutorial: Simple Anonymous Message Board",
+    defaultMessage: "Step-by-step Tutorial: Anonymous Message Board",
+  };
+  let advancedSnarkyJS = {
+    id: "sidenav.advanced-snarkyjs",
+    defaultMessage: "Advanced SnarkyJS",
   };
   let onlineCommunities = {
     id: "sidenav.online-communities",
     defaultMessage: "Online Communities",
   };
-  let careers = {
-    id: "sidenav.careers",
-    defaultMessage: "Careers",
-  };
+  let careers = {id: "sidenav.careers", defaultMessage: "Careers"};
 
   let reporting = {
     id: "sidenav.reporting",
     defaultMessage: "Reporting Issues, Bugs, & Feature Requests",
   };
-  let github  = {
-    id: "sidenav.github",
-    defaultMessage: "Github",
-  };
+  let github = {id: "sidenav.github", defaultMessage: "Github"};
   let howZkAppsWork = {
     id: "sidenav.how-zkapps-work",
     defaultMessage: "How zkApps Work",
   };
   let howWriteZkApp = {
     id: "sidenav.how-to-write-a-zkapp",
-    defaultMessage: "How To Write a zkApp",
+    defaultMessage: "How to Write a zkApp",
   };
   let howTestZkApp = {
     id: "sidenav.how-to-test-a-zkapp",
-    defaultMessage: "How To Test a zkApp",
+    defaultMessage: "How to Test a zkApp",
   };
-  let   howDeployZkApp = {
+  let howDeployZkApp = {
     id: "sidenav.how-to-deploy-a-zkapp",
-    defaultMessage: "How To Deploy a zkApp",
+    defaultMessage: "How to Deploy a zkApp",
   };
-  let   howZkAppUI = {
+  let howZkAppUI = {
     id: "sidenav.how-to-write-a-zkapp-ui",
-    defaultMessage: "How To Write a zkApp UI",
+    defaultMessage: "How to Write a zkApp UI",
   };
-  let zkAppsAPIReference= {
+  let zkAppsAPIReference = {
     id: "sidenav.api-reference",
     defaultMessage: "SnarkyJS API Reference",
   };
@@ -180,25 +193,38 @@ module DocsNavsTranslations = {
     defaultMessage: "Troubleshooting",
   };
   let glossary = {id: "sidenav.glossary", defaultMessage: "Glossary"};
-  let faq = {id: "sidenav.faq", defaultMessage: "FAQ"};
-  let exchangeFaq = {id: "sidenav.exchange-operators", defaultMessage: "Exchange Operators"};
-  let participate = {id: "sidenav.participate", defaultMessage: "Participate"};
+
+  let exchange = {
+    id: "sidenav.exchange-operators",
+    defaultMessage: "Exchange Operators",
+  };
+  let exchangeFaq = {id: "sidenav.faq", defaultMessage: "FAQ"};
+
+  let whitepaper = {id: "sidenav.whitepaper", defaultMessage: "Whitepaper"};
+  let faq = {id: "sidenav.FAQ", defaultMessage: "FAQ"};
+  let aboutFaq = {id: "sidenave.faq", defaultMessage: "FAQ"};
+
+  let participate = {
+    id: "sidenav.participate",
+    defaultMessage: "Participate",
+  };
   let contributingToMina = {
     id: "sidenav.contributing-to-mina",
     defaultMessage: "Contributing to Mina",
   };
-  let grantoverview = {
-    id: "sidenav.grantoverview",
+  let grantsAndPrograms = {
+    id: "sidenav.grants-and-programs",
     defaultMessage: "Grants & Programs",
   };
   let delegation = {
     id: "sidenav.delegation",
     defaultMessage: "Foundation Delegation Program",
   };
-  let rosetta = {
-    id: "sidenav.rosetta",
-    defaultMessage: "Rosetta",
+  let delegationTiebreak = {
+    id: "sidenav.delegation-tiebreak",
+    defaultMessage: "Delegation Program Tiebreak System",
   };
+  let rosetta = {id: "sidenav.rosetta", defaultMessage: "Rosetta"};
   let edit = {id: "sidenav.edit", defaultMessage: "Documentation"};
   let overview = {id: "sidenav.overview", defaultMessage: "Overview"};
   let documentation = {id: "sidenav.documentation", defaultMessage: "Edit"};
@@ -226,13 +252,13 @@ module SideNav = {
       ]);
   };
 
-    /* ------------------------------------------------------------- */
-    /* ------------------------------------------------------------- */
-    /* ------------------------------------------------------------- */
-    /* Below is the navigation for web */
-    /* ------------------------------------------------------------- */
-    /* ------------------------------------------------------------- */
-    /* ------------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
+  /* Below is the navigation for web */
+  /* ------------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
+  /* ------------------------------------------------------------- */
 
   [@react.component]
   let make = (~currentSlug) => {
@@ -251,12 +277,178 @@ module SideNav = {
     <div className=Styles.container>
       <SideNav currentSlug>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
-        <Item
-          title={intl->Intl.formatMessage(gettingStarted)}
-          slug={f("getting-started")}
-        />
+        <Section
+          title={intl->Intl.formatMessage(aboutMina)} slug={f("about-mina")}>
+          <Item
+            title={intl->Intl.formatMessage(aboutOverview)}
+            slug="overview"
+          />
+          <Item
+            title={intl->Intl.formatMessage(whatAreZeroKnowledgeProofs)}
+            slug="what-are-zero-knowledge-proofs"
+          />
+          <Item
+            title={intl->Intl.formatMessage(protocolArchitecture)}
+            slug="protocol-architecture"
+          />
+          <Item
+            title={intl->Intl.formatMessage(consensus)}
+            slug="consensus"
+          />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          <Item
+            title={intl->Intl.formatMessage(whitepaper)}
+            slug=""
+            externalSlug={
+              Some(
+                "https://docs.minaprotocol.com/static/pdf/technicalWhitepaper.pdf",
+              )
+            }
+          />
+        </Section>
         <Section
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          <Item
+            title={intl->Intl.formatMessage(installWallet)}
+            slug="install-a-wallet"
+          />
+        </Section>
+                /* ----------------------- zkApps Section (web) ---------------------------- */
+                <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
+                <Item title={intl->Intl.formatMessage(overview)} slug="" />
+                <Item
+                  title={intl->Intl.formatMessage(howZkAppsWork)}
+                  slug="how-zkapps-work"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howWriteZkApp)}
+                  slug="how-to-write-a-zkapp"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howTestZkApp)}
+                  slug="how-to-test-a-zkapp"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howDeployZkApp)}
+                  slug="how-to-deploy-a-zkapp"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(howZkAppUI)}
+                  slug="how-to-write-a-zkapp-ui"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(advancedSnarkyJS)}
+                  slug="advanced-snarkyjs"
+                />
+                <Item
+                  title={
+                    intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)
+                  }
+                  slug="simple-anonymous-message-board-tutorial"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+                  slug="zkapps-for-ethereum-developers"
+                />
+                <Item
+                  title={intl->Intl.formatMessage(zkAppsAPIReference)}
+                  slug="snarkyjs-reference"
+                />
+              </Section>
+        <Section
+          title={intl->Intl.formatMessage(nodeOperators)}
+          slug={f("node-operators")}>
+          <Item
+            title={intl->Intl.formatMessage(gettingStarted)}
+            slug="getting-started"
+          />
+          <Item
+            title={intl->Intl.formatMessage(archiveNode)}
+            slug="archive-node"
+          />
+          <Item
+            title={intl->Intl.formatMessage(archiveRedundancy)}
+            slug="archive-redundancy"
+          />
+          <Item
+            title={intl->Intl.formatMessage(delegation)}
+            slug="delegation"
+          />
+          <Item
+            title={intl->Intl.formatMessage(delegationTiebreak)}
+            slug="delegation-tiebreak"
+          />
+          <Item
+            title={intl->Intl.formatMessage(blockProducerSidecar)}
+            slug="bp-sidecar"
+          />
+          <Item
+            title={intl->Intl.formatMessage(uptime)}
+            slug="uptime-system"
+          />
+          <Item
+            title={intl->Intl.formatMessage(clientSDK)}
+            slug="client-sdk"
+          />
+          <Item
+            title={intl->Intl.formatMessage(dataQuerying)}
+            slug="operating-for-data"
+          />
+          <Item
+            title={intl->Intl.formatMessage(devnet)}
+            slug="connecting-devnet"
+          />
+          <Item title={intl->Intl.formatMessage(hardFork)} slug="hard-fork" />
+          <Item
+            title={intl->Intl.formatMessage(hotColdWallet)}
+            slug="hot-cold-block-production"
+          />
+          <Item
+            title={intl->Intl.formatMessage(ledgerHardWallet)}
+            slug="ledger-app-mina"
+          />
+          <Item title={intl->Intl.formatMessage(rosetta)} slug="rosetta" />
+          <Item
+            title={intl->Intl.formatMessage(proofOfStake)}
+            slug="proof-of-stake"
+          />
+          <Item
+            title={intl->Intl.formatMessage(snarkWorkers)}
+            slug="snark-workers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(scanState)}
+            slug="scan-state"
+          />
+          <Item
+            title={intl->Intl.formatMessage(timeLockedAccounts)}
+            slug="timelock"
+          />
+          <Item
+            title={intl->Intl.formatMessage(blockProducers)}
+            slug="block-producers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(whatsInABlock)}
+            slug="whats-in-a-block"
+          />
+          <Item
+            title={intl->Intl.formatMessage(lifecycleOfPayment)}
+            slug="lifecycle-payment"
+          />
+          <Item
+            title={intl->Intl.formatMessage(seedPeers)}
+            slug="seed-peers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(stakingServiceGuidelines)}
+            slug="staking-service-guidelines"
+          />
+          <Item
+            title={intl->Intl.formatMessage(troubleshooting)}
+            slug="troubleshooting"
+          />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
           <Item
             title={intl->Intl.formatMessage(keypairGeneration)}
             slug="keypair"
@@ -279,65 +471,8 @@ module SideNav = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(advanced)} slug={f("advanced")}>
-          <Item
-            title={intl->Intl.formatMessage(archiveNode)}
-            slug="archive-node"
-          />
-          <Item
-            title={intl->Intl.formatMessage(archiveRedundancy)}
-            slug="archive-redundancy"
-          />
-          <Item
-          title={intl->Intl.formatMessage(delegation)}
-          slug="delegation"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducerSidecar)}
-            slug="bp-sidecar"
-          />
-          <Item
-          title={intl->Intl.formatMessage(uptime)}
-          slug="uptime-system"
-        />
-          <Item
-            title={intl->Intl.formatMessage(clientSDK)}
-            slug="client-sdk"
-          />
-          <Item
-            title={intl->Intl.formatMessage(dataQuerying)}
-            slug="operating-for-data"
-          />
-          <Item
-            title={intl->Intl.formatMessage(devnet)}
-            slug="connecting-devnet"
-          />
-
-          <Item title={intl->Intl.formatMessage(hardFork)} slug="hard-fork" />
-          <Item
-            title={intl->Intl.formatMessage(hotColdWallet)}
-            slug="hot-cold-block-production"
-          />
-          <Item
-            title={intl->Intl.formatMessage(ledgerHardWallet)}
-            slug="ledger-app-mina"
-          />
-          <Item
-          title={intl->Intl.formatMessage(rosetta)}
-          slug="rosetta"
-        />
-          <Item
-            title={intl->Intl.formatMessage(seedPeers)}
-            slug="seed-peers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(stakingServiceGuidelines)}
-            slug="staking-service-guidelines"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(developers)}
-          slug={f("developers")}>
+          title={intl->Intl.formatMessage(nodeDevelopers)}
+          slug={f("node-developers")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(codebaseOverview)}
@@ -378,112 +513,35 @@ module SideNav = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(protocolArchitecture)}
-          slug={f("architecture")}>
-          <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
+          title={intl->Intl.formatMessage(exchange)}
+          slug={f("exchange-operators")}>
           <Item
-            title={intl->Intl.formatMessage(lifecycleOfPayment)}
-            slug="lifecycle-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducers)}
-            slug="block-producers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whatsInABlock)}
-            slug="whats-in-a-block"
-          />
-          <Item
-            title={intl->Intl.formatMessage(consensus)}
-            slug="consensus"
-          />
-          <Item
-            title={intl->Intl.formatMessage(proofOfStake)}
-            slug="proof-of-stake"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkWorkers)}
-            slug="snark-workers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(scanState)}
-            slug="scan-state"
-          />
-          <Item
-            title={intl->Intl.formatMessage(timeLockedAccounts)}
-            slug="timelock"
+            title={intl->Intl.formatMessage(exchangeFaq)}
+            slug="faq"
           />
         </Section>
-
-        /* ----------------------- zkApps Section (web) ---------------------------- */
-
-        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
-          <Item title={intl->Intl.formatMessage(overview)} slug="" />
-          <Item
-            title={intl->Intl.formatMessage(howZkAppsWork)}
-            slug="how-zkapps-work"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howWriteZkApp)}
-            slug="how-to-write-a-zkapp"
-          />
-          <Item
-          title={intl->Intl.formatMessage(howTestZkApp)}
-          slug="how-to-test-a-zkapp"
-          />
-          <Item
-          title={intl->Intl.formatMessage(howDeployZkApp)}
-          slug="how-to-deploy-a-zkapp"
-          />
-          <Item
-          title={intl->Intl.formatMessage(howZkAppUI)}
-          slug="how-to-write-a-zkapp-ui"
-          />
-          <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
-            slug="simple-anonymous-message-board-tutorial"
-          />
-           <Item
-            title={intl->Intl.formatMessage(zkAppsAPIReference)}
-            slug="snarkyjs-reference"
-          />
-        </Section>
-        <Item
-          title={intl->Intl.formatMessage(troubleshooting)}
-          slug={f("troubleshooting")}
-        />
-        <Item
-          title={intl->Intl.formatMessage(glossary)}
-          slug={f("glossary")}
-        />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
-        <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
-        <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
+        <Section
+          title={intl->Intl.formatMessage(participate)}
+          slug={f("participate")}>
           <Item
             title={intl->Intl.formatMessage(onlineCommunities)}
             slug="online-communities"
           />
           <Item
-          title={intl->Intl.formatMessage(grantoverview)}
-          slug="grantoverview"
+            title={intl->Intl.formatMessage(grantsAndPrograms)}
+            slug="grants-and-programs"
           />
+          <Item title={intl->Intl.formatMessage(careers)} slug="careers" />
+          <Item title={intl->Intl.formatMessage(github)} slug="github" />
           <Item
-          title={intl->Intl.formatMessage(careers)}
-          slug="careers"
+            title={intl->Intl.formatMessage(reporting)}
+            slug="reporting"
           />
-          <Item
-          title={intl->Intl.formatMessage(github)}
-          slug="github"
-          />
-          <Item
-          title={intl->Intl.formatMessage(reporting)}
-          slug="reporting"
-          />
-      </Section>
+        </Section>
+        <Item
+          title={intl->Intl.formatMessage(glossary)}
+          slug={f("glossary")}
+        />
       </SideNav>
     </div>;
   };
@@ -529,12 +587,149 @@ module Dropdown = {
       <DropdownNav
         currentSlug defaultValue={intl->Intl.formatMessage(minaOverview)}>
         <Item title={intl->Intl.formatMessage(minaOverview)} slug={f("/")} />
-        <Item
-          title={intl->Intl.formatMessage(gettingStarted)}
-          slug={f("getting-started")}
-        />
+        <Section
+          title={intl->Intl.formatMessage(aboutMina)} slug={f("about-mina")}>
+          <Item
+            title={intl->Intl.formatMessage(aboutOverview)}
+            slug="overview"
+          />
+          <Item
+            title={intl->Intl.formatMessage(whatAreZeroKnowledgeProofs)}
+            slug="what-are-zero-knowledge-proofs"
+          />
+          <Item
+            title={intl->Intl.formatMessage(protocolArchitecture)}
+            slug="protocol-architecture"
+          />
+          <Item
+            title={intl->Intl.formatMessage(consensus)}
+            slug="consensus"
+          />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
+          <Item
+            title={intl->Intl.formatMessage(whitepaper)}
+            slug=""
+            externalSlug={
+              Some(
+                "https://docs.minaprotocol.com/static/pdf/technicalWhitepaper.pdf",
+              )
+            }
+          />
+        </Section>
         <Section
           title={intl->Intl.formatMessage(usingMina)} slug={f("using-mina")}>
+          <Item
+            title={intl->Intl.formatMessage(installWallet)}
+            slug="install-a-wallet"
+          />
+        </Section>
+        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
+          <Item title={intl->Intl.formatMessage(overview)} slug="" />
+          <Item
+            title={intl->Intl.formatMessage(howZkAppsWork)}
+            slug="how-zkapps-work"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howWriteZkApp)}
+            slug="how-to-write-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howTestZkApp)}
+            slug="how-to-test-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howDeployZkApp)}
+            slug="how-to-deploy-a-zkapp"
+          />
+          <Item
+            title={intl->Intl.formatMessage(howZkAppUI)}
+            slug="how-to-write-a-zkapp-ui"
+          />
+          <Item
+            title={intl->Intl.formatMessage(advancedSnarkyJS)}
+            slug="advanced-snarkyjs"
+          />
+          <Item
+            title={
+              intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)
+            }
+            slug="simple-anonymous-message-board-tutorial"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
+            slug="zkapps-for-ethereum-developers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(zkAppsAPIReference)}
+            slug="snarkyjs-reference"
+          />
+        </Section>
+        <Section
+          title={intl->Intl.formatMessage(nodeOperators)}
+          slug={f("node-operators")}>
+          <Item
+            title={intl->Intl.formatMessage(gettingStarted)}
+            slug="getting-started"
+          />
+          <Item
+            title={intl->Intl.formatMessage(archiveNode)}
+            slug="archive-node"
+          />
+          <Item
+            title={intl->Intl.formatMessage(archiveRedundancy)}
+            slug="archive-redundancy"
+          />
+          <Item
+            title={intl->Intl.formatMessage(delegation)}
+            slug="delegation"
+          />
+          <Item
+            title={intl->Intl.formatMessage(delegationTiebreak)}
+            slug="delegation-tiebreak"
+          />
+          <Item
+            title={intl->Intl.formatMessage(blockProducerSidecar)}
+            slug="bp-sidecar"
+          />
+          <Item
+            title={intl->Intl.formatMessage(uptime)}
+            slug="uptime-system"
+          />
+          <Item
+            title={intl->Intl.formatMessage(clientSDK)}
+            slug="client-sdk"
+          />
+          <Item
+            title={intl->Intl.formatMessage(dataQuerying)}
+            slug="operating-for-data"
+          />
+          <Item
+            title={intl->Intl.formatMessage(devnet)}
+            slug="connecting-devnet"
+          />
+          <Item title={intl->Intl.formatMessage(hardFork)} slug="hard-fork" />
+          <Item
+            title={intl->Intl.formatMessage(hotColdWallet)}
+            slug="hot-cold-block-production"
+          />
+          <Item
+            title={intl->Intl.formatMessage(ledgerHardWallet)}
+            slug="ledger-app-mina"
+          />
+          <Item title={intl->Intl.formatMessage(rosetta)} slug="rosetta" />
+          <Item
+            title={intl->Intl.formatMessage(seedPeers)}
+            slug="seed-peers"
+          />
+          <Item
+            title={intl->Intl.formatMessage(stakingServiceGuidelines)}
+            slug="staking-service-guidelines"
+          />
+          <Item
+            title={intl->Intl.formatMessage(troubleshooting)}
+            slug="troubleshooting"
+          />
+          <Item title={intl->Intl.formatMessage(faq)} slug="faq" />
           <Item
             title={intl->Intl.formatMessage(keypairGeneration)}
             slug="keypair"
@@ -557,64 +752,8 @@ module Dropdown = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(advanced)} slug={f("advanced")}>
-          <Item
-            title={intl->Intl.formatMessage(archiveNode)}
-            slug="archive-node"
-          />
-          <Item
-            title={intl->Intl.formatMessage(archiveRedundancy)}
-            slug="archive-redundancy"
-          />
-          <Item
-          title={intl->Intl.formatMessage(delegation)}
-          slug="delegation"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducerSidecar)}
-            slug="bp-sidecar"
-          />
-          <Item
-          title={intl->Intl.formatMessage(uptime)}
-          slug="uptime-system"
-        />
-          <Item
-            title={intl->Intl.formatMessage(clientSDK)}
-            slug="client-sdk"
-          />
-          <Item
-            title={intl->Intl.formatMessage(dataQuerying)}
-            slug="operating-for-data"
-          />
-          <Item
-            title={intl->Intl.formatMessage(devnet)}
-            slug="connecting-devnet"
-          />
-          <Item title={intl->Intl.formatMessage(hardFork)} slug="hard-fork" />
-          <Item
-            title={intl->Intl.formatMessage(hotColdWallet)}
-            slug="hot-cold-block-production"
-          />
-          <Item
-            title={intl->Intl.formatMessage(ledgerHardWallet)}
-            slug="ledger-app-mina"
-          />
-          <Item
-          title={intl->Intl.formatMessage(rosetta)}
-          slug="rosetta"
-        />
-          <Item
-            title={intl->Intl.formatMessage(seedPeers)}
-            slug="seed-peers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(stakingServiceGuidelines)}
-            slug="staking-service-guidelines"
-          />
-        </Section>
-        <Section
-          title={intl->Intl.formatMessage(developers)}
-          slug={f("developers")}>
+          title={intl->Intl.formatMessage(nodeDevelopers)}
+          slug={f("node-developers")}>
           <Item title={intl->Intl.formatMessage(overview)} slug="" />
           <Item
             title={intl->Intl.formatMessage(codebaseOverview)}
@@ -655,113 +794,35 @@ module Dropdown = {
           />
         </Section>
         <Section
-          title={intl->Intl.formatMessage(protocolArchitecture)}
-          slug={f("architecture")}>
-          <Item title={intl->Intl.formatMessage(minaOverview)} slug="" />
+          title={intl->Intl.formatMessage(exchange)}
+          slug={f("exchange-operators")}>
           <Item
-            title={intl->Intl.formatMessage(lifecycleOfPayment)}
-            slug="lifecycle-payment"
-          />
-          <Item
-            title={intl->Intl.formatMessage(blockProducers)}
-            slug="block-producers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(whatsInABlock)}
-            slug="whats-in-a-block"
-          />
-          <Item
-            title={intl->Intl.formatMessage(consensus)}
-            slug="consensus"
-          />
-          <Item
-            title={intl->Intl.formatMessage(proofOfStake)}
-            slug="proof-of-stake"
-          />
-          <Item
-            title={intl->Intl.formatMessage(snarkWorkers)}
-            slug="snark-workers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(scanState)}
-            slug="scan-state"
-          />
-          <Item
-            title={intl->Intl.formatMessage(timeLockedAccounts)}
-            slug="timelock"
+            title={intl->Intl.formatMessage(exchangeFaq)}
+            slug="faq"
           />
         </Section>
-      
-        /* ----------------------- zkApps Section (mobile) ---------------------------- */
-
-        <Section title={intl->Intl.formatMessage(zkapps)} slug={f("zkapps")}>
-          <Item title={intl->Intl.formatMessage(overview)} slug="" />
-          <Item
-            title={intl->Intl.formatMessage(howZkAppsWork)}
-            slug="how-zkapps-work"
-          />
-          <Item
-            title={intl->Intl.formatMessage(howWriteZkApp)}
-            slug="how-to-write-a-zkapp"
-          />
-          <Item
-          title={intl->Intl.formatMessage(howTestZkApp)}
-          slug="how-to-test-a-zkapp"
-          />
-          <Item
-          title={intl->Intl.formatMessage(howDeployZkApp)}
-          slug="how-to-deploy-a-zkapp"
-          />
-          <Item
-          title={intl->Intl.formatMessage(howZkAppUI)}
-          slug="how-to-write-a-zkapp-ui"
-          />
-          <Item
-            title={intl->Intl.formatMessage(zkAppsForEthereumDevelopers)}
-            slug="zkapps-for-ethereum-developers"
-          />
-          <Item
-            title={intl->Intl.formatMessage(simpleAnonymousMessageBoardTutorial)}
-            slug="simple-anonymous-message-board-tutorial"
-          />
-        <Item
-        title={intl->Intl.formatMessage(zkAppsAPIReference)}
-        slug="snarkyjs-reference"
-      />
-        </Section>
-        <Item
-          title={intl->Intl.formatMessage(troubleshooting)}
-          slug={f("troubleshooting")}
-        />
-        <Item
-          title={intl->Intl.formatMessage(glossary)}
-          slug={f("glossary")}
-        />
-        <Item title={intl->Intl.formatMessage(faq)} slug={f("faq")} />
-        <Item title={intl->Intl.formatMessage(exchangeFaq)} slug={f("exchange-operators")} />
-
-        <Section title={intl->Intl.formatMessage(participate)} slug={f("participate")}>
+        <Section
+          title={intl->Intl.formatMessage(participate)}
+          slug={f("participate")}>
           <Item
             title={intl->Intl.formatMessage(onlineCommunities)}
             slug="online-communities"
           />
+          <Item title={intl->Intl.formatMessage(careers)} slug="careers" />
           <Item
-          title={intl->Intl.formatMessage(careers)}
-          slug="careers"
+            title={intl->Intl.formatMessage(grantsAndPrograms)}
+            slug="grants-and-programs"
           />
+          <Item title={intl->Intl.formatMessage(github)} slug="github" />
           <Item
-          title={intl->Intl.formatMessage(grantoverview)}
-          slug="grantoverview"
-          />
-          <Item
-          title={intl->Intl.formatMessage(github)}
-          slug="github"
-          />
-          <Item
-          title={intl->Intl.formatMessage(reporting)}
-          slug="reporting"
+            title={intl->Intl.formatMessage(reporting)}
+            slug="reporting"
           />
         </Section>
+        <Item
+          title={intl->Intl.formatMessage(glossary)}
+          slug={f("glossary")}
+        />
       </DropdownNav>
     </div>;
   };
