@@ -22,11 +22,9 @@ Your smart contract will be written using <a href="https://github.com/o1-labs/zk
 Mina zkApp CLI makes it easy to follow recommended best practices by providing project scaffolding including dependencies such as SnarkyJS, a test framework (<a href="https://jestjs.io/">Jest</a>), code auto-formatting (<a href="https://prettier.io/
 ">Prettier</a>), linting (<a href="https://eslint.org/">ES Lint</a>), & more.
 
-### Install Mina zkApp CLI
+### Use Mina zkApp CLI
 
-```sh
-npm install -g zkapp-cli
-```
+We'll use the [zkapp-cli](https://github.com/o1-labs/zkapp-cli) [npm package](https://www.npmjs.com/package/zkapp-cli).
 
 #### Dependencies:
 
@@ -48,7 +46,7 @@ Now that you have Mina zkApp CLI installed, you can start with an example or sta
 
 Examples are based on the standard project structure, but with additional files in the `/src` directory as the only difference.
 
-1. **Install:** Run `zk example sudoku`. This creates a new project and includes
+1. **Install:** Run `npx -p zkapp-cli zk example sudoku`. This creates a new project and includes
    the example files (i.e. the smart contract) inside the project’s `src/`
    directory. Type `ls` & hit enter to see the files that were created or open
    the directory in a code editor such as VS Code.
@@ -68,7 +66,7 @@ You can view a list of <a href="https://github.com/o1-labs/zkapp-cli/tree/main/e
 
 #### Option B: Start your own project
 
-1. **Install:** Run `zk project <myproj>`. Type `ls` and hit enter to see the
+1. **Install:** Run `npx -p zkapp-cli zk project <myproj>`. Type `ls` and hit enter to see the
    newly created project structure.
 2. **Run tests:** Run `npm run test`. Tests are written using <a
    href="https://jestjs.io/">Jest</a>. After running this command, you should
