@@ -1,3 +1,6 @@
+_Note: This repo contains the *old* docs website. The new docs website is located at https://github.com/o1-labs/docs2_
+
+
 <img src="https://github.com/MinaProtocol/docs/blob/main/public/static/img/svg/mina-wordmark-redviolet.svg" width="350" alt="Mina logo">
 
 # Mina Docs
